@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Problem section styles */
+.problem-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.problem-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(59, 130, 246, 0.1),
+    rgba(37, 99, 235, 0.05)
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.problem-card:hover::before {
+  opacity: 1;
+}
+
+/* Featured card styles */
+.featured-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.featured-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom right,
+    rgba(59, 130, 246, 0.2),
+    rgba(37, 99, 235, 0.1)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.featured-card:hover::before {
+  opacity: 1;
+}
+
+/* Magnetic glow effect */
+.magnetic-glow {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.magnetic-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.15),
+    transparent 70%
+  );
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.magnetic-glow:hover::before {
+  opacity: 1;
+}
+
+/* Hero section styles */
+.hero-glow {
+  position: relative;
+}
+
+.hero-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.2),
+    transparent 70%
+  );
+  opacity: var(--glow-intensity, 0);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Enhanced pricing card styles */
+.pricing-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    1200px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.2),
+    transparent 40%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+.pricing-card:hover::before {
+  opacity: 1;
+}
+
+.pricing-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(59, 130, 246, 0.4),
+    rgba(37, 99, 235, 0.2)
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
+
+.pricing-card:hover::after {
+  opacity: 1;
+}
+
+.pricing-card .feature-section {
+  position: relative;
+  z-index: 1;
+}
+
+.pricing-card .feature-item {
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.pricing-card .feature-item:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateX(0.25rem);
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px -5px rgba(59, 130, 246, 0.15),
+    0 10px 20px -5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .pricing-card {
+    transform: none !important;
+  }
+  
+  .pricing-card .feature-item:hover {
+    transform: none;
+  }
+}

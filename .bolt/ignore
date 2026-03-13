@@ -1,0 +1,11 @@
+src/pages/DFY.tsx
+src/pages/ContentArchetypeAssessment.tsx
+src/pages/EditorApplication.tsx
+src/pages/AuthorityAccelerator.tsx
+src/pages/AuthorityBuilder.tsx
+src/pages/BeliefMap.tsx
+src/pages/BeliefMapBuilder.tsx
+src/pages/TheBuilder.tsx
+src/pages/DWY.tsx
+src/pages/Home.tsx
+src/pages/Assessment.tsx
