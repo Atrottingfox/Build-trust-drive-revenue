@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { Suspense, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const DFY = React.lazy(() => import('./pages/DFY'));
 const Assessment = React.lazy(() => import('./pages/Assessment'));
@@ -14,9 +14,18 @@ const TheBuilder = React.lazy(() => import('./pages/TheBuilder'));
 
 import { Navigation } from './components/ui/Navigation';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Navigation />
       <Suspense fallback={
         <div className="flex justify-center items-center min-h-screen bg-base text-white text-xl">

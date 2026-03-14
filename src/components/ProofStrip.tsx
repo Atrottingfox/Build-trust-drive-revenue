@@ -54,10 +54,27 @@ export default function ProofStrip() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          The proof is in
+          The outcomes tell
           <br />
-          <span className="text-zinc-500">the process.</span>
+          <span className="text-zinc-500">a story.</span>
         </motion.h2>
+
+        <motion.div
+          className="mb-12"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.1 }}
+        >
+          <a
+            href="https://drive.google.com/file/d/1KItvUIfOo2Ip6mbTVtLlpNHKo_mN5WY-/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-zinc-400 font-medium hover:text-white transition-colors text-[15px] group"
+          >
+            Download our authority template
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {results.map((r, i) => (
@@ -85,22 +102,6 @@ export default function ProofStrip() {
           ))}
         </div>
 
-        <motion.div
-          className="mt-14"
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3 }}
-        >
-          <a
-            href="https://drive.google.com/file/d/1KItvUIfOo2Ip6mbTVtLlpNHKo_mN5WY-/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-zinc-400 font-medium hover:text-white transition-colors text-[15px] group"
-          >
-            Download our authority template
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </motion.div>
       </div>
 
       <AnimatePresence>
