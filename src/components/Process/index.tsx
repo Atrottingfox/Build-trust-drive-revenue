@@ -7,7 +7,7 @@ const outcomes = [
   "A predictable organic lead generation system",
   "A multi platform content engine tied to one core outcome",
   "A bank of angles, content styles and hooks unique to you",
-  "A complete Operator Playbook so any team member can run the engine",
+  "An Operator Playbook so any team member can run the engine",
 ];
 
 function OutcomeCard({ outcome, index }: { outcome: string; index: number }) {

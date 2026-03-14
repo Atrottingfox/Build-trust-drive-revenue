@@ -363,26 +363,6 @@ export default function Engine() {
           ))}
         </div>
 
-        {/* Result strip */}
-        <motion.div
-          className="mt-12 hidden lg:flex items-center justify-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.6 }}
-        >
-          <div className="flex items-center gap-4 px-6 py-3 rounded-full border border-zinc-800/60 bg-zinc-900/40">
-            <motion.div
-              className="w-2 h-2 rounded-full bg-blue-500"
-              initial={{ scale: 0 }}
-              animate={inView ? { scale: 1, boxShadow: "0 0 8px rgba(59,130,246,0.4)" } : {}}
-              transition={{ delay: 1.8, type: "spring", stiffness: 300 }}
-            />
-            <span className="font-display text-sm font-bold text-zinc-400 uppercase tracking-wider">
-              Your Authority Engine. Live and driving leads.
-            </span>
-          </div>
-        </motion.div>
-
         {/* Apply now */}
         <motion.div
           className="mt-14 flex justify-center"
