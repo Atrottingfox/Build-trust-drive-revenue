@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -7,6 +7,7 @@ export function Navigation() {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
+  const lastScrollY = useRef(0);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === '/') {
@@ -17,10 +18,22 @@ export function Navigation() {
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 20);
-      setShowMobile(window.scrollY > 400);
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+
+      if (currentY < 400) {
+        setShowMobile(false);
+      } else if (currentY < lastScrollY.current) {
+        // Scrolling up
+        setShowMobile(true);
+      } else {
+        // Scrolling down
+        setShowMobile(false);
+      }
+
+      lastScrollY.current = currentY;
     };
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -51,16 +64,17 @@ export function Navigation() {
       <AnimatePresence>
         {showMobile && (
           <motion.div
-            className="fixed bottom-0 left-0 right-0 sm:hidden z-50 p-4 bg-gradient-to-t from-base via-base/95 to-transparent pointer-events-none"
-            initial={{ y: 80, opacity: 0 }}
+            className="fixed bottom-6 left-0 right-0 sm:hidden z-50 px-5 pointer-events-none"
+            initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
+            exit={{ y: 60, opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
             <a
               href="https://form.typeform.com/to/S2rogsdT"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-full py-3.5 text-[15px] font-semibold bg-white text-black rounded-full pointer-events-auto hover:bg-zinc-200 transition-colors"
+              className="flex items-center justify-center w-full py-3 text-[14px] font-semibold bg-white text-black rounded-full pointer-events-auto hover:bg-zinc-200 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
             >
               Apply now
             </a>
