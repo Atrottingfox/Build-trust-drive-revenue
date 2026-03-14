@@ -10,6 +10,32 @@ const outcomes = [
   "A complete Operator Playbook so any team member can run the engine",
 ];
 
+function OutcomeCard({ outcome, index }: { outcome: string; index: number }) {
+  const [ref, inView] = useInView({ threshold: 0.3 });
+
+  return (
+    <motion.div
+      ref={ref}
+      className="rounded-xl border border-zinc-800/60 bg-[#111113] p-5 flex items-start gap-3"
+      initial={{ opacity: 0, y: 20 }}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, delay: index * 0.06 }}
+    >
+      <svg className="w-4 h-4 shrink-0 mt-0.5 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+        <motion.path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M5 13l4 4L19 7"
+          initial={{ pathLength: 0 }}
+          animate={inView ? { pathLength: 1 } : { pathLength: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 + index * 0.06 }}
+        />
+      </svg>
+      <span className="text-zinc-300 text-sm leading-relaxed">{outcome}</span>
+    </motion.div>
+  );
+}
+
 export default function Process() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
@@ -50,21 +76,10 @@ export default function Process() {
           </motion.p>
         </div>
 
-        {/* Outcomes as horizontal strip */}
+        {/* Outcomes - each animates on scroll */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {outcomes.map((outcome, i) => (
-            <motion.div
-              key={i}
-              className="rounded-xl border border-zinc-800/60 bg-[#111113] p-5 flex items-start gap-3"
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.08 }}
-            >
-              <svg className="w-4 h-4 shrink-0 mt-0.5 text-zinc-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
-              <span className="text-zinc-300 text-sm leading-relaxed">{outcome}</span>
-            </motion.div>
+            <OutcomeCard key={i} outcome={outcome} index={i} />
           ))}
         </div>
       </div>

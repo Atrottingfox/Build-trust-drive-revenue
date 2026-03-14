@@ -365,7 +365,7 @@ export default function Engine() {
 
         {/* Result strip */}
         <motion.div
-          className="mt-12 flex items-center justify-center"
+          className="mt-12 hidden lg:flex items-center justify-center"
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.6 }}
