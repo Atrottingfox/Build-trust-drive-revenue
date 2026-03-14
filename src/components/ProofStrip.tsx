@@ -50,13 +50,13 @@ export default function ProofStrip() {
           Client outcomes
         </motion.p>
         <motion.h2
-          className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white mb-16 max-w-xl leading-[1.05]"
+          className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white mb-6 max-w-xl leading-[1.05]"
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          The outcomes tell
+          The outcomes
           <br />
-          <span className="text-zinc-500">a story.</span>
+          <span className="text-zinc-500">tell a story.</span>
         </motion.h2>
 
         <motion.div
