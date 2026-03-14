@@ -298,7 +298,7 @@ const caseStudies: CaseStudyData[] = [
       {
         ghost: "→",
         label: "The build",
-        headline: <>Extremely authentic.<br /><span className="text-blue-500/80">Market-rattling.</span></>,
+        headline: <>Extremely authentic.<br /><span className="text-blue-500/80">Extreme authenticity.</span></>,
         body: "Through short form video we built it out and created a magnetic personal brand that aligned with who he was. We didn't make him someone else. We amplified who he already was.",
         accent: true,
       },
@@ -306,7 +306,7 @@ const caseStudies: CaseStudyData[] = [
         ghost: "1.2M",
         label: "The outcome",
         headline: <><span className="text-blue-500/80">1.2M+</span> organic impressions.</>,
-        body: "Three months straight. His largest Christmas period ever. Directly attributed to the content strategy. All from a founder who originally hated being on camera.",
+        body: "Three months straight. The results in his business showed. Directly attributed to the content strategy. All from a founder who originally hated being on camera.",
         visual: (
           <div className="flex items-end gap-2 mt-6 h-16">
             {[40, 65, 90].map((h, i) => (
