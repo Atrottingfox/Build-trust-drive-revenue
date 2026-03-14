@@ -39,7 +39,7 @@ export function OutcomeCard({ icon: Icon, title, description, index }: OutcomeCa
   return (
     <motion.div 
       ref={cardRef}
-      className="magnetic-glow p-8 bg-gray-800/40 rounded-xl ring-1 ring-white/10 group relative overflow-hidden transform-gpu"
+      className="magnetic-glow p-8 bg-surface rounded-2xl border border-white/[0.06] group relative overflow-hidden transform-gpu hover:border-white/[0.12] hover:shadow-glow-sm transition-all duration-300"
       style={{ opacity, y, scale }}
       transition={{ duration: 0.5 }}
     >
@@ -53,7 +53,9 @@ export function OutcomeCard({ icon: Icon, title, description, index }: OutcomeCa
         }}
         className="mb-4"
       >
-        <Icon className="w-12 h-12 text-blue-500 group-hover:text-blue-400 transition-colors" />
+        <div className="w-12 h-12 rounded-xl bg-blue-500/[0.08] flex items-center justify-center group-hover:shadow-glow-md transition-all duration-300">
+          <Icon className="w-6 h-6 text-blue-500 group-hover:text-blue-400 transition-colors duration-200" />
+        </div>
       </motion.div>
       
       <h3 className="text-2xl font-semibold mb-3 text-white group-hover:text-blue-400 transition-colors">
@@ -64,31 +66,8 @@ export function OutcomeCard({ icon: Icon, title, description, index }: OutcomeCa
         {description}
       </p>
 
-      {/* Floating particles */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-blue-500/30 rounded-full"
-          animate={{
-            y: [0, -20, 0],
-            x: [0, 10, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 2,
-            delay: i * 0.3,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-          style={{
-            left: `${20 + (i * 30)}%`,
-            top: '80%',
-          }}
-        />
-      ))}
-
       {/* Gradient hover effect */}
-      <motion.div 
+      <motion.div
         className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-blue-500/5 to-blue-500/0"
         initial={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}

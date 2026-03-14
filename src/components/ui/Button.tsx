@@ -10,10 +10,10 @@ export function Button({ variant = 'primary', children, className = '', ...props
   return (
     <motion.button
       className={`
-        magnetic-glow relative px-6 py-3 rounded-lg font-semibold
-        ${variant === 'primary' 
-          ? 'bg-blue-600 text-white hover:bg-blue-700' 
-          : 'bg-gray-800 text-white hover:bg-gray-700'}
+        magnetic-glow relative px-6 py-3 rounded-xl font-semibold transition-all duration-200
+        ${variant === 'primary'
+          ? 'bg-blue-600 text-white hover:bg-blue-500 hover:shadow-glow-md'
+          : 'bg-transparent border border-white/[0.12] text-white hover:border-white/25 hover:bg-white/[0.03]'}
         ${className}
       `}
       whileHover={{ scale: 1.02 }}

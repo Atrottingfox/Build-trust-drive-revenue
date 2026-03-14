@@ -1,122 +1,85 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Coffee } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Container } from './ui/Container';
 
 export default function FinalCTA() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="relative py-32 overflow-hidden">
-      {/* Animated gradient background */}
-      <motion.div 
-        className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 via-gray-950 to-gray-950" />
-        
-        {/* Animated glow effect */}
+    <section ref={ref} className="py-32 relative overflow-hidden">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center relative z-10">
         <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(600px circle at 50% 100%, rgba(59, 130, 246, 0.15), transparent 70%)',
-              'radial-gradient(600px circle at 50% 100%, rgba(59, 130, 246, 0.1), transparent 70%)',
-              'radial-gradient(600px circle at 50% 100%, rgba(59, 130, 246, 0.15), transparent 70%)'
-            ]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="accent-line mx-auto mb-10"
+          initial={{ width: 0 }}
+          animate={inView ? { width: 40 } : {}}
         />
-      </motion.div>
-      
-      <Container className="relative z-10">
-        <motion.div 
-          className="max-w-4xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
+
+        <motion.h2
+          className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]"
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
-            Your next step toward scalable,{' '}
-            <span className="text-blue-400">mission driven</span> growth
-          </h2>
-          <p className="text-xl text-blue-100/80 mb-12">
-            We'll handle the content. You focus on growing your business.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <motion.a
-              href="https://form.typeform.com/to/S2rogsdT"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all relative overflow-hidden group"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Apply now
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              
-              {/* Shine effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                animate={{
-                  x: ['-100%', '100%']
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
-            </motion.a>
-          </div>
+          Try our content operating system
+          <br />
+          before you start.
+        </motion.h2>
 
-          <motion.p 
-            className="mt-12 text-blue-200/60 font-medium"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-          >
-            We will not compromise our quality for cashflow
-          </motion.p>
-        </motion.div>
-      </Container>
+        <motion.p
+          className="text-zinc-400 mb-10"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.15 }}
+        >
+          Turn ideas into value driven content in under 60 seconds.
+        </motion.p>
 
-      {/* Bottom glow effect */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-      
-      {/* Floating particles */}
-      {[...Array(5)].map((_, i) => (
         <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-blue-400/30 rounded-full"
-          animate={{
-            y: [0, -40, 0],
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: 3,
-            delay: i * 0.4,
-            repeat: Infinity,
-            repeatType: "loop"
-          }}
-          style={{
-            left: `${20 + (i * 15)}%`,
-            bottom: '20%',
-          }}
-        />
-      ))}
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.25 }}
+        >
+          <a
+            href="https://www.contentengine.live"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
+          >
+            Try it now
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </motion.div>
+
+        {/* Divider */}
+        <motion.div
+          className="my-16 flex items-center justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.35 }}
+        >
+          <div className="w-12 h-px bg-zinc-800" />
+          <span className="text-zinc-700 text-xs uppercase tracking-widest">or</span>
+          <div className="w-12 h-px bg-zinc-800" />
+        </motion.div>
+
+        {/* Virtual coffee */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4 }}
+        >
+          <a
+            href="https://calendar.app.google/BiQRa1PYXCyDQVov5"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 text-zinc-500 hover:text-white transition-colors group"
+          >
+            <Coffee className="w-4 h-4" />
+            <span className="text-sm font-medium">Book a virtual coffee</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 }

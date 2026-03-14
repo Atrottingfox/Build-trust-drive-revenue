@@ -1,28 +1,22 @@
 import React from 'react';
 import Hero from '../components/Hero';
-import Problem from '../components/Problem';
-import Outcomes from '../components/Outcomes';
-import BetaToolCTA from '../components/BetaToolCTA';
+import ProofStrip from '../components/ProofStrip';
 import Engine from '../components/Engine';
 import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import FinalCTA from '../components/FinalCTA';
+import Footer from '../components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-950">
+    <div className="min-h-screen bg-base">
       <Hero />
-      <Problem />
-      <div className="py-4" />
-      <Outcomes />
-      <BetaToolCTA />
-      <div className="py-4" />
-      <Process />
-      <div className="py-4" />
+      <ProofStrip />
       <Engine />
-      <div className="py-4" />
+      <Process />
       <PricingPlans />
       <FinalCTA />
+      <Footer />
     </div>
   );
 }

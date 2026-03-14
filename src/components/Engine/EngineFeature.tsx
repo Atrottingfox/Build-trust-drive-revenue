@@ -10,7 +10,7 @@ interface EngineFeatureProps {
 export function EngineFeature({ title, description, delay }: EngineFeatureProps) {
   return (
     <motion.div 
-      className="magnetic-glow bg-gray-800/40 p-8 rounded-xl ring-1 ring-white/10 hover:ring-white/20 transition-all group"
+      className="magnetic-glow bg-surface p-8 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] hover:shadow-glow-sm transition-all duration-300 group relative overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

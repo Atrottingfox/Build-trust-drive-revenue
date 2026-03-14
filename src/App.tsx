@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const DFY = React.lazy(() => import('./pages/DFY'));
@@ -15,31 +15,11 @@ const TheBuilder = React.lazy(() => import('./pages/TheBuilder'));
 import { Navigation } from './components/ui/Navigation';
 
 export default function App() {
-  const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <Router>
-      <div 
-        className="cursor-glow"
-        style={{ 
-          left: mousePos.x,
-          top: mousePos.y,
-        }} 
-      />
-      <div className="huly-background" />
-      <div className="huly-grid" />
       <Navigation />
       <Suspense fallback={
-        <div className="flex justify-center items-center min-h-screen bg-gray-950 text-white text-xl">
+        <div className="flex justify-center items-center min-h-screen bg-base text-white text-xl">
           Loading...
         </div>
       }>

@@ -50,22 +50,9 @@ export function PainPoint({ point, index }: PainPointProps) {
       style={{ opacity, y }}
       transition={{ duration: 0.5 }}
     >
-      <div className="magnetic-glow bg-gray-800/40 p-6 rounded-xl relative overflow-hidden group">
+      <div className="magnetic-glow bg-surface border border-white/[0.06] p-6 rounded-2xl relative overflow-hidden group hover:border-white/[0.12] hover:shadow-glow-sm transition-all duration-300">
         <div className="flex items-start gap-4 relative z-10">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 5, -5, 0]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: index * 0.2
-            }}
-          >
-            <AlertCircle className="w-5 h-5 text-blue-500 group-hover:text-blue-400 transition-colors" />
-          </motion.div>
+          <AlertCircle className="w-5 h-5 text-blue-500/60 shrink-0 mt-0.5" />
           <p className="text-lg text-gray-200 group-hover:text-white transition-colors">{point}</p>
         </div>
 

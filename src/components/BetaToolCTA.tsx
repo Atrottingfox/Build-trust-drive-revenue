@@ -1,52 +1,46 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Container } from './ui/Container';
 import { ArrowRight } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 
 export default function BetaToolCTA() {
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section ref={ref} className="py-20 bg-gray-950 relative overflow-hidden">
-      <Container>
+    <section ref={ref} className="py-24 relative">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
-          className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 20 }}
+          className="glow-card p-10 md:p-14 text-center relative overflow-hidden"
+          initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-8 leading-tight">
-            Turn your ideas into value driven content in under 60 seconds
-          </h2>
-          <motion.a
-            href="https://www.contentengine.live"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all relative overflow-hidden group"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Access here
-            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            {/* Shine effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-              animate={{
-                x: ['-100%', '100%']
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
-          </motion.a>
+          {/* Top glow */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[100px] opacity-[0.05]"
+            style={{ background: 'radial-gradient(ellipse, #ffffff, transparent 70%)' }}
+          />
+
+          <div className="relative z-10">
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white mb-4">
+              Try our content operating system
+              <br className="hidden sm:block" />
+              before you start.
+            </h2>
+            <p className="text-zinc-400 mb-10">
+              Turn ideas into value driven content in under 60 seconds.
+            </p>
+            <a
+              href="https://www.contentengine.live"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
+            >
+              Try it now
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </motion.div>
-      </Container>
+      </div>
+      <div className="absolute bottom-0 left-0 right-0 gradient-line" />
     </section>
   );
 }
