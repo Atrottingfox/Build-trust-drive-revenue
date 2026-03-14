@@ -275,8 +275,8 @@ const caseStudies: CaseStudyData[] = [
       {
         ghost: "02",
         label: "The problem",
-        headline: <>No presence.<br />No process.<br /><span className="text-zinc-500">No system.</span></>,
-        body: "His reputation offline was strong. Online? It didn't exist in a way that matched.",
+        headline: <>Huge brand.<br />No video presence.<br /><span className="text-zinc-500">No process.</span></>,
+        body: "He had a reputation. It just wasn't built with video. The online presence didn't match the offline impact.",
       },
       {
         label: "The approach",
@@ -299,7 +299,7 @@ const caseStudies: CaseStudyData[] = [
         ghost: "→",
         label: "The build",
         headline: <>Extremely authentic.<br /><span className="text-blue-500/80">Market-rattling.</span></>,
-        body: "The strategy was new age, modern, and it cut through. We didn't make him someone else. We amplified who he already was.",
+        body: "Through short form video we built it out and created a magnetic personal brand that aligned with who he was. We didn't make him someone else. We amplified who he already was.",
         accent: true,
       },
       {

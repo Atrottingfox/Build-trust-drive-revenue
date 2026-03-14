@@ -47,7 +47,7 @@ export default function ProofStrip() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
         >
-          Client outcomes
+          Client results
         </motion.p>
         <motion.h2
           className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white mb-6 max-w-xl leading-[1.05]"
