@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ArrowRightLeft, CheckCircle2, X } from 'lucide-react';
+import { ArrowRight, ArrowRightLeft } from 'lucide-react';
 import { Container } from '../components/ui/Container';
 import { GradientText } from '../components/ui/GradientText';
 

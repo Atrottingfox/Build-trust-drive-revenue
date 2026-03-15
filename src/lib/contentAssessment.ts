@@ -1,6 +1,4 @@
 import { supabase } from './supabase';
-import type { ContentAssessmentResponse } from '../types/contentAssessment';
-
 export async function saveContentAssessment(data: {
   name: string;
   email: string;
@@ -138,36 +136,3 @@ export function calculateArchetypeScores(answers: Record<string, string>, questi
   };
 }
 
-// Analytics function to help understand distribution patterns
-export function analyzeArchetypeDistribution(assessments: ContentAssessmentResponse[]) {
-  const distribution: Record<string, number> = {};
-  const traitPatterns: Record<string, Record<string, number>> = {};
-  
-  assessments.forEach(assessment => {
-    // Count archetype occurrences
-    distribution[assessment.dominant_archetype] = 
-      (distribution[assessment.dominant_archetype] || 0) + 1;
-    
-    // Analyze trait patterns for each archetype
-    if (!traitPatterns[assessment.dominant_archetype]) {
-      traitPatterns[assessment.dominant_archetype] = {};
-    }
-    
-    Object.entries(assessment.trait_scores as Record<string, number>).forEach(([trait, score]) => {
-      traitPatterns[assessment.dominant_archetype][trait] = 
-        (traitPatterns[assessment.dominant_archetype][trait] || 0) + score;
-    });
-  });
-  
-  return {
-    distribution,
-    traitPatterns,
-    totalAssessments: assessments.length,
-    averageScores: Object.fromEntries(
-      Object.entries(distribution).map(([archetype, count]) => [
-        archetype, 
-        (count / assessments.length * 100).toFixed(1) + '%'
-      ])
-    )
-  };
-}

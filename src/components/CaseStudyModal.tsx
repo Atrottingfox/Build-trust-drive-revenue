@@ -521,5 +521,3 @@ export default function CaseStudyModal({ index, onClose }: { index: number; onCl
     </motion.div>
   );
 }
-
-export { caseStudies };

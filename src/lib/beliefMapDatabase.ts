@@ -302,8 +302,6 @@ export async function saveCompleteBeliefMap(mapData: {
   }>;
 }): Promise<void> {
   try {
-    console.log('Starting to save belief map data:', mapData);
-
     // Track completion status
     const completionStatus = mapData.concepts.length > 0 ? 
       (mapData.concepts.length >= 3 ? 'completed' : 'partial') : 'started';
@@ -319,20 +317,14 @@ export async function saveCompleteBeliefMap(mapData: {
       values: mapData.values
     });
 
-    console.log('Saved entry:', entry);
-
     // Save each concept
     for (const conceptData of mapData.concepts) {
-      console.log('Saving concept:', conceptData);
-      
       const concept = await saveBeliefMapConcept({
         id: conceptData.id,
         belief_map_id: entry.id!,
         title: conceptData.title,
         description: conceptData.description
       });
-
-      console.log('Saved concept:', concept);
 
       // Save messages and content ideas
       await saveBeliefMapMessages(concept.id!, conceptData.keyMessages);
@@ -346,7 +338,6 @@ export async function saveCompleteBeliefMap(mapData: {
       access_method: 'direct_link'
     });
 
-    console.log('Successfully saved complete belief map');
   } catch (error) {
     console.error('Error saving belief map:', error);
     throw error;

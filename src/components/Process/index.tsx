@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 const outcomes = [
   "A calibrated content identity you can use forever",
-  "A predictable organic lead generation system",
+  "A predictable organic lead generation system on autopilot",
   "A multi platform content engine tied to one core outcome",
   "A bank of angles, content styles and hooks unique to you",
   "An Operator Playbook so any team member can run the engine",
@@ -16,7 +16,7 @@ function OutcomeCard({ outcome, index }: { outcome: string; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="rounded-xl border border-zinc-800/60 bg-[#111113] p-5 flex items-start gap-3"
+      className="rounded-xl border border-zinc-800/60 bg-[#111113] p-5 flex items-start gap-3 h-full"
       initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay: index * 0.06 }}
@@ -31,7 +31,7 @@ function OutcomeCard({ outcome, index }: { outcome: string; index: number }) {
           transition={{ duration: 0.5, delay: 0.2 + index * 0.06 }}
         />
       </svg>
-      <span className="text-zinc-300 text-sm leading-relaxed">{outcome}</span>
+      <span className="text-zinc-300 text-xs leading-relaxed">{outcome}</span>
     </motion.div>
   );
 }

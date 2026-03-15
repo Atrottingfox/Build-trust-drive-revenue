@@ -94,6 +94,21 @@
   opacity: 1;
 }
 
+
+/* Animated gradient border — top of page */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-border-top {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(59,130,246,0.4), rgba(139,92,246,0.3), rgba(59,130,246,0.4), transparent);
+  background-size: 200% 100%;
+  animation: gradient-shift 8s ease-in-out infinite;
+}
+
 /* Accent line — decorative */
 .accent-line {
   width: 40px;
