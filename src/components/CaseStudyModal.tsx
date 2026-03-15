@@ -121,14 +121,14 @@ const caseStudies: CaseStudyData[] = [
       },
       {
         ghost: "01",
-        label: "The weight",
+        label: "The problem",
         headline: <>Too much impact to not be represented well online.</>,
         body: "Massive brand. Huge reputation. But none of it was showing up where it mattered.",
         accent: true,
       },
       {
         ghost: "02",
-        label: "The problem",
+        label: "The gap",
         headline: <>Sales team of closers.<br /><span className="text-zinc-500">Content was an afterthought.</span></>,
         visual: <FunnelBars widths={[80, 60, 30, 8]} />,
       },
@@ -140,10 +140,10 @@ const caseStudies: CaseStudyData[] = [
       },
       {
         label: "The shift",
-        headline: <>We repositioned everything.</>,
+        headline: <>Repositioned everything.</>,
         visual: (
           <div className="space-y-6 mt-8">
-            <StrikeReplace old="Team of closers" replacement="Content driven pipeline" />
+            <StrikeReplace old="Team of closers" replacement="Content driven sales" />
             <StrikeReplace old="Cold outreach" replacement="Presold prospects" />
             <StrikeReplace old="Convincing people" replacement="Attracting the right ones" />
           </div>
@@ -153,13 +153,13 @@ const caseStudies: CaseStudyData[] = [
         ghost: "→",
         label: "The build",
         headline: <>Every prospect arrived presold.</>,
-        body: "They looked at the offer and purchased. No sales calls. No convincing. No friction.",
+        body: "They looked at the offer and purchased. No sales calls. No convincing.",
         accent: true,
       },
       {
-        label: "The moment",
+        label: "The result",
         headline: <>He never had to jump on a sales call again.</>,
-        body: "The content did the selling. The brand did the positioning. The system did the rest.",
+        body: "The content did the selling. The brand did the positioning.",
         centered: true,
       },
       {
@@ -173,7 +173,7 @@ const caseStudies: CaseStudyData[] = [
       },
       {
         label: "The takeaway",
-        headline: <>Your presence should match your reputation.</>,
+        headline: <>Your brand should match your reputation.</>,
         body: "If it doesn't, you're leaving money, influence, and impact on the table.",
         accent: true,
         centered: true,
@@ -197,15 +197,15 @@ const caseStudies: CaseStudyData[] = [
       },
       {
         ghost: "01",
-        label: "The weight",
+        label: "The problem",
         headline: <>45,000 followers.<br /><span className="text-zinc-500">Growth had stalled.</span></>,
-        body: "A marketing team of one. Agencies tried. Nothing stuck. Creating content felt like pushing uphill.",
+        body: "A marketing team of one. Agencies tried. Creating content felt like an uphill battle.",
         accent: true,
       },
       {
         ghost: "02",
-        label: "The problem",
-        headline: <>No strategy.<br />No system.<br /><span className="text-zinc-500">No idea why they were posting.</span></>,
+        label: "The gap",
+        headline: <>No strategy.<br />No system.<br /><span className="text-zinc-500">No intention behind why they were posting.</span></>,
         visual: <MiniChart bars={[30, 35, 25, 32, 28, 30, 33]} />,
       },
       {
@@ -236,7 +236,7 @@ const caseStudies: CaseStudyData[] = [
         ghost: "2x",
         label: "The outcome",
         headline: <><span className="text-blue-500/80">46k → 90k</span><br />in 10 months.</>,
-        body: "But the real win was behind the scenes. Content attributed to many millions in additional revenue. During this period, the business went through a major growth phase including a PE acquisition.",
+        body: "But the real win was behind the scenes. Content attributed to many millions in additional revenue and a PE acquisition.",
         visual: <GrowthLine />,
         stat: "46k → 90k",
         statLabel: "10 months",
@@ -267,16 +267,10 @@ const caseStudies: CaseStudyData[] = [
       },
       {
         ghost: "01",
-        label: "The weight",
-        headline: <>Hundreds of thousands in missed opportunities.</>,
-        body: "Strong brand. People loved him. But he didn't want to do media and it was holding everything back.",
-        accent: true,
-      },
-      {
-        ghost: "02",
         label: "The problem",
-        headline: <>Huge brand.<br />No video presence.<br /><span className="text-zinc-500">No process.</span></>,
-        body: "He had a reputation. It just wasn't built with video. The online presence didn't match the offline impact.",
+        headline: <>Huge brand. No video presence.</>,
+        body: "He had a reputation. But the online presence didn't match the offline impact.",
+        accent: true,
       },
       {
         label: "The approach",
@@ -298,8 +292,8 @@ const caseStudies: CaseStudyData[] = [
       {
         ghost: "→",
         label: "The build",
-        headline: <>Extremely authentic.<br /><span className="text-blue-500/80">Extreme authenticity.</span></>,
-        body: "Through short form video we built it out and created a magnetic personal brand that aligned with who he was. We didn't make him someone else. We amplified who he already was.",
+        headline: <>Extreme authenticity.</>,
+        body: "We created a magnetic personal brand through short form video that aligned with exactly who he was. We didn't make him someone else. We amplified who he already was.",
         accent: true,
       },
       {
