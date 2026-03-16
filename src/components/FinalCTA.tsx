@@ -40,7 +40,7 @@ export default function FinalCTA() {
           transition={{ delay: 0.25 }}
         >
           <a
-            href="https://www.contentengine.live"
+            href="https://contentengine.live/try"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
