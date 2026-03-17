@@ -7,8 +7,7 @@ const corsHeaders = {
     "Content-Type, Authorization, X-Client-Info, Apikey",
 };
 
-// Replace with your Notion database ID for resource downloads
-const NOTION_DATABASE_ID = Deno.env.get("NOTION_RESOURCE_DB_ID") || "";
+const NOTION_DATABASE_ID = "5b5bb79f4c3c4b1582099aa832b2121f";
 
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
