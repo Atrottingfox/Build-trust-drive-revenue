@@ -16,6 +16,8 @@ const BeliefShift = React.lazy(() => import('./pages/BeliefShift'));
 const BeliefBuilder = React.lazy(() => import('./pages/BeliefBuilder'));
 const BeliefBridge = React.lazy(() => import('./pages/BeliefBridge'));
 const Resources = React.lazy(() => import('./pages/Resources'));
+const ContentEngine = React.lazy(() => import('./pages/ContentEngine'));
+const Builder = React.lazy(() => import('./pages/Builder'));
 
 import { Navigation } from './components/ui/Navigation';
 
@@ -54,6 +56,8 @@ export default function App() {
           <Route path="/belief-builder" element={<BeliefBuilder />} />
           <Route path="/belief-bridge" element={<BeliefBridge />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/content-engine" element={<ContentEngine />} />
+          <Route path="/builder" element={<Builder />} />
         </Routes>
       </Suspense>
     </Router>
