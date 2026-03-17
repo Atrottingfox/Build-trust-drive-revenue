@@ -171,7 +171,7 @@ export default function Diagnostic() {
               <span className="text-xs text-zinc-400 tracking-wide">The Authority Engine System</span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[1.05] mb-6">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.08] sm:leading-[1.05] mb-6">
               Build trust.<br />
               Drive demand.<br />
               <GradientText>Dominate your niche.</GradientText>

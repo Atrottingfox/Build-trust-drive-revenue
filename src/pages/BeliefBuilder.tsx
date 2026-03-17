@@ -103,7 +103,7 @@ export default function BeliefBuilder() {
               <span className="text-sm text-zinc-400 font-medium">Authority Engine</span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight">
               Know what you<br />
               stand for.<br />
               <GradientText>Own your market.</GradientText>
