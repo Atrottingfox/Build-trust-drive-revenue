@@ -75,7 +75,12 @@ const problemLabels: Record<string, string> = {
   'Message unclear / fragmented': 'Our message is unclear / fragmented',
   'Creates a lot but no pipeline': "We create a lot but it doesn't turn into pipeline",
 };
-const opsOptions = ['Yes full-time', 'Yes part-time', 'No'];
+const opsOptions = ['Yes, full time', 'Yes, part time', 'No'];
+const opsToNotion: Record<string, string> = {
+  'Yes, full time': 'Yes full-time',
+  'Yes, part time': 'Yes part-time',
+  'No': 'No',
+};
 
 /* ─── reusable form atoms ─── */
 
@@ -249,7 +254,10 @@ export default function Builder() {
       const res = await fetch('/.netlify/functions/builder-application', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          contentOpsPerson: opsToNotion[form.contentOpsPerson] || form.contentOpsPerson,
+        }),
       });
 
       const data = await res.json();
@@ -405,7 +413,7 @@ export default function Builder() {
                   <Label required>Do you have at least one person who can own content ops after this?</Label>
                   <RadioGroup options={opsOptions} value={form.contentOpsPerson} onChange={(v) => update('contentOpsPerson', v)} />
                 </div>
-                {(form.contentOpsPerson === 'Yes full-time' || form.contentOpsPerson === 'Yes part-time') && (
+                {(form.contentOpsPerson === 'Yes, full time' || form.contentOpsPerson === 'Yes, part time') && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
