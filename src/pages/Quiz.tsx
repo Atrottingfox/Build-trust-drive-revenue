@@ -70,7 +70,6 @@ const QUESTIONS: QuizQuestion[] = [
     id: 'price',
     question: "What's your price point?",
     subtitle: 'Your primary offer, not your cheapest.',
-    type: 'select',
     options: [
       { id: 'under1k', label: 'Under $1,000' },
       { id: '1k-5k', label: '$1,000 - $5,000' },
@@ -79,27 +78,24 @@ const QUESTIONS: QuizQuestion[] = [
     ],
   },
   {
-    id: 'leads',
-    question: 'Where do most of your leads come from right now?',
-    subtitle: 'Be honest. Where are the majority actually coming from?',
-    type: 'select',
+    id: 'stage',
+    question: 'Where is your audience right now?',
+    subtitle: 'Think about the people you want this lead magnet to attract.',
     options: [
-      { id: 'organic', label: 'Organic content', sublabel: 'Social media, YouTube, blog' },
-      { id: 'paid', label: 'Paid ads', sublabel: 'Meta, Google, LinkedIn ads' },
-      { id: 'referrals', label: 'Referrals and word of mouth', sublabel: 'Network, past clients, introductions' },
-      { id: 'outbound', label: 'Outbound', sublabel: 'Cold email, DMs, events' },
-      { id: 'none', label: "I don't have a reliable source yet", sublabel: "It's inconsistent or random" },
+      { id: 'attention', label: "They don't know me yet", sublabel: 'Cold audience. Need to earn attention first.' },
+      { id: 'alignment', label: 'They know me but aren\'t sold', sublabel: 'Following along but haven\'t committed to anything.' },
+      { id: 'achievability', label: 'They trust me but need proof it works', sublabel: 'Interested in working together but need to see the system.' },
+      { id: 'access', label: 'They\'re ready, just need the right entry point', sublabel: 'Warm leads who need a reason to start now.' },
     ],
   },
   {
     id: 'bottleneck',
     question: "What's the real bottleneck?",
     subtitle: "If you could fix one thing tomorrow, what would move the needle most?",
-    type: 'select',
     options: [
       { id: 'volume', label: 'Not enough leads', sublabel: "Pipeline is dry. Can't fill the calendar." },
-      { id: 'quality', label: 'Wrong leads', sublabel: 'Getting interest but from people who can\'t afford it or aren\'t the right fit.' },
-      { id: 'conversion', label: "Leads don't convert", sublabel: 'People show up but don\'t buy. Something breaks between interest and purchase.' },
+      { id: 'quality', label: 'Wrong leads', sublabel: 'Getting interest from people who aren\'t the right fit.' },
+      { id: 'conversion', label: "Leads don't convert", sublabel: 'People show up but don\'t buy.' },
       { id: 'all', label: 'All of the above', sublabel: 'The whole system needs work.' },
     ],
   },
@@ -107,11 +103,10 @@ const QUESTIONS: QuizQuestion[] = [
     id: 'time',
     question: 'How much time can you put into this?',
     subtitle: 'Building and maintaining the lead magnet.',
-    type: 'select',
     options: [
-      { id: 'passive', label: 'Set and forget', sublabel: 'Build it once, let it run. I\'m time poor.' },
-      { id: 'moderate', label: 'A few hours to build, then it runs', sublabel: 'I can invest upfront but need it automated after.' },
-      { id: 'active', label: 'I can show up live regularly', sublabel: 'Weekly or monthly live delivery is fine.' },
+      { id: 'passive', label: 'Set and forget', sublabel: 'Build it once, let it run.' },
+      { id: 'moderate', label: 'A few hours to build, then it runs', sublabel: 'Invest upfront, automated after.' },
+      { id: 'active', label: 'I can show up live regularly', sublabel: 'Weekly or monthly live delivery.' },
     ],
   },
 ];
@@ -126,8 +121,8 @@ const LEAD_MAGNET_TYPES: LeadMagnetType[] = [
     tagline: 'Reveal the problem they can\'t name.',
     coreTrigger: 'Problem revelation',
     color: { bg: 'bg-violet-500/10', text: 'text-violet-400', border: 'border-violet-500/20', glow: 'rgba(139,92,246,0.15)' },
-    description: 'An interactive assessment where the prospect answers questions and gets a personalised score, category, or gap analysis.',
-    howItWorks: 'Build 8-15 questions across 3-4 categories. Score responses. Deliver a result page with their category, their biggest gap, and one clear next step.',
+    description: 'An interactive assessment where the prospect answers questions and gets a personalised score, category, or gap analysis. The belief shift: they thought they knew where they stood. The diagnostic shows them the gap between perceived and actual.',
+    howItWorks: 'Build 8-15 questions across 3-4 categories. Score responses. Deliver a result page with their category, their biggest gap, and one clear next step. The questions themselves should encode your methodology. Each question teaches something.',
     exampleTemplate: '"The [Your Topic] Scorecard" or "[Industry] Readiness Assessment"',
     personalisationTip: 'Create 3-5 distinct result categories. Each one gets different copy, different next steps, and a different email sequence.',
     buildTime: '1-2 weekends',
@@ -142,8 +137,8 @@ const LEAD_MAGNET_TYPES: LeadMagnetType[] = [
     tagline: 'Give them their number in 60 seconds.',
     coreTrigger: 'Speed + specificity',
     color: { bg: 'bg-blue-500/10', text: 'text-blue-400', border: 'border-blue-500/20', glow: 'rgba(59,130,246,0.15)' },
-    description: 'A calculator, generator, or grader that takes their inputs and produces a specific, usable output.',
-    howItWorks: 'Build a form with 3-5 inputs. Process into a personalised output (score, projection, graded result). The output itself starts the sales conversation.',
+    description: 'A calculator, generator, or grader that takes their inputs and produces a specific, usable output. The belief shift: they were guessing at a number. Now they have the real one. Your framework produced it.',
+    howItWorks: 'Build a form with 3-5 inputs. Process into a personalised output (score, projection, graded result). The output itself starts the sales conversation. The formula behind it IS your IP.',
     exampleTemplate: '"[Metric] Calculator" or "[Topic] Grader" or "[Outcome] Generator"',
     personalisationTip: 'Every user gets a different output based on their inputs. Segment follow-up by score range.',
     buildTime: '1 weekend',
@@ -158,8 +153,8 @@ const LEAD_MAGNET_TYPES: LeadMagnetType[] = [
     tagline: 'Skip the blank page. Start 80% done.',
     coreTrigger: 'Speed + shortcut',
     color: { bg: 'bg-emerald-500/10', text: 'text-emerald-400', border: 'border-emerald-500/20', glow: 'rgba(16,185,129,0.15)' },
-    description: 'A ready made framework, swipe file, or fill in the blank system they can apply immediately.',
-    howItWorks: 'Package your core methodology into a plug and play format. The template IS a taste of your system.',
+    description: 'A ready made framework, swipe file, or fill in the blank system they can apply immediately. The belief shift: they thought the problem was effort. The template shows them it was structure all along.',
+    howItWorks: 'Package your core methodology into a plug and play format. The template IS a taste of your system. They use your structure, get a result, and the belief shifts from "I can\'t do this" to "I just need the full version."',
     exampleTemplate: '"The [Your Method] Template" or "[Outcome] Swipe File" or "[Process] Playbook"',
     personalisationTip: 'Add a short intake form before delivery to serve the right variant.',
     buildTime: 'A few hours',
@@ -174,8 +169,8 @@ const LEAD_MAGNET_TYPES: LeadMagnetType[] = [
     tagline: 'Establish depth. Build authority over time.',
     coreTrigger: 'Authority + aspiration',
     color: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/20', glow: 'rgba(245,158,11,0.15)' },
-    description: 'A guide, checklist, or report that packages your expertise into a deliverable.',
-    howItWorks: 'Create a focused document around ONE specific problem. Short, actionable, impossible to find elsewhere.',
+    description: 'A guide, checklist, or report that packages your expertise into a deliverable. The belief shift: they were approaching the problem wrong. Your framework reframes it. Best for cold audiences who need their thinking changed before they\'ll buy.',
+    howItWorks: 'Create a focused document around ONE specific problem. The content should install a new belief, not just deliver tips. Frame it around your contrarian position or proprietary methodology.',
     exampleTemplate: '"The [Specific Outcome] Checklist" or "[Industry] Playbook"',
     personalisationTip: 'Gate with a "which version?" selector. Each maps to a segment.',
     buildTime: '2-4 hours',
@@ -190,8 +185,8 @@ const LEAD_MAGNET_TYPES: LeadMagnetType[] = [
     tagline: 'Let them taste what working with you feels like.',
     coreTrigger: 'Trust transfer + reciprocity',
     color: { bg: 'bg-red-500/10', text: 'text-red-400', border: 'border-red-500/20', glow: 'rgba(239,68,68,0.15)' },
-    description: 'A live or semi-live event. Workshop, challenge, webinar, or mini course.',
-    howItWorks: 'Run a 60-90 minute workshop or 3-5 day challenge. Deliver real value. Let them experience your process firsthand.',
+    description: 'A live or semi-live event. Workshop, challenge, webinar, or mini course. The belief shift: they experienced your methodology firsthand. Theory became real. The sale happens because they already felt the transformation.',
+    howItWorks: 'Run a 60-90 minute workshop or 3-5 day challenge. Deliver a real outcome, not a pitch. Structure it around your core framework so they experience your thinking live.',
     exampleTemplate: '"The [Outcome] Workshop" or "[Number]-Day [Topic] Sprint"',
     personalisationTip: 'Pre-event survey to tailor examples. Segment by attendance behaviour.',
     buildTime: '1 week to prep, then recurring',
@@ -207,34 +202,34 @@ type Weights = Record<string, number>;
 
 const SCORING: Record<string, Record<string, Weights>> = {
   offer: {
-    coaching: { diagnostic: 3, tool: 1, template: 2, education: 1, experience: 3 },
-    agency:   { diagnostic: 3, tool: 2, template: 1, education: 0, experience: 1 },
-    course:   { diagnostic: 2, tool: 2, template: 3, education: 2, experience: 2 },
+    coaching: { diagnostic: 2, tool: 1, template: 2, education: 2, experience: 3 },
+    agency:   { diagnostic: 2, tool: 2, template: 2, education: 1, experience: 1 },
+    course:   { diagnostic: 1, tool: 2, template: 3, education: 2, experience: 2 },
     saas:     { diagnostic: 1, tool: 3, template: 2, education: 1, experience: 1 },
   },
   price: {
-    'under1k':  { diagnostic: 1, tool: 2, template: 3, education: 3, experience: 1 },
-    '1k-5k':    { diagnostic: 2, tool: 2, template: 2, education: 1, experience: 2 },
-    '5k-15k':   { diagnostic: 3, tool: 2, template: 1, education: 0, experience: 3 },
-    '15k+':     { diagnostic: 3, tool: 1, template: 0, education: 0, experience: 2 },
+    'under1k':  { diagnostic: 0, tool: 1, template: 3, education: 3, experience: 1 },
+    '1k-5k':    { diagnostic: 1, tool: 2, template: 2, education: 2, experience: 2 },
+    '5k-15k':   { diagnostic: 2, tool: 2, template: 1, education: 0, experience: 3 },
+    '15k+':     { diagnostic: 2, tool: 1, template: 0, education: 0, experience: 3 },
   },
-  leads: {
-    organic:   { diagnostic: 2, tool: 2, template: 2, education: 2, experience: 2 },
-    paid:      { diagnostic: 3, tool: 3, template: 1, education: 1, experience: 1 },
-    referrals: { diagnostic: 2, tool: 1, template: 1, education: 1, experience: 3 },
-    outbound:  { diagnostic: 2, tool: 2, template: 2, education: 1, experience: 1 },
-    none:      { diagnostic: 3, tool: 1, template: 2, education: 2, experience: 1 },
+  // Stage is the heaviest weight — it determines the PHASE of trust building
+  stage: {
+    attention:     { diagnostic: 0, tool: 1, template: 2, education: 4, experience: 3 },
+    alignment:     { diagnostic: 1, tool: 2, template: 3, education: 2, experience: 3 },
+    achievability: { diagnostic: 3, tool: 3, template: 1, education: 0, experience: 2 },
+    access:        { diagnostic: 3, tool: 2, template: 0, education: 0, experience: 3 },
   },
   bottleneck: {
-    volume:     { diagnostic: 3, tool: 2, template: 2, education: 2, experience: 2 },
+    volume:     { diagnostic: 1, tool: 1, template: 2, education: 3, experience: 2 },
     quality:    { diagnostic: 3, tool: 3, template: 0, education: 0, experience: 1 },
-    conversion: { diagnostic: 2, tool: 1, template: 1, education: 1, experience: 3 },
-    all:        { diagnostic: 3, tool: 2, template: 1, education: 1, experience: 1 },
+    conversion: { diagnostic: 2, tool: 1, template: 1, education: 0, experience: 3 },
+    all:        { diagnostic: 2, tool: 2, template: 1, education: 1, experience: 1 },
   },
   time: {
-    passive:  { diagnostic: 3, tool: 3, template: 3, education: 2, experience: 0 },
+    passive:  { diagnostic: 2, tool: 3, template: 3, education: 3, experience: 0 },
     moderate: { diagnostic: 2, tool: 2, template: 2, education: 2, experience: 1 },
-    active:   { diagnostic: 1, tool: 0, template: 0, education: 1, experience: 3 },
+    active:   { diagnostic: 1, tool: 0, template: 0, education: 1, experience: 4 },
   },
 };
 
@@ -274,9 +269,9 @@ function calculateLeadScore(answers: Record<string, string>): { score: number; l
   const bottleneckScores: Record<string, number> = { conversion: 4, quality: 3, all: 3, volume: 2 };
   score += bottleneckScores[answers.bottleneck] || 0;
 
-  // Lead source (referrals/organic = warmer)
-  const leadScores: Record<string, number> = { referrals: 3, organic: 3, paid: 2, outbound: 2, none: 1 };
-  score += leadScores[answers.leads] || 0;
+  // Audience stage (closer to access = hotter)
+  const stageScores: Record<string, number> = { access: 4, achievability: 3, alignment: 2, attention: 1 };
+  score += stageScores[answers.stage] || 0;
 
   // Time (moderate = sweet spot for done-with-you)
   const timeScores: Record<string, number> = { moderate: 3, active: 2, passive: 1 };
@@ -554,11 +549,12 @@ export default function Quiz() {
     const bottleneckLabels: Record<string, string> = {
       volume: 'Not enough leads', quality: 'Wrong leads', conversion: 'Leads don\'t convert', all: 'All of the above',
     };
-    const leadLabels: Record<string, string> = {
-      organic: 'Organic content', paid: 'Paid ads', referrals: 'Referrals', outbound: 'Outbound', none: 'No reliable source',
+    const stageLabels: Record<string, string> = {
+      attention: 'cold audience, need to earn attention', alignment: 'aware but not committed',
+      achievability: 'interested, need proof', access: 'warm, need entry point',
     };
 
-    const businessDescription = `A ${offerLabels[answers.offer] || 'business'} priced at ${priceLabels[answers.price] || 'mid-range'}`;
+    const businessDescription = `A ${offerLabels[answers.offer] || 'business'} priced at ${priceLabels[answers.price] || 'mid-range'}. Audience stage: ${stageLabels[answers.stage] || 'mixed'}`;
 
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/content-engine-ai`, {
@@ -575,7 +571,7 @@ export default function Quiz() {
           offerType: answers.offer,
           pricePoint: priceLabels[answers.price] || answers.price,
           bottleneck: bottleneckLabels[answers.bottleneck] || answers.bottleneck,
-          leadSource: leadLabels[answers.leads] || answers.leads,
+          leadSource: answers.stage || 'unknown',
         }),
       });
 
@@ -621,6 +617,23 @@ export default function Quiz() {
       const { createClient } = await import('@supabase/supabase-js');
       const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+      // Save to dedicated quiz_results table with each answer as a column
+      await supabase.from('quiz_results').insert({
+        email: email.trim(),
+        offer: answers.offer || '',
+        price: answers.price || '',
+        leads: answers.stage || '',
+        bottleneck: answers.bottleneck || '',
+        time_available: answers.time || '',
+        audience_stage: answers.stage || '',
+        result_primary: result.primary.id,
+        result_secondary: result.secondary.id,
+        lead_score: result.leadScore.score,
+        lead_tier: result.leadScore.tier,
+        scores: result.scores,
+      });
+
+      // Also save to contacts + interactions for CRM
       const { data: contact } = await supabase
         .from('contacts')
         .upsert({ email: email.trim(), source: 'lead_magnet_quiz' }, { onConflict: 'email' })
@@ -634,8 +647,6 @@ export default function Quiz() {
           description: JSON.stringify({
             answers,
             result: result.primary.id,
-            secondary: result.secondary.id,
-            scores: result.scores,
             leadScore: result.leadScore,
           }),
         });
