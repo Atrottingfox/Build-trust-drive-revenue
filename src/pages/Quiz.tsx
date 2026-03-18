@@ -44,6 +44,7 @@ interface QuizResult {
   primary: LeadMagnetType;
   secondary: LeadMagnetType;
   scores: Record<string, number>;
+  leadScore: { score: number; label: string; tier: 'hot' | 'warm' | 'cold' };
   personalised: {
     whyThis: string;
     specificExample: string;
@@ -253,8 +254,37 @@ function calculateResult(answers: Record<string, string>): QuizResult {
   const primary = LEAD_MAGNET_TYPES.find(t => t.id === sorted[0][0])!;
   const secondary = LEAD_MAGNET_TYPES.find(t => t.id === sorted[1][0])!;
   const personalised = generatePersonalisedCopy(answers, primary);
+  const leadScore = calculateLeadScore(answers);
 
-  return { primary, secondary, scores, personalised };
+  return { primary, secondary, scores, leadScore, personalised };
+}
+
+function calculateLeadScore(answers: Record<string, string>): { score: number; label: string; tier: 'hot' | 'warm' | 'cold' } {
+  let score = 0;
+
+  // Price point (higher = hotter)
+  const priceScores: Record<string, number> = { 'under1k': 1, '1k-5k': 2, '5k-15k': 4, '15k+': 5 };
+  score += priceScores[answers.price] || 0;
+
+  // Offer type
+  const offerScores: Record<string, number> = { coaching: 4, agency: 3, course: 2, saas: 2 };
+  score += offerScores[answers.offer] || 0;
+
+  // Bottleneck (conversion = most aware, all = most pain)
+  const bottleneckScores: Record<string, number> = { conversion: 4, quality: 3, all: 3, volume: 2 };
+  score += bottleneckScores[answers.bottleneck] || 0;
+
+  // Lead source (referrals/organic = warmer)
+  const leadScores: Record<string, number> = { referrals: 3, organic: 3, paid: 2, outbound: 2, none: 1 };
+  score += leadScores[answers.leads] || 0;
+
+  // Time (moderate = sweet spot for done-with-you)
+  const timeScores: Record<string, number> = { moderate: 3, active: 2, passive: 1 };
+  score += timeScores[answers.time] || 0;
+
+  if (score >= 15) return { score, label: 'High intent', tier: 'hot' };
+  if (score >= 10) return { score, label: 'Considering', tier: 'warm' };
+  return { score, label: 'Exploring', tier: 'cold' };
 }
 
 function generatePersonalisedCopy(
@@ -606,6 +636,7 @@ export default function Quiz() {
             result: result.primary.id,
             secondary: result.secondary.id,
             scores: result.scores,
+            leadScore: result.leadScore,
           }),
         });
       }
@@ -886,6 +917,43 @@ export default function Quiz() {
                           <span className="text-[10px] font-semibold text-zinc-600 uppercase tracking-wider">Runner up</span>
                         </div>
                         <p className="text-xs text-zinc-500">{result.secondary.tagline}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Build It With Us */}
+                  <div className="bg-[#111113] border border-blue-500/20 rounded-2xl p-6 mb-4 relative overflow-hidden" style={{ boxShadow: '0 0 40px -15px rgba(59,130,246,0.12)' }}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/[0.03] to-transparent pointer-events-none" />
+                    <div className="relative">
+                      <h3 className="text-lg font-bold text-white mb-2">Want to build it together?</h3>
+                      <p className="text-sm text-zinc-400 leading-relaxed mb-4">
+                        Skip the guesswork. We'll build your {result.primary.name.toLowerCase()} with you in a live working session. You leave with a finished lead magnet, not a plan.
+                      </p>
+                      <a
+                        href="https://form.typeform.com/to/S2rogsdT"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 transition-all"
+                      >
+                        Apply for a live build session
+                        <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Content Diagnostic Chain */}
+                  <div className="bg-[#111113] border border-white/[0.06] rounded-2xl p-6 mb-8">
+                    <div className="flex items-start gap-3 mb-3">
+                      <Target className="w-5 h-5 text-violet-400 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h3 className="text-sm font-bold text-white mb-1">Your lead magnet only works if your content feeds it.</h3>
+                        <p className="text-xs text-zinc-500 leading-relaxed mb-3">
+                          The best lead magnet in the world dies without a content system driving traffic to it. Find out where your content system is breaking.
+                        </p>
+                        <a href="/diagnostic-tool" className="inline-flex items-center gap-1.5 text-sm text-violet-400 hover:text-violet-300 font-semibold transition-colors">
+                          Take the Content Diagnostic
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </a>
                       </div>
                     </div>
                   </div>
