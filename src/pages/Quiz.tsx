@@ -55,32 +55,14 @@ interface QuizResult {
 
 const QUESTIONS: QuizQuestion[] = [
   {
-    id: 'niche',
-    question: "What's your niche?",
-    subtitle: 'Pick the closest match to your industry or audience.',
-    type: 'select',
-    options: [
-      { id: 'health', label: 'Health, fitness, or wellness' },
-      { id: 'business', label: 'Business, marketing, or sales' },
-      { id: 'finance', label: 'Finance, investing, or real estate' },
-      { id: 'tech', label: 'Tech, SaaS, or software' },
-      { id: 'coaching', label: 'Coaching, mindset, or personal development' },
-      { id: 'ecommerce', label: 'E-commerce or DTC brands' },
-      { id: 'creative', label: 'Creative, design, or media' },
-      { id: 'other', label: 'Something else' },
-    ],
-  },
-  {
     id: 'offer',
-    question: 'What do you sell?',
-    subtitle: 'Pick the closest match to your primary offer.',
-    type: 'select',
+    question: 'What do you do?',
+    subtitle: 'Pick the closest match.',
     options: [
-      { id: 'service', label: 'Done for you service', sublabel: 'Agency, freelance, implementation' },
-      { id: 'coaching', label: 'Coaching or consulting', sublabel: '1:1, group, advisory' },
-      { id: 'course', label: 'Course or program', sublabel: 'Digital product, membership, community' },
-      { id: 'saas', label: 'Software or SaaS', sublabel: 'App, platform, tool' },
-      { id: 'agency', label: 'Agency or productised service', sublabel: 'Retainers, packages, managed service' },
+      { id: 'coaching', label: 'Coaching or consulting' },
+      { id: 'agency', label: 'Agency or done for you service' },
+      { id: 'course', label: 'Course, program, or membership' },
+      { id: 'saas', label: 'Software or SaaS' },
     ],
   },
   {
@@ -224,11 +206,10 @@ type Weights = Record<string, number>;
 
 const SCORING: Record<string, Record<string, Weights>> = {
   offer: {
-    service:  { diagnostic: 3, tool: 2, template: 1, education: 0, experience: 1 },
     coaching: { diagnostic: 3, tool: 1, template: 2, education: 1, experience: 3 },
+    agency:   { diagnostic: 3, tool: 2, template: 1, education: 0, experience: 1 },
     course:   { diagnostic: 2, tool: 2, template: 3, education: 2, experience: 2 },
     saas:     { diagnostic: 1, tool: 3, template: 2, education: 1, experience: 1 },
-    agency:   { diagnostic: 3, tool: 2, template: 1, education: 0, experience: 1 },
   },
   price: {
     'under1k':  { diagnostic: 1, tool: 2, template: 3, education: 3, experience: 1 },
@@ -285,18 +266,16 @@ function generatePersonalisedCopy(
 
   const whyThisMap: Record<string, Record<string, string>> = {
     diagnostic: {
-      service: "You sell a service. The prospect needs to trust your diagnosis before they'll trust your delivery. A diagnostic positions you as the expert who understands their problem better than they do.",
       coaching: "You sell coaching. The hardest part isn't convincing people coaching works. It's helping them see exactly where they're stuck. A diagnostic does that without a sales call.",
+      agency: "You sell a service. Prospects compare you to every other provider. A diagnostic reframes the conversation from 'which provider?' to 'what's actually broken?'",
       course: "You sell a course. The biggest objection is 'is this for me?' A diagnostic lets them self-select by showing them their exact gap.",
       saas: "You sell software. A diagnostic helps prospects quantify the problem your tool solves. They see the gap, they feel the pain, they want the fix.",
-      agency: "You sell agency services. Prospects compare you to every other agency. A diagnostic reframes the conversation from 'which agency?' to 'what's actually broken?'",
     },
     tool: {
-      service: "You sell a service. A tool gives prospects their specific number before you ever get on a call. By the time they book, they already know they need you.",
       coaching: "You sell coaching. A tool lets prospects see exactly where they stand in 60 seconds. It's proof of your methodology before they've spent a dollar.",
+      agency: "You sell a service. A tool gives prospects their specific number before you ever get on a call. By the time they book, they already know they need you.",
       course: "You sell a course. A tool gives instant value and proves your framework works. The output makes them want the full system behind it.",
       saas: "You sell software. A tool IS what you do. Build a lighter version that solves one specific problem.",
-      agency: "You sell agency services. A tool quantifies the opportunity. When they see the gap, the agency engagement sells itself.",
     },
     template: { default: "You need something people can use immediately. A template removes the blank page problem and gives them a taste of your system." },
     education: { default: "Your audience needs to understand the problem before they'll pay to solve it. A focused, high value guide positions you as the authority." },
@@ -525,25 +504,19 @@ export default function Quiz() {
 
   // Generate preview when result loads
   useEffect(() => {
-    if (result && answers.niche && !preview && !previewLoading) {
+    if (result && answers.offer && !preview && !previewLoading) {
       generatePreview();
     }
   }, [result]);
 
   async function generatePreview() {
-    if (!result || !answers.niche) return;
+    if (!result || !answers.offer) return;
     setPreviewLoading(true);
     setPreviewError('');
 
-    const nicheLabels: Record<string, string> = {
-      health: 'health, fitness, and wellness', business: 'business, marketing, and sales',
-      finance: 'finance, investing, and real estate', tech: 'tech and SaaS',
-      coaching: 'coaching and personal development', ecommerce: 'e-commerce and DTC brands',
-      creative: 'creative, design, and media', other: 'professional services',
-    };
     const offerLabels: Record<string, string> = {
-      service: 'done-for-you service', coaching: 'coaching or consulting',
-      course: 'course or program', saas: 'software or SaaS', agency: 'agency or productised service',
+      coaching: 'coaching or consulting business', agency: 'agency or done-for-you service',
+      course: 'course, program, or membership', saas: 'software or SaaS company',
     };
     const priceLabels: Record<string, string> = {
       'under1k': 'Under $1,000', '1k-5k': '$1,000-$5,000', '5k-15k': '$5,000-$15,000', '15k+': '$15,000+',
@@ -555,7 +528,7 @@ export default function Quiz() {
       organic: 'Organic content', paid: 'Paid ads', referrals: 'Referrals', outbound: 'Outbound', none: 'No reliable source',
     };
 
-    const businessDescription = `A ${offerLabels[answers.offer] || 'business'} in the ${nicheLabels[answers.niche] || 'professional services'} space, priced at ${priceLabels[answers.price] || 'mid-range'}`;
+    const businessDescription = `A ${offerLabels[answers.offer] || 'business'} priced at ${priceLabels[answers.price] || 'mid-range'}`;
 
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/content-engine-ai`, {
@@ -709,7 +682,7 @@ export default function Quiz() {
                     <GradientText>should you build?</GradientText>
                   </h1>
                   <p className="text-base text-zinc-400 max-w-lg mx-auto leading-relaxed mb-4">
-                    6 questions. 60 seconds. Get a personalised recommendation with a real preview of what YOUR lead magnet could look like.
+                    5 questions. 60 seconds. Get a personalised recommendation with a real preview of what YOUR lead magnet could look like.
                   </p>
                   <p className="text-sm text-zinc-600 mb-10">
                     Not generic advice. AI builds a custom preview based on your exact business.
