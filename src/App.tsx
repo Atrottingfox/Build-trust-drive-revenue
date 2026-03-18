@@ -18,6 +18,8 @@ const BeliefBridge = React.lazy(() => import('./pages/BeliefBridge'));
 const Resources = React.lazy(() => import('./pages/Resources'));
 const ContentEngine = React.lazy(() => import('./pages/ContentEngine'));
 const Builder = React.lazy(() => import('./pages/Builder'));
+const DiagnosticTool = React.lazy(() => import('./pages/DiagnosticTool'));
+const Quiz = React.lazy(() => import('./pages/Quiz'));
 
 import { Navigation } from './components/ui/Navigation';
 
@@ -58,6 +60,8 @@ export default function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/content-engine" element={<ContentEngine />} />
           <Route path="/builder" element={<Builder />} />
+          <Route path="/diagnostic-tool" element={<DiagnosticTool />} />
+          <Route path="/quiz" element={<Quiz />} />
         </Routes>
       </Suspense>
     </Router>
