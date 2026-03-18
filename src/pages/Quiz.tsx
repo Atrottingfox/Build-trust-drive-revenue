@@ -20,9 +20,7 @@ interface QuizQuestion {
   id: string;
   question: string;
   subtitle: string;
-  type: 'select' | 'text';
-  options?: QuizOption[];
-  placeholder?: string;
+  options: QuizOption[];
 }
 
 interface LeadMagnetType {
@@ -57,11 +55,20 @@ interface QuizResult {
 
 const QUESTIONS: QuizQuestion[] = [
   {
-    id: 'business',
-    question: 'Describe your business in one sentence.',
-    subtitle: 'Who do you help and what do you help them do? Be specific.',
-    type: 'text',
-    placeholder: 'e.g. "I help e-commerce brands scale to $10M with Meta ads" or "I coach executive women through career transitions"',
+    id: 'niche',
+    question: "What's your niche?",
+    subtitle: 'Pick the closest match to your industry or audience.',
+    type: 'select',
+    options: [
+      { id: 'health', label: 'Health, fitness, or wellness' },
+      { id: 'business', label: 'Business, marketing, or sales' },
+      { id: 'finance', label: 'Finance, investing, or real estate' },
+      { id: 'tech', label: 'Tech, SaaS, or software' },
+      { id: 'coaching', label: 'Coaching, mindset, or personal development' },
+      { id: 'ecommerce', label: 'E-commerce or DTC brands' },
+      { id: 'creative', label: 'Creative, design, or media' },
+      { id: 'other', label: 'Something else' },
+    ],
   },
   {
     id: 'offer',
@@ -505,7 +512,6 @@ export default function Quiz() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
-  const [textInput, setTextInput] = useState('');
 
   // AI Preview
   const [preview, setPreview] = useState<any>(null);
@@ -519,16 +525,26 @@ export default function Quiz() {
 
   // Generate preview when result loads
   useEffect(() => {
-    if (result && answers.business && !preview && !previewLoading) {
+    if (result && answers.niche && !preview && !previewLoading) {
       generatePreview();
     }
   }, [result]);
 
   async function generatePreview() {
-    if (!result || !answers.business) return;
+    if (!result || !answers.niche) return;
     setPreviewLoading(true);
     setPreviewError('');
 
+    const nicheLabels: Record<string, string> = {
+      health: 'health, fitness, and wellness', business: 'business, marketing, and sales',
+      finance: 'finance, investing, and real estate', tech: 'tech and SaaS',
+      coaching: 'coaching and personal development', ecommerce: 'e-commerce and DTC brands',
+      creative: 'creative, design, and media', other: 'professional services',
+    };
+    const offerLabels: Record<string, string> = {
+      service: 'done-for-you service', coaching: 'coaching or consulting',
+      course: 'course or program', saas: 'software or SaaS', agency: 'agency or productised service',
+    };
     const priceLabels: Record<string, string> = {
       'under1k': 'Under $1,000', '1k-5k': '$1,000-$5,000', '5k-15k': '$5,000-$15,000', '15k+': '$15,000+',
     };
@@ -538,6 +554,8 @@ export default function Quiz() {
     const leadLabels: Record<string, string> = {
       organic: 'Organic content', paid: 'Paid ads', referrals: 'Referrals', outbound: 'Outbound', none: 'No reliable source',
     };
+
+    const businessDescription = `A ${offerLabels[answers.offer] || 'business'} in the ${nicheLabels[answers.niche] || 'professional services'} space, priced at ${priceLabels[answers.price] || 'mid-range'}`;
 
     try {
       const res = await fetch(`${SUPABASE_URL}/functions/v1/content-engine-ai`, {
@@ -549,7 +567,7 @@ export default function Quiz() {
         },
         body: JSON.stringify({
           action: 'generate_lead_magnet_preview',
-          businessDescription: answers.business,
+          businessDescription,
           leadMagnetType: result.primary.name,
           offerType: answers.offer,
           pricePoint: priceLabels[answers.price] || answers.price,
@@ -583,26 +601,8 @@ export default function Quiz() {
     }, 300);
   }
 
-  function submitTextAnswer() {
-    if (!textInput.trim()) return;
-    setAnswers(prev => ({ ...prev, [QUESTIONS[currentQ].id]: textInput.trim() }));
-
-    if (currentQ < totalQuestions - 1) {
-      setCurrentQ(prev => prev + 1);
-    } else {
-      const finalAnswers = { ...answers, [QUESTIONS[currentQ].id]: textInput.trim() };
-      setResult(calculateResult(finalAnswers));
-      setCurrentQ(totalQuestions);
-    }
-    topRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
   function goBack() {
     if (currentQ > 0) {
-      const prevQ = QUESTIONS[currentQ - 1];
-      if (prevQ.type === 'text') {
-        setTextInput(answers[prevQ.id] || '');
-      }
       setCurrentQ(prev => prev - 1);
     } else if (currentQ === 0) {
       setCurrentQ(-1);
@@ -709,7 +709,7 @@ export default function Quiz() {
                     <GradientText>should you build?</GradientText>
                   </h1>
                   <p className="text-base text-zinc-400 max-w-lg mx-auto leading-relaxed mb-4">
-                    6 questions. 90 seconds. Get a personalised recommendation with a real preview of what YOUR lead magnet could look like.
+                    6 questions. 60 seconds. Get a personalised recommendation with a real preview of what YOUR lead magnet could look like.
                   </p>
                   <p className="text-sm text-zinc-600 mb-10">
                     Not generic advice. AI builds a custom preview based on your exact business.
@@ -722,38 +722,8 @@ export default function Quiz() {
                 </motion.div>
               )}
 
-              {/* Text Question */}
-              {currentQuestion?.type === 'text' && (
-                <motion.div key={`q-${currentQ}`} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }}>
-                  <div className="mb-8">
-                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-2">{currentQuestion.question}</h2>
-                    <p className="text-sm text-zinc-500">{currentQuestion.subtitle}</p>
-                  </div>
-                  <textarea
-                    value={textInput}
-                    onChange={e => setTextInput(e.target.value)}
-                    placeholder={currentQuestion.placeholder}
-                    className="w-full min-h-[120px] bg-[#111113] border border-white/[0.06] rounded-2xl text-white text-base p-5 resize-y leading-relaxed placeholder:text-zinc-600 focus:outline-none focus:border-blue-500/30 transition-colors"
-                    autoFocus
-                    onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitTextAnswer(); } }}
-                  />
-                  <button
-                    onClick={submitTextAnswer}
-                    disabled={!textInput.trim()}
-                    className="mt-4 w-full py-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-bold text-base tracking-tight hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none flex items-center justify-center gap-2"
-                  >
-                    Next <ArrowRight className="w-5 h-5" />
-                  </button>
-                  {currentQ > 0 && (
-                    <button onClick={goBack} className="mt-4 text-sm text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1.5">
-                      <ArrowLeft className="w-3.5 h-3.5" /> Back
-                    </button>
-                  )}
-                </motion.div>
-              )}
-
-              {/* Select Question */}
-              {currentQuestion?.type === 'select' && (
+              {/* Question */}
+              {currentQuestion && (
                 <motion.div key={`q-${currentQ}`} initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.25 }}>
                   <div className="mb-8">
                     <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-2">{currentQuestion.question}</h2>
@@ -847,7 +817,7 @@ export default function Quiz() {
                           {previewLoading && (
                             <div className="flex items-center justify-center gap-3 py-8">
                               <Loader2 className="w-5 h-5 text-blue-400 animate-spin" />
-                              <p className="text-sm text-zinc-500">Building your preview based on "{answers.business}"...</p>
+                              <p className="text-sm text-zinc-500">Building your preview based on your answers...</p>
                             </div>
                           )}
                           {previewError && (
@@ -971,7 +941,7 @@ export default function Quiz() {
                   </div>
 
                   <div className="text-center">
-                    <button onClick={() => { setCurrentQ(-1); setAnswers({}); setResult(null); setEmail(''); setSaved(false); setShowDetail(false); setPreview(null); setTextInput(''); topRef.current?.scrollIntoView({ behavior: 'smooth' }); }}
+                    <button onClick={() => { setCurrentQ(-1); setAnswers({}); setResult(null); setEmail(''); setSaved(false); setShowDetail(false); setPreview(null); topRef.current?.scrollIntoView({ behavior: 'smooth' }); }}
                       className="text-sm text-zinc-600 hover:text-zinc-400 transition-colors"
                     >
                       Retake the diagnostic
@@ -989,9 +959,9 @@ export default function Quiz() {
         <Container>
           <div className="max-w-2xl mx-auto text-center">
             <div className="w-10 h-[3px] bg-gradient-to-r from-blue-500 to-blue-400 rounded-full mx-auto mb-6" />
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Want someone to build it for you?</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Want help building yours?</h2>
             <p className="text-zinc-400 mb-8 leading-relaxed">
-              The Authority Engine builds your entire content system. Brand, strategy, operator, and the lead magnets that actually convert.
+              The Authority Engine is a consulting partnership that turns your expertise into a content system. Brand, positioning, strategy, and the frameworks to ship consistently.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="https://form.typeform.com/to/S2rogsdT" target="_blank" rel="noopener noreferrer"
