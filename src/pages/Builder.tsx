@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Container } from '../components/ui/Container';
 import { ArrowRight, Check, Loader2 } from 'lucide-react';
+import Footer from '../components/Footer';
 
-/* ─── animation helpers ─── */
+/* --- animation helpers --- */
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   return (
@@ -20,69 +21,33 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
   );
 }
 
-/* ─── form types ─── */
+/* --- form types --- */
 interface FormData {
-  name: string;
-  email: string;
-  company: string;
-  website: string;
-  location: string;
-  revenueBand: string;
-  primaryOffer: string;
-  activeChannels: string[];
-  audienceSize: string;
-  biggestProblem: string;
-  whatToFix: string;
-  contentOpsPerson: string;
-  opsPersonRole: string;
-  canCommitDay: string;
-  blackoutDates: string;
-  comfortableWithFilming: string;
-  whyYouWhyNow: string;
+  fullName: string;
+  businessName: string;
+  websiteOrSocial: string;
+  revenueRange: string;
+  struggling: string;
+  triedBefore: string;
+  successIn90: string;
+  hoursPerWeek: string;
 }
 
 const initialForm: FormData = {
-  name: '',
-  email: '',
-  company: '',
-  website: '',
-  location: '',
-  revenueBand: '',
-  primaryOffer: '',
-  activeChannels: [],
-  audienceSize: '',
-  biggestProblem: '',
-  whatToFix: '',
-  contentOpsPerson: '',
-  opsPersonRole: '',
-  canCommitDay: '',
-  blackoutDates: '',
-  comfortableWithFilming: '',
-  whyYouWhyNow: '',
+  fullName: '',
+  businessName: '',
+  websiteOrSocial: '',
+  revenueRange: '',
+  struggling: '',
+  triedBefore: '',
+  successIn90: '',
+  hoursPerWeek: '',
 };
 
-const revenueBands = ['<500k', '500k-1M', '1-3M', '3-10M', '10M+'];
-const channels = ['Instagram', 'YouTube', 'Email', 'LinkedIn', 'Podcast', 'Other'];
-const problems = [
-  'Content doesnt match business level',
-  'Inconsistent / founder dependent',
-  'Message unclear / fragmented',
-  'Creates a lot but no pipeline',
-];
-const problemLabels: Record<string, string> = {
-  'Content doesnt match business level': "Our content doesn't match the level of our business",
-  'Inconsistent / founder dependent': "We're inconsistent / founder dependent",
-  'Message unclear / fragmented': 'Our message is unclear / fragmented',
-  'Creates a lot but no pipeline': "We create a lot but it doesn't turn into pipeline",
-};
-const opsOptions = ['Yes, full time', 'Yes, part time', 'No'];
-const opsToNotion: Record<string, string> = {
-  'Yes, full time': 'Yes full-time',
-  'Yes, part time': 'Yes part-time',
-  'No': 'No',
-};
+const revenueOptions = ['$500k - $1M', '$1M - $3M', '$3M - $5M', '$5M+'];
+const hoursOptions = ['1-3 hours', '3-5 hours', '5-10 hours', '10+ hours'];
 
-/* ─── reusable form atoms ─── */
+/* --- reusable form atoms --- */
 
 function Label({ children, required = false }: { children: React.ReactNode; required?: boolean }) {
   return (
@@ -131,76 +96,25 @@ function TextArea({ value, onChange, placeholder, rows = 3, required = false }: 
   );
 }
 
-function RadioGroup({ options, value, onChange, labels }: {
+function Select({ options, value, onChange, placeholder }: {
   options: string[];
   value: string;
   onChange: (v: string) => void;
-  labels?: Record<string, string>;
+  placeholder?: string;
 }) {
   return (
-    <div className="space-y-2">
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className={`w-full bg-[#111113] border border-white/[0.06] rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500/40 focus:ring-1 focus:ring-blue-500/20 transition-all text-sm appearance-none ${
+        value ? 'text-white' : 'text-zinc-600'
+      }`}
+    >
+      <option value="" disabled>{placeholder || 'Select...'}</option>
       {options.map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => onChange(opt)}
-          className={`w-full text-left px-4 py-3 rounded-xl border text-sm transition-all ${
-            value === opt
-              ? 'border-blue-500/40 bg-blue-500/[0.06] text-white'
-              : 'border-white/[0.06] bg-[#111113] text-zinc-400 hover:border-white/[0.10] hover:text-zinc-300'
-          }`}
-        >
-          <span className="flex items-center gap-3">
-            <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-all ${
-              value === opt ? 'border-blue-500 bg-blue-500' : 'border-zinc-600'
-            }`}>
-              {value === opt && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
-            </span>
-            {labels ? labels[opt] : opt}
-          </span>
-        </button>
+        <option key={opt} value={opt}>{opt}</option>
       ))}
-    </div>
-  );
-}
-
-function CheckboxGroup({ options, value, onChange }: {
-  options: string[];
-  value: string[];
-  onChange: (v: string[]) => void;
-}) {
-  const toggle = (opt: string) => {
-    onChange(
-      value.includes(opt)
-        ? value.filter((v) => v !== opt)
-        : [...value, opt]
-    );
-  };
-
-  return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-      {options.map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => toggle(opt)}
-          className={`px-4 py-3 rounded-xl border text-sm transition-all ${
-            value.includes(opt)
-              ? 'border-blue-500/40 bg-blue-500/[0.06] text-white'
-              : 'border-white/[0.06] bg-[#111113] text-zinc-400 hover:border-white/[0.10] hover:text-zinc-300'
-          }`}
-        >
-          <span className="flex items-center gap-2">
-            <span className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-all ${
-              value.includes(opt) ? 'border-blue-500 bg-blue-500' : 'border-zinc-600'
-            }`}>
-              {value.includes(opt) && <Check className="w-3 h-3 text-white" />}
-            </span>
-            {opt}
-          </span>
-        </button>
-      ))}
-    </div>
+    </select>
   );
 }
 
@@ -218,7 +132,7 @@ function SectionDivider({ label, number }: { label: string; number: number }) {
   );
 }
 
-/* ─── main component ─── */
+/* --- main component --- */
 
 export default function Builder() {
   const [form, setForm] = useState<FormData>(initialForm);
@@ -231,17 +145,14 @@ export default function Builder() {
   };
 
   const isValid =
-    form.name.trim() &&
-    form.email.trim() &&
-    form.company.trim() &&
-    form.revenueBand &&
-    form.primaryOffer.trim() &&
-    form.biggestProblem &&
-    form.whatToFix.trim() &&
-    form.contentOpsPerson &&
-    form.canCommitDay &&
-    form.comfortableWithFilming &&
-    form.whyYouWhyNow.trim();
+    form.fullName.trim() &&
+    form.businessName.trim() &&
+    form.websiteOrSocial.trim() &&
+    form.revenueRange &&
+    form.struggling.trim() &&
+    form.triedBefore.trim() &&
+    form.successIn90.trim() &&
+    form.hoursPerWeek;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,17 +162,11 @@ export default function Builder() {
     setError('');
 
     try {
-      const res = await fetch('/.netlify/functions/builder-application', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          contentOpsPerson: opsToNotion[form.contentOpsPerson] || form.contentOpsPerson,
-        }),
-      });
+      // For now, log the data and show success
+      console.log('Brand Day Application:', form);
 
-      const data = await res.json();
-      if (!res.ok || data.error) throw new Error(data.error || 'Submission failed');
+      // Simulate brief delay for UX
+      await new Promise((resolve) => setTimeout(resolve, 800));
 
       setSubmitted(true);
     } catch (err: any) {
@@ -275,17 +180,18 @@ export default function Builder() {
   return (
     <div className="min-h-screen bg-base">
       {/* Hero */}
-      <div className="gradient-border-top" />
+      <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
       <Container className="pt-32 pb-16">
         <Section>
           <div className="max-w-2xl mx-auto text-center">
             <div className="accent-line mx-auto mb-6" />
-            <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
-              Brand Builder Day
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-4">
+              Brand Day Application
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mx-auto">
-              One day. Your office. A complete brand rebuild and content shoot.
-              Five spots. Apply below.
+              $5,000. Half day. Sean flies to you. Five spots available.
+              <br />
+              This form is a filter. Not everyone gets in.
             </p>
           </div>
         </Section>
@@ -306,7 +212,7 @@ export default function Builder() {
               </div>
               <h2 className="font-display text-3xl text-white mb-4">Application received.</h2>
               <p className="text-zinc-400 text-lg">
-                If you're a fit, you'll hear from me within 48 hours.
+                Sean will review and reach out within 48 hours.
               </p>
             </motion.div>
           ) : (
@@ -317,159 +223,73 @@ export default function Builder() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
             >
-              {/* 1. Basics */}
-              <SectionDivider label="Basics" number={1} />
+              {/* 1. About You */}
+              <SectionDivider label="About you" number={1} />
 
               <div className="space-y-5 mt-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <Label required>Full name</Label>
-                    <Input value={form.name} onChange={(v) => update('name', v)} placeholder="Jane Smith" required />
+                    <Input value={form.fullName} onChange={(v) => update('fullName', v)} placeholder="Jane Smith" required />
                   </div>
                   <div>
-                    <Label required>Email</Label>
-                    <Input value={form.email} onChange={(v) => update('email', v)} placeholder="jane@company.com" type="email" required />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <Label required>Company</Label>
-                    <Input value={form.company} onChange={(v) => update('company', v)} placeholder="Company name" required />
-                  </div>
-                  <div>
-                    <Label>Website</Label>
-                    <Input value={form.website} onChange={(v) => update('website', v)} placeholder="https://" />
+                    <Label required>Business name</Label>
+                    <Input value={form.businessName} onChange={(v) => update('businessName', v)} placeholder="Company name" required />
                   </div>
                 </div>
                 <div>
-                  <Label>Where are you based?</Label>
-                  <Input value={form.location} onChange={(v) => update('location', v)} placeholder="City, Country" />
+                  <Label required>Website or primary social link</Label>
+                  <Input value={form.websiteOrSocial} onChange={(v) => update('websiteOrSocial', v)} placeholder="https:// or @handle" required />
+                </div>
+                <div>
+                  <Label required>Annual revenue range</Label>
+                  <Select options={revenueOptions} value={form.revenueRange} onChange={(v) => update('revenueRange', v)} placeholder="Select your revenue range" />
                 </div>
               </div>
 
-              {/* 2. Business Snapshot */}
-              <SectionDivider label="Business snapshot" number={2} />
+              {/* 2. The Situation */}
+              <SectionDivider label="The situation" number={2} />
 
               <div className="space-y-5 mt-6">
                 <div>
-                  <Label required>Current annual revenue</Label>
-                  <RadioGroup options={revenueBands} value={form.revenueBand} onChange={(v) => update('revenueBand', v)} />
-                </div>
-                <div>
-                  <Label required>Primary offer and price point</Label>
+                  <Label required>What are you struggling with specifically?</Label>
                   <TextArea
-                    value={form.primaryOffer}
-                    onChange={(v) => update('primaryOffer', v)}
-                    placeholder="e.g. Group coaching program, $10k over 12 weeks"
-                    rows={2}
+                    value={form.struggling}
+                    onChange={(v) => update('struggling', v)}
+                    placeholder="Be specific. The more detail, the better we can assess fit."
+                    rows={4}
                     required
                   />
                 </div>
-              </div>
-
-              {/* 3. Distribution & Audience */}
-              <SectionDivider label="Distribution & audience" number={3} />
-
-              <div className="space-y-5 mt-6">
                 <div>
-                  <Label>Where are you currently active?</Label>
-                  <CheckboxGroup options={channels} value={form.activeChannels} onChange={(v) => update('activeChannels', v)} />
-                </div>
-                <div>
-                  <Label>Rough audience size per main channel</Label>
-                  <Input
-                    value={form.audienceSize}
-                    onChange={(v) => update('audienceSize', v)}
-                    placeholder="e.g. IG 12k, Email 4k, YT 800"
-                  />
-                </div>
-              </div>
-
-              {/* 4. Biggest Problem */}
-              <SectionDivider label="Biggest brand / content problem" number={4} />
-
-              <div className="space-y-5 mt-6">
-                <div>
-                  <Label required>What feels most broken right now?</Label>
-                  <RadioGroup options={problems} value={form.biggestProblem} onChange={(v) => update('biggestProblem', v)} labels={problemLabels} />
-                </div>
-                <div>
-                  <Label required>In your own words, what's the #1 thing you want to fix on a Brand Builder Day?</Label>
+                  <Label required>What have you tried before?</Label>
                   <TextArea
-                    value={form.whatToFix}
-                    onChange={(v) => update('whatToFix', v)}
-                    placeholder="Be specific. The more detail, the better."
+                    value={form.triedBefore}
+                    onChange={(v) => update('triedBefore', v)}
+                    placeholder="Agencies, coaches, DIY, team hires. What's been attempted and what happened?"
                     rows={4}
                     required
                   />
                 </div>
               </div>
 
-              {/* 5. Team & Implementation */}
-              <SectionDivider label="Team & implementation" number={5} />
+              {/* 3. Outcomes */}
+              <SectionDivider label="Outcomes" number={3} />
 
               <div className="space-y-5 mt-6">
                 <div>
-                  <Label required>Do you have at least one person who can own content ops after this?</Label>
-                  <RadioGroup options={opsOptions} value={form.contentOpsPerson} onChange={(v) => update('contentOpsPerson', v)} />
-                </div>
-                {(form.contentOpsPerson === 'Yes, full time' || form.contentOpsPerson === 'Yes, part time') && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                  >
-                    <Label>Who are they and what's their role today?</Label>
-                    <TextArea
-                      value={form.opsPersonRole}
-                      onChange={(v) => update('opsPersonRole', v)}
-                      placeholder="e.g. VA who handles social scheduling, 20hrs/week"
-                      rows={2}
-                    />
-                  </motion.div>
-                )}
-              </div>
-
-              {/* 6. Commitment & Logistics */}
-              <SectionDivider label="Commitment & logistics" number={6} />
-
-              <div className="space-y-5 mt-6">
-                <div>
-                  <Label required>Can you commit one full day in the next 30 days, on site at your office?</Label>
-                  <RadioGroup options={['Yes', 'No']} value={form.canCommitDay} onChange={(v) => update('canCommitDay', v)} />
-                </div>
-                {form.canCommitDay === 'Yes' && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                  >
-                    <Label>Any blackout dates?</Label>
-                    <Input
-                      value={form.blackoutDates}
-                      onChange={(v) => update('blackoutDates', v)}
-                      placeholder="e.g. April 7-11"
-                    />
-                  </motion.div>
-                )}
-                <div>
-                  <Label required>Are you comfortable with us filming the day and using the footage/results as content and case studies?</Label>
-                  <RadioGroup options={['Yes', 'No']} value={form.comfortableWithFilming} onChange={(v) => update('comfortableWithFilming', v)} />
-                </div>
-              </div>
-
-              {/* 7. Why You */}
-              <SectionDivider label="Why you, why now" number={7} />
-
-              <div className="space-y-5 mt-6">
-                <div>
-                  <Label required>If I only pick five people, why should you be one of them?</Label>
+                  <Label required>What does success look like in 90 days?</Label>
                   <TextArea
-                    value={form.whyYouWhyNow}
-                    onChange={(v) => update('whyYouWhyNow', v)}
-                    placeholder="What makes this the right moment for you?"
+                    value={form.successIn90}
+                    onChange={(v) => update('successIn90', v)}
+                    placeholder="Paint the picture. What changes if this works?"
                     rows={4}
                     required
                   />
+                </div>
+                <div>
+                  <Label required>How many hours per week can you dedicate to content?</Label>
+                  <Select options={hoursOptions} value={form.hoursPerWeek} onChange={(v) => update('hoursPerWeek', v)} placeholder="Select hours per week" />
                 </div>
               </div>
 
@@ -507,6 +327,8 @@ export default function Builder() {
           )}
         </AnimatePresence>
       </Container>
+
+      <Footer />
     </div>
   );
 }

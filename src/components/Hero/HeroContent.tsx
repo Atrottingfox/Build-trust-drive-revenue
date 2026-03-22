@@ -37,7 +37,7 @@ export function HeroContent() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        We turn founder-led content into a predictable, value-driven
+        We turn founder led content into a predictable, value driven
         marketing engine that compounds trust and drives revenue.
       </motion.p>
 
