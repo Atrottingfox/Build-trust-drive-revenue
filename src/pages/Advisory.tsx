@@ -64,7 +64,7 @@ export default function Advisory() {
                 <span className="text-zinc-500">Content.OS Access.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mb-4">
-                $2,500/month. For Brand Day graduates who implemented.
+                $3,000/month. For Brand Day graduates who implemented.
               </p>
               <p className="text-zinc-500 text-sm">
                 This is not a public offer. It's an invitation.
