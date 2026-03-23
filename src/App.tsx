@@ -23,6 +23,7 @@ const Quiz = React.lazy(() => import('./pages/Quiz'));
 const CongruenceAudit = React.lazy(() => import('./pages/CongruenceAudit'));
 const BrandDay = React.lazy(() => import('./pages/BrandDay'));
 const Advisory = React.lazy(() => import('./pages/Advisory'));
+const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 
 import { Navigation } from './components/ui/Navigation';
 
@@ -68,6 +69,7 @@ export default function App() {
           <Route path="/congruence" element={<CongruenceAudit />} />
           <Route path="/brand-day" element={<BrandDay />} />
           <Route path="/advisory" element={<Advisory />} />
+          <Route path="/map" element={<BusinessMap />} />
         </Routes>
       </Suspense>
     </Router>
