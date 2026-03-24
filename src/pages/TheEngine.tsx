@@ -23,53 +23,53 @@ const phases = [
   {
     num: '01',
     label: 'Days 1–30',
-    name: 'The Build',
+    name: 'Brand',
     icon: Wrench,
-    headline: 'Brand. Positioning. Narrative.',
-    description: 'Everything that makes your content yours gets extracted, documented, and installed into Content.OS. Brand Bible. Belief Map. Origin Story. Content angles matched to your archetype. A 30 day rhythm using the 5 A\'s framework.',
+    headline: 'Extract what makes you, you.',
+    description: 'Your expertise, positioning, and narrative get pulled out of your head, documented, and installed into Content.OS. By day 30 you have a Brand Bible, a content plan, and a system your operator can run from.',
     what: [
       'Brand Day (half day, in person). Sean flies to you.',
       'Brand Bible built live. Voice, positioning, narrative, messaging.',
       'Authority Archetype Profile. How you naturally build trust.',
       'Belief Map. What your audience believes vs what they need to.',
       'Origin Story extracted using 1 of 7 narrative templates.',
-      '30 day content plan. Weekly rhythm. Formats matched to you.',
+      '30 day content plan using the 5 A\'s rhythm.',
       'Lead magnet built in the room from your IP.',
     ],
-    outcome: 'You walk out with a documented brand system and a content plan you can execute immediately.',
+    outcome: 'You leave with a documented brand and a content plan ready to execute.',
   },
   {
     num: '02',
     label: 'Days 31–60',
-    name: 'The Install',
+    name: 'Content',
     icon: Settings,
-    headline: 'Systems. Operator. Execution.',
-    description: 'The brand is built. Now the machine gets installed. Your operator learns the system. Content production becomes repeatable. Posting OS, capture workflows, and editing templates all go live inside Content.OS.',
+    headline: 'Strategy. Production. Distribution.',
+    description: 'The brand is documented. Now it becomes content. Your strategy gets locked in. Production workflows go live. Distribution channels are configured. Your operator starts running the system week to week.',
     what: [
-      'Operator onboarded into Content.OS and trained on your system.',
-      'Posting OS installed. Capture, create, edit, publish. Documented.',
-      'Content production templated. Scripts, thumbnails, formats.',
-      'Weekly rhythm locked in. Who does what, when, every week.',
-      'First 30 days of output reviewed. Patterns surfaced. Adjustments made.',
-      'Distribution channels configured. Platform strategy confirmed.',
+      'Content strategy mapped to your positioning and audience.',
+      'Production workflow installed. Capture, script, edit, publish.',
+      'Distribution configured. Platform strategy confirmed.',
+      'Operator onboarded into Content.OS and running weekly.',
+      'First 30 days of output reviewed. Patterns surfaced.',
+      'Weekly rhythm locked in. Who does what, when.',
     ],
-    outcome: 'Content runs without you being the bottleneck. Your operator owns execution.',
+    outcome: 'Content is shipping weekly. Your operator runs production. You show up to film.',
   },
   {
     num: '03',
     label: 'Days 61–90',
-    name: 'The Tune',
+    name: 'Scale',
     icon: Gauge,
-    headline: 'Optimise. Measure. Compound.',
-    description: 'The system is running. Now it gets dialled in. Performance data reviewed. Content angles sharpened. The engine moves from "running" to "compounding." KPIs installed so you can see what\'s working without guessing.',
+    headline: 'Measure. Sharpen. Compound.',
+    description: 'The engine is running. Now it gets dialled in. Performance data reviewed. Content angles sharpened. KPIs installed so you can see what\'s working without guessing. Your operator can run the system by day 90. Understanding the thinking behind it is a 12 month process.',
     what: [
       'Authority Dashboard live. Drift Index, Velocity Score, output tracking.',
       'Content performance reviewed. What\'s landing, what\'s not, why.',
       'Quarterly campaign structure mapped. Repeatable launches.',
-      'Operator fully autonomous. Sean shifts to pattern recognition only.',
-      'Ascension path set. Advisory continuity or graduation.',
+      'Operator running the system independently.',
+      'Sean shifts to pattern recognition and strategic direction only.',
     ],
-    outcome: 'A documented, operator led authority engine. Running, measured, and ready to scale.',
+    outcome: 'A documented, operator led authority engine. Running, measured, and compounding.',
   },
 ];
 
@@ -90,10 +90,10 @@ export default function TheEngine() {
                 <span className="text-zinc-500">Authority Engine.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mb-4">
-                Build. Install. Tune. A documented content engine built around your expertise, run by your operator, measured by real numbers.
+                In 90 days you have a brand system, a trained operator, and a content engine producing without you.
               </p>
               <p className="text-zinc-500 text-sm max-w-lg">
-                Three phases. Each one builds on the last. You don't move forward until the previous stage is working.
+                Three phases. Build it. Install it. Tune it.
               </p>
             </div>
           </Section>
@@ -114,13 +114,13 @@ export default function TheEngine() {
             </h2>
             <div className="max-w-3xl space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                Phase one is the build. Your brand, positioning, and narrative get extracted and documented. Everything that makes your content yours.
+                Brand. Your expertise extracted, documented, and installed into a system.
               </p>
               <p>
-                Phase two is the install. Your operator learns the system. Content production becomes repeatable. You stop being the bottleneck.
+                Content. Strategy, production, and distribution running weekly without you.
               </p>
               <p>
-                Phase three is the tune. Performance data. Pattern recognition. The engine goes from running to compounding.
+                Scale. Performance data in. Angles sharpened. The engine compounding.
               </p>
             </div>
           </Section>
@@ -183,7 +183,7 @@ export default function TheEngine() {
         </React.Fragment>
       ))}
 
-      {/* After 90 Days — Advisory */}
+      {/* After 90 Days — Keep Building */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
@@ -192,17 +192,17 @@ export default function TheEngine() {
                 <div className="flex items-center gap-3 mb-6">
                   <RotateCcw className="w-6 h-6 text-blue-400" />
                   <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Continuity</p>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">After 90 days</p>
                     <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                       The Pit Team
                     </h2>
                   </div>
                 </div>
                 <p className="text-zinc-400 leading-relaxed mb-6">
-                  After 90 days, the engine is built and running. Advisory is the pit team. Strategic pattern recognition, quarterly planning, and Content.OS access. You stay sharp without going back to heavy touch.
+                  Your operator can run the system at day 90. Learning to think like you, to understand the why behind every decision, that's a 12 month process. Advisory is the pit team that keeps the engine sharp while that happens.
                 </p>
                 <p className="text-zinc-400 leading-relaxed mb-8">
-                  Weekly group calls. Edge case support. Milestone based check ins. Your operator keeps running. Sean keeps watching the patterns.
+                  Weekly group calls. Pattern recognition. Strategic direction. Content.OS access. The opportunity to keep building and scaling what you started.
                 </p>
                 <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
                   <p className="text-zinc-300 text-sm font-medium">Advisory is invite only. If you implement through the 90 days, you get the invitation.</p>
@@ -222,7 +222,7 @@ export default function TheEngine() {
                     'Full Content.OS access. Frameworks, templates, tracking.',
                     'Weekly group pattern recognition calls with Sean.',
                     'Strategic direction on the decisions that change trajectory.',
-                    'Milestone based check ins. Progress drives the cadence.',
+                    'Operator development. From running the system to understanding it.',
                     'Priority access to Operator Launch when you\'re ready.',
                   ].map((item, j) => (
                     <li key={j} className="flex items-start gap-3">
@@ -252,10 +252,10 @@ export default function TheEngine() {
               </h2>
               <div className="space-y-4 text-zinc-400 leading-relaxed">
                 <p>
-                  The 90 days covers all three phases. Brand Day, operator install, and the full tune. Everything built inside Content.OS.
+                  The 90 days covers Brand, Content, and Scale. Everything built inside Content.OS.
                 </p>
                 <p>
-                  Advisory is month to month continuity for graduates. No lock in. Stay as long as the value is obvious.
+                  Advisory is month to month for graduates. No lock in. Stay as long as the value is obvious.
                 </p>
               </div>
             </div>
