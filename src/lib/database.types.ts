@@ -93,6 +93,65 @@ export interface Database {
           created_at?: string | null
         }
       }
+      try_assessments: {
+        Row: {
+          id: string
+          archetype: string
+          archetype_scores: Record<string, number>
+          archetype_method: string
+          quiz_responses: Record<string, boolean>
+          industry: string | null
+          problem_area: string | null
+          platforms: string[]
+          posting_frequency: string | null
+          phone: string | null
+          team_size: string | null
+          content_role: string | null
+          generated_cadence: Record<string, unknown> | null
+          calendly_booked: boolean
+          sms_sent: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          archetype: string
+          archetype_scores: Record<string, number>
+          archetype_method: string
+          quiz_responses?: Record<string, boolean>
+          industry?: string | null
+          problem_area?: string | null
+          platforms?: string[]
+          posting_frequency?: string | null
+          phone?: string | null
+          team_size?: string | null
+          content_role?: string | null
+          generated_cadence?: Record<string, unknown> | null
+          calendly_booked?: boolean
+          sms_sent?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          archetype?: string
+          archetype_scores?: Record<string, number>
+          archetype_method?: string
+          quiz_responses?: Record<string, boolean>
+          industry?: string | null
+          problem_area?: string | null
+          platforms?: string[]
+          posting_frequency?: string | null
+          phone?: string | null
+          team_size?: string | null
+          content_role?: string | null
+          generated_cadence?: Record<string, unknown> | null
+          calendly_booked?: boolean
+          sms_sent?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
       user_feedback: {
         Row: {
           id: string
