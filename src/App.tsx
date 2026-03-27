@@ -26,7 +26,7 @@ const Advisory = React.lazy(() => import('./pages/Advisory'));
 const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 const TheEngine = React.lazy(() => import('./pages/TheEngine'));
 const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
-const Try = React.lazy(() => import('./pages/Try'));
+
 
 import { Navigation } from './components/ui/Navigation';
 
@@ -75,8 +75,6 @@ export default function App() {
           <Route path="/map" element={<BusinessMap />} />
           <Route path="/engine" element={<TheEngine />} />
           <Route path="/90dayprogram" element={<NinetyDayProgram />} />
-          <Route path="/try" element={<Try />} />
-          <Route path="/try/results/:id" element={<Try />} />
         </Routes>
       </Suspense>
     </Router>
