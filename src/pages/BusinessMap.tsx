@@ -75,17 +75,17 @@ const revenueMetrics = [
 const pillars = [
   {
     icon: Target,
-    title: 'Ignition Core (Strategy)',
+    title: 'Brand',
     description: 'Realign perception with truth. Belief Map, Proof Architecture, Authority Narrative.',
   },
   {
     icon: Zap,
-    title: 'Transmission Layer (Communication)',
+    title: 'Content',
     description: 'Engineer consistent trust transfer. Channel OS, Format Library, Distribution OS.',
   },
   {
     icon: TrendingUp,
-    title: 'Compounding Flywheel (Scale)',
+    title: 'Scale',
     description: 'Build operator led engine. Operator Install, Authority Dashboard, Quarterly Campaigns.',
   },
 ];
