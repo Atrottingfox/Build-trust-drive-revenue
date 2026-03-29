@@ -531,7 +531,7 @@ export default function BusinessMap() {
                   title: 'Bolt on Talent',
                   revenue: '$3M to $10M',
                   description: 'The real moat. Sean provides trained operators alongside the advisory. Clients get the system AND the person to run it. Nobody else has software plus methodology plus talent supply.',
-                  model: 'Program install: $10k. Operator placement: $3k to $5k/month. Advisory: $3k/month. Total per client: $6k to $8k/month. Junior operators at $55k manage 3 to 4 clients each. Gross margin per operator: 60 to 70%. Top advisors earn into a profit share pool that vests over time, tied to retention and performance.',
+                  model: 'Program install: $10k. Operator placement: $3k to $5k/month. Advisory: $3k/month. Total per client: $6k to $8k/month. Junior operators at $80k manage 3 to 4 clients each. Gross margin per operator: 60 to 70%. Top advisors earn into a profit share pool that vests over time, tied to retention and performance.',
                   metric: 'Operator utilisation rate. Clients per operator. Target: 3 to 4.',
                 },
                 {
@@ -609,7 +609,7 @@ export default function BusinessMap() {
                 {
                   icon: TrendingUp,
                   title: 'Talent multiplier',
-                  description: 'A $55k operator delivers $180k in billable value because the software does the thinking. The gap between cost and value IS the platform.',
+                  description: 'A $80k operator delivers $180k in billable value because the software does the thinking. The gap between cost and value IS the platform.',
                 },
                 {
                   icon: Network,
