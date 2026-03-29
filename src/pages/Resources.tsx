@@ -26,14 +26,29 @@ interface Resource {
 
 const resources: Resource[] = [
   {
-    id: 'diagnostic',
+    id: 'diagnostic-tool',
     title: 'The Content Diagnostic',
-    subtitle: '6 layers. Scored /60. Fixed every 6 weeks.',
-    description: 'Find the broken layer in your organic content. Score your brand clarity, strategy, content quality, execution, systems, and authority. Get a clear action plan for what to fix first.',
+    subtitle: '30 questions. Scored /60. Personalised diagnosis.',
+    description: 'Score yourself across 6 layers with 30 yes/no questions. Get your Authority Score, weakest layers highlighted, specific fix protocols, and a weekly content rotation. Takes 3 minutes.',
     problem: 'My content is not building authority or generating inbound.',
     type: 'diagnose',
     typeLabel: 'Diagnostic',
     icon: <Layers className="w-5 h-5" />,
+    href: '/diagnostic-tool',
+    color: 'text-blue-400',
+    borderColor: 'border-blue-500/20',
+    bgColor: 'bg-blue-500/[0.06]',
+    isInteractive: true,
+  },
+  {
+    id: 'diagnostic',
+    title: 'The Full Diagnostic Guide',
+    subtitle: '6 layers. Signals. Fix protocols. Checklist.',
+    description: 'The complete reference guide behind the diagnostic tool. Detailed signal tables, scoring rubrics, diagnostic tests, and fix protocols for every layer.',
+    problem: 'I want to understand the full system behind the diagnostic.',
+    type: 'diagnose',
+    typeLabel: 'Guide',
+    icon: <BookOpen className="w-5 h-5" />,
     href: '/diagnostic',
     color: 'text-blue-400',
     borderColor: 'border-blue-500/20',
@@ -272,7 +287,7 @@ export default function Resources() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/diagnostic"
+                href="/diagnostic-tool"
                 className="inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-8 py-3.5 rounded-full hover:bg-zinc-100 shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] transition-all"
               >
                 Start the Diagnostic
