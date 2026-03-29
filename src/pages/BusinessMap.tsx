@@ -47,7 +47,7 @@ const offers = [
     num: '01',
     title: '30 Day Authority Engine Sprint',
     price: '$5k',
-    description: 'The core product. Brand Day intensive, 4 week OS build, weekly implementation calls, fast demand push. One constraint solved in 30 days. Everything documented inside Content.OS.',
+    description: 'The core product. Brand Day intensive, 4 week OS build, weekly implementation calls, fast demand push. One constraint solved in 30 days. Everything documented inside The Engineroom.',
   },
   {
     num: '02',
@@ -59,7 +59,7 @@ const offers = [
     num: '03',
     title: 'Advisory',
     price: '$3k/month',
-    description: 'Month to month. For the top sliver who implemented and want ongoing pattern recognition, edge case support, and Content.OS access. Never pitched. Always earned.',
+    description: 'Month to month. For the top sliver who implemented and want ongoing pattern recognition, edge case support, and The Engineroom access. Never pitched. Always earned.',
   },
 ];
 
@@ -120,7 +120,7 @@ const roles = [
   { role: 'Sean', description: 'Strategy. Pattern recognition. Milestones only.' },
   { role: 'Founder', description: 'Shows up. Films. Brain dumps. Approves.' },
   { role: 'Operator', description: 'All implementation. Scripts, thumbnails, uploads, publishing.' },
-  { role: 'Content.OS', description: 'Stores everything. Tracks. Nudges. Generates.' },
+  { role: 'The Engineroom', description: 'Stores everything. Tracks. Nudges. Generates.' },
 ];
 
 const seanDoesNot = [
@@ -368,7 +368,7 @@ export default function BusinessMap() {
               The Authority Engine.
             </h2>
             <p className="text-zinc-500 text-lg mb-4">Brand. Content. Scale.</p>
-            <p className="text-zinc-600 text-sm mb-12">The Authority Engine is the system. Content.OS is the software that stores, nudges, and measures it.</p>
+            <p className="text-zinc-600 text-sm mb-12">The Authority Engine is the system. The Engineroom is the software that stores, nudges, and measures it.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {pillars.map((p, i) => (
                 <motion.div
@@ -538,17 +538,17 @@ export default function BusinessMap() {
                   stage: 'STAGE 3',
                   title: 'Academy',
                   revenue: '$10M to $20M',
-                  description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists. Graduates join the advisor pool or go independent with a Content.OS license.',
-                  model: 'Certification: $5k to $10k per person. Annual Content.OS license: $2k to $5k. Two revenue streams: training fees and platform fees.',
+                  description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists. Graduates join the advisor pool or go independent with a The Engineroom license.',
+                  model: 'Certification: $5k to $10k per person. Annual The Engineroom license: $2k to $5k. Two revenue streams: training fees and platform fees.',
                   metric: 'Partner activation rate. Graduates must deliver independently within 90 days of certification.',
                 },
                 {
                   stage: 'STAGE 4',
                   title: 'Affiliate Distribution',
                   revenue: '$20M to $50M',
-                  description: 'Partners resell the Authority Engine system through their own channels. Agencies, coaches, consultants white label Content.OS with their clients. Distribution happens through other people\'s networks.',
+                  description: 'Partners resell the Authority Engine system through their own channels. Agencies, coaches, consultants white label The Engineroom with their clients. Distribution happens through other people\'s networks.',
                   model: '200 partners at 5 clients each at $300/seat = $300k MRR platform revenue. Plus partner fees. Plus direct clients and talent.',
-                  metric: 'Partner activation rate. Number of partners actively billing clients through Content.OS.',
+                  metric: 'Partner activation rate. Number of partners actively billing clients through The Engineroom.',
                 },
                 {
                   stage: 'STAGE 5',
@@ -598,7 +598,7 @@ export default function BusinessMap() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               The moat is the software.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">Content.OS isn't a delivery tool. It's a data platform.</p>
+            <p className="text-zinc-500 text-lg mb-12">The Engineroom isn't a delivery tool. It's a data platform.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
@@ -614,7 +614,7 @@ export default function BusinessMap() {
                 {
                   icon: Network,
                   title: 'Network effect',
-                  description: 'Operators trained on Content.OS bring it to their next client. Partners distribute it through their networks. The tool spreads through the talent layer, not through marketing.',
+                  description: 'Operators trained on The Engineroom bring it to their next client. Partners distribute it through their networks. The tool spreads through the talent layer, not through marketing.',
                 },
               ].map((m, i) => (
                 <motion.div
