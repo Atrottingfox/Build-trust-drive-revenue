@@ -332,10 +332,9 @@ export default function BusinessMap() {
             <p className="text-zinc-500 text-lg mb-12">Why this model compounds.</p>
             <div className="grid sm:grid-cols-2 gap-6">
               {[
-                { stat: '$500+', label: 'Revenue Per Client Hour', description: "~10 hours of Sean's time per sprint. $5k fee. Stacks with each additional sprint." },
                 { stat: '85-90%', label: 'Gross Margin', description: "Costs are Sean's time, flights, and tools. No inventory. No office. No team at stage 0." },
-                { stat: '$23k', label: 'LTV (6 month retention)', description: '$5k sprint plus 6 months at $3k retainer. At 12 months: $41k.' },
-                { stat: '23:1', label: 'LTV to CAC', description: 'At $1k CAC from warm outreach and content. Anything above 3:1 is considered excellent.' },
+                { stat: '$41k', label: 'Year 1 LTV', description: '$5k sprint entry. 50% convert to $3k/month retainer. One client, one year, $41k.' },
+                { stat: '41:1', label: 'LTV to CAC', description: 'At $1k CAC from warm outreach and content. Anything above 3:1 is considered excellent.' },
               ].map((m, i) => (
                 <motion.div
                   key={i}
