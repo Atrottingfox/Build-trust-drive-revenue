@@ -327,9 +327,8 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Unit economics</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              Unit economics.
+              Why this model compounds.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">Why this model compounds.</p>
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { stat: '85-90%', label: 'Gross Margin', description: "Costs are Sean's time, flights, and tools. No inventory. No office. No team at stage 0." },
@@ -448,7 +447,7 @@ export default function BusinessMap() {
               ))}
             </div>
             <p className="text-zinc-500 text-sm text-center">
-              All three paths lead to the same destination. Qualification for the 30 day sprint.
+              Workshops and events qualify. The sprint is direct entry.
             </p>
           </Section>
         </div>
@@ -597,7 +596,7 @@ export default function BusinessMap() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               The moat is the software.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">The Engineroom isn't a delivery tool. It's a data platform.</p>
+            <p className="text-zinc-500 text-lg mb-12">The Engineroom becomes a data platform.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
