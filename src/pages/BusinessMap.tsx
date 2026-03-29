@@ -231,7 +231,7 @@ export default function BusinessMap() {
                     'No online presence or expertise yet',
                     'Looking for someone to do it all for you',
                     'Not willing to film and show up',
-                    'Under $1.5M revenue',
+                    'Under $500k revenue',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <X className="w-4 h-4 text-zinc-600 mt-1 flex-shrink-0" />
