@@ -46,17 +46,12 @@ const deliverables = [
   {
     icon: Calendar,
     title: '90 Day Content Blueprint',
-    description: 'Exactly what to publish (longform + shortform) for the next 90 days, in order.',
+    description: 'Exactly what to publish (longform + shortform) for the next 90 days, in order. Plus a simple 4 week posting cycle that consistently drives qualified leads.',
   },
   {
     icon: FileText,
     title: 'Mid Funnel Asset Stack',
     description: '3\u20115 key pieces (lead magnet, emails, page, video) that turn attention into applications, booked calls and sales.',
-  },
-  {
-    icon: Repeat,
-    title: 'Simple 4 Week Posting Cycle',
-    description: 'A monthly rhythm that consistently drives new qualified leads.',
   },
 ];
 
@@ -68,7 +63,7 @@ export default function ThirtyDaySprint() {
 
       {/* Hero */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
@@ -111,7 +106,7 @@ export default function ThirtyDaySprint() {
 
       {/* Intro */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <div className="space-y-5 text-zinc-400 text-lg leading-relaxed">
@@ -138,9 +133,12 @@ export default function ThirtyDaySprint() {
         </div>
       </section>
 
+      {/* Proof Strip */}
+      <ProofStrip />
+
       {/* Our goal */}
       <section className="pb-24 md:pb-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
@@ -182,7 +180,7 @@ export default function ThirtyDaySprint() {
 
       {/* Credibility */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <div className="space-y-5 text-zinc-400 text-lg leading-relaxed">
@@ -206,12 +204,11 @@ export default function ThirtyDaySprint() {
         </div>
       </section>
 
-      {/* Proof Strip from home page */}
-      <ProofStrip />
+      <div className="gradient-line" />
 
       {/* The Plan */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The plan</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-16">
@@ -374,7 +371,7 @@ export default function ThirtyDaySprint() {
 
       {/* What we're aiming to influence */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
@@ -408,7 +405,7 @@ export default function ThirtyDaySprint() {
 
       {/* Format & Support */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Format & support</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
@@ -486,7 +483,7 @@ export default function ThirtyDaySprint() {
 
       {/* Who This Is For / Not For */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="grid md:grid-cols-2 gap-12 md:gap-16">
               <div>
@@ -544,7 +541,7 @@ export default function ThirtyDaySprint() {
 
       {/* Price & Terms */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Price & terms</p>
@@ -584,7 +581,7 @@ export default function ThirtyDaySprint() {
 
       {/* In 30 Days */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
@@ -630,7 +627,7 @@ export default function ThirtyDaySprint() {
 
       {/* What You Leave With */}
       <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you actually leave with</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-4">
@@ -638,7 +635,7 @@ export default function ThirtyDaySprint() {
               <br />
               <span className="text-zinc-500">You leave with assets.</span>
             </h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+            <div className="grid md:grid-cols-2 gap-6 mt-12">
               {deliverables.map((d, i) => (
                 <motion.div
                   key={i}
