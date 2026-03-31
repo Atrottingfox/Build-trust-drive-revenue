@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Check, X, Clock, MessageCircle, Video, BarChart3, BookOpen, Target, Map, Mic, FileText, Calendar, Repeat } from 'lucide-react';
 import Footer from '../components/Footer';
+import ProofStrip from '../components/ProofStrip';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -59,11 +60,6 @@ const deliverables = [
   },
 ];
 
-const proofStats = [
-  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 6 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
-  { name: 'Jay Wright', stat: '2x', context: 'following + revenue in 12 months', sub: 'E-commerce brands LSKD, Tiger Lily.' },
-  { name: 'Mitch Revs', stat: '19k \u2192 50k', context: 'followers in 2 months', sub: '1.4M organic impressions 3 months straight.' },
-];
 
 export default function ThirtyDaySprint() {
   return (
@@ -210,7 +206,8 @@ export default function ThirtyDaySprint() {
         </div>
       </section>
 
-      <div className="gradient-line" />
+      {/* Proof Strip from home page */}
+      <ProofStrip />
 
       {/* The Plan */}
       <section className="py-24 md:py-32">
@@ -538,42 +535,6 @@ export default function ThirtyDaySprint() {
                   We'll do it with a diagnosis first, then a custom content path built around your one core offer, your market, and your team's capacity to execute.
                 </p>
               </div>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Proof */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Proof</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              The results
-              <br />
-              <span className="text-zinc-500">speak for themselves.</span>
-            </h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              {proofStats.map((p, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-8 text-center"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <p className="font-display text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">
-                    {p.stat}
-                  </p>
-                  <p className="text-zinc-300 font-medium mb-1">{p.context}</p>
-                  <p className="text-zinc-600 text-sm">{p.name}</p>
-                  <p className="text-zinc-600 text-xs mt-2">{p.sub}</p>
-                </motion.div>
-              ))}
             </div>
           </Section>
         </div>
