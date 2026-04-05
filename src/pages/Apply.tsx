@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 export default function Apply() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
-    first_name: '',
-    last_name: '',
+    name: '',
     email: '',
-    business_url: '',
-    revenue_range: '',
+    company: '',
+    website: '',
+    instagram: '',
+    revenue_band: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -24,12 +24,20 @@ export default function Apply() {
     setLoading(true);
 
     try {
-      await supabase.from('applications').insert({
-        first_name: form.first_name,
-        last_name: form.last_name,
-        email: form.email,
-        business_url: form.business_url || null,
-        revenue_range: form.revenue_range || null,
+      await fetch('/.netlify/functions/builder-application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          website: form.website || undefined,
+          primaryOffer: '',
+          location: '',
+          revenueBand: form.revenue_band || undefined,
+          activeChannels: form.instagram ? ['Instagram'] : [],
+          audienceSize: form.instagram || '',
+        }),
       });
     } catch (err) {
       // Still redirect even if save fails
@@ -37,6 +45,8 @@ export default function Apply() {
 
     navigate('/thank-you');
   };
+
+  const inputClass = "w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors";
 
   return (
     <section className="min-h-screen bg-base flex items-center justify-center px-6 py-32">
@@ -47,33 +57,22 @@ export default function Apply() {
           transition={{ duration: 0.5 }}
         >
           <h1 className="font-display text-4xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.1] mb-4">
-            Start here.
+            Let's talk.
           </h1>
           <p className="text-zinc-400 text-lg mb-10 max-w-md">
-            Tell me a little about you and your business. I'll be in touch within 48 hours.
+            Not a generic form. I read every one of these.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <input
-                type="text"
-                name="first_name"
-                placeholder="First name"
-                required
-                value={form.first_name}
-                onChange={handleChange}
-                className="w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-              />
-              <input
-                type="text"
-                name="last_name"
-                placeholder="Last name"
-                required
-                value={form.last_name}
-                onChange={handleChange}
-                className="w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
-              />
-            </div>
+            <input
+              type="text"
+              name="name"
+              placeholder="Full name"
+              required
+              value={form.name}
+              onChange={handleChange}
+              className={inputClass}
+            />
 
             <input
               type="email"
@@ -82,32 +81,50 @@ export default function Apply() {
               required
               value={form.email}
               onChange={handleChange}
-              className="w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
+              className={inputClass}
+            />
+
+            <input
+              type="text"
+              name="company"
+              placeholder="What's your business?"
+              required
+              value={form.company}
+              onChange={handleChange}
+              className={inputClass}
+            />
+
+            <input
+              type="text"
+              name="instagram"
+              placeholder="Instagram handle"
+              value={form.instagram}
+              onChange={handleChange}
+              className={inputClass}
             />
 
             <input
               type="url"
-              name="business_url"
-              placeholder="Website or Instagram (optional)"
-              value={form.business_url}
+              name="website"
+              placeholder="Website"
+              value={form.website}
               onChange={handleChange}
-              className="w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors"
+              className={inputClass}
             />
 
             <select
-              name="revenue_range"
-              value={form.revenue_range}
+              name="revenue_band"
+              value={form.revenue_band}
               onChange={handleChange}
-              className="w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-[15px] focus:outline-none focus:border-zinc-600 transition-colors appearance-none"
-              style={{ color: form.revenue_range ? '#fff' : '#52525b' }}
+              className={`${inputClass} appearance-none`}
+              style={{ color: form.revenue_band ? '#fff' : '#52525b' }}
             >
-              <option value="" disabled>Annual revenue (optional)</option>
-              <option value="under-500k">Under $500k</option>
-              <option value="500k-1m">$500k — $1M</option>
-              <option value="1m-3m">$1M — $3M</option>
-              <option value="3m-5m">$3M — $5M</option>
-              <option value="5m-10m">$5M — $10M</option>
-              <option value="10m-plus">$10M+</option>
+              <option value="" disabled>Annual revenue</option>
+              <option value="<500k">Under $500k</option>
+              <option value="500k-1M">$500k — $1M</option>
+              <option value="1-3M">$1M — $3M</option>
+              <option value="3-10M">$3M — $10M</option>
+              <option value="10M+">$10M+</option>
             </select>
 
             <button
