@@ -115,9 +115,7 @@ export default function Hero() {
             transition={{ delay: 0.55 }}
           >
             <a
-              href="https://form.typeform.com/to/S2rogsdT"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/apply"
               className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
             >
               Apply now

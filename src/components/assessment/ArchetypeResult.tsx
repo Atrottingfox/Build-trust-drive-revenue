@@ -115,7 +115,7 @@ export function ArchetypeResult({ archetype }: ArchetypeResultProps) {
 
       <div className="space-y-6">
         <motion.a
-          href="https://form.typeform.com/to/S2rogsdT"
+          href="/apply"
           target="_blank"
           rel="noopener noreferrer"
           className="magnetic-glow block w-full text-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all"

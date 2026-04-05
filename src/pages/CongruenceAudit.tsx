@@ -688,7 +688,7 @@ export default function CongruenceAudit() {
               The Authority Engine is a consulting partnership that aligns your brand, content, and offer into one system. Every piece of content builds the beliefs your audience needs to buy.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://form.typeform.com/to/S2rogsdT" target="_blank" rel="noopener noreferrer"
+              <a href="/apply" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-8 py-3.5 rounded-full hover:bg-zinc-100 shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] transition-all"
               >
                 Apply to work together <ArrowRight className="w-4 h-4" />

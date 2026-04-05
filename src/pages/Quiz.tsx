@@ -941,7 +941,7 @@ export default function Quiz() {
                         Skip the guesswork. We'll build your {result.primary.name.toLowerCase()} with you in a live working session. You leave with a finished lead magnet, not a plan.
                       </p>
                       <a
-                        href="https://form.typeform.com/to/S2rogsdT"
+                        href="/apply"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-500 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:shadow-[0_8px_30px_-8px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 transition-all"
@@ -1016,7 +1016,7 @@ export default function Quiz() {
               The Authority Engine is a consulting partnership that turns your expertise into a content system. Brand, positioning, strategy, and the frameworks to ship consistently.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="https://form.typeform.com/to/S2rogsdT" target="_blank" rel="noopener noreferrer"
+              <a href="/apply" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white text-black font-semibold px-8 py-3.5 rounded-full hover:bg-zinc-100 shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] transition-all"
               >
                 Apply to work together <ArrowRight className="w-4 h-4" />

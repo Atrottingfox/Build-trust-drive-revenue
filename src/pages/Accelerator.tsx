@@ -349,7 +349,7 @@ export default function Accelerator() {
 
                 <div className="mt-auto">
                   <motion.a
-                    href="https://form.typeform.com/to/S2rogsdT"
+                    href="/apply"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="magnetic-glow block w-full text-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all"
@@ -424,7 +424,7 @@ export default function Accelerator() {
 
                 <div className="mt-auto">
                   <motion.a
-                    href="https://form.typeform.com/to/S2rogsdT"
+                    href="/apply"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="magnetic-glow block w-full text-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-500 hover:to-purple-500 transition-all"
@@ -607,7 +607,7 @@ export default function Accelerator() {
                     <p className="text-gray-400 text-sm">or 3 payments of $8,000</p>
                   </div>
                   <motion.a
-                    href="https://form.typeform.com/to/S2rogsdT"
+                    href="/apply"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all w-full relative overflow-hidden group/btn"
@@ -647,7 +647,7 @@ export default function Accelerator() {
                     <p className="text-gray-400 text-sm">or 6 payments of $8,000</p>
                   </div>
                   <motion.a
-                    href="https://form.typeform.com/to/S2rogsdT"
+                    href="/apply"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl hover:from-blue-500 hover:to-purple-500 transition-all w-full relative overflow-hidden group/btn"

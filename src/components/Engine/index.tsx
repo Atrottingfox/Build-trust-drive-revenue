@@ -371,7 +371,7 @@ export default function Engine() {
           transition={{ delay: 2 }}
         >
           <a
-            href="https://form.typeform.com/to/S2rogsdT"
+            href="/apply"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-shine inline-flex items-center gap-2 border border-zinc-700 text-white px-7 py-3.5 rounded-full text-[15px] font-semibold hover:border-zinc-500 hover:bg-elevated transition-all"

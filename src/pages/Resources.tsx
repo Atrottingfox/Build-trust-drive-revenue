@@ -294,7 +294,7 @@ export default function Resources() {
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="https://form.typeform.com/to/S2rogsdT"
+                href="/apply"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-zinc-800 text-zinc-400 font-medium px-8 py-3.5 rounded-full hover:border-zinc-600 hover:text-white transition-all"

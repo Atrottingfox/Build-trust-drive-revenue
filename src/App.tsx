@@ -27,6 +27,8 @@ const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 const TheEngine = React.lazy(() => import('./pages/TheEngine'));
 const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
 const ThirtyDaySprint = React.lazy(() => import('./pages/ThirtyDaySprint'));
+const Apply = React.lazy(() => import('./pages/Apply'));
+const ThankYou = React.lazy(() => import('./pages/ThankYou'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -77,6 +79,8 @@ export default function App() {
           <Route path="/engine" element={<TheEngine />} />
           <Route path="/90dayprogram" element={<NinetyDayProgram />} />
           <Route path="/30-day-sprint" element={<ThirtyDaySprint />} />
+          <Route path="/apply" element={<Apply />} />
+          <Route path="/thank-you" element={<ThankYou />} />
         </Routes>
       </Suspense>
     </Router>

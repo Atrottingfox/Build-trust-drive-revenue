@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="flex items-center gap-8 text-sm text-zinc-600">
             <a href="https://www.contentengine.live" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Content Engine</a>
             <a href="https://www.instagram.com/a_trotting_fox/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
-            <a href="https://form.typeform.com/to/S2rogsdT" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Apply now</a>
+            <a href="/apply" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Apply now</a>
           </div>
 
           <p className="text-sm text-zinc-700">&copy; {new Date().getFullYear()}</p>

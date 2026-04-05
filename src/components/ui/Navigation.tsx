@@ -50,9 +50,7 @@ export function Navigation() {
             </Link>
 
             <a
-              href="https://form.typeform.com/to/S2rogsdT"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/apply"
               className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
             >
               Apply now
@@ -71,9 +69,7 @@ export function Navigation() {
             transition={{ duration: 0.25 }}
           >
             <a
-              href="https://form.typeform.com/to/S2rogsdT"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/apply"
               className="flex items-center justify-center w-full py-3 text-[14px] font-semibold bg-white text-black rounded-full pointer-events-auto hover:bg-zinc-200 transition-colors shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
             >
               Apply now

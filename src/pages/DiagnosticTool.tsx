@@ -752,7 +752,7 @@ function StepOutput({
             <Download className="w-4 h-4" /> Download as PDF
           </button>
           <a
-            href="https://form.typeform.com/to/S2rogsdT"
+            href="/apply"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold px-6 py-3 rounded-full hover:brightness-110 shadow-[0_0_30px_-5px_rgba(59,130,246,0.4)] transition-all"

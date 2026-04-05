@@ -56,7 +56,7 @@ export default function AuthorityBuilder() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
-                href="https://form.typeform.com/to/S2rogsdT"
+                href="/apply"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all"
@@ -347,7 +347,7 @@ export default function AuthorityBuilder() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.a
-              href="https://form.typeform.com/to/S2rogsdT"
+              href="/apply"
               target="_blank"
               rel="noopener noreferrer"
               className="magnetic-glow inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-xl hover:bg-blue-500 transition-all"
@@ -434,7 +434,7 @@ export default function AuthorityBuilder() {
               </div>
 
               <motion.a
-                href="https://form.typeform.com/to/S2rogsdT"
+                href="/apply"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-500 transition-colors"
@@ -514,7 +514,7 @@ export default function AuthorityBuilder() {
               </div>
 
               <motion.a
-                href="https://form.typeform.com/to/S2rogsdT"
+                href="/apply"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-500 transition-colors"

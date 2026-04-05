@@ -48,7 +48,7 @@ export function HeroContent() {
         transition={{ delay: 0.45 }}
       >
         <motion.a
-          href="https://form.typeform.com/to/S2rogsdT"
+          href="/apply"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-full bg-blue-600 px-8 py-4 text-lg font-semibold text-white hover:bg-blue-500 transition-all duration-200 group shadow-[0_0_30px_-5px_rgba(59,130,246,0.4)]"

@@ -386,7 +386,7 @@ function Slide({ data }: { data: SlideData }) {
         {/* CTA button for light slides */}
         {isLight && (
           <a
-            href="https://form.typeform.com/to/S2rogsdT"
+            href="/apply"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-shine inline-flex items-center justify-center bg-black text-white px-6 py-3 rounded-full text-[13px] font-semibold mt-8 self-start hover:bg-zinc-800 transition-colors"

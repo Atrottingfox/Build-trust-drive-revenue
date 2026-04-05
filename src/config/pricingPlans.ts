@@ -14,7 +14,7 @@ export const pricingPlans: PricingPlan[] = [
       "Scale your profit"
     ],
     cta: "Apply now",
-    typeformUrl: "https://form.typeform.com/to/S2rogsdT",
+    typeformUrl: "/apply",
     forText: "Founders eager to scale their influence with a proven system"
   },
   {
@@ -31,7 +31,7 @@ export const pricingPlans: PricingPlan[] = [
     ],
     cta: "Apply now",
     featured: true,
-    typeformUrl: "https://form.typeform.com/to/S2rogsdT",
+    typeformUrl: "/apply",
     forText: "Founders looking to go pro with personal brand"
   },
   {
