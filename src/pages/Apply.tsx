@@ -9,6 +9,7 @@ export default function Apply() {
   const [form, setForm] = useState({
     name: '',
     email: '',
+    phone: '',
     business_type: '',
     company: '',
     instagram: '',
@@ -34,6 +35,7 @@ export default function Apply() {
           company: form.company || form.business_type,
           website: form.website || undefined,
           primaryOffer: form.business_type,
+          location: form.phone || '',
           revenueBand: form.revenue_band || undefined,
           audienceSize: form.instagram || '',
         }),
@@ -67,10 +69,10 @@ export default function Apply() {
             <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1] mb-6">
               Ready to scale
               <br />
-              your authority?
+              your brand?
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
-              Not a generic form. I review every application personally and respond within 48 hours.
+              Create content that does the selling for you.
             </p>
           </div>
 
@@ -97,6 +99,15 @@ export default function Apply() {
                   className={inputClass}
                 />
               </div>
+
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone number"
+                value={form.phone}
+                onChange={handleChange}
+                className={inputClass}
+              />
 
               <select
                 name="business_type"
