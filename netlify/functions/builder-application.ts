@@ -82,6 +82,32 @@ const handler: Handler = async (event) => {
       };
     }
 
+    // Add to Kit (ConvertKit)
+    const kitApiSecret = process.env.KIT_API_SECRET;
+    if (kitApiSecret && data.email) {
+      try {
+        await fetch('https://api.convertkit.com/v3/tags/18814834/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            api_secret: kitApiSecret,
+            email: data.email,
+            first_name: (data.name || '').split(' ')[0],
+            fields: {
+              company: data.company || '',
+              business_type: data.primaryOffer || '',
+              revenue: data.revenueBand || '',
+              instagram: data.audienceSize || '',
+              website: data.website || '',
+              phone: data.location || '',
+            },
+          }),
+        });
+      } catch (kitErr) {
+        console.error('Kit subscription failed:', kitErr);
+      }
+    }
+
     // Send Slack notification
     const slackWebhook = process.env.SLACK_WEBHOOK_URL;
     if (slackWebhook) {
