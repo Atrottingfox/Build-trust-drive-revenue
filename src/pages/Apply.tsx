@@ -72,7 +72,7 @@ export default function Apply() {
               that sells for you.
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
-              The Authority Engine for 7-8+ figure founders.
+              The Authority Engine for 7-8+ figure founders
             </p>
           </div>
 
