@@ -82,6 +82,22 @@ const handler: Handler = async (event) => {
       };
     }
 
+    // Send Slack notification
+    const slackWebhook = process.env.SLACK_WEBHOOK_URL;
+    if (slackWebhook) {
+      try {
+        await fetch(slackWebhook, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: `*New Application*\n*Name:* ${data.name || 'N/A'}\n*Email:* ${data.email || 'N/A'}\n*Business:* ${data.company || 'N/A'}\n*Type:* ${data.primaryOffer || 'N/A'}\n*Instagram:* ${data.audienceSize || 'N/A'}\n*Website:* ${data.website || 'N/A'}\n*Revenue:* ${data.revenueBand || 'N/A'}\n*Phone:* ${data.location || 'N/A'}`,
+          }),
+        });
+      } catch (slackErr) {
+        console.error('Slack notification failed:', slackErr);
+      }
+    }
+
     return {
       statusCode: 200,
       headers,
