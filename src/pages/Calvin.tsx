@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, Calendar, Clock, Video, BookOpen, Target, Zap, Users } from 'lucide-react';
+import { Check, Clock, Video, BookOpen, Target, Zap, Users } from 'lucide-react';
 import Footer from '../components/Footer';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -38,7 +38,7 @@ const deliverables = [
   {
     icon: Zap,
     title: 'Basic Media OS',
-    description: 'A system your videographer runs week to week. How ideas become videos, clips, and leads.',
+    description: 'A system you or your videographer can run week to week. How ideas become videos, clips, and leads.',
   },
 ];
 
@@ -82,7 +82,7 @@ const day1Outputs = [
 const day2Outputs = [
   'Organised Pillar Footage',
   'Final 30 Day Release Plan',
-  'SOPs for Your Videographer',
+  'Production SOPs',
 ];
 
 export default function Calvin() {
@@ -95,7 +95,6 @@ export default function Calvin() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">For Joe</p>
               <div className="accent-line mb-8" />
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 Build your brand
@@ -103,7 +102,7 @@ export default function Calvin() {
                 <span className="text-zinc-500">in 48 hours.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
-                I come in for 2 days inside the 27&ndash;29th. You give me two 3&ndash;4 hour blocks. We leave with your brand documented, a simple client path, 6 pillar videos mapped + as many as we can shoot in the time available, with your videographer knowing exactly how to run it without me.
+                Two days. Two blocks of your time. We leave with your brand documented, a simple client path, 6 pillar videos mapped + as many as we can shoot in the time available.
               </p>
             </div>
           </Section>
@@ -173,19 +172,25 @@ export default function Calvin() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Your time</p>
-            <div className="grid sm:grid-cols-3 gap-6 mb-10">
+            <div className="grid sm:grid-cols-2 gap-6 mb-10">
               <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl">
-                <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-2">I'm around</p>
-                <p className="text-white font-semibold text-lg">27th &ndash; 29th</p>
-              </div>
-              <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl col-span-2">
-                <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-2">You</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <Clock className="w-5 h-5 text-blue-400" />
+                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">You</p>
+                </div>
                 <p className="text-white font-semibold text-lg mb-2">Two 3&ndash;4 hr blocks total</p>
                 <p className="text-zinc-500 text-sm">Block 1: building, thinking + mapping</p>
                 <p className="text-zinc-500 text-sm">Block 2: filming</p>
               </div>
+              <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl">
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="w-5 h-5 text-blue-400" />
+                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Me</p>
+                </div>
+                <p className="text-white font-semibold text-lg mb-2">Two full days on the ground</p>
+                <p className="text-zinc-500 text-sm">Everything that doesn't need you in the room gets done while you're out living your life.</p>
+              </div>
             </div>
-            <p className="text-zinc-500 text-sm">Everything else is me + your videographer.</p>
           </Section>
         </div>
       </section>
@@ -203,7 +208,7 @@ export default function Calvin() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               Brand, Beliefs & System
             </h2>
-            <p className="text-zinc-500 text-sm mb-12">Block 1 with you &mdash; 3 to 4 hours</p>
+            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4 hours</p>
 
             <div className="space-y-10">
               {day1WithYou.map((block, i) => (
@@ -227,29 +232,16 @@ export default function Calvin() {
               ))}
             </div>
 
-            {/* Optional */}
+            {/* Documented workflow */}
             <motion.div
               className="mt-12 p-6 bg-surface border border-zinc-800/50 rounded-2xl"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Optional</p>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                Solve any additional core problems down before shoot day with videographer.
-              </p>
-            </motion.div>
-
-            {/* Documented for videographer */}
-            <motion.div
-              className="mt-6 p-6 bg-surface border border-zinc-800/50 rounded-2xl"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Documented for your videographer (rest of day)</p>
+              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Rest of Day 1</p>
               <p className="text-zinc-400 text-sm leading-relaxed mb-3">
-                Turn this into a simple workflow:
+                Once your blocks are done, I document the production workflow:
               </p>
               <ul className="space-y-2">
                 {[
@@ -262,6 +254,9 @@ export default function Calvin() {
                   </li>
                 ))}
               </ul>
+              <p className="text-zinc-500 text-sm mt-3">
+                Built so it's repeatable whether you're running it yourself or handing it to a videographer.
+              </p>
             </motion.div>
 
             {/* Day 1 Outputs */}
@@ -290,9 +285,9 @@ export default function Calvin() {
               <span className="h-px flex-1 bg-zinc-800/50" />
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              Shoot & Train
+              Shoot
             </h2>
-            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4+ hours</p>
+            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4 hours</p>
 
             <div className="space-y-10">
               <motion.div
@@ -335,24 +330,21 @@ export default function Calvin() {
                 </ul>
               </motion.div>
 
-              {/* Videographer training */}
+              {/* If videographer present */}
               <motion.div
+                className="p-6 bg-surface border border-zinc-800/50 rounded-2xl"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <Users className="w-5 h-5 text-blue-400" />
-                  <h3 className="text-white font-semibold text-lg">With your videographer (full day)</h3>
-                </div>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-4">Shadow how I:</p>
-                <ul className="space-y-3 mb-6">
+                <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">If you have a videographer</p>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-3">They shadow how I:</p>
+                <ul className="space-y-2">
                   {[
                     'Brief you',
                     'Direct on camera. What\u2019s important, what\u2019s not',
                     'Run the room and manage takes',
-                    'Understand what to focus on',
                   ].map((point, j) => (
                     <li key={j} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
@@ -360,8 +352,8 @@ export default function Calvin() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  Then run segments themselves while I coach on form and process.
+                <p className="text-zinc-400 text-sm mt-3">
+                  Then run segments themselves while I coach on form and process. They leave knowing exactly how to run it without me.
                 </p>
               </motion.div>
             </div>
@@ -383,32 +375,14 @@ export default function Calvin() {
 
       <div className="gradient-line" />
 
-      {/* Additional Support */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <div className="max-w-3xl">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Additional support</p>
-              <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
-                <p className="text-white font-semibold leading-relaxed">
-                  Plus an additional 30 days of implementation assistance on the backend to guide videographer, including async reviews + two 1:1 calls per week for 4 weeks.
-                </p>
-              </div>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
       {/* Investment */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Investment & Terms</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Investment</p>
               <h2 className="font-display text-5xl md:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-3">
-                $15,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">US</span>
+                $10,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">AUD</span>
               </h2>
               <p className="text-zinc-500 text-lg mb-10">+ travel</p>
               <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
@@ -438,15 +412,14 @@ export default function Calvin() {
               Reply &ldquo;Let's do it&rdquo;
             </h2>
             <p className="text-zinc-400 mb-12 max-w-md mx-auto">
-              If this feels solid, that's the whole next step. Everything else follows from there.
+              That's the whole next step. Everything else follows from there.
             </p>
 
             <div className="max-w-lg mx-auto space-y-5 text-left">
               {[
-                'Pick your two 3\u20134 hr blocks inside the 27th\u201329th',
+                'Pick two back to back days that work for you',
                 'I\u2019ll send the payment link',
-                'Fill a quick 10 minute prep doc',
-                'I\u2019ll set up details with your PA so you don\u2019t have to think about it',
+                'Fill a quick 10 minute prep doc so we hit the ground running on Day 1',
               ].map((step, i) => (
                 <motion.div
                   key={i}
