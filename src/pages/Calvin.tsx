@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Check, Calendar, Clock, Video, BookOpen, Target, Zap, ArrowRight } from 'lucide-react';
+import { Check, Calendar, Clock, Video, BookOpen, Target, Zap, Users } from 'lucide-react';
 import Footer from '../components/Footer';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -27,18 +27,18 @@ const deliverables = [
   },
   {
     icon: Target,
-    title: 'Content \u2192 Client Path',
-    description: 'Simple map from stranger to follower to buyer, built around one core offer.',
+    title: 'Content > Client Path',
+    description: 'Simple map from stranger > follower > buyer around one core offer.',
   },
   {
     icon: Video,
-    title: '6 Pillar YouTube Videos',
-    description: 'Topics, angles, stories, CTAs, and lead magnets for each. Ready to record.',
+    title: '6 Pillar YouTube Videos Mapped',
+    description: 'Topics, angles, stories, CTAs, and lead magnets for each.',
   },
   {
     icon: Zap,
     title: 'Basic Media OS',
-    description: 'A simple system you can run week to week. How ideas become videos, clips, and how viewers become leads.',
+    description: 'A system your videographer runs week to week. How ideas become videos, clips, and leads.',
   },
 ];
 
@@ -47,20 +47,18 @@ const day1WithYou = [
     title: 'Brand & Positioning',
     points: [
       'Who you are, what you\u2019re for and not for',
-      'What category we own and how to capture it',
-      'Defining your brand narrative alongside the hero\u2019s journey',
-      'Your core beliefs, philosophies, and points of relatability for your ideal audience',
-      'Documenting a completed brand bible. The backbone of all future content',
+      'What category we will own, and how to capture it',
+      'Defining our brand narrative alongside the hero\u2019s journey',
+      'Your core beliefs, philosophies and points of relatability for the ideal audience',
+      'Documenting a complete brand bible',
     ],
   },
   {
-    title: 'Content \u2192 Client Map',
+    title: 'Content > Client Map',
     points: [
-      'Complete strategy and cadence to follow',
-      'Core hooks, angles, and formats',
-      'Map the steps: stranger \u2192 follower \u2192 buyer',
-      'Belief gap and objection analysis. What your audience needs to believe at each stage',
-      'Where content, DMs, and docs or calls each fit',
+      'Map the steps: stranger > follower > buyer',
+      'Belief gap and objection analysis. What the audience needs to believe to move to the next stage',
+      'Where content, DMs, and docs or calls fit',
     ],
   },
   {
@@ -68,14 +66,15 @@ const day1WithYou = [
     points: [
       'Define 6 core YouTube pillar videos',
       'For each: title, thumbnail guide, angle, key points, story, CTA, running structure',
-      'Decide the job of each video inside the client path',
+      'Decide the \u2018job\u2019 of each video in the path',
+      'Pair each pillar with a lead magnet or mid funnel asset (e.g. tool, case study, breakdown, short training based on each video)',
     ],
   },
 ];
 
 const day1Outputs = [
   'Brand Bible',
-  'Content \u2192 Client Map',
+  'Content > Client Map',
   'Pillar & Lead Magnet Map',
   'Draft 30 Day Release Plan',
 ];
@@ -83,7 +82,7 @@ const day1Outputs = [
 const day2Outputs = [
   'Organised Pillar Footage',
   'Final 30 Day Release Plan',
-  'Production SOPs',
+  'SOPs for Your Videographer',
 ];
 
 export default function Calvin() {
@@ -96,15 +95,15 @@ export default function Calvin() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">For Calvin &mdash; April 2025</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">For Joe</p>
               <div className="accent-line mb-8" />
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 Build your brand
                 <br />
                 <span className="text-zinc-500">in 48 hours.</span>
               </h1>
-              <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mb-6">
-                Two days. Two blocks of your time. We leave with your brand documented, your content path mapped, six pillar videos ready to shoot, and as many recorded as we can get done cleanly.
+              <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
+                I come in for 2 days inside the 27&ndash;29th. You give me two 3&ndash;4 hour blocks. We leave with your brand documented, a simple client path, 6 pillar videos mapped + as many as we can shoot in the time available, with your videographer knowing exactly how to run it without me.
               </p>
             </div>
           </Section>
@@ -113,29 +112,28 @@ export default function Calvin() {
 
       <div className="gradient-line" />
 
-      {/* At a Glance */}
+      {/* The Vision */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                { label: 'Your time commitment', value: 'Two 3\u20134 hour blocks' },
-                { label: 'My time on the ground', value: 'Two full days' },
-                { label: 'Structure', value: 'Day 1 build. Day 2 shoot.' },
-                { label: 'Window', value: '20th \u2013 26th April' },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-6 bg-surface border border-zinc-800/50 rounded-2xl"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-2">{item.label}</p>
-                  <p className="text-white font-semibold text-lg">{item.value}</p>
-                </motion.div>
-              ))}
+            <div className="max-w-3xl space-y-6">
+              <p className="text-zinc-400 leading-relaxed">
+                Once we have your brand documented, it becomes the backbone of each piece of content for the next 90 days and beyond.
+              </p>
+              <p className="text-zinc-400 leading-relaxed">
+                The core of these 6 pillar videos set a cadence that can be repeated using the exact frameworks each of the videos follow for YouTube.
+              </p>
+              <p className="text-zinc-400 leading-relaxed">
+                This 6 week cycle you can then run on rotation to open new audiences, get them familiar with you and your expertise, then transfer them seamlessly into either an advocate or client.
+              </p>
+              <p className="text-zinc-400 leading-relaxed">
+                We set it up once, and if you want we calibrate it over time with one clear intention:
+              </p>
+              <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl">
+                <p className="text-white font-semibold leading-relaxed">
+                  Create mass demand through a clear path which takes every viewer from interested to invested. Not just in you or your product but the belief that it can and will solve their specific problem.
+                </p>
+              </div>
             </div>
           </Section>
         </div>
@@ -143,17 +141,12 @@ export default function Calvin() {
 
       <div className="gradient-line" />
 
-      {/* What You Walk Away With */}
+      {/* What You Get */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Four deliverables.
-              <br />
-              <span className="text-zinc-500">Zero fluff.</span>
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you get</p>
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
               {deliverables.map((item, i) => (
                 <motion.div
                   key={i}
@@ -175,40 +168,24 @@ export default function Calvin() {
 
       <div className="gradient-line" />
 
-      {/* How Your Time Is Split */}
+      {/* Your Time */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">How your time is split</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              You show up twice.
-              <br />
-              <span className="text-zinc-500">I handle the rest.</span>
-            </h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-5 h-5 text-blue-400" />
-                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">You</p>
-                </div>
-                <p className="text-white font-semibold text-lg mb-3">Two 3&ndash;4 hour blocks</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  Block 1: building, thinking, mapping, directing.
-                  <br />
-                  Block 2: filming.
-                </p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Your time</p>
+            <div className="grid sm:grid-cols-3 gap-6 mb-10">
+              <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl">
+                <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-2">I'm around</p>
+                <p className="text-white font-semibold text-lg">27th &ndash; 29th</p>
               </div>
-              <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <Calendar className="w-5 h-5 text-blue-400" />
-                  <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Me</p>
-                </div>
-                <p className="text-white font-semibold text-lg mb-3">Two full days on the ground</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">
-                  Everything that doesn't need you in the room gets done while you're out living your life.
-                </p>
+              <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl col-span-2">
+                <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-2">You</p>
+                <p className="text-white font-semibold text-lg mb-2">Two 3&ndash;4 hr blocks total</p>
+                <p className="text-zinc-500 text-sm">Block 1: building, thinking + mapping</p>
+                <p className="text-zinc-500 text-sm">Block 2: filming</p>
               </div>
             </div>
+            <p className="text-zinc-500 text-sm">Everything else is me + your videographer.</p>
           </Section>
         </div>
       </section>
@@ -226,7 +203,7 @@ export default function Calvin() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               Brand, Beliefs & System
             </h2>
-            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4 hours</p>
+            <p className="text-zinc-500 text-sm mb-12">Block 1 with you &mdash; 3 to 4 hours</p>
 
             <div className="space-y-10">
               {day1WithYou.map((block, i) => (
@@ -250,22 +227,46 @@ export default function Calvin() {
               ))}
             </div>
 
-            {/* Optional rest of day 1 */}
+            {/* Optional */}
             <motion.div
               className="mt-12 p-6 bg-surface border border-zinc-800/50 rounded-2xl"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Rest of Day 1</p>
+              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Optional</p>
               <p className="text-zinc-400 text-sm leading-relaxed">
-                Once your blocks are done, I document the production workflow. Idea intake through to publish and lead capture, checklists for each stage, paired lead magnets for each pillar video. Built so it's repeatable whether you're running it yourself or eventually handing it to someone.
+                Solve any additional core problems down before shoot day with videographer.
               </p>
+            </motion.div>
+
+            {/* Documented for videographer */}
+            <motion.div
+              className="mt-6 p-6 bg-surface border border-zinc-800/50 rounded-2xl"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-3">Documented for your videographer (rest of day)</p>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-3">
+                Turn this into a simple workflow:
+              </p>
+              <ul className="space-y-2">
+                {[
+                  'Idea intake > outline > record > edit > publish > lead capture',
+                  'Checklist for each stage (who does what, in what order)',
+                ].map((point, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
             </motion.div>
 
             {/* Day 1 Outputs */}
             <div className="mt-10">
-              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-4">Day 1 outputs</p>
+              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-4">Outputs after Day 1</p>
               <div className="flex flex-wrap gap-3">
                 {day1Outputs.map((output, i) => (
                   <span key={i} className="px-4 py-2 bg-surface border border-zinc-800/50 rounded-full text-zinc-300 text-sm">
@@ -289,9 +290,9 @@ export default function Calvin() {
               <span className="h-px flex-1 bg-zinc-800/50" />
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              Shoot
+              Shoot & Train
             </h2>
-            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4 hours</p>
+            <p className="text-zinc-500 text-sm mb-12">With you &mdash; 3 to 4+ hours</p>
 
             <div className="space-y-10">
               <motion.div
@@ -323,8 +324,8 @@ export default function Calvin() {
                 <h3 className="text-white font-semibold text-lg mb-4">Debrief & Standards</h3>
                 <ul className="space-y-3">
                   {[
-                    'Define what good looks like for future videos',
-                    'Lock a simple weekly rhythm for the next 30 days',
+                    'Define what \u2018good\u2019 looks like for future videos',
+                    'Lock a simple weekly rhythm for the next 30 to 90 days',
                   ].map((point, j) => (
                     <li key={j} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
@@ -333,11 +334,41 @@ export default function Calvin() {
                   ))}
                 </ul>
               </motion.div>
+
+              {/* Videographer training */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <Users className="w-5 h-5 text-blue-400" />
+                  <h3 className="text-white font-semibold text-lg">With your videographer (full day)</h3>
+                </div>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-4">Shadow how I:</p>
+                <ul className="space-y-3 mb-6">
+                  {[
+                    'Brief you',
+                    'Direct on camera. What\u2019s important, what\u2019s not',
+                    'Run the room and manage takes',
+                    'Understand what to focus on',
+                  ].map((point, j) => (
+                    <li key={j} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Then run segments themselves while I coach on form and process.
+                </p>
+              </motion.div>
             </div>
 
             {/* Day 2 Outputs */}
             <div className="mt-10">
-              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-4">Day 2 outputs</p>
+              <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-4">Outputs after Day 2</p>
               <div className="flex flex-wrap gap-3">
                 {day2Outputs.map((output, i) => (
                   <span key={i} className="px-4 py-2 bg-surface border border-zinc-800/50 rounded-full text-zinc-300 text-sm">
@@ -352,24 +383,42 @@ export default function Calvin() {
 
       <div className="gradient-line" />
 
+      {/* Additional Support */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <div className="max-w-3xl">
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Additional support</p>
+              <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
+                <p className="text-white font-semibold leading-relaxed">
+                  Plus an additional 30 days of implementation assistance on the backend to guide videographer, including async reviews + two 1:1 calls per week for 4 weeks.
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* Investment */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-2xl mx-auto text-center">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Investment</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Investment & Terms</p>
               <h2 className="font-display text-5xl md:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-3">
-                $10,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">AUD</span>
+                $15,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">US</span>
               </h2>
-              <p className="text-zinc-500 text-lg mb-10">+ Travel</p>
-              <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto mb-6">
+              <p className="text-zinc-500 text-lg mb-10">+ travel</p>
+              <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
                 <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
                   <p className="text-zinc-500 text-xs uppercase tracking-widest mb-1">50%</p>
                   <p className="text-zinc-300 text-sm">To lock the dates</p>
                 </div>
                 <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
                   <p className="text-zinc-500 text-xs uppercase tracking-widest mb-1">50%</p>
-                  <p className="text-zinc-300 text-sm">On Day 1 when we sit down</p>
+                  <p className="text-zinc-300 text-sm">On Day 1</p>
                 </div>
               </div>
             </div>
@@ -386,17 +435,18 @@ export default function Calvin() {
             <div className="accent-line mx-auto mb-10" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Next step</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
-              Reply yes.
+              Reply &ldquo;Let's do it&rdquo;
             </h2>
             <p className="text-zinc-400 mb-12 max-w-md mx-auto">
-              That's the whole next step. Everything else follows from there.
+              If this feels solid, that's the whole next step. Everything else follows from there.
             </p>
 
-            <div className="max-w-sm mx-auto space-y-5 text-left">
+            <div className="max-w-lg mx-auto space-y-5 text-left">
               {[
-                'Pick two back to back days between the 20th and 26th of April',
-                'I send the payment link',
-                'I send a short prep doc so we hit the ground running on Day 1',
+                'Pick your two 3\u20134 hr blocks inside the 27th\u201329th',
+                'I\u2019ll send the payment link',
+                'Fill a quick 10 minute prep doc',
+                'I\u2019ll set up details with your PA so you don\u2019t have to think about it',
               ].map((step, i) => (
                 <motion.div
                   key={i}

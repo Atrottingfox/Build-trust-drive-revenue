@@ -82,7 +82,7 @@ export default function App() {
           <Route path="/30-day-sprint" element={<ThirtyDaySprint />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/thank-you" element={<ThankYou />} />
-          <Route path="/calvin" element={<Calvin />} />
+          <Route path="/brandin48hours" element={<Calvin />} />
         </Routes>
       </Suspense>
     </Router>
