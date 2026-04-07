@@ -29,6 +29,7 @@ const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
 const ThirtyDaySprint = React.lazy(() => import('./pages/ThirtyDaySprint'));
 const Apply = React.lazy(() => import('./pages/Apply'));
 const ThankYou = React.lazy(() => import('./pages/ThankYou'));
+const Calvin = React.lazy(() => import('./pages/Calvin'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -81,6 +82,7 @@ export default function App() {
           <Route path="/30-day-sprint" element={<ThirtyDaySprint />} />
           <Route path="/apply" element={<Apply />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/calvin" element={<Calvin />} />
         </Routes>
       </Suspense>
     </Router>
