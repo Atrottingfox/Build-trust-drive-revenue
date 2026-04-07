@@ -72,7 +72,7 @@ export default function Apply() {
               your brand?
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
-              Create content that does the selling for you.
+              Start creating content that does the selling for you.
             </p>
           </div>
 
