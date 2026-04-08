@@ -246,7 +246,7 @@ export default function CalvinOriginal() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Two full days.
               <br />
-              <span className="text-zinc-500">Both brands covered.</span>
+              <span className="text-zinc-500">All brands covered.</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
