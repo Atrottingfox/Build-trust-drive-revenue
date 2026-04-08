@@ -55,7 +55,7 @@ const day1WithYou = [
     ],
   },
   {
-    title: 'Brand & Positioning (AI \u2014 Jayden & Kim)',
+    title: 'Brand & Positioning (AI - Jayden & Kim)',
     points: [
       'Map brand positioning for the AI arm as its own entity',
       'Structure content to profile and launch the university model ahead of July',
@@ -65,12 +65,10 @@ const day1WithYou = [
   {
     title: 'Content > Client Map',
     points: [
-      'Complete strategy and cadence to follow',
+      'Strategy and cadence to follow across shorts and longs',
       'Core hooks, angles, and formats',
       'Map the steps: stranger > follower > buyer',
       'Belief gap and objection analysis. What your audience needs to believe at each stage',
-      'Where content, DMs, and docs or calls each fit',
-      'Design each YouTube video as a lead magnet delivery vehicle',
       'Build content that works as ad creative. Content as ads, not ads and content as separate things',
     ],
   },
@@ -80,7 +78,7 @@ const day1WithYou = [
       'Define pillar videos for all brands',
       'For each: title, thumbnail guide, angle, key points, story, CTA, running structure',
       'Decide the job of each video inside the client path',
-      'Structure the "Breakthrough Reactions" signature series concept',
+      'Design each YouTube video as a lead magnet delivery vehicle',
     ],
   },
 ];
@@ -90,11 +88,10 @@ const day1Outputs = [
   'Brand Positioning (AI)',
   'Content > Client Map',
   'Pillar & Lead Magnet Map',
-  'Signature Series Structure',
 ];
 
 const day2Outputs = [
-  '3\u20134 Calvin YouTube Videos',
+  '3-4 Calvin YouTube Videos',
   '1+ Video per AI Lead',
   '1 Podcast Episode (AI)',
   '20+ Shorts Total',
@@ -161,7 +158,7 @@ export default function CalvinOriginal() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">For Calvin &mdash; April 2025</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">For Calvin - April 2025</p>
               <div className="accent-line mb-8" />
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 Build your brands
@@ -187,7 +184,7 @@ export default function CalvinOriginal() {
                 { label: 'Brands covered', value: 'Calvin + AI' },
                 { label: 'On the ground', value: 'Two full days' },
                 { label: 'Structure', value: 'Day 1 build. Day 2 shoot.' },
-                { label: 'Dates', value: '22nd \u2013 23rd April' },
+                { label: 'Dates', value: '22nd - 23rd April' },
               ].map((item, i) => (
                 <motion.div
                   key={i}
@@ -287,7 +284,7 @@ export default function CalvinOriginal() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               Brand, Beliefs & System
             </h2>
-            <p className="text-zinc-500 text-sm mb-12">Full day &mdash; Calvin, Gigi, Jayden, Kim</p>
+            <p className="text-zinc-500 text-sm mb-12">Full day - Calvin, Gigi, Jayden, Kim</p>
 
             <div className="space-y-10">
               {day1WithYou.map((block, i) => (
@@ -431,7 +428,7 @@ export default function CalvinOriginal() {
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
-                { value: '3\u20134', label: 'Calvin YouTube Videos' },
+                { value: '3-4', label: 'Calvin YouTube Videos' },
                 { value: '1', label: 'Podcast Episode' },
                 { value: '1+', label: 'Video per AI Lead' },
                 { value: '20+', label: 'Shorts Total' },
@@ -494,7 +491,7 @@ export default function CalvinOriginal() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="flex items-center gap-4 mb-4">
-              <span className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Days 3&ndash;30</span>
+              <span className="text-xs font-medium text-zinc-500 uppercase tracking-widest">Days 3-30</span>
               <span className="h-px flex-1 bg-zinc-800/50" />
             </div>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
