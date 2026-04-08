@@ -553,7 +553,7 @@ export default function CalvinOriginal() {
             <div className="accent-line mx-auto mb-10" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Next step</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
-              Reply yes.
+              Let's do it.
             </h2>
             <p className="text-zinc-400 mb-12 max-w-md mx-auto">
               That's the whole next step. Everything else follows from there.
