@@ -369,7 +369,7 @@ export default function CalvinOriginal() {
                 <ul className="space-y-3">
                   {[
                     '1 podcast episode. Calvin, Jayden, and Kim on the state of AI',
-                    '1+ talking head video each from Jayden and Kim. YouTube and shorts',
+                    '1+ talking head video each from Jayden and Kim minimum, plus filming direction and guidance as required',
                     'Content to build momentum for the university model launch',
                   ].map((point, j) => (
                     <li key={j} className="flex items-start gap-3">
@@ -462,8 +462,8 @@ export default function CalvinOriginal() {
             </h2>
             <div className="space-y-4">
               {[
-                'A YouTube production style and strategy you can run consistently. No more thinking about style or structure. Just content.',
-                'Brand clarity locked in. So when 30,000 people land on your profile every month, they know exactly what you do and who it\u2019s for.',
+                'A YouTube production style and strategy you can run consistently. No more thinking about style or structure.',
+                'Brand clarity locked in. So when 30,000 people land on your profile every month, they know exactly what you do and that you\u2019re for them.',
                 'Content that works as ad creative. Not ads and content as separate things.',
                 'A quality standard your team can replicate independently. SOPs, benchmarks, and feedback loops already running.',
               ].map((item, i) => (
@@ -526,7 +526,7 @@ export default function CalvinOriginal() {
             <div className="max-w-2xl mx-auto text-center">
               <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Investment</p>
               <h2 className="font-display text-5xl md:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-3">
-                $15,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">AUD</span>
+                $16,000 <span className="text-zinc-500 text-2xl md:text-3xl font-semibold">AUD</span>
               </h2>
               <p className="text-zinc-500 text-lg mb-10">All inclusive. Flights and accommodation covered.</p>
               <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto mb-6">
@@ -563,7 +563,6 @@ export default function CalvinOriginal() {
               {[
                 'Lock in April 22nd and 23rd',
                 'I send the payment link',
-                'I send a short prep doc so we hit the ground running on Day 1',
               ].map((step, i) => (
                 <motion.div
                   key={i}
