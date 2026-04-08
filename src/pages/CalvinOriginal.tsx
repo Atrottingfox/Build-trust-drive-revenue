@@ -23,7 +23,7 @@ const deliverables = [
   {
     icon: BookOpen,
     title: 'Brand Bible',
-    description: 'Positioning, voice, key ideologies and philosophies, what you stand for and against. Mapped for both brands.',
+    description: 'Positioning, voice, key ideologies and philosophies, what you stand for and against. Mapped for all brands.',
   },
   {
     icon: Target,
@@ -33,7 +33,7 @@ const deliverables = [
   {
     icon: Video,
     title: 'YouTube Pillar Videos',
-    description: 'Topics, angles, stories, CTAs, and lead magnets for each. Ready to record across both brands.',
+    description: 'Topics, angles, stories, CTAs, and lead magnets for each. Ready to record across brands.',
   },
   {
     icon: Zap,
@@ -77,7 +77,7 @@ const day1WithYou = [
   {
     title: 'YouTube Pillar Mapping',
     points: [
-      'Define pillar videos for both brands',
+      'Define pillar videos for all brands',
       'For each: title, thumbnail guide, angle, key points, story, CTA, running structure',
       'Decide the job of each video inside the client path',
       'Structure the "Breakthrough Reactions" signature series concept',
@@ -169,7 +169,7 @@ export default function CalvinOriginal() {
                 <span className="text-zinc-500">in 48 hours.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mb-6">
-                Two days. Two brands. We leave with both brands documented, your content path mapped, pillar videos filmed, and your team set up to run it without me. Plus 30 days of implementation support on the backend.
+                Two days. Two brands. We leave with all brands documented, your content path mapped, pillar videos filmed, and your team set up to run it without me. Plus 30 days of implementation support on the backend.
               </p>
             </div>
           </Section>
@@ -256,7 +256,7 @@ export default function CalvinOriginal() {
                 </div>
                 <p className="text-white font-semibold text-lg mb-3">Build & Map</p>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Brand, positioning, content strategy, and pillar video mapping across both brands. Calvin, Gigi, Jayden, and Kim in the room.
+                  Brand, positioning, content strategy, and pillar video mapping across brands. Calvin, Gigi, Jayden, and Kim in the room.
                 </p>
               </div>
               <div className="p-8 bg-surface border border-zinc-800/50 rounded-2xl">
@@ -266,7 +266,7 @@ export default function CalvinOriginal() {
                 </div>
                 <p className="text-white font-semibold text-lg mb-3">Shoot</p>
                 <p className="text-zinc-500 text-sm leading-relaxed">
-                  Long form YouTube, shorts, podcast episode with Jayden and Kim. Full production day across both brands.
+                  Long form YouTube, shorts, podcast episode with Jayden and Kim. Full production day across brands.
                 </p>
               </div>
             </div>
