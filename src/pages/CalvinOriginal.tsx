@@ -536,7 +536,7 @@ export default function CalvinOriginal() {
                 </div>
                 <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
                   <p className="text-zinc-500 text-xs uppercase tracking-widest mb-1">50%</p>
-                  <p className="text-zinc-300 text-sm">On Day 1 when we sit down</p>
+                  <p className="text-zinc-300 text-sm">After Day 1</p>
                 </div>
               </div>
             </div>
