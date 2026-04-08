@@ -27,8 +27,8 @@ const deliverables = [
   },
   {
     icon: Target,
-    title: 'Content \u2192 Client Path',
-    description: 'Simple map from stranger to follower to buyer, built around your live events and programs. Content designed to double as ad creative.',
+    title: 'Content > Client Path',
+    description: 'Simple map from stranger (cold ads) to follower to advocate/buyer, built around monthly live events and programs. Building a strategy designed for content to double as ad creative.',
   },
   {
     icon: Video,
@@ -63,11 +63,11 @@ const day1WithYou = [
     ],
   },
   {
-    title: 'Content \u2192 Client Map',
+    title: 'Content > Client Map',
     points: [
       'Complete strategy and cadence to follow',
       'Core hooks, angles, and formats',
-      'Map the steps: stranger \u2192 follower \u2192 buyer',
+      'Map the steps: stranger > follower > buyer',
       'Belief gap and objection analysis. What your audience needs to believe at each stage',
       'Where content, DMs, and docs or calls each fit',
       'Design each YouTube video as a lead magnet delivery vehicle',
@@ -88,7 +88,7 @@ const day1WithYou = [
 const day1Outputs = [
   'Brand Bible (Calvin)',
   'Brand Positioning (AI)',
-  'Content \u2192 Client Map',
+  'Content > Client Map',
   'Pillar & Lead Magnet Map',
   'Signature Series Structure',
 ];
@@ -215,8 +215,6 @@ export default function CalvinOriginal() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Four deliverables.
-              <br />
-              <span className="text-zinc-500">Zero fluff.</span>
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {deliverables.map((item, i) => (
