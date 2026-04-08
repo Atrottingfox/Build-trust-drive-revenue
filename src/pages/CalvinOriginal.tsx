@@ -551,15 +551,13 @@ export default function CalvinOriginal() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
             <div className="accent-line mx-auto mb-10" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Next step</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
-              Reply with 'let's do it'.
-            </h2>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Next step - lock it in</p>
 
             <div className="max-w-sm mx-auto space-y-5 text-left">
               {[
-                'Lock in April 22nd and 23rd',
-                'I send the payment link',
+                'Reply with \'let\'s do it\'',
+                'Pay 50% deposit',
+                'Lock in April 22nd & 23rd',
               ].map((step, i) => (
                 <motion.div
                   key={i}
