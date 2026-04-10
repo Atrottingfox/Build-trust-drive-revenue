@@ -256,6 +256,7 @@ export default function Builder() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          source: 'builder',
           ...form,
           contentOpsPerson: opsToNotion[form.contentOpsPerson] || form.contentOpsPerson,
         }),

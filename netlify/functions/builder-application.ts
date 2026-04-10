@@ -1,6 +1,10 @@
 import type { Handler } from "@netlify/functions";
 
-const NOTION_DATABASE_ID = "f8cdb64d3910451b9607600fb326bf6e";
+const NOTION_BUILDER_DB = "f8cdb64d3910451b9607600fb326bf6e";
+const NOTION_APPLY_DB = "ef00b2eb6dfb825da88101e3c99717d0";
+
+const KIT_TAG_BUILDER = 18814834;
+const KIT_TAG_APPLY = 18845355;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -20,6 +24,9 @@ const handler: Handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body || "{}");
+    const isApply = data.source === 'apply';
+    const notionDbId = isApply ? NOTION_APPLY_DB : NOTION_BUILDER_DB;
+    const kitTagId = isApply ? KIT_TAG_APPLY : KIT_TAG_BUILDER;
 
     const notionKey = process.env.NOTION_API_KEY;
     if (!notionKey) {
@@ -67,7 +74,7 @@ const handler: Handler = async (event) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        parent: { database_id: NOTION_DATABASE_ID },
+        parent: { database_id: notionDbId },
         properties,
       }),
     });
@@ -86,7 +93,7 @@ const handler: Handler = async (event) => {
     const kitApiSecret = process.env.KIT_API_SECRET;
     if (kitApiSecret && data.email) {
       try {
-        await fetch('https://api.convertkit.com/v3/tags/18814834/subscribe', {
+        await fetch(`https://api.convertkit.com/v3/tags/${kitTagId}/subscribe`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -116,7 +123,7 @@ const handler: Handler = async (event) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            text: `*New Application*\n*Name:* ${data.name || 'N/A'}\n*Email:* ${data.email || 'N/A'}\n*Business:* ${data.company || 'N/A'}\n*Type:* ${data.primaryOffer || 'N/A'}\n*Instagram:* ${data.audienceSize || 'N/A'}\n*Website:* ${data.website || 'N/A'}\n*Revenue:* ${data.revenueBand || 'N/A'}\n*Phone:* ${data.location || 'N/A'}`,
+            text: `*New ${isApply ? 'Apply Now Lead' : 'Builder Application'}*\n*Name:* ${data.name || 'N/A'}\n*Email:* ${data.email || 'N/A'}\n*Business:* ${data.company || 'N/A'}\n*Type:* ${data.primaryOffer || 'N/A'}\n*Instagram:* ${data.audienceSize || 'N/A'}\n*Website:* ${data.website || 'N/A'}\n*Revenue:* ${data.revenueBand || 'N/A'}\n*Phone:* ${data.location || 'N/A'}`,
           }),
         });
       } catch (slackErr) {
