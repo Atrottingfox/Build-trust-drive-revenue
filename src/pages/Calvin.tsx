@@ -386,14 +386,26 @@ export default function Calvin() {
               </h2>
               <p className="text-zinc-500 text-lg mb-10">+ travel</p>
               <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
-                <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
+                <a
+                  href="https://buy.stripe.com/4gMeV6cSY5bybcQfdh0000e"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 bg-surface border border-zinc-800/50 rounded-2xl transition-all duration-200 hover:border-white/30 hover:bg-white/5 cursor-pointer"
+                >
                   <p className="text-zinc-500 text-xs uppercase tracking-widest mb-1">50%</p>
                   <p className="text-zinc-300 text-sm">To lock the dates</p>
-                </div>
-                <div className="p-5 bg-surface border border-zinc-800/50 rounded-2xl">
+                  <p className="text-xs text-zinc-600 mt-2 group-hover:text-white/60 transition-colors duration-200">Click to pay first instalment</p>
+                </a>
+                <a
+                  href="https://buy.stripe.com/aFa9AMdX26fCgxa5CH0000f"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block p-5 bg-surface border border-zinc-800/50 rounded-2xl transition-all duration-200 hover:border-white/30 hover:bg-white/5 cursor-pointer"
+                >
                   <p className="text-zinc-500 text-xs uppercase tracking-widest mb-1">50%</p>
                   <p className="text-zinc-300 text-sm">On Day 1</p>
-                </div>
+                  <p className="text-xs text-zinc-600 mt-2 group-hover:text-white/60 transition-colors duration-200">Click to pay final instalment</p>
+                </a>
               </div>
             </div>
           </Section>
