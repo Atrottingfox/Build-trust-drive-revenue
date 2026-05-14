@@ -81,10 +81,12 @@ export default function Apply() {
               transition={{ duration: 0.6, delay: 0.1 }}
             />
             <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1] mb-6">
-              Own your category.
+              Make content
+              <br />
+              that sells for you.
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
-              The Authority Engine for 7-8+ figure founders.
+              The Authority Engine for 7-8+ figure founders
             </p>
           </div>
 
@@ -158,15 +160,6 @@ export default function Apply() {
                 <option value="Education / Training">Education / Training</option>
                 <option value="Other">Other</option>
               </select>
-
-              <input
-                type="text"
-                name="company"
-                placeholder="Business name"
-                value={form.company}
-                onChange={handleChange}
-                className={inputClass}
-              />
 
               <div>
                 <div className="grid grid-cols-2 gap-4">
