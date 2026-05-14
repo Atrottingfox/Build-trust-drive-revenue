@@ -5,6 +5,7 @@ import { ArrowRight, Loader2 } from 'lucide-react';
 export default function Apply() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -14,14 +15,25 @@ export default function Apply() {
     instagram: '',
     website: '',
     revenue_band: '',
+    content_ops: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    if (error && (e.target.name === 'instagram' || e.target.name === 'website')) {
+      setError('');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!form.instagram.trim() && !form.website.trim()) {
+      setError('Add your Instagram or website so we can see your work.');
+      return;
+    }
+
+    setError('');
     setLoading(true);
 
     try {
@@ -38,6 +50,7 @@ export default function Apply() {
           location: form.phone || '',
           revenueBand: form.revenue_band || undefined,
           audienceSize: form.instagram || '',
+          contentOpsPerson: form.content_ops || undefined,
         }),
       });
     } catch (err) {
@@ -155,23 +168,26 @@ export default function Apply() {
                 className={inputClass}
               />
 
-              <div className="grid grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  name="instagram"
-                  placeholder="Instagram handle"
-                  value={form.instagram}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
-                <input
-                  type="text"
-                  name="website"
-                  placeholder="Website"
-                  value={form.website}
-                  onChange={handleChange}
-                  className={inputClass}
-                />
+              <div>
+                <div className="grid grid-cols-2 gap-4">
+                  <input
+                    type="text"
+                    name="instagram"
+                    placeholder="Instagram handle"
+                    value={form.instagram}
+                    onChange={handleChange}
+                    className={`${inputClass} ${error ? 'border-red-500/60' : ''}`}
+                  />
+                  <input
+                    type="text"
+                    name="website"
+                    placeholder="Website"
+                    value={form.website}
+                    onChange={handleChange}
+                    className={`${inputClass} ${error ? 'border-red-500/60' : ''}`}
+                  />
+                </div>
+                <p className="text-zinc-600 text-xs mt-2">Instagram or website required.</p>
               </div>
 
               <select
@@ -183,11 +199,32 @@ export default function Apply() {
               >
                 <option value="" disabled>Annual revenue</option>
                 <option value="<500k">Under $500k</option>
-                <option value="500k-1M">$500k — $1M</option>
-                <option value="1-3M">$1M — $3M</option>
-                <option value="3-10M">$3M — $10M</option>
-                <option value="10M+">$10M+</option>
+                <option value="500k-1M">$500k to $1M</option>
+                <option value="1-3M">$1M to $3M</option>
+                <option value="3-10M">$3M to $10M</option>
+                <option value="10-20M">$10M to $20M</option>
+                <option value="20-50M">$20M to $50M</option>
+                <option value="50M+">$50M+</option>
               </select>
+
+              <select
+                name="content_ops"
+                required
+                value={form.content_ops}
+                onChange={handleChange}
+                className={`${inputClass} appearance-none`}
+                style={{ color: form.content_ops ? '#fff' : '#52525b' }}
+              >
+                <option value="" disabled>Who runs your content currently?</option>
+                <option value="Me">Me</option>
+                <option value="In-house team">In-house team</option>
+                <option value="Agency">Agency</option>
+                <option value="Nobody">Nobody</option>
+              </select>
+
+              {error && (
+                <p className="text-red-400 text-[13px]">{error}</p>
+              )}
 
               <button
                 type="submit"
