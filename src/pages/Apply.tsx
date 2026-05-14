@@ -68,12 +68,10 @@ export default function Apply() {
               transition={{ duration: 0.6, delay: 0.1 }}
             />
             <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1] mb-6">
-              Make content
-              <br />
-              that sells for you.
+              Own your category.
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
-              The Authority Engine for 7-8+ figure founders
+              The Authority Engine for 7-8+ figure founders.
             </p>
           </div>
 
