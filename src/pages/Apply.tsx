@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2 } from 'lucide-react';
 
 export default function Apply() {
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -42,10 +41,11 @@ export default function Apply() {
         }),
       });
     } catch (err) {
-      // Still redirect even if save fails
+      // Still show confirmation even if save fails
     }
 
-    navigate('/thank-you');
+    setLoading(false);
+    setSubmitted(true);
   };
 
   const inputClass = "w-full px-4 py-3.5 bg-elevated border border-zinc-800 rounded-lg text-white text-[15px] placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors";
@@ -77,8 +77,28 @@ export default function Apply() {
             </p>
           </div>
 
-          {/* Right side — form */}
+          {/* Right side — form or confirmation */}
           <div>
+            {submitted ? (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-elevated border border-zinc-800 rounded-xl p-8"
+              >
+                <div className="w-12 h-12 rounded-full bg-white/5 border border-zinc-800 flex items-center justify-center mb-6">
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h2 className="font-display text-3xl font-extrabold tracking-tight text-white leading-[1.1] mb-3">
+                  Application received.
+                </h2>
+                <p className="text-zinc-400 text-[15px]">
+                  We'll be in touch if you qualify.
+                </p>
+              </motion.div>
+            ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <input
@@ -186,6 +206,7 @@ export default function Apply() {
                 )}
               </button>
             </form>
+            )}
           </div>
         </motion.div>
       </div>

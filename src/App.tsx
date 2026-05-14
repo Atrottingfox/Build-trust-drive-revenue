@@ -2,7 +2,6 @@ import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const DFY = React.lazy(() => import('./pages/DFY'));
-const Assessment = React.lazy(() => import('./pages/Assessment'));
 const Accelerator = React.lazy(() => import('./pages/Accelerator'));
 const ContentArchetypeAssessment = React.lazy(() => import('./pages/ContentArchetypeAssessment'));
 const EditorApplication = React.lazy(() => import('./pages/EditorApplication'));
@@ -28,7 +27,6 @@ const TheEngine = React.lazy(() => import('./pages/TheEngine'));
 const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
 const ThirtyDaySprint = React.lazy(() => import('./pages/ThirtyDaySprint'));
 const Apply = React.lazy(() => import('./pages/Apply'));
-const ThankYou = React.lazy(() => import('./pages/ThankYou'));
 const Calvin = React.lazy(() => import('./pages/Calvin'));
 const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
 
@@ -57,7 +55,6 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/dfy" element={<DFY />} />
           <Route path="/accelerator" element={<Accelerator />} />
-          <Route path="/assessment" element={<Assessment />} />
           <Route path="/content-archetype" element={<ContentArchetypeAssessment />} />
           <Route path="/editorapplication" element={<EditorApplication />} />
           <Route path="/authorityaccelerator" element={<AuthorityAccelerator />} />
@@ -82,7 +79,7 @@ export default function App() {
           <Route path="/90dayprogram" element={<NinetyDayProgram />} />
           <Route path="/30-day-sprint" element={<ThirtyDaySprint />} />
           <Route path="/apply" element={<Apply />} />
-          <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/calvin" element={<Calvin />} />
           <Route path="/brandin48hours" element={<Calvin />} />
           <Route path="/calvincoyles" element={<CalvinOriginal />} />
         </Routes>
