@@ -33,7 +33,6 @@ export default function Apply() {
       return;
     }
 
-    setError('');
     setLoading(true);
 
     try {
@@ -81,9 +80,9 @@ export default function Apply() {
               transition={{ duration: 0.6, delay: 0.1 }}
             />
             <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1] mb-6">
-              Make content
+              Let your content
               <br />
-              that sells for you.
+              do the selling for you.
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
               The Authority Engine for 7-8+ figure founders
@@ -180,7 +179,9 @@ export default function Apply() {
                     className={`${inputClass} ${error ? 'border-red-500/60' : ''}`}
                   />
                 </div>
-                <p className="text-zinc-600 text-xs mt-2">Instagram or website required.</p>
+                {error && (
+                  <p className="text-red-400 text-[13px] mt-2">{error}</p>
+                )}
               </div>
 
               <select
@@ -195,29 +196,29 @@ export default function Apply() {
                 <option value="500k-1M">$500k to $1M</option>
                 <option value="1-3M">$1M to $3M</option>
                 <option value="3-10M">$3M to $10M</option>
-                <option value="10-20M">$10M to $20M</option>
-                <option value="20-50M">$20M to $50M</option>
+                <option value="10-50M">$10M to $50M</option>
                 <option value="50M+">$50M+</option>
               </select>
 
-              <select
-                name="content_ops"
-                required
-                value={form.content_ops}
-                onChange={handleChange}
-                className={`${inputClass} appearance-none`}
-                style={{ color: form.content_ops ? '#fff' : '#52525b' }}
-              >
-                <option value="" disabled>Who runs your content currently?</option>
-                <option value="Me">Me</option>
-                <option value="In-house team">In-house team</option>
-                <option value="Agency">Agency</option>
-                <option value="Nobody">Nobody</option>
-              </select>
-
-              {error && (
-                <p className="text-red-400 text-[13px]">{error}</p>
-              )}
+              <div>
+                <p className="text-zinc-500 text-[13px] mb-2 px-1">Who runs your content currently?</p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {['Me', 'In-house team', 'Agency', 'Nobody'].map((option) => (
+                    <button
+                      type="button"
+                      key={option}
+                      onClick={() => setForm(prev => ({ ...prev, content_ops: option }))}
+                      className={`px-3 py-3 rounded-lg text-[13px] font-medium border transition-colors ${
+                        form.content_ops === option
+                          ? 'bg-white text-black border-white'
+                          : 'bg-elevated text-zinc-400 border-zinc-800 hover:border-zinc-700'
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
               <button
                 type="submit"
