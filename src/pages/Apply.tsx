@@ -82,7 +82,7 @@ export default function Apply() {
             <h1 className="font-display text-5xl sm:text-6xl font-extrabold tracking-[-0.04em] text-white leading-[1] mb-6">
               Let your content
               <br />
-              do the selling for you.
+              sell for you.
             </h1>
             <p className="text-zinc-400 text-lg max-w-sm leading-relaxed">
               The Authority Engine for 7-8+ figure founders
