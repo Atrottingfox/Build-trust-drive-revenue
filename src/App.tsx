@@ -29,6 +29,7 @@ const ThirtyDaySprint = React.lazy(() => import('./pages/ThirtyDaySprint'));
 const Apply = React.lazy(() => import('./pages/Apply'));
 const Calvin = React.lazy(() => import('./pages/Calvin'));
 const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
+const Undeniable = React.lazy(() => import('./pages/Undeniable'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -82,6 +83,7 @@ export default function App() {
           <Route path="/calvin" element={<Calvin />} />
           <Route path="/brandin48hours" element={<Calvin />} />
           <Route path="/calvincoyles" element={<CalvinOriginal />} />
+          <Route path="/undeniable" element={<Undeniable />} />
         </Routes>
       </Suspense>
     </Router>
