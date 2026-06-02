@@ -145,7 +145,7 @@ export default function Undeniable() {
                 {
                   icon: Users,
                   title: 'Authority Intensive',
-                  description: 'One in person session over 4 to 6 hours. Clarify positioning, promise, and for vs against. Map the end to end journey from stranger to continuity member.',
+                  description: 'One in person session over 4 to 6 hours. You, Rhys, your creative director, and me. Clarify positioning, promise, and for vs against. Map the end to end journey from stranger to continuity member.',
                 },
                 {
                   icon: Target,
@@ -154,8 +154,8 @@ export default function Undeniable() {
                 },
                 {
                   icon: Calendar,
-                  title: '90 Day Blueprint',
-                  description: 'Weekly 60 minute call with you and key team. The Undeniable Content and Pipeline Blueprint gets finalised. Targets set for leads, show ups, upgrades.',
+                  title: 'Weekly Founder + CD install call',
+                  description: 'Four weekly 60 minute install calls with founders, your creative director, and me. We finalise the 90 day Undeniable Authority Blueprint. Set lead, seat, and upgrade targets for the next event cycle.',
                 },
               ].map((item, i) => (
                 <motion.div
@@ -243,8 +243,8 @@ export default function Undeniable() {
                 },
                 {
                   icon: Calendar,
-                  title: 'Implementation calls + Loom reviews',
-                  description: 'One 60 minute call every week or fortnight (agreed up front), plus batched Loom reviews on key assets.',
+                  title: 'Touch model installed',
+                  description: 'Founder Strategy Pod, CD 1:1, weekly Operator Clinic, and templated Looms. The rhythm that runs week 5 onward. Detailed below.',
                 },
               ].map((item, i) => (
                 <motion.div
@@ -334,6 +334,82 @@ export default function Undeniable() {
                 ))}
               </ul>
             </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* CADENCE / TOUCH MODEL */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Month one. Deep.
+              <br />
+              <span className="text-zinc-500">Then a clean rhythm.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
+              Three windows. Different touch model in each. You always know what is on the calendar.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-3">Weeks 1 to 4</p>
+                <h3 className="text-white font-semibold mb-4">Founders + CD + me. Weekly.</h3>
+                <ul className="space-y-2">
+                  {[
+                    '1x in person Authority Intensive (4 to 6 hours).',
+                    '1x 60 minute install call per week. All three of us.',
+                    'Lock positioning, blueprint, and targets.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-3">Weeks 5 to 12</p>
+                <h3 className="text-white font-semibold mb-4">Split touch model.</h3>
+                <ul className="space-y-2">
+                  {[
+                    '1x 60 minute Founder Strategy Pod per month. Small group of 5 to 8 room owners. Scorecards and big decisions. No thumbnails.',
+                    '1x 60 minute 1:1 with your creative director per month. Focused on the Undeniable engine.',
+                    'Weekly Operator Clinic. CD joins the room of all Stage 2 and advisory operators. We work patterns live.',
+                    'Up to 1 Loom per week from your team. Templated: context, goal, question. I reply on patterns and next moves. Not proofreading.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-3">After 90 days</p>
+                <h3 className="text-white font-semibold mb-4">Same rhythm. Stage 2 advisory.</h3>
+                <ul className="space-y-2">
+                  {[
+                    'Monthly Founder Strategy Pod.',
+                    'Monthly 1:1 with your creative director.',
+                    'Weekly Operator Clinic.',
+                    'Structured Loom access.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <p className="text-zinc-500 text-sm leading-relaxed max-w-3xl">
+              Advisory is Stage 2 support extended. Not a mystery extra. You already know exactly what ongoing looks like before we get there.
+            </p>
           </Section>
         </div>
       </section>
@@ -612,9 +688,11 @@ export default function Undeniable() {
                 <ul className="space-y-3">
                   {[
                     '1x in person Authority Intensive (4 to 6 hours).',
-                    'Weeks 1 to 8: one 60 minute call per week with you and your media or marketing lead.',
-                    'Weeks 9 to 12: one 60 minute call per fortnight.',
-                    'Loom reviews for key assets. Batched and pattern focused.',
+                    'Weeks 1 to 4: 1x 60 minute Founder + CD install call per week.',
+                    'Weeks 5 to 12: 1x 60 minute Founder Strategy Pod per month.',
+                    'Weeks 5 to 12: 1x 60 minute 1:1 CD call per month.',
+                    'Weeks 5 to 12: 1x weekly Operator Clinic (group).',
+                    'Weekly Loom reviews. Capped and templated.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
