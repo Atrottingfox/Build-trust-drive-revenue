@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Target, BookOpen, Video, Mic, BarChart3, Users, Megaphone, Layers, RefreshCw, Calendar, Settings, FileText } from 'lucide-react';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -22,6 +23,12 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 export default function Undeniable() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="Boardroom Authority Engine"
+        description="A 90 day Boardroom Authority Engine. Turn the room, the events, and the founders into a compounding media engine."
+        path="/undeniable"
+        noIndex
+      />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* Hero */}

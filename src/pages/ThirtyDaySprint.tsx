@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Check, X, Clock, MessageCircle, Video, BarChart3, BookOpen, Target, Map, Mic, FileText, Calendar, Repeat } from 'lucide-react';
 import Footer from '../components/Footer';
 import ProofStrip from '../components/ProofStrip';
+import SEO from '../components/SEO';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -59,6 +60,12 @@ const deliverables = [
 export default function ThirtyDaySprint() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="The 30 Day Sprint"
+        description="A calibration sprint. We find out how you actually create, build the Brand Bible, and launch a four week posting sprint to get data and first wins fast."
+        path="/30-day-sprint"
+        noIndex
+      />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* Hero */}

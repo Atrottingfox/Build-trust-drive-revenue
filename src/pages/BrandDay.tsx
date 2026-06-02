@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, BookOpen, Target, Zap, Shield, Gift, Check, X, Calendar, Video } from 'lucide-react';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -66,6 +67,11 @@ const proofStats = [
 export default function BrandDay() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="Brand Day"
+        description="A one day intensive that rebuilds your brand from positioning to voice to launch structure. For 7 and 8 figure founders who are repositioning, not starting."
+        path="/brand-day"
+      />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* Hero */}

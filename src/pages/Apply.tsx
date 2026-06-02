@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Loader2 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function Apply() {
   const [loading, setLoading] = useState(false);
@@ -64,6 +65,11 @@ export default function Apply() {
 
   return (
     <section className="min-h-screen bg-base flex items-center justify-center px-6 py-32">
+      <SEO
+        title="Apply — Authority Engine"
+        description="Apply to work with Sean Fox. Brand Bible, content systems, and media operators for 7 and 8 figure founders ready to make their authority compound."
+        path="/apply"
+      />
       <div className="w-full max-w-5xl">
         <motion.div
           className="grid md:grid-cols-2 gap-16 md:gap-20 items-center"

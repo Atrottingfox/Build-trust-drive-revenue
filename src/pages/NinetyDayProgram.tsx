@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Target, BookOpen, Zap, Shield, Video, Mic, BarChart3, Users, Megaphone, Layers, RefreshCw, Calendar, Settings, Gauge, FileText } from 'lucide-react';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -55,6 +56,12 @@ const components = [
 export default function NinetyDayProgram() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="The 90 Day Program"
+        description="Three phases. Six components. The full Authority Engine installation. Brand Bible, Authority Engine Blueprint, Posting OS, Media Operator Playbook."
+        path="/90dayprogram"
+        noIndex
+      />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* Hero */}

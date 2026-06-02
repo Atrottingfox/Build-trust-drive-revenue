@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Check, Shield, Zap, Target, BookOpen } from 'lucide-react';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -50,6 +51,12 @@ const inclusions = [
 export default function Advisory() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="Advisory"
+        description="Strategic advisory for founders who have the team and the content. Monthly strategy. Weekly media ops. The pit team keeping the engine sharp."
+        path="/advisory"
+        noIndex
+      />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* Hero */}

@@ -6,10 +6,16 @@ import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-base">
+      <SEO
+        title="Authority Engine — Content systems for 7 and 8 figure founders"
+        description="Sean Fox builds Authority Engines. A 90 day content system that turns founder expertise into a media operating system. Without you becoming a full time creator."
+        path="/"
+      />
       {/* Animated gradient border */}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
       <Hero />

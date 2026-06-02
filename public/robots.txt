@@ -1,0 +1,36 @@
+User-agent: *
+Allow: /$
+Allow: /brand-day$
+Allow: /apply$
+
+Disallow: /90dayprogram
+Disallow: /30-day-sprint
+Disallow: /advisory
+Disallow: /dfy
+Disallow: /accelerator
+Disallow: /authorityaccelerator
+Disallow: /authoritybuilder
+Disallow: /beliefmap
+Disallow: /beliefmapbuilder
+Disallow: /thebuilder
+Disallow: /belief-shift
+Disallow: /diagnostic
+Disallow: /belief-builder
+Disallow: /belief-bridge
+Disallow: /resources
+Disallow: /content-engine
+Disallow: /builder
+Disallow: /diagnostic-tool
+Disallow: /quiz
+Disallow: /congruence
+Disallow: /map
+Disallow: /engine
+Disallow: /content-archetype
+Disallow: /editorapplication
+Disallow: /calvin
+Disallow: /brandin48hours
+Disallow: /calvincoyles
+Disallow: /calvin-coyles
+Disallow: /undeniable
+
+Sitemap: https://authorityengine.com.au/sitemap.xml
