@@ -723,7 +723,7 @@ export default function BusinessMap() {
                 {
                   icon: TrendingUp,
                   title: 'Talent multiplier',
-                  description: 'A $80k operator delivers $180k in billable value because the software does the thinking. The gap between cost and value IS the platform.',
+                  description: 'A $80k operator delivers $180k in billable value because the data does the thinking. The gap between cost and value IS the platform.',
                 },
                 {
                   icon: Network,
