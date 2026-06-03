@@ -244,7 +244,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Why this exists */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
@@ -256,7 +256,7 @@ export default function BusinessMap() {
 
             <div className="glow-card p-8 md:p-10">
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-                <span className="text-white font-semibold">Mission:</span> Build the core media operating system for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
+                <span className="text-white font-semibold">Mission:</span> Build the media operating system for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
               </p>
             </div>
           </Section>
@@ -266,7 +266,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 1: The Problem */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The problem</p>
@@ -298,7 +298,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 2: Who It's For */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="grid md:grid-cols-2 gap-12 md:gap-16">
@@ -353,7 +353,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 3: The Offer Ladder */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The offer ladder</p>
@@ -395,7 +395,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 4: Revenue Model */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
@@ -428,7 +428,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Unit Economics */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Unit economics</p>
@@ -464,7 +464,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* 6 Month Plan */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The first $1M</p>
@@ -518,7 +518,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 5: The System */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What gets installed</p>
@@ -550,7 +550,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 6: The 5 A's Rhythm */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The belief map</p>
@@ -583,7 +583,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 7: Acquisition */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Acquisition</p>
@@ -616,7 +616,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Section 8: Roles */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Roles</p>
@@ -657,7 +657,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* Scale Roadmap */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
@@ -707,7 +707,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* The Software Moat */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The moat</p>
@@ -754,7 +754,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* One Metric Per Stage */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="glow-card border-blue-500/20 p-8 md:p-10">
@@ -784,7 +784,7 @@ export default function BusinessMap() {
       <div className="gradient-line" />
 
       {/* North Star */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">North star · 2 year headline</p>
