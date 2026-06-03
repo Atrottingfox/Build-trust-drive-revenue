@@ -425,11 +425,53 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* 06 · INVISIBLE HAND */}
+      {/* 06 · STRATEGIC RISK */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The invisible hand we are about to unlock</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The strategic risk we are avoiding</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Don't jump markets yet.
+              <br />
+              <span className="text-zinc-500">First, own the pond.</span>
+            </h2>
+            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
+              <p>
+                The temptation right now is to jump to general service businesses.
+              </p>
+              <p className="text-zinc-300 font-medium">Here's my view for the next 90 days.</p>
+            </div>
+
+            <ul className="space-y-3 max-w-3xl mb-10">
+              {[
+                'We double down on fitness. Build the trust ecosystem. Use it to deepen demand and authority.',
+                'We implement a strategy to inject broader business content to collect data on who is raising their hand from outside fitness.',
+                'At the end of the 90 days we decide, with data, what a service business opportunity could look like. When, how, and if required.',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                  <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+              <p className="text-blue-400 font-semibold text-sm mb-3">First goal</p>
+              <p className="text-white text-base leading-relaxed font-medium">
+                Make Undeniable so strong in the current market that the next market pulls you in. We then supply based on demand. Not just to get cheaper CAC.
+              </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 07 · INVISIBLE HAND */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · The invisible hand we are about to unlock</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               When your clients
               <br />
@@ -475,48 +517,6 @@ export default function Undeniable() {
             <p className="text-zinc-300 text-base leading-relaxed max-w-3xl font-medium">
               The aim. Your clients do more of the talking. The trust ecosystem feels like a self fulfilling prophecy, not paid traffic on life support.
             </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* 05 · STRATEGIC RISK */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · The strategic risk we are avoiding</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Don't jump markets yet.
-              <br />
-              <span className="text-zinc-500">Create the demand. Bridge the content.</span>
-            </h2>
-            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              <p>
-                The temptation right now is to jump to general service businesses because fitness is getting more expensive to acquire.
-              </p>
-              <p className="text-zinc-300 font-medium">My view for the next 90 days.</p>
-            </div>
-
-            <ul className="space-y-3 max-w-3xl mb-10">
-              {[
-                'We create an influx of demand inside fitness. Build the trust ecosystem. Get the room overflowing.',
-                'We begin bridging content outside the immediate market. A coordinated blend that speaks to both. Those in the current pond, and the ones in the ocean.',
-                'We collect data on who is raising their hand from outside fitness.',
-                'At the end of the 90 days we decide, with data, what a service business lane should look like. If at all.',
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <AlertCircle className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
-                  <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-white text-base leading-relaxed font-medium">
-                Make Undeniable so strong in your current market that the next market pulls you in. Not so you can run away from CAC.
-              </p>
-            </div>
           </Section>
         </div>
       </section>
