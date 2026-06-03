@@ -32,5 +32,6 @@ Disallow: /brandin48hours
 Disallow: /calvincoyles
 Disallow: /calvin-coyles
 Disallow: /undeniable
+Disallow: /undeniable-notes
 
 Sitemap: https://authorityengine.com.au/sitemap.xml

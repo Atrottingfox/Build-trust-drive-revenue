@@ -30,6 +30,7 @@ const Apply = React.lazy(() => import('./pages/Apply'));
 const Calvin = React.lazy(() => import('./pages/Calvin'));
 const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
 const Undeniable = React.lazy(() => import('./pages/Undeniable'));
+const UndeniableNotes = React.lazy(() => import('./pages/UndeniableNotes'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -84,6 +85,7 @@ export default function App() {
           <Route path="/brandin48hours" element={<Calvin />} />
           <Route path="/calvincoyles" element={<CalvinOriginal />} />
           <Route path="/undeniable" element={<Undeniable />} />
+          <Route path="/undeniable-notes" element={<UndeniableNotes />} />
         </Routes>
       </Suspense>
     </Router>
