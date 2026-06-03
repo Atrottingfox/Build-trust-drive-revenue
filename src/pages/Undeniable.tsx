@@ -38,11 +38,12 @@ export default function Undeniable() {
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
               <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Undeniable · 90 Day Authority Engine</p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-5">
                 Build a trust ecosystem to take the right people from cold to sold.
-                <br />
-                <span className="text-zinc-500">So Undeniable becomes the obvious choice for the ideal market.</span>
               </h1>
+              <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
+                So Undeniable becomes the obvious choice for the ideal market.
+              </p>
             </div>
           </Section>
         </div>
@@ -472,20 +473,20 @@ export default function Undeniable() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · Deliverables</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              What you'll have
+              A comprehensive Brand Bible.
               <br />
-              <span className="text-zinc-500">in your hands.</span>
+              <span className="text-zinc-500">Plus the install around it.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              A pack you can hand straight to the team. Whatever we decide at Day 90, these assets are yours.
+              The Brand Bible is the centerpiece. Everything else is built on top of it so the team can run the engine without you. Whatever we decide at Day 90, all of this is yours.
             </p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   icon: BookOpen,
-                  title: 'Brand documentation',
-                  description: 'The output of the Brand Day. Voice, positioning, beliefs, contrarian takes, narrative.',
+                  title: 'Complete Brand Bible',
+                  description: 'Voice, positioning, narrative, messaging, beliefs, origin story, archetype profile. Identity extracted. Positioning clarified. All documented and ready to hand to any operator or team member.',
                 },
                 {
                   icon: Compass,
@@ -493,24 +494,24 @@ export default function Undeniable() {
                   description: 'Cold to room to continuity. The trust path your team executes against.',
                 },
                 {
+                  icon: Layers,
+                  title: 'Authority Engine Map',
+                  description: 'The three elements documented. How short form, lead magnets, and longform integrate around your monthly workshops.',
+                },
+                {
+                  icon: Calendar,
+                  title: '6 Week Cycle Plan',
+                  description: 'Themes, hooks, topics. The plug and play structure your team re runs every cycle.',
+                },
+                {
                   icon: Target,
                   title: 'Hook Bank',
                   description: 'Your best angles. Tested, sorted, ready to re run. Updated as you go.',
                 },
                 {
-                  icon: Video,
-                  title: 'Longform Plan',
-                  description: 'Evergreen video assets. Topics, hooks, outlines, CTAs. The depth layer of the engine.',
-                },
-                {
-                  icon: Calendar,
-                  title: 'Short Form Rhythm',
-                  description: 'Weekly themes and post types across Instagram and short form. Discovery layer.',
-                },
-                {
                   icon: FileText,
                   title: 'Lead Magnet Stack',
-                  description: 'One core evergreen plus video specific magnets. Email sequences mapped.',
+                  description: 'One core evergreen plus video specific magnets. Email sequences mapped to each stage of the journey.',
                 },
                 {
                   icon: Settings,
