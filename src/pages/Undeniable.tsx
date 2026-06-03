@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Target, BookOpen, Video, Mic, BarChart3, Users, Megaphone, Layers, RefreshCw, Calendar, Settings, FileText, Check, Compass, Eye, MessageCircle, Zap } from 'lucide-react';
+import { ArrowRight, Target, BookOpen, Video, Mic, BarChart3, Users, Layers, RefreshCw, Calendar, FileText, Check, Compass, Eye, Zap, Megaphone, Shield, AlertCircle, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
@@ -157,7 +157,7 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* SECTION 2: GOAL */}
+      {/* SECTION 2: GOAL + SUCCESS CRITERIA */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
@@ -170,7 +170,7 @@ export default function Undeniable() {
             <p className="text-zinc-400 text-base leading-relaxed max-w-3xl mb-8">
               In the next 90 days, the goal is to install a simple, testable trust path that:
             </p>
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
               {[
                 {
                   icon: Target,
@@ -202,11 +202,37 @@ export default function Undeniable() {
                 </motion.div>
               ))}
             </div>
-            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+
+            <div className="glow-card border-blue-500/20 p-8 mb-12 max-w-3xl">
               <p className="text-white text-base leading-relaxed font-medium">
                 This is a test of the system and of how we work together. Not a forever contract.
               </p>
             </div>
+
+            {/* Success criteria */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Success criteria</p>
+            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              How we'll know it worked.
+            </h3>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-8">
+              By Day 90 we want to see:
+            </p>
+            <ul className="space-y-3 max-w-3xl mb-8">
+              {[
+                'A documented, simple cold to warm to room to continuity path we both agree on.',
+                "A 6 week YouTube and Instagram program you'd be happy to re run.",
+                'An agreed % of new room buyers coming through the new path, not just legacy warm. (Number set in Phase 1.)',
+                'An agreed number of qualified new conversations per month clearly traceable to the new trust path. (Number set in Phase 1.)',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                  <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-zinc-300 text-sm leading-relaxed max-w-3xl font-medium">
+              If we hit or trend toward those, we talk about continuing. If we don't, we fix it or we stop.
+            </p>
           </Section>
         </div>
       </section>
@@ -280,11 +306,108 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* SECTION 4: 90 DAY OUTLINE */}
+      {/* SECTION 4: INVISIBLE HAND */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The plan</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The invisible hand we are about to unlock</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              When your clients
+              <br />
+              <span className="text-zinc-500">do the talking.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
+              You're on the verge of a heavy word of mouth phase. Lots more clients whose story rhymes. Lots more social proof.
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              {[
+                {
+                  icon: Users,
+                  title: 'Visible advocates',
+                  description: 'Turn your best clients into testimonials, breakdowns, and story content. Their words, not just yours.',
+                },
+                {
+                  icon: Video,
+                  title: 'Their stories as core content',
+                  description: 'Use client stories as the spine of content and ads, not just your face. Trust transfers faster from peer to peer.',
+                },
+                {
+                  icon: Megaphone,
+                  title: 'Time on brand plays',
+                  description: 'Boost the best stories as paid distribution. Not cold ads. Proof at scale.',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-zinc-300 text-base leading-relaxed max-w-3xl font-medium">
+              The aim. Your clients do more of the talking. The trust path feels like a self fulfilling prophecy, not paid traffic on life support.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* SECTION 5: STRATEGIC RISK */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · The strategic risk we are avoiding</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Don't jump markets yet.
+              <br />
+              <span className="text-zinc-500">Refill the pond first.</span>
+            </h2>
+            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
+              <p>
+                The temptation right now is to jump to general service businesses because fitness is getting more expensive to acquire.
+              </p>
+              <p className="text-zinc-300 font-medium">My view for the next 90 days.</p>
+            </div>
+
+            <ul className="space-y-3 max-w-3xl mb-10">
+              {[
+                'We double down on fitness. Build the trust path. Use it to refill the pond.',
+                'We collect data on who is raising their hand from outside fitness.',
+                'At the end of the 90 days we decide, with data, what a service business lane should look like. If at all.',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <AlertCircle className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+                  <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+              <p className="text-white text-base leading-relaxed font-medium">
+                The whole point is to make Undeniable so strong in your current market that the next market pulls you in. Not so you can run away from CAC.
+              </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* SECTION 6: 90 DAY OUTLINE */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The plan</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               90 day outline.
               <br />
@@ -305,7 +428,7 @@ export default function Undeniable() {
                 </div>
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                   <p>One in person or deep dive session with you and your creative director.</p>
-                  <p>We map your current content, funnels, and where leads actually come from. Then the ideal path from first touch to room to continuity.</p>
+                  <p>We map your current content, funnels, and where leads actually come from. Then the ideal path from first touch to room to continuity. We agree the success metrics that decide Day 31 and Day 90.</p>
                 </div>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Deliverables</p>
                 <ul className="space-y-2">
@@ -313,6 +436,7 @@ export default function Undeniable() {
                     'Customer Journey Map. Cold to warm to room to continuity.',
                     'Simple brand deck and voice card. What you stand for. How you sound. What to avoid.',
                     'List of required lead magnets and proof assets.',
+                    'Agreed success metrics for the 90 days.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
@@ -397,11 +521,11 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* SECTION 5: WHAT YOU WALK AWAY WITH */}
+      {/* SECTION 7: DELIVERABLES */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · Deliverables</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · Deliverables</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               What you'll have
               <br />
@@ -469,25 +593,27 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* SECTION 6: HOW WE WORK TOGETHER */}
+      {/* SECTION 8: HOW WE WORK */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · How we work</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">08 · How we work</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Cadence.
               <br />
               <span className="text-zinc-500">Expectations.</span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
               <div className="glow-card p-8">
+                <Shield className="w-5 h-5 text-blue-400 mb-4" />
                 <p className="text-blue-400 font-semibold text-sm mb-4">My role</p>
                 <ul className="space-y-3">
                   {[
-                    'Design the trust path and content / lead plan.',
-                    'Advise your team. Review key assets.',
-                    'Read the numbers with you.',
+                    'Design the trust path and 6 week plans.',
+                    'Advise on hooks, formats, and lead magnets. Not write or edit everything.',
+                    'Read the data with you and suggest next best moves.',
+                    'Show up at your event each month and test the ideas live with the room.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
@@ -497,12 +623,13 @@ export default function Undeniable() {
                 </ul>
               </div>
               <div className="glow-card p-8">
+                <Users className="w-5 h-5 text-blue-400 mb-4" />
                 <p className="text-blue-400 font-semibold text-sm mb-4">Your team's role</p>
                 <ul className="space-y-3">
                   {[
-                    'Film. Edit. Publish.',
-                    'Build and wire up lead magnets and basic funnels.',
-                    'Fill in a simple weekly scorecard.',
+                    'Implement. Film, edit, publish, build funnels, send emails.',
+                    'Fill a simple weekly scorecard.',
+                    'Give me honest feedback from the room and the numbers.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
@@ -513,6 +640,34 @@ export default function Undeniable() {
               </div>
             </div>
 
+            {/* Events & speaking */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Events & speaking · Shots on goal</p>
+            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              On your stage every month.
+              <br />
+              <span className="text-zinc-500">Part of the test.</span>
+            </h3>
+            <div className="glow-card p-8 mb-12 max-w-3xl">
+              <p className="text-zinc-400 leading-relaxed mb-5">
+                For the 90 days, we test how we work together by:
+              </p>
+              <ul className="space-y-3 mb-5">
+                {[
+                  "Me getting a segment at each monthly event to teach or debrief the trust path.",
+                  "Using those sessions as content and feedback loops. What lands. What confuses the room.",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-zinc-300 text-sm leading-relaxed font-medium">
+                This gives me reps on your stage and lets us see, in real time, how the strategy lands with your people.
+              </p>
+            </div>
+
+            {/* Cadence */}
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
             <div className="grid md:grid-cols-2 gap-6 mb-12">
               <div className="glow-card p-8">
@@ -526,6 +681,7 @@ export default function Undeniable() {
                     '1x 60 minute call per fortnight. You and CD.',
                     '1x Operator Clinic per fortnight for implementation questions.',
                     'Up to 1 Loom per week for asset review.',
+                    'Live stage segment at each monthly event.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
@@ -536,6 +692,7 @@ export default function Undeniable() {
               </div>
             </div>
 
+            {/* Commercials */}
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Commercials</p>
             <div className="glow-card border-blue-500/20 p-8">
               <div className="space-y-4 text-zinc-400 leading-relaxed">
@@ -556,35 +713,39 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* SECTION 7: AFTER 90 DAYS */}
+      {/* SECTION 9: DAY 90 DECISION */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · After 90 days</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">09 · What happens at Day 90</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              What we might do.
+              We sit down.
               <br />
-              <span className="text-zinc-500">Options, not pitch.</span>
+              <span className="text-zinc-500">We choose one of three.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              If the trust path is working and we like working together, we could:
+              We look at the trust path we've installed. The numbers from the last cycle. How it's felt working together. Then we pick.
             </p>
-            <div className="grid md:grid-cols-3 gap-6 mb-10">
+
+            <div className="space-y-6 mb-10">
               {[
                 {
                   icon: RefreshCw,
-                  title: 'Extend advisory',
-                  description: 'I keep helping the team tune the engine on a monthly rhythm.',
+                  num: '01',
+                  title: 'Keep going in advisory',
+                  description: 'Keep tuning the engine. Expand what works. Monthly rhythm.',
                 },
                 {
                   icon: Layers,
-                  title: 'Go deeper on positioning',
-                  description: 'Use what we learned to take Undeniable into general service businesses.',
+                  num: '02',
+                  title: 'Go deeper',
+                  description: 'Talk about a more formal partnership or Room OS build. The 12 month version of this.',
                 },
                 {
-                  icon: Users,
-                  title: 'Formal strategic partner',
-                  description: 'Room OS, speaking, deeper involvement in your events.',
+                  icon: X,
+                  num: '03',
+                  title: 'Stop here',
+                  description: 'You keep all the assets and insights. We chalk it up as a finished project.',
                 },
               ].map((item, i) => (
                 <motion.div
@@ -595,15 +756,23 @@ export default function Undeniable() {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
                 >
-                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
-                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                  <div className="flex flex-col md:flex-row md:items-start md:gap-8">
+                    <div className="flex-shrink-0 mb-3 md:mb-0">
+                      <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">{item.num}</p>
+                    </div>
+                    <div className="flex-1">
+                      <item.icon className="w-5 h-5 text-blue-400 mb-3" />
+                      <h3 className="text-white font-semibold text-lg mb-2">{item.title}</h3>
+                      <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </div>
-            <div className="glow-card p-8 max-w-3xl">
-              <p className="text-zinc-300 text-sm leading-relaxed">
-                If it is not a clear win, you still leave with the assets above. We will both have learned what does not move the needle. And we stop there.
+
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+              <p className="text-white text-base leading-relaxed font-medium">
+                No pressure either way. The 90 days are about testing the system and the fit.
               </p>
             </div>
           </Section>
