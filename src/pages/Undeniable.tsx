@@ -45,11 +45,8 @@ export default function Undeniable() {
                 <br />
                 Authority Engine.
               </h1>
-              <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl mb-4">
+              <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl">
                 Engineer trust at scale, and move the right people from cold to sold every month.
-              </p>
-              <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
-                So Undeniable becomes the obvious choice for the ideal market.
               </p>
             </div>
           </Section>
