@@ -710,9 +710,9 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The moat</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              The moat is the software.
+              The moat is the data.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">The Engineroom becomes a data platform.</p>
+            <p className="text-zinc-500 text-lg mb-12">Every client makes it sharper.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
