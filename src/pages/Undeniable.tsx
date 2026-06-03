@@ -101,10 +101,12 @@ export default function Undeniable() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Outcome</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Current state.
+              Inside, undeniable.
+              <br />
+              <span className="text-zinc-500">Outside, not yet.</span>
             </h2>
 
-            <div className="glow-card p-8 md:p-10 mb-10">
+            <div className="glow-card p-8 md:p-10 mb-10 max-w-3xl">
               <ul className="space-y-4 mb-6">
                 {[
                   'The product is bulletproof.',
@@ -112,29 +114,24 @@ export default function Undeniable() {
                   'Credibility is undeniable.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-blue-400 mt-1.5 flex-shrink-0" />
+                    <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
                     <span className="text-white text-lg leading-relaxed font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="text-zinc-500 text-sm italic pl-7">
+              <p className="text-zinc-500 text-sm italic pl-8">
                 Once you're inside.
               </p>
             </div>
 
-            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              <p>
-                But making that known to the public is where the greatest opportunity exists.
-              </p>
-              <p>
-                With CAC increasing, the solution is to build a simple path from getting someone's attention, to them knocking down your door for access.
-              </p>
-            </div>
+            <p className="text-zinc-300 text-base leading-relaxed max-w-3xl mb-10 font-medium">
+              Making that known to the public is where the greatest opportunity exists. With CAC increasing, the play is to build a simple path from someone's attention, to them knocking down your door for access.
+            </p>
 
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
               <p className="text-blue-400 font-semibold text-sm mb-3">The gap</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                A simple strategy, with a repeatable cycle that makes content more effective, easier to make, and faster to build trust.
+                A simple strategy. A repeatable cycle. Content that's more effective, easier to make, and faster to build trust.
               </p>
             </div>
           </Section>
@@ -151,7 +148,7 @@ export default function Undeniable() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Install a trust ecosystem.
               <br />
-              <span className="text-zinc-500">The Authority Engine.</span>
+              <span className="text-zinc-500">Your Authority Engine.</span>
             </h2>
             <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-16">
               <p>
@@ -257,11 +254,182 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* 04 · INVISIBLE HAND */}
+      {/* 05 · THE 90 DAY PLAN */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · The invisible hand we are about to unlock</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · The 90 day plan</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Install an Authority Engine.
+              <br />
+              <span className="text-zinc-500">Brand. Content. Scale.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
+              Three core content output areas. Plus the connective tissue that turns them into a monthly demand cycle around your workshops.
+            </p>
+
+            {/* The 3 core output areas */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Three core outputs</p>
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              {[
+                {
+                  icon: Zap,
+                  title: 'Short Form',
+                  description: 'Discovery layer. Hooks, formats, and angles that open new audiences and pull the right people toward the channel and the room.',
+                },
+                {
+                  icon: Video,
+                  title: 'Long Form',
+                  description: 'Trust depth. The pieces that get watched, shared, and remembered. The reason cold viewers turn into buyers.',
+                },
+                {
+                  icon: FileText,
+                  title: 'Lead Magnets',
+                  description: 'Trust bridge. Assets that take someone from interested to invested. One core evergreen plus video specific magnets.',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Plus the connective tissue */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Plus the connective tissue</p>
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {[
+                {
+                  icon: Megaphone,
+                  title: 'Trojan Horse VSL',
+                  description: 'A value first video sales letter. Seeds the offer while delivering deep value. Lives in the trust path and does the selling without feeling like a sale.',
+                },
+                {
+                  icon: Settings,
+                  title: 'Documented Media Operating System',
+                  description: 'A system your team can run week to week. Captures the brand, the cycle, and the playbook in one place. Survives team changes.',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-6 mb-16 max-w-3xl">
+              <p className="text-white text-sm leading-relaxed font-medium">
+                Brand documented. Content engineered. System installed. The room markets itself.
+              </p>
+            </div>
+
+            {/* Phases */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Three phases</p>
+            <div className="space-y-8">
+              {/* Phase 1: BUILD */}
+              <div className="glow-card p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">01</p>
+                  <div>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 01 · Build · 4 to 6 hours</p>
+                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
+                      Extract the genius. Document the brand.
+                    </h3>
+                  </div>
+                </div>
+                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
+                  <p>
+                    Brand Day intensive. One in person session with you and your creative director. Four to six hours. We extract the genius. The founder beliefs, the contrarian takes, the stories, the lens. The entire engine runs from this.
+                  </p>
+                  <p>
+                    We document the brand, map the cycles to the demand they need to create, and agree the success metrics for the 90 days.
+                  </p>
+                </div>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase 1</p>
+                <ul className="space-y-2">
+                  {[
+                    'A documented brand. Voice, positioning, category lens, contrarian takes.',
+                    'A Customer Journey Map. Cold to warm to room to continuity.',
+                    'The shape of the monthly demand cycle, mapped to your workshop calendar.',
+                    'Agreed success metrics for the 90 days.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Phase 2: INSTALL */}
+              <div className="glow-card p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">02</p>
+                  <div>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 02 · Install · Weeks 1–3</p>
+                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
+                      Wrap the engine around your next workshop.
+                    </h3>
+                  </div>
+                </div>
+                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
+                  <p>
+                    One 60 minute call per week for three weeks with your creative director. Founder joins if desired.
+                  </p>
+                  <p>
+                    Short form, long form, lead magnets, the Trojan Horse VSL, and the Media Operating System get built and wired up. The first cycle wraps around your next workshop so we test it live, not in theory.
+                  </p>
+                </div>
+              </div>
+
+              {/* Phase 3: TUNE */}
+              <div className="glow-card p-8 md:p-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">03</p>
+                  <div>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 03 · Tune · Weeks 4–12</p>
+                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
+                      Tune on real data. Codify the cycle.
+                    </h3>
+                  </div>
+                </div>
+                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
+                  <p>
+                    Your team runs the cycle. I act as advisor. We tighten hooks, lead magnets, longform structure, and the VSL on real data. We test the strongest pieces with your best members.
+                  </p>
+                  <p>
+                    End of 90 days you have one documented Authority Engine, one repeatable monthly demand cycle, and a clear view of what happens if we keep going.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 06 · INVISIBLE HAND */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The invisible hand we are about to unlock</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               When your clients
               <br />
@@ -317,11 +485,11 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The strategic risk we are avoiding</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · The strategic risk we are avoiding</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Don't jump markets yet.
               <br />
-              <span className="text-zinc-500">Refill the pond first.</span>
+              <span className="text-zinc-500">Create the demand. Bridge the content.</span>
             </h2>
             <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
               <p>
@@ -332,13 +500,14 @@ export default function Undeniable() {
 
             <ul className="space-y-3 max-w-3xl mb-10">
               {[
-                'We double down on fitness. Build the trust ecosystem. Use it to refill the pond.',
+                'We create an influx of demand inside fitness. Build the trust ecosystem. Get the room overflowing.',
+                'We begin bridging content outside the immediate market. A coordinated blend that speaks to both. Those in the current pond, and the ones in the ocean.',
                 'We collect data on who is raising their hand from outside fitness.',
                 'At the end of the 90 days we decide, with data, what a service business lane should look like. If at all.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <AlertCircle className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-                  <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  <AlertCircle className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                  <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
@@ -352,144 +521,6 @@ export default function Undeniable() {
         </div>
       </section>
 
-      <div className="gradient-line" />
-
-      {/* 06 · THE 90 DAY PLAN */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · The 90 day plan</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Install an Authority Engine.
-              <br />
-              <span className="text-zinc-500">A simple path from cold to sold.</span>
-            </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              The Authority Engine is three integrated elements that build monthly demand cycles. Each cycle coincides with one of your workshops.
-            </p>
-
-            {/* The 3 elements */}
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
-              {[
-                {
-                  icon: Zap,
-                  title: 'Short form strategy',
-                  description: 'Discovery layer. Hooks, formats, and angles that open new audiences and pull the right people toward the channel and the room.',
-                },
-                {
-                  icon: FileText,
-                  title: 'Lead magnet strategy',
-                  description: 'Trust bridge. Assets that take someone from interested to invested. One core evergreen plus video specific magnets.',
-                },
-                {
-                  icon: Video,
-                  title: 'Longform strategy',
-                  description: 'Trust depth. The pieces that get watched, shared, and remembered. The reason cold viewers turn into buyers.',
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-8"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
-                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-6 mb-16 max-w-3xl">
-              <p className="text-white text-sm leading-relaxed font-medium">
-                Three streams. One cycle. Repeated monthly around your workshops.
-              </p>
-            </div>
-
-            {/* Phases */}
-            <div className="space-y-8">
-              {/* Weeks 1-4: Brand Day + Diagnose */}
-              <div className="glow-card p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">01</p>
-                  <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 1–4 · Brand Day intensive</p>
-                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
-                      Extract the genius. Design the cycles.
-                    </h3>
-                  </div>
-                </div>
-                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
-                  <p>
-                    Phase 1 starts with the Brand Day intensive. One in person session with you and your creative director. We extract the genius — the founder beliefs, the contrarian takes, the stories, the lens — that the entire engine runs from.
-                  </p>
-                  <p>
-                    We document the brand, map the cycles to the demand they need to create, and agree the success metrics for the 90 days.
-                  </p>
-                </div>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase 1</p>
-                <ul className="space-y-2">
-                  {[
-                    'A documented brand. Voice, positioning, category lens, contrarian takes.',
-                    'A Customer Journey Map. Cold to warm to room to continuity.',
-                    'The shape of the monthly demand cycle, mapped to your workshop calendar.',
-                    'Agreed success metrics for the 90 days.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Weeks 5-8: Build & Install */}
-              <div className="glow-card p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">02</p>
-                  <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 5–8 · Build & install</p>
-                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
-                      Wrap the engine around a real workshop.
-                    </h3>
-                  </div>
-                </div>
-                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
-                  <p>
-                    Build the three elements. Short form rhythm, lead magnets, and longform content. Integrated, not three disconnected streams.
-                  </p>
-                  <p>
-                    The first cycle wraps around your next workshop so we test it live. Hook bank started. Lead magnets wired up. Nurture sequences in place. Early emotional wins are non negotiable.
-                  </p>
-                </div>
-              </div>
-
-              {/* Weeks 9-12: Optimise */}
-              <div className="glow-card p-8 md:p-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">03</p>
-                  <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 9–12 · Optimise & codify</p>
-                    <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
-                      Tune on real data. Codify the cycle.
-                    </h3>
-                  </div>
-                </div>
-                <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
-                  <p>
-                    Your team runs the cycle. I act as advisor. We tighten hooks, lead magnets, and longform structure on real data. We test the strongest pieces with your best members.
-                  </p>
-                  <p>
-                    End of 90 days you have one documented Authority Engine, one repeatable monthly demand cycle, and a clear view of what happens if we keep going.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Section>
-        </div>
-      </section>
 
       <div className="gradient-line" />
 
@@ -522,7 +553,7 @@ export default function Undeniable() {
                 {
                   icon: Layers,
                   title: 'Authority Engine Map',
-                  description: 'The three elements documented. How short form, lead magnets, and longform integrate around your monthly workshops.',
+                  description: 'The full system documented. How the three core outputs and the connective tissue integrate around your monthly workshops.',
                 },
                 {
                   icon: Calendar,
@@ -538,6 +569,16 @@ export default function Undeniable() {
                   icon: FileText,
                   title: 'Lead Magnet Stack',
                   description: 'One core evergreen plus video specific magnets. Email sequences mapped to each stage of the journey.',
+                },
+                {
+                  icon: Megaphone,
+                  title: 'Trojan Horse VSL',
+                  description: 'A value first video sales letter. Seeds the offer while delivering deep value. The sales asset that lives inside the trust path.',
+                },
+                {
+                  icon: Shield,
+                  title: 'Documented Media Operating System',
+                  description: 'A system your team can run week to week. The brand, the cycle, and the playbook in one place. Survives team changes.',
                 },
                 {
                   icon: Settings,
@@ -643,23 +684,41 @@ export default function Undeniable() {
 
             {/* Cadence */}
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
               <div className="glow-card p-8">
-                <p className="text-blue-400 font-semibold text-sm mb-3">Phase 1 · Brand Day intensive</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">In person session with you and your creative director. Half or full day.</p>
+                <p className="text-blue-400 font-semibold text-sm mb-1">Phase 01 · Build</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">4 to 6 hours</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">Brand Day intensive. One in person session with you and your creative director.</p>
               </div>
               <div className="glow-card p-8">
-                <p className="text-blue-400 font-semibold text-sm mb-3">Weeks 2 to 12</p>
+                <p className="text-blue-400 font-semibold text-sm mb-1">Phase 02 · Install</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 1 to 3</p>
+                <ul className="space-y-2">
+                  {[
+                    '1x 60 minute call per week with your CD.',
+                    'Founder joins if desired.',
+                    'The engine gets built and wired up.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-1">Phase 03 · Tune</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 4 to 12</p>
                 <ul className="space-y-2">
                   {[
                     '1x 60 minute call per fortnight with you and your CD.',
                     '1x Operator Clinic per fortnight for implementation questions.',
                     'Up to 1 Loom per week for asset review.',
-                    'One stage segment at each of your three monthly workshops.',
+                    'One stage segment at each monthly workshop.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
