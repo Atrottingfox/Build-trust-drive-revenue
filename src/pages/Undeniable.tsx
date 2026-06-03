@@ -204,15 +204,16 @@ export default function Undeniable() {
               <div className="glow-card p-8">
                 <Check className="w-5 h-5 text-blue-400 mb-4" />
                 <p className="text-white font-semibold text-base mb-4">Strengths</p>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {[
-                    'Clear avatar and result. 7 figure online PTs.',
-                    'A room that already delivers serious outcomes.',
-                    'Social proof and word of mouth momentum building.',
+                    'Clear avatar and epic results.',
+                    'A killer playbook that already delivers wicked outcomes.',
+                    'Social proof and word of mouth building momentum.',
+                    'Undeniable credibility of expertise.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -220,15 +221,15 @@ export default function Undeniable() {
               <div className="glow-card p-8">
                 <Compass className="w-5 h-5 text-blue-400 mb-4" />
                 <p className="text-white font-semibold text-base mb-4">Gaps</p>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {[
                     'No single, documented customer journey from cold to sold.',
                     'Hooks and content formats that work are not yet systemised into a bank your team can re use.',
                     'YouTube not yet leveraged as the deep trust channel.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -236,15 +237,15 @@ export default function Undeniable() {
               <div className="glow-card p-8">
                 <Zap className="w-5 h-5 text-blue-400 mb-4" />
                 <p className="text-white font-semibold text-base mb-4">Opportunities · Next 90 days</p>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {[
-                    'Turn your best existing clients and advocates into a visible invisible hand.',
-                    'Build a 6 week YouTube and Instagram program so you know exactly what to shoot and why.',
-                    'Design a small set of lead magnets and nurture emails so people have everything they need to go from just found you to I am in.',
+                    'Turn your best existing clients into a reference book for advocacy and simple breakdowns.',
+                    'Build a YouTube and Instagram cycle so you know exactly what type of content to shoot and why.',
+                    'Craft a small set of lead magnets so people have everything they need to go from just found you to I am in.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
