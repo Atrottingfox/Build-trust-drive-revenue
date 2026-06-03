@@ -147,36 +147,42 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · What we are trying to do in 90 days</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · Opportunity</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Install one trust ecosystem.
+              Install a trust ecosystem.
               <br />
-              <span className="text-zinc-500">Prove it with real events.</span>
+              <span className="text-zinc-500">The Authority Engine.</span>
             </h2>
-            <p className="text-zinc-400 text-base leading-relaxed max-w-3xl mb-12">
-              We are not trying to force a two events per month empire in 90 days. We are installing one working trust ecosystem, proving it with real events, and then deciding how far to push it.
-            </p>
+            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-16">
+              <p>
+                The first step is simple. Craft a methodical customer journey that increases demand, and nurtures fast to coincide with live events.
+              </p>
+              <p className="text-zinc-300 font-medium">
+                We are not trying to push two events per month. We are trying to first increase demand, while lowering supply.
+              </p>
+            </div>
 
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Success criteria · Agreed in Phase 1</p>
-            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">
               How we'll know it worked.
             </h3>
-            <ul className="space-y-3 max-w-3xl mb-8">
+            <ul className="space-y-4 max-w-3xl mb-10">
               {[
                 'A documented, simple cold to warm to room to continuity path we both agree on.',
-                "A 6 week content cycle you'd be happy to re run.",
-                'An agreed % of new room buyers coming through the new path, not just legacy warm.',
-                'An agreed number of qualified new conversations per month clearly traceable to the trust ecosystem.',
+                'A 4 or 6 week content cycle we can easily run.',
+                "An agreed % of new room buyers coming through the new path. With a notable shortening of those putting their hand up when asked: how many people first heard about me in the past 3 months?",
+                'An agreed number of qualified booked calls from content.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
-                  <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-                  <span className="text-zinc-400 text-sm md:text-base leading-relaxed">{item}</span>
+                  <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                  <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
-            <p className="text-zinc-300 text-sm leading-relaxed max-w-3xl font-medium">
-              If we hit or trend toward those, we talk about continuing. If we don't, we fix it or we stop.
-            </p>
+            <div className="space-y-2 text-zinc-300 leading-relaxed max-w-3xl font-medium">
+              <p>If we hit or trend toward those, we talk about continuing.</p>
+              <p>If we don't, we fix it or we stop.</p>
+            </div>
           </Section>
         </div>
       </section>
