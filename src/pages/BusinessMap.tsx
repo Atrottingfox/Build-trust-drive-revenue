@@ -250,13 +250,11 @@ export default function BusinessMap() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Build the engine for the top 1%.
-              <br />
-              <span className="text-zinc-500">Use it to lift the next wave.</span>
             </h2>
 
             <div className="glow-card p-8 md:p-10">
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-                <span className="text-white font-semibold">Mission:</span> Build the media operating system for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
+                <span className="text-white font-semibold">Mission:</span> Build the content infrastructure for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
               </p>
             </div>
           </Section>
