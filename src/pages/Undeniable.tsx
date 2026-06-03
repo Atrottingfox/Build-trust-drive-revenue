@@ -99,26 +99,43 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · Where Undeniable is now</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              My read on
-              <br />
-              <span className="text-zinc-500">where you are right now.</span>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · Current state</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Current state.
             </h2>
-            <div className="glow-card p-8 md:p-10">
-              <ul className="space-y-5">
+
+            <div className="glow-card p-8 md:p-10 mb-10">
+              <ul className="space-y-4 mb-6">
                 {[
-                  "You've already built a room and continuity model that works for 7 figure online PTs and fitness founders.",
-                  "You're moving from warm heavy to more cold traffic and content. The existing list is doing less of the heavy lifting.",
-                  "You want to speed up trust from stranger to I have to be in this room. Especially as you push harder into YouTube and content.",
-                  "You don't yet have one documented trust path your team can point at and say: this is how someone goes from first touch to room to continuity.",
+                  'The product is bulletproof.',
+                  'The advocates are stacking in numbers.',
+                  'Credibility is undeniable.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Eye className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
+                    <Check className="w-4 h-4 text-blue-400 mt-1.5 flex-shrink-0" />
+                    <span className="text-white text-lg leading-relaxed font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
+              <p className="text-zinc-500 text-sm italic pl-7">
+                Once you're inside.
+              </p>
+            </div>
+
+            <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-10">
+              <p>
+                But making that known to the public is where the greatest opportunity exists.
+              </p>
+              <p>
+                With CAC increasing, the solution is to build a simple path from getting someone's attention, to them knocking down your door for access.
+              </p>
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+              <p className="text-blue-400 font-semibold text-sm mb-3">The gap</p>
+              <p className="text-white text-base leading-relaxed font-medium">
+                A simple strategy, with a repeatable cycle that makes content more effective, easier to make, and faster to build trust.
+              </p>
             </div>
           </Section>
         </div>
