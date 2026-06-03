@@ -37,10 +37,15 @@ export default function Undeniable() {
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Undeniable · 90 Day Authority Engine</p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-5">
-                Build a trust ecosystem to take the right people from cold to sold.
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Proposal</p>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
+                The Undeniable
+                <br />
+                Authority Engine.
               </h1>
+              <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl mb-4">
+                Engineer trust at scale, and move the right people from cold to sold every month.
+              </p>
               <p className="text-zinc-500 text-base md:text-lg leading-relaxed max-w-2xl">
                 So Undeniable becomes the obvious choice for the ideal market.
               </p>
@@ -165,7 +170,7 @@ export default function Undeniable() {
             </h3>
             <ul className="space-y-4 max-w-3xl mb-10">
               {[
-                'A documented, simple cold to warm to room to continuity path we both agree on.',
+                'A documented, simple cold to warm to workshop to continuity path we both agree on.',
                 'A 4 or 6 week content cycle we can easily run.',
                 "An agreed % of new room buyers coming through the new path, with a notable shortening of those putting their hand up when asked: how many people first heard about me in the past 3 months.",
                 'An agreed number of qualified booked calls from content.',
@@ -355,17 +360,20 @@ export default function Undeniable() {
                 </div>
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                   <p>
-                    Brand Day intensive. One in person session with you and your creative director. Four to six hours. We extract the genius. The founder beliefs, the contrarian takes, the stories, the lens. The entire engine runs from this.
+                    Brand Day intensive. One in person session with you and your creative director. Four to six hours. Two hours with you. The rest with your content lead.
                   </p>
                   <p>
-                    We document the brand, map the cycles to the demand they need to create, and agree the success metrics for the 90 days.
+                    We extract the genius. The founder beliefs, contrarian takes, the stories. Everything gets built and documented live. The entire engine runs from this.
+                  </p>
+                  <p>
+                    This is where we build your customer journey, craft your plan, and map your core pillar videos.
                   </p>
                 </div>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase 1</p>
                 <ul className="space-y-2">
                   {[
                     'A documented brand. Voice, positioning, category lens, contrarian takes.',
-                    'A Customer Journey Map. Cold to warm to room to continuity.',
+                    'A Customer Journey Map. Cold to warm to workshop to continuity.',
                     'The shape of the monthly demand cycle, mapped to your workshop calendar.',
                     'Agreed success metrics for the 90 days.',
                   ].map((item, i) => (
@@ -382,7 +390,7 @@ export default function Undeniable() {
                 <div className="flex items-center gap-3 mb-4">
                   <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">02</p>
                   <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 02 · Install · Weeks 1–3</p>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 02 · Install · Weeks 1–4</p>
                     <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                       Wrap the engine around your next workshop.
                     </h3>
@@ -390,10 +398,10 @@ export default function Undeniable() {
                 </div>
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                   <p>
-                    One 60 minute call per week for three weeks with your creative director. Founder joins if desired.
+                    One 60 minute call per week with your creative director. Founder welcome.
                   </p>
                   <p>
-                    Short form, long form, lead magnets, the Trojan Horse VSL, and the Media Operating System get built and wired up. The first cycle wraps around your next workshop so we test it live, not in theory.
+                    Short form, long form, lead magnets, the Trojan Horse VSL, and the Media Operating System get built and wired up. The first cycle wraps around your next workshop so we test it live.
                   </p>
                 </div>
               </div>
@@ -403,9 +411,9 @@ export default function Undeniable() {
                 <div className="flex items-center gap-3 mb-4">
                   <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">03</p>
                   <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 03 · Tune · Weeks 4–12</p>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 03 · Tune · Weeks 5–12</p>
                     <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
-                      Tune on real data. Codify the cycle.
+                      Tune the engine based on data.
                     </h3>
                   </div>
                 </div>
@@ -458,7 +466,7 @@ export default function Undeniable() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
               <p className="text-blue-400 font-semibold text-sm mb-3">First goal</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Make Undeniable so strong in the current market that the next market pulls you in. We then supply based on demand. Not just to get cheaper CAC.
+                Make Undeniable so strong in the current market that the next market pulls you in. We then supply based on demand. That way, CAC naturally will decrease.
               </p>
             </div>
           </Section>
@@ -478,7 +486,7 @@ export default function Undeniable() {
               <span className="text-zinc-500">do the talking.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              You're on the verge of a heavy word of mouth phase. Lots more clients whose story rhymes. Lots more social proof.
+              You're on the verge of a heavy word of mouth phase. Compounding social proof.
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 mb-10">
@@ -514,9 +522,14 @@ export default function Undeniable() {
               ))}
             </div>
 
-            <p className="text-zinc-300 text-base leading-relaxed max-w-3xl font-medium">
-              The aim. Your clients do more of the talking. The trust ecosystem feels like a self fulfilling prophecy, not paid traffic on life support.
-            </p>
+            <div className="space-y-5 text-zinc-300 leading-relaxed max-w-3xl">
+              <p>
+                Advocates aren't trackable. Whether they're shown in content, or spoken about when you're not in the room.
+              </p>
+              <p className="font-medium">
+                Word of mouth from building a killer product that increases perceived status and enforces an identity is the invisible hand that compounds over time.
+              </p>
+            </div>
           </Section>
         </div>
       </section>
@@ -548,7 +561,7 @@ export default function Undeniable() {
                 {
                   icon: Compass,
                   title: 'Customer Journey Map',
-                  description: 'Cold to room to continuity. The trust path your team executes against.',
+                  description: 'Cold to workshop to continuity. The trust path your team executes against.',
                 },
                 {
                   icon: Layers,
@@ -603,7 +616,7 @@ export default function Undeniable() {
 
             <div className="mt-10 p-6 bg-surface border border-zinc-800/50 rounded-2xl max-w-3xl">
               <p className="text-zinc-400 text-sm leading-relaxed">
-                Want to see how I am thinking about your specific channels? Read the working notes →{' '}
+                How I'm currently assessing the existing channels —{' '}
                 <a href="/undeniable-notes" className="text-blue-400 hover:text-blue-300 transition-colors">
                   /undeniable-notes
                 </a>
@@ -621,9 +634,9 @@ export default function Undeniable() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">09 · How we work</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Roles. Cadence.
+              Roles.
               <br />
-              <span className="text-zinc-500">Fee.</span>
+              <span className="text-zinc-500">Cadence.</span>
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-12">
@@ -632,7 +645,7 @@ export default function Undeniable() {
                 <p className="text-blue-400 font-semibold text-sm mb-4">My role</p>
                 <ul className="space-y-3">
                   {[
-                    'Design the Authority Engine. The three elements, the monthly cycle, and the cadence around your workshops.',
+                    'Design the Authority Engine. The core elements, monthly cycle, and cadence around your workshops.',
                     'Advise on hooks, formats, lead magnets, and longform structure. Not write or edit everything.',
                     'Read the data with you. Suggest next best moves.',
                     'Show up at your monthly workshop to teach, debrief, and test the strategy live in the room.',
@@ -668,17 +681,16 @@ export default function Undeniable() {
               <p className="text-zinc-400 leading-relaxed mb-5">For the 90 days, we test how we work together by:</p>
               <ul className="space-y-3 mb-5">
                 {[
-                  "Me getting a segment at each monthly workshop to teach or debrief the system.",
-                  "Using those sessions as content and feedback loops. What lands. What confuses the room.",
+                  "Having a segment at each monthly workshop to teach or coach.",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
               <p className="text-zinc-300 text-sm leading-relaxed font-medium">
-                This gives me reps on your stage and lets us see, in real time, how the strategy lands with your people.
+                This gives me reps on your stage and lets us see in real time how my philosophies land with your people.
               </p>
             </div>
 
@@ -708,12 +720,13 @@ export default function Undeniable() {
               </div>
               <div className="glow-card p-8">
                 <p className="text-blue-400 font-semibold text-sm mb-1">Phase 03 · Tune</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 4 to 12</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 5 to 12</p>
                 <ul className="space-y-2">
                   {[
                     '1x 60 minute call per fortnight with you and your CD.',
                     '1x Operator Clinic per fortnight for implementation questions.',
                     'Up to 1 Loom per week for asset review.',
+                    '24 hour feedback via WhatsApp.',
                     'One stage segment at each monthly workshop.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -725,20 +738,42 @@ export default function Undeniable() {
               </div>
             </div>
 
-            {/* Fee */}
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Fee & structure</p>
-            <div className="glow-card border-blue-500/20 p-8">
-              <div className="space-y-4 text-zinc-400 leading-relaxed">
-                <p className="text-white text-base font-medium">
-                  AUD $30,000 across 90 days. Includes the Brand Day intensive.
-                </p>
-                <p className="text-zinc-400 text-sm">
-                  Split $15,000 on signing and $15,000 on Day 31. Day 31 only flows if you show up, your team executes, and we are hitting or trending toward what we agreed in Phase 1.
-                </p>
-                <p className="text-zinc-500 text-sm pt-2 border-t border-zinc-800/50">
-                  At Day 90 we both decide. Continue in advisory. Go deeper. Or shake hands and move on.
-                </p>
-              </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 10 · WHAT THIS IS NOT */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">10 · What this is not</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Boundaries.
+              <br />
+              <span className="text-zinc-500">So we both stay sharp.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
+              For clarity on both sides.
+            </p>
+
+            <div className="glow-card p-8 md:p-10 max-w-3xl">
+              <ul className="space-y-5">
+                {[
+                  'This is not a done for you content agency. Your team implements. I design, advise, and read the data with you.',
+                  'This is not a guarantee of revenue or attendance. We agree the metrics. We test. The data tells us what worked.',
+                  'This is not full time CMO services. I show up for the cadence we agreed. Not in your inbox at 11pm.',
+                  'This is not a content factory. I do not write or edit every script. Your team produces.',
+                  'This is not a media buying service. We design what gets boosted. Your team runs the spend.',
+                  'This is not a forever contract. At Day 90 we both pick.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <X className="w-5 h-5 text-zinc-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                    <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Section>
         </div>
@@ -746,11 +781,11 @@ export default function Undeniable() {
 
       <div className="gradient-line" />
 
-      {/* 09 · DAY 90 DECISION */}
+      {/* 11 · DAY 90 DECISION */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">10 · What happens at Day 90</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">11 · What happens at Day 90</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               We sit down.
               <br />
@@ -803,11 +838,6 @@ export default function Undeniable() {
               ))}
             </div>
 
-            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-white text-base leading-relaxed font-medium">
-                No pressure either way. The 90 days are about testing the system and the fit.
-              </p>
-            </div>
           </Section>
         </div>
       </section>
@@ -820,22 +850,24 @@ export default function Undeniable() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
-              You are already doing the hard part.
+              You're 80% of the way there.
             </h2>
             <p className="text-zinc-400 mb-3 leading-relaxed">
-              Filling and leading the room.
+              You've built a killer product. And a wicked team.
             </p>
             <p className="text-zinc-400 mb-10 leading-relaxed">
               My job is to build the trust ecosystem that keeps it full without you becoming a full time creator.
             </p>
             <a
-              href="mailto:sean@authorityengine.com.au?subject=Undeniable%20Authority%20Engine"
+              href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
             >
               Book the working session
               <ArrowRight className="w-4 h-4" />
             </a>
-            <p className="text-zinc-600 text-sm mt-6">30 to 45 minutes. We walk through your current room, events, and media. If it is a fit, we lock dates. If not, I tell you straight.</p>
+            <p className="text-zinc-600 text-sm mt-6">30 to 45 minutes. We walk through logistics, build the plan. If it is a fit, we lock dates. If not, I tell you.</p>
             <p className="text-zinc-600 text-sm mt-8">
               <a href="/undeniable-notes" className="text-blue-400 hover:text-blue-300 transition-colors">
                 Read the working notes →
