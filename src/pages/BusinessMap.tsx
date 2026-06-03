@@ -248,19 +248,43 @@ export default function BusinessMap() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Match the brand
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Build the engine for the top 1%.
               <br />
-              <span className="text-zinc-500">to the capability.</span>
+              <span className="text-zinc-500">Use it to lift the next wave.</span>
             </h2>
-            <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl">
-              <p>
-                For 7 and 8 figure founders, coaches, and consultants who have already done the work. The Authority Engine turns reputation, expertise, and proof into a content system your team can run.
+
+            <div className="glow-card p-8 md:p-10 mb-8">
+              <p className="text-zinc-300 text-base md:text-lg leading-relaxed mb-6">
+                <span className="text-white font-semibold">Mission:</span> Build the media operating system for 7 and 8 figure founders. And the ladder for the operators and creatives who run it.
               </p>
-              <p>
-                Brand. Content. Scale. Without you becoming a full time creator.
-              </p>
+              <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
+                <p>I help the best founders in the world turn content into revenue and reputation.</p>
+                <p>Their revenue funds the tools, training, and career paths that make it easier for the next wave of operators and creatives to win.</p>
+              </div>
             </div>
+
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div className="glow-card p-6">
+                <Crown className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Founders</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get operator run media engines that print trust and pipeline.</p>
+              </div>
+              <div className="glow-card p-6">
+                <GraduationCap className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Operators and creatives</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get trained, placed, and paid well.</p>
+              </div>
+              <div className="glow-card p-6">
+                <Database className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Playbooks and software</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Sit in the middle and create leverage for everyone.</p>
+              </div>
+            </div>
+
+            <p className="text-zinc-500 text-sm leading-relaxed mt-8">
+              Revenue is the fuel. The Authority Engine is the vehicle.
+            </p>
           </Section>
         </div>
       </section>
