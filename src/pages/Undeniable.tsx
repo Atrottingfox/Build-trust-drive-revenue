@@ -31,34 +31,24 @@ export default function Undeniable() {
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
-      {/* HERO */}
+      {/* Hero */}
       <section className="pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">For Undeniable · Diagnostic & 90 day install</p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
-                Install a trust path that takes cold fitness coaches from stranger to sold in 90 days.
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">For Undeniable</p>
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
+                The Undeniable
                 <br />
-                <span className="text-zinc-500">And makes Undeniable the obvious category king for 7 figure online PTs.</span>
+                <span className="text-zinc-500">Authority Engine.</span>
               </h1>
-              <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
-                We design and install one repeatable sequence of content, lead assets, and event touchpoints that speeds up trust, fills the room with the right PTs, and moves more of them into continuity. Your team knows exactly how people go from never heard of you to I have to be in this room.
+              <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mb-3">
+                90 Day Install.
               </p>
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">In 90 days, you'll have</p>
-              <ul className="space-y-3 max-w-2xl">
-                {[
-                  'A single, documented cold to warm to room to continuity path your team can point at.',
-                  'A 90 day publishing and lead asset plan tuned for trust, not just views.',
-                  'A scoreboard that tells you if the trust path is working, instead of guessing off vibes.',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm md:text-base leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
+                A media operating system wrapped around your room. Designed to make Undeniable the category king for 7 figure online PTs and fitness founders. Then let demand tell us where it goes next.
+              </p>
             </div>
           </Section>
         </div>
