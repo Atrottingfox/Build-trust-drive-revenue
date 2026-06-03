@@ -37,7 +37,7 @@ export default function Undeniable() {
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Proposal</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Plan</p>
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 The Undeniable
                 <br />

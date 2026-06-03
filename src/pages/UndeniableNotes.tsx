@@ -24,8 +24,8 @@ export default function UndeniableNotes() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Working Notes for Undeniable"
-        description="Current channel overview, gaps, and specific improvements. Non-prescriptive draft for discussion."
+        title="Channel & content overview for Undeniable"
+        description="Where the brand is. The gaps that exist. The specific improvements I would test inside the first 90 days. Non prescriptive, for discussion."
         path="/undeniable-notes"
         noIndex
       />
@@ -47,7 +47,7 @@ export default function UndeniableNotes() {
               <span className="text-blue-400 text-xs font-medium italic">Non prescriptive · for discussion</span>
             </div>
             <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
-              My current read on where the content is, the gaps I see, and the specific improvements I would test inside the first 90 days. The real install gets built together in Phase 1.
+              My analysis on where the brand is, the gaps that exist, and the specific improvements I'd test inside the first 90 days. This is the starting point for our Brand Day discussion. What we'll actually craft together.
             </p>
           </Section>
         </div>
@@ -61,14 +61,14 @@ export default function UndeniableNotes() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Current overview</p>
             <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-6">
-              Where the channels sit today.
+              How trust is built today.
             </h2>
             <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                Instagram is the primary distribution channel. Strong founder presence, recognisable face, consistent posting rhythm. YouTube is light — early uploads, a few longer pieces, not yet running as a planned cycle. Email is in place but not loaded as a trust transfer channel.
+                Instagram is the primary distribution channel. Strong founder presence, recognition is growing, strong brand aesthetic, consistent posting rhythm. YouTube is light. Early uploads, a few longer pieces, not yet running as a planned cycle. Email is utilised but additional trust assets can be leveraged. A core demand cycle campaign could help.
               </p>
               <p>
-                The room and workshop calendar carries the conversion. Most buyers come from warm. Cold to warm to room is mostly happening inside DMs and inside the workshop itself, not the content layer.
+                The workshop calendar is the core mechanism for building deep trust. Most buyers come in from warm. Many taking 6+ months to warm up. Even when people walk through the doors, the workshop itself is still doing the heavy lifting.
               </p>
             </div>
           </Section>
@@ -87,11 +87,11 @@ export default function UndeniableNotes() {
             </h2>
             <ul className="space-y-4">
               {[
-                'Strong, clear avatar. 7 figure online PTs and fitness founders. No ambiguity about who you are talking to.',
-                "Real results in the room. Continuity model holds. Members compound across cycles.",
-                "Active testimonial flow and a heavy word of mouth phase about to kick in.",
-                "Founder voice is recognisable. Identity is locked. No identity crisis to solve.",
-                "Workshop calendar is consistent. That gives us a natural rhythm to wrap the content cycle around.",
+                "Strong, clear avatar. 6 to 7 figure online PTs and fitness founders. No ambiguity about who you are talking to and who it's for. Immediate identity alignment.",
+                "Genuine results exist within each workshop. The continuity model stacks a solid long tail. Members continue to let revenue compound across cycles.",
+                "Active testimonial flow baked into the system with a heavy word of mouth phase about to kick in.",
+                "Founder voice is building recognition. Identity and aesthetic is strong. Story is being built.",
+                "Workshop calendar is consistent and gives us a natural rhythm to wrap the content cycle around.",
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
@@ -111,7 +111,7 @@ export default function UndeniableNotes() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Gaps</p>
             <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Where the leverage is sitting unused.
+              Where leverage is being lost.
             </h2>
 
             <div className="space-y-10">
@@ -119,15 +119,11 @@ export default function UndeniableNotes() {
               <div>
                 <div className="flex items-baseline gap-3 mb-3">
                   <span className="font-display text-2xl font-extrabold text-blue-400">01</span>
-                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Niche · one core message</h3>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Messaging</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed mb-4">
-                  Targeting fitness founders is strong. But the core message is not yet dialled identically across every channel. Instagram says one thing. YouTube says a slightly different thing. DMs land another way.
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  Targeting online coaches (for right now) is killer. Simple. Clean. Immediately identifiable. But the core message is not yet dialled across multiple channels. IG vs YouTube has disparity.
                 </p>
-                <div className="border-l-2 border-blue-500/40 pl-5 py-2">
-                  <p className="text-zinc-500 text-sm italic mb-2">Potential option to discuss / test</p>
-                  <p className="text-zinc-300 text-sm leading-relaxed">For fitness founders who want to build a 7 figure business worth selling. Or who want their training business to outgrow their hours.</p>
-                </div>
               </div>
 
               {/* Gap 2 */}
@@ -136,11 +132,8 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">02</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Video length and depth</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed mb-3">
-                  Short videos can struggle to rank for competitive search terms and are less likely to surface via recommendation. They also can't build the depth of trust that gets someone to take action.
-                </p>
                 <p className="text-zinc-400 text-base leading-relaxed">
-                  Top content in this space runs 20 to 50+ minutes. Longer content generates more watch time, which the algorithm rewards. Right now this depth layer is missing.
+                  Short videos struggle to build true depth and trust with the audience. Top content in this space runs 20 to 40+ minutes. Longer content generates more watch time, which the algorithm rewards, and the audience often requires. Not all videos must be lengthy, but core pillar videos should.
                 </p>
               </div>
 
@@ -150,8 +143,11 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">03</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Titles and hooks · specificity</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
-                  Titles and hooks should be specific, credibility anchored, and reinforced in the first 30 seconds. Only things you can say. Undeniable evidence. Right now the highest performing angles are not getting weaponised into titles consistently.
+                <p className="text-zinc-400 text-base leading-relaxed mb-3">
+                  Titles and hooks should be specific, credibility anchored, and reinforced, whether used across Instagram or YouTube. Only things you can say. Undeniable evidence. Multiple current opportunities exist within titles that weaponise credibility and craft intrigue for the core market.
+                </p>
+                <p className="text-zinc-500 text-sm leading-relaxed italic">
+                  Specificity includes: experience, data, stories, and of course, avatar.
                 </p>
               </div>
 
@@ -173,7 +169,7 @@ export default function UndeniableNotes() {
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Long form evergreen assets</h3>
                 </div>
                 <p className="text-zinc-400 text-base leading-relaxed">
-                  Right now there are no flagship long videos ranking for broad search terms. A handful of long form evergreen assets funnel viewers into the rest of the content for months or years. The library compounds.
+                  Right now there are no flagship long videos that compound in the background. A handful of long form evergreen assets funnel viewers into the rest of the content for months or years. The library compounds.
                 </p>
               </div>
 
@@ -194,10 +190,10 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">07</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Core evergreen lead magnet trust assets</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-base leading-relaxed mb-3">
                   No small selection of core evergreen lead magnets that get downloaded consistently from videos and posts. These trust assets sit at the back of the nurture sequence and convert intent into action. Right now this layer is mostly missing.
                 </p>
-                <p className="text-zinc-500 text-sm leading-relaxed mt-3 italic">
+                <p className="text-zinc-500 text-sm leading-relaxed italic">
                   Each video should have one lead magnet specific to that video AND one core evergreen lead magnet always available.
                 </p>
               </div>
@@ -222,13 +218,14 @@ export default function UndeniableNotes() {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Immediate</p>
               <ul className="space-y-3">
                 {[
-                  'Rewrite channel descriptions across YouTube and Instagram to clearly state the promise. Anchor in credibility (results delivered, founders served). Lead with what the channel is for, not what you sell.',
+                  'Rewrite core channel descriptions across all YouTube videos with core credibility anchor and story to disarm and clearly state the promise. Anchor in credibility (results delivered, founders served). Lead with what the channel is for, not what is sold.',
+                  'Audit recent video descriptions. Lead with the lead magnet top line, then outline of video, then personal timeline.',
                   'Pin one core evergreen lead magnet at the top of every channel. Same one. Easy to find. Easy to opt in.',
-                  'Audit recent video descriptions. Move sales CTAs below value CTAs. Lead with the lead magnet.',
+                  'Rearrange pinned posts. Story or plane carousel on the left (potential to recreate post and pin updated version) and include lead magnet CTA on the third line. Alex in the middle. Vulnerable or honest video on the right.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -239,18 +236,18 @@ export default function UndeniableNotes() {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Simplified longform strategy</p>
               <ul className="space-y-3">
                 {[
-                  'Produce 2 to 3 longer videos (25 to 40 minutes) that go deep on specific topics for online PTs. These become search evergreen assets.',
+                  'Produce 2 to 3 longer videos (25 to 40 minutes) that go deep on specific topics for online PTs. These become evergreen assets to send to prospects.',
                   'Each long video packages one core lead magnet inside it. Ideally one relevant to the video and one core evergreen always available.',
                   'Build a bank of hyper specific personal stories to illustrate the points. Then a second bank of case studies and client results to reference inside videos as core examples.',
-                  'For case studies, pick avatars with the highest conversion and the highest stick. Specificity of who they are and what they did.',
-                  'Align shorts to main channel positioning. Same message, compressed.',
-                  'Create a 6 or 8 week cycle. Every cycle repeats the same core style of videos to open new audiences, nurture them, and get them into the workshop.',
-                  'Instagram points people toward YouTube WITH its lead magnet. The lead magnet is inside a toolkit with both the YouTube video and the asset.',
-                  'Every video ties back to one core problem solved inside the workshop. Each video includes a CTA toward the next step.',
+                  'For case studies, pick avatars with the highest conversion and the highest stick. Specificity of who they are and what they did. Duplicate your dream client.',
+                  'Create a 6 or 8 week cycle. Every cycle repeats the same core style of videos to open new audiences, nurture them, and get them into a workshop.',
+                  'Instagram points people toward YouTube videos with lead magnets. The lead magnet is inside a toolkit with both the YouTube video and the asset.',
+                  'Every video ties back to one core problem solved inside the workshop.',
+                  'Each video includes a logical next step toward the VSL (which we will craft).',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -261,14 +258,14 @@ export default function UndeniableNotes() {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Titles and hooks</p>
               <ul className="space-y-3">
                 {[
-                  'Inject specific credibility, numbers, and outcomes. "94% of the 376 fitness founders I audited were doing X wrong."',
-                  'Use the "If I were starting from zero, I would do this" title.',
-                  'Lead with personal story + result. "How I built a $X room with 100% retention in 6 months — the actual play."',
+                  'Inject specific credibility, numbers, and outcomes.',
+                  'Utilise the "If I..." and "How I..." frame.',
+                  'Lead with personal story plus result.',
                   'Anchor specificity in the first 30 seconds of every video. Names. Numbers. Time frames. Lock the credibility before the content.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -279,14 +276,13 @@ export default function UndeniableNotes() {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Growth opportunities</p>
               <ul className="space-y-3">
                 {[
-                  'Pursue 1 to 2 collaboration videos with known names in adjacent spaces. Borrow audiences. Borrow authority.',
-                  'Take a stance on the current state of the fitness coaching industry. The demand pocket for "how to actually build a sellable training business" is wide open because nobody with the credibility owns it.',
-                  'Podcast option. Bring guests into the room. Either talk shop with them, or do the install on them and document it. Use the industry advantages nobody else has.',
+                  'Pursue 2 to 3 collaboration videos with known names in adjacent spaces. Offer to help them grow their brand. Fly to them, audit or consult. Crack open new audiences. Borrow authority. Build credibility.',
+                  'Take a stance on the current state of the fitness coaching industry.',
                   'Member spotlight rotation. Each cycle features one member journey at depth. Their words, their results, on your channel.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -303,14 +299,14 @@ export default function UndeniableNotes() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <p className="text-zinc-400 mb-10 leading-relaxed text-lg">
-              This is not the install. We would build the real thing together. But it should give you a sense of how I think about your specific channels, and what the next 90 days would actually look like.
+              This is not the install. We would build the actual thing together. But it should give you a sense of how I think about your specific channels, and what the next 90 days would actually look like.
             </p>
             <a
               href="/undeniable"
               className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to the proposal
+              Back to the 90 day plan
             </a>
           </Section>
         </div>
