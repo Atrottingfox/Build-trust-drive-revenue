@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowLeft, Compass, Video, Target, Check, Calendar, Layers, Eye, Megaphone, Mic, BookOpen } from 'lucide-react';
+import { ArrowLeft, Check, AlertCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
@@ -25,26 +25,50 @@ export default function UndeniableNotes() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Working Notes for Undeniable"
-        description="Draft trust path sketch for Undeniable. Working notes. Not the install."
+        description="Current channel overview, gaps, and specific improvements. Non-prescriptive draft for discussion."
         path="/undeniable-notes"
         noIndex
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      <section className="pt-32 pb-12 md:pt-40 md:pb-16">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
-            <div className="max-w-3xl">
-              <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Appendix · Working notes</p>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
-                Draft trust path sketch
-                <br />
-                <span className="text-zinc-500">for Undeniable.</span>
-              </h1>
-              <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl">
-                This is not the install. It is a working sketch. My read on where the leverage points are for Undeniable, and a glimpse of what a 6 week cycle could look like. We would build the real thing together in Phase 1.
+            <div className="accent-line mb-8" />
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Appendix · Working notes</p>
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
+              Channel & content overview
+              <br />
+              <span className="text-zinc-500">for Undeniable.</span>
+            </h1>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 mb-8">
+              <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-blue-400 text-xs font-medium italic">Non prescriptive · for discussion</span>
+            </div>
+            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+              My current read on where the content is, the gaps I see, and the specific improvements I would test inside the first 90 days. The real install gets built together in Phase 1.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* CURRENT OVERVIEW */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Current overview</p>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-6">
+              Where the channels sit today.
+            </h2>
+            <div className="space-y-4 text-zinc-400 leading-relaxed">
+              <p>
+                Instagram is the primary distribution channel. Strong founder presence, recognisable face, consistent posting rhythm. YouTube is light — early uploads, a few longer pieces, not yet running as a planned cycle. Email is in place but not loaded as a trust transfer channel.
+              </p>
+              <p>
+                The room and workshop calendar carries the conversion. Most buyers come from warm. Cold to warm to room is mostly happening inside DMs and inside the workshop itself, not the content layer.
               </p>
             </div>
           </Section>
@@ -53,112 +77,129 @@ export default function UndeniableNotes() {
 
       <div className="gradient-line" />
 
-      {/* WHAT TO DO WITH THIS DOC */}
+      {/* GOOD */}
       <section className="py-16 md:py-20">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
-            <div className="glow-card p-8 md:p-10 max-w-3xl">
-              <p className="text-blue-400 font-semibold text-sm mb-4">What this doc is</p>
-              <div className="space-y-4 text-zinc-400 leading-relaxed">
-                <p>Three sections.</p>
-                <p><span className="text-white font-semibold">A.</span> A tight read on the gaps and where the opportunity sits.</p>
-                <p><span className="text-white font-semibold">B.</span> A skeleton of what a 6 week cycle could look like for Undeniable. The shape, not the titles.</p>
-                <p><span className="text-white font-semibold">C.</span> A 10 question diagnostic checklist you can run yourself.</p>
-                <p className="text-zinc-500 text-sm pt-2 border-t border-zinc-800/50">
-                  We would build the real install together. This is a sketch.
-                </p>
-              </div>
-            </div>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Good</p>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              What's clearly working.
+            </h2>
+            <ul className="space-y-4">
+              {[
+                'Strong, clear avatar. 7 figure online PTs and fitness founders. No ambiguity about who you are talking to.',
+                "Real results in the room. Continuity model holds. Members compound across cycles.",
+                "Active testimonial flow and a heavy word of mouth phase about to kick in.",
+                "Founder voice is recognisable. Identity is locked. No identity crisis to solve.",
+                "Workshop calendar is consistent. That gives us a natural rhythm to wrap the content cycle around.",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+                  <span className="text-zinc-400 text-base leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </Section>
         </div>
       </section>
 
       <div className="gradient-line" />
 
-      {/* A. GAPS & OPPORTUNITIES */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      {/* GAPS */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">A · Gaps & opportunities</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Three gaps.
-              <br />
-              <span className="text-zinc-500">Three opportunities.</span>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Gaps</p>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Where the leverage is sitting unused.
             </h2>
 
-            <div className="space-y-8">
+            <div className="space-y-10">
               {/* Gap 1 */}
-              <div className="glow-card p-8 md:p-10">
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Gap 01</p>
-                <h3 className="font-display text-xl md:text-2xl font-extrabold text-white mb-4 leading-tight">
-                  No single written cold → room → continuity map.
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                  Every campaign starts from scratch. Every hook is a fresh guess. The team can describe what they did last time, but not why, or what each piece was supposed to do.
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">01</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Niche · one core message</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed mb-4">
+                  Targeting fitness founders is strong. But the core message is not yet dialled identically across every channel. Instagram says one thing. YouTube says a slightly different thing. DMs land another way.
                 </p>
-                <p className="text-blue-400 font-semibold text-sm mb-2">Opportunity</p>
-                <p className="text-zinc-300 text-sm leading-relaxed">
-                  One pager that every future campaign gets checked against. Before any post goes out, the question becomes "where on the path does this live?" Marketing decisions stop being subjective.
-                </p>
+                <div className="border-l-2 border-blue-500/40 pl-5 py-2">
+                  <p className="text-zinc-500 text-sm italic mb-2">Potential option to discuss / test</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed">For fitness founders who want to build a 7 figure business worth selling. Or who want their training business to outgrow their hours.</p>
+                </div>
               </div>
 
               {/* Gap 2 */}
-              <div className="glow-card p-8 md:p-10">
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Gap 02</p>
-                <h3 className="font-display text-xl md:text-2xl font-extrabold text-white mb-4 leading-tight">
-                  Client stories are under leveraged.
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                  You have winners. The room is producing real results. But those results are mostly screenshots in Slack and the occasional tagged post. They should be doing more work.
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">02</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Video length and depth</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed mb-3">
+                  Short videos can struggle to rank for competitive search terms and are less likely to surface via recommendation. They also can't build the depth of trust that gets someone to take action.
                 </p>
-                <p className="text-blue-400 font-semibold text-sm mb-4">Opportunity</p>
-                <p className="text-zinc-300 text-sm leading-relaxed mb-4">
-                  Turn 3 to 5 of your best recent winners into:
-                </p>
-                <ul className="space-y-2">
-                  {[
-                    "1 flagship video breakdown. Their journey, on your channel.",
-                    '1 written case study. The version you can paste into a DM or a sales doc.',
-                    '1 room only "here\'s what\'s possible" story block. Used to lift existing members and convert new ones.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-zinc-500 text-sm leading-relaxed mt-5">
-                  These become the highest leverage assets in your library. They sell the room without selling.
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  Top content in this space runs 20 to 50+ minutes. Longer content generates more watch time, which the algorithm rewards. Right now this depth layer is missing.
                 </p>
               </div>
 
               {/* Gap 3 */}
-              <div className="glow-card p-8 md:p-10">
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Gap 03</p>
-                <h3 className="font-display text-xl md:text-2xl font-extrabold text-white mb-4 leading-tight">
-                  Hooks live in people's heads.
-                </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
-                  When something works, the team feels it. But there is no place where the best angles are written down, sorted, and re used. So the same insights get rediscovered every campaign.
-                </p>
-                <p className="text-blue-400 font-semibold text-sm mb-4">Opportunity</p>
-                <p className="text-zinc-300 text-sm leading-relaxed mb-4">
-                  A simple Hook Bank with three buckets.
-                </p>
-                <div className="grid md:grid-cols-3 gap-4 mt-6">
-                  <div className="border border-zinc-800/50 rounded-xl p-5 bg-black/30">
-                    <p className="text-white font-semibold text-sm mb-2">Why now</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">Tension around what is shifting in the market that makes the room urgent.</p>
-                  </div>
-                  <div className="border border-zinc-800/50 rounded-xl p-5 bg-black/30">
-                    <p className="text-white font-semibold text-sm mb-2">Why Rhys</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">Founder beliefs, contrarian takes, why your approach works when others do not.</p>
-                  </div>
-                  <div className="border border-zinc-800/50 rounded-xl p-5 bg-black/30">
-                    <p className="text-white font-semibold text-sm mb-2">Why this room</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">What makes Undeniable structurally different from a course, a community, or a generic mastermind.</p>
-                  </div>
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">03</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Titles and hooks · specificity</h3>
                 </div>
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  Titles and hooks should be specific, credibility anchored, and reinforced in the first 30 seconds. Only things you can say. Undeniable evidence. Right now the highest performing angles are not getting weaponised into titles consistently.
+                </p>
+              </div>
+
+              {/* Gap 4 */}
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">04</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Social proof and collaboration</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  Your client stories are under leveraged. Building in live interactive videos with members, plus structured collaboration with adjacent voices, multiplies trust without adding founder hours.
+                </p>
+              </div>
+
+              {/* Gap 5 */}
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">05</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Long form evergreen assets</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  Right now there are no flagship long videos ranking for broad search terms. A handful of long form evergreen assets funnel viewers into the rest of the content for months or years. The library compounds.
+                </p>
+              </div>
+
+              {/* Gap 6 */}
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">06</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">CTAs · sales first vs value first</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  When the first line of every description points cold viewers straight at the offer, it triggers defensive pattern recognition. Value first CTAs that lead through a lead magnet land harder for cold audiences.
+                </p>
+              </div>
+
+              {/* Gap 7 */}
+              <div>
+                <div className="flex items-baseline gap-3 mb-3">
+                  <span className="font-display text-2xl font-extrabold text-blue-400">07</span>
+                  <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Core evergreen lead magnet trust assets</h3>
+                </div>
+                <p className="text-zinc-400 text-base leading-relaxed">
+                  No small selection of core evergreen lead magnets that get downloaded consistently from videos and posts. These trust assets sit at the back of the nurture sequence and convert intent into action. Right now this layer is mostly missing.
+                </p>
+                <p className="text-zinc-500 text-sm leading-relaxed mt-3 italic">
+                  Each video should have one lead magnet specific to that video AND one core evergreen lead magnet always available.
+                </p>
               </div>
             </div>
           </Section>
@@ -167,131 +208,89 @@ export default function UndeniableNotes() {
 
       <div className="gradient-line" />
 
-      {/* B. SAMPLE 6 WEEK CYCLE */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+      {/* SPECIFIC IMPROVEMENTS */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">B · Sample 6 week cycle</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              The shape.
-              <br />
-              <span className="text-zinc-500">Not the titles.</span>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Specific improvements</p>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              What I would test inside 90 days.
             </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              This is what a 6 week cycle could look like. Each week is a job to be done. The actual hooks, titles, and CTAs get written together in Phase 1.
-            </p>
 
-            <div className="space-y-4 mb-10">
-              {[
-                {
-                  week: 'Week 1',
-                  icon: Eye,
-                  job: 'Belief shift',
-                  description: 'Big belief shift about what "real business" looks like for PTs.',
-                },
-                {
-                  week: 'Week 2',
-                  icon: Video,
-                  job: 'Behind the scenes + journey',
-                  description: 'Behind the scenes of the room. Plus one client journey, told properly.',
-                },
-                {
-                  week: 'Week 3',
-                  icon: Target,
-                  job: 'Tactical breakdown',
-                  description: '"How we fixed X bottleneck" for one specific member. Mechanism visible.',
-                },
-                {
-                  week: 'Week 4',
-                  icon: Megaphone,
-                  job: 'Day in the room + soft invite',
-                  description: '"Day in the room" recap content. Soft invite at the close.',
-                },
-                {
-                  week: 'Week 5',
-                  icon: Layers,
-                  job: 'Myth bust + proof',
-                  description: 'Service or delivery myth busting, with a live example from the room.',
-                },
-                {
-                  week: 'Week 6',
-                  icon: Check,
-                  job: 'Results + hard invite',
-                  description: 'Results montage. Hard invite to the next room.',
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-6 md:p-8"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-                    <div className="flex items-center gap-3 sm:w-40 sm:flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                      <span className="text-zinc-500 text-sm font-medium uppercase tracking-widest">{item.week}</span>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-white font-semibold mb-1">{item.job}</p>
-                      <p className="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                A note on this. The cycle runs as a loop. Week 6 hands back into Week 1 with a refreshed belief shift, informed by what the previous cycle taught us. Compound effect happens by Cycle 3.
-              </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* C. DIAGNOSTIC CHECKLIST */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">C · Diagnostic checklist</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Ten questions.
-              <br />
-              <span className="text-zinc-500">Run them on yourself.</span>
-            </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              A short audit of your current trust path. The more yeses, the less work the install has to do.
-            </p>
-
-            <div className="glow-card p-8 md:p-10">
-              <ul className="space-y-5">
+            {/* Immediate */}
+            <div className="mb-12">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Immediate</p>
+              <ul className="space-y-3">
                 {[
-                  'Can someone land on your Instagram today and, in 10 posts, understand who you are for, what you do, and why now?',
-                  'Do you have at least 3 client stories you would be happy to boost as ads tomorrow?',
-                  'Does your team know which lead magnet to use at each stage of a launch without asking you?',
-                  'Can you name the single biggest belief shift your audience needs to make before they buy?',
-                  'Is there a documented trust path from first touch to room to continuity that someone new on the team could follow?',
-                  'Do you have a written list of hooks and angles that consistently work, ranked by performance?',
-                  'When someone watches a YouTube video, is there a clear next step that does not depend on them sending a DM?',
-                  'Do you have a way to track which content sourced your last 10 room buyers?',
-                  'Could someone hand off your content creation to a trained operator without losing your voice?',
-                  'Is there a regular weekly scorecard your team fills out without prompting?',
+                  'Rewrite channel descriptions across YouTube and Instagram to clearly state the promise. Anchor in credibility (results delivered, founders served). Lead with what the channel is for, not what you sell.',
+                  'Pin one core evergreen lead magnet at the top of every channel. Same one. Easy to find. Easy to opt in.',
+                  'Audit recent video descriptions. Move sales CTAs below value CTAs. Lead with the lead magnet.',
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <span className="text-blue-400 font-display font-extrabold text-sm flex-shrink-0 w-6 mt-0.5">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <p className="text-zinc-500 text-sm leading-relaxed mt-8 max-w-3xl">
-              Honest count. If under 4 yeses, the install has real ground to cover. If 4 to 7, we are tuning what's already there. If 8+, we are sharpening, not building.
-            </p>
+            {/* Simplified longform strategy */}
+            <div className="mb-12">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Simplified longform strategy</p>
+              <ul className="space-y-3">
+                {[
+                  'Produce 2 to 3 longer videos (25 to 40 minutes) that go deep on specific topics for online PTs. These become search evergreen assets.',
+                  'Each long video packages one core lead magnet inside it. Ideally one relevant to the video and one core evergreen always available.',
+                  'Build a bank of hyper specific personal stories to illustrate the points. Then a second bank of case studies and client results to reference inside videos as core examples.',
+                  'For case studies, pick avatars with the highest conversion and the highest stick. Specificity of who they are and what they did.',
+                  'Align shorts to main channel positioning. Same message, compressed.',
+                  'Create a 6 or 8 week cycle. Every cycle repeats the same core style of videos to open new audiences, nurture them, and get them into the workshop.',
+                  'Instagram points people toward YouTube WITH its lead magnet. The lead magnet is inside a toolkit with both the YouTube video and the asset.',
+                  'Every video ties back to one core problem solved inside the workshop. Each video includes a CTA toward the next step.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Titles and hooks */}
+            <div className="mb-12">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Titles and hooks</p>
+              <ul className="space-y-3">
+                {[
+                  'Inject specific credibility, numbers, and outcomes. "94% of the 376 fitness founders I audited were doing X wrong."',
+                  'Use the "If I were starting from zero, I would do this" title.',
+                  'Lead with personal story + result. "How I built a $X room with 100% retention in 6 months — the actual play."',
+                  'Anchor specificity in the first 30 seconds of every video. Names. Numbers. Time frames. Lock the credibility before the content.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Growth opportunities */}
+            <div>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-4">Growth opportunities</p>
+              <ul className="space-y-3">
+                {[
+                  'Pursue 1 to 2 collaboration videos with known names in adjacent spaces. Borrow audiences. Borrow authority.',
+                  'Take a stance on the current state of the fitness coaching industry. The demand pocket for "how to actually build a sellable training business" is wide open because nobody with the credibility owns it.',
+                  'Podcast option. Bring guests into the room. Either talk shop with them, or do the install on them and document it. Use the industry advantages nobody else has.',
+                  'Member spotlight rotation. Each cycle features one member journey at depth. Their words, their results, on your channel.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </Section>
         </div>
       </section>
@@ -304,7 +303,7 @@ export default function UndeniableNotes() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <p className="text-zinc-400 mb-10 leading-relaxed text-lg">
-              This is not the full install. We would build the real thing together. But it should give you a sense of how I think about your specific situation, and what the next 90 days would actually look like.
+              This is not the install. We would build the real thing together. But it should give you a sense of how I think about your specific channels, and what the next 90 days would actually look like.
             </p>
             <a
               href="/undeniable"
