@@ -55,7 +55,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The goal</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · The Goal</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Make Undeniable
               <br />
@@ -99,7 +99,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · Current state</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Outcome</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Current state.
             </h2>
@@ -147,7 +147,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · Opportunity</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · The Opportunity</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Install a trust ecosystem.
               <br />
@@ -155,7 +155,7 @@ export default function Undeniable() {
             </h2>
             <div className="space-y-5 text-zinc-400 leading-relaxed max-w-3xl mb-16">
               <p>
-                The first step is simple. Craft a methodical customer journey that increases demand, and nurtures fast to coincide with live events.
+                The first step is simple. Craft a methodic customer journey that increases demand, and nurtures fast to coincide with live events.
               </p>
               <p className="text-zinc-300 font-medium">
                 We are not trying to push two events per month. We are trying to first increase demand, while lowering supply.
@@ -170,7 +170,7 @@ export default function Undeniable() {
               {[
                 'A documented, simple cold to warm to room to continuity path we both agree on.',
                 'A 4 or 6 week content cycle we can easily run.',
-                "An agreed % of new room buyers coming through the new path. With a notable shortening of those putting their hand up when asked: how many people first heard about me in the past 3 months?",
+                "An agreed % of new room buyers coming through the new path, with a notable shortening of those putting their hand up when asked: how many people first heard about me in the past 3 months.",
                 'An agreed number of qualified booked calls from content.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
@@ -193,7 +193,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · The diagnostic</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The diagnostic</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Strengths. Gaps.
               <br />
@@ -260,7 +260,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The invisible hand we are about to unlock</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · The invisible hand we are about to unlock</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               When your clients
               <br />
@@ -316,7 +316,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · The strategic risk we are avoiding</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The strategic risk we are avoiding</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Don't jump markets yet.
               <br />
@@ -357,7 +357,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · The 90 day plan</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · The 90 day plan</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Install an Authority Engine.
               <br />
@@ -496,7 +496,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · Deliverables</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">08 · Deliverables</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               A comprehensive Brand Bible.
               <br />
@@ -577,7 +577,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">08 · How we work</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">09 · How we work</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Roles. Cadence.
               <br />
@@ -690,7 +690,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">09 · What happens at Day 90</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">10 · What happens at Day 90</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               We sit down.
               <br />
