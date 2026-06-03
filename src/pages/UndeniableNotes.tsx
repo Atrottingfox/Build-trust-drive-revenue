@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { ArrowLeft, Check, AlertCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import PasswordGate from '../components/PasswordGate';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -22,6 +23,7 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 
 export default function UndeniableNotes() {
   return (
+    <PasswordGate>
     <div className="min-h-screen bg-base">
       <SEO
         title="Channel & content overview for Undeniable"
@@ -314,5 +316,6 @@ export default function UndeniableNotes() {
 
       <Footer />
     </div>
+    </PasswordGate>
   );
 }

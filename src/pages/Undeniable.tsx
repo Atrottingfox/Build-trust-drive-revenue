@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Target, BookOpen, Video, Mic, BarChart3, Users, Megaphone, Layers, RefreshCw, Calendar, Settings, FileText, Check, Compass, Eye, Zap, Shield, AlertCircle, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import PasswordGate from '../components/PasswordGate';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -22,6 +23,7 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 
 export default function Undeniable() {
   return (
+    <PasswordGate>
     <div className="min-h-screen bg-base">
       <SEO
         title="Undeniable. 90 Day Authority Engine"
@@ -881,5 +883,6 @@ export default function Undeniable() {
 
       <Footer />
     </div>
+    </PasswordGate>
   );
 }
