@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Heart, Pen, Award, DoorOpen, Check, X, Rocket, Crown, Building, Globe, Database, Network, GraduationCap, Share2, Briefcase } from 'lucide-react';
+import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Heart, Pen, Award, DoorOpen, Check, X, Rocket, Crown, Building, Globe, Database, Network, GraduationCap, Share2, Briefcase, Compass, Repeat } from 'lucide-react';
 import Footer from '../components/Footer';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -59,30 +59,37 @@ const offers = [
   },
   {
     num: '03',
-    title: '12 Month Advisory',
-    price: '+$21k',
-    rolled: '$36k all in',
-    description: 'Offered at Day 30 as PIF only. The full 90 days rolls over. Annual pattern recognition, edge case support, and Engineroom access. Plus an in person day where Sean shoots their core pillar video on site.',
+    title: '6 Month Advisory Bundle',
+    price: '+$13k',
+    rolled: '$28k all in · Early commit',
+    description: "Offered at Day 30 to strong fits. Roll the rest of the 90 days and 6 months of advisory into one decision. Brand Day $5k + Install $10k + Bundle $13k = $28k for 9 months. Versus $33k list (15k + 18k), they save $5k for committing early.",
+  },
+  {
+    num: '04',
+    title: 'Standard Advisory',
+    price: '$3k / month',
+    rolled: 'Continuity',
+    description: "For clients who don't take the bundle, or who want to continue after the 6 months. Monthly Founder Strategy Pod or 1:1. Monthly 1:1 with the Operator or Creative Director. Weekly Operator Clinic group call. Up to one Loom per week.",
   },
 ];
 
 const revenueMetrics = [
   { stat: '$5k', label: 'Brand Day', sub: 'Entry point' },
   { stat: '$15k', label: 'Install', sub: 'Brand Day + 90 day build' },
-  { stat: '$36k', label: 'Year 1 Per Client', sub: 'Brand Day + Install + Advisory PIF' },
+  { stat: '$33k', label: 'Year 1 (base)', sub: '$15k Install + $18k for 6 months advisory' },
+  { stat: '$28k', label: 'Year 1 (early commit)', sub: '6 Month Bundle taken at Day 30' },
   { stat: '60-80%', label: 'Brand Day to Install', sub: 'When the day is strong and pre framed' },
-  { stat: '20-30%', label: 'Install to Advisory', sub: 'Offered at Day 30 PIF' },
-  { stat: '$1k', label: 'CAC', sub: 'Warm outreach + content' },
+  { stat: '40-50%', label: 'Install to Bundle', sub: 'Offered at Day 30 to strong fits' },
 ];
 
 const sixMonthPlan = [
-  { month: 'June', brandDays: 4, installs: 3, advisory: 0, revenue: '$35k' },
-  { month: 'July', brandDays: 6, installs: 5, advisory: 1, revenue: '$101k' },
-  { month: 'August', brandDays: 8, installs: 6, advisory: 1, revenue: '$131k' },
-  { month: 'September', brandDays: 10, installs: 8, advisory: 2, revenue: '$192k' },
-  { month: 'October', brandDays: 10, installs: 8, advisory: 2, revenue: '$192k' },
-  { month: 'November', brandDays: 11, installs: 9, advisory: 3, revenue: '$228k' },
-  { month: 'December', brandDays: 11, installs: 9, advisory: 3, revenue: '$228k' },
+  { month: 'June',      brandDays: 4,  installs: 3, bundles: 0, revenue: '$35k' },
+  { month: 'July',      brandDays: 6,  installs: 5, bundles: 2, revenue: '$111k' },
+  { month: 'August',    brandDays: 8,  installs: 6, bundles: 2, revenue: '$126k' },
+  { month: 'September', brandDays: 10, installs: 8, bundles: 3, revenue: '$169k' },
+  { month: 'October',   brandDays: 10, installs: 8, bundles: 3, revenue: '$169k' },
+  { month: 'November',  brandDays: 11, installs: 9, bundles: 5, revenue: '$210k' },
+  { month: 'December',  brandDays: 11, installs: 9, bundles: 5, revenue: '$210k' },
 ];
 
 const pillars = [
@@ -145,6 +152,120 @@ const seanDoesNot = [
   'Review every single piece',
 ];
 
+const flywheel = [
+  {
+    num: '01',
+    title: 'Serve the top of the market',
+    description: '7 and 8 figure founders, coaches, consultants. High ticket, low volume installs and advisory. Use their hardest problems to sharpen the system.',
+  },
+  {
+    num: '02',
+    title: 'Turn work into assets',
+    description: 'Every project becomes case studies, frameworks, data. All of it stored and productised inside The Engineroom.',
+  },
+  {
+    num: '03',
+    title: 'Use assets to train operators and creatives',
+    description: 'Take the same IP and build free or low cost training for videographers, editors, creative directors. Certify them on the system so they can run it anywhere.',
+  },
+  {
+    num: '04',
+    title: 'Place talent back into top end clients',
+    description: 'Founders get world class operators. Operators get high leverage roles. The system spreads through people, not through marketing.',
+  },
+  {
+    num: '05',
+    title: 'Repeat at bigger scale',
+    description: 'More revenue funds more proof, training, and talent. More talent enables more installs and better results. The cycle compounds.',
+  },
+];
+
+const operatingPrinciples = [
+  {
+    title: 'Results first. Content second.',
+    description: "Content is only good if it drives pipeline and positioning.",
+  },
+  {
+    title: 'System over heroics.',
+    description: "Engines operators can run. Not founders being on all the time.",
+  },
+  {
+    title: 'Serve the top to serve the rest.',
+    description: 'Start with the best resourced founders so we can fund free or low cost training for the next wave.',
+  },
+  {
+    title: 'No scope creep.',
+    description: 'Clear ladders. Clear boundaries. We change terms, not prices.',
+  },
+  {
+    title: 'Document everything.',
+    description: 'Every win and mistake becomes a playbook. Future clients and operators move faster because of it.',
+  },
+];
+
+const stages = [
+  {
+    stage: 'STAGE 0',
+    year: 'Year 1 · H2 2026',
+    title: 'Advisory',
+    revenue: '$0 to $1M',
+    description: 'Sean delivers everything. Brand Day, 90 day install, advisory. Every client generates IP, case studies, and proof. The system gets documented and battle tested.',
+    model: '60 Brand Days, 48 Installs, 20 early commit 6 month bundles in H2 2026 ≈ $1.04M. Conversion targets: Brand Day to Install 60-80%, Install to Bundle 40-50%.',
+    mission: 'Every client generates IP, case studies, and proof. This is where we earn the right to say this works and build the first version of the operator curriculum.',
+    metric: "Install conversion rate. Target 60-80%. Secondary: % of installs taking the 6 month bundle (target 40-50%). If attach is low, early commit offer or pre frame is off.",
+  },
+  {
+    stage: 'STAGE 1',
+    year: 'Year 2 · 2027',
+    title: 'Licensed Operators',
+    revenue: '$1M to $3M',
+    description: 'Sean slows direct delivery. Licensed operators run the full Brand Day, Install, Advisory pipeline on their own client base. Same delivery, just no longer through Sean. Operators pay annual license. Revenue share back to the company. Sean trains. Sean reviews patterns. Sean owns the IP.',
+    model: 'Each operator targets ~$300k/year running the engine on their roster. Annual license plus revenue share to company. 5 to 8 operators plus Sean\'s direct installs = $1M to $3M. Delivery doesn\'t change. The model just gets copied.',
+    mission: 'Real career paths for operators start here. Revenue funds training and support instead of just Sean\'s calendar.',
+    metric: "Operator retention rate. If licensed operators can't retain clients at 70%+ of Sean's rate, the playbook isn't tight enough.",
+  },
+  {
+    stage: 'STAGE 2',
+    year: 'Year 3 · 2028',
+    title: 'Bolt on Talent',
+    revenue: '$3M to $10M',
+    description: 'The real moat. Sean provides trained operators alongside the advisory. Clients get the system AND the person to run it. Software plus methodology plus talent supply.',
+    model: 'Install: $10k. Operator placement: $3k to $5k/month. Advisory: $3k/month. Total per client: $6k to $8k/month. Junior operators at $80k manage 3 to 4 clients each. Gross margin per operator: 60 to 70%. Top operators earn into a profit share pool that vests over time, tied to retention and performance.',
+    mission: 'Founders get the system and the person. Operators get a clear ladder from good editor to trusted creative director with upside.',
+    metric: 'Operator utilisation rate. Clients per operator. Target: 3 to 4.',
+  },
+  {
+    stage: 'STAGE 3',
+    year: 'Year 4 · 2029',
+    title: 'Academy',
+    revenue: '$10M to $20M',
+    description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists. Graduates join the licensed operator pool or go independent with an Engineroom license.',
+    model: 'Certification: $5k to $10k per person. Annual Engineroom license: $2k to $5k. Two revenue streams: training fees and platform fees.',
+    mission: 'Training becomes a product. This is where the free or low cost education for videographers and creative directors starts to scale.',
+    metric: 'Partner activation rate. Graduates must deliver independently within 90 days of certification.',
+  },
+  {
+    stage: 'STAGE 4',
+    year: 'Year 5 · 2030',
+    title: 'Affiliate Distribution',
+    revenue: '$20M to $50M',
+    description: "Partners resell the Authority Engine system through their own channels. Agencies, coaches, consultants white label The Engineroom with their clients. Distribution happens through other people's networks.",
+    model: '200 partners at 5 clients each at $300/seat = $300k MRR platform revenue. Plus partner fees. Plus direct clients and talent.',
+    mission: 'Partners distribute the system and the talent layer through their own networks. Impact compounds even when we are not in the room.',
+    metric: 'Partner activation rate. Number of partners actively billing clients through The Engineroom.',
+  },
+  {
+    stage: 'STAGE 5',
+    year: 'Year 6+ · 2031+',
+    title: 'Agency',
+    revenue: '$50M+',
+    description: 'Full service for the biggest clients. Teams of operators, editors, strategists. Premium pricing. The software and data from every previous stage is the unfair advantage no competitor can replicate.',
+    model: 'Full service teams at $15k to $25k/month per client. High revenue, lower margin, operationally heavy.',
+    mission: 'For the biggest brands we become the media team in a box. The data and training from every previous stage power work no one else can match.',
+    metric: 'Revenue per employee. Must stay above $200k to justify the complexity.',
+  },
+];
+
 
 export default function BusinessMap() {
   return (
@@ -163,10 +284,61 @@ export default function BusinessMap() {
               <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-4">
                 Internal Business Architecture
               </p>
-              <p className="text-zinc-600 text-sm">
+              <p className="text-zinc-600 text-sm mb-8">
                 The system. The model. The roadmap.
               </p>
+              <p className="text-zinc-400 text-sm leading-relaxed max-w-2xl">
+                This deck shows how The Authority Engine is designed to go from $0 to $1M in H2 2026, and how that money funds the long term plan: build an ecosystem that trains and places creative operators for free or low cost.
+              </p>
             </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* Why this exists */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Build the engine for the top 1%.
+              <br />
+              <span className="text-zinc-500">Use it to lift the next wave.</span>
+            </h2>
+
+            <div className="glow-card p-8 md:p-10 mb-8">
+              <p className="text-zinc-300 text-base md:text-lg leading-relaxed mb-6">
+                <span className="text-white font-semibold">Mission:</span> Build the media operating system for the top 1% of expert led businesses, then use that engine to make world class training and opportunities free for the next generation of videographers and creative directors.
+              </p>
+              <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
+                <p>I help the best founders in the world turn content into revenue and reputation.</p>
+                <p>I use that revenue to build tools, training, and an ecosystem that make it easier for the next wave of operators and creatives to win.</p>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div className="glow-card p-6">
+                <Crown className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Founders</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get operator run media engines that print trust and pipeline.</p>
+              </div>
+              <div className="glow-card p-6">
+                <GraduationCap className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Operators and creatives</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get trained, placed, and paid well.</p>
+              </div>
+              <div className="glow-card p-6">
+                <Database className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Playbooks and software</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Sit in the middle and create leverage for everyone.</p>
+              </div>
+            </div>
+
+            <p className="text-zinc-500 text-sm leading-relaxed mt-8">
+              Revenue is the fuel. The Authority Engine is the vehicle.
+            </p>
           </Section>
         </div>
       </section>
@@ -266,7 +438,7 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The offer ladder</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Three steps.
+              Four steps.
               <br />
               <span className="text-zinc-500">One system.</span>
             </h2>
@@ -346,8 +518,8 @@ export default function BusinessMap() {
             <div className="grid sm:grid-cols-2 gap-6">
               {[
                 { stat: '85-90%', label: 'Gross Margin', description: "Costs are Sean's time, flights, and tools. No inventory. No office. No team at stage 0." },
-                { stat: '$36k', label: 'Year 1 LTV', description: '$5k Brand Day entry. Installs at 60-80%. Advisory at 20-30%. One client, one year, $36k all in.' },
-                { stat: '36:1', label: 'LTV to CAC', description: 'At $1k CAC from warm outreach and content. Anything above 3:1 is considered excellent.' },
+                { stat: '$28-33k', label: 'Year 1 LTV', description: '$5k Brand Day entry. Install conversion 60-80%. 6 Month Bundle attach 40-50%. Plus upside from ongoing advisory at $3k/month.' },
+                { stat: '28-33:1', label: 'LTV to CAC', description: 'At $1k CAC from warm outreach and content. Anything above 3:1 is considered excellent.' },
               ].map((m, i) => (
                 <motion.div
                   key={i}
@@ -371,6 +543,47 @@ export default function BusinessMap() {
 
       <div className="gradient-line" />
 
+      {/* The Flywheel */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The flywheel</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              How money
+              <br />
+              <span className="text-zinc-500">becomes impact.</span>
+            </h2>
+            <div className="space-y-6">
+              {flywheel.map((step, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <div className="flex flex-col md:flex-row md:items-start md:gap-8">
+                    <div className="flex-shrink-0 mb-4 md:mb-0">
+                      <p className="font-display text-5xl md:text-6xl font-extrabold text-zinc-700 tracking-tight">{step.num}</p>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-white font-semibold text-lg mb-3">{step.title}</h3>
+                      <p className="text-zinc-500 text-sm leading-relaxed">{step.description}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <p className="text-zinc-500 text-sm leading-relaxed mt-8 max-w-3xl">
+              Money becomes proof. Proof becomes training. Training becomes talent. Talent becomes more installs. The cycle compounds.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* 6 Month Plan */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -386,7 +599,7 @@ export default function BusinessMap() {
                 <div>Month</div>
                 <div className="text-right">Brand Days $5k</div>
                 <div className="text-right">Installs +$10k</div>
-                <div className="text-right">Advisory +$21k</div>
+                <div className="text-right">6 Month Bundles +$13k</div>
                 <div className="text-right">Revenue</div>
               </div>
               {sixMonthPlan.map((row, i) => (
@@ -402,7 +615,7 @@ export default function BusinessMap() {
                     <span className="md:hidden text-zinc-600 mr-2">Installs:</span>{row.installs}
                   </div>
                   <div className="text-zinc-400 md:text-right">
-                    <span className="md:hidden text-zinc-600 mr-2">Advisory:</span>{row.advisory}
+                    <span className="md:hidden text-zinc-600 mr-2">Bundles:</span>{row.bundles}
                   </div>
                   <div className="text-blue-400 font-semibold md:text-right col-span-2 md:col-span-1">{row.revenue}</div>
                 </div>
@@ -412,11 +625,11 @@ export default function BusinessMap() {
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Totals</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">60 Brand Days. 48 Installs. 12 Advisory upgrades.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">60 Brand Days. 48 Installs. 20 early commit 6 month bundles.</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Six month total</p>
-                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.03M</p>
+                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.04M</p>
               </div>
             </div>
           </Section>
@@ -547,7 +760,7 @@ export default function BusinessMap() {
               ))}
             </div>
 
-            <div className="glow-card p-8">
+            <div className="glow-card p-8 mb-12">
               <h3 className="text-zinc-400 font-semibold text-sm uppercase tracking-widest mb-6">Sean does NOT</h3>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {seanDoesNot.map((item, i) => (
@@ -557,6 +770,65 @@ export default function BusinessMap() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Call cadence & capacity */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Call cadence & capacity</p>
+            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              What I promise.
+              <br />
+              <span className="text-zinc-500">What scales when we grow.</span>
+            </h3>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-3">Stage 1 · Weeks 1 to 4</p>
+                <h4 className="text-white font-semibold mb-4">Per Install client</h4>
+                <ul className="space-y-2">
+                  {[
+                    '1x 60 min 1:1 call per week. Operator and Sean. Founder if requested.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-3">Stage 2 · Weeks 5 to 12</p>
+                <h4 className="text-white font-semibold mb-4">Per Install client</h4>
+                <ul className="space-y-2">
+                  {[
+                    'Founder: 1x 60 min Founder Strategy Pod per month (small group).',
+                    'Operator: 2x 60 min 1:1 call per month.',
+                    'Operator: 1x weekly Operator Clinic group call plus 1x 90 minute Q&A group call.',
+                    'Up to 2 Looms per week with templated questions.',
+                    '24 hour response via WhatsApp.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-8">
+              <p className="text-blue-400 font-semibold text-sm mb-3">Scale rule</p>
+              <ul className="space-y-2">
+                {[
+                  'Up to ~15 active installs, Stage 2 can be mostly 1:1.',
+                  'Once active installs ≥ 20, all Stage 2 founders move into pods and operators rely more on clinics and Looms.',
+                  'Target total delivery: ~10 to 12 hours per week of install and advisory calls at peak.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Section>
         </div>
@@ -575,62 +847,7 @@ export default function BusinessMap() {
             </h2>
             <p className="text-zinc-500 text-lg mb-12">Each stage proves the next one is possible.</p>
             <div className="space-y-6">
-              {[
-                {
-                  stage: 'STAGE 0',
-                  year: 'Year 1 · H2 2026',
-                  title: 'Advisory',
-                  revenue: '$0 to $1M',
-                  description: 'Sean delivers everything. Brand Day, 90 day install, advisory. Every client generates IP, case studies, and proof. The system gets documented and battle tested.',
-                  model: '60 Brand Days, 48 Installs, 12 Advisory PIFs in H2 2026 = $1.03M. Conversion targets: Brand Day to Install 60-80%, Install to Advisory 20-30%.',
-                  metric: 'Install conversion rate. Target: 60-80%. Below that, the day isn\'t strong enough or the pre frame is off.',
-                },
-                {
-                  stage: 'STAGE 1',
-                  year: 'Year 2 · 2027',
-                  title: 'Licensed Operators',
-                  revenue: '$1M to $3M',
-                  description: 'Sean slows direct delivery. Licensed operators run the full Brand Day, Install, Advisory pipeline on their own client base. Same delivery, just no longer through Sean. Operators pay annual license. Revenue share back to the company. Sean trains. Sean reviews patterns. Sean owns the IP.',
-                  model: 'Each operator targets ~$300k/year running the engine on their roster. Annual license plus revenue share to company. 5 to 8 operators plus Sean\'s direct installs = $1M to $3M. Delivery doesn\'t change. The model just gets copied.',
-                  metric: 'Operator retention rate. If licensed operators can\'t retain clients at 70%+ of Sean\'s rate, the playbook isn\'t tight enough.',
-                },
-                {
-                  stage: 'STAGE 2',
-                  year: 'Year 3 · 2028',
-                  title: 'Bolt on Talent',
-                  revenue: '$3M to $10M',
-                  description: 'The real moat. Sean provides trained operators alongside the advisory. Clients get the system AND the person to run it. Software plus methodology plus talent supply.',
-                  model: 'Install: $10k. Operator placement: $3k to $5k/month. Advisory: $3k/month. Total per client: $6k to $8k/month. Junior operators at $80k manage 3 to 4 clients each. Gross margin per operator: 60 to 70%. Top operators earn into a profit share pool that vests over time, tied to retention and performance.',
-                  metric: 'Operator utilisation rate. Clients per operator. Target: 3 to 4.',
-                },
-                {
-                  stage: 'STAGE 3',
-                  year: 'Year 4 · 2029',
-                  title: 'Academy',
-                  revenue: '$10M to $20M',
-                  description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists. Graduates join the licensed operator pool or go independent with an Engineroom license.',
-                  model: 'Certification: $5k to $10k per person. Annual Engineroom license: $2k to $5k. Two revenue streams: training fees and platform fees.',
-                  metric: 'Partner activation rate. Graduates must deliver independently within 90 days of certification.',
-                },
-                {
-                  stage: 'STAGE 4',
-                  year: 'Year 5 · 2030',
-                  title: 'Affiliate Distribution',
-                  revenue: '$20M to $50M',
-                  description: 'Partners resell the Authority Engine system through their own channels. Agencies, coaches, consultants white label The Engineroom with their clients. Distribution happens through other people\'s networks.',
-                  model: '200 partners at 5 clients each at $300/seat = $300k MRR platform revenue. Plus partner fees. Plus direct clients and talent.',
-                  metric: 'Partner activation rate. Number of partners actively billing clients through The Engineroom.',
-                },
-                {
-                  stage: 'STAGE 5',
-                  year: 'Year 6+ · 2031+',
-                  title: 'Agency',
-                  revenue: '$50M+',
-                  description: 'Full service for the biggest clients. Teams of operators, editors, strategists. Premium pricing. The software and data from every previous stage is the unfair advantage no competitor can replicate.',
-                  model: 'Full service teams at $15k to $25k/month per client. High revenue, lower margin, operationally heavy.',
-                  metric: 'Revenue per employee. Must stay above $200k to justify the complexity.',
-                },
-              ].map((s, i) => (
+              {stages.map((s, i) => (
                 <motion.div
                   key={i}
                   className="glow-card p-8 md:p-10"
@@ -651,6 +868,10 @@ export default function BusinessMap() {
                   <div className="mb-5">
                     <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-2">The Model</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">{s.model}</p>
+                  </div>
+                  <div className="mb-5">
+                    <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-2">Mission</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{s.mission}</p>
                   </div>
                   <div className="border-t border-zinc-800 pt-4">
                     <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-1">Key Metric</p>
@@ -679,7 +900,7 @@ export default function BusinessMap() {
                 {
                   icon: Database,
                   title: 'Data compounds',
-                  description: 'Every client generates brand profiles, content performance data, archetype patterns, industry benchmarks. At 50 clients that becomes proprietary intelligence. At 500 it\'s unassailable.',
+                  description: "Every client generates brand profiles, content performance data, archetype patterns, industry benchmarks. At 50 clients that becomes proprietary intelligence. At 500 it's unassailable.",
                 },
                 {
                   icon: TrendingUp,
@@ -722,7 +943,7 @@ export default function BusinessMap() {
               </h3>
               <div className="space-y-4">
                 {[
-                  { stage: 'Stage 0', metric: 'Install conversion rate (target 60-80%)' },
+                  { stage: 'Stage 0', metric: 'Install conversion rate (target 60-80%). Secondary: 6 Month Bundle attach rate (target 40-50%).' },
                   { stage: 'Stage 1', metric: "Licensed operator retention (target 70%+ of Sean's rate)" },
                   { stage: 'Stage 2', metric: 'Operator utilisation (target 3 to 4 clients per operator)' },
                   { stage: 'Stage 3', metric: 'Certification graduation rate' },
@@ -735,6 +956,37 @@ export default function BusinessMap() {
                   </div>
                 ))}
               </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* How we operate */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">How we operate</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Five principles.
+              <br />
+              <span className="text-zinc-500">No exceptions.</span>
+            </h2>
+            <div className="space-y-4">
+              {operatingPrinciples.map((p, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <h3 className="text-white font-semibold mb-2">{p.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{p.description}</p>
+                </motion.div>
+              ))}
             </div>
           </Section>
         </div>
