@@ -23,22 +23,22 @@ const problems = [
   {
     icon: Eye,
     title: 'Clarity',
-    description: "The market sees the old version of you. Your brand doesn't match your capability.",
+    description: "The market does not know who you are for. Positioning is muddy. The right people walk past.",
   },
   {
     icon: Zap,
     title: 'Visibility',
-    description: 'Content depends on the founder showing up inspired. No system. No cadence.',
+    description: 'Not getting distribution. The expertise is real. The reach is not.',
   },
   {
     icon: Shield,
     title: 'Authority',
-    description: "You have the expertise but it's not translating. What others see doesn't match what you know.",
+    description: "They do not see you as the expert. What others perceive does not match what you actually know.",
   },
   {
     icon: Layers,
     title: 'Quality',
-    description: "Resources exist but there's no system connecting them. Output is inconsistent.",
+    description: "Lead quality is low. People who land are not the people you want to work with.",
   },
 ];
 
@@ -254,37 +254,11 @@ export default function BusinessMap() {
               <span className="text-zinc-500">Use it to lift the next wave.</span>
             </h2>
 
-            <div className="glow-card p-8 md:p-10 mb-8">
-              <p className="text-zinc-300 text-base md:text-lg leading-relaxed mb-6">
-                <span className="text-white font-semibold">Mission:</span> Build the media operating system for 7 and 8 figure founders. And the ladder for the operators and creatives who run it.
+            <div className="glow-card p-8 md:p-10">
+              <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
+                <span className="text-white font-semibold">Mission:</span> Build the core media operating system for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
               </p>
-              <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
-                <p>I help the best founders in the world turn content into revenue and reputation.</p>
-                <p>Their revenue funds the tools, training, and career paths that make it easier for the next wave of operators and creatives to win.</p>
-              </div>
             </div>
-
-            <div className="grid sm:grid-cols-3 gap-6">
-              <div className="glow-card p-6">
-                <Crown className="w-5 h-5 text-blue-400 mb-3" />
-                <p className="text-white font-semibold text-sm mb-1">Founders</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">Get operator run media engines that print trust and pipeline.</p>
-              </div>
-              <div className="glow-card p-6">
-                <GraduationCap className="w-5 h-5 text-blue-400 mb-3" />
-                <p className="text-white font-semibold text-sm mb-1">Operators and creatives</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">Get trained, placed, and paid well.</p>
-              </div>
-              <div className="glow-card p-6">
-                <Database className="w-5 h-5 text-blue-400 mb-3" />
-                <p className="text-white font-semibold text-sm mb-1">Playbooks and software</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">Sit in the middle and create leverage for everyone.</p>
-              </div>
-            </div>
-
-            <p className="text-zinc-500 text-sm leading-relaxed mt-8">
-              Revenue is the fuel. The Authority Engine is the vehicle.
-            </p>
           </Section>
         </div>
       </section>
@@ -803,43 +777,6 @@ export default function BusinessMap() {
                 ))}
               </div>
             </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Why I care about this */}
-      <section className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why I care about this</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              From the floor.
-              <br />
-              <span className="text-zinc-500">To the floor plan.</span>
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="glow-card p-8">
-                <p className="text-blue-400 font-semibold text-sm mb-3">Where I came from</p>
-                <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
-                  <p>I grew up as the operator in other people's businesses. On the floor, behind the camera, in the weeds.</p>
-                  <p>I know what it is like to be the person doing the work with no clear path to equity, leverage, or recognition.</p>
-                </div>
-              </div>
-              <div className="glow-card p-8">
-                <p className="text-blue-400 font-semibold text-sm mb-3">Why the engine</p>
-                <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
-                  <p>The Authority Engine is my way of giving founders a system that finally matches what they have built.</p>
-                  <p>And giving operators and creatives a ladder out of "just edit the video" into strategic, well paid roles.</p>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-zinc-300 text-base leading-relaxed max-w-3xl font-medium">
-              The faster I stack revenue and proof at the top of the market, the faster I can make the training and opportunities free at the bottom.
-            </p>
           </Section>
         </div>
       </section>
