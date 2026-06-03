@@ -24,7 +24,7 @@ export default function Undeniable() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Undeniable — 90 Day Authority Engine"
+        title="Undeniable. 90 Day Authority Engine"
         description="Build a trust ecosystem to take the right people from cold to sold, so Undeniable becomes the obvious choice for the ideal market."
         path="/undeniable"
         noIndex
@@ -104,7 +104,7 @@ export default function Undeniable() {
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Outcome</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Challenge</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Inside, undeniable.
               <br />
@@ -171,7 +171,7 @@ export default function Undeniable() {
             <ul className="space-y-4 max-w-3xl mb-10">
               {[
                 'A documented, simple cold to warm to workshop to continuity path we both agree on.',
-                'A 4 or 6 week content cycle we can easily run.',
+                'A simple monthly content cycle we can easily run.',
                 "An agreed % of new room buyers coming through the new path, with a notable shortening of those putting their hand up when asked: how many people first heard about me in the past 3 months.",
                 'An agreed number of qualified booked calls from content.',
               ].map((item, i) => (
@@ -390,7 +390,7 @@ export default function Undeniable() {
                 <div className="flex items-center gap-3 mb-4">
                   <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">02</p>
                   <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 02 · Install · Weeks 1–4</p>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 02 · Install · Weeks 1 to 4</p>
                     <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                       Wrap the engine around your next workshop.
                     </h3>
@@ -411,7 +411,7 @@ export default function Undeniable() {
                 <div className="flex items-center gap-3 mb-4">
                   <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">03</p>
                   <div>
-                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 03 · Tune · Weeks 5–12</p>
+                    <p className="text-zinc-600 text-xs uppercase tracking-widest">Phase 03 · Tune · Weeks 5 to 12</p>
                     <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                       Tune the engine based on data.
                     </h3>
@@ -570,8 +570,8 @@ export default function Undeniable() {
                 },
                 {
                   icon: Calendar,
-                  title: '6 Week Cycle Plan',
-                  description: 'Themes, hooks, topics. The plug and play structure your team re runs every cycle.',
+                  title: 'Monthly Cycle Plan',
+                  description: 'Themes, hooks, topics. The plug and play structure your team re runs every month around your workshops.',
                 },
                 {
                   icon: Target,
@@ -616,7 +616,7 @@ export default function Undeniable() {
 
             <div className="mt-10 p-6 bg-surface border border-zinc-800/50 rounded-2xl max-w-3xl">
               <p className="text-zinc-400 text-sm leading-relaxed">
-                How I'm currently assessing the existing channels —{' '}
+                How I'm currently assessing the existing channels.{' '}
                 <a href="/undeniable-notes" className="text-blue-400 hover:text-blue-300 transition-colors">
                   /undeniable-notes
                 </a>
@@ -765,7 +765,6 @@ export default function Undeniable() {
                   'This is not a guarantee of revenue or attendance. We agree the metrics. We test. The data tells us what worked.',
                   'This is not full time CMO services. I show up for the cadence we agreed. Not in your inbox at 11pm.',
                   'This is not a content factory. I do not write or edit every script. Your team produces.',
-                  'This is not a media buying service. We design what gets boosted. Your team runs the spend.',
                   'This is not a forever contract. At Day 90 we both pick.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -852,6 +851,9 @@ export default function Undeniable() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
               You're 80% of the way there.
             </h2>
+            <p className="text-zinc-500 italic mb-6 leading-relaxed">
+              But have you ever heard of Pareto's principle?
+            </p>
             <p className="text-zinc-400 mb-3 leading-relaxed">
               You've built a killer product. And a wicked team.
             </p>
