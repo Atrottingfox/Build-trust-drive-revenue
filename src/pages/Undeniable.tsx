@@ -704,11 +704,11 @@ export default function Undeniable() {
               </div>
               <div className="glow-card p-8">
                 <p className="text-blue-400 font-semibold text-sm mb-1">Phase 02 · Install</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 1 to 3</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Weeks 1 to 4</p>
                 <ul className="space-y-2">
                   {[
                     '1x 60 minute call per week with your CD.',
-                    'Founder joins if desired.',
+                    'Founder welcome.',
                     'The engine gets built and wired up.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
