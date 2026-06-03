@@ -37,21 +37,21 @@ export default function Undeniable() {
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">For Undeniable · Diagnostic + 90 day proposal</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">For Undeniable · Diagnostic & 90 day install</p>
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
-                Not a pitch.
+                Install a trust path that takes cold fitness coaches from stranger to sold in 90 days.
                 <br />
-                <span className="text-zinc-500">A diagnostic. And a 90 day proposal.</span>
+                <span className="text-zinc-500">And makes Undeniable the obvious category king for 7 figure online PTs.</span>
               </h1>
               <p className="text-zinc-400 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
-                What I see at Undeniable right now. The strategic opportunity I think you should lean into. And a simple 90 day plan to install a methodical system that takes cold fitness coaches from stranger to sold. Designed as a test of the system and of how we work together.
+                We design and install one repeatable sequence of content, lead assets, and event touchpoints that speeds up trust, fills the room with the right PTs, and moves more of them into continuity. Your team knows exactly how people go from never heard of you to I have to be in this room.
               </p>
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Three things layered in this doc</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">In 90 days, you'll have</p>
               <ul className="space-y-3 max-w-2xl">
                 {[
-                  'What I am seeing in your business right now. Stated as assumptions you can push back on.',
-                  'Where I think the opportunity sits. The invisible hand of word of mouth that is about to swing in your favour.',
-                  'What we would build, learn, and decide together over the next 90 days.',
+                  'A single, documented cold to warm to room to continuity path your team can point at.',
+                  'A 90 day publishing and lead asset plan tuned for trust, not just views.',
+                  'A scoreboard that tells you if the trust path is working, instead of guessing off vibes.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
