@@ -73,20 +73,22 @@ export default function Undeniable() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mt-10 max-w-3xl">
-              <div className="glow-card p-6">
-                <p className="text-blue-400 font-semibold text-sm mb-2">More demand than fitness alone can serve</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">The room overflows. You stop having to hunt.</p>
-              </div>
-              <div className="glow-card p-6">
-                <p className="text-blue-400 font-semibold text-sm mb-2">The market pulls you into general service</p>
-                <p className="text-zinc-500 text-sm leading-relaxed">Instead of you pushing into it. They come to you.</p>
-              </div>
+            <div className="max-w-3xl mt-12 space-y-4">
+              <p className="text-zinc-300 font-medium leading-relaxed">
+                <span className="text-zinc-500">Step 1.</span> Build the strategy that makes you the category king.
+              </p>
+              <p className="text-zinc-300 font-medium leading-relaxed">
+                <span className="text-zinc-500">Step 2.</span> Decide with data when to jump from the pond to the ocean.
+              </p>
             </div>
 
-            <p className="text-zinc-300 font-medium leading-relaxed max-w-3xl mt-10">
-              Step 1: build the system that makes you category king for 7 figure online PTs. Step 2: decide with data when to jump to the ocean and punch above your weight.
-            </p>
+            <div className="max-w-3xl mt-12">
+              <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.15]">
+                But first.
+                <br />
+                <span className="text-blue-400">Make Rhys Livingston Undeniable.</span>
+              </p>
+            </div>
           </Section>
         </div>
       </section>
