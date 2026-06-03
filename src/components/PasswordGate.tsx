@@ -44,7 +44,7 @@ export default function PasswordGate({ children }: { children: React.ReactNode }
           Password required.
         </h1>
         <p className="text-zinc-500 text-sm leading-relaxed mb-8">
-          This page is shared with a small number of partners. Enter the password to continue.
+          Restricted access. Enter your password to continue.
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
