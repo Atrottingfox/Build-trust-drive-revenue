@@ -213,19 +213,19 @@ const TIERS: TierRow[] = [
   {
     name: 'Identity',
     potency: 5,
-    note: 'A specific person. Real revenue, real pain. The right operator nods immediately.',
+    note: "The role label they use for themselves. The 'that's me' moment.",
     examples: {
-      restaurant: 'Restaurant operator at $1.5M who hates seeing the GST bill more than the tax bill.',
-      ecommerce: "Shopify founder at $3M who can't tell which SKUs are profitable after returns and ad spend.",
-      agency: "Creative agency owner at 12 staff who can't tell which clients are losing him money.",
+      restaurant: 'Restaurant operators.',
+      ecommerce: 'Ecommerce founders.',
+      agency: 'Agency owners.',
     },
   },
   {
     name: 'Category',
     potency: 4,
-    note: 'The specific business type. Broader than identity, narrower than industry.',
+    note: 'The business category they sit in. Broader than the role label, narrower than the industry.',
     examples: {
-      restaurant: 'Restaurant operators.',
+      restaurant: 'Food service operators.',
       ecommerce: 'DTC brands.',
       agency: 'Creative agencies.',
     },
@@ -292,8 +292,8 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
-    loose: 'Restaurant operators. Improve your profit.',
-    tight: "Restaurant operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
+    loose: 'Food service operators. Improve your profit.',
+    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
   },
   ecommerce: {
     loose: 'DTC brands. Improve your margin.',
