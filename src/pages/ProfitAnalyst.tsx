@@ -56,29 +56,32 @@ const BELIEFS: Belief[] = [
   },
   {
     category: 'Mechanism',
-    sub: 'They assume every advisor does the same thing',
+    sub: 'Skepticism by what they have seen before',
+    framingLabels: ['Mild', 'Default', 'Burnt', 'Hardened'],
     currents: [
+      "'Probably similar to others. Worth checking I guess.'",
       "'All these workshops are basically the same. Different branding, same content.'",
-      "'It's a spreadsheet exercise dressed up as a methodology.'",
-      "'Every advisor asks the same questions. Nothing new will come out of this one.'",
-      "'If everyone does the same thing, there's no reason to pick this one over a cheaper version.'",
+      "'I've paid for this kind of thing before. Got generic frameworks and a homework template.'",
+      "'I've stopped engaging with anything that calls itself a profit workshop.'",
     ],
     required: "'This mechanism actually is different. The question sequence is proprietary. The order he asks them in is the actual product. The spreadsheet is just where the answers land.'",
   },
   {
     category: 'Founder',
-    sub: 'What they assume about Gavin specifically',
+    sub: 'The kind of distance they feel from Gavin',
+    framingLabels: ['Experience', 'Industry', 'Personality', 'Stage'],
     currents: [
       "'He's an advisor. Advisors haven't actually run what I run.'",
       "'My industry is different enough that he won't get the nuance.'",
       "'He'll give me the same playbook he gives everyone.'",
-      "'Smart guy. But hasn't lived the operational mess I'm in.'",
+      "'Smart guy. But hasn't lived the operational mess I'm in at my size.'",
     ],
     required: "'He runs multiple of his own businesses. He's been in the chair. He's also honest about what he gets wrong, which most aren't.'",
   },
   {
     category: 'Self',
-    sub: 'What they believe about themselves walking in',
+    sub: 'Self-concept defences they hold walking in',
+    framingLabels: ['Mess', 'Size', 'Specificity', 'Awareness'],
     currents: [
       "'My business is too messy. The workshop will get wasted on cleanup.'",
       "'I'm too small for this kind of analysis. It's for $10M+ operators.'",
@@ -89,7 +92,8 @@ const BELIEFS: Belief[] = [
   },
   {
     category: 'Timing',
-    sub: 'Why they think later is fine',
+    sub: 'The reason they give themselves for waiting',
+    framingLabels: ['Calendar', 'Preparation', 'Capacity', 'Financial'],
     currents: [
       "'I'll book it after the EOFY rush.'",
       "'I want to clean my numbers up before he sees them.'",
@@ -462,6 +466,230 @@ function SpecificityStack() {
   );
 }
 
+type Move = { axis: 'authority' | 'authenticity'; short: string; text: string };
+
+const MOVES: Move[] = [
+  { axis: 'authority', short: 'Aggregate data', text: 'Aggregate data. The average outcome across the last X workshops, named publicly.' },
+  { axis: 'authority', short: 'Operator stories', text: 'Specific operator stories. Named figures from named operators on the day.' },
+  { axis: 'authority', short: 'Proprietary mechanism', text: 'Proprietary mechanism. The question sequence documented, named, and protected.' },
+  { axis: 'authority', short: 'Visible IP', text: 'Visible IP. Frameworks and decision rules others can recognise without being able to replicate.' },
+  { axis: 'authority', short: 'Live workshop footage', text: 'Live workshop footage. The mechanism shown in action, captured on video.' },
+  { axis: 'authenticity', short: 'Damaging admissions', text: 'Damaging admissions. The numbers you got wrong in your own businesses, named on camera.' },
+  { axis: 'authenticity', short: 'BTS from own P&L', text: 'Behind the scenes from your own P&L. You run operations yourself. Show it.' },
+  { axis: 'authenticity', short: 'Native operator language', text: "Native operator language. Speak the way operators speak when they're alone." },
+  { axis: 'authenticity', short: 'Verifiable industry knowledge', text: 'Verifiable industry knowledge. The specific facts only an insider would know.' },
+  { axis: 'authenticity', short: 'Public no-money decisions', text: 'Public decisions not to take easy money. Clients you said no to and why.' },
+];
+
+const RATING_LABELS = ['Not yet', 'Started', 'Running', 'Strong'];
+
+function MoveRow({ short, score, onChange }: { short: string; score: number; onChange: (v: number) => void }) {
+  return (
+    <div className="glow-card p-4 flex items-center justify-between gap-3 flex-wrap">
+      <p className="text-zinc-300 text-sm leading-relaxed flex-1 min-w-[160px]">{short}</p>
+      <div className="inline-flex items-center gap-1 p-1 rounded-full border border-zinc-800 bg-zinc-900/40 flex-shrink-0">
+        {RATING_LABELS.map((label, i) => (
+          <button
+            key={i}
+            onClick={() => onChange(i)}
+            className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${
+              score === i
+                ? i === 0
+                  ? 'bg-zinc-800 text-zinc-300'
+                  : 'bg-blue-500/15 text-blue-300 border border-blue-500/40'
+                : 'text-zinc-500 hover:text-zinc-300'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TrustMatrixInteractive() {
+  const [scores, setScores] = useState<number[]>(Array(MOVES.length).fill(0));
+
+  const setScore = (idx: number, val: number) => {
+    setScores((s) => s.map((x, i) => (i === idx ? val : x)));
+  };
+
+  const authoritySum = MOVES.reduce((sum, m, i) => (m.axis === 'authority' ? sum + scores[i] : sum), 0);
+  const authenticitySum = MOVES.reduce((sum, m, i) => (m.axis === 'authenticity' ? sum + scores[i] : sum), 0);
+  const authorityScore = authoritySum / 15;
+  const authenticityScore = authenticitySum / 15;
+
+  const xPercent = authenticityScore * 100;
+  const yPercent = (1 - authorityScore) * 100;
+
+  const totalRated = scores.reduce((sum, s) => sum + s, 0);
+  const hasRated = totalRated > 0;
+
+  let quadrant = 'Stranger';
+  let quadrantDescription = 'Unknown. Skipped past in the feed.';
+  if (authorityScore >= 0.5 && authenticityScore >= 0.5) {
+    quadrant = 'Trust';
+    quadrantDescription = 'Goal zone. Comparison stops, premium pricing holds.';
+  } else if (authorityScore >= 0.5) {
+    quadrant = 'Credible but cold';
+    quadrantDescription = "Expert who hasn't earned the right to be liked. Easy to shop against on price.";
+  } else if (authenticityScore >= 0.5) {
+    quadrant = 'Likeable but unproven';
+    quadrantDescription = "Connection without proof. People like them. They don't write the cheque.";
+  }
+
+  const lighterAxis: 'authority' | 'authenticity' = authorityScore <= authenticityScore ? 'authority' : 'authenticity';
+  let suggestedMove: Move | null = null;
+  let lowestScore = 4;
+  MOVES.forEach((m, i) => {
+    if (m.axis === lighterAxis && scores[i] < lowestScore) {
+      suggestedMove = m;
+      lowestScore = scores[i];
+    }
+  });
+
+  return (
+    <div>
+      <p className="text-zinc-300 font-semibold mb-2">Rate where you sit on each move</p>
+      <p className="text-zinc-500 text-sm mb-8">The dot in the matrix below moves with you. Your weakest axis gets the strategic move at the bottom.</p>
+
+      <div className="space-y-8 mb-12">
+        <div>
+          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authority moves</p>
+          <p className="text-zinc-500 text-xs italic mb-4">Proof you can deliver</p>
+          <div className="space-y-3">
+            {MOVES.map((m, i) =>
+              m.axis === 'authority' ? (
+                <MoveRow key={i} short={m.short} score={scores[i]} onChange={(v) => setScore(i, v)} />
+              ) : null,
+            )}
+          </div>
+        </div>
+
+        <div>
+          <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authenticity moves</p>
+          <p className="text-zinc-500 text-xs italic mb-4">Proof you will deliver for me</p>
+          <div className="space-y-3">
+            {MOVES.map((m, i) =>
+              m.axis === 'authenticity' ? (
+                <MoveRow key={i} short={m.short} score={scores[i]} onChange={(v) => setScore(i, v)} />
+              ) : null,
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="mb-4 text-center">
+        <p className="text-zinc-500 text-xs uppercase tracking-widest">Authenticity, character, will they</p>
+        <div className="flex justify-between text-zinc-600 text-[10px] uppercase tracking-widest mt-1 px-3">
+          <span>Low</span>
+          <span>High</span>
+        </div>
+      </div>
+
+      <div className="flex gap-3">
+        <div className="flex flex-col justify-between text-zinc-500 text-xs uppercase tracking-widest py-3">
+          <span>High</span>
+          <span></span>
+          <span>Low</span>
+        </div>
+
+        <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 relative">
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
+            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">High auth · Low authen</p>
+            <p className="text-white font-semibold text-sm mb-1">Credible but cold</p>
+          </div>
+          <div className="rounded-xl border-2 border-blue-500/50 bg-blue-500/10 p-5 min-h-[140px] shadow-[0_0_40px_-10px_rgba(59,130,246,0.45)]">
+            <p className="text-blue-300 text-[10px] uppercase tracking-widest mb-2 font-semibold">★ Trust</p>
+            <p className="text-white font-semibold text-sm mb-1">The goal zone</p>
+          </div>
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5 min-h-[140px] opacity-50">
+            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · Low authen</p>
+            <p className="text-white font-semibold text-sm mb-1">Stranger</p>
+          </div>
+          <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
+            <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · High authen</p>
+            <p className="text-white font-semibold text-sm mb-1">Likeable but unproven</p>
+          </div>
+
+          {hasRated && (
+            <motion.div
+              className="absolute w-5 h-5 rounded-full bg-blue-300 border-2 border-white shadow-[0_0_25px_rgba(96,165,250,0.9)] pointer-events-none"
+              animate={{
+                left: `calc(${xPercent}% - 10px)`,
+                top: `calc(${yPercent}% - 10px)`,
+              }}
+              transition={{ type: 'spring', stiffness: 90, damping: 16 }}
+            />
+          )}
+        </div>
+      </div>
+
+      <div className="mt-8 glow-card border-blue-500/30 p-6">
+        <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Your position</p>
+        <p className="text-white text-xl font-semibold mb-2">{hasRated ? quadrant : 'Start rating to plot a position'}</p>
+        {hasRated && (
+          <>
+            <p className="text-zinc-400 text-sm leading-relaxed mb-4">{quadrantDescription}</p>
+            <div className="flex items-center gap-4 mb-5 text-xs">
+              <span className="text-zinc-500">Authority <span className="text-blue-300 font-semibold">{Math.round(authorityScore * 100)}%</span></span>
+              <span className="text-zinc-700">|</span>
+              <span className="text-zinc-500">Authenticity <span className="text-blue-300 font-semibold">{Math.round(authenticityScore * 100)}%</span></span>
+            </div>
+            {suggestedMove && lowestScore < 3 && (
+              <div className="border-t border-zinc-800/60 pt-5">
+                <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Strategic move</p>
+                <p className="text-zinc-300 text-sm leading-relaxed mb-1">
+                  Push the {lighterAxis} axis. Start with: <span className="text-white font-medium">{suggestedMove.short}</span>
+                </p>
+                <p className="text-zinc-500 text-xs leading-relaxed">{suggestedMove.text}</p>
+              </div>
+            )}
+            {(!suggestedMove || lowestScore >= 3) && hasRated && (
+              <div className="border-t border-zinc-800/60 pt-5">
+                <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Strategic move</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">Both axes are strong. Compound what's working.</p>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+const TOC_SECTIONS = [
+  { id: 'section-01', num: '01', title: 'Specificity' },
+  { id: 'section-02', num: '02', title: 'Beliefs' },
+  { id: 'section-03', num: '03', title: 'Trust matrix' },
+  { id: 'section-04', num: '04', title: 'Workshops' },
+];
+
+function SectionNav() {
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <div className="sticky top-0 z-40 bg-base/85 backdrop-blur-md border-b border-zinc-900/60">
+      <div className="max-w-3xl mx-auto px-6 lg:px-8 py-3 flex gap-2 overflow-x-auto">
+        {TOC_SECTIONS.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => scrollTo(s.id)}
+            className="flex-shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-800 hover:border-zinc-700 bg-zinc-900/40 text-zinc-400 hover:text-zinc-200 text-xs font-medium transition-colors"
+          >
+            <span className="text-zinc-600 font-mono">{s.num}</span>
+            {s.title}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function ProfitAnalyst() {
   return (
     <PasswordGate storageKey="profitanalyst-unlocked">
@@ -474,8 +702,10 @@ export default function ProfitAnalyst() {
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
+      <SectionNav />
+
       {/* HERO */}
-      <section className="pt-32 pb-12 md:pt-40 md:pb-16">
+      <section className="pt-24 pb-12 md:pt-32 md:pb-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
@@ -493,7 +723,7 @@ export default function ProfitAnalyst() {
       <div className="gradient-line" />
 
       {/* 01 THE SPECIFICITY STACK */}
-      <section className="py-16 md:py-20">
+      <section id="section-01" className="py-16 md:py-20 scroll-mt-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="01" title="The specificity stack" />
@@ -537,7 +767,7 @@ export default function ProfitAnalyst() {
       <div className="gradient-line" />
 
       {/* 02 CURRENT TO REQUIRED BELIEFS */}
-      <section className="py-16 md:py-20">
+      <section id="section-02" className="py-16 md:py-20 scroll-mt-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="02" title="Current and required beliefs" />
@@ -560,7 +790,7 @@ export default function ProfitAnalyst() {
       <div className="gradient-line" />
 
       {/* 03 AUTHORITY + AUTHENTICITY */}
-      <section className="py-16 md:py-20">
+      <section id="section-03" className="py-16 md:py-20 scroll-mt-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="03" title="Authority and authenticity" />
@@ -571,93 +801,7 @@ export default function ProfitAnalyst() {
               <span className="text-white font-semibold">Authority is credibility</span>. Proof you <span className="text-blue-300 font-semibold">can</span> deliver on the promise. <span className="text-white font-semibold">Authenticity is character</span>. Proof you <span className="text-blue-300 font-semibold">will</span>.
             </p>
 
-            {/* TRUST MATRIX */}
-            <div className="mb-4 text-center">
-              <p className="text-zinc-500 text-xs uppercase tracking-widest">Authenticity, character, will they</p>
-              <div className="flex justify-between text-zinc-600 text-[10px] uppercase tracking-widest mt-1 px-3">
-                <span>Low</span>
-                <span>High</span>
-              </div>
-            </div>
-
-            <div className="flex gap-3 mb-12">
-              <div className="flex flex-col justify-between text-zinc-500 text-xs uppercase tracking-widest py-3">
-                <span>High</span>
-                <span className="text-zinc-400 text-[10px] writing-vertical hidden sm:inline" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Authority, credibility, can they</span>
-                <span>Low</span>
-              </div>
-
-              <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3">
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
-                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">High auth · Low authen</p>
-                  <p className="text-white font-semibold text-sm mb-1">Credible but cold</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed">Expert who hasn't earned the right to be liked. Easy to shop against on price.</p>
-                </div>
-                <div className="rounded-xl border-2 border-blue-500/50 bg-blue-500/10 p-5 min-h-[140px] shadow-[0_0_40px_-10px_rgba(59,130,246,0.45)] relative">
-                  <p className="text-blue-300 text-[10px] uppercase tracking-widest mb-2 font-semibold">★ Trust</p>
-                  <p className="text-white font-semibold text-sm mb-1">The goal zone</p>
-                  <p className="text-zinc-300 text-xs leading-relaxed">Can deliver. Will deliver. Comparison stops. Premium pricing holds.</p>
-                </div>
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5 min-h-[140px] opacity-50">
-                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · Low authen</p>
-                  <p className="text-white font-semibold text-sm mb-1">Stranger</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed">Unknown. Skipped past in the feed.</p>
-                </div>
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
-                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · High authen</p>
-                  <p className="text-white font-semibold text-sm mb-1">Likeable but unproven</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed">Connection without proof. People like them. They don't write the cheque.</p>
-                </div>
-              </div>
-            </div>
-
-            {/* THE OPPORTUNITY */}
-            <div className="border-t border-zinc-800/60 pt-10">
-              <p className="text-zinc-300 font-semibold mb-3">The opportunity</p>
-              <p className="text-zinc-400 leading-relaxed mb-8">
-                Authority is mostly there. The work, the results, the credibility are real. The lighter axis is authenticity. Stacking moves on the character side is what pushes the brand into the trust quadrant.
-              </p>
-
-              <div className="space-y-8">
-                <div>
-                  <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authority moves</p>
-                  <p className="text-zinc-500 text-xs italic mb-4">Proof you can deliver</p>
-                  <ul className="space-y-2">
-                    {[
-                      'Aggregate data. The average outcome across the last X workshops, named publicly.',
-                      'Specific operator stories. Named figures from named operators on the day.',
-                      'Proprietary mechanism. The question sequence documented, named, and protected.',
-                      'Visible IP. Frameworks and decision rules others can recognise but not replicate.',
-                      'Live workshop moments. The mechanism shown working, not just claimed.',
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div>
-                  <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authenticity moves</p>
-                  <p className="text-zinc-500 text-xs italic mb-4">Proof you will deliver for me</p>
-                  <ul className="space-y-2">
-                    {[
-                      'Damaging admissions. The numbers you got wrong in your own businesses, named on camera.',
-                      'Behind the scenes from your own P&L. You run operations yourself. Show it.',
-                      "Native operator language. Speak the way operators speak when they're alone.",
-                      'Verifiable industry knowledge. The specific facts only an insider would know.',
-                      'Public decisions not to take easy money. Clients you said no to and why.',
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <TrustMatrixInteractive />
           </Section>
         </div>
       </section>
@@ -665,7 +809,7 @@ export default function ProfitAnalyst() {
       <div className="gradient-line" />
 
       {/* 04 SELLING WORKSHOPS */}
-      <section className="py-16 md:py-20">
+      <section id="section-04" className="py-16 md:py-20 scroll-mt-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="04" title="Selling workshops" />
