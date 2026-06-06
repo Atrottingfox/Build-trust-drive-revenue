@@ -215,9 +215,9 @@ const TIERS: TierRow[] = [
     potency: 5,
     note: 'The role label they use for themselves. Immediate self-identification.',
     examples: {
-      restaurant: 'Restaurant operators.',
-      ecommerce: 'DTC founders.',
-      agency: 'Creative agency owners.',
+      restaurant: 'Restaurant owners.',
+      ecommerce: 'Ecommerce founders.',
+      agency: 'Agency owners.',
     },
   },
   {
@@ -226,7 +226,7 @@ const TIERS: TierRow[] = [
     note: 'The business category they sit in. Broader than the role label, narrower than the industry.',
     examples: {
       restaurant: 'Food service operators.',
-      ecommerce: 'Ecommerce brands.',
+      ecommerce: 'DTC brands.',
       agency: 'Agencies.',
     },
   },
@@ -296,8 +296,8 @@ const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
     tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   ecommerce: {
-    loose: 'Ecommerce brands. Improve your margin.',
-    tight: "Ecommerce brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    loose: 'DTC brands. Improve your margin.',
+    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   agency: {
     loose: 'Agencies. Optimise your profit.',
