@@ -499,53 +499,100 @@ export default function ProfitAnalyst() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="03" title="Authority and authenticity" />
-            <p className="text-zinc-400 leading-relaxed mb-8">
-              Two axes carry trust. Both have to be near max. Most operators run hard at one and forget the other.
+            <p className="text-zinc-400 leading-relaxed mb-2">
+              Two axes carry trust. Both have to be near max for comparison to stop.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-10">
+              <span className="text-white font-semibold">Authority is credibility</span>. Proof you <span className="text-blue-300 font-semibold">can</span> deliver on the promise. <span className="text-white font-semibold">Authenticity is character</span>. Proof you <span className="text-blue-300 font-semibold">will</span>.
             </p>
 
-            <div className="space-y-8">
-              <div>
-                <p className="text-white font-semibold mb-2 text-lg">Can they deliver?</p>
-                <p className="text-zinc-500 text-sm uppercase tracking-widest mb-3">Authority</p>
-                <ul className="space-y-2">
-                  {[
-                    'Named proprietary mechanism. Something only you can claim.',
-                    'Aggregate data. The number across all the workshops.',
-                    'Individual data. Specific clients, specific results.',
-                    'IP. Frameworks, sequences, decision rules you built and others use.',
-                    'Stories. Past work that proves the principle holds.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div>
-                <p className="text-white font-semibold mb-2 text-lg">Will they deliver for me?</p>
-                <p className="text-zinc-500 text-sm uppercase tracking-widest mb-3">Authenticity</p>
-                <ul className="space-y-2">
-                  {[
-                    'Damaging admissions. The things you got wrong, on camera, named.',
-                    'Behind the scenes from your own operations. The honest version.',
-                    "Native language. Speak the way your audience speaks when they're alone.",
-                    'Industry knowledge they can verify with one question.',
-                    'Specific moments where you decided not to take the easy money. They notice.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+            {/* TRUST MATRIX */}
+            <div className="mb-4 text-center">
+              <p className="text-zinc-500 text-xs uppercase tracking-widest">Authenticity, character, will they</p>
+              <div className="flex justify-between text-zinc-600 text-[10px] uppercase tracking-widest mt-1 px-3">
+                <span>Low</span>
+                <span>High</span>
               </div>
             </div>
 
-            <p className="text-zinc-300 leading-relaxed mt-8 font-medium">
-              When both are near max, comparison stops. Prospects stop shopping the category and start trying to work with you specifically.
-            </p>
+            <div className="flex gap-3 mb-12">
+              <div className="flex flex-col justify-between text-zinc-500 text-xs uppercase tracking-widest py-3">
+                <span>High</span>
+                <span className="text-zinc-400 text-[10px] writing-vertical hidden sm:inline" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>Authority, credibility, can they</span>
+                <span>Low</span>
+              </div>
+
+              <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3">
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
+                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">High auth · Low authen</p>
+                  <p className="text-white font-semibold text-sm mb-1">Credible but cold</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed">Expert who hasn't earned the right to be liked. Easy to shop against on price.</p>
+                </div>
+                <div className="rounded-xl border-2 border-blue-500/50 bg-blue-500/10 p-5 min-h-[140px] shadow-[0_0_40px_-10px_rgba(59,130,246,0.45)] relative">
+                  <p className="text-blue-300 text-[10px] uppercase tracking-widest mb-2 font-semibold">★ Trust</p>
+                  <p className="text-white font-semibold text-sm mb-1">The goal zone</p>
+                  <p className="text-zinc-300 text-xs leading-relaxed">Can deliver. Will deliver. Comparison stops. Premium pricing holds.</p>
+                </div>
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/20 p-5 min-h-[140px] opacity-50">
+                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · Low authen</p>
+                  <p className="text-white font-semibold text-sm mb-1">Stranger</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed">Unknown. Skipped past in the feed.</p>
+                </div>
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-5 min-h-[140px]">
+                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-2">Low auth · High authen</p>
+                  <p className="text-white font-semibold text-sm mb-1">Likeable but unproven</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed">Connection without proof. People like them. They don't write the cheque.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* THE OPPORTUNITY */}
+            <div className="border-t border-zinc-800/60 pt-10">
+              <p className="text-zinc-300 font-semibold mb-3">The opportunity</p>
+              <p className="text-zinc-400 leading-relaxed mb-8">
+                Authority is mostly there. The work, the results, the credibility are real. The lighter axis is authenticity. Stacking moves on the character side is what pushes the brand into the trust quadrant.
+              </p>
+
+              <div className="space-y-8">
+                <div>
+                  <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authority moves</p>
+                  <p className="text-zinc-500 text-xs italic mb-4">Proof you can deliver</p>
+                  <ul className="space-y-2">
+                    {[
+                      'Aggregate data. The average outcome across the last X workshops, named publicly.',
+                      'Specific operator stories. Named figures from named operators on the day.',
+                      'Proprietary mechanism. The question sequence documented, named, and protected.',
+                      'Visible IP. Frameworks and decision rules others can recognise but not replicate.',
+                      'Live workshop moments. The mechanism shown working, not just claimed.',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">Authenticity moves</p>
+                  <p className="text-zinc-500 text-xs italic mb-4">Proof you will deliver for me</p>
+                  <ul className="space-y-2">
+                    {[
+                      'Damaging admissions. The numbers you got wrong in your own businesses, named on camera.',
+                      'Behind the scenes from your own P&L. You run operations yourself. Show it.',
+                      "Native operator language. Speak the way operators speak when they're alone.",
+                      'Verifiable industry knowledge. The specific facts only an insider would know.',
+                      'Public decisions not to take easy money. Clients you said no to and why.',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </Section>
         </div>
       </section>
