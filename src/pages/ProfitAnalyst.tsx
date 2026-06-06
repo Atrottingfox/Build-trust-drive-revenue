@@ -271,7 +271,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   {
     name: 'Promise',
     loose: "'Better margins.'",
-    tight: "'Walk in with twelve weeks of numbers. Walk out with hidden profit named in 90 minutes.'",
+    tight: "'Bring twelve weeks of numbers. Historic average across the last 15 workshops: $50k of hidden profit named in 90 minutes.'",
   },
   {
     name: 'Language',
@@ -281,7 +281,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   {
     name: 'Outcome',
     loose: "'More profit.'",
-    tight: "'$50,000 of hidden profit. Named on the day. Defended by historic average.'",
+    tight: "'$50,000 average hidden profit found per workshop. Historic, across 15 past sessions. Not a claim. A fact.'",
   },
   {
     name: 'Stage',
@@ -293,15 +293,15 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Hospitality founders. Improve your profit.',
-    tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Walk in with twelve weeks of numbers. Walk out with $50k of hidden profit named in 90 minutes.",
+    tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
   },
   ecommerce: {
     loose: 'DTC brand operators. Improve your margin.',
-    tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out with your top three profit killers named, and the fix for each.",
+    tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Across our last 15 workshops, every operator left with their top three profit killers named and the fix for each.",
   },
   agency: {
     loose: 'Service business founders. Optimise your profit.',
-    tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out with every client ranked by real margin, and the three you should fire by next month.",
+    tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Operators in our past workshops left with every client ranked by real margin, and the three they fired by month's end.",
   },
 };
 
@@ -543,7 +543,7 @@ const MOVES: Move[] = [
     axis: 'authority',
     short: 'Proprietary mechanism',
     text: 'A named, sequenced process nobody else can claim.',
-    example: "'The Profit Lens.' A four-step sequence that surfaces hidden margin in any operator's P&L in 90 minutes.",
+    example: "'The Profit Lens.' A four-step sequence used in every past workshop to surface hidden margin from an operator's P&L.",
   },
   {
     axis: 'authority',
@@ -929,6 +929,9 @@ export default function ProfitAnalyst() {
               <p>
                 The unit being sold is a $5,000 workshop. The marketing job isn't to defend that price tag. It's to make the price irrelevant. When the workshop is unique, differentiated, proprietary, non risked, simple, and fast, $5,000 stops being a number anyone weighs against. Operators just want in.
               </p>
+              <p>
+                Every number on the page comes from past workshops. No promise of a future outcome. No claim. Just facts about what the average has been.
+              </p>
             </div>
 
             <p className="text-zinc-300 font-semibold mb-3">Six attributes that make the price irrelevant</p>
@@ -938,7 +941,7 @@ export default function ProfitAnalyst() {
                 { name: 'Unique', desc: 'Nobody else runs this workshop. Different from anything that calls itself the same name.' },
                 { name: 'Differentiated', desc: 'Even where the category exists, this format has a specific approach you cannot get elsewhere.' },
                 { name: 'Proprietary', desc: 'Named methodology. Owned. Protected. Not generic frameworks dressed up.' },
-                { name: 'Non risked', desc: "'Work free until we find it.' Money risk transferred away from the operator." },
+                { name: 'Non risked', desc: 'Historic data carries the certainty. Past workshop averages published openly. Operator decides on facts, not on a promise.' },
                 { name: 'Simple', desc: '90 minutes. Walk in. Walk out. One number named on the day.' },
                 { name: 'Fast', desc: 'Same-day insight. No weeks of analysis. Immediate value.' },
               ].map((item, i) => (
