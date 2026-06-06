@@ -341,24 +341,71 @@ function PillRow<T extends string | number>({ label, options, value, onChange }:
   );
 }
 
+function TextField({ label, value, onChange, prefix, placeholder, width = 'w-28' }: { label?: string; value: string; onChange: (v: string) => void; prefix?: string; placeholder?: string; width?: string }) {
+  return (
+    <div>
+      {label && <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">{label}</p>}
+      <div className="inline-flex items-center gap-1.5">
+        {prefix && <span className="text-zinc-500 text-sm">{prefix}</span>}
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
+          className={`bg-zinc-900/60 border border-zinc-800 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500/40 transition-colors ${width}`}
+        />
+      </div>
+    </div>
+  );
+}
+
 function AggregateStatementBuilder() {
-  const [count, setCount] = useState<number>(15);
-  const [band, setBand] = useState<string>('$1M and $5M');
-  const [profit, setProfit] = useState<string>('$50,000');
+  const [count, setCount] = useState<string>('15');
+  const [bandMin, setBandMin] = useState<string>('1M');
+  const [bandMax, setBandMax] = useState<string>('5M');
+  const [profit, setProfit] = useState<string>('50,000');
   const [duration, setDuration] = useState<string>('90 minutes');
 
-  const statement = `Across the last ${count} workshops with operators between ${band} in revenue, the average profit found in ${duration} is ${profit}. Some find more. Some find less. That's where the average sits.`;
+  const statement = `Across the last ${count} workshops with operators between $${bandMin} and $${bandMax} in revenue, the average profit found in ${duration} is $${profit}. Some find more. Some find less. That's where the average sits.`;
 
   return (
     <div className="glow-card p-6 md:p-8">
       <p className="text-zinc-300 font-semibold mb-1">Build the aggregate statement</p>
-      <p className="text-zinc-500 text-sm mb-6">Pick the real numbers from the workshops you've run. The line below assembles live. Use the output as a core asset across the channel.</p>
+      <p className="text-zinc-500 text-sm mb-6">Type Gavin's actual numbers. The line below assembles live. Use the output as a core asset across the channel.</p>
 
       <div className="space-y-5 mb-8">
-        <PillRow label="Workshops run" options={[10, 15, 25, 50]} value={count} onChange={setCount} />
-        <PillRow label="Revenue band" options={['$500k and $2M', '$1M and $5M', '$2M and $10M']} value={band} onChange={setBand} />
-        <PillRow label="Average profit found" options={['$25,000', '$50,000', '$100,000']} value={profit} onChange={setProfit} />
-        <PillRow label="Duration" options={['90 minutes', '2 hours', 'a half day']} value={duration} onChange={setDuration} />
+        <TextField label="Workshops run" value={count} onChange={setCount} placeholder="15" width="w-24" />
+
+        <div>
+          <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Revenue band</p>
+          <div className="inline-flex items-center gap-2 flex-wrap">
+            <div className="inline-flex items-center gap-1.5">
+              <span className="text-zinc-500 text-sm">$</span>
+              <input
+                type="text"
+                value={bandMin}
+                onChange={(e) => setBandMin(e.target.value)}
+                placeholder="1M"
+                className="bg-zinc-900/60 border border-zinc-800 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500/40 transition-colors w-24"
+              />
+            </div>
+            <span className="text-zinc-500 text-sm">to</span>
+            <div className="inline-flex items-center gap-1.5">
+              <span className="text-zinc-500 text-sm">$</span>
+              <input
+                type="text"
+                value={bandMax}
+                onChange={(e) => setBandMax(e.target.value)}
+                placeholder="5M"
+                className="bg-zinc-900/60 border border-zinc-800 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500/40 transition-colors w-24"
+              />
+            </div>
+          </div>
+        </div>
+
+        <TextField label="Average profit found" value={profit} onChange={setProfit} prefix="$" placeholder="50,000" width="w-32" />
+
+        <PillRow label="Duration" options={['60 minutes', '90 minutes', '2 hours', '3 hours', 'a half day', 'a full day']} value={duration} onChange={setDuration} />
       </div>
 
       <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-6">
