@@ -194,60 +194,88 @@ function BeliefCard({ belief }: { belief: Belief }) {
   );
 }
 
-type SpecTier = { tier: string; text: string; potency: number; note: string };
-type Compensation = { broadAvatar: string; loose: string; tight: string };
-type SpecExample = { label: string; sub: string; tiers: SpecTier[]; compensation: Compensation };
+type Scenario = 'restaurant' | 'ecommerce' | 'agency';
 
-const SPEC_EXAMPLES: SpecExample[] = [
+const SCENARIOS: { key: Scenario; label: string; sub: string }[] = [
+  { key: 'restaurant', label: 'Restaurant', sub: 'Hospitality operator' },
+  { key: 'ecommerce', label: 'E-commerce', sub: 'DTC founder' },
+  { key: 'agency', label: 'Agency', sub: 'Service business' },
+];
+
+type TierRow = {
+  name: string;
+  potency: number;
+  note: string;
+  examples: Record<Scenario, string>;
+};
+
+const TIERS: TierRow[] = [
   {
-    label: 'Restaurant',
-    sub: 'Hospitality operator',
-    tiers: [
-      { tier: 'Identity', text: 'Restaurant operator running $1.5M who hates seeing the GST bill more than the tax bill.', potency: 5, note: 'A real person. Specific revenue, specific pain.' },
-      { tier: 'Category', text: 'Hospitality founders.', potency: 4, note: 'Broader. Loses the operational pain that made the identity nod.' },
-      { tier: 'Industry', text: 'Food and beverage businesses.', potency: 3, note: 'Industry label. Generic enough nobody sees themselves in it.' },
-      { tier: 'Segment', text: 'SMBs.', potency: 2, note: 'A size grouping. Defines scope but no operator self-identifies as this.' },
-      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'The widest possible label. Almost invisible to the right person.' },
-    ],
-    compensation: {
-      broadAvatar: 'Hospitality founders',
-      loose: 'Hospitality founders. Improve your profit.',
-      tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Walk in with twelve weeks of numbers. Walk out with $50k of hidden profit named in 90 minutes.",
+    name: 'Identity',
+    potency: 5,
+    note: 'A specific person. Real revenue, real pain. The right operator nods immediately.',
+    examples: {
+      restaurant: 'Restaurant operator at $1.5M who hates seeing the GST bill more than the tax bill.',
+      ecommerce: "Shopify founder at $3M who can't tell which SKUs are profitable after returns and ad spend.",
+      agency: "Creative agency owner at 12 staff who can't tell which clients are losing him money.",
     },
   },
   {
-    label: 'E-commerce',
-    sub: 'DTC founder',
-    tiers: [
-      { tier: 'Identity', text: "Shopify founder at $3M who can't tell which SKUs are actually profitable after returns and ad spend.", potency: 5, note: 'Pain is hyper specific. The right founder leans in.' },
-      { tier: 'Category', text: 'DTC brand operators.', potency: 4, note: 'Common label. Loses the specific blind spot.' },
-      { tier: 'Industry', text: 'E-commerce businesses.', potency: 3, note: 'Too broad. Different operators with different problems.' },
-      { tier: 'Segment', text: 'SMBs.', potency: 2, note: "A size descriptor. Doesn't speak to anyone specifically." },
-      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'The broadest label. Says nothing to anyone in particular.' },
-    ],
-    compensation: {
-      broadAvatar: 'DTC brand operators',
-      loose: 'DTC brand operators. Improve your margin.',
-      tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out with your top three profit killers named, and the fix for each.",
+    name: 'Category',
+    potency: 4,
+    note: 'Broader sub-group. Loses some of the operational pain that made the identity nod.',
+    examples: {
+      restaurant: 'Hospitality founders.',
+      ecommerce: 'DTC brand operators.',
+      agency: 'Service business founders.',
     },
   },
   {
-    label: 'Agency',
-    sub: 'Service business owner',
-    tiers: [
-      { tier: 'Identity', text: "Creative agency owner at 12 staff who books $2M revenue but can't tell which clients are losing him money.", potency: 5, note: 'Specific size, specific structure, specific problem.' },
-      { tier: 'Category', text: 'Service business founders.', potency: 4, note: 'Wide. Covers people whose problems are nothing alike.' },
-      { tier: 'Industry', text: 'Professional services.', potency: 3, note: 'Industry term. Almost institutional.' },
-      { tier: 'Segment', text: 'SMBs.', potency: 2, note: 'Just describes business size. Not an identity.' },
-      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'Nobody calls themselves this. Invisible.' },
-    ],
-    compensation: {
-      broadAvatar: 'Service business founders',
-      loose: 'Service business founders. Optimise your profit.',
-      tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out with every client ranked by real margin, and the three you should fire by next month.",
+    name: 'Industry',
+    potency: 3,
+    note: 'Industry label. Generic enough that nobody self-identifies as this.',
+    examples: {
+      restaurant: 'Food and beverage.',
+      ecommerce: 'E-commerce businesses.',
+      agency: 'Professional services.',
+    },
+  },
+  {
+    name: 'Segment',
+    potency: 2,
+    note: 'Size descriptor. Defines scope but no operator calls themselves this.',
+    examples: {
+      restaurant: 'SMBs.',
+      ecommerce: 'SMBs.',
+      agency: 'SMBs.',
+    },
+  },
+  {
+    name: 'Market',
+    potency: 1,
+    note: 'Widest possible label. Almost invisible to the right person.',
+    examples: {
+      restaurant: 'Business owners.',
+      ecommerce: 'Business owners.',
+      agency: 'Business owners.',
     },
   },
 ];
+
+const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
+  restaurant: {
+    loose: 'Hospitality founders. Improve your profit.',
+    tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Walk in with twelve weeks of numbers. Walk out with $50k of hidden profit named in 90 minutes.",
+  },
+  ecommerce: {
+    loose: 'DTC brand operators. Improve your margin.',
+    tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out with your top three profit killers named, and the fix for each.",
+  },
+  agency: {
+    loose: 'Service business founders. Optimise your profit.',
+    tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out with every client ranked by real margin, and the three you should fire by next month.",
+  },
+};
 
 function PotencyDots({ score, max = 5 }: { score: number; max?: number }) {
   return (
@@ -325,157 +353,93 @@ function AggregateStatementBuilder() {
 }
 
 function SpecificityStack() {
-  const [selected, setSelected] = useState(0);
-  const [openTier, setOpenTier] = useState<number | null>(null);
-  const [showTight, setShowTight] = useState(false);
-  const current = SPEC_EXAMPLES[selected];
-
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-6">
-        {SPEC_EXAMPLES.map((ex, i) => (
-          <button
-            key={i}
-            onClick={() => { setSelected(i); setOpenTier(null); setShowTight(false); }}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              selected === i
-                ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300 shadow-[0_0_20px_-8px_rgba(59,130,246,0.5)]'
-                : 'bg-transparent border border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
-            }`}
-          >
-            {ex.label}
-          </button>
+      {/* Desktop header row */}
+      <div className="hidden md:grid grid-cols-[80px_1fr_1fr_1fr] gap-4 mb-4 pb-3 border-b border-zinc-800/60">
+        <div></div>
+        {SCENARIOS.map((s) => (
+          <div key={s.key}>
+            <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold">{s.label}</p>
+            <p className="text-zinc-500 text-[10px] italic">{s.sub}</p>
+          </div>
         ))}
       </div>
-      <p className="text-zinc-500 text-xs mb-5 italic">{current.sub}. Tap a tier for the note.</p>
 
+      {/* Bar legend */}
       <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest">
         <span className="text-blue-400 font-semibold">Avatar carries</span>
         <span className="text-zinc-500 font-semibold">Other levers must carry</span>
       </div>
 
+      {/* Tier rows */}
       <div className="space-y-3 mb-12">
-        {current.tiers.map((row, i) => {
-          const isOpen = openTier === i;
-          const avatarPercent = (row.potency / 5) * 100;
+        {TIERS.map((tier, i) => {
+          const avatarPercent = (tier.potency / 5) * 100;
           return (
-            <motion.button
-              key={`${selected}-${i}`}
-              onClick={() => setOpenTier(isOpen ? null : i)}
+            <motion.div
+              key={tier.name}
               initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.25, delay: i * 0.05 }}
-              className={`glow-card w-full text-left p-5 transition-colors ${isOpen ? 'border-blue-500/30' : 'hover:border-zinc-700'}`}
+              className="glow-card p-5"
             >
-              <div className="flex items-start gap-4 mb-3">
-                <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0 pt-0.5">{row.tier}</p>
-                <p className="text-white font-medium text-sm leading-relaxed flex-1">{row.text}</p>
+              <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_1fr_1fr] gap-3 md:gap-4 items-start mb-4">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest pt-0.5">{tier.name}</p>
+                {SCENARIOS.map((s) => (
+                  <div key={s.key}>
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest mb-1 md:hidden font-semibold">{s.label}</p>
+                    <p className="text-white text-sm leading-relaxed">{tier.examples[s.key]}</p>
+                  </div>
+                ))}
               </div>
 
-              <div className="pl-24">
+              <div className="md:pl-[92px]">
                 <div className="flex h-2 rounded-full overflow-hidden bg-zinc-900/60 border border-zinc-800/60 w-full">
-                  <motion.div
-                    className="bg-blue-400"
-                    initial={false}
-                    animate={{ width: `${avatarPercent}%` }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  />
-                  <motion.div
-                    className="bg-zinc-600/80"
-                    initial={false}
-                    animate={{ width: `${100 - avatarPercent}%` }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  />
+                  <div className="bg-blue-400" style={{ width: `${avatarPercent}%` }} />
+                  <div className="bg-zinc-600/80" style={{ width: `${100 - avatarPercent}%` }} />
                 </div>
                 <div className="flex justify-between mt-1.5 text-[10px]">
                   <span className="text-blue-400 font-medium">{Math.round(avatarPercent)}%</span>
                   <span className="text-zinc-500 font-medium">{Math.round(100 - avatarPercent)}%</span>
                 </div>
+                <p className="text-zinc-500 text-xs italic mt-3 leading-relaxed">{tier.note}</p>
               </div>
-
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="overflow-hidden"
-                  >
-                    <p className="text-zinc-400 text-sm leading-relaxed pt-4 pl-24">{row.note}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
+            </motion.div>
           );
         })}
       </div>
 
-      {/* COMPENSATION DEMO */}
+      {/* COMPENSATION DEMO - all scenarios visible, both loose and tight */}
       <div className="border-t border-zinc-800/60 pt-10">
-        <div className="flex items-baseline justify-between mb-2 gap-4 flex-wrap">
-          <p className="text-zinc-300 font-semibold">Even with a broader avatar, you can still hit hard.</p>
-          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-zinc-800 bg-zinc-900/40">
-            <button
-              onClick={() => setShowTight(false)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${!showTight ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
-            >
-              Loose
-            </button>
-            <button
-              onClick={() => setShowTight(true)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${showTight ? 'bg-blue-500/20 text-blue-300' : 'text-zinc-500 hover:text-zinc-300'}`}
-            >
-              Tightened
-            </button>
-          </div>
-        </div>
-        <p className="text-zinc-500 text-sm mb-5">
-          Same avatar at the Category tier ({current.compensation.broadAvatar}). Toggle to see the same broad avatar with the other levers tightened.
+        <p className="text-zinc-300 font-semibold mb-2">Even with a broader avatar, you can still hit hard.</p>
+        <p className="text-zinc-500 text-sm mb-8">
+          Same Category-tier avatar across all three. The loose version (left) keeps everything broad. The tightened version (right) holds the same broad avatar but dials Problem, Promise, and Outcome to hyper specific. The relationship is visible at a glance.
         </p>
 
-        <div className="glow-card p-6">
-          <div className="flex items-start justify-between gap-4 mb-4">
-            <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest">{showTight ? 'Problem + promise + outcome tightened' : 'Avatar broad, everything else loose'}</p>
-            <PotencyDots score={showTight ? 5 : 1} />
-          </div>
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={`${selected}-${showTight ? 'tight' : 'loose'}`}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -6 }}
-              transition={{ duration: 0.2 }}
-              className={`leading-relaxed ${showTight ? 'text-white text-base' : 'text-zinc-400 text-base italic'}`}
-            >
-              {showTight ? current.compensation.tight : current.compensation.loose}
-            </motion.p>
-          </AnimatePresence>
-
-          {showTight && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              transition={{ duration: 0.25, delay: 0.1 }}
-              className="overflow-hidden"
-            >
-              <div className="mt-5 pt-5 border-t border-zinc-800/60 grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {[
-                  { label: 'Problem', state: 'tight' },
-                  { label: 'Promise', state: 'tight' },
-                  { label: 'Outcome', state: 'tight' },
-                  { label: 'Avatar', state: 'broad' },
-                ].map((lever, i) => (
-                  <div key={i} className="flex flex-col gap-1">
-                    <p className="text-zinc-500 text-xs uppercase tracking-widest">{lever.label}</p>
-                    <p className={`text-xs font-medium ${lever.state === 'tight' ? 'text-blue-300' : 'text-zinc-400'}`}>
-                      {lever.state === 'tight' ? 'Hyper specific' : 'Category level'}
-                    </p>
+        <div className="space-y-6">
+          {SCENARIOS.map((s) => (
+            <div key={s.key}>
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-3">{s.label}</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="rounded-xl border border-zinc-800 p-4 bg-zinc-900/30">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold">Loose</p>
+                    <PotencyDots score={1} />
                   </div>
-                ))}
+                  <p className="text-zinc-400 text-sm leading-relaxed italic">'{COMPENSATIONS[s.key].loose}'</p>
+                </div>
+                <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold">Tightened</p>
+                    <PotencyDots score={5} />
+                  </div>
+                  <p className="text-white text-sm leading-relaxed italic">'{COMPENSATIONS[s.key].tight}'</p>
+                </div>
               </div>
-            </motion.div>
-          )}
+            </div>
+          ))}
         </div>
       </div>
     </div>
