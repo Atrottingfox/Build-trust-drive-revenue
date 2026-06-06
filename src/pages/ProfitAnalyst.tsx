@@ -32,11 +32,75 @@ function SectionHeading({ num, title }: { num: string; title: string }) {
   );
 }
 
-function BeliefCard({ category, current, required }: { category: string; current: string; required: string }) {
+type Belief = { category: string; sub: string; currents: string[]; required: string };
+
+const BELIEFS: Belief[] = [
+  {
+    category: 'Category',
+    sub: 'What they currently believe about profit analysis as a category',
+    currents: [
+      "'My accountant already runs my numbers. I don't need a second set of eyes.'",
+      "'Profit consulting is just rebranded bookkeeping with a higher price tag.'",
+      "'My business is profitable. There's nothing hidden to find.'",
+      "'I've sat through budget review sessions before. They told me what I already knew.'",
+    ],
+    required: "'Compliance accounting and profit analysis are different jobs. My accountant isn't built to find what this workshop finds.'",
+  },
+  {
+    category: 'Mechanism',
+    sub: 'What they think about how the workshop actually works',
+    currents: [
+      "'It'll be another spreadsheet exercise. Nothing I haven't already done.'",
+      "'These workshops are just sales pitches for a bigger consulting package.'",
+      "'Two hours can't possibly surface anything I haven't seen.'",
+      "'It's going to be generic frameworks dressed up as bespoke advice.'",
+    ],
+    required: "'The workshop runs a specific question sequence I haven't been asked before. The questions are the actual product. Operators don't think to ask themselves these things.'",
+  },
+  {
+    category: 'Founder',
+    sub: 'What they assume about Gavin specifically',
+    currents: [
+      "'He's an advisor. Advisors haven't actually run what I run.'",
+      "'My industry is different enough that he won't get the nuance.'",
+      "'He'll give me the same playbook he gives everyone.'",
+      "'Smart guy. But hasn't lived the operational mess I'm in.'",
+    ],
+    required: "'He runs multiple of his own businesses. He's been in the chair. He's also honest about what he gets wrong, which most aren't.'",
+  },
+  {
+    category: 'Self',
+    sub: 'What they believe about themselves walking in',
+    currents: [
+      "'My business is too messy. The workshop will get wasted on cleanup.'",
+      "'I'm too small for this kind of analysis. It's for $10M+ operators.'",
+      "'My situation is too specific. A standard workshop won't fit me.'",
+      "'If there were hidden profit, I'd already know about it.'",
+    ],
+    required: "'Someone at my exact size with my exact mess walked out with a real number named on the day. The mess turns out to be the signal.'",
+  },
+  {
+    category: 'Timing',
+    sub: 'Why they think later is fine',
+    currents: [
+      "'I'll book it after the EOFY rush.'",
+      "'I want to clean my numbers up before he sees them.'",
+      "'Q4 is too busy. New year for this.'",
+      "'I'll do it once cashflow settles.'",
+    ],
+    required: "'Every month I'm not running this, the number the workshop would have surfaced is sitting in the business doing nothing. The fire is the reason to do it now.'",
+  },
+];
+
+function BeliefCard({ belief }: { belief: Belief }) {
   const [view, setView] = useState<'current' | 'required'>('current');
+  const [idx, setIdx] = useState(0);
+  const cycleCurrent = () => setIdx((i) => (i + 1) % belief.currents.length);
+
   return (
     <div>
-      <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-3">{category}</p>
+      <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest mb-1">{belief.category}</p>
+      <p className="text-zinc-500 text-xs mb-3 italic">{belief.sub}</p>
       <div className="glow-card p-6">
         <div className="flex gap-2 mb-5">
           <button
@@ -62,16 +126,37 @@ function BeliefCard({ category, current, required }: { category: string; current
         </div>
         <AnimatePresence mode="wait">
           <motion.p
-            key={view}
+            key={`${view}-${idx}`}
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2 }}
             className={`leading-relaxed ${view === 'current' ? 'text-white' : 'text-zinc-300'}`}
           >
-            {view === 'current' ? current : required}
+            {view === 'current' ? belief.currents[idx] : belief.required}
           </motion.p>
         </AnimatePresence>
+
+        {view === 'current' && belief.currents.length > 1 && (
+          <div className="mt-5 pt-4 border-t border-zinc-800/60 flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              {belief.currents.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-blue-400' : 'bg-zinc-700'}`}
+                />
+              ))}
+              <span className="text-zinc-500 text-xs ml-2">{idx + 1} of {belief.currents.length}</span>
+            </div>
+            <button
+              onClick={cycleCurrent}
+              className="inline-flex items-center gap-1 text-blue-400 text-xs font-medium hover:text-blue-300 transition-colors"
+            >
+              Another framing
+              <ArrowRight className="w-3 h-3" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -367,35 +452,13 @@ export default function ProfitAnalyst() {
               Every prospect carries beliefs that have to shift before they buy. Map the current. Map the required. Build the content that bridges them.
             </p>
             <p className="text-zinc-500 text-sm leading-relaxed mb-10 italic">
-              Tap any card to flip between current and required. Examples are illustrative.
+              Tap Current or Required. Cycle through the framings inside Current to see the variations operators actually hold.
             </p>
 
             <div className="space-y-8">
-              <BeliefCard
-                category="Category"
-                current="'My accountant handles this. He's fine.'"
-                required="'There is profit hiding in my business that compliance accounting won't find. That requires a different conversation.'"
-              />
-              <BeliefCard
-                category="Mechanism"
-                current="'I've worked with advisors before. Generic frameworks, no real edge.'"
-                required="'This guy runs a specific process I haven't seen anywhere else. The questions he asks and the order he asks them in is the actual product.'"
-              />
-              <BeliefCard
-                category="Founder"
-                current="'He doesn't get my business. Operators don't get operators unless they've run one.'"
-                required="'He runs multiple of his own. He's been in the chair. He's also honest about what he gets wrong, which is rare.'"
-              />
-              <BeliefCard
-                category="Self"
-                current="'My business is too messy / too small / too specific. Won't work for me.'"
-                required="'Someone at my exact size with my exact mess got a real result. The proof is undeniable enough that I can't talk myself out of it.'"
-              />
-              <BeliefCard
-                category="Timing"
-                current="'I'll get to this once the [current fire] is handled.'"
-                required="'The fire is the reason I should do this now. Every month I'm not running this analysis, the number my workshop would have surfaced is sitting in the business doing nothing.'"
-              />
+              {BELIEFS.map((belief) => (
+                <BeliefCard key={belief.category} belief={belief} />
+              ))}
             </div>
           </Section>
         </div>
