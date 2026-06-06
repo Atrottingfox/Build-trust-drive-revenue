@@ -211,13 +211,13 @@ type TierRow = {
 
 const TIERS: TierRow[] = [
   {
-    name: 'Identity',
+    name: "Identity (that's me)",
     potency: 5,
-    note: "The role label they use for themselves. The 'that's me' moment.",
+    note: 'The role label they use for themselves. Immediate self-identification.',
     examples: {
       restaurant: 'Restaurant operators.',
-      ecommerce: 'Ecommerce founders.',
-      agency: 'Agency owners.',
+      ecommerce: 'DTC founders.',
+      agency: 'Creative agency owners.',
     },
   },
   {
@@ -226,17 +226,17 @@ const TIERS: TierRow[] = [
     note: 'The business category they sit in. Broader than the role label, narrower than the industry.',
     examples: {
       restaurant: 'Food service operators.',
-      ecommerce: 'DTC brands.',
-      agency: 'Creative agencies.',
+      ecommerce: 'Ecommerce brands.',
+      agency: 'Agencies.',
     },
   },
   {
-    name: 'Industry',
+    name: 'Industry (vertical)',
     potency: 3,
     note: 'The broader vertical the category sits inside. Generic enough that few self-identify as this alone.',
     examples: {
       restaurant: 'Hospitality.',
-      ecommerce: 'E-commerce.',
+      ecommerce: 'Retail.',
       agency: 'Professional services.',
     },
   },
@@ -296,12 +296,12 @@ const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
     tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   ecommerce: {
-    loose: 'DTC brands. Improve your margin.',
-    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    loose: 'Ecommerce brands. Improve your margin.',
+    tight: "Ecommerce brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   agency: {
-    loose: 'Creative agencies. Optimise your profit.',
-    tight: "Creative agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out in 90 minutes with every client ranked by real margin, and the names of the three you should fire by month's end. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    loose: 'Agencies. Optimise your profit.',
+    tight: "Agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out in 90 minutes with every client ranked by real margin, and the names of the three you should fire by month's end. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
 };
 
