@@ -840,7 +840,7 @@ export default function ProfitAnalyst() {
           <Section>
             <SectionHeading num="01" title="The specificity stack" />
             <p className="text-zinc-400 leading-relaxed mb-8">
-              Every offer pulls on a few specificity levers. Tighten one, the others can loosen. Loosen one, the others have to compensate. The trap is loosening all of them at once because each one feels safer on its own.
+              Every offer pulls on a few specificity levers. Tighten one, the others can loosen. Loosen one, the others have to compensate.
             </p>
 
             <p className="text-zinc-300 font-semibold mb-2">Avatar chunking, and the relationship to other levers</p>
