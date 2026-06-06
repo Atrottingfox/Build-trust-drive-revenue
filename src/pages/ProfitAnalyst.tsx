@@ -270,8 +270,8 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   },
   {
     name: 'Promise',
-    loose: "'Better margins.'",
-    tight: "'Bring twelve weeks of numbers. Historic average across the last 15 workshops: $50k of hidden profit named in 90 minutes.'",
+    loose: "'Better profit clarity.'",
+    tight: "'Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.'",
   },
   {
     name: 'Language',
@@ -281,7 +281,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   {
     name: 'Outcome',
     loose: "'More profit.'",
-    tight: "'$50,000 average hidden profit found per workshop. Historic, across 15 past sessions. Not a claim. A fact.'",
+    tight: "'$[X] average hidden profit per workshop, across [N] past sessions. Historic. Verified. Published.' (Placeholder figures. Replace with Gavin's verified record before publishing.)",
   },
   {
     name: 'Stage',
@@ -293,15 +293,15 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Food service operators. Improve your profit.',
-    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
+    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   ecommerce: {
     loose: 'DTC brands. Improve your margin.',
-    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Across our last 15 workshops, every operator left with their top three profit killers named and the fix for each.",
+    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
   agency: {
     loose: 'Creative agencies. Optimise your profit.',
-    tight: "Creative agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Operators in our past workshops left with every client ranked by real margin, and the three they fired by month's end.",
+    tight: "Creative agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out in 90 minutes with every client ranked by real margin, and the names of the three you should fire by month's end. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
   },
 };
 
@@ -476,7 +476,7 @@ function SpecificityStack() {
 
       {/* COMPENSATION DEMO - synced to selected scenario */}
       <div className="border-t border-zinc-800/60 pt-10">
-        <p className="text-zinc-300 font-semibold mb-2">{currentScenario.label}: all five levers tightened, broad avatar held.</p>
+        <p className="text-zinc-300 font-semibold mb-2">Compensation in action: {currentScenario.label}.</p>
         <p className="text-zinc-500 text-sm mb-8">
           Both versions hold the same Category-tier avatar. Loose keeps the other five levers broad. Tightened dials them all up. The contrast reads at a glance.
         </p>
