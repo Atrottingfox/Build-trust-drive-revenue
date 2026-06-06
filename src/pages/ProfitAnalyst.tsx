@@ -77,44 +77,112 @@ function BeliefCard({ category, current, required }: { category: string; current
   );
 }
 
-function SpecificityRow({ tier, label, example, potency }: { tier: string; label: string; example: string; potency: number }) {
-  const [open, setOpen] = useState(false);
+type SpecTier = { tier: string; text: string; potency: number; note: string };
+type SpecExample = { label: string; sub: string; tiers: SpecTier[] };
+
+const SPEC_EXAMPLES: SpecExample[] = [
+  {
+    label: 'Restaurant',
+    sub: 'Hospitality operator',
+    tiers: [
+      { tier: 'Identity', text: 'Restaurant operator running $1.5M who hates seeing the GST bill more than the tax bill.', potency: 4, note: 'A real person. Specific revenue, specific pain.' },
+      { tier: 'Category', text: 'Hospitality founders.', potency: 3, note: 'Broader. Loses the operational pain that made the identity nod.' },
+      { tier: 'Industry', text: 'Food and beverage businesses.', potency: 2, note: 'Industry label. Generic enough nobody sees themselves in it.' },
+      { tier: 'State', text: 'SMB owners.', potency: 1, note: 'The label nobody uses about themselves. Almost invisible.' },
+    ],
+  },
+  {
+    label: 'E-commerce',
+    sub: 'DTC founder',
+    tiers: [
+      { tier: 'Identity', text: "Shopify founder at $3M who can't tell which SKUs are actually profitable after returns and ad spend.", potency: 4, note: 'Pain is hyper specific. The right founder leans in.' },
+      { tier: 'Category', text: 'DTC brand operators.', potency: 3, note: 'Common label. Loses the specific blind spot.' },
+      { tier: 'Industry', text: 'E-commerce businesses.', potency: 2, note: 'Too broad. Different operators with different problems.' },
+      { tier: 'State', text: 'Online retailers.', potency: 1, note: 'A descriptor, not an identity. Easy to skip past.' },
+    ],
+  },
+  {
+    label: 'Agency',
+    sub: 'Service business owner',
+    tiers: [
+      { tier: 'Identity', text: "Creative agency owner at 12 staff who books $2M revenue but can't tell which clients are losing him money.", potency: 4, note: 'Specific size, specific structure, specific problem.' },
+      { tier: 'Category', text: 'Service business founders.', potency: 3, note: 'Wide. Covers people whose problems are nothing alike.' },
+      { tier: 'Industry', text: 'Professional services.', potency: 2, note: 'Industry term. Almost institutional.' },
+      { tier: 'State', text: 'Small business owners.', potency: 1, note: 'Nobody calls themselves this. Invisible.' },
+    ],
+  },
+];
+
+function SpecificityStack() {
+  const [selected, setSelected] = useState(0);
+  const [openTier, setOpenTier] = useState<number | null>(null);
+  const current = SPEC_EXAMPLES[selected];
+
   return (
-    <button
-      onClick={() => setOpen(o => !o)}
-      className="glow-card p-5 w-full text-left hover:border-zinc-700 transition-colors"
-    >
-      <div className="flex items-center justify-between gap-4 mb-1">
-        <div className="flex items-center gap-4 flex-1">
-          <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0">{tier}</p>
-          <p className="text-white font-medium text-sm">{label}</p>
-        </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <div className="flex gap-1">
-            {[1, 2, 3, 4].map(i => (
-              <div
-                key={i}
-                className={`w-1.5 h-4 rounded-full ${i <= potency ? 'bg-blue-400' : 'bg-zinc-800'}`}
-              />
-            ))}
-          </div>
-          <span className="text-zinc-600 text-xs ml-2">{open ? '−' : '+'}</span>
-        </div>
-      </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden"
+    <div>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {SPEC_EXAMPLES.map((ex, i) => (
+          <button
+            key={i}
+            onClick={() => { setSelected(i); setOpenTier(null); }}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              selected === i
+                ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300 shadow-[0_0_20px_-8px_rgba(59,130,246,0.5)]'
+                : 'bg-transparent border border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+            }`}
           >
-            <p className="text-zinc-400 text-sm leading-relaxed pt-3 pl-24">{example}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </button>
+            {ex.label}
+          </button>
+        ))}
+      </div>
+      <p className="text-zinc-500 text-xs mb-5 italic">{current.sub}. Tap a tier for the note.</p>
+
+      <div className="space-y-3">
+        {current.tiers.map((row, i) => {
+          const isOpen = openTier === i;
+          const opacity = 0.5 + (row.potency / 4) * 0.5;
+          return (
+            <motion.button
+              key={`${selected}-${i}`}
+              onClick={() => setOpenTier(isOpen ? null : i)}
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.05 }}
+              className={`glow-card w-full text-left p-5 transition-colors ${isOpen ? 'border-blue-500/30' : 'hover:border-zinc-700'}`}
+              style={{ opacity }}
+            >
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4 flex-1 min-w-0">
+                  <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0">{row.tier}</p>
+                  <p className="text-white font-medium text-sm leading-relaxed">{row.text}</p>
+                </div>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  {[1, 2, 3, 4].map(p => (
+                    <div
+                      key={p}
+                      className={`w-1.5 h-5 rounded-full transition-colors ${p <= row.potency ? 'bg-blue-400' : 'bg-zinc-800'}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <p className="text-zinc-400 text-sm leading-relaxed pt-3 pl-24">{row.note}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -158,32 +226,9 @@ export default function ProfitAnalyst() {
             </p>
 
             <p className="text-zinc-300 font-semibold mb-2">Avatar chunking</p>
-            <p className="text-zinc-500 text-sm mb-5">Tap a tier to see the example. Bars show relative potency.</p>
-            <div className="space-y-3 mb-10">
-              <SpecificityRow
-                tier="Identity"
-                label="Restaurant operator at $1.5M"
-                example="Restaurant operator running $1.5M who hates seeing the GST bill more than the tax bill."
-                potency={4}
-              />
-              <SpecificityRow
-                tier="Category"
-                label="Hospitality founders"
-                example="Hospitality founders. Broader. Still legible. Loses the specific operational pain."
-                potency={3}
-              />
-              <SpecificityRow
-                tier="Industry"
-                label="Food and beverage"
-                example="Food and beverage businesses. Industry level. Generic enough that the person doesn't see themselves in it."
-                potency={2}
-              />
-              <SpecificityRow
-                tier="State"
-                label="SMB owners"
-                example="SMB owners. The label nobody uses about themselves. Almost invisible to the right person."
-                potency={1}
-              />
+            <p className="text-zinc-500 text-sm mb-5">Pick a scenario. Watch potency drop as you chunk up.</p>
+            <div className="mb-10">
+              <SpecificityStack />
             </div>
 
             <p className="text-zinc-400 leading-relaxed mb-6">
