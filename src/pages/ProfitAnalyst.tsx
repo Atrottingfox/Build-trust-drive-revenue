@@ -199,10 +199,11 @@ const SPEC_EXAMPLES: SpecExample[] = [
     label: 'Restaurant',
     sub: 'Hospitality operator',
     tiers: [
-      { tier: 'Identity', text: 'Restaurant operator running $1.5M who hates seeing the GST bill more than the tax bill.', potency: 4, note: 'A real person. Specific revenue, specific pain.' },
-      { tier: 'Category', text: 'Hospitality founders.', potency: 3, note: 'Broader. Loses the operational pain that made the identity nod.' },
-      { tier: 'Industry', text: 'Food and beverage businesses.', potency: 2, note: 'Industry label. Generic enough nobody sees themselves in it.' },
-      { tier: 'State', text: 'SMB owners.', potency: 1, note: 'The label nobody uses about themselves. Almost invisible.' },
+      { tier: 'Identity', text: 'Restaurant operator running $1.5M who hates seeing the GST bill more than the tax bill.', potency: 5, note: 'A real person. Specific revenue, specific pain.' },
+      { tier: 'Category', text: 'Hospitality founders.', potency: 4, note: 'Broader. Loses the operational pain that made the identity nod.' },
+      { tier: 'Industry', text: 'Food and beverage businesses.', potency: 3, note: 'Industry label. Generic enough nobody sees themselves in it.' },
+      { tier: 'Segment', text: 'SMBs.', potency: 2, note: 'A size grouping. Defines scope but no operator self-identifies as this.' },
+      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'The widest possible label. Almost invisible to the right person.' },
     ],
     compensation: {
       broadAvatar: 'Hospitality founders',
@@ -214,10 +215,11 @@ const SPEC_EXAMPLES: SpecExample[] = [
     label: 'E-commerce',
     sub: 'DTC founder',
     tiers: [
-      { tier: 'Identity', text: "Shopify founder at $3M who can't tell which SKUs are actually profitable after returns and ad spend.", potency: 4, note: 'Pain is hyper specific. The right founder leans in.' },
-      { tier: 'Category', text: 'DTC brand operators.', potency: 3, note: 'Common label. Loses the specific blind spot.' },
-      { tier: 'Industry', text: 'E-commerce businesses.', potency: 2, note: 'Too broad. Different operators with different problems.' },
-      { tier: 'State', text: 'Online retailers.', potency: 1, note: 'A descriptor, not an identity. Easy to skip past.' },
+      { tier: 'Identity', text: "Shopify founder at $3M who can't tell which SKUs are actually profitable after returns and ad spend.", potency: 5, note: 'Pain is hyper specific. The right founder leans in.' },
+      { tier: 'Category', text: 'DTC brand operators.', potency: 4, note: 'Common label. Loses the specific blind spot.' },
+      { tier: 'Industry', text: 'E-commerce businesses.', potency: 3, note: 'Too broad. Different operators with different problems.' },
+      { tier: 'Segment', text: 'SMBs.', potency: 2, note: "A size descriptor. Doesn't speak to anyone specifically." },
+      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'The broadest label. Says nothing to anyone in particular.' },
     ],
     compensation: {
       broadAvatar: 'DTC brand operators',
@@ -229,10 +231,11 @@ const SPEC_EXAMPLES: SpecExample[] = [
     label: 'Agency',
     sub: 'Service business owner',
     tiers: [
-      { tier: 'Identity', text: "Creative agency owner at 12 staff who books $2M revenue but can't tell which clients are losing him money.", potency: 4, note: 'Specific size, specific structure, specific problem.' },
-      { tier: 'Category', text: 'Service business founders.', potency: 3, note: 'Wide. Covers people whose problems are nothing alike.' },
-      { tier: 'Industry', text: 'Professional services.', potency: 2, note: 'Industry term. Almost institutional.' },
-      { tier: 'State', text: 'Small business owners.', potency: 1, note: 'Nobody calls themselves this. Invisible.' },
+      { tier: 'Identity', text: "Creative agency owner at 12 staff who books $2M revenue but can't tell which clients are losing him money.", potency: 5, note: 'Specific size, specific structure, specific problem.' },
+      { tier: 'Category', text: 'Service business founders.', potency: 4, note: 'Wide. Covers people whose problems are nothing alike.' },
+      { tier: 'Industry', text: 'Professional services.', potency: 3, note: 'Industry term. Almost institutional.' },
+      { tier: 'Segment', text: 'SMBs.', potency: 2, note: 'Just describes business size. Not an identity.' },
+      { tier: 'Market', text: 'Business owners.', potency: 1, note: 'Nobody calls themselves this. Invisible.' },
     ],
     compensation: {
       broadAvatar: 'Service business founders',
@@ -283,7 +286,7 @@ function SpecificityStack() {
       <div className="space-y-3 mb-12">
         {current.tiers.map((row, i) => {
           const isOpen = openTier === i;
-          const opacity = 0.5 + (row.potency / 4) * 0.5;
+          const opacity = 0.45 + (row.potency / 5) * 0.55;
           return (
             <motion.button
               key={`${selected}-${i}`}
@@ -300,7 +303,7 @@ function SpecificityStack() {
                   <p className="text-white font-medium text-sm leading-relaxed">{row.text}</p>
                 </div>
                 <div className="flex items-center gap-1 flex-shrink-0">
-                  {[1, 2, 3, 4].map(p => (
+                  {[1, 2, 3, 4, 5].map(p => (
                     <div
                       key={p}
                       className={`w-1.5 h-5 rounded-full transition-colors ${p <= row.potency ? 'bg-blue-400' : 'bg-zinc-800'}`}
