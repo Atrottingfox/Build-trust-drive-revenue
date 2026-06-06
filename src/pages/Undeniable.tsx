@@ -871,7 +871,7 @@ export default function Undeniable() {
             <p className="text-zinc-600 text-sm mt-6">30 to 45 minutes. We walk through logistics, build the plan. If it is a fit, we lock dates. If not, I tell you.</p>
             <p className="text-zinc-600 text-sm mt-8">
               <a href="/undeniable-notes" className="text-blue-400 hover:text-blue-300 transition-colors">
-                Read the working notes →
+                Read the working notes
               </a>
             </p>
           </Section>

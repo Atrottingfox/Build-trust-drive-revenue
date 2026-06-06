@@ -175,19 +175,19 @@ export default function LinkNinja() {
             <div className="space-y-6">
               <div>
                 <p className="text-white font-semibold mb-2">Category belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"LinkedIn matters for my business." Mostly broken if they are watching. Easy gate.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">'LinkedIn matters for my business.' Mostly broken if they are watching. Easy gate.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Mechanism belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"Your method is different." The hardest gate and the one that costs the most deals. Overcome with proprietary frameworks, principles that guide decisions, and procedures other people can follow.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">'Your method is different.' The hardest gate and the one that costs the most deals. Overcome with proprietary frameworks, principles that guide decisions, and procedures other people can follow.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Self belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"If they can, I can." Harder when the guest is purely aspirational. Bridge with relatable examples.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">'If they can, I can.' Harder when the guest is purely aspirational. Bridge with relatable examples.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Timing belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"Now is the moment." Handled with scarcity, urgency, or the natural pressure of the guest being early to something.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">'Now is the moment.' Handled with scarcity, urgency, or the natural pressure of the guest being early to something.</p>
               </div>
             </div>
           </Section>
@@ -260,21 +260,21 @@ export default function LinkNinja() {
             <div className="space-y-6">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
-                <p className="text-white font-semibold mb-3">"LinkedIn is lame."</p>
+                <p className="text-white font-semibold mb-3">'LinkedIn is lame.'</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
-                <p className="text-zinc-300 text-sm leading-relaxed">"My audience is on LinkedIn. Nobody else is showing up there, so it is easy to own."</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">'My audience is on LinkedIn. Nobody else is showing up there, so it is easy to own.'</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
-                <p className="text-white font-semibold mb-3">"It takes too much time."</p>
+                <p className="text-white font-semibold mb-3">'It takes too much time.'</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
-                <p className="text-zinc-300 text-sm leading-relaxed">"It is as easy as knowing who the person is and being able to find them. Sales Nav."</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">'It is as easy as knowing who the person is and being able to find them. Sales Nav.'</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
-                <p className="text-white font-semibold mb-3">"LinkedIn audiences don't buy."</p>
+                <p className="text-white font-semibold mb-3">'LinkedIn audiences don't buy.'</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
-                <p className="text-zinc-300 text-sm leading-relaxed">"They do, when the message is direct and the path to the next step is obvious."</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">'They do, when the message is direct and the path to the next step is obvious.'</p>
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-8">

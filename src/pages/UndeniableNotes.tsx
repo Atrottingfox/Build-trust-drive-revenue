@@ -261,7 +261,7 @@ export default function UndeniableNotes() {
               <ul className="space-y-3">
                 {[
                   'Inject specific credibility, numbers, and outcomes.',
-                  'Utilise the "If I..." and "How I..." frame.',
+                  "Utilise the 'If I...' and 'How I...' frame.",
                   'Lead with personal story plus result.',
                   'Anchor specificity in the first 30 seconds of every video. Names. Numbers. Time frames. Lock the credibility before the content.',
                 ].map((item, i) => (
