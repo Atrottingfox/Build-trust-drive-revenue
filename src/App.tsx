@@ -31,6 +31,7 @@ const Calvin = React.lazy(() => import('./pages/Calvin'));
 const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
 const Undeniable = React.lazy(() => import('./pages/Undeniable'));
 const UndeniableNotes = React.lazy(() => import('./pages/UndeniableNotes'));
+const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -86,6 +87,7 @@ export default function App() {
           <Route path="/calvincoyles" element={<CalvinOriginal />} />
           <Route path="/undeniable" element={<Undeniable />} />
           <Route path="/undeniable-notes" element={<UndeniableNotes />} />
+          <Route path="/linkninja" element={<LinkNinja />} />
         </Routes>
       </Suspense>
     </Router>

@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Lock } from 'lucide-react';
 
-const PASSWORD = 'Scale';
-const STORAGE_KEY = 'undeniable-unlocked';
+type PasswordGateProps = {
+  children: React.ReactNode;
+  password?: string;
+  storageKey?: string;
+};
 
-export default function PasswordGate({ children }: { children: React.ReactNode }) {
+export default function PasswordGate({ children, password: expected = 'Scale', storageKey = 'undeniable-unlocked' }: PasswordGateProps) {
   const [unlocked, setUnlocked] = useState(false);
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && sessionStorage.getItem(STORAGE_KEY) === 'true') {
+    if (typeof window !== 'undefined' && sessionStorage.getItem(storageKey) === 'true') {
       setUnlocked(true);
     }
     setChecked(true);
-  }, []);
+  }, [storageKey]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === PASSWORD) {
-      sessionStorage.setItem(STORAGE_KEY, 'true');
+    if (password === expected) {
+      sessionStorage.setItem(storageKey, 'true');
       setUnlocked(true);
       setError(false);
     } else {
