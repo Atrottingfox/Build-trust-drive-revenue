@@ -258,6 +258,68 @@ function PotencyDots({ score, max = 5 }: { score: number; max?: number }) {
   );
 }
 
+function PillRow<T extends string | number>({ label, options, value, onChange }: { label: string; options: T[]; value: T; onChange: (v: T) => void }) {
+  return (
+    <div>
+      <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">{label}</p>
+      <div className="flex flex-wrap gap-2">
+        {options.map((opt) => (
+          <button
+            key={String(opt)}
+            onClick={() => onChange(opt)}
+            className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+              value === opt
+                ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300'
+                : 'bg-transparent border border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+            }`}
+          >
+            {opt}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AggregateStatementBuilder() {
+  const [count, setCount] = useState<number>(15);
+  const [band, setBand] = useState<string>('$1M and $5M');
+  const [profit, setProfit] = useState<string>('$50,000');
+  const [duration, setDuration] = useState<string>('90 minutes');
+
+  const statement = `Across the last ${count} workshops with operators between ${band} in revenue, the average profit found in ${duration} is ${profit}. Some find more. Some find less. That's where the average sits.`;
+
+  return (
+    <div className="glow-card p-6 md:p-8">
+      <p className="text-zinc-300 font-semibold mb-1">Build the aggregate statement</p>
+      <p className="text-zinc-500 text-sm mb-6">Pick the real numbers from the workshops you've run. The line below assembles live. Use the output as a core asset across the channel.</p>
+
+      <div className="space-y-5 mb-8">
+        <PillRow label="Workshops run" options={[10, 15, 25, 50]} value={count} onChange={setCount} />
+        <PillRow label="Revenue band" options={['$500k and $2M', '$1M and $5M', '$2M and $10M']} value={band} onChange={setBand} />
+        <PillRow label="Average profit found" options={['$25,000', '$50,000', '$100,000']} value={profit} onChange={setProfit} />
+        <PillRow label="Duration" options={['90 minutes', '2 hours', 'a half day']} value={duration} onChange={setDuration} />
+      </div>
+
+      <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-6">
+        <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-3">Your aggregate statement</p>
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={statement}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.18 }}
+            className="text-white leading-relaxed italic"
+          >
+            '{statement}'
+          </motion.p>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
 function SpecificityStack() {
   const [selected, setSelected] = useState(0);
   const [openTier, setOpenTier] = useState<number | null>(null);
@@ -602,35 +664,43 @@ export default function ProfitAnalyst() {
 
       <div className="gradient-line" />
 
-      {/* 04 OUTCOMES + SPECIFICITY */}
+      {/* 04 SELLING WORKSHOPS */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="04" title="Outcomes without overpromising" />
+            <SectionHeading num="04" title="Selling workshops" />
             <div className="space-y-4 text-zinc-400 leading-relaxed mb-8">
               <p>
-                Nobody buys coaching. Nobody buys consulting. They buy the outcome the mechanism delivers. The mechanism is just how you get there. Sell the result of the mechanism.
+                The unit being sold is a $5,000 workshop. A specific session, a specific structure, a specific duration. Marketing's job is to defend that price tag, not to promise an outcome you can't guarantee for any individual.
               </p>
               <p>
-                The trap is overpromising. You can't promise a number for a specific person you've never met. What you can do is point at the historic data and let the average do the work.
+                Promising 'I'll find you $50k of hidden profit' for an operator you've never met is the trap. The first prospect who finds $20k drags you into a debate you can't win.
+              </p>
+              <p className="text-zinc-300 font-medium">
+                What does the work instead is the aggregate. Stop promising future outcomes. Start presenting historic averages. That's the asset.
               </p>
             </div>
 
-            <div className="glow-card border-blue-500/20 p-6 mb-10">
-              <p className="text-blue-400 font-semibold text-sm mb-3">How that sounds</p>
-              <p className="text-zinc-300 text-sm leading-relaxed mb-3 italic">
-                'Across the last fifteen workshops with operators between $1M and $5M revenue, the average profit found on the day is $X. Some find more. Some find less. That's where the average sits.'
-              </p>
-              <p className="text-zinc-500 text-sm leading-relaxed">
-                Specific. Defensible. Defended by the proof bank behind it. No promise made about any one individual.
-              </p>
+            <div className="mb-10">
+              <AggregateStatementBuilder />
             </div>
 
-            <p className="text-zinc-400 leading-relaxed mb-6">
-              The other half of this is mechanism. Own it. Name it. Sequence it. Have a defensible answer for every problem that comes up.
-            </p>
-            <p className="text-zinc-300 leading-relaxed font-medium">
-              When the audience feels 'this guy has an answer for everything,' the outcome feels assured even when you never claimed it. The mechanism does the heavy lifting the promise can't.
+            <p className="text-zinc-300 font-semibold mb-3">What this changes</p>
+            <ul className="space-y-2 mb-6">
+              {[
+                'The price is defended by past results, not future promises.',
+                'The marketing focus shifts to the mechanism and the average, away from outcome guarantees.',
+                'The cost of an unmet promise drops to zero. You never made a specific one.',
+                'The workshop is the unit being sold. Everything before it builds the case for the price tag.',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                  <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-zinc-400 leading-relaxed">
+              The mechanism does the heavy lifting the promise can't. The aggregate does the convincing the promise can't. Together they hold a $5k price with no individual claim attached.
             </p>
           </Section>
         </div>
