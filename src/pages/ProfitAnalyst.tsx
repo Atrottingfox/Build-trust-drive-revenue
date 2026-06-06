@@ -223,20 +223,20 @@ const TIERS: TierRow[] = [
   {
     name: 'Category',
     potency: 4,
-    note: 'Broader sub-group. Loses some of the operational pain that made the identity nod.',
+    note: 'The specific business type. Broader than identity, narrower than industry.',
     examples: {
-      restaurant: 'Hospitality founders.',
-      ecommerce: 'DTC brand operators.',
-      agency: 'Service business founders.',
+      restaurant: 'Restaurant operators.',
+      ecommerce: 'DTC brands.',
+      agency: 'Creative agencies.',
     },
   },
   {
     name: 'Industry',
     potency: 3,
-    note: 'Industry label. Generic enough that nobody self-identifies as this.',
+    note: 'The broader vertical the category sits inside. Generic enough that few self-identify as this alone.',
     examples: {
-      restaurant: 'Food and beverage.',
-      ecommerce: 'E-commerce businesses.',
+      restaurant: 'Hospitality.',
+      ecommerce: 'E-commerce.',
       agency: 'Professional services.',
     },
   },
@@ -292,16 +292,16 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
-    loose: 'Hospitality founders. Improve your profit.',
-    tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
+    loose: 'Restaurant operators. Improve your profit.',
+    tight: "Restaurant operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Average operator across our last 15 workshops left with $50k of hidden profit named in 90 minutes.",
   },
   ecommerce: {
-    loose: 'DTC brand operators. Improve your margin.',
-    tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Across our last 15 workshops, every operator left with their top three profit killers named and the fix for each.",
+    loose: 'DTC brands. Improve your margin.',
+    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Across our last 15 workshops, every operator left with their top three profit killers named and the fix for each.",
   },
   agency: {
-    loose: 'Service business founders. Optimise your profit.',
-    tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Operators in our past workshops left with every client ranked by real margin, and the three they fired by month's end.",
+    loose: 'Creative agencies. Optimise your profit.',
+    tight: "Creative agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Operators in our past workshops left with every client ranked by real margin, and the three they fired by month's end.",
   },
 };
 
