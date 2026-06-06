@@ -78,7 +78,8 @@ function BeliefCard({ category, current, required }: { category: string; current
 }
 
 type SpecTier = { tier: string; text: string; potency: number; note: string };
-type SpecExample = { label: string; sub: string; tiers: SpecTier[] };
+type Compensation = { broadAvatar: string; loose: string; tight: string };
+type SpecExample = { label: string; sub: string; tiers: SpecTier[]; compensation: Compensation };
 
 const SPEC_EXAMPLES: SpecExample[] = [
   {
@@ -90,6 +91,11 @@ const SPEC_EXAMPLES: SpecExample[] = [
       { tier: 'Industry', text: 'Food and beverage businesses.', potency: 2, note: 'Industry label. Generic enough nobody sees themselves in it.' },
       { tier: 'State', text: 'SMB owners.', potency: 1, note: 'The label nobody uses about themselves. Almost invisible.' },
     ],
+    compensation: {
+      broadAvatar: 'Hospitality founders',
+      loose: 'Hospitality founders. Improve your profit.',
+      tight: "Hospitality founders. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Walk in with twelve weeks of numbers. Walk out with $50k of hidden profit named in 90 minutes.",
+    },
   },
   {
     label: 'E-commerce',
@@ -100,6 +106,11 @@ const SPEC_EXAMPLES: SpecExample[] = [
       { tier: 'Industry', text: 'E-commerce businesses.', potency: 2, note: 'Too broad. Different operators with different problems.' },
       { tier: 'State', text: 'Online retailers.', potency: 1, note: 'A descriptor, not an identity. Easy to skip past.' },
     ],
+    compensation: {
+      broadAvatar: 'DTC brand operators',
+      loose: 'DTC brand operators. Improve your margin.',
+      tight: "DTC operators. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out with your top three profit killers named, and the fix for each.",
+    },
   },
   {
     label: 'Agency',
@@ -110,12 +121,31 @@ const SPEC_EXAMPLES: SpecExample[] = [
       { tier: 'Industry', text: 'Professional services.', potency: 2, note: 'Industry term. Almost institutional.' },
       { tier: 'State', text: 'Small business owners.', potency: 1, note: 'Nobody calls themselves this. Invisible.' },
     ],
+    compensation: {
+      broadAvatar: 'Service business founders',
+      loose: 'Service business founders. Optimise your profit.',
+      tight: "Service business founders. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out with every client ranked by real margin, and the three you should fire by next month.",
+    },
   },
 ];
+
+function PotencyDots({ score, max = 5 }: { score: number; max?: number }) {
+  return (
+    <div className="flex items-center gap-1">
+      {Array.from({ length: max }).map((_, i) => (
+        <div
+          key={i}
+          className={`w-1.5 h-1.5 rounded-full ${i < score ? 'bg-blue-400' : 'bg-zinc-800'}`}
+        />
+      ))}
+    </div>
+  );
+}
 
 function SpecificityStack() {
   const [selected, setSelected] = useState(0);
   const [openTier, setOpenTier] = useState<number | null>(null);
+  const [showTight, setShowTight] = useState(false);
   const current = SPEC_EXAMPLES[selected];
 
   return (
@@ -124,7 +154,7 @@ function SpecificityStack() {
         {SPEC_EXAMPLES.map((ex, i) => (
           <button
             key={i}
-            onClick={() => { setSelected(i); setOpenTier(null); }}
+            onClick={() => { setSelected(i); setOpenTier(null); setShowTight(false); }}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
               selected === i
                 ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300 shadow-[0_0_20px_-8px_rgba(59,130,246,0.5)]'
@@ -137,7 +167,7 @@ function SpecificityStack() {
       </div>
       <p className="text-zinc-500 text-xs mb-5 italic">{current.sub}. Tap a tier for the note.</p>
 
-      <div className="space-y-3">
+      <div className="space-y-3 mb-12">
         {current.tiers.map((row, i) => {
           const isOpen = openTier === i;
           const opacity = 0.5 + (row.potency / 4) * 0.5;
@@ -181,6 +211,74 @@ function SpecificityStack() {
             </motion.button>
           );
         })}
+      </div>
+
+      {/* COMPENSATION DEMO */}
+      <div className="border-t border-zinc-800/60 pt-10">
+        <div className="flex items-baseline justify-between mb-2 gap-4 flex-wrap">
+          <p className="text-zinc-300 font-semibold">Even with a broader avatar, you can still hit hard.</p>
+          <div className="inline-flex items-center gap-1 p-1 rounded-full border border-zinc-800 bg-zinc-900/40">
+            <button
+              onClick={() => setShowTight(false)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${!showTight ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+            >
+              Loose
+            </button>
+            <button
+              onClick={() => setShowTight(true)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${showTight ? 'bg-blue-500/20 text-blue-300' : 'text-zinc-500 hover:text-zinc-300'}`}
+            >
+              Tightened
+            </button>
+          </div>
+        </div>
+        <p className="text-zinc-500 text-sm mb-5">
+          Same avatar at the Category tier ({current.compensation.broadAvatar}). Toggle to see the same broad avatar with the other levers tightened.
+        </p>
+
+        <div className="glow-card p-6">
+          <div className="flex items-start justify-between gap-4 mb-4">
+            <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest">{showTight ? 'Problem + promise + outcome tightened' : 'Avatar broad, everything else loose'}</p>
+            <PotencyDots score={showTight ? 5 : 1} />
+          </div>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={`${selected}-${showTight ? 'tight' : 'loose'}`}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className={`leading-relaxed ${showTight ? 'text-white text-base' : 'text-zinc-400 text-base italic'}`}
+            >
+              {showTight ? current.compensation.tight : current.compensation.loose}
+            </motion.p>
+          </AnimatePresence>
+
+          {showTight && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.25, delay: 0.1 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-5 pt-5 border-t border-zinc-800/60 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { label: 'Problem', state: 'tight' },
+                  { label: 'Promise', state: 'tight' },
+                  { label: 'Outcome', state: 'tight' },
+                  { label: 'Avatar', state: 'broad' },
+                ].map((lever, i) => (
+                  <div key={i} className="flex flex-col gap-1">
+                    <p className="text-zinc-500 text-xs uppercase tracking-widest">{lever.label}</p>
+                    <p className={`text-xs font-medium ${lever.state === 'tight' ? 'text-blue-300' : 'text-zinc-400'}`}>
+                      {lever.state === 'tight' ? 'Hyper specific' : 'Category level'}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );
