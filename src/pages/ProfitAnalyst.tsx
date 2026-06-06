@@ -381,18 +381,28 @@ function AggregateStatementBuilder() {
 }
 
 function SpecificityStack() {
+  const [selected, setSelected] = useState<Scenario>('restaurant');
+  const currentScenario = SCENARIOS.find((s) => s.key === selected)!;
+
   return (
     <div>
-      {/* Desktop header row */}
-      <div className="hidden md:grid grid-cols-[80px_1fr_1fr_1fr] gap-4 mb-4 pb-3 border-b border-zinc-800/60">
-        <div></div>
+      {/* Scenario buttons */}
+      <div className="flex flex-wrap gap-2 mb-4">
         {SCENARIOS.map((s) => (
-          <div key={s.key}>
-            <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold">{s.label}</p>
-            <p className="text-zinc-500 text-[10px] italic">{s.sub}</p>
-          </div>
+          <button
+            key={s.key}
+            onClick={() => setSelected(s.key)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              selected === s.key
+                ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300 shadow-[0_0_20px_-8px_rgba(59,130,246,0.5)]'
+                : 'bg-transparent border border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+            }`}
+          >
+            {s.label}
+          </button>
         ))}
       </div>
+      <p className="text-zinc-500 text-xs mb-6 italic">{currentScenario.sub}</p>
 
       {/* Bar legend */}
       <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest">
@@ -400,33 +410,37 @@ function SpecificityStack() {
         <span className="text-zinc-500 font-semibold">Other levers must carry</span>
       </div>
 
-      {/* Tier rows */}
+      {/* Tier rows - one scenario at a time */}
       <div className="space-y-3 mb-12">
         {TIERS.map((tier, i) => {
           const avatarPercent = (tier.potency / 5) * 100;
           return (
             <motion.div
-              key={tier.name}
+              key={`${selected}-${tier.name}`}
               initial={{ opacity: 0, x: -8 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.25, delay: i * 0.05 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.04 }}
               className="glow-card p-5"
             >
-              <div className="grid grid-cols-1 md:grid-cols-[80px_1fr_1fr_1fr] gap-3 md:gap-4 items-start mb-4">
-                <p className="text-zinc-500 text-xs uppercase tracking-widest pt-0.5">{tier.name}</p>
-                {SCENARIOS.map((s) => (
-                  <div key={s.key}>
-                    <p className="text-blue-400 text-[10px] uppercase tracking-widest mb-1 md:hidden font-semibold">{s.label}</p>
-                    <p className="text-white text-sm leading-relaxed">{tier.examples[s.key]}</p>
-                  </div>
-                ))}
+              <div className="flex items-start gap-4 mb-4">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0 pt-0.5">{tier.name}</p>
+                <p className="text-white font-medium text-sm leading-relaxed flex-1">{tier.examples[selected]}</p>
               </div>
 
-              <div className="md:pl-[92px]">
+              <div className="pl-24">
                 <div className="flex h-2 rounded-full overflow-hidden bg-zinc-900/60 border border-zinc-800/60 w-full">
-                  <div className="bg-blue-400" style={{ width: `${avatarPercent}%` }} />
-                  <div className="bg-zinc-600/80" style={{ width: `${100 - avatarPercent}%` }} />
+                  <motion.div
+                    className="bg-blue-400"
+                    initial={false}
+                    animate={{ width: `${avatarPercent}%` }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
+                  <motion.div
+                    className="bg-zinc-600/80"
+                    initial={false}
+                    animate={{ width: `${100 - avatarPercent}%` }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
                 </div>
                 <div className="flex justify-between mt-1.5 text-[10px]">
                   <span className="text-blue-400 font-medium">{Math.round(avatarPercent)}%</span>
@@ -439,7 +453,7 @@ function SpecificityStack() {
         })}
       </div>
 
-      {/* 5 OTHER LEVERS */}
+      {/* 5 OTHER LEVERS - scenario agnostic */}
       <div className="border-t border-zinc-800/60 pt-10 mb-12">
         <p className="text-zinc-300 font-semibold mb-2">The other five levers</p>
         <p className="text-zinc-500 text-sm mb-6">
@@ -460,35 +474,50 @@ function SpecificityStack() {
         </div>
       </div>
 
-      {/* COMPENSATION DEMO - all scenarios visible, both loose and tight */}
+      {/* COMPENSATION DEMO - synced to selected scenario */}
       <div className="border-t border-zinc-800/60 pt-10">
-        <p className="text-zinc-300 font-semibold mb-2">All five levers tightened, broad avatar held.</p>
+        <p className="text-zinc-300 font-semibold mb-2">{currentScenario.label}: all five levers tightened, broad avatar held.</p>
         <p className="text-zinc-500 text-sm mb-8">
-          Same Category-tier avatar across all three. Loose version (left) keeps everything broad. Tightened version (right) holds the same broad avatar with all five levers dialled. The contrast reads at a glance.
+          Both versions hold the same Category-tier avatar. Loose keeps the other five levers broad. Tightened dials them all up. The contrast reads at a glance.
         </p>
 
-        <div className="space-y-6">
-          {SCENARIOS.map((s) => (
-            <div key={s.key}>
-              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-3">{s.label}</p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="rounded-xl border border-zinc-800 p-4 bg-zinc-900/30">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold">Loose</p>
-                    <PotencyDots score={1} />
-                  </div>
-                  <p className="text-zinc-400 text-sm leading-relaxed italic">'{COMPENSATIONS[s.key].loose}'</p>
-                </div>
-                <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold">Tightened</p>
-                    <PotencyDots score={5} />
-                  </div>
-                  <p className="text-white text-sm leading-relaxed italic">'{COMPENSATIONS[s.key].tight}'</p>
-                </div>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="rounded-xl border border-zinc-800 p-5 bg-zinc-900/30">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-zinc-500 text-xs uppercase tracking-widest font-semibold">Loose</p>
+              <PotencyDots score={1} />
             </div>
-          ))}
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`loose-${selected}`}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="text-zinc-400 text-sm leading-relaxed italic"
+              >
+                '{COMPENSATIONS[selected].loose}'
+              </motion.p>
+            </AnimatePresence>
+          </div>
+          <div className="rounded-xl border border-blue-500/30 bg-blue-500/5 p-5">
+            <div className="flex items-center justify-between mb-3">
+              <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold">Tightened</p>
+              <PotencyDots score={5} />
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`tight-${selected}`}
+                initial={{ opacity: 0, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="text-white text-sm leading-relaxed italic"
+              >
+                '{COMPENSATIONS[selected].tight}'
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>
