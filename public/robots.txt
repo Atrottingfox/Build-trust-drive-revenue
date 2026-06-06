@@ -34,5 +34,6 @@ Disallow: /calvin-coyles
 Disallow: /undeniable
 Disallow: /undeniable-notes
 Disallow: /linkninja
+Disallow: /theprofitanalyst
 
 Sitemap: https://authorityengine.com.au/sitemap.xml
