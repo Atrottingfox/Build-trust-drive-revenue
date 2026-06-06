@@ -37,8 +37,8 @@ export default function LinkNinja() {
     <PasswordGate storageKey="linkninja-unlocked">
     <div className="min-h-screen bg-base">
       <SEO
-        title="LinkNinja. A read on the category play."
-        description="Strategic notes on the move from coach to category owner. Notes, not a pitch."
+        title="LinkNinja Category Ownership"
+        description="Your path to owning the category of LinkedIn. Strategic memo."
         path="/linkninja"
         noIndex
       />
@@ -49,18 +49,18 @@ export default function LinkNinja() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Strategic read · For discussion</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Strategic memo · For discussion</p>
             <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
-              LinkNinja.
+              LinkNinja
               <br />
-              <span className="text-zinc-500">A read on the category play.</span>
+              <span className="text-zinc-500">Category Ownership.</span>
             </h1>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 mb-8">
               <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
               <span className="text-blue-400 text-xs font-medium italic">Notes, not a pitch</span>
             </div>
             <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
-              What it takes to make "serious LinkedIn leads" associated with you in the minds of your market. Sharing the thinking so you can use it however you want.
+              Your path to owning the category of LinkedIn.
             </p>
           </Section>
         </div>
@@ -68,20 +68,20 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 01 WHERE YOU ARE */}
+      {/* 01 THE ARC */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="01" title="Where you are" />
+            <SectionHeading num="01" title="The arc" />
             <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                The path is problem to promise to product to market. You have already done three.
+                Problem to promise to product to market. You have done three.
               </p>
               <p>
                 Problem owned. People weren't getting leads on LinkedIn. Promise made. We will get you X with LinkedIn. Product built. The portal does the work.
               </p>
               <p className="text-zinc-300 font-medium">
-                The next move is owning the marketing of LinkedIn as a whole. The category. That's the play.
+                The next move is owning the market. The category. That's the play.
               </p>
             </div>
           </Section>
@@ -90,20 +90,17 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 02 WHAT MARKETING ACTUALLY IS */}
+      {/* 02 MARKETING IS WHAT OTHER PEOPLE SAY */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="02" title="What marketing actually is" />
+            <SectionHeading num="02" title="Marketing is what other people say about you" />
             <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                Marketing is what other people say about you. Not what you say about you. If that's the rule, the question becomes how do you get the right other people saying the right things about you in the right rooms.
+                Not what you say about you. If that's the rule, the move is to pair yourself with people who are aspirational and embody the identity of your ideal consumer.
               </p>
               <p>
-                Two routes. Direct, where you reach their audience. Indirect, where you break the audience open through a podcast or a consulting session.
-              </p>
-              <p className="text-zinc-300 font-medium">
-                Consulting sessions are the strongest indirect play. The guest borrows their trust onto you. You own the category through the format itself.
+                The fastest way to do that is borrow trust from people who already have it.
               </p>
             </div>
           </Section>
@@ -112,58 +109,85 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 03 WHY CONSULTING SESSIONS */}
+      {/* 03 BORROWING TRUST */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="03" title="Why consulting sessions own the category" />
-            <p className="text-zinc-400 leading-relaxed mb-8">
-              The format does three things at once that nothing else does as cleanly.
+            <SectionHeading num="03" title="Borrowing trust" />
+            <p className="text-zinc-400 leading-relaxed mb-6">Two routes.</p>
+            <div className="space-y-5 mb-8">
+              <div>
+                <p className="text-white font-semibold mb-1">Direct</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">You reach their audience.</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold mb-1">Indirect</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">You break their audience open through a podcast or a consulting session.</p>
+              </div>
+            </div>
+            <p className="text-zinc-300 leading-relaxed font-medium">
+              Consulting sessions are the strongest indirect play. The person running them borrows trust and owns the category based on the problem they are solving.
             </p>
-            <ul className="space-y-5">
-              <li>
-                <p className="text-white font-semibold mb-1">It borrows trust</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">The guest is credible to your audience. Their credibility rubs off in the act of you hosting them well.</p>
-              </li>
-              <li>
-                <p className="text-white font-semibold mb-1">It owns the mechanism</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">The structure of the session itself becomes proprietary. The way you walk people through the questions is the mechanism nobody else can claim.</p>
-              </li>
-              <li>
-                <p className="text-white font-semibold mb-1">It compounds</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">Each guest extends the credibility umbrella. The next guest is easier to land because the last one made you legible. The audience starts anticipating the format.</p>
-              </li>
-            </ul>
           </Section>
         </div>
       </section>
 
       <div className="gradient-line" />
 
-      {/* 04 THE BELIEF STACK */}
+      {/* 04 THE MECHANISM */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="04" title="The belief stack each session helps you break" />
+            <SectionHeading num="04" title="What makes the session a category owning mechanism" />
+            <div className="space-y-4 text-zinc-400 leading-relaxed mb-8">
+              <p>
+                You need a method other people can follow. That is how you own the mechanism.
+              </p>
+              <p>
+                For the consulting session, three core areas you are looking out for inside any guest's situation.
+              </p>
+            </div>
+            <div className="space-y-3 mb-8">
+              <p className="text-white font-semibold">Content. DMs. Funnels.</p>
+            </div>
+            <div className="space-y-4 text-zinc-400 leading-relaxed">
+              <p>
+                It creates predictable behaviour. How somebody comes in. What problems they face. The process for getting through them. The audience watches and sees themselves on the same path. The format itself becomes the mechanism.
+              </p>
+              <p className="text-zinc-300 font-medium">
+                Each guest faces a sequence of problems. The audience anticipates the same problems coming for them. That's how a session becomes proprietary.
+              </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 05 BELIEF STACK */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="05" title="The belief stack each session walks through" />
             <p className="text-zinc-400 leading-relaxed mb-8">
-              Every viewer arrives with four gates that have to shift before they buy. The session is engineered to walk people through them.
+              Four beliefs gate every purchase. The session is engineered to break them in order.
             </p>
             <div className="space-y-6">
               <div>
                 <p className="text-white font-semibold mb-2">Category belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"LinkedIn matters for B2B leads." If they're watching, this is mostly broken. The easy gate.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">"LinkedIn matters for my business." Mostly broken if they are watching. Easy gate.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Mechanism belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"Your method is different." This is the hardest. The session lets you show your mechanism in real time, applied to a real operator's situation. Hard to copy. Hard to argue with.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">"Your method is different." The hardest gate and the one that costs the most deals. Overcome with proprietary frameworks, principles that guide decisions, and procedures other people can follow.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Self belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"If they can, I can." This is where the aspirational and relatable bridge matters (next section).</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">"If they can, I can." Harder when the guest is purely aspirational. Bridge with relatable examples.</p>
               </div>
               <div>
                 <p className="text-white font-semibold mb-2">Timing belief</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">"Now is the moment." Handled either by scarcity in the room, or by the natural urgency the guest creates by being early to something.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">"Now is the moment." Handled with scarcity, urgency, or the natural pressure of the guest being early to something.</p>
               </div>
             </div>
           </Section>
@@ -172,20 +196,20 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 05 ASPIRATIONAL + RELATABLE */}
+      {/* 06 ASPIRATIONAL + RELATABLE */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="05" title="Aspirational and relatable, at the same time" />
-            <div className="space-y-4 text-zinc-400 leading-relaxed mb-8">
+            <SectionHeading num="06" title="Aspirational and relatable, at the same time" />
+            <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                You can't only bring on whales. The audience watches and thinks "that's not me." You can't only bring on people the audience already feels equal to. There's nothing to reach for.
+                Self belief lives or dies here. Pure aspiration creates distance. Pure relatability gives nothing to reach for.
               </p>
               <p>
-                The play is both. The 10M business and the 5 person team. Same principle, different scale. The audience self selects up or down.
+                The play is both. The 10M business and the 5 person team. Same principle, different scale.
               </p>
               <p className="text-zinc-300 font-medium">
-                Principles travel up and down. Tactics don't. That's why the category gets owned by people who can chunk up to principles, not the ones who just collect hacks.
+                When the message chunks up to principles, it works for someone at 10M and for someone with a 5 person team. The audience self selects. Principles travel up and down. Tactics don't.
               </p>
             </div>
           </Section>
@@ -194,20 +218,119 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 06 WHAT THIS BUYS YOU */}
+      {/* 07 HOW BELIEF SHIFTS */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="06" title="What this buys you" />
+            <SectionHeading num="07" title="How belief actually shifts" />
+            <p className="text-zinc-400 leading-relaxed mb-6">
+              The instinct is to dismiss the current belief. Don't. Acknowledge it. It is there. It is not their fault. There is a new way to see it.
+            </p>
+            <div className="space-y-5 mb-8">
+              <div>
+                <p className="text-white font-semibold mb-1">Acknowledge</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Name the current belief. Show you understand why it exists.</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold mb-1">Dismantle</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Pull it apart with your own data. Let people see the flaws in their own logic.</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold mb-1">Install</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Put the new belief in its place. Back it with examples and proof.</p>
+              </div>
+            </div>
+            <p className="text-zinc-300 leading-relaxed font-medium">
+              Then walk to the next gate. One, two, three, four.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 08 CURRENT REQUIRED */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="08" title="Current beliefs and required beliefs" />
+            <p className="text-zinc-400 leading-relaxed mb-8">
+              Mapping current to required is underrated, rarely properly done, and gives the most leverage. Three examples.
+            </p>
+            <div className="space-y-6">
+              <div className="glow-card p-6">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
+                <p className="text-white font-semibold mb-3">"LinkedIn is lame."</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">"My audience is on LinkedIn. Nobody else is showing up there, so it is easy to own."</p>
+              </div>
+              <div className="glow-card p-6">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
+                <p className="text-white font-semibold mb-3">"It takes too much time."</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">"It is as easy as knowing who the person is and being able to find them. Sales Nav."</p>
+              </div>
+              <div className="glow-card p-6">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Current</p>
+                <p className="text-white font-semibold mb-3">"LinkedIn audiences don't buy."</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-2">Required</p>
+                <p className="text-zinc-300 text-sm leading-relaxed">"They do, when the message is direct and the path to the next step is obvious."</p>
+              </div>
+            </div>
+            <p className="text-zinc-400 leading-relaxed mt-8">
+              Once you know the required belief, every piece of content, every DM, every funnel step is built to install it.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 09 DIFFERENTIATED CONTENT */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="09" title="The only things you can actually claim" />
+            <p className="text-zinc-400 leading-relaxed mb-8">
+              Anyone can post the same hook. Anyone can copy the same CTA. Three things are uniquely yours.
+            </p>
+            <div className="space-y-6">
+              <div>
+                <p className="text-white font-semibold mb-2">Stories</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Your clients' journeys. Their words, their results. Self trust transfer.</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold mb-2">Data</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">Individual (case studies, testimonials) and aggregate (across all clients). Authority trust transfer.</p>
+              </div>
+              <div>
+                <p className="text-white font-semibold mb-2">Experiences</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">What you have seen, done, and heard. Personal trust transfer.</p>
+              </div>
+            </div>
+            <p className="text-zinc-300 leading-relaxed mt-8 font-medium">
+              Bake all three into the sessions and the content that comes off them. Differentiation nobody can copy.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 10 SOFT CLOSE */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="10" title="The soft close" />
             <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
-                A category that gets owned through the mechanism instead of through louder claims. Borrowed trust compounding through the talent layer instead of leaking through paid spend.
+                You do not need a hard sell or a clear CTA if you have engineered a soft, insinuated outcome.
               </p>
               <p>
-                When the SaaS pivot lands, the demand pulls it through. Not because you rebranded as a software company. Because the market already associates the way LinkedIn should work with the way you do it.
+                Give people the opportunity to come to their own logical conclusion. Put two ideas close enough together that the conclusion is obvious. They walk to the next step themselves.
               </p>
               <p className="text-zinc-300 font-medium">
-                That's the category play. The consulting session is the vehicle.
+                That's category ownership. The audience doesn't get pitched. They arrive.
               </p>
             </div>
           </Section>
