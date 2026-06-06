@@ -32,30 +32,38 @@ function SectionHeading({ num, title }: { num: string; title: string }) {
   );
 }
 
-type Belief = { category: string; sub: string; currents: string[]; required: string };
+type Belief = {
+  category: string;
+  sub: string;
+  currents: string[];
+  required: string;
+  framingLabels?: string[];
+};
 
 const BELIEFS: Belief[] = [
   {
     category: 'Category',
-    sub: 'What they currently believe about profit analysis as a category',
+    sub: 'Beliefs shift by stage of awareness',
+    framingLabels: ['Unaware', 'Pain aware', 'Problem aware', 'Solution aware', 'Most aware'],
     currents: [
-      "'My accountant already runs my numbers. I don't need a second set of eyes.'",
-      "'Profit consulting is just rebranded bookkeeping with a higher price tag.'",
-      "'My business is profitable. There's nothing hidden to find.'",
-      "'I've sat through budget review sessions before. They told me what I already knew.'",
+      "'Business is fine. Cashflow is tight sometimes, but that's just running a business.'",
+      "'I work really hard. The bank account never grows the way it should.'",
+      "'I don't actually know which products, clients, or days are making me money.'",
+      "'I should get someone to look at my numbers properly. There are people who do this.'",
+      "'I want to run a proper profit audit. Just deciding who to do it with.'",
     ],
-    required: "'Compliance accounting and profit analysis are different jobs. My accountant isn't built to find what this workshop finds.'",
+    required: "'Compliance accounting and profit analysis are different jobs. Whatever stage I'm at, my regular accountant isn't built to surface what this workshop is built to surface.'",
   },
   {
     category: 'Mechanism',
-    sub: 'What they think about how the workshop actually works',
+    sub: 'They assume every advisor does the same thing',
     currents: [
-      "'It'll be another spreadsheet exercise. Nothing I haven't already done.'",
-      "'These workshops are just sales pitches for a bigger consulting package.'",
-      "'Two hours can't possibly surface anything I haven't seen.'",
-      "'It's going to be generic frameworks dressed up as bespoke advice.'",
+      "'All these workshops are basically the same. Different branding, same content.'",
+      "'It's a spreadsheet exercise dressed up as a methodology.'",
+      "'Every advisor asks the same questions. Nothing new will come out of this one.'",
+      "'If everyone does the same thing, there's no reason to pick this one over a cheaper version.'",
     ],
-    required: "'The workshop runs a specific question sequence I haven't been asked before. The questions are the actual product. Operators don't think to ask themselves these things.'",
+    required: "'This mechanism actually is different. The question sequence is proprietary. The order he asks them in is the actual product. The spreadsheet is just where the answers land.'",
   },
   {
     category: 'Founder',
@@ -138,23 +146,43 @@ function BeliefCard({ belief }: { belief: Belief }) {
         </AnimatePresence>
 
         {view === 'current' && belief.currents.length > 1 && (
-          <div className="mt-5 pt-4 border-t border-zinc-800/60 flex items-center justify-between">
-            <div className="flex items-center gap-1.5">
-              {belief.currents.map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-blue-400' : 'bg-zinc-700'}`}
-                />
-              ))}
-              <span className="text-zinc-500 text-xs ml-2">{idx + 1} of {belief.currents.length}</span>
-            </div>
-            <button
-              onClick={cycleCurrent}
-              className="inline-flex items-center gap-1 text-blue-400 text-xs font-medium hover:text-blue-300 transition-colors"
-            >
-              Another framing
-              <ArrowRight className="w-3 h-3" />
-            </button>
+          <div className="mt-5 pt-4 border-t border-zinc-800/60">
+            {belief.framingLabels ? (
+              <div className="flex flex-wrap gap-1.5">
+                {belief.framingLabels.map((label, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setIdx(i)}
+                    className={`px-2.5 py-1 rounded-full text-xs font-medium transition-colors ${
+                      i === idx
+                        ? 'bg-blue-500/15 border border-blue-500/40 text-blue-300'
+                        : 'border border-zinc-800 text-zinc-500 hover:text-zinc-300 hover:border-zinc-700'
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  {belief.currents.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`w-1.5 h-1.5 rounded-full transition-colors ${i === idx ? 'bg-blue-400' : 'bg-zinc-700'}`}
+                    />
+                  ))}
+                  <span className="text-zinc-500 text-xs ml-2">{idx + 1} of {belief.currents.length}</span>
+                </div>
+                <button
+                  onClick={cycleCurrent}
+                  className="inline-flex items-center gap-1 text-blue-400 text-xs font-medium hover:text-blue-300 transition-colors"
+                >
+                  Another framing
+                  <ArrowRight className="w-3 h-3" />
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
