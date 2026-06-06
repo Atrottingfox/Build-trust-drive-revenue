@@ -262,6 +262,34 @@ const TIERS: TierRow[] = [
   },
 ];
 
+const LEVERS: { name: string; loose: string; tight: string }[] = [
+  {
+    name: 'Problem',
+    loose: "'Improve your profit.'",
+    tight: "'You're paying yourself last and don't know your real hourly rate. Your P&L doesn't tell you which days actually make money.'",
+  },
+  {
+    name: 'Promise',
+    loose: "'Better margins.'",
+    tight: "'Walk in with twelve weeks of numbers. Walk out with hidden profit named in 90 minutes.'",
+  },
+  {
+    name: 'Language',
+    loose: "'Optimise your business.'",
+    tight: "Operator native. 'EOFY scramble.' 'GST hit.' 'The cashflow squeeze.' Not advisor jargon.",
+  },
+  {
+    name: 'Outcome',
+    loose: "'More profit.'",
+    tight: "'$50,000 of hidden profit. Named on the day. Defended by historic average.'",
+  },
+  {
+    name: 'Stage',
+    loose: "'Any business size.'",
+    tight: "'Operators between $1M and $5M in revenue, brick and mortar or service.'",
+  },
+];
+
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Hospitality founders. Improve your profit.',
@@ -411,11 +439,32 @@ function SpecificityStack() {
         })}
       </div>
 
+      {/* 5 OTHER LEVERS */}
+      <div className="border-t border-zinc-800/60 pt-10 mb-12">
+        <p className="text-zinc-300 font-semibold mb-2">The other five levers</p>
+        <p className="text-zinc-500 text-sm mb-6">
+          Problem, Promise, Language, Outcome, and Stage. Each one can be loose or tightened. Tightening any of these compensates for a broader avatar. Tightening all of them is how a Category-tier message hits like an Identity-tier message.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {LEVERS.map((lever) => (
+            <div key={lever.name} className="glow-card p-5">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-3">{lever.name}</p>
+              <div>
+                <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">Loose</p>
+                <p className="text-zinc-400 text-sm leading-relaxed italic mb-4">{lever.loose}</p>
+                <p className="text-blue-300 text-[10px] uppercase tracking-widest mb-1 font-semibold">Tightened</p>
+                <p className="text-white text-sm leading-relaxed italic">{lever.tight}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* COMPENSATION DEMO - all scenarios visible, both loose and tight */}
       <div className="border-t border-zinc-800/60 pt-10">
-        <p className="text-zinc-300 font-semibold mb-2">Even with a broader avatar, you can still hit hard.</p>
+        <p className="text-zinc-300 font-semibold mb-2">All five levers tightened, broad avatar held.</p>
         <p className="text-zinc-500 text-sm mb-8">
-          Same Category-tier avatar across all three. The loose version (left) keeps everything broad. The tightened version (right) holds the same broad avatar but dials Problem, Promise, and Outcome to hyper specific. The relationship is visible at a glance.
+          Same Category-tier avatar across all three. Loose version (left) keeps everything broad. Tightened version (right) holds the same broad avatar with all five levers dialled. The contrast reads at a glance.
         </p>
 
         <div className="space-y-6">
@@ -446,44 +495,97 @@ function SpecificityStack() {
   );
 }
 
-type Move = { axis: 'authority' | 'authenticity'; short: string; text: string };
+type Move = { axis: 'authority' | 'authenticity'; short: string; text: string; example: string };
 
 const MOVES: Move[] = [
-  { axis: 'authority', short: 'Aggregate data', text: 'Aggregate data. The average outcome across the last X workshops, named publicly.' },
-  { axis: 'authority', short: 'Operator stories', text: 'Specific operator stories. Named figures from named operators on the day.' },
-  { axis: 'authority', short: 'Proprietary mechanism', text: 'Proprietary mechanism. The question sequence documented, named, and protected.' },
-  { axis: 'authority', short: 'Visible IP', text: 'Visible IP. Frameworks and decision rules others can recognise without being able to replicate.' },
-  { axis: 'authority', short: 'Live workshop footage', text: 'Live workshop footage. The mechanism shown in action, captured on video.' },
-  { axis: 'authenticity', short: 'Damaging admissions', text: 'Damaging admissions. The numbers you got wrong in your own businesses, named on camera.' },
-  { axis: 'authenticity', short: 'BTS from own P&L', text: 'Behind the scenes from your own P&L. You run operations yourself. Show it.' },
-  { axis: 'authenticity', short: 'Native operator language', text: "Native operator language. Speak the way operators speak when they're alone." },
-  { axis: 'authenticity', short: 'Verifiable industry knowledge', text: 'Verifiable industry knowledge. The specific facts only an insider would know.' },
-  { axis: 'authenticity', short: 'Public no-money decisions', text: 'Public decisions not to take easy money. Clients you said no to and why.' },
+  {
+    axis: 'authority',
+    short: 'Aggregate data',
+    text: 'The average outcome across all the workshops, named publicly.',
+    example: "'Across 15 workshops with operators between $1M and $5M, the average profit found in 90 minutes is $50,000.'",
+  },
+  {
+    axis: 'authority',
+    short: 'Specific operator stories',
+    text: 'Named operators with named figures from named workshops.',
+    example: "'Mark, fitness studio owner at $1.8M, found $73k of profit on the day. Most of it sitting in his subscription pricing.'",
+  },
+  {
+    axis: 'authority',
+    short: 'Proprietary mechanism',
+    text: 'A named, sequenced process nobody else can claim.',
+    example: "'The Profit Lens.' A four-step sequence that surfaces hidden margin in any operator's P&L in 90 minutes.",
+  },
+  {
+    axis: 'authority',
+    short: 'Visible IP',
+    text: 'Frameworks and decision rules others can recognise without being able to replicate.',
+    example: 'Named tools shown publicly: the Profit Lens, the Hidden Profit Matrix, the Margin Mapping worksheet.',
+  },
+  {
+    axis: 'authority',
+    short: 'Live workshop footage',
+    text: 'Captured moments of the mechanism working in real time.',
+    example: '60-second clips from inside workshops showing the moment an operator realises the number they were missing.',
+  },
+  {
+    axis: 'authenticity',
+    short: 'Mission statement',
+    text: 'A clear, repeatable line that shares your intent and what you exist for.',
+    example: "'Too many operators are walking past money they earned. My job is to help them see what they missed.'",
+  },
+  {
+    axis: 'authenticity',
+    short: 'BTS from own P&L',
+    text: 'Show your own operator side. You run businesses too.',
+    example: 'Monthly review posts of your own numbers, the decisions you made, the ones you got wrong.',
+  },
+  {
+    axis: 'authenticity',
+    short: 'Native operator language',
+    text: "Speak the way operators speak when they're alone.",
+    example: "'EOFY scramble,' 'cashflow squeeze,' 'GST hit.' Not advisor jargon.",
+  },
+  {
+    axis: 'authenticity',
+    short: 'Verifiable industry knowledge',
+    text: 'Specific facts only an insider would know.',
+    example: 'Sunday revenue spike for restaurants. Return rates by category for DTC. Project utilisation math for agencies.',
+  },
+  {
+    axis: 'authenticity',
+    short: 'Public no-money decisions',
+    text: 'Clients you turned down and why.',
+    example: "'I turned down a $3M operator last month. Their books needed cleaning up before the workshop could land. I told them what they actually needed first.'",
+  },
 ];
 
 const RATING_LABELS = ['Not yet', 'Started', 'Running', 'Strong'];
 
-function MoveRow({ short, score, onChange }: { short: string; score: number; onChange: (v: number) => void }) {
+function MoveRow({ short, example, score, onChange }: { short: string; example: string; score: number; onChange: (v: number) => void }) {
   return (
-    <div className="glow-card p-4 flex items-center justify-between gap-3 flex-wrap">
-      <p className="text-zinc-300 text-sm leading-relaxed flex-1 min-w-[160px]">{short}</p>
-      <div className="inline-flex items-center gap-1 p-1 rounded-full border border-zinc-800 bg-zinc-900/40 flex-shrink-0">
-        {RATING_LABELS.map((label, i) => (
-          <button
-            key={i}
-            onClick={() => onChange(i)}
-            className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${
-              score === i
-                ? i === 0
-                  ? 'bg-zinc-800 text-zinc-300'
-                  : 'bg-blue-500/15 text-blue-300 border border-blue-500/40'
-                : 'text-zinc-500 hover:text-zinc-300'
-            }`}
-          >
-            {label}
-          </button>
-        ))}
+    <div className="glow-card p-4">
+      <div className="flex items-start justify-between gap-3 flex-wrap mb-2">
+        <p className="text-white text-sm font-medium leading-relaxed flex-1 min-w-[160px]">{short}</p>
+        <div className="inline-flex items-center gap-1 p-1 rounded-full border border-zinc-800 bg-zinc-900/40 flex-shrink-0">
+          {RATING_LABELS.map((label, i) => (
+            <button
+              key={i}
+              onClick={() => onChange(i)}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors ${
+                score === i
+                  ? i === 0
+                    ? 'bg-zinc-800 text-zinc-300'
+                    : 'bg-blue-500/15 text-blue-300 border border-blue-500/40'
+                  : 'text-zinc-500 hover:text-zinc-300'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
       </div>
+      <p className="text-zinc-500 text-xs leading-relaxed italic">{example}</p>
     </div>
   );
 }
@@ -541,7 +643,7 @@ function TrustMatrixInteractive() {
           <div className="space-y-3">
             {MOVES.map((m, i) =>
               m.axis === 'authority' ? (
-                <MoveRow key={i} short={m.short} score={scores[i]} onChange={(v) => setScore(i, v)} />
+                <MoveRow key={i} short={m.short} example={m.example} score={scores[i]} onChange={(v) => setScore(i, v)} />
               ) : null,
             )}
           </div>
@@ -553,7 +655,7 @@ function TrustMatrixInteractive() {
           <div className="space-y-3">
             {MOVES.map((m, i) =>
               m.axis === 'authenticity' ? (
-                <MoveRow key={i} short={m.short} score={scores[i]} onChange={(v) => setScore(i, v)} />
+                <MoveRow key={i} short={m.short} example={m.example} score={scores[i]} onChange={(v) => setScore(i, v)} />
               ) : null,
             )}
           </div>
@@ -620,10 +722,11 @@ function TrustMatrixInteractive() {
             {suggestedMove && lowestScore < 3 && (
               <div className="border-t border-zinc-800/60 pt-5">
                 <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">Strategic move</p>
-                <p className="text-zinc-300 text-sm leading-relaxed mb-1">
+                <p className="text-zinc-300 text-sm leading-relaxed mb-2">
                   Push the {lighterAxis} axis. Start with: <span className="text-white font-medium">{suggestedMove.short}</span>
                 </p>
-                <p className="text-zinc-500 text-xs leading-relaxed">{suggestedMove.text}</p>
+                <p className="text-zinc-400 text-xs leading-relaxed mb-2">{suggestedMove.text}</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">{suggestedMove.example}</p>
               </div>
             )}
             {(!suggestedMove || lowestScore >= 3) && hasRated && (
@@ -793,17 +896,33 @@ export default function ProfitAnalyst() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="04" title="Selling workshops" />
-            <div className="space-y-4 text-zinc-400 leading-relaxed mb-8">
+            <div className="space-y-4 text-zinc-400 leading-relaxed mb-10">
               <p>
-                The unit being sold is a $5,000 workshop. A specific session, a specific structure, a specific duration. Marketing's job is to defend that price tag, not to promise an outcome you can't guarantee for any individual.
-              </p>
-              <p>
-                Promising 'I'll find you $50k of hidden profit' for an operator you've never met is the trap. The first prospect who finds $20k drags you into a debate you can't win.
-              </p>
-              <p className="text-zinc-300 font-medium">
-                What does the work instead is the aggregate. Stop promising future outcomes. Start presenting historic averages. That's the asset.
+                The unit being sold is a $5,000 workshop. The marketing job isn't to defend that price tag. It's to make the price irrelevant. When the workshop is unique, differentiated, proprietary, non risked, simple, and fast, $5,000 stops being a number anyone weighs against. Operators just want in.
               </p>
             </div>
+
+            <p className="text-zinc-300 font-semibold mb-3">Six attributes that make the price irrelevant</p>
+            <p className="text-zinc-500 text-sm mb-6">Stack all six. The price stops being the conversation.</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+              {[
+                { name: 'Unique', desc: 'Nobody else runs this workshop. Different from anything that calls itself the same name.' },
+                { name: 'Differentiated', desc: 'Even where the category exists, this format has a specific approach you cannot get elsewhere.' },
+                { name: 'Proprietary', desc: 'Named methodology. Owned. Protected. Not generic frameworks dressed up.' },
+                { name: 'Non risked', desc: "'Work free until we find it.' Money risk transferred away from the operator." },
+                { name: 'Simple', desc: '90 minutes. Walk in. Walk out. One number named on the day.' },
+                { name: 'Fast', desc: 'Same-day insight. No weeks of analysis. Immediate value.' },
+              ].map((item, i) => (
+                <div key={i} className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">{item.name}</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-zinc-400 leading-relaxed mb-10">
+              The other half is proof. Aggregate historic data sits alongside the six attributes and does the convincing without promising any individual outcome.
+            </p>
 
             <div className="mb-10">
               <AggregateStatementBuilder />
@@ -812,10 +931,10 @@ export default function ProfitAnalyst() {
             <p className="text-zinc-300 font-semibold mb-3">What this changes</p>
             <ul className="space-y-2 mb-6">
               {[
-                'The price is defended by past results, not future promises.',
-                'The marketing focus shifts to the mechanism and the average, away from outcome guarantees.',
+                'The price stops being the conversation. The six attributes do.',
+                'No individual outcome is promised. The aggregate does the proof work.',
                 'The cost of an unmet promise drops to zero. You never made a specific one.',
-                'The workshop is the unit being sold. Everything before it builds the case for the price tag.',
+                'The workshop is the unit being sold. Everything before it builds the case.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
@@ -824,7 +943,7 @@ export default function ProfitAnalyst() {
               ))}
             </ul>
             <p className="text-zinc-400 leading-relaxed">
-              The mechanism does the heavy lifting the promise can't. The aggregate does the convincing the promise can't. Together they hold a $5k price with no individual claim attached.
+              Stack the six attributes. Surface the aggregate. The workshop sells itself.
             </p>
           </Section>
         </div>
