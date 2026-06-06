@@ -349,10 +349,15 @@ function SpecificityStack() {
       </div>
       <p className="text-zinc-500 text-xs mb-5 italic">{current.sub}. Tap a tier for the note.</p>
 
+      <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest">
+        <span className="text-blue-400 font-semibold">Avatar carries</span>
+        <span className="text-zinc-500 font-semibold">Other levers must carry</span>
+      </div>
+
       <div className="space-y-3 mb-12">
         {current.tiers.map((row, i) => {
           const isOpen = openTier === i;
-          const opacity = 0.45 + (row.potency / 5) * 0.55;
+          const avatarPercent = (row.potency / 5) * 100;
           return (
             <motion.button
               key={`${selected}-${i}`}
@@ -361,22 +366,33 @@ function SpecificityStack() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.25, delay: i * 0.05 }}
               className={`glow-card w-full text-left p-5 transition-colors ${isOpen ? 'border-blue-500/30' : 'hover:border-zinc-700'}`}
-              style={{ opacity }}
             >
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4 flex-1 min-w-0">
-                  <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0">{row.tier}</p>
-                  <p className="text-white font-medium text-sm leading-relaxed">{row.text}</p>
+              <div className="flex items-start gap-4 mb-3">
+                <p className="text-zinc-500 text-xs uppercase tracking-widest w-20 flex-shrink-0 pt-0.5">{row.tier}</p>
+                <p className="text-white font-medium text-sm leading-relaxed flex-1">{row.text}</p>
+              </div>
+
+              <div className="pl-24">
+                <div className="flex h-2 rounded-full overflow-hidden bg-zinc-900/60 border border-zinc-800/60 w-full">
+                  <motion.div
+                    className="bg-blue-400"
+                    initial={false}
+                    animate={{ width: `${avatarPercent}%` }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
+                  <motion.div
+                    className="bg-zinc-600/80"
+                    initial={false}
+                    animate={{ width: `${100 - avatarPercent}%` }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
                 </div>
-                <div className="flex items-center gap-1 flex-shrink-0">
-                  {[1, 2, 3, 4, 5].map(p => (
-                    <div
-                      key={p}
-                      className={`w-1.5 h-5 rounded-full transition-colors ${p <= row.potency ? 'bg-blue-400' : 'bg-zinc-800'}`}
-                    />
-                  ))}
+                <div className="flex justify-between mt-1.5 text-[10px]">
+                  <span className="text-blue-400 font-medium">{Math.round(avatarPercent)}%</span>
+                  <span className="text-zinc-500 font-medium">{Math.round(100 - avatarPercent)}%</span>
                 </div>
               </div>
+
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
@@ -386,7 +402,7 @@ function SpecificityStack() {
                     transition={{ duration: 0.2 }}
                     className="overflow-hidden"
                   >
-                    <p className="text-zinc-400 text-sm leading-relaxed pt-3 pl-24">{row.note}</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed pt-4 pl-24">{row.note}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -731,8 +747,8 @@ export default function ProfitAnalyst() {
               Every offer pulls on a few specificity levers. Tighten one, the others can loosen. Loosen one, the others have to compensate. The trap is loosening all of them at once because each one feels safer on its own.
             </p>
 
-            <p className="text-zinc-300 font-semibold mb-2">Avatar chunking</p>
-            <p className="text-zinc-500 text-sm mb-5">Pick a scenario. Watch potency drop as you chunk up.</p>
+            <p className="text-zinc-300 font-semibold mb-2">Avatar chunking, and the relationship to other levers</p>
+            <p className="text-zinc-500 text-sm mb-5">Pick a scenario. The bar on each tier shows how much of the work the avatar carries vs how much the other levers (problem, promise, outcome, language) must pick up. As the avatar gets broader, the burden shifts.</p>
             <div className="mb-10">
               <SpecificityStack />
             </div>
