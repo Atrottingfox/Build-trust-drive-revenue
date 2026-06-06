@@ -797,7 +797,7 @@ export default function ProfitAnalyst() {
               Profit Analyst.
             </h1>
             <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
-              Where the leverage sits.
+              Getting leverage.
             </p>
           </Section>
         </div>
