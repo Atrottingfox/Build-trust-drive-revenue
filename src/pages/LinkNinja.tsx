@@ -62,53 +62,6 @@ export default function LinkNinja() {
         </div>
       </section>
 
-      {/* INTRO CTA - BUNDLE */}
-      <section className="pb-16">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <div className="glow-card border-blue-500/30 p-6 md:p-8">
-              <div className="flex items-start gap-4 mb-5">
-                <div className="w-10 h-10 rounded-full bg-blue-500/15 border border-blue-500/40 flex items-center justify-center flex-shrink-0">
-                  <Download className="w-4 h-4 text-blue-300" />
-                </div>
-                <div>
-                  <p className="text-zinc-300 font-semibold text-lg mb-1">Download the bundle.</p>
-                  <p className="text-zinc-500 text-sm">Everything in this memo, plus the audit and the next steps.</p>
-                </div>
-              </div>
-
-              <ul className="space-y-2.5 mb-6">
-                {[
-                  { label: 'Lab notes', desc: 'Breakdown of what got uncovered, by problem.' },
-                  { label: 'Right next steps', desc: 'For content, DMs, and funnels, mapped to where the audit lands you.' },
-                  { label: 'Full summary', desc: 'What gets covered in the next session, the next bucket, the next move.' },
-                  { label: 'Audit tool', desc: 'Self-rate across content, DMs, and funnels. Short videos at the top of each answer point at the right next step.' },
-                  { label: '7-day free trial', desc: 'Of the LinkNinja tool, ungated, no card required.' },
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-sm leading-relaxed">
-                      <span className="text-white font-medium">{item.label}.</span>{' '}
-                      <span className="text-zinc-400">{item.desc}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <a
-                href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-shine inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full text-sm font-semibold hover:bg-zinc-100 transition-colors"
-              >
-                Get the bundle
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </Section>
-        </div>
-      </section>
-
       <div className="gradient-line" />
 
       {/* 01 MARKETING INSTALLS TRUST */}
@@ -464,11 +417,61 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 08 ASPIRATIONAL + RELATABLE */}
+      {/* 08 BUNDLE INSTALLED IN EVERY VIDEO */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <SectionHeading num="08" title="Aspirational and relatable, at the same time" />
+            <SectionHeading num="08" title="The bundle installed in every video" />
+            <p className="text-zinc-400 leading-relaxed mb-8">
+              Every consulting video carries a bundle. Not a separate funnel, not a separate offer. A bonus the viewer pulls down while watching, that compounds the value of the video itself. The click-to-capture moment built into the mechanism.
+            </p>
+
+            <p className="text-zinc-300 font-semibold mb-4">What goes in it</p>
+            <div className="space-y-3 mb-10">
+              {[
+                { icon: FileText, label: 'Lab notes', desc: "Breakdown of what got uncovered for the guest, mapped to the viewer's situation. Same structure, different operator." },
+                { icon: Compass, label: 'Right next steps', desc: 'For content, DMs, and funnels. Mapped to where the audit lands the viewer.' },
+                { icon: BookOpen, label: 'Full summary', desc: "What got covered in the video, plus what's coming next in the bucket." },
+                { icon: Layers, label: 'Audit tool', desc: 'Self-rate across content, DMs, and funnels. Short videos at the top of each answer point at the right next step.' },
+                { icon: Zap, label: '7-day free trial', desc: 'Of the LinkNinja tool, ungated, no card required.' },
+              ].map((item, i) => (
+                <div key={i} className="glow-card p-4 flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
+                    <item.icon className="w-4 h-4 text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold text-sm mb-1">{item.label}</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-zinc-300 font-semibold mb-3">Why the bundle works</p>
+            <ul className="space-y-2 mb-6">
+              {[
+                'Captures viewers at peak intent. Tension built in the video, the click resolves it.',
+                'Self-segments. The audit reveals where the viewer actually sits across content, DMs, and funnels.',
+                'Compounds the mechanism. The same three-bucket structure carries through every video, every bundle, every next step.',
+                'Earns the trial. By the time the viewer hits the free trial, they have already self-diagnosed and chosen the path.',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                  <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 09 ASPIRATIONAL + RELATABLE */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="09" title="Aspirational and relatable, at the same time" />
             <div className="space-y-4 text-zinc-400 leading-relaxed">
               <p>
                 Self-belief lives or dies here. Pure aspiration creates distance. Pure relatability gives nothing to reach for.
@@ -486,33 +489,6 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* 09 THE PITCH */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <SectionHeading num="09" title="The pitch reads as recognition" />
-            <div className="glow-card border-blue-500/30 p-6 md:p-8 mb-8">
-              <p className="text-white text-lg leading-relaxed font-medium italic">
-                'You're already doing the work. You're already the expert. What you actually need is a simple, repeatable process your team can run, that adds an additional channel where you have no competition.'
-              </p>
-            </div>
-            <div className="space-y-4 text-zinc-400 leading-relaxed">
-              <p>
-                LinkedIn lead gen is the underrated play. Not sexy. Clunky. Takes time. Most operators skip past it.
-              </p>
-              <p>
-                Once the operator is trained correctly and everything is plug-and-play, the founder doesn't have to do anything. That's the beauty. The lift sits inside the operator layer, not the founder layer.
-              </p>
-              <p className="text-zinc-300 font-medium">
-                Done right, this adds a lead gen channel that lifts sales by 30% or more for most businesses (placeholder figure, confirm with Matt's record).
-              </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
       {/* CLOSING */}
       <section className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
@@ -522,7 +498,7 @@ export default function LinkNinja() {
               That's the read.
             </p>
             <p className="text-zinc-400 mb-10 leading-relaxed text-lg">
-              If any of it lands, dig into the bundle above. Happy to talk through any one piece.
+              If any of it lands, happy to talk through any one piece.
             </p>
             <a
               href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
