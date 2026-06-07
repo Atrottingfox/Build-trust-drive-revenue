@@ -426,21 +426,36 @@ export default function LinkNinja() {
               Every consulting video carries a bundle. Not a separate funnel, not a separate offer. A bonus the viewer pulls down while watching, that compounds the value of the video itself. The click-to-capture moment built into the mechanism.
             </p>
 
-            <p className="text-zinc-300 font-semibold mb-4">What goes in it</p>
+            <p className="text-zinc-300 font-semibold mb-2">Three core things</p>
+            <p className="text-zinc-500 text-sm mb-6">Each one earns the next. Give first, give-give second, data exchange third.</p>
             <div className="space-y-3 mb-10">
               {[
-                { icon: FileText, label: 'Lab notes', desc: "Breakdown of what got uncovered for the guest, mapped to the viewer's situation. Same structure, different operator." },
-                { icon: Compass, label: 'Right next steps', desc: 'For content, DMs, and funnels. Mapped to where the audit lands the viewer.' },
-                { icon: BookOpen, label: 'Full summary', desc: "What got covered in the video, plus what's coming next in the bucket." },
-                { icon: Layers, label: 'Audit tool', desc: 'Self-rate across content, DMs, and funnels. Short videos at the top of each answer point at the right next step.' },
-                { icon: Zap, label: '7-day free trial', desc: 'Of the LinkNinja tool, ungated, no card required.' },
+                {
+                  icon: FileText,
+                  label: 'Lab notes',
+                  tier: 'Give. Open. Ungated.',
+                  desc: "The full summary of the consulting session. Breakdown of what got uncovered for the guest, mapped to the viewer's situation. Same structure, different operator. No friction, no trade, no card.",
+                },
+                {
+                  icon: Layers,
+                  label: 'Audit tool',
+                  tier: 'Give-give.',
+                  desc: 'Self-rate across content, DMs, and funnels. Short videos at the top of each answer point at the right next step. The audit IS the right next steps, scored against where the viewer actually sits.',
+                },
+                {
+                  icon: Zap,
+                  label: '7-day free trial',
+                  tier: 'Data exchange.',
+                  desc: 'Of the LinkNinja tool. Earned by the viewer because they have already self-diagnosed through the audit. By the time they hit the trial, they have chosen the path.',
+                },
               ].map((item, i) => (
-                <div key={i} className="glow-card p-4 flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
+                <div key={i} className="glow-card p-5 flex items-start gap-4">
+                  <div className="w-9 h-9 rounded-full bg-blue-500/10 border border-blue-500/30 flex items-center justify-center flex-shrink-0">
                     <item.icon className="w-4 h-4 text-blue-400" />
                   </div>
                   <div>
-                    <p className="text-white font-semibold text-sm mb-1">{item.label}</p>
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest font-semibold mb-1">{item.tier}</p>
+                    <p className="text-white font-semibold text-base mb-1">{item.label}</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
@@ -451,9 +466,9 @@ export default function LinkNinja() {
             <ul className="space-y-2 mb-6">
               {[
                 'Captures viewers at peak intent. Tension built in the video, the click resolves it.',
-                'Self-segments. The audit reveals where the viewer actually sits across content, DMs, and funnels.',
-                'Compounds the mechanism. The same three-bucket structure carries through every video, every bundle, every next step.',
-                'Earns the trial. By the time the viewer hits the free trial, they have already self-diagnosed and chosen the path.',
+                'Lab notes ungated. The give comes first. No card, no trade, no friction.',
+                'The audit self-segments. Viewer rates themselves across content, DMs, funnels and lands on their next step.',
+                'Earns the trial. By the time the viewer hits the 7 days, they have self-diagnosed and chosen the path. The free trial converts because the work was already done.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
