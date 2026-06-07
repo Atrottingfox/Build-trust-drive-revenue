@@ -68,7 +68,7 @@ const BELIEFS: Belief[] = [
   },
   {
     category: 'Founder',
-    sub: 'The kind of distance they feel from Gavin',
+    sub: 'The kind of distance they feel from you',
     framingLabels: ['Experience', 'Industry', 'Personality', 'Stage'],
     currents: [
       "'He's an advisor. Advisors haven't actually run what I run.'",
@@ -366,7 +366,7 @@ function AggregateStatementBuilder() {
   return (
     <div className="glow-card p-6 md:p-8">
       <p className="text-zinc-300 font-semibold mb-1">Build the aggregate statement</p>
-      <p className="text-zinc-500 text-sm mb-6">Type Gavin's actual numbers. The line below assembles live. Use the output as a core asset across the channel.</p>
+      <p className="text-zinc-500 text-sm mb-6">Type your actual numbers. The line below assembles live. Use the output as a core asset across the channel.</p>
 
       <div className="space-y-5 mb-8">
         <TextField label="Workshops run" value={count} onChange={setCount} placeholder="15" width="w-24" />
@@ -945,7 +945,7 @@ export default function ProfitAnalyst() {
             <TrustMatrixInteractive />
 
             <div className="border-t border-zinc-800/60 pt-10 mt-12">
-              <p className="text-zinc-300 font-semibold mb-2">The four things only Gavin can claim</p>
+              <p className="text-zinc-300 font-semibold mb-2">The four things only you can claim</p>
               <p className="text-zinc-500 text-sm mb-6">
                 Anyone can copy a hook. Anyone can run a profit workshop. Four things are uniquely yours and can't be replicated. Bake all four into every workshop and every piece of content that comes off it.
               </p>
@@ -953,22 +953,22 @@ export default function ProfitAnalyst() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Stories</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Stories of the clients he's worked with. The journeys, the unlocks, the figures named on the day.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Stories of the clients you've worked with. The journeys, the unlocks, the figures named on the day.</p>
                   <p className="text-zinc-500 text-xs leading-relaxed italic">Self trust transfer. The viewer maps themselves onto the client and pre-feels the outcome.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Data</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Aggregate data, studies, and numbers that are unique to him. The figures that exist nowhere else.</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed italic">Authority trust transfer. His data, not generic stats, defends the workshop without promising a future outcome.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Aggregate data, studies, and numbers that are unique to you. The figures that exist nowhere else.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Authority trust transfer. Your data, not generic stats, defends the workshop without promising a future outcome.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Experiences</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Personal experience. The patterns he has seen across operators that nobody else has been in the room for.</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed italic">Personal trust transfer. He's been in the chair. He knows the pattern before the operator names it.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Personal experience. The patterns you have seen across operators that nobody else has been in the room for.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Personal trust transfer. You've been in the chair. You know the pattern before the operator names it.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Mechanisms</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Mechanisms, principles, frameworks, and IP. Named tools and decision rules that are his.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Mechanisms, principles, frameworks, and IP. Named tools and decision rules that are yours.</p>
                   <p className="text-zinc-500 text-xs leading-relaxed italic">Process trust transfer. The IP can be recognised without being replicated.</p>
                 </div>
               </div>
@@ -990,7 +990,7 @@ export default function ProfitAnalyst() {
             <SectionHeading num="04" title="Selling workshops" />
             <div className="space-y-4 text-zinc-400 leading-relaxed mb-10">
               <p>
-                The unit being sold is a $5,000 workshop. The marketing job isn't to defend that price tag. It's to make the price irrelevant. When the workshop is unique, differentiated, proprietary, non risked, simple, and fast, $5,000 stops being a number anyone weighs against. Operators just want in.
+                The marketing job isn't to defend the price tag. It's to make the price irrelevant. When the workshop is unique, differentiated, proprietary, non risked, simple, and fast, the price stops being a number anyone weighs against. Operators just want in.
               </p>
               <p>
                 Every number on the page comes from past workshops. No promise of a future outcome. No claim. Just facts about what the average has been.
