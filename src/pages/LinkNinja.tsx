@@ -489,30 +489,6 @@ export default function LinkNinja() {
 
       <div className="gradient-line" />
 
-      {/* CLOSING */}
-      <section className="py-20 md:py-28">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <Section>
-            <div className="accent-line mx-auto mb-10" />
-            <p className="text-zinc-400 mb-3 leading-relaxed text-lg">
-              That's the read.
-            </p>
-            <p className="text-zinc-400 mb-10 leading-relaxed text-lg">
-              If any of it lands, happy to talk through any one piece.
-            </p>
-            <a
-              href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium"
-            >
-              Want to dig into any of this?
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </Section>
-        </div>
-      </section>
-
       <Footer />
     </div>
     </PasswordGate>
