@@ -40,6 +40,7 @@ const TOC_SECTIONS = [
   { id: 'section-05', num: '05', title: 'Trust matrix' },
   { id: 'section-06', num: '06', title: 'Video structure' },
   { id: 'section-07', num: '07', title: 'Bundle' },
+  { id: 'section-08', num: '08', title: 'Year 1 plan' },
 ];
 
 function SectionNav() {
@@ -1123,6 +1124,219 @@ export default function TheNextStage() {
                 </li>
               ))}
             </ul>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 08 YEAR 1 CONTENT PLAN */}
+      <section id="section-08" className="py-16 md:py-20 scroll-mt-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="08" title="Your year 1 content plan" />
+            <p className="text-zinc-400 leading-relaxed mb-3">
+              Not templates. Finished work. The five outputs below are populated for your brand and your market. Each one produces filmable content. Together they are roughly the next 12 months of long form.
+            </p>
+            <p className="text-zinc-500 text-sm italic mb-12">
+              Sharpen with the team in week one. Filmable inside 30 days.
+            </p>
+
+            {/* 08.1 BELIEF BRIDGE */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">08.1</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Belief bridge map</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Five belief layers your audience walks through before they buy. Current belief, required belief, the working video title that bridges the gap.
+              </p>
+              <div className="space-y-4">
+                {[
+                  {
+                    layer: 'Category',
+                    current: "'I need more clients on Instagram.'",
+                    required: "'I need an authority system that compounds across every platform I touch.'",
+                    title: "Why 'more leads on Instagram' is the wrong goal for fitness coaches scaling past \$1M",
+                  },
+                  {
+                    layer: 'Product',
+                    current: "'Content is what I do between client work.'",
+                    required: "'Content is the leverage that makes client work scalable.'",
+                    title: 'The hidden cost of being your own marketer (and the only fix for fitness operators)',
+                  },
+                  {
+                    layer: 'Brand',
+                    current: "'Other coaches do this better than me.'",
+                    required: "'My specific approach is the moat, but only if I name it.'",
+                    title: 'Why your method is the brand (not your face)',
+                  },
+                  {
+                    layer: 'Self',
+                    current: "'I am not big enough to install this yet.'",
+                    required: "'This is the install that gets me big enough.'",
+                    title: 'What changes when fitness operators at \$400k to \$2M install an authority system',
+                  },
+                  {
+                    layer: 'Timing',
+                    current: "'I will do this once revenue is more stable.'",
+                    required: "'Authority is the thing that makes revenue stable.'",
+                    title: 'Why most fitness founders install authority too late',
+                  },
+                ].map((row, i) => (
+                  <div key={i} className="glow-card p-5">
+                    <div className="flex items-center justify-between mb-4">
+                      <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold">{row.layer}</p>
+                      <p className="text-zinc-600 text-xs">Belief {i + 1} of 5</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">Current</p>
+                        <p className="text-zinc-300 text-sm leading-relaxed italic">{row.current}</p>
+                      </div>
+                      <div>
+                        <p className="text-blue-300 text-[10px] uppercase tracking-widest mb-1 font-semibold">Required</p>
+                        <p className="text-white text-sm leading-relaxed italic">{row.required}</p>
+                      </div>
+                    </div>
+                    <div className="border-t border-zinc-800/60 pt-3">
+                      <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">Working video title</p>
+                      <p className="text-white font-medium text-sm leading-relaxed">'{row.title}'</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 08.2 8-VIDEO FOUNDATION */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">08.2</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">The 8-video foundation</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Eight video types that move the audience through the natural trust arc: Character to Authority to Practicality to Philosophy to Legacy. Working titles below.
+              </p>
+              <div className="space-y-3">
+                {[
+                  { n: '01', type: 'Character Story', title: "From PT to \$10M+ in client revenue: what I got wrong on the way", driver: 'Trust through truth. People buy why, not what.' },
+                  { n: '02', type: 'The Positioning Play', title: 'The full Authority Engine: every step to install one in 90 days', driver: "Authority through density. 'This person has a system for everything.'" },
+                  { n: '03', type: 'Tactical Niche Operator', title: 'Three patterns I see in fitness operators who scale past \$2M', driver: 'Principles over predictions. Pattern recognition earns credibility.' },
+                  { n: '04', type: 'Accessible Masterclass', title: 'The single content move that took Mitch Revs from 19k to 50k followers in 60 days', driver: 'Speed to value + simple accessibility. Shareable in Slack.' },
+                  { n: '05', type: 'The Signature Framework', title: "The 5 A's: how authority actually gets built (not bought)", driver: 'A framework they implement becomes a framework they share.' },
+                  { n: '06', type: 'Expertise Compression', title: 'Everything I know about online coaching content in 12 minutes', driver: 'Simplifying the complex is the highest form of expertise demonstration.' },
+                  { n: '07', type: 'Counterintuitive Shift', title: 'Why fitness founders chasing volume are running the wrong playbook', driver: 'Belief breaker. Shifts the relationship dynamic. Doubles as VSL.' },
+                  { n: '08', type: 'Legacy', title: 'Why authority is the only asset that survives algorithm changes', driver: 'Audience adopts philosophies, not just frameworks. Final layer of identity trust.' },
+                ].map((video, i) => (
+                  <div key={i} className="glow-card p-5">
+                    <div className="flex items-baseline gap-3 mb-3">
+                      <span className="text-blue-400 text-xs font-bold font-mono">{video.n}</span>
+                      <span className="text-zinc-500 text-xs uppercase tracking-widest">{video.type}</span>
+                    </div>
+                    <p className="text-white font-semibold leading-relaxed mb-2">'{video.title}'</p>
+                    <p className="text-zinc-500 text-xs leading-relaxed italic">{video.driver}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-zinc-500 text-xs italic mt-4">Same eight types every quarter. Different angles, same psychological arc. The library compounds.</p>
+            </div>
+
+            {/* 08.3 FOUNDER BELIEF BANK */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">08.3</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Founder belief bank</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Five contrarian positions you hold about the fitness coaching industry. Each one defendable with evidence. Each one underpins multiple videos. The reinforcing beliefs that become your public philosophies.
+              </p>
+              <div className="space-y-3">
+                {[
+                  { belief: 'More content volume is the most common cause of plateau, not the solution.', proof: 'Backed by what actually scales the operators in your roster. Volume is the trap dressed as the answer.' },
+                  { belief: 'Online coaches do not need bigger audiences. They need deeper systems.', proof: 'Backed by operator hour math. The ceiling is system depth, not reach.' },
+                  { belief: 'Personal brand is the wrong frame for most fitness operators. Authority systems are the right one.', proof: "Backed by what survives when the founder steps off camera. The brand can't depend on the face." },
+                  { belief: 'Working with category leaders is what borrowed authority actually means. Most coaches mistake it for vanity.', proof: 'Backed by Taki, Jay, Bailey, Mitch. The chunk-up principle in action.' },
+                  { belief: 'The fitness industry confuses output with authority.', proof: 'Backed by what audiences remember vs what they ignore. Output is noise. Authority is signal.' },
+                ].map((item, i) => (
+                  <div key={i} className="glow-card p-5">
+                    <div className="flex items-start gap-3 mb-3">
+                      <span className="text-blue-400 text-xs font-bold font-mono mt-0.5 flex-shrink-0">0{i + 1}</span>
+                      <p className="text-white font-semibold leading-relaxed flex-1">'{item.belief}'</p>
+                    </div>
+                    <p className="text-zinc-500 text-xs leading-relaxed italic pl-7">{item.proof}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-zinc-500 text-xs italic mt-4">Same five beliefs, applied across different videos, audiences, industries. That is how intellectual ownership gets built.</p>
+            </div>
+
+            {/* 08.4 HERO'S JOURNEY */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">08.4</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Your hero's journey type</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Of the seven hero's journey templates (Transformation, Insider, Contrarian, Scientist, Guide, Accidental Hero, Protector), your story reads as <span className="text-white font-semibold">Insider + Scientist hybrid</span>. Insider because you have worked behind the operators most people only watch from the outside. Scientist because the work is framework-driven and pattern-based, not coaching cliche.
+              </p>
+
+              <div className="glow-card border-blue-500/30 p-6">
+                <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold mb-4">Your locked narrative</p>
+                <div className="space-y-3">
+                  {[
+                    { label: "I have spent years behind brands like", value: 'LSKD, Tiger Lily, Mitch Revs, Jay Wright, Taki Moore. The category leaders most online operators only see from the outside.' },
+                    { label: 'But I discovered the opposite is true', value: 'The industry assumes authority is claimed. It is not. It is inferred by others through observed truth. The operators with the biggest audiences are often the least trusted in the room.' },
+                    { label: 'I kept seeing the same problem', value: 'Output mistaken for authority. Volume mistaken for visibility. Founders trapped inside their own marketing.' },
+                    { label: 'So I built', value: 'The Authority Engine. The system that installs deep, system-led trust across a personal brand without making the founder the bottleneck.' },
+                    { label: 'Now I help', value: 'Online fitness founders at $400k to $5M install the engine that compounds their authority while their team runs the operation.' },
+                  ].map((row, i) => (
+                    <div key={i} className="border-l-2 border-zinc-800 pl-4">
+                      <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">{row.label}</p>
+                      <p className="text-white text-sm leading-relaxed">{row.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="text-zinc-500 text-xs italic mt-3">This is the spine of the Character Story video (Video 01) and every story you reuse in other content.</p>
+            </div>
+
+            {/* 08.5 TRUST TIMELINE DIAGNOSIS */}
+            <div>
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">08.5</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Trust timeline diagnosis</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Five stages every viewer travels. Your current audience tends to cluster in stages 1 and 2. The gap is stage 3.
+              </p>
+
+              <div className="space-y-2 mb-8">
+                {[
+                  { stage: 'Attention', sub: 'Stranger to Aware', status: 'strong', note: 'Audience knows you exist. Borrowed audiences and client name drops are doing this work.' },
+                  { stage: 'Alignment', sub: 'Aware to Interested', status: 'strong', note: 'Mission and shared values land. Operators feel pulled toward you.' },
+                  { stage: 'Authorship', sub: 'Interested to Trusting', status: 'gap', note: 'This is the gap. Audience likes you but does not yet trust your method specifically. Earned credibility content is the next lever.' },
+                  { stage: 'Achievability', sub: 'Trusting to Buying', status: 'building', note: 'Some case studies in place. Needs more concrete path documentation.' },
+                  { stage: 'Access', sub: 'Buying to Advocating', status: 'building', note: 'Boardroom does this well. Workshop format makes scarcity genuine.' },
+                ].map((row, i) => (
+                  <div key={i} className={`glow-card p-4 ${row.status === 'gap' ? 'border-blue-500/40 bg-blue-500/5' : ''}`}>
+                    <div className="flex items-start justify-between gap-3 mb-1">
+                      <div>
+                        <p className="text-white font-semibold text-sm">{row.stage}</p>
+                        <p className="text-zinc-500 text-xs">{row.sub}</p>
+                      </div>
+                      <span className={`text-[10px] uppercase tracking-widest font-semibold px-2 py-1 rounded-full ${
+                        row.status === 'gap' ? 'bg-blue-500/15 text-blue-300 border border-blue-500/40'
+                        : row.status === 'strong' ? 'bg-zinc-800/60 text-zinc-400'
+                        : 'border border-zinc-800 text-zinc-500'
+                      }`}>
+                        {row.status === 'gap' ? '★ The gap' : row.status === 'strong' ? 'Strong' : 'Building'}
+                      </span>
+                    </div>
+                    <p className="text-zinc-400 text-xs leading-relaxed mt-2">{row.note}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="glow-card border-blue-500/30 p-6">
+                <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold mb-3">Strategic move for the next 60 days</p>
+                <p className="text-white leading-relaxed mb-3 font-medium">
+                  Lead with Videos 03, 04, 05, and 07 from the 8-video foundation.
+                </p>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Tactical Niche Operator + Accessible Masterclass + Signature Framework + Counterintuitive Shift. These four are the Authorship bridge. They turn 'I like Rhys' into 'I trust the method.' That is what closes the gap between Stage 2 and Stage 3, and it is what unlocks the next layer of inbound.
+                </p>
+              </div>
+            </div>
           </Section>
         </div>
       </section>
