@@ -943,6 +943,40 @@ export default function ProfitAnalyst() {
             </p>
 
             <TrustMatrixInteractive />
+
+            <div className="border-t border-zinc-800/60 pt-10 mt-12">
+              <p className="text-zinc-300 font-semibold mb-2">The four things only Gavin can claim</p>
+              <p className="text-zinc-500 text-sm mb-6">
+                Anyone can copy a hook. Anyone can run a profit workshop. Four things are uniquely yours and can't be replicated. Bake all four into every workshop and every piece of content that comes off it.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Stories</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Named operators, their words, their numbers.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
+                </div>
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Data</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Individual figures plus the aggregate across every workshop.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Authority trust transfer. Numbers defend the price tag without making a future promise.</p>
+                </div>
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Experiences</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">What you've seen inside operator P&Ls that nobody else has.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Personal trust transfer. You've been in the chair. You know the pattern.</p>
+                </div>
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Mechanisms</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">The Profit Lens. The named, sequenced process. The decision rules.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Process trust transfer. The IP can be recognised without being replicated.</p>
+                </div>
+              </div>
+
+              <p className="text-zinc-300 leading-relaxed mt-6 font-medium">
+                The combination is what's uncopyable. Anyone can claim one. Stacking all four is what locks the category.
+              </p>
+            </div>
           </Section>
         </div>
       </section>
