@@ -275,8 +275,8 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   },
   {
     name: 'Language',
-    loose: "'Optimise your business.'",
-    tight: "Operator native. 'EOFY scramble.' 'GST hit.' 'The cashflow squeeze.' Not advisor jargon.",
+    loose: "'Improve your margins.'",
+    tight: "Industry-native vocabulary. Food service: 'prime cost,' 'kitchen labour,' 'table turns.' DTC: 'CAC,' 'MER,' 'return rate.' Agencies: 'utilisation,' 'AGI,' 'scope creep.' The words operators use in their own meetings.",
   },
   {
     name: 'Stage',
@@ -288,7 +288,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Food service operators. Improve your profit.',
-    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.",
+    tight: "Food service operators. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.",
   },
   ecommerce: {
     loose: 'DTC brands. Improve your margin.',
