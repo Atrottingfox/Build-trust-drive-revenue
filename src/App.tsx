@@ -33,6 +33,7 @@ const Undeniable = React.lazy(() => import('./pages/Undeniable'));
 const UndeniableNotes = React.lazy(() => import('./pages/UndeniableNotes'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
+const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -90,6 +91,7 @@ export default function App() {
           <Route path="/undeniable-notes" element={<UndeniableNotes />} />
           <Route path="/linkninja" element={<LinkNinja />} />
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
+          <Route path="/thenextstage" element={<TheNextStage />} />
         </Routes>
       </Suspense>
     </Router>

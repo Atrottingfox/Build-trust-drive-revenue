@@ -35,5 +35,6 @@ Disallow: /undeniable
 Disallow: /undeniable-notes
 Disallow: /linkninja
 Disallow: /theprofitanalyst
+Disallow: /thenextstage
 
 Sitemap: https://authorityengine.com.au/sitemap.xml
