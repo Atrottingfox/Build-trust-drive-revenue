@@ -953,22 +953,22 @@ export default function ProfitAnalyst() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Stories</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Named operators, their words, their numbers.</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed italic">Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Stories of the clients he's worked with. The journeys, the unlocks, the figures named on the day.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Self trust transfer. The viewer maps themselves onto the client and pre-feels the outcome.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Data</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">Individual figures plus the aggregate across every workshop.</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed italic">Authority trust transfer. Numbers defend the price tag without making a future promise.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Aggregate data, studies, and numbers that are unique to him. The figures that exist nowhere else.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Authority trust transfer. His data, not generic stats, defends the workshop without promising a future outcome.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Experiences</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">What you've seen inside operator P&Ls that nobody else has.</p>
-                  <p className="text-zinc-500 text-xs leading-relaxed italic">Personal trust transfer. You've been in the chair. You know the pattern.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Personal experience. The patterns he has seen across operators that nobody else has been in the room for.</p>
+                  <p className="text-zinc-500 text-xs leading-relaxed italic">Personal trust transfer. He's been in the chair. He knows the pattern before the operator names it.</p>
                 </div>
                 <div className="glow-card p-5">
                   <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Mechanisms</p>
-                  <p className="text-white text-sm leading-relaxed mb-2">The Profit Lens. The named, sequenced process. The decision rules.</p>
+                  <p className="text-white text-sm leading-relaxed mb-2">Mechanisms, principles, frameworks, and IP. Named tools and decision rules that are his.</p>
                   <p className="text-zinc-500 text-xs leading-relaxed italic">Process trust transfer. The IP can be recognised without being replicated.</p>
                 </div>
               </div>
