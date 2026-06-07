@@ -271,7 +271,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
   {
     name: 'Promise',
     loose: "'Better profit clarity.'",
-    tight: "'Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.'",
+    tight: "'Walk out at the end of the day with every revenue line ranked by real profit. The ones making you money. The ones losing you money.'",
   },
   {
     name: 'Language',
@@ -288,7 +288,7 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Food service operators. Improve your profit.',
-    tight: "Food service operators. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.",
+    tight: "Food service operators. Bring twelve weeks of numbers. Spend a day in the room. Walk out knowing exactly which days of the week make you money and which days lose you money.",
   },
   ecommerce: {
     loose: 'DTC brands. Improve your margin.',
