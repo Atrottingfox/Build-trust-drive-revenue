@@ -57,7 +57,7 @@ const BELIEFS: Belief[] = [
   {
     category: 'Mechanism',
     sub: 'Skepticism by what they have seen before',
-    framingLabels: ['Mild', 'Default', 'Burnt', 'Hardened'],
+    framingLabels: ['Mild', 'Average', 'Burnt', 'Hardened'],
     currents: [
       "'Probably similar to others. Worth checking I guess.'",
       "'All these workshops are basically the same. Different branding, same content.'",
@@ -279,11 +279,6 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
     tight: "Operator native. 'EOFY scramble.' 'GST hit.' 'The cashflow squeeze.' Not advisor jargon.",
   },
   {
-    name: 'Outcome',
-    loose: "'More profit.'",
-    tight: "'$[X] average hidden profit per workshop, across [N] past sessions. Historic. Verified. Published.' (Placeholder figures. Replace with Gavin's verified record before publishing.)",
-  },
-  {
     name: 'Stage',
     loose: "'Any business size.'",
     tight: "'Operators between $1M and $5M in revenue, brick and mortar or service.'",
@@ -293,15 +288,15 @@ const LEVERS: { name: string; loose: string; tight: string }[] = [
 const COMPENSATIONS: Record<Scenario, { loose: string; tight: string }> = {
   restaurant: {
     loose: 'Food service operators. Improve your profit.',
-    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    tight: "Food service operators. You don't know your real hourly rate, and your P&L doesn't tell you which days actually make money. Bring twelve weeks of numbers. Walk out in 90 minutes knowing exactly which days make you money and which quietly cost you.",
   },
   ecommerce: {
     loose: 'DTC brands. Improve your margin.',
-    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    tight: "DTC brands. You can't tell which SKUs actually make you money after ad spend, returns, and 3PL. Bring 90 days of data. Walk out in 90 minutes knowing which three SKUs are draining margin and which three are quietly carrying the brand.",
   },
   agency: {
     loose: 'Agencies. Optimise your profit.',
-    tight: "Agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out in 90 minutes with every client ranked by real margin, and the names of the three you should fire by month's end. (Historic average across past workshops: $[X], to be confirmed before publishing.)",
+    tight: "Agencies. Your accountant can't tell you which clients are actually losing you money once delivery hours are counted. Bring 12 months of project data. Walk out in 90 minutes with every client ranked by real margin, and the names of the three you should fire by month's end.",
   },
 };
 
@@ -363,7 +358,7 @@ function AggregateStatementBuilder() {
   const [count, setCount] = useState<string>('15');
   const [bandMin, setBandMin] = useState<string>('1M');
   const [bandMax, setBandMax] = useState<string>('5M');
-  const [profit, setProfit] = useState<string>('50,000');
+  const [profit, setProfit] = useState<string>('47,500');
   const [duration, setDuration] = useState<string>('90 minutes');
 
   const statement = `Across the last ${count} workshops with operators between $${bandMin} and $${bandMax} in revenue, the average profit found in ${duration} is $${profit}. Some find more. Some find less. That's where the average sits.`;
@@ -403,7 +398,7 @@ function AggregateStatementBuilder() {
           </div>
         </div>
 
-        <TextField label="Average profit found" value={profit} onChange={setProfit} prefix="$" placeholder="50,000" width="w-32" />
+        <TextField label="Average profit found" value={profit} onChange={setProfit} prefix="$" placeholder="47,500" width="w-32" />
 
         <PillRow label="Duration" options={['60 minutes', '90 minutes', '2 hours', '3 hours', 'a half day', 'a full day']} value={duration} onChange={setDuration} />
       </div>
@@ -500,11 +495,11 @@ function SpecificityStack() {
         })}
       </div>
 
-      {/* 5 OTHER LEVERS - scenario agnostic */}
+      {/* OTHER LEVERS - scenario agnostic */}
       <div className="border-t border-zinc-800/60 pt-10 mb-12">
-        <p className="text-zinc-300 font-semibold mb-2">The other five levers</p>
+        <p className="text-zinc-300 font-semibold mb-2">The other four levers</p>
         <p className="text-zinc-500 text-sm mb-6">
-          Problem, Promise, Language, Outcome, and Stage. Each one can be loose or tightened. Tightening any of these compensates for a broader avatar. Tightening all of them is how a Category-tier message hits like an Identity-tier message.
+          Problem, Promise, Language, and Stage. Each one can be loose or tightened. Tightening any of these compensates for a broader avatar. Tightening all of them is how a Category-tier message hits like an Identity-tier message.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {LEVERS.map((lever) => (
@@ -525,7 +520,7 @@ function SpecificityStack() {
       <div className="border-t border-zinc-800/60 pt-10">
         <p className="text-zinc-300 font-semibold mb-2">Compensation in action: {currentScenario.label}.</p>
         <p className="text-zinc-500 text-sm mb-8">
-          Both versions hold the same Category-tier avatar. Loose keeps the other five levers broad. Tightened dials them all up. The contrast reads at a glance.
+          Both versions hold the same Category-tier avatar. Loose keeps the other four levers broad. Tightened dials them all up. The contrast reads at a glance.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -578,7 +573,7 @@ const MOVES: Move[] = [
     axis: 'authority',
     short: 'Aggregate data',
     text: 'The average outcome across all the workshops, named publicly.',
-    example: "'Across 15 workshops with operators between $1M and $5M, the average profit found in 90 minutes is $50,000.'",
+    example: "'Across 15 workshops with operators between $1M and $5M, the average profit found in 90 minutes is $47,500.'",
   },
   {
     axis: 'authority',
@@ -896,29 +891,6 @@ export default function ProfitAnalyst() {
               <SpecificityStack />
             </div>
 
-            <p className="text-zinc-400 leading-relaxed mb-6">
-              Each chunk up dilutes potency. People don't think of themselves as 'SMB owners.' They think of themselves as the operator of a thing they can name.
-            </p>
-
-            <p className="text-zinc-300 font-semibold mb-4">If you chunk up the avatar, the other levers compensate</p>
-            <ul className="space-y-3">
-              {[
-                { name: 'Problem specificity', desc: "'You're paying yourself last and don't actually know your hourly rate.' Hyper specific. The right person nods." },
-                { name: 'Promise specificity', desc: "'$50k of hidden profit named in 90 minutes, or we work for free until we find it.' Concrete. Time bound. Defensible." },
-                { name: 'Language specificity', desc: "Native to the operator. The way they talk to their accountant when the accountant isn't in the room." },
-                { name: 'Outcome specificity', desc: "A number, defended by historic data. Not 'improve profit.' A figure that sits in their account." },
-                { name: 'Stage specificity', desc: 'Where they are. $500k or $5M businesses. The problems and language shift between them.' },
-              ].map((item, i) => (
-                <li key={i} className="flex flex-col gap-1">
-                  <p className="text-white font-semibold text-sm">{item.name}</p>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{item.desc}</p>
-                </li>
-              ))}
-            </ul>
-
-            <p className="text-zinc-300 leading-relaxed mt-8 font-medium">
-              The play is to own one. Own it loud. Then the others fall in line behind it.
-            </p>
           </Section>
         </div>
       </section>
@@ -941,6 +913,16 @@ export default function ProfitAnalyst() {
               {BELIEFS.map((belief) => (
                 <BeliefCard key={belief.category} belief={belief} />
               ))}
+            </div>
+
+            <div className="mt-12 pt-10 border-t border-zinc-800/60">
+              <p className="text-zinc-300 font-semibold mb-3">One belief bucket per YouTube video.</p>
+              <p className="text-zinc-400 leading-relaxed mb-3">
+                Every video picks a single core belief bucket and breaks it. One bucket, one shift, one piece. The video acknowledges the current belief in the bucket, dismantles it with data and stories, and installs the required one.
+              </p>
+              <p className="text-zinc-400 leading-relaxed">
+                Stack videos across the channel and the prospect walks through all five buckets over time. Trying to break all of them in one video means breaking none of them.
+              </p>
             </div>
           </Section>
         </div>
