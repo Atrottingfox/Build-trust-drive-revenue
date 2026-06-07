@@ -366,51 +366,101 @@ export default function LinkNinja() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <SectionHeading num="07" title="The video structure" />
-            <p className="text-zinc-400 leading-relaxed mb-8">
-              Every video runs the same shape so the audience can predict and trust it. Predictability is part of the mechanism.
+            <p className="text-zinc-400 leading-relaxed mb-3">
+              Every consulting video follows the same outline. Intro, body, close. The structure itself becomes the mechanism. Viewers recognise the pattern. By the third video they trust the format. By the tenth they can predict it.
+            </p>
+            <p className="text-zinc-300 leading-relaxed mb-10 font-medium">
+              That predictability is the proof you have a method.
             </p>
 
-            <div className="space-y-4">
-              <div className="glow-card p-5">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">0 to 10 sec</span>
-                  <p className="text-white font-semibold">Relatable pain.</p>
+            {/* INTRO */}
+            <div className="mb-10">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-1">Part 01</p>
+              <p className="text-white font-semibold text-lg mb-4">The intro <span className="text-zinc-500 font-normal">(0 to 30 seconds)</span></p>
+              <div className="space-y-3">
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">0 to 10 sec</span>
+                    <p className="text-white font-semibold text-sm">Relatable pain.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">The avatar instantly sees themselves. Frustration named. Tension installed.</p>
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">The avatar instantly sees themselves. Frustration named. Tension installed.</p>
-              </div>
-
-              <div className="glow-card p-5">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">10 to 30 sec</span>
-                  <p className="text-white font-semibold">Proof, promise, plan.</p>
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">10 to 25 sec</span>
+                    <p className="text-white font-semibold text-sm">Proof, promise, plan.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">15-second credibility soundbite. Signal of intention. What the viewer gets from watching.</p>
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">15-second credibility soundbite (signal of intention). What they get from watching. The path the video will walk.</p>
-              </div>
-
-              <div className="glow-card p-5">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Middle</span>
-                  <p className="text-white font-semibold">Three core problems.</p>
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">25 to 30 sec</span>
+                    <p className="text-white font-semibold text-sm">The path.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">The three problems the video will walk. Tension carries forward.</p>
                 </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">Content, DMs, funnels (or another set of three from this guest's situation). Cuts between the consultant naming the problem and the guest unlocking on the answer.</p>
-              </div>
-
-              <div className="glow-card p-5">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Inside 2 min</span>
-                  <p className="text-white font-semibold">Outcome shown.</p>
-                </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">The audience knows exactly what they're getting from the rest of the video. Clear line from in to out.</p>
-              </div>
-
-              <div className="glow-card p-5">
-                <div className="flex items-baseline gap-3 mb-2">
-                  <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Throughout</span>
-                  <p className="text-white font-semibold">Bundle capture.</p>
-                </div>
-                <p className="text-zinc-400 text-sm leading-relaxed">Click-to-capture for the bundle (work notes, audit, free trial). Tension drives curiosity. Curiosity drives the click.</p>
               </div>
             </div>
+
+            {/* BODY */}
+            <div className="mb-10">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-1">Part 02</p>
+              <p className="text-white font-semibold text-lg mb-2">The body <span className="text-zinc-500 font-normal">(the three-problem walk-through)</span></p>
+              <p className="text-zinc-500 text-sm mb-5">For each of Content, DMs, Funnels, the same five beats run in the same order. Cuts move between consultant, guest, and snippets from earlier in the session.</p>
+              <div className="glow-card p-5">
+                <ol className="space-y-3">
+                  {[
+                    { n: '01', label: 'Consultant names the problem.', desc: 'Frames why it matters for the guest. The viewer pre-feels the same problem.' },
+                    { n: '02', label: 'Guest unlocks.', desc: 'Relatable pain surfaces. Camera catches the recognition moment.' },
+                    { n: '03', label: 'Expert uncovers the opportunity.', desc: 'The opportunity hidden inside the problem gets named on camera.' },
+                    { n: '04', label: 'Mechanism applied.', desc: 'The proprietary process gets demonstrated live. The IP shows itself.' },
+                    { n: '05', label: 'Outcome named.', desc: 'What changes for the guest once the mechanism runs. The viewer extrapolates.' },
+                  ].map((step, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="text-blue-400 text-xs font-bold font-mono w-6 flex-shrink-0">{step.n}</span>
+                      <div>
+                        <p className="text-white font-semibold text-sm">{step.label}</p>
+                        <p className="text-zinc-400 text-sm leading-relaxed">{step.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+              <p className="text-zinc-500 text-xs italic mt-3">Same five beats, three times in a row. Predictable rhythm. The audience anticipates each move before it happens.</p>
+            </div>
+
+            {/* CLOSE */}
+            <div className="mb-10">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-1">Part 03</p>
+              <p className="text-white font-semibold text-lg mb-4">The close</p>
+              <div className="space-y-3">
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Recap</span>
+                    <p className="text-white font-semibold text-sm">Outcome named.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">What got uncovered for the guest, what's now possible. The line from in to out is closed.</p>
+                </div>
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Capture</span>
+                    <p className="text-white font-semibold text-sm">Bundle.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">Lab notes, audit, free trial. Click-to-capture for the viewer. Tension drives curiosity. Curiosity drives the click.</p>
+                </div>
+                <div className="glow-card p-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">Next</span>
+                    <p className="text-white font-semibold text-sm">Soft next step.</p>
+                  </div>
+                  <p className="text-zinc-400 text-sm leading-relaxed">Viewer self-selects into the audit. The audit selects them into the trial. Each step earns the next.</p>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-zinc-300 leading-relaxed font-medium">
+              Same intro shape. Same five-beat body. Same close. Every guest, same outline. Every video, same outline. The mechanism is visible in the structure itself.
+            </p>
           </Section>
         </div>
       </section>
