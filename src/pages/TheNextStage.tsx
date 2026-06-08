@@ -41,6 +41,7 @@ const TOC_SECTIONS = [
   { id: 'section-06', num: '06', title: 'Video structure' },
   { id: 'section-07', num: '07', title: 'Bundle' },
   { id: 'section-08', num: '08', title: 'Year 1 plan' },
+  { id: 'section-09', num: '09', title: 'Execution' },
 ];
 
 function SectionNav() {
@@ -1335,6 +1336,514 @@ export default function TheNextStage() {
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   Tactical Niche Operator + Accessible Masterclass + Signature Framework + Counterintuitive Shift. These four are the Authorship bridge. They turn 'I like Rhys' into 'I trust the method.' That is what closes the gap between Stage 2 and Stage 3, and it is what unlocks the next layer of inbound.
                 </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 09 EXECUTION PLAN */}
+      <section id="section-09" className="py-16 md:py-20 scroll-mt-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <SectionHeading num="09" title="Execution plan" />
+            <p className="text-zinc-400 leading-relaxed mb-3">
+              The operational layer underneath the strategy. Hooks to film. Buckets to film from. Format mix. Lead magnets. The 30 day shipping calendar. The system that runs without you in the room.
+            </p>
+            <p className="text-zinc-500 text-sm italic mb-12">
+              Section 08 is the what. This is the how. Everything below is populated. Sharpen with the operator. Ship.
+            </p>
+
+            {/* 09.1 HOOK BANK */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.1</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Hook bank</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                20 hooks organised by the 5 A's. Each one is a pattern interrupt that earns the first second. Pull from this for short form, long form openers, and thread leads.
+              </p>
+
+              {[
+                {
+                  axis: 'Attention',
+                  sub: 'Scroll-stoppers. Pattern interrupt or contrarian frame.',
+                  hooks: [
+                    "Most fitness coaches plateau at $400k. Here is the exact reason why.",
+                    "I spent six figures learning what nobody teaches about online coaching. Here it is in 10 minutes.",
+                    "The way you scale a coaching business is not the way you scale Mitch Revs' brand.",
+                    "Three patterns I see in fitness operators who scale past $2M. None are obvious.",
+                    "If I had to rebuild a coaching business from zero today, I'd skip 80% of what coaches do.",
+                  ],
+                },
+                {
+                  axis: 'Alignment',
+                  sub: 'Likeness. The thing that makes them say they are just like me.',
+                  hooks: [
+                    "Your content is the bottleneck. Nobody is telling you because it is hard to hear.",
+                    "I run multiple businesses. This is the most common mistake I see fitness founders make at scale.",
+                    "The hardest part of being a coach isn't coaching. It is everything else.",
+                    "I used to think content was the work I did between client work. Then a client told me it was the leverage that made the client work scalable.",
+                  ],
+                },
+                {
+                  axis: 'Authority',
+                  sub: 'Credibility. Earned proof of method.',
+                  hooks: [
+                    "We've helped fitness operators generate $10M+ in 24 months. The pattern across every one of them is the same.",
+                    "Inside the Authority Engine: how the 5 A's compound across a 90 day install.",
+                    "Mitch Revs grew from 19k to 50k followers in 60 days. The play was not hooks. It was this.",
+                    "Jay Wright doubled his following and his revenue in 12 months. Here is the exact sequence we ran.",
+                  ],
+                },
+                {
+                  axis: 'Achievability',
+                  sub: 'Easy first steps. Proof people like them already did it.',
+                  hooks: [
+                    "The smallest content move that 3x'd Mitch's organic reach in one week. Anyone can replicate it.",
+                    "What to film if you have 60 minutes and one phone. (Worth $40k+ in advisory.)",
+                    "The 5 questions every founder should answer in a daily voice note. That is the entire content bank.",
+                    "How to ship one long video per week without you in the chair every day.",
+                  ],
+                },
+                {
+                  axis: 'Access',
+                  sub: 'The door. One destination, named and pointed to.',
+                  hooks: [
+                    "What it actually looks like inside The Authority Engine 90 day install.",
+                    "If you are scaling between $400k and $5M, this is the install for you. Here is what is included.",
+                    "Inside the Boardroom: who it is for, what it costs, what walks out the door at day 90.",
+                  ],
+                },
+              ].map((group, i) => (
+                <div key={i} className="glow-card p-5 mb-4">
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <span className="text-blue-400 text-xs font-bold uppercase tracking-widest">{group.axis}</span>
+                  </div>
+                  <p className="text-zinc-500 text-xs italic mb-4">{group.sub}</p>
+                  <ul className="space-y-2.5">
+                    {group.hooks.map((h, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <span className="text-zinc-600 text-xs font-mono mt-1 flex-shrink-0">{String(j + 1).padStart(2, '0')}</span>
+                        <p className="text-white text-sm leading-relaxed italic">'{h}'</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* 09.2 FORMAT MIX + ADS VS ORGANIC */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.2</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Format mix and the ads vs organic split</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Which formats earn attention, which build authority, which compound. Plus what runs paid and what runs organic.
+              </p>
+
+              <p className="text-zinc-300 font-semibold mb-3">Primary signature format</p>
+              <div className="glow-card border-blue-500/30 p-5 mb-6">
+                <p className="text-white font-semibold mb-1">Long form YouTube. 8 to 20 minutes.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">The format the audience associates with you. Anchored by the 8 pillar videos. Every other format recycles from here.</p>
+              </div>
+
+              <p className="text-zinc-300 font-semibold mb-3">The recycle map</p>
+              <div className="glow-card p-5 mb-8">
+                <p className="text-zinc-400 text-sm leading-relaxed mb-3">
+                  One pillar video becomes:
+                </p>
+                <ul className="space-y-1.5">
+                  {[
+                    '6 short form clips (60 to 90s vertical)',
+                    '1 carousel breakdown (8 to 12 slides)',
+                    '1 newsletter (long form, owned audience)',
+                    '1 text thread (X or LinkedIn)',
+                    '1 podcast clip or guest spot insert',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <p className="text-zinc-300 font-semibold mb-3">Ads vs organic split</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-3">Organic</p>
+                  <ul className="space-y-2 mb-4">
+                    {[
+                      'All 8 pillar long form videos',
+                      'Short form clips (recycled from pillars)',
+                      'Daily voice notes turned into posts',
+                      'Carousels, threads, newsletter',
+                      'Guest appearances, podcast clips',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                        <span className="text-zinc-300">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-zinc-500 text-xs italic">Job: build trust deep. Watch time, email captures, DMs from ICPs.</p>
+                </div>
+                <div className="glow-card p-5">
+                  <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-3">Paid</p>
+                  <ul className="space-y-2 mb-4">
+                    {[
+                      'Trojan Horse VSL (Video 07 doubles as this)',
+                      'Retargeting clips from past pillars',
+                      'Lead magnet ads (the 3 magnets in 09.4)',
+                      'Boost the best client story content',
+                      'Boardroom landing page traffic',
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                        <span className="text-zinc-300">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-zinc-500 text-xs italic">Job: extend reach + accelerate qualified inbound. Lead cost, application volume.</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 09.3 DEMAND BUCKETS */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.3</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Demand buckets</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Four content buckets, each tied to one of the belief layers from Section 01. Six content items per bucket. That is 24 pieces of content sequenced by belief.
+              </p>
+
+              {[
+                {
+                  bucket: 'Scaling without becoming the bottleneck',
+                  belief: 'Self belief',
+                  items: [
+                    'How to scale past $400k without becoming the bottleneck',
+                    "The hidden cost of being your own marketer",
+                    'Operator install vs another content course',
+                    'Why most fitness coaches plateau at the same revenue',
+                    'What to delegate first, what to keep last',
+                    "When to fire your editor (and how to know)",
+                  ],
+                },
+                {
+                  bucket: 'Authority via system, not via face',
+                  belief: 'Brand belief',
+                  items: [
+                    'Personal brand vs authority system',
+                    'Why category ownership beats personal brand at scale',
+                    "The 5 A's explained for fitness operators",
+                    'Named methodology examples that worked',
+                    'How borrowed authority actually compounds',
+                    'Why your content keeps working after you stop posting',
+                  ],
+                },
+                {
+                  bucket: 'Founder operations',
+                  belief: 'Category belief',
+                  items: [
+                    'What I learned working with Taki Moore',
+                    'What I got wrong with Mitch Revs in the first month',
+                    'What changed when LSKD came on as a client',
+                    'Behind the scenes of a Brand Day',
+                    'Inside the Boardroom: what actually happens',
+                    'My own monthly review process',
+                  ],
+                },
+                {
+                  bucket: 'Industry truth',
+                  belief: 'Mechanism belief',
+                  items: [
+                    'Why most content coaches sound the same',
+                    "The volume trap in fitness coaching content",
+                    'Authority is inferred, not claimed',
+                    'Why bigger audience does not equal better revenue',
+                    'The wrong way to use AI in coaching content',
+                    "Why 'just post more' does not work after $400k",
+                  ],
+                },
+              ].map((bucket, i) => (
+                <div key={i} className="glow-card p-5 mb-4">
+                  <div className="flex items-baseline justify-between gap-3 mb-1 flex-wrap">
+                    <p className="text-white font-semibold">{bucket.bucket}</p>
+                    <p className="text-blue-400 text-xs italic">Bucket {i + 1} of 4</p>
+                  </div>
+                  <p className="text-zinc-500 text-xs mb-4">Linked to: <span className="text-blue-300 font-medium">{bucket.belief}</span></p>
+                  <ul className="space-y-2">
+                    {bucket.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-3 text-sm">
+                        <span className="text-zinc-600 text-xs font-mono mt-0.5 flex-shrink-0">{String(j + 1).padStart(2, '0')}</span>
+                        <p className="text-zinc-300 leading-relaxed">{item}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            {/* 09.4 LEAD MAGNET TRIO */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.4</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">Lead magnet trio</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Three magnets. Map, Audit, Playbook. Each one targets one of the 5 A's, resolves a specific tension, and earns the next step. Stacks like the LinkNinja bundle but built for this audience.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    magnet: 'The Map',
+                    name: "The Authority Engine Blueprint",
+                    targets: ['Attention', 'Alignment'],
+                    tension: "I have no idea where to start.",
+                    promise: "See the entire authority system on one page.",
+                    pillar: 'Pillar Video 02 (The Positioning Play)',
+                    tier: 'Give. Open. Ungated.',
+                  },
+                  {
+                    magnet: 'The Audit',
+                    name: "The 5 A's Scorecard",
+                    targets: ['Authority', 'Achievability'],
+                    tension: "I don't know which part of my content engine is leaking.",
+                    promise: "Self-rate across Attention, Alignment, Authority, Achievability, Access. Know exactly which A is leaking.",
+                    pillar: 'Pillar Video 05 (The Signature Framework)',
+                    tier: 'Give-give.',
+                  },
+                  {
+                    magnet: 'The Playbook',
+                    name: "The 8 Video Foundation Playbook",
+                    targets: ['Achievability', 'Access'],
+                    tension: "I know what to do, I don't know how to ship it.",
+                    promise: "The 8 video types with working titles and the order to film them.",
+                    pillar: 'Pillar Video 06 (Expertise Compression)',
+                    tier: 'Data exchange.',
+                  },
+                ].map((m, i) => (
+                  <div key={i} className="glow-card p-5">
+                    <div className="flex items-baseline justify-between gap-3 mb-2 flex-wrap">
+                      <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold">{m.magnet}</p>
+                      <p className="text-zinc-500 text-xs italic">{m.tier}</p>
+                    </div>
+                    <p className="text-white font-semibold text-lg mb-3">{m.name}</p>
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {m.targets.map((t, j) => (
+                        <span key={j} className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold px-2 py-1 rounded-full border border-blue-500/40 bg-blue-500/10">{t}</span>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold">Tension it resolves</p>
+                      <p className="text-zinc-300 text-sm italic mb-3">'{m.tension}'</p>
+                      <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold">Promise on the headline</p>
+                      <p className="text-zinc-300 text-sm mb-3">{m.promise}</p>
+                      <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold">Pillar video that delivers it</p>
+                      <p className="text-zinc-400 text-sm">{m.pillar}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 09.5 30 DAY PIPELINE */}
+            <div className="mb-16">
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.5</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">30 day pipeline</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Four weeks of named, sequenced pieces. Leads with the four Authorship-gap videos from 08.5 (Videos 03, 04, 05, 07) since that is the trust pocket to push for the next 60 days.
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    week: 'Week 01',
+                    pillar: 'Pillar Video 07 — Counterintuitive Shift',
+                    title: "'Why fitness founders chasing volume are running the wrong playbook'",
+                    pieces: [
+                      'Mon: Pillar long form (15 min)',
+                      'Tue: Short clip 01 (volume trap moment)',
+                      'Wed: Carousel (the 3 patterns of plateau)',
+                      'Thu: Short clip 02 (Mitch Revs result)',
+                      'Fri: Newsletter (the long form essay)',
+                      'Sat: Short clip 03 (one-line takeaway)',
+                      'Sun: Thread (the contrarian belief stated plainly)',
+                    ],
+                  },
+                  {
+                    week: 'Week 02',
+                    pillar: 'Pillar Video 04 — Accessible Masterclass',
+                    title: "'The single content move that took Mitch Revs from 19k to 50k followers in 60 days'",
+                    pieces: [
+                      'Mon: Pillar long form (12 min)',
+                      'Tue: Short clip 01 (the move named)',
+                      'Wed: Carousel (the before/after)',
+                      'Thu: Short clip 02 (what NOT to do)',
+                      'Fri: Newsletter (the play in detail)',
+                      'Sat: Short clip 03 (operator anyone can copy)',
+                      'Sun: DM-style post asking who wants the bundle',
+                    ],
+                  },
+                  {
+                    week: 'Week 03',
+                    pillar: 'Pillar Video 05 — The Signature Framework',
+                    title: "'The 5 As: how authority actually gets built (not bought)'",
+                    pieces: [
+                      'Mon: Pillar long form (20 min)',
+                      'Tue: Short clip 01 (Attention explained)',
+                      'Wed: Short clip 02 (Alignment explained)',
+                      'Thu: Carousel (all 5 A\'s on one card)',
+                      'Fri: Newsletter (the framework deep dive)',
+                      'Sat: Short clip 03 (the Authority pillar)',
+                      'Sun: Lead magnet launch (The Map)',
+                    ],
+                  },
+                  {
+                    week: 'Week 04',
+                    pillar: 'Pillar Video 03 — Tactical Niche Operator',
+                    title: "'Three patterns I see in fitness operators who scale past $2M'",
+                    pieces: [
+                      'Mon: Pillar long form (15 min)',
+                      'Tue: Short clip 01 (pattern 1)',
+                      'Wed: Short clip 02 (pattern 2)',
+                      'Thu: Short clip 03 (pattern 3)',
+                      'Fri: Newsletter (the full breakdown)',
+                      'Sat: Carousel (the patterns with named operators)',
+                      'Sun: Audit tool launch (The Scorecard)',
+                    ],
+                  },
+                ].map((week, i) => (
+                  <div key={i} className="glow-card p-5">
+                    <div className="mb-3">
+                      <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-1">{week.week}</p>
+                      <p className="text-white font-semibold text-sm mb-1">{week.pillar}</p>
+                      <p className="text-zinc-400 text-sm italic">{week.title}</p>
+                    </div>
+                    <ul className="space-y-1.5 border-t border-zinc-800/60 pt-3">
+                      {week.pieces.map((piece, j) => (
+                        <li key={j} className="flex items-start gap-3 text-xs">
+                          <div className="w-1 h-1 rounded-full bg-zinc-600 mt-1.5 flex-shrink-0" />
+                          <span className="text-zinc-400 leading-relaxed">{piece}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 09.6 THE SYSTEM */}
+            <div>
+              <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">09.6</p>
+              <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">The system that runs without you</h3>
+              <p className="text-zinc-400 leading-relaxed mb-6">
+                Roles, cadence, capture, packaging, KPIs. Production breaks down without ownership. Below: who owns what, what gets shot when, what gets measured.
+              </p>
+
+              {/* Roles */}
+              <p className="text-zinc-300 font-semibold mb-3">Roles</p>
+              <div className="space-y-3 mb-8">
+                {[
+                  { role: 'Founder (Rhys)', owns: 'Recorded reps, contrarian takes, voice notes, strategic decisions, milestone approvals.' },
+                  { role: 'Creative director / Editor', owns: 'Translation of voice into edited pieces, packaging, weekly cadence.' },
+                  { role: 'Producer / Operator', owns: 'Shoot days, scheduling, asset library, distribution checklist, weekly scorecard.' },
+                ].map((r, i) => (
+                  <div key={i} className="glow-card p-4">
+                    <p className="text-white font-semibold text-sm mb-1">{r.role}</p>
+                    <p className="text-zinc-400 text-sm leading-relaxed">{r.owns}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Cadence */}
+              <p className="text-zinc-300 font-semibold mb-3">Cadence</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+                {[
+                  { label: 'Shoot day', value: '1 per fortnight, 4 hours, two pillars filmed' },
+                  { label: 'Review cadence', value: 'Weekly. Operator runs the scorecard. Founder reviews patterns.' },
+                  { label: 'KPI check in', value: 'Monthly. What worked, what gets cut, what doubles down.' },
+                ].map((c, i) => (
+                  <div key={i} className="glow-card p-4">
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest font-semibold mb-1">{c.label}</p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">{c.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Capture setup */}
+              <p className="text-zinc-300 font-semibold mb-3">Capture setup</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                {[
+                  { env: 'Studio desk (primary)', use: 'Pillar long form. Frameworks, breakdowns, signature pieces.' },
+                  { env: 'Whiteboard wall (secondary)', use: 'Teach pieces, signature framework reveals, live-build sessions.' },
+                  { env: 'Walking shot (supplementary)', use: 'Hot takes, daily voice notes, short form rants.' },
+                  { env: 'Client site / boardroom (supplementary)', use: 'Behind the scenes, live workshop moments, character content.' },
+                ].map((env, i) => (
+                  <div key={i} className="glow-card p-4">
+                    <p className="text-white font-semibold text-sm mb-1">{env.env}</p>
+                    <p className="text-zinc-500 text-xs leading-relaxed">{env.use}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Packaging */}
+              <p className="text-zinc-300 font-semibold mb-3">Packaging signature</p>
+              <div className="glow-card p-5 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div>
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Palette</p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">Two to three colours your audience associates with you. Define on the Brand Day shoot.</p>
+                  </div>
+                  <div>
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Type</p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">One display headline + one body voice + one mono caption. Same across every piece.</p>
+                  </div>
+                  <div>
+                    <p className="text-blue-400 text-[10px] uppercase tracking-widest font-semibold mb-1">Motif</p>
+                    <p className="text-zinc-300 text-sm leading-relaxed">A recurring visual signature. Numbered chapter card, single blue underline, or black-on-paper teardown.</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* KPIs */}
+              <p className="text-zinc-300 font-semibold mb-3">Distribution KPIs (first 90 days)</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
+                <div className="glow-card p-4">
+                  <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold mb-2">Surface metrics</p>
+                  <ul className="space-y-1.5 text-sm">
+                    {['Views and reach (context only)', 'Subscriber growth', 'Engagement rate'].map((k, i) => (
+                      <li key={i} className="flex items-start gap-2"><div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" /><span className="text-zinc-400">{k}</span></li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="glow-card border-blue-500/30 p-4">
+                  <p className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold mb-2">Conversion metrics (the ones to watch)</p>
+                  <ul className="space-y-1.5 text-sm">
+                    {['Lead magnet conversion rate per pillar', 'DM quality and volume from ICPs', 'Watch time on high-intent videos', 'Replies that reference specific pain points', 'Boardroom application volume'].map((k, i) => (
+                      <li key={i} className="flex items-start gap-2"><div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-300">{k}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Bottleneck */}
+              <div className="glow-card border-blue-500/30 p-6">
+                <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold mb-4">Bottleneck check</p>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">Bottleneck today</p>
+                    <p className="text-white text-sm leading-relaxed">Volume of pillar long form. The 8 video foundation has to exist before the recycle machine can run.</p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">What unlocks it</p>
+                    <p className="text-white text-sm leading-relaxed">Fortnightly shoot day, two pillars per shoot, operator-led packaging and scheduling.</p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">Next 30 day move</p>
+                    <p className="text-white text-sm leading-relaxed">Lock the first 4 pillars (Videos 03, 04, 05, 07). Ship them weekly. Spin up the lead magnet trio in parallel. By Week 04, the audit tool launches and inbound segments itself.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </Section>
