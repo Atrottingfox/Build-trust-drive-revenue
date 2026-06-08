@@ -84,37 +84,37 @@ const BELIEFS: Belief[] = [
     sub: 'Beliefs shift by stage of awareness',
     framingLabels: ['Unaware', 'Pain aware', 'Problem aware', 'Solution aware', 'Most aware'],
     currents: [
-      "'Coaching is just personal training online. I do that already.'",
-      "'I'm working too hard for what I make. Something's leaking somewhere.'",
-      "'I don't have a content engine. I'm trading time for clients.'",
-      "'I need a content + community + workshop system to scale.'",
-      "'I need to install an Authority Engine. Who's running this for elite operators?'",
+      "'Content is what I do between client work.'",
+      "'I post daily and get nothing back from it.'",
+      "'My content is not converting coaching clients. Something is wrong.'",
+      "'I need a real content system that scales without me in the chair every day.'",
+      "'I want to install an Authority Engine. Who is running this for PT operators?'",
     ],
-    required: "'There's a category called the Authority Engine. The top operators install it before they scale, not after.'",
+    required: "'Authority Engine is a real category. The top PT operators install it before they scale, not after.'",
   },
   {
     category: 'Mechanism',
     sub: 'Skepticism by what they have seen before',
     framingLabels: ['Mild', 'Average', 'Burnt', 'Hardened'],
     currents: [
-      "'Probably another content coach. Worth a look.'",
-      "'All these coaches are basically the same. Same hooks, same playbooks.'",
-      "'I paid for one of these. Got generic frameworks. Nothing landed.'",
+      "'Worth a look. Might be useful.'",
+      "'Probably similar to every other content coach in fitness.'",
+      "'I paid for one of these already. Got generic frameworks. Nothing landed.'",
       "'I have stopped engaging with anything that calls itself a content engine.'",
     ],
-    required: "'This mechanism is different. It is an install, not a course. The IP is sequenced, proprietary, and built for operators at this level.'",
+    required: "'This mechanism is different. It is an install, not a course. The IP is sequenced, proprietary, and built for PT operators at this level.'",
   },
   {
     category: 'Founder',
-    sub: 'The kind of distance they feel from Sean',
+    sub: 'The kind of distance they feel from you (the founder)',
     framingLabels: ['Experience', 'Industry', 'Personality', 'Stage'],
     currents: [
-      "'He coaches coaches. He has not actually run a fitness business at scale.'",
-      "'He does not get fitness specifically. PTs are different to ecommerce founders.'",
-      "'He will run the same playbook he runs for everyone else.'",
-      "'I am bigger than his usual client. He will not get my problems.'",
+      "'He coaches coaches now. Has he actually been on the floor running a PT business?'",
+      "'He works with online operators. Mine is in-person or hybrid. Different problems.'",
+      "'He is strategic. I need help with execution, not more strategy.'",
+      "'He works with operators bigger than me. He will not get my problems at $400k.'",
     ],
-    required: "'He has worked with Taki, Jay Wright, Bailey, Mitch Revs. He has run multiple businesses to eight figures. He has been in the chair at every level above mine.'",
+    required: "'He has been in the chair as a PT operator himself. He has worked with operators from \$300k to \$5M+ across both online and in-person. He has done both layers, the floor and the strategic install.'",
   },
   {
     category: 'Self',
@@ -126,19 +126,19 @@ const BELIEFS: Belief[] = [
       "'My niche is too specific. A standard system will not fit me.'",
       "'I would already know if there was a real gap in my content engine.'",
     ],
-    required: "'Online operators at my exact size with my exact mess have already installed this. The mess is the input, not the obstacle.'",
+    required: "'PT operators at my exact size with my exact mess have already installed this. The mess is the input, not the obstacle.'",
   },
   {
     category: 'Timing',
     sub: 'The reason they give themselves for waiting',
     framingLabels: ['Calendar', 'Preparation', 'Capacity', 'Financial'],
     currents: [
-      "'I will get this sorted in Q1.'",
+      "'I will get this sorted after my next intake.'",
       "'I want my team in place before this starts.'",
       "'Too busy with my next launch. I will look at this after.'",
       "'I will do it once revenue is more predictable.'",
     ],
-    required: "'Every month I delay is one less month the engine runs. The compounding is the cost. The engine compounds whether I install it now or later. Earlier is cheaper.'",
+    required: "'Every month I delay is one less month the engine runs. The compounding is the cost. Earlier is cheaper.'",
   },
 ];
 
@@ -896,23 +896,23 @@ export default function TheNextStage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Stories</p>
-                <p className="text-white text-sm leading-relaxed mb-2">Named clients, their journeys, their figures.</p>
-                <p className="text-zinc-500 text-xs leading-relaxed italic">Bailey Seamer. Mitch Revs. Jay Wright. Taki Moore. Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
+                <p className="text-white text-sm leading-relaxed mb-2">Named PT clients, their journeys, their figures.</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">[Your named PT operators with their numbers — replace with your actual roster.] Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
               </div>
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Data</p>
                 <p className="text-white text-sm leading-relaxed mb-2">Aggregate and individual numbers unique to you.</p>
-                <p className="text-zinc-500 text-xs leading-relaxed italic">$10M+ created for clients in 24 months. Workshop results. Content engagement across the client roster. Numbers that exist nowhere else.</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">[Aggregate revenue created for PT clients]. [Boardroom attendance and result data]. [Content engagement across your roster]. Numbers that exist nowhere else.</p>
               </div>
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Experiences</p>
-                <p className="text-white text-sm leading-relaxed mb-2">Personal patterns seen across operators at every level.</p>
-                <p className="text-zinc-500 text-xs leading-relaxed italic">Running your own businesses. Two of the highest level coaches in Australia inside the engine. What it actually takes inside the room when multi-million dollar plays are being run.</p>
+                <p className="text-white text-sm leading-relaxed mb-2">Personal patterns seen across PT operators at every level.</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">Running your own coaching business. The PT operators inside the Boardroom. What it actually takes inside the room when an operator hits the ceiling and breaks through it.</p>
               </div>
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Mechanisms</p>
                 <p className="text-white text-sm leading-relaxed mb-2">Mechanisms, principles, frameworks, and IP.</p>
-                <p className="text-zinc-500 text-xs leading-relaxed italic">The Authority Engine. The Magic Model. The 5 As. VOICE framework. Brand to Content to Scale. Operator Install Model. Named, owned, defended.</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">[Your named frameworks for PT operators]. The Authority Engine install. The Boardroom mechanism. [Your signature scoring or diagnostic tool]. Named, owned, defended.</p>
               </div>
             </div>
 
@@ -1216,13 +1216,13 @@ export default function TheNextStage() {
               </p>
               <div className="space-y-3">
                 {[
-                  { n: '01', type: 'Character Story', title: "From PT to \$10M+ in client revenue: what I got wrong on the way", driver: 'Trust through truth. People buy why, not what.' },
-                  { n: '02', type: 'The Positioning Play', title: 'The full Authority Engine: every step to install one in 90 days', driver: "Authority through density. 'This person has a system for everything.'" },
-                  { n: '03', type: 'Tactical Niche Operator', title: 'Three patterns I see in fitness operators who scale past \$2M', driver: 'Principles over predictions. Pattern recognition earns credibility.' },
-                  { n: '04', type: 'Accessible Masterclass', title: 'The single content move that took Mitch Revs from 19k to 50k followers in 60 days', driver: 'Speed to value + simple accessibility. Shareable in Slack.' },
+                  { n: '01', type: 'Character Story', title: "From PT operator to building [\$X+ across the roster]: what I got wrong on the way", driver: 'Trust through truth. People buy why, not what.' },
+                  { n: '02', type: 'The Positioning Play', title: 'The full Authority Engine: every step to install one in a PT business in 90 days', driver: "Authority through density. 'This person has a system for everything.'" },
+                  { n: '03', type: 'Tactical Niche Operator', title: 'Three patterns I see in PT operators who scale past \$2M', driver: 'Principles over predictions. Pattern recognition earns credibility.' },
+                  { n: '04', type: 'Accessible Masterclass', title: 'The single content move that took [your named PT client] from [X to Y] in 60 days', driver: 'Speed to value + simple accessibility. Shareable in Slack.' },
                   { n: '05', type: 'The Signature Framework', title: "The 5 A's: how authority actually gets built (not bought)", driver: 'A framework they implement becomes a framework they share.' },
-                  { n: '06', type: 'Expertise Compression', title: 'Everything I know about online coaching content in 12 minutes', driver: 'Simplifying the complex is the highest form of expertise demonstration.' },
-                  { n: '07', type: 'Counterintuitive Shift', title: 'Why fitness founders chasing volume are running the wrong playbook', driver: 'Belief breaker. Shifts the relationship dynamic. Doubles as VSL.' },
+                  { n: '06', type: 'Expertise Compression', title: 'Everything I know about PT coaching content in 12 minutes', driver: 'Simplifying the complex is the highest form of expertise demonstration.' },
+                  { n: '07', type: 'Counterintuitive Shift', title: 'Why PT founders chasing volume are running the wrong playbook', driver: 'Belief breaker. Shifts the relationship dynamic. Doubles as VSL.' },
                   { n: '08', type: 'Legacy', title: 'Why authority is the only asset that survives algorithm changes', driver: 'Audience adopts philosophies, not just frameworks. Final layer of identity trust.' },
                 ].map((video, i) => (
                   <div key={i} className="glow-card p-5">
@@ -1247,11 +1247,11 @@ export default function TheNextStage() {
               </p>
               <div className="space-y-3">
                 {[
-                  { belief: 'More content volume is the most common cause of plateau, not the solution.', proof: 'Backed by what actually scales the operators in your roster. Volume is the trap dressed as the answer.' },
-                  { belief: 'Online coaches do not need bigger audiences. They need deeper systems.', proof: 'Backed by operator hour math. The ceiling is system depth, not reach.' },
-                  { belief: 'Personal brand is the wrong frame for most fitness operators. Authority systems are the right one.', proof: "Backed by what survives when the founder steps off camera. The brand can't depend on the face." },
-                  { belief: 'Working with category leaders is what borrowed authority actually means. Most coaches mistake it for vanity.', proof: 'Backed by Taki, Jay, Bailey, Mitch. The chunk-up principle in action.' },
-                  { belief: 'The fitness industry confuses output with authority.', proof: 'Backed by what audiences remember vs what they ignore. Output is noise. Authority is signal.' },
+                  { belief: 'More content volume is the most common cause of plateau, not the solution.', proof: 'Backed by what actually scales the PT operators in your roster. Volume is the trap dressed as the answer.' },
+                  { belief: 'PT operators do not need bigger audiences. They need deeper systems.', proof: 'Backed by operator hour math. The ceiling is system depth, not reach.' },
+                  { belief: 'Personal brand is the wrong frame for most PT operators. Authority systems are the right one.', proof: "Backed by what survives when the founder steps off camera. The brand can't depend on the face." },
+                  { belief: 'Working with category leaders is what borrowed authority actually means. Most PT coaches mistake it for vanity.', proof: 'Backed by [your named higher-tier operators]. The chunk-up principle in action.' },
+                  { belief: 'The PT industry confuses output with authority.', proof: 'Backed by what audiences remember vs what they ignore. Output is noise. Authority is signal.' },
                 ].map((item, i) => (
                   <div key={i} className="glow-card p-5">
                     <div className="flex items-start gap-3 mb-3">
@@ -1277,11 +1277,11 @@ export default function TheNextStage() {
                 <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold mb-4">Your locked narrative</p>
                 <div className="space-y-3">
                   {[
-                    { label: "I have spent years behind brands like", value: 'LSKD, Tiger Lily, Mitch Revs, Jay Wright, Taki Moore. The category leaders most online operators only see from the outside.' },
-                    { label: 'But I discovered the opposite is true', value: 'The industry assumes authority is claimed. It is not. It is inferred by others through observed truth. The operators with the biggest audiences are often the least trusted in the room.' },
-                    { label: 'I kept seeing the same problem', value: 'Output mistaken for authority. Volume mistaken for visibility. Founders trapped inside their own marketing.' },
-                    { label: 'So I built', value: 'The Authority Engine. The system that installs deep, system-led trust across a personal brand without making the founder the bottleneck.' },
-                    { label: 'Now I help', value: 'Online fitness founders at $400k to $5M install the engine that compounds their authority while their team runs the operation.' },
+                    { label: 'I have spent years behind brands like', value: '[Your named PT operators and brands — substitute your actual roster]. The category leaders most PT coaches only see from the outside.' },
+                    { label: 'But I discovered the opposite is true', value: 'The PT industry assumes authority is claimed. It is not. It is inferred by others through observed truth. The PTs with the biggest audiences are often the least trusted in the room.' },
+                    { label: 'I kept seeing the same problem', value: 'Output mistaken for authority. Volume mistaken for visibility. PT founders trapped inside their own marketing.' },
+                    { label: 'So I built', value: 'The Authority Engine install. The system that builds deep, system-led trust across a PT founder brand without making the operator the bottleneck.' },
+                    { label: 'Now I help', value: 'PT operators at \$400k to \$5M install the engine that compounds their authority while their team runs the operation.' },
                   ].map((row, i) => (
                     <div key={i} className="border-l-2 border-zinc-800 pl-4">
                       <p className="text-zinc-500 text-[10px] uppercase tracking-widest mb-1 font-semibold">{row.label}</p>
@@ -1369,11 +1369,11 @@ export default function TheNextStage() {
                   axis: 'Attention',
                   sub: 'Scroll-stoppers. Pattern interrupt or contrarian frame.',
                   hooks: [
-                    "Most fitness coaches plateau at $400k. Here is the exact reason why.",
-                    "I spent six figures learning what nobody teaches about online coaching. Here it is in 10 minutes.",
-                    "The way you scale a coaching business is not the way you scale Mitch Revs' brand.",
-                    "Three patterns I see in fitness operators who scale past $2M. None are obvious.",
-                    "If I had to rebuild a coaching business from zero today, I'd skip 80% of what coaches do.",
+                    "Most PT coaches plateau at \$400k. Here is the exact reason why.",
+                    "I spent six figures learning what nobody teaches about online PT coaching. Here it is in 10 minutes.",
+                    "The way you scale a PT business is not the way you scale [a category leader's] brand.",
+                    "Three patterns I see in PT operators who scale past \$2M. None are obvious.",
+                    "If I had to rebuild a PT business from zero today, I'd skip 80% of what PT coaches do.",
                   ],
                 },
                 {
@@ -1381,28 +1381,28 @@ export default function TheNextStage() {
                   sub: 'Likeness. The thing that makes them say they are just like me.',
                   hooks: [
                     "Your content is the bottleneck. Nobody is telling you because it is hard to hear.",
-                    "I run multiple businesses. This is the most common mistake I see fitness founders make at scale.",
-                    "The hardest part of being a coach isn't coaching. It is everything else.",
-                    "I used to think content was the work I did between client work. Then a client told me it was the leverage that made the client work scalable.",
+                    "I've been on the floor as a PT operator. This is the most common mistake I see PT founders make at scale.",
+                    "The hardest part of being a PT coach isn't coaching. It is everything else.",
+                    "I used to think content was the work I did between client work. Then I realised it was the leverage that made the client work scalable.",
                   ],
                 },
                 {
                   axis: 'Authority',
                   sub: 'Credibility. Earned proof of method.',
                   hooks: [
-                    "We've helped fitness operators generate $10M+ in 24 months. The pattern across every one of them is the same.",
-                    "Inside the Authority Engine: how the 5 A's compound across a 90 day install.",
-                    "Mitch Revs grew from 19k to 50k followers in 60 days. The play was not hooks. It was this.",
-                    "Jay Wright doubled his following and his revenue in 12 months. Here is the exact sequence we ran.",
+                    "We've helped PT operators generate [\$X+] in [N] months. The pattern across every one of them is the same.",
+                    "Inside the Authority Engine: how the 5 A's compound across a 90 day install for a PT business.",
+                    "[Your named client] grew from [X to Y] in [N] months. The play was not hooks. It was this.",
+                    "[Your named client] doubled their revenue and following in 12 months. Here is the exact sequence we ran.",
                   ],
                 },
                 {
                   axis: 'Achievability',
                   sub: 'Easy first steps. Proof people like them already did it.',
                   hooks: [
-                    "The smallest content move that 3x'd Mitch's organic reach in one week. Anyone can replicate it.",
-                    "What to film if you have 60 minutes and one phone. (Worth $40k+ in advisory.)",
-                    "The 5 questions every founder should answer in a daily voice note. That is the entire content bank.",
+                    "The smallest content move that 3x'd [your client's] organic reach in one week. Any PT coach can replicate it.",
+                    "What to film if you have 60 minutes and one phone. (The play I'd run in Brand Day.)",
+                    "The 5 questions every PT founder should answer in a daily voice note. That is the entire content bank.",
                     "How to ship one long video per week without you in the chair every day.",
                   ],
                 },
@@ -1411,7 +1411,7 @@ export default function TheNextStage() {
                   sub: 'The door. One destination, named and pointed to.',
                   hooks: [
                     "What it actually looks like inside The Authority Engine 90 day install.",
-                    "If you are scaling between $400k and $5M, this is the install for you. Here is what is included.",
+                    "If you are a PT operator scaling between \$400k and \$5M, this is the install for you. Here is what is included.",
                     "Inside the Boardroom: who it is for, what it costs, what walks out the door at day 90.",
                   ],
                 },
@@ -1674,7 +1674,7 @@ export default function TheNextStage() {
                   {
                     week: 'Week 02',
                     pillar: 'Pillar Video 04 — Accessible Masterclass',
-                    title: "'The single content move that took Mitch Revs from 19k to 50k followers in 60 days'",
+                    title: "'The single content move that took [your named PT client] from [X to Y followers] in 60 days'",
                     pieces: [
                       'Mon: Pillar long form (12 min)',
                       'Tue: Short clip 01 (the move named)',
@@ -1702,7 +1702,7 @@ export default function TheNextStage() {
                   {
                     week: 'Week 04',
                     pillar: 'Pillar Video 03 — Tactical Niche Operator',
-                    title: "'Three patterns I see in fitness operators who scale past $2M'",
+                    title: "'Three patterns I see in PT operators who scale past \$2M'",
                     pieces: [
                       'Mon: Pillar long form (15 min)',
                       'Tue: Short clip 01 (pattern 1)',
