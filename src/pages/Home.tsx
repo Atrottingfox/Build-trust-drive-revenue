@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Authority Engine — Content systems for 7 and 8 figure founders"
+        title="Own Your Category. The Content Authority Engine for 7 & 8 figure founders"
         description="Sean Fox builds Authority Engines. A 90 day content system that turns founder expertise into a media operating system. Without you becoming a full time creator."
         path="/"
       />
