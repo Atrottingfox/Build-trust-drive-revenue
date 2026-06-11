@@ -12,7 +12,6 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-8 text-sm text-zinc-600">
-            <a href="https://www.contentengine.live" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Content Engine</a>
             <a href="https://www.instagram.com/a_trotting_fox/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
             <a href="/apply" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Apply now</a>
           </div>
