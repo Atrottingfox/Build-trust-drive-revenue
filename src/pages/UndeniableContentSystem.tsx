@@ -44,7 +44,6 @@ export default function UndeniableContentSystem() {
           <><b className="text-white font-semibold">Client Problem (Documentation).</b> An anonymised real problem from a call that week, and the diagnosis.</>,
           <><b className="text-white font-semibold">Binary / Two Paths.</b> Make them choose, signal doer vs not. Trains the dream client.</>,
           <><b className="text-white font-semibold">Belief Flip · old way vs new way.</b> Contrarian with data, the side-by-side.</>,
-          <>Bonus: <b className="text-white font-semibold">The Single Number.</b> One big number, nonchalant, timeframe compressed.</>,
         ]} />
       </Wrap>
       <Divider />

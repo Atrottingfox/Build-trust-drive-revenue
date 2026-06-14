@@ -55,17 +55,6 @@ const G: Array<{ label: string; items: Array<string | { q: string; star?: boolea
     { q: 'Manual effort will reign supreme. Analogue effort is the thing that always wins. You can\'t cheat it.', star: true },
     'If you\'ve been burnt and you\'re scared to get burnt again, the only thing happening is you staying smaller. Worst case you find more info and stay the same. Best case you\'re wrong and you get wealthier.',
   ]},
-  { label: 'Stories · full anecdotes (each = 1 long-form + cutdowns)', items: [
-    { q: 'I got given her by a PT who was leaving. She did five sessions a week and didn\'t follow program. The PT called it glorified babysitting. I got bored, so I built her the most disgusting program to make her quit. She asked to cancel her sessions. I thought she was too sore. She said, no, I want to come do it myself. She dropped 40 kilos and got on stage. I built her to be the best client.', star: true },
-    { q: 'Nate was at a bodybuilding show doing work on a laptop. Kate said, you really love this coaching stuff. Nate said, yeah, I love coaching. Kate said, I just like making money. I don\'t care about being a good coach anymore.', star: true },
-    'She\'s a golden girl, great shape, coaching people 20 kilos overweight who\'d be scared of her. Until she started talking on her story, being friendly. People buy people, not product.',
-    { q: 'I couldn\'t pay my staff two weeks before Christmas because I fucked up.', star: true },
-    { q: 'When I was at my worst was when we were at our best. I was ready to off myself. We grew near 600% in five months. More staff, more people, more problems. Making the most money, at my worst.', star: true },
-    { q: 'Three years ago, my first seminar, 16 people, two bought tickets, the rest came for free. We made $175. And I taught the same thing I charge 22 grand for now.', star: true },
-    'She\'d listened to every podcast back to the Livestone days. She said, I\'m annoyed you don\'t make the podcast anymore, so I just need to pay you to get you to talk.',
-    { q: 'I did the math of what he\'d lost by not fixing his churn. $800,000. He sat there white in the face. I\'ve never done the math on my churn. All I was focused on was getting more leads.', star: true },
-    'On the sales call I asked, what\'s the goal. She said, I just want McLaren money.',
-  ]},
   { label: 'The frames · reusable across every piece', items: [
     { q: 'Right problem, wrong way is the most expensive place to be. Things get a bit better, you think it\'s awesome, and you don\'t find out for five years you\'ve wasted five years and could have been three times the size.', star: true },
     'The golden BBs. You don\'t know if the shots firing are correct or in the right sequence, even if they\'re working.',
@@ -107,7 +96,6 @@ export default function UndeniableAdGold() {
             <Quotes items={g.items} />
           </Block>
         ))}
-        <Note>Run each story as both a short (the line) and a long-form (the full story). Turn every line in the contrarian, churn and math blocks into a single whiteboard or talking-head short. That alone is 60-plus pieces before the backlog.</Note>
       </Wrap>
     </Shell>
   );
