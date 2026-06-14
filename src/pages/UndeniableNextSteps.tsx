@@ -192,7 +192,6 @@ export default function UndeniableNextSteps() {
                   { n: 'WK 3', pillar: 'Niche Authority', label: 'Tactical Operator Video · the VSL', q: 'Does this apply specifically to me?', titles: [
                     'If I Wanted to Make $1M as a Fitness Coach Again, I\'d Do This',
                     'How to Become a $1M Fitness Coach',
-                    'The Fastest Way to Become a Million Dollar Fitness Business Owner',
                     'How to Make Your First $1M as a Fitness Coach (Step by Step)',
                     'How to Make Your First $1M in Fitness (Full Walkthrough)',
                   ] },
@@ -202,24 +201,13 @@ export default function UndeniableNextSteps() {
                   ] },
                   { n: 'WK 5', pillar: 'Implementable', label: 'Accessible Insights', q: 'Do they have insights I can\'t find anywhere else?', titles: [
                     'Stop "Learning Marketing" and Just Copy This (Complete Plan)',
-                    '$10,000 > $100,000/Month',
                     'If I Wanted to Add $10,000/Month as a PT, I\'d Just Do This',
-                    '+$10,000 > +$10,000 > +$10,000',
-                    'How to Make an Extra $10,000+ Every Month as an Experienced PT',
-                    'The Real Reason Your Marketing Isn\'t Working',
                   ] },
                   { n: 'WK 6', pillar: 'Masterclass', label: 'Step by Step Walkthrough', q: 'Is there a complete system, or just tactics?', titles: [
                     'How to Get So Good at Marketing You Never Have to Sell Again',
                     'How to Get So Many Referrals You Never Need to Run an Ad Again',
                     'Every Fitness Creator Gets Stuck at the Same Point. If That\'s You, Do This.',
                     'How to Add $10,000/Month as a PT (The Exact System)',
-                  ] },
-                  { n: 'WK 7', pillar: 'Story · bonus', label: 'Case Study (non-traditional)', q: 'Is this just theory? Will it actually work for me?', titles: [
-                    'The Real Reason Marketing Isn\'t Working in Your Business',
-                  ] },
-                  { n: 'WK 8', pillar: 'Philosophy · bonus', label: 'Us vs Them · day in the life / mission', q: 'Why is this different?', titles: [
-                    'How to Build Wealth as a PT in 2026, Fast',
-                    'Why Health and Fitness Is the BEST Niche to Scale in 2026',
                   ] },
                 ].map((p) => (
                   <div key={p.n}>
