@@ -54,7 +54,7 @@ export default function UndeniableContentSystem() {
         <Block label="Three content modes">
           <BulletList items={[
             <><b className="text-white font-semibold">Demonstration</b> — whiteboard + top down. Showing, not telling. The best kind.</>,
-            <><b className="text-white font-semibold">Documentation</b> — the gym pieces. Real client problems, anonymised.</>,
+            <><b className="text-white font-semibold">Documentation</b> — telling stories and hot takes. The "share" lens.</>,
             <><b className="text-white font-semibold">Teaching</b> — concise education, one takeaway, implementable now.</>,
           ]} />
         </Block>

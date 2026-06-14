@@ -250,11 +250,11 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Section>
               <Eyebrow>The voice</Eyebrow>
-              <H2>Brand core. Write as him, not as you.</H2>
+              <H2>Brand core.</H2>
               <Block label="Archetypes">
                 <BulletList items={[
                   <><b className="text-white font-semibold">Guide</b> (primary). Done it, sharing the scars.</>,
-                  <><b className="text-white font-semibold">Protector</b>. Won't let people pay dumb people.</>,
+                  <><b className="text-white font-semibold">Protector</b>. I won't let people get scammed.</>,
                   <><b className="text-white font-semibold">Scientist</b>. Runs tests, shares lessons, the data guy.</>,
                 ]} />
               </Block>
@@ -295,12 +295,6 @@ export default function UndeniableNextSteps() {
                 <BulletList items={[
                   'Did the math on his churn: lost $800,000 and never knew it. Sat white in the face.',
                   'Shows up to every call. Problem-solves himself. "You won\'t hear from me until I\'ve done 80K a month."',
-                ]} />
-              </Block>
-              <Block label="McLaren lady · unassuming, power coaching">
-                <BulletList items={[
-                  'Most unassuming in the room. On the sales call: "I just want McLaren money."',
-                  'The reminder: most won\'t admit they want money, but the best ones do.',
                 ]} />
               </Block>
             </Section>
@@ -485,7 +479,8 @@ export default function UndeniableNextSteps() {
                   'Send the script structures and the content template.',
                   'Deliver the ecosystem visual as a clean one pager.',
                   'Call to work through the 10 character lessons.',
-                  'Build the 6 week cycle doc and the Taki weekly campaign template.',
+                  'Build the 6 week cycle doc.',
+                  'Send Corey a list of resources to go through and consume.',
                   'Provide the bottleneck diagnostic and call questions for Corey.',
                 ]} />
               </Block>
@@ -513,9 +508,6 @@ export default function UndeniableNextSteps() {
                 ]} />
               </Block>
 
-              <p className="text-zinc-400 text-sm leading-relaxed italic">
-                The thing only Rhys can give is the 10 lessons. That is the bottleneck. Chase it first.
-              </p>
             </Section>
           </div>
         </section>
@@ -531,8 +523,8 @@ export default function UndeniableNextSteps() {
               <p className="text-zinc-400 text-[16px] leading-relaxed mb-8">The four things actually blocking forward motion. Everything else is transferring what's already captured.</p>
               <BulletList items={[
                 <><b className="text-white font-semibold">The 10 character lessons</b> from Rhys. Experience (pain, money) → story → lesson → action + one-liner. The bottleneck.</>,
-                <><b className="text-white font-semibold">Lock 6 vs 8 pillars</b> and map each to a 5 A. Two versions are floating.</>,
-                <><b className="text-white font-semibold">Name the one signature mechanism</b> (with a visual + promise). MACHINE, 5-star offer, or the lead-vs-churn inverse.</>,
+                <><b className="text-white font-semibold">Lock the 6 pillar video outlines</b> and send the doc.</>,
+                <><b className="text-white font-semibold">Name the signature mechanisms.</b> MACHINE, 5-star offer, the lead-vs-churn inverse.</>,
                 <><b className="text-white font-semibold">Naming</b> for the sales asset, churn calculator and diagnostic.</>,
               ]} />
             </Section>
