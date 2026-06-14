@@ -22,7 +22,7 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 }
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">{children}</p>
+  <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">{children}</p>
 );
 
 const H2 = ({ children }: { children: React.ReactNode }) => (
@@ -79,7 +79,7 @@ export default function UndeniableNextSteps() {
               <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.08] mb-6">
                 The problem was never awareness.
                 <br />
-                <span className="text-zinc-500">It is trust.</span>
+                <span className="text-zinc-400">It is trust.</span>
               </h1>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 mb-8">
                 <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
@@ -111,7 +111,7 @@ export default function UndeniableNextSteps() {
                     <div className="flex items-baseline gap-3 mb-3 flex-wrap">
                       <span className="font-display text-2xl font-extrabold text-blue-400">{b.n}</span>
                       <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">{b.name}</h3>
-                      <span className="text-zinc-500 text-sm font-medium">{b.score}</span>
+                      <span className="text-zinc-400 text-sm font-medium">{b.score}</span>
                       {b.focus && (
                         <span className="text-blue-400 text-[11px] font-semibold uppercase tracking-widest border border-blue-500/30 bg-blue-500/5 rounded-full px-2.5 py-0.5">Fix first</span>
                       )}
@@ -120,7 +120,7 @@ export default function UndeniableNextSteps() {
                   </div>
                 ))}
               </div>
-              <p className="text-zinc-500 text-sm leading-relaxed italic mt-10">
+              <p className="text-zinc-400 text-sm leading-relaxed italic mt-10">
                 Clarity and Quality sit at three. That is where the work starts. Once clarity is dialled, the machine breaks every bottleneck before it begins.
               </p>
             </Section>
@@ -141,7 +141,7 @@ export default function UndeniableNextSteps() {
                 <><b className="text-white font-semibold">Lead magnets and email</b> sit behind the videos. Diagnostic or roadmap magnets point to YouTube to learn. Straight assets give the two path choice. Every email signals back to YouTube.</>,
                 <><b className="text-white font-semibold">The workshop is the money.</b> Secret word and revenue routing tracks who came through the YouTube flow. Pixel everything and retarget.</>,
               ]} />
-              <p className="text-zinc-500 text-sm leading-relaxed italic mt-6">
+              <p className="text-zinc-400 text-sm leading-relaxed italic mt-6">
                 People come in the top and rotate until they pop. The job is to get them in and watching as much as possible.
               </p>
             </Section>
@@ -171,7 +171,7 @@ export default function UndeniableNextSteps() {
                   </div>
                 ))}
               </div>
-              <p className="text-zinc-500 text-sm leading-relaxed italic mt-10">
+              <p className="text-zinc-400 text-sm leading-relaxed italic mt-10">
                 One YouTube video a week. After six weeks, pause, read the data, change. Then peel back another layer and run it again.
               </p>
             </Section>
@@ -384,7 +384,7 @@ export default function UndeniableNextSteps() {
                 ]} />
               </Block>
 
-              <p className="text-zinc-500 text-sm leading-relaxed italic">
+              <p className="text-zinc-400 text-sm leading-relaxed italic">
                 The thing only Rhys can give is the 10 lessons. That is the bottleneck. Chase it first.
               </p>
             </Section>
