@@ -247,8 +247,9 @@ export default function UndeniableNextSteps() {
                   <><b className="text-white font-semibold">Scientist</b>. Runs tests, shares lessons, the data guy.</>,
                 ]} />
               </Block>
-              <Block label="The offer + recognition line">
+              <Block label="Category, offer + recognition line">
                 <BulletList items={[
+                  'Category of ownership: Health & Fitness business owners.',
                   'Unique offer: "I did it without influence, without going viral. Come test me in person."',
                   'Recognition line: "He\'s the one who actually did it."',
                 ]} />
