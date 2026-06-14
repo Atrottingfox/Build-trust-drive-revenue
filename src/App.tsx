@@ -31,6 +31,7 @@ const Calvin = React.lazy(() => import('./pages/Calvin'));
 const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
 const Undeniable = React.lazy(() => import('./pages/Undeniable'));
 const UndeniableNotes = React.lazy(() => import('./pages/UndeniableNotes'));
+const UndeniableNextSteps = React.lazy(() => import('./pages/UndeniableNextSteps'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="/calvincoyles" element={<CalvinOriginal />} />
           <Route path="/undeniable" element={<Undeniable />} />
           <Route path="/undeniable-notes" element={<UndeniableNotes />} />
+          <Route path="/undeniablenextsteps" element={<UndeniableNextSteps />} />
           <Route path="/linkninja" element={<LinkNinja />} />
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
