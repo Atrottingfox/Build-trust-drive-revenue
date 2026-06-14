@@ -45,7 +45,7 @@ const Quotes = ({ items }: { items: string[] }) => (
     {items.map((q, i) => (
       <li key={i} className="flex items-start gap-3">
         <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-        <span className="text-zinc-300 text-sm md:text-base leading-relaxed italic">&ldquo;{q}&rdquo;</span>
+        <span className="text-zinc-300 text-sm md:text-[1rem] leading-relaxed italic">&ldquo;{q}&rdquo;</span>
       </li>
     ))}
   </ul>
@@ -85,7 +85,7 @@ export default function UndeniableNextSteps() {
                 <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
                 <span className="text-blue-400 text-xs font-medium italic">Working session output · for the team</span>
               </div>
-              <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+              <p className="text-zinc-400 text-[1rem] md:text-lg leading-relaxed">
                 Everything we mapped in the room, in order. Most of the market already knows who you are. They are not ready to buy yet. The next 6 weeks compress trust and convert the people sitting on the fence, not chase new eyeballs.
               </p>
             </Section>
@@ -116,7 +116,7 @@ export default function UndeniableNextSteps() {
                         <span className="text-blue-400 text-[11px] font-semibold uppercase tracking-widest border border-blue-500/30 bg-blue-500/5 rounded-full px-2.5 py-0.5">Fix first</span>
                       )}
                     </div>
-                    <p className="text-zinc-400 text-base leading-relaxed">{b.q}</p>
+                    <p className="text-zinc-400 text-[1rem] leading-relaxed">{b.q}</p>
                   </div>
                 ))}
               </div>
@@ -167,7 +167,7 @@ export default function UndeniableNextSteps() {
                       <span className="font-display text-lg font-extrabold text-blue-400 whitespace-nowrap">{w.n}</span>
                       <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">{w.name}</h3>
                     </div>
-                    <p className="text-zinc-400 text-base leading-relaxed">{w.d}</p>
+                    <p className="text-zinc-400 text-[1rem] leading-relaxed">{w.d}</p>
                   </div>
                 ))}
               </div>
@@ -256,7 +256,7 @@ export default function UndeniableNextSteps() {
             <Section>
               <Eyebrow>The raw material</Eyebrow>
               <H2>Content angles, in your words.</H2>
-              <p className="text-zinc-400 text-base leading-relaxed mb-12">
+              <p className="text-zinc-400 text-[1rem] leading-relaxed mb-12">
                 Pulled straight from the session. These bolt into the 14 videos and the cycles. A month of content sits in here already.
               </p>
 
@@ -344,7 +344,7 @@ export default function UndeniableNextSteps() {
             <Section>
               <Eyebrow>The work</Eyebrow>
               <H2>Next steps, by owner.</H2>
-              <p className="text-zinc-400 text-base leading-relaxed mb-12">
+              <p className="text-zinc-400 text-[1rem] leading-relaxed mb-12">
                 Priority order: the content system first. It is the thing that has been missing, and you get more out of it than anything else.
               </p>
 
