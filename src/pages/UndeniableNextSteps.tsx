@@ -170,30 +170,75 @@ export default function UndeniableNextSteps() {
 
         <div className="gradient-line" />
 
-        {/* 6 WEEK CYCLE */}
+        {/* THE VIDEO PILLARS */}
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Section>
-              <Eyebrow>The rhythm</Eyebrow>
-              <H2>The six week cycle.</H2>
-              <div className="space-y-10">
+              <Eyebrow>The videos</Eyebrow>
+              <H2>The video pillars.</H2>
+              <div className="space-y-11 mt-2">
                 {[
-                  { n: 'WK 1', name: 'Character video', d: 'Heart heavy. The timeline. "Just a PT to my First Million." 10 lessons, each tied to a real scar. The lens: I am the guy, I have been through the shit, I do not want you to go through it.' },
-                  { n: 'WK 2', name: 'Rome', d: 'The masterpiece. Head heavy. The ultimate skill show so nobody has to watch all six hours again. First 45 seconds: here is the GPT that knows everything in this video.' },
-                  { n: 'WK 3-6', name: 'Education', d: 'Whiteboard, top down, direct to camera. Belief shift plus demonstration. The lead versus churn inverse is the flagship.' },
-                ].map((w) => (
-                  <div key={w.n}>
-                    <div className="flex items-baseline gap-3 mb-3">
-                      <span className="font-display text-lg font-extrabold text-blue-400 whitespace-nowrap">{w.n}</span>
-                      <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">{w.name}</h3>
+                  { n: 'WK 1', pillar: 'Character', label: 'Character Development', q: 'Why should I listen to this person, specifically?', titles: [
+                    'How I Built a $XM Online Fitness Empire in 11 Years',
+                    'How I Made $XM Online Without Going Viral',
+                    'As a PT I Made $X. This Is Everything I Did to Get There.',
+                  ] },
+                  { n: 'WK 2', pillar: 'Authority', label: 'The Positioning Play · Full Playbook', q: 'Does this person actually know what they\'re talking about at depth?', titles: [
+                    'F*ck It, This Is How to Build a $1M+ Online Fitness Business',
+                    '"As an Online Fitness Coach, How Can I Make $1M?" Just Do This.',
+                    'How I Made $XM Online Coaching Without Going Viral',
+                  ] },
+                  { n: 'WK 3', pillar: 'Niche Authority', label: 'Tactical Operator Video · the VSL', q: 'Does this apply specifically to me?', titles: [
+                    'If I Wanted to Make $1M as a Fitness Coach Again, I\'d Do This',
+                    'How to Become a $1M Fitness Coach',
+                    'The Fastest Way to Become a Million Dollar Fitness Business Owner',
+                    'How to Make Your First $1M as a Fitness Coach (Step by Step)',
+                    'How to Make Your First $1M in Fitness (Full Walkthrough)',
+                  ] },
+                  { n: 'WK 4', pillar: 'Practical', label: 'Signature Framework · the unique mechanism', q: 'Do I trust this person\'s specific frameworks?', titles: [
+                    'How I Made $X/Month as a PT (Without …)',
+                    'Stop "Learning Marketing" and Just Copy This',
+                  ] },
+                  { n: 'WK 5', pillar: 'Implementable', label: 'Accessible Insights', q: 'Do they have insights I can\'t find anywhere else?', titles: [
+                    'Stop "Learning Marketing" and Just Copy This (Complete Plan)',
+                    '$10,000 > $100,000/Month',
+                    'If I Wanted to Add $10,000/Month as a PT, I\'d Just Do This',
+                    '+$10,000 > +$10,000 > +$10,000',
+                    'How to Make an Extra $10,000+ Every Month as an Experienced PT',
+                    'The Real Reason Your Marketing Isn\'t Working',
+                  ] },
+                  { n: 'WK 6', pillar: 'Masterclass', label: 'Step by Step Walkthrough', q: 'Is there a complete system, or just tactics?', titles: [
+                    'How to Get So Good at Marketing You Never Have to Sell Again',
+                    'How to Get So Many Referrals You Never Need to Run an Ad Again',
+                    'Every Fitness Creator Gets Stuck at the Same Point. If That\'s You, Do This.',
+                    'How to Add $10,000/Month as a PT (The Exact System)',
+                  ] },
+                  { n: 'WK 7', pillar: 'Story · bonus', label: 'Case Study (non-traditional)', q: 'Is this just theory? Will it actually work for me?', titles: [
+                    'The Real Reason Marketing Isn\'t Working in Your Business',
+                  ] },
+                  { n: 'WK 8', pillar: 'Philosophy · bonus', label: 'Us vs Them · day in the life / mission', q: 'Why is this different?', titles: [
+                    'How to Build Wealth as a PT in 2026, Fast',
+                    'Why Health and Fitness Is the BEST Niche to Scale in 2026',
+                  ] },
+                ].map((p) => (
+                  <div key={p.n}>
+                    <div className="flex items-baseline gap-3 mb-1 flex-wrap">
+                      <span className="font-display text-[17px] font-extrabold text-blue-400 whitespace-nowrap">{p.n}</span>
+                      <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">{p.pillar}</h3>
                     </div>
-                    <p className="text-zinc-400 text-[1rem] leading-relaxed">{w.d}</p>
+                    <p className="text-zinc-300 text-[14px] font-medium">{p.label}</p>
+                    <p className="text-zinc-400 text-[13px] italic mb-4">{p.q}</p>
+                    <ul className="space-y-2">
+                      {p.titles.map((t, i) => (
+                        <li key={i} className="flex items-start gap-2.5">
+                          <div className="w-1 h-1 rounded-full bg-blue-400 mt-2.5 flex-shrink-0" />
+                          <span className="text-zinc-300 text-[14px] leading-relaxed">{t}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
-              <p className="text-zinc-400 text-sm leading-relaxed italic mt-10">
-                One YouTube video a week. After six weeks, pause, read the data, change. Then peel back another layer and run it again.
-              </p>
             </Section>
           </div>
         </section>
