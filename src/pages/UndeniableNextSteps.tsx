@@ -103,6 +103,7 @@ export default function UndeniableNextSteps() {
               <H2>The operating modules.</H2>
               <p className="text-zinc-400 text-[16px] leading-relaxed mb-8">The hub is the map. These are the pages the team opens day to day.</p>
               <div className="grid md:grid-cols-2 gap-4">
+                <ModuleLink to="/undeniablenextsteps/demand-buckets" label="Demand Buckets" blurb="Six core problems the ICP fights with + the inverse, mapped to environments and styles." />
                 <ModuleLink to="/undeniablenextsteps/shoot-card" label="The Shoot Card" blurb="The kick-off checklist and the first 15 shorts, hook to CTA. Open on shoot day." />
                 <ModuleLink to="/undeniablenextsteps/content-system" label="The Content System" blurb="Formats, modes, capture, measurement, production, the room." />
                 <ModuleLink to="/undeniablenextsteps/hooks" label="The Hook Bank" blurb="Around 90 hooks by mechanic. Grab and shoot." />
@@ -394,6 +395,11 @@ export default function UndeniableNextSteps() {
                 Each piece, in full.
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <ModuleLink
+                  to="/undeniablenextsteps/demand-buckets"
+                  label="Demand Buckets"
+                  blurb="Six core problems the ICP fights with, the inverse of each, the angles inside, and how environments map to style."
+                />
                 <ModuleLink
                   to="/undeniablenextsteps/content-system"
                   label="Content System"
