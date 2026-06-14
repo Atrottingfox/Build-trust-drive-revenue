@@ -48,7 +48,7 @@ export default function UndeniableNotes() {
               <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
               <span className="text-blue-400 text-xs font-medium italic">Non prescriptive · for discussion</span>
             </div>
-            <p className="text-zinc-400 text-base md:text-lg leading-relaxed">
+            <p className="text-zinc-400 text-[1rem] md:text-lg leading-relaxed">
               My analysis on where the brand is, the gaps that exist, and the specific improvements I'd test inside the first 90 days. This is the starting point for our Brand Day discussion. What we'll actually craft together.
             </p>
           </Section>
@@ -97,7 +97,7 @@ export default function UndeniableNotes() {
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-                  <span className="text-zinc-400 text-base leading-relaxed">{item}</span>
+                  <span className="text-zinc-400 text-[1rem] leading-relaxed">{item}</span>
                 </li>
               ))}
             </ul>
@@ -123,7 +123,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">01</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Messaging</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed">
                   Targeting online coaches (for right now) is killer. Simple. Clean. Immediately identifiable. But the core message is not yet dialled across multiple channels. IG vs YouTube has disparity.
                 </p>
               </div>
@@ -134,7 +134,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">02</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Video length and depth</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed">
                   Short videos struggle to build true depth and trust with the audience. Top content in this space runs 20 to 40+ minutes. Longer content generates more watch time, which the algorithm rewards, and the audience often requires. Not all videos must be lengthy, but core pillar videos should.
                 </p>
               </div>
@@ -145,7 +145,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">03</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Titles and hooks · specificity</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed mb-3">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed mb-3">
                   Titles and hooks should be specific, credibility anchored, and reinforced, whether used across Instagram or YouTube. Only things you can say. Undeniable evidence. Multiple current opportunities exist within titles that weaponise credibility and craft intrigue for the core market.
                 </p>
                 <p className="text-zinc-500 text-sm leading-relaxed italic">
@@ -159,7 +159,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">04</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Social proof and collaboration</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed">
                   Your client stories are under leveraged. Building in live interactive videos with members, plus structured collaboration with adjacent voices, multiplies trust without adding founder hours.
                 </p>
               </div>
@@ -170,7 +170,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">05</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Long form evergreen assets</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed">
                   Right now there are no flagship long videos that compound in the background. A handful of long form evergreen assets funnel viewers into the rest of the content for months or years. The library compounds.
                 </p>
               </div>
@@ -181,7 +181,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">06</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">CTAs · sales first vs value first</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed">
                   When the first line of every description points cold viewers straight at the offer, it triggers defensive pattern recognition. Value first CTAs that lead through a lead magnet land harder for cold audiences.
                 </p>
               </div>
@@ -192,7 +192,7 @@ export default function UndeniableNotes() {
                   <span className="font-display text-2xl font-extrabold text-blue-400">07</span>
                   <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight">Core evergreen lead magnet trust assets</h3>
                 </div>
-                <p className="text-zinc-400 text-base leading-relaxed mb-3">
+                <p className="text-zinc-400 text-[1rem] leading-relaxed mb-3">
                   No small selection of core evergreen lead magnets that get downloaded consistently from videos and posts. These trust assets sit at the back of the nurture sequence and convert intent into action. Right now this layer is mostly missing.
                 </p>
                 <p className="text-zinc-500 text-sm leading-relaxed italic">

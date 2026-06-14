@@ -5,6 +5,7 @@ import { ArrowLeft, AlertCircle } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import PasswordGate from '../components/PasswordGate';
+import { ModuleLink } from '../components/undeniable/Bits';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -94,6 +95,25 @@ export default function UndeniableNextSteps() {
 
         <div className="gradient-line" />
 
+        {/* MODULES */}
+        <section className="py-14 md:py-16">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Section>
+              <Eyebrow>Jump in</Eyebrow>
+              <H2>The operating modules.</H2>
+              <p className="text-zinc-400 text-[16px] leading-relaxed mb-8">The hub is the map. These are the pages the team opens day to day.</p>
+              <div className="grid md:grid-cols-2 gap-4">
+                <ModuleLink to="/undeniablenextsteps/shoot-card" label="The Shoot Card" blurb="The kick-off checklist and the first 15 shorts, hook to CTA. Open on shoot day." />
+                <ModuleLink to="/undeniablenextsteps/content-system" label="The Content System" blurb="Formats, modes, capture, measurement, production, the room." />
+                <ModuleLink to="/undeniablenextsteps/hooks" label="The Hook Bank" blurb="Around 90 hooks by mechanic. Grab and shoot." />
+                <ModuleLink to="/undeniablenextsteps/ad-gold" label="Ad Gold" blurb="Verbatim money lines and stories, ready to lift into creative." />
+              </div>
+            </Section>
+          </div>
+        </section>
+
+        <div className="gradient-line" />
+
         {/* DIAGNOSIS */}
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -174,6 +194,70 @@ export default function UndeniableNextSteps() {
               <p className="text-zinc-400 text-sm leading-relaxed italic mt-10">
                 One YouTube video a week. After six weeks, pause, read the data, change. Then peel back another layer and run it again.
               </p>
+            </Section>
+          </div>
+        </section>
+
+        <div className="gradient-line" />
+
+        {/* BRAND CORE */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Section>
+              <Eyebrow>The voice</Eyebrow>
+              <H2>Brand core. Write as him, not as you.</H2>
+              <Block label="Archetypes">
+                <BulletList items={[
+                  <><b className="text-white font-semibold">Guide</b> (primary). Done it, sharing the scars.</>,
+                  <><b className="text-white font-semibold">Protector</b>. Won't let people pay dumb people.</>,
+                  <><b className="text-white font-semibold">Scientist</b>. Runs tests, shares lessons, the data guy.</>,
+                ]} />
+              </Block>
+              <Block label="The offer + recognition line">
+                <BulletList items={[
+                  'Unique offer: "I did it without influence, without going viral. Come test me in person."',
+                  'Recognition line: "He\'s the one who actually did it."',
+                ]} />
+              </Block>
+              <Block label="Voice">
+                <BulletList items={[
+                  'Powerful, conviction, dry humour, logical, outcome-focused, obsessive.',
+                  'Values: integrity (character is currency), speed, excellence, morality, duty.',
+                  'No corporate gloss. Profane when emphatic. Calm conviction over urgency.',
+                ]} />
+              </Block>
+            </Section>
+          </div>
+        </section>
+
+        <div className="gradient-line" />
+
+        {/* DREAM CLIENTS */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Section>
+              <Eyebrow>Who we aim at</Eyebrow>
+              <H2>The dream clients.</H2>
+              <p className="text-zinc-400 text-[16px] leading-relaxed mb-10">Content aims at these three. They self-identify as doers. The binary format trains more of them to put their hand up.</p>
+              <Block label="Sabine · 15K → 80K months">
+                <BulletList items={[
+                  'Consumed everything, listened to every podcast back to the Livestone days.',
+                  'Problem-solver, patient. "Sorry if I\'m being annoying." Tries first, asks when stuck.',
+                  'Undiagnosed churn problem. "You don\'t know what you don\'t know."',
+                ]} />
+              </Block>
+              <Block label="Josh · gym owner, 2 locations">
+                <BulletList items={[
+                  'Did the math on his churn: lost $800,000 and never knew it. Sat white in the face.',
+                  'Shows up to every call. Problem-solves himself. "You won\'t hear from me until I\'ve done 80K a month."',
+                ]} />
+              </Block>
+              <Block label="McLaren lady · unassuming, power coaching">
+                <BulletList items={[
+                  'Most unassuming in the room. On the sales call: "I just want McLaren money."',
+                  'The reminder: most won\'t admit they want money, but the best ones do.',
+                ]} />
+              </Block>
             </Section>
           </div>
         </section>
@@ -387,6 +471,25 @@ export default function UndeniableNextSteps() {
               <p className="text-zinc-400 text-sm leading-relaxed italic">
                 The thing only Rhys can give is the 10 lessons. That is the bottleneck. Chase it first.
               </p>
+            </Section>
+          </div>
+        </section>
+
+        <div className="gradient-line" />
+
+        {/* OPEN LOOPS */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Section>
+              <Eyebrow>Still owed</Eyebrow>
+              <H2>Open loops.</H2>
+              <p className="text-zinc-400 text-[16px] leading-relaxed mb-8">The four things actually blocking forward motion. Everything else is transferring what's already captured.</p>
+              <BulletList items={[
+                <><b className="text-white font-semibold">The 10 character lessons</b> from Rhys. Experience (pain, money) → story → lesson → action + one-liner. The bottleneck.</>,
+                <><b className="text-white font-semibold">Lock 6 vs 8 pillars</b> and map each to a 5 A. Two versions are floating.</>,
+                <><b className="text-white font-semibold">Name the one signature mechanism</b> (with a visual + promise). MACHINE, 5-star offer, or the lead-vs-churn inverse.</>,
+                <><b className="text-white font-semibold">Naming</b> for the sales asset, churn calculator and diagnostic.</>,
+              ]} />
             </Section>
           </div>
         </section>
