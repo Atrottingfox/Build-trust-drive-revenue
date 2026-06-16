@@ -81,14 +81,9 @@ export default function TheUndeniablePlan() {
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
             The Undeniable <span className="text-blue-500">Plan.</span>
           </h1>
-          <p className="text-white text-[20px] font-semibold leading-snug mb-5">
+          <p className="text-white text-[20px] font-semibold leading-snug">
             Goal: 2,000 health and fitness businesses scaled by 2028.
           </p>
-          <div className="rounded-xl border border-zinc-800 bg-elevated px-5 py-3.5">
-            <p className="text-zinc-300 text-[14px] leading-relaxed">
-              <span className="text-white font-semibold">Sean:</span> weekly calls, plus WhatsApp access on 0418 554 4311.
-            </p>
-          </div>
         </div>
       </section>
 
@@ -160,6 +155,10 @@ export default function TheUndeniablePlan() {
           <Detail title="The questions">
             <p>What did I teach? What did I learn? What problem did I solve? What would I do differently? What's a thought I can't get out of my head?</p>
           </Detail>
+        </Bucket>
+
+        <Bucket n="7" title="Weekly calls + access" owners="S">
+          <p className="text-zinc-300 text-[15px] leading-relaxed">Weekly calls with Sean, plus WhatsApp access on 0418 554 4311.</p>
         </Bucket>
       </Phase>
 
