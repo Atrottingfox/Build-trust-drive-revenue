@@ -224,16 +224,6 @@ const BUCKETS: Bucket[] = [
         ],
       },
       {
-        name: 'Framework Explainer',
-        template: 'Name your system → The principle → What each part does → Why it works',
-        example: 'The Ecosystem. Hooks feed pillars. Pillars feed offers. Same hours, ten times the return.',
-        formats: [
-          'Direct to camera, name the framework like it\'s a known thing',
-          'Walking, explaining the parts',
-          'In the gym, gesturing the parts of the system',
-        ],
-      },
-      {
         name: 'The Comparison',
         template: 'Two paths side by side → What each costs → Which one wins (and when)',
         example: 'In-person vs online coaching: this is what most people don\'t see.',
@@ -243,8 +233,6 @@ const BUCKETS: Bucket[] = [
           'Standing between two parts of the gym, pointing each way',
         ],
       },
-    ],
-    moreFrameworks: [
       {
         name: 'The Swipe / Steal This',
         template: 'Hand over the actual asset → How to use it → Permission to steal it',
@@ -255,6 +243,8 @@ const BUCKETS: Bucket[] = [
           'Screen-share showing the actual thing',
         ],
       },
+    ],
+    moreFrameworks: [
       {
         name: 'The Tutorial / Walkthrough',
         template: 'Outcome → Step 1 → Step 2 → Step 3 → Next',
@@ -299,32 +289,26 @@ const BUCKETS: Bucket[] = [
         ['What each costs', 'Your content selects which one shows up. Frame for doers, doers come. Frame soft, waiters come.'],
         ['Which wins (and when)', 'Decide who you\'re talking to. Then talk to them. Not both.'],
       ]},
-      { n: '15', framework: 'Framework Explainer', fields: [
-        ['Name your system', 'The Ecosystem.'],
-        ['The principle', 'Every piece of content connects. Nothing posts alone.'],
-        ['What each part does', 'Hooks feed pillars. Pillars feed offers. Offers feed the next pillar.'],
-        ['Why it works', 'Same hours. Ten times the return. Old way is just show up and hope.'],
-      ]},
-      { n: '16', framework: 'If I Were Starting Over', fields: [
+      { n: '15', framework: 'If I Were Starting Over', fields: [
         ['The reset premise', 'If I lost every client tomorrow and had to make $1M as a fitness coach again.'],
         ['What I\'d do first', 'Cap retention at 32 weeks. Build one offer, not five.'],
         ['Why', 'I\'m not learning. I\'m running a system I already know works.'],
         ['The end state', '$1M in 12 months. Without going viral. Same way I did it the first time.'],
       ]},
-      { n: '17', framework: 'The List', fields: [
+      { n: '16', framework: 'The List', fields: [
         ['Number', '3 numbers in your business you\'ve never measured.'],
         ['1', 'Churn rate. Above 3% means 60% of the business is gone a year.'],
         ['2', 'Average client lifetime in weeks. Most PTs have 12-16. The math says you need 32.'],
         ['3', 'True time on task. 100 clients should be a 40-hour week. If you\'re flat out at 30, you\'re inefficient.'],
         ['Reward', 'Calculate yours this week. Each one is costing you six figures.'],
       ]},
-      { n: '18', framework: 'Old Way · New Way', fields: [
+      { n: '17', framework: 'Old Way · New Way', fields: [
         ['Old way', '12-16 week clients. Then they leave. You sign two and lose two every month.'],
         ['Why it fails', 'You\'re running to stand still. Each new client just replaces one you already had.'],
         ['New way', '32-week retention contracts. Lock the back end. Solve churn before chasing leads.'],
         ['The result', 'Doubles revenue without doubling leads. The label "just a PT" disappears with it.'],
       ]},
-      { n: '19', framework: 'The Checklist / Order', fields: [
+      { n: '18', framework: 'The Checklist / Order', fields: [
         ['Outcome', 'Raise your rates without losing clients.'],
         ['1', 'Audit your current churn rate (above 3% and you can\'t raise yet).'],
         ['2', 'Lock in 32-week retention contracts on new clients.'],
@@ -417,37 +401,37 @@ const BUCKETS: Bucket[] = [
       },
     ],
     pieces: [
-      { n: '18', framework: 'The Number Reveal', fields: [
+      { n: '19', framework: 'The Number Reveal', fields: [
         ['The pain', 'He thought he was killing it. Top-line growing every month.'],
         ['The number', '$800,000.'],
         ['What it means', 'That\'s what hidden churn ate. Wasn\'t on any dashboard.'],
         ['The lesson', 'If you\'re not measuring it, you\'re losing it. My client lost $800,000 and never even knew.'],
       ]},
-      { n: '19', framework: 'The Math Live', fields: [
+      { n: '20', framework: 'The Math Live', fields: [
         ['The premise', 'Coaches think 3% churn is fine. Let\'s actually do the math.'],
         ['Pull out the phone', '100 clients. Lose 3 a month. After 12 months, that\'s 36 gone.'],
         ['The math', 'You\'ve had to replace 36 just to stand still. Compound that against client lifetime value.'],
         ['The verdict', 'Anything above 3% churn means 60% of your business is gone every year.'],
       ]},
-      { n: '20', framework: 'The Bucket', fields: [
+      { n: '21', framework: 'The Bucket', fields: [
         ['Name the framework', 'The leaky bucket.'],
         ['Draw it live', 'Top = new clients in. Sides = clients leaving.'],
         ['What each part means', 'If the holes are smaller than inflow, you grow. Same = flat. Bigger = shrinking. Most coaches don\'t measure the holes.'],
         ['The lesson', 'Imagine if you never lost a client. You\'d stop selling and start choosing.'],
       ]},
-      { n: '21', framework: 'The Math Live', fields: [
+      { n: '22', framework: 'The Math Live', fields: [
         ['The premise', 'Online coaches think they work a lot. Let\'s actually do the math on a 100-client week.'],
         ['Pull out the phone', '100 × 15-min check-ins = 25 hours.'],
         ['The math', '+ 5 hours of comms + 5 of content + 5 of programs = 40-hour week.'],
         ['The verdict', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
       ]},
-      { n: '22', framework: 'The Number Reveal', fields: [
+      { n: '23', framework: 'The Number Reveal', fields: [
         ['The pain', 'Every month feels like running to stand still.'],
         ['The number', 'Your churn rate.'],
         ['What it means', 'Two clients in, two clients out. Zero net growth. Every month, less oxygen.'],
         ['The lesson', 'That\'s not a feeling. It\'s a number. Solve it and you stop signing and start choosing.'],
       ]},
-      { n: '23', framework: 'The Split Screen', fields: [
+      { n: '24', framework: 'The Split Screen', fields: [
         ['Path A', '$120,000. The number I made extra that year. Felt great.'],
         ['Path B', '$600,000. The number available if I\'d solved the right problem first.'],
         ['Numbers under each', 'Same year. Same effort. Different sequence.'],
@@ -518,17 +502,20 @@ function FrameworkRow({ f, open, onToggle }: { f: Framework; open: boolean; onTo
       <button
         type="button"
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-elevated transition-colors"
+        className="w-full text-left px-5 py-4 hover:bg-elevated transition-colors"
         aria-expanded={open}
       >
-        <span className="font-display text-[16px] md:text-[17px] font-extrabold text-white">{f.name}</span>
-        <span className={`text-zinc-500 text-[18px] leading-none transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
+        <div className="flex items-start justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <p className="font-display text-[16px] md:text-[17px] font-extrabold text-white mb-1.5">{f.name}</p>
+            <p className="text-zinc-400 text-[13px] leading-relaxed">{f.template}</p>
+          </div>
+          <span className={`text-zinc-500 text-[18px] leading-none transition-transform flex-shrink-0 mt-1 ${open ? 'rotate-45' : ''}`}>+</span>
+        </div>
       </button>
       {open && (
         <div className="px-5 pb-5 pt-1 border-t border-zinc-800/60">
-          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 mt-4 font-semibold">Template</p>
-          <p className="text-zinc-300 text-[14px] leading-relaxed mb-4">{f.template}</p>
-          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Example</p>
+          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 mt-4 font-semibold">Example</p>
           <p className="text-zinc-200 text-[14px] leading-relaxed italic mb-5">&ldquo;{f.example}&rdquo;</p>
           <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Formats · you can do it like</p>
           <ul className="space-y-1.5">
