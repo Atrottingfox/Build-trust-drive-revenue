@@ -34,6 +34,7 @@ type Bucket = {
   name: string;
   env: string;
   frameworks: Framework[];
+  moreFrameworks?: Framework[];
   pieces: Piece[];
   hooks: string[];
 };
@@ -48,7 +49,7 @@ const BUCKETS: Bucket[] = [
       {
         name: 'Transformation',
         template: 'Old situation → Friction → Turning point → New reality → Invitation',
-        example: 'Fully booked and broke at 60 sessions a week. The week I capped my 1-on-1s and built one online offer, it flipped. Now I coach 40 people in the hours I used to coach 8. If your calendar owns you, start by capping it.',
+        example: 'Fully booked and broke at 60 sessions a week. The week I capped my 1-on-1s and built one online offer, it flipped. Now I coach 40 people in the hours I used to coach 8.',
         formats: [
           'Walking outside, narrating the arc',
           'Sitting on a bench or in the car, recounting it casually',
@@ -58,62 +59,64 @@ const BUCKETS: Bucket[] = [
       {
         name: 'Specific Moment',
         template: 'The moment → What it cost → The realisation → The takeaway',
-        example: 'A client asked to drop to fortnightly because money was tight. I said yes and drove home gutted. That night I saw I\'d built a business that broke the second one person flinched. Your whole income can\'t ride on one client.',
+        example: 'A client asked to drop to fortnightly because money was tight. I said yes and drove home gutted. That night I saw I\'d built a business that broke the second one person flinched.',
         formats: [
           'Direct to camera in a quiet outdoor spot, intimate',
           'Walking, recreating the scene',
-          'Sitting in the place it happened (gym floor, car, kitchen)',
+          'Sitting in the place it happened',
         ],
       },
     ],
     pieces: [
-      { n: '04', framework: 'Transformation', fields: [
+      { n: '01', framework: 'Transformation', fields: [
         ['Old situation', 'Trading time on the gym floor. Couldn\'t scale because I was the product.'],
         ['Friction', 'Every viral chase failed. The grind was breaking me.'],
         ['Turning point', 'Stopped trying to reach more people. Focused on the ones already there.'],
         ['New reality', 'A $5M business. Built without one viral moment.'],
-        ['Invitation', 'Watch Rome for the full breakdown.'],
+        ['Invitation', 'Watch the long version on the channel.'],
       ]},
-      { n: '06', framework: 'Specific Moment', fields: [
-        ['The moment', 'Someone asked me how the gym I work at works, no one can train there.'],
-        ['What it cost', 'I just said: that\'s the whole point.'],
-        ['The realisation', 'I\'d signalled status by what I refuse to do, not by what I sell.'],
-        ['The takeaway', 'A 750K gym no one can use says more than any testimonial.'],
+      { n: '02', framework: 'Specific Moment', fields: [
+        ['The moment', 'We were doing 600% growth in five months. Numbers people would kill for.'],
+        ['What it cost', 'I was ready to walk away from the whole thing.'],
+        ['The realisation', 'Growing fast doesn\'t mean it\'s working. It can mean it\'s killing you.'],
+        ['The takeaway', 'If you\'re growing and you hate your life, your business is broken, not your effort.'],
       ]},
-      { n: '11', framework: 'Specific Moment', fields: [
-        ['The moment', 'A client texted me "sorry to be annoying" and I knew what was coming.'],
-        ['What it cost', 'Two steps forward, two steps back. Less oxygen than the month before.'],
-        ['The realisation', 'It\'s not a feeling. It\'s a number. It\'s churn.'],
-        ['The takeaway', 'If you feel this and can\'t name it, the math will name it for you.'],
-      ]},
-      { n: '13', framework: 'Transformation', fields: [
-        ['Old situation', 'Five of my 13 years I did this the wrong way. Hating my life.'],
-        ['Friction', 'Almost lost the business. The mental cost was the worst part.'],
-        ['Turning point', 'I started teaching what nearly killed me. So you don\'t have to learn it the hard way.'],
-        ['New reality', 'Now I leapfrog people over my battle scars.'],
-        ['Invitation', 'The whole arc lives in the character video.'],
-      ]},
-      { n: '14', framework: 'Specific Moment', fields: [
-        ['The moment', 'I built a client a program designed to make her quit.'],
-        ['What it cost', 'I was ready to lose her. I was tired of trying.'],
+      { n: '03', framework: 'Specific Moment', fields: [
+        ['The moment', 'She was the client I was ready to lose. I built her a program designed to make her quit.'],
+        ['What it cost', 'I was tired of trying. I was done.'],
         ['The realisation', 'She didn\'t quit. She did the work. Dropped 40 kilos. Got on stage.'],
         ['The takeaway', 'You don\'t find the best client. You build them.'],
       ]},
-      { n: '15', framework: 'Transformation', fields: [
-        ['Old situation', 'First seminar, 16 people. Only 2 paid. Made $175.'],
-        ['Friction', 'Same content I now charge 22 grand for. Spent 80 hours preparing it.'],
+      { n: '04', framework: 'Transformation', fields: [
+        ['Old situation', 'Less than 5,000 followers. 12 likes on a photo.'],
+        ['Friction', 'Everyone said go viral. The whole industry said you need a following.'],
+        ['Turning point', 'Built the business through the work, not the audience.'],
+        ['New reality', '$2.2M US with less than 5K followers.'],
+        ['Invitation', 'Your excuse just disappeared.'],
+      ]},
+      { n: '05', framework: 'Specific Moment', fields: [
+        ['The moment', 'Someone asked how the gym I work at actually works. No one can train there.'],
+        ['What it cost', 'I said: that\'s the whole point.'],
+        ['The realisation', 'I\'d signalled status by what I refuse to do, not what I sell.'],
+        ['The takeaway', 'A 750K gym no one can use says more than any testimonial.'],
+      ]},
+      { n: '06', framework: 'Transformation', fields: [
+        ['Old situation', 'First seminar. 16 people. Two paid. Made $175.'],
+        ['Friction', 'Same content I now charge 22 grand for. 80 hours preparing it.'],
         ['Turning point', 'I didn\'t change the content. I changed what I\'d done by then.'],
         ['New reality', 'Same lesson. Now it lands.'],
         ['Invitation', 'This is the why-now.'],
       ]},
     ],
     hooks: [
+      'I built a $5M fitness business without going viral. Here\'s everything I did.',
+      'I did it without influence and without following. So your excuse just disappeared.',
+      'I built a client a program so bad it was designed to make her quit. She dropped 40 kilos and got on stage.',
+      'When I was at my worst, we were at our best. We grew 600% and I was ready to walk away from all of it.',
       'I couldn\'t pay my staff two weeks before Christmas. That\'s the year I learned everything.',
-      'When I was at my worst, we were at our best. We grew 600% and I was ready to walk away.',
-      'I spent 750 grand on a gym no one is allowed to train at.',
+      'I spent 750 grand on a gym no one is allowed to train at. Here\'s why that\'s the smartest thing I\'ve done.',
       'On the sales call I asked her what she wanted. She said, McLaren money.',
       'A coach told me he loved coaching. His mate said, I just like making money.',
-      'There\'s a feeling every coach at 30 clients has and can\'t describe. Let me describe it for you.',
     ],
   },
 
@@ -136,7 +139,7 @@ const BUCKETS: Bucket[] = [
       {
         name: 'Reframe',
         template: 'The pain → Remove the blame → The real cause → The shift',
-        example: 'You\'re not bad at sales. Most coaches freeze on price because they were taught to compete on cheap and helpful. The real issue is an offer that isn\'t built to be paid for. Fix the offer.',
+        example: 'You\'re not bad at sales. You were taught to compete on cheap and helpful. The real issue is an offer that isn\'t built to be paid for.',
         formats: [
           'Direct to camera, softer tone',
           'Walking, contemplative pace',
@@ -145,50 +148,52 @@ const BUCKETS: Bucket[] = [
       },
     ],
     pieces: [
-      { n: '03', framework: 'Reframe', fields: [
-        ['The pain', 'You\'re over 10K a month and still get called "just a PT".'],
-        ['Remove the blame', 'You\'re not less than. The label isn\'t your fault.'],
-        ['The real cause', 'Your business is built like a PT\'s. 12-16 week clients. Churn ignored.'],
-        ['The shift', 'Extend retention to 32 weeks. Instant double on the back end.'],
-      ]},
-      { n: '05', framework: 'Belief Flip', fields: [
-        ['Common belief', 'Bigger businesses are less ethical. 35 clients done brilliantly is more honest than 350.'],
-        ['Why accepted', 'It feels noble. It hides the income ceiling.'],
+      { n: '07', framework: 'Belief Flip', fields: [
+        ['Common belief', '35 clients done brilliantly is more impactful than 350 who lose 10 kilos and move on.'],
+        ['Why accepted', 'It feels noble. Hides the income ceiling.'],
         ['Why it fails', 'Income buys impact. You\'re not changing the world coaching 25 people.'],
         ['What\'s true', 'If you\'re impact-driven, you have a duty to build something big. Fight me.'],
       ]},
       { n: '08', framework: 'Belief Flip', fields: [
-        ['Common belief', 'More learning equals more results. More tactics equals more clients.'],
-        ['Why accepted', 'Learning feels productive. Buying courses feels like action.'],
-        ['Why it fails', 'Coaches drown in tactics and AI and still don\'t grow.'],
-        ['What\'s true', 'Copy what works. Stop learning marketing. The complete plan is on the channel.'],
+        ['Common belief', 'Big business equals ego. Small business equals purpose.'],
+        ['Why accepted', 'The industry rewards humility. Coaches signal it by staying small.'],
+        ['Why it fails', 'You can\'t scale impact without scaling income. Numbers prove it.'],
+        ['What\'s true', 'Wealthier coaches help more people. The end.'],
       ]},
       { n: '09', framework: 'Reframe', fields: [
-        ['The pain', '80K months. Then the first of the month hits and you\'re panicking again.'],
-        ['Remove the blame', 'You\'re not bad with money. The math just doesn\'t fit your business.'],
-        ['The real cause', 'Revenue resets to zero. Tax + GST + lifestyle creep eat the rest.'],
-        ['The shift', 'Fix profit, not revenue. The 40K month coach often keeps more than the 80K one.'],
+        ['The pain', 'You\'re running 10K-plus a month and still get called "just a PT".'],
+        ['Remove the blame', 'You\'re not less than. The label isn\'t your fault.'],
+        ['The real cause', 'Your business is built like a PT\'s. 12-16 week clients. Churn ignored.'],
+        ['The shift', 'Extend retention to 32 weeks. The label disappears.'],
       ]},
       { n: '10', framework: 'Belief Flip', fields: [
-        ['Common belief', 'Churn is the cost of doing business. Just sign more.'],
-        ['Why accepted', 'Acquisition feels productive. Replacing leaks feels invisible.'],
-        ['Why it fails', 'You\'re signing two and losing two. Running to stand still.'],
-        ['What\'s true', 'Net-zero churn means you only ever add. At some point you stop signing and start choosing.'],
+        ['Common belief', 'Influencers shouldn\'t make money because their challenges are fake.'],
+        ['Why accepted', 'It\'s easier to dismiss than compete.'],
+        ['Why it fails', 'People care about results, not credentials. They vote with money.'],
+        ['What\'s true', 'If the market pays for it, it works. Argue with the market, not the influencer.'],
+      ]},
+      { n: '11', framework: 'Reframe', fields: [
+        ['The pain', 'You feel attacked when someone says something contrary.'],
+        ['Remove the blame', 'It\'s not your ego. It\'s a signal.'],
+        ['The real cause', 'Triggers point at the thing you\'ve avoided.'],
+        ['The shift', 'Stop arguing with the truth. Use it. If it triggers you, it\'s probably true.'],
       ]},
       { n: '12', framework: 'Reframe', fields: [
-        ['The pain', 'You paid a mentor who\'d never done it. Now you\'re scared to invest again.'],
-        ['Remove the blame', 'You\'re not stupid. You trusted credentials.'],
-        ['The real cause', 'The industry doesn\'t filter for done-it. The receipts are buried under sales pages.'],
-        ['The shift', 'Check the receipts. Worst case you stay the same. Best case you get wealthier.'],
+        ['The pain', 'You can\'t raise prices because the market expects cheap.'],
+        ['Remove the blame', 'You\'re not undervaluing yourself.'],
+        ['The real cause', 'Your competitors are setting your prices, not your clients.'],
+        ['The shift', 'Price the outcome, not the hours. The undercharging stops there.'],
       ]},
     ],
     hooks: [
-      'Most coaches think they have to compromise who they are to build something big. They\'re wrong.',
+      'Which business has more impact, 35 clients done brilliantly or 350 who lose 10 kilos and move on? It\'s the bigger one. Fight me.',
       'Income buys you impact. You\'re not changing the world coaching 25 people.',
-      'You\'re not lazy and you\'re not stupid. You\'re stuck in the part of the business no one warned you about.',
+      'If you\'re sick of being called just a PT, even though you\'re running over 10K, I finally worked out why.',
+      'No one cares about the influencer\'s challenge until people buy it. Then you care. Let\'s talk about why.',
+      'Most coaches think they have to compromise who they are to build something big. They\'re wrong.',
       'If it triggers you, it\'s probably true.',
       'Your competitors are setting your prices, not your clients. That\'s why you\'re underpaid.',
-      'Coaching used to be a hobby. If you still treat it like one, you\'ll stay broke.',
+      'Manual effort will reign supreme. You can\'t cheat it, and that\'s good news for you.',
     ],
   },
 
@@ -199,29 +204,61 @@ const BUCKETS: Bucket[] = [
     env: 'Gym · straight to camera',
     frameworks: [
       {
+        name: 'The Binary',
+        template: 'Two paths → Stakes → Pick one',
+        example: 'Two ways to get leads. Door-knock every day, or post this exact thing five times a day. Pick one.',
+        formats: [
+          'Direct to camera, "either or"',
+          'Walking, gesture one path then the other',
+          'Standing between two parts of the gym, pointing each way',
+        ],
+      },
+      {
+        name: 'Stop · Just Do',
+        template: 'Stop the wrong thing → Why it fails → Just do this',
+        example: 'Stop learning marketing. Copy this exact playbook.',
+        formats: [
+          'Talking head, blunt delivery',
+          'Walking, declarative pace',
+          'Casual gym setting, head-on',
+        ],
+      },
+      {
+        name: 'Old Way · New Way',
+        template: 'Old way → Why it fails → New way → Result',
+        example: 'Old way: just show up online. New way: build an ecosystem. One of these makes money.',
+        formats: [
+          'Direct to camera, contrasting gestures',
+          'Walking through both physical environments',
+          'Standing in two different settings (then / now)',
+        ],
+      },
+      {
         name: 'The List',
-        template: 'Number → Specific list → Reward',
+        template: 'Number → List → Reward',
         example: '3 ways to fill your coaching roster without spending a dollar on ads.',
         formats: [
-          'Talking head, count on fingers',
+          'Count on fingers, direct to camera',
           'Walking through the gym, listing aloud',
           'Sitting on a bench, casual',
         ],
       },
+    ],
+    moreFrameworks: [
       {
         name: 'The Compare',
-        template: 'Two paths → What each costs → Which when',
-        example: 'In-person vs online coaching. What most coaches don\'t see is which one scales when you hit 80 clients.',
+        template: 'Path A + cost → Path B + cost → Which when',
+        example: 'In-person vs online coaching. What most coaches don\'t see is which one scales at 80 clients.',
         formats: [
           'Direct to camera, "this or this"',
-          'Walking, gesture one path then the other',
-          'Standing between two parts of the gym, pointing',
+          'Walking, gesture between two options',
+          'Two-shot pointing to physical sides',
         ],
       },
       {
         name: 'The How-To',
         template: 'Outcome → Step 1 → Step 2 → Step 3 → Next',
-        example: 'How to build your first online offer this weekend, start to finish.',
+        example: 'How to add $10K/month as an experienced PT.',
         formats: [
           'Direct to camera, numbered steps',
           'Walking through the steps verbally',
@@ -230,20 +267,42 @@ const BUCKETS: Bucket[] = [
       },
     ],
     pieces: [
-      { n: '07', framework: 'The Compare', fields: [
-        ['Two paths', 'Knock on doors every day. Or post this specific thing five times a day.'],
-        ['What each costs', 'Door-knocking: 50 hours a week, low scale. Posting: 5 hours, infinite scale once it works.'],
-        ['Which when', 'Door-knocking trains you in sales. Posting trains the algorithm.'],
-        ['Verdict', 'Pick one and commit for 90 days. Doing both at half-effort is the worst path.'],
+      { n: '13', framework: 'The Binary', fields: [
+        ['Two paths', 'Knock on doors every day. Or post this exact thing five times a day.'],
+        ['Stakes', 'Door-knock: 50 hours a week, low scale. Posting: 5 hours, infinite scale once it works.'],
+        ['Pick one', 'Pick one and commit for 90 days. Half-effort on both is the worst path.'],
+      ]},
+      { n: '14', framework: 'The Binary', fields: [
+        ['Two paths', 'Doers test everything. Waiters wait for permission.'],
+        ['Stakes', 'Your content selects which one shows up. Frame for doers, doers come. Frame soft, waiters come.'],
+        ['Pick one', 'Decide who you\'re talking to. Then talk to them. Not both.'],
+      ]},
+      { n: '15', framework: 'Stop · Just Do', fields: [
+        ['Stop', 'Stop buying courses. Stop watching ads about ads.'],
+        ['Why it fails', 'You\'re learning faster than you\'re earning. Tactics overload.'],
+        ['Just do', 'Copy a system that works. Run it 90 days. Then improve it.'],
+      ]},
+      { n: '16', framework: 'Old Way · New Way', fields: [
+        ['Old way', 'Post every day. Engage. Hope it works.'],
+        ['Why it fails', 'No connective tissue. Each piece dies alone.'],
+        ['New way', 'Build an ecosystem. Hooks feed pillars. Pillars feed offers.'],
+        ['Result', 'Same hours. Ten times the return.'],
+      ]},
+      { n: '17', framework: 'The Binary', fields: [
+        ['Two paths', 'Path A: 80 individual check-ins a week. Path B: group rhythm + async loops.'],
+        ['Stakes', 'Path A: 40 hours of check-ins alone. Path B: 12 hours, better outcomes.'],
+        ['Pick one', 'If you\'re at 80 clients and burnt, you picked A. Move to B this week.'],
       ]},
     ],
     hooks: [
-      'Two paths to grow a coaching business. One caps you. One scales forever.',
+      'There are two ways to get leads. Knock on doors every day, or post this specific thing five times a day. Pick one.',
       'Doers and waiters. Your content is training one of them to come to you.',
+      'Stop learning marketing and just copy this.',
       'Old way: just show up online. New way: build an ecosystem. One of these makes money.',
-      'How to Add $10,000/Month as an Experienced PT.',
       'There are two ways to run a business at 80 clients. One of them is killing you.',
-      'If I Wanted to Make $1M as a Fitness Coach Again, I\'d Do This.',
+      'Two paths to grow a coaching business. One caps you. One scales forever.',
+      'How to Add $10,000/Month as an Experienced PT.',
+      'Coaching used to be a hobby. If you still treat it like one, you\'ll stay broke.',
     ],
   },
 
@@ -254,65 +313,120 @@ const BUCKETS: Bucket[] = [
     env: 'Whiteboard · desk · shown',
     frameworks: [
       {
-        name: 'The List',
-        template: 'Number → List drawn or shown live → Reward',
-        example: '3 numbers that matter more than revenue. Drawn live with circles around each.',
+        name: 'The Math Live',
+        template: 'The premise → Pull out the phone → The math → The verdict',
+        example: '100 clients × 15-min check-ins = 25 hours. Add 5 of comms, 5 of content, 5 of programs. 40-hour week. If you\'re flat out at 30, you\'re inefficient.',
         formats: [
-          'Numbered on the whiteboard',
-          'Top-down camera on paper, ticking off',
-          'iPad screen-share, drawn live',
+          'Phone in hand, live calculator',
+          'iPad numbers drawn',
+          'Whiteboard math written out',
         ],
       },
       {
-        name: 'The Compare',
-        template: 'Whiteboard split → Path A on left, Path B on right → Verdict',
-        example: 'In-person vs online coaching. Two columns drawn with cost, time, ceiling under each.',
+        name: 'The Bucket',
+        template: 'Name the framework → Draw it live → What each part means → The lesson',
+        example: 'The leaky bucket. Top = clients pouring in. Sides = clients leaking out. Above 3% leak rate = 60% of your business gone every year.',
         formats: [
-          'Whiteboard split-screen (LEFT | RIGHT)',
-          'Top-down with two pieces of paper side by side',
-          'iPad split with two columns',
+          'Whiteboard drawn from scratch',
+          'Top-down camera on paper',
+          'iPad illustration',
         ],
       },
       {
-        name: 'The How-To',
+        name: 'The Number Reveal',
+        template: 'The pain → The number → What it means → The lesson',
+        example: '$800,000. That\'s what one client lost in a year without ever knowing.',
+        formats: [
+          'Single number filling the screen',
+          'Big text on iPad',
+          'Whiteboard with one number circled',
+        ],
+      },
+      {
+        name: 'The Split Screen',
+        template: 'Path A drawn → Path B drawn → Numbers under each → Verdict',
+        example: '35 clients vs 350 clients. Revenue. Time. Impact. Which is bigger?',
+        formats: [
+          'Whiteboard split LEFT | RIGHT',
+          'Two pieces of paper top-down',
+          'iPad split view',
+        ],
+      },
+    ],
+    moreFrameworks: [
+      {
+        name: 'The Tutorial Shown',
         template: 'Outcome → Steps shown live → Result',
-        example: 'How to do the math on your churn. Pull out the phone, calculate it, show the verdict.',
+        example: 'How to calculate your true churn. Steps drawn live.',
         formats: [
+          'Screen recording with clicks',
           'Whiteboard step-by-step',
-          'Screen-recording with clicks',
-          'Phone in hand, live math on the calculator',
+          'iPad walkthrough',
+        ],
+      },
+      {
+        name: 'The Numbered Drawn',
+        template: 'Number → Items drawn or shown → Reward',
+        example: '3 numbers that matter more than revenue. Drawn live with each circled.',
+        formats: [
+          'Whiteboard numbered list',
+          'Top-down paper with each one ticked off',
+          'iPad list drawn',
         ],
       },
     ],
     pieces: [
-      { n: '01', framework: 'The How-To', fields: [
-        ['Outcome', 'Find out what your churn is actually costing you.'],
-        ['Setup', 'Draw the bucket. New clients pour in the top. Existing clients leak out the sides.'],
-        ['Step 1', 'Count clients in over 12 months.'],
-        ['Step 2', 'Count clients out.'],
-        ['Step 3', 'Multiply the lost ones by their LTV. Above 3% churn? You\'re losing 60% of your business a year.'],
-        ['Next', 'Comment "CHURN" for the calculator.'],
+      { n: '18', framework: 'The Number Reveal', fields: [
+        ['The pain', 'He thought he was killing it. Top-line growing every month.'],
+        ['The number', '$800,000.'],
+        ['What it means', 'That\'s what hidden churn ate. Wasn\'t on any dashboard.'],
+        ['The lesson', 'If you\'re not measuring it, you\'re losing it. My client lost $800,000 and never even knew.'],
       ]},
-      { n: '02', framework: 'The How-To', fields: [
-        ['Outcome', 'Discover whether you\'re actually busy or just inefficient.'],
-        ['Pull out the phone', '100 clients × 15-minute check-ins = 25 hours per week.'],
-        ['Add the rest', 'Comms 5 hours. Content 5 hours. Program updates 5 hours.'],
-        ['Verdict', 'A 40-hour week with 100 clients. If you\'re flat out at 30, you\'re inefficient.'],
-        ['Next', 'Save this. Run your own numbers.'],
+      { n: '19', framework: 'The Math Live', fields: [
+        ['The premise', 'Coaches think 3% churn is fine. Let\'s actually do the math.'],
+        ['Pull out the phone', '100 clients. Lose 3 a month. After 12 months, that\'s 36 gone.'],
+        ['The math', 'You\'ve had to replace 36 just to stand still. Compound that against client lifetime value.'],
+        ['The verdict', 'Anything above 3% churn means 60% of your business is gone every year.'],
+      ]},
+      { n: '20', framework: 'The Bucket', fields: [
+        ['Name the framework', 'The leaky bucket.'],
+        ['Draw it live', 'Top = new clients in. Sides = clients leaving.'],
+        ['What each part means', 'If the holes are smaller than inflow, you grow. Same = flat. Bigger = shrinking. Most coaches don\'t measure the holes.'],
+        ['The lesson', 'Imagine if you never lost a client. You\'d stop selling and start choosing.'],
+      ]},
+      { n: '21', framework: 'The Math Live', fields: [
+        ['The premise', 'Online coaches think they work a lot. Let\'s actually do the math on a 100-client week.'],
+        ['Pull out the phone', '100 × 15-min check-ins = 25 hours.'],
+        ['The math', '+ 5 hours of comms + 5 of content + 5 of programs = 40-hour week.'],
+        ['The verdict', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
+      ]},
+      { n: '22', framework: 'The Number Reveal', fields: [
+        ['The pain', 'Every month feels like running to stand still.'],
+        ['The number', 'Your churn rate.'],
+        ['What it means', 'Two clients in, two clients out. Zero net growth. Every month, less oxygen.'],
+        ['The lesson', 'That\'s not a feeling. It\'s a number. Solve it and you stop signing and start choosing.'],
+      ]},
+      { n: '23', framework: 'The Split Screen', fields: [
+        ['Path A', '$120,000. The number I made extra that year. Felt great.'],
+        ['Path B', '$600,000. The number available if I\'d solved the right problem first.'],
+        ['Numbers under each', 'Same year. Same effort. Different sequence.'],
+        ['Verdict', 'Right problem, wrong order = expensive. Right problem, right order = wealth.'],
       ]},
     ],
     hooks: [
-      'I did the math on his business live and he went white in the face.',
-      'You\'re filling a bucket with holes in it and wondering why it never gets full.',
+      'My client lost $800,000 and never even knew it.',
       'Anything above 3% churn means 60% of your business is gone every year.',
-      'I\'m going to do the math on your business and you\'re not going to like it.',
-      'There\'s a number in your business you\'ve never calculated, and it\'s costing you six figures.',
-      'Give me five minutes and I\'ll find the one number that\'s capping your business.',
+      'Imagine if you never lost a client. Now let me show you how close that actually is.',
+      'I made an extra $120,000 that year and thought I\'d won. I\'d actually left $600,000 on the table.',
+      'It feels like two steps forward and two steps back every month. That\'s not a feeling, that\'s a number.',
+      'Online coaches think they work a lot. Let\'s actually do the math.',
+      'You\'re filling a bucket with holes in it and wondering why it never gets full.',
+      'I did the math on his business live and he went white in the face.',
     ],
   },
 ];
 
-// ─── Sub-components (all neutral, no bucket-specific colours) ────────────
+// ─── Sub-components ──────────────────────────────────────────────────────
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
@@ -357,23 +471,35 @@ function PieceCard({ p }: { p: Piece }) {
   );
 }
 
-function FrameworkCard({ f }: { f: Framework }) {
+function FrameworkRow({ f, open, onToggle }: { f: Framework; open: boolean; onToggle: () => void }) {
   return (
-    <div className="glow-card p-6">
-      <h3 className="font-display text-[18px] font-extrabold text-white mb-3">{f.name}</h3>
-      <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Template</p>
-      <p className="text-zinc-300 text-[14px] leading-relaxed mb-4">{f.template}</p>
-      <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Example</p>
-      <p className="text-zinc-200 text-[14px] leading-relaxed italic mb-5">&ldquo;{f.example}&rdquo;</p>
-      <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Formats · you can do it like</p>
-      <ul className="space-y-1.5">
-        {f.formats.map((fmt) => (
-          <li key={fmt} className="flex items-start gap-2.5">
-            <span className="w-1 h-1 rounded-full bg-zinc-500 mt-2 flex-shrink-0" />
-            <span className="text-zinc-300 text-[13px] leading-relaxed">{fmt}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="rounded-xl border border-zinc-800 bg-elevated/40 overflow-hidden">
+      <button
+        type="button"
+        onClick={onToggle}
+        className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-elevated transition-colors"
+        aria-expanded={open}
+      >
+        <span className="font-display text-[16px] md:text-[17px] font-extrabold text-white">{f.name}</span>
+        <span className={`text-zinc-500 text-[18px] leading-none transition-transform ${open ? 'rotate-45' : ''}`}>+</span>
+      </button>
+      {open && (
+        <div className="px-5 pb-5 pt-1 border-t border-zinc-800/60">
+          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 mt-4 font-semibold">Template</p>
+          <p className="text-zinc-300 text-[14px] leading-relaxed mb-4">{f.template}</p>
+          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Example</p>
+          <p className="text-zinc-200 text-[14px] leading-relaxed italic mb-5">&ldquo;{f.example}&rdquo;</p>
+          <p className="text-zinc-500 text-[11px] uppercase tracking-widest mb-2 font-semibold">Formats · you can do it like</p>
+          <ul className="space-y-1.5">
+            {f.formats.map((fmt) => (
+              <li key={fmt} className="flex items-start gap-2.5">
+                <span className="w-1 h-1 rounded-full bg-zinc-500 mt-2 flex-shrink-0" />
+                <span className="text-zinc-300 text-[13px] leading-relaxed">{fmt}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
@@ -424,40 +550,66 @@ function BucketPill({ b, active, onClick }: { b: Bucket; active: boolean; onClic
 }
 
 function BucketContent({ b }: { b: Bucket }) {
+  const [openFrameworks, setOpenFrameworks] = useState<Set<string>>(new Set());
+  const [showMore, setShowMore] = useState(false);
+
+  const toggle = (name: string) => {
+    setOpenFrameworks((prev) => {
+      const next = new Set(prev);
+      if (next.has(name)) next.delete(name);
+      else next.add(name);
+      return next;
+    });
+  };
+
   return (
     <div className="space-y-12">
       <div>
         <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">{b.env}</p>
-        <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-2">{b.name}.</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white">{b.name}.</h2>
       </div>
 
       <div>
-        <H2>Pick a framework.</H2>
-        <Note>Simple shapes. Pick one. The formats below each show ways you can film it.</Note>
-        <div className="grid md:grid-cols-2 gap-4 mt-8">
+        <div className="space-y-3">
           {b.frameworks.map((f) => (
-            <FrameworkCard key={f.name} f={f} />
+            <FrameworkRow
+              key={f.name}
+              f={f}
+              open={openFrameworks.has(f.name)}
+              onToggle={() => toggle(f.name)}
+            />
+          ))}
+          {showMore && b.moreFrameworks?.map((f) => (
+            <FrameworkRow
+              key={f.name}
+              f={f}
+              open={openFrameworks.has(f.name)}
+              onToggle={() => toggle(f.name)}
+            />
           ))}
         </div>
+        {b.moreFrameworks && b.moreFrameworks.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setShowMore((v) => !v)}
+            className="mt-4 text-[12px] font-semibold uppercase tracking-widest text-zinc-500 hover:text-blue-400 transition-colors"
+          >
+            {showMore ? '− Hide extras' : `+ Show ${b.moreFrameworks.length} more`}
+          </button>
+        )}
       </div>
 
       <div>
         <H2>Steal a piece.</H2>
-        <Note>Shoot-ready. Each one structured in its framework. Click Copy.</Note>
+        <Note>Pulled from the strongest hooks. Each one structured in its framework. Click Copy.</Note>
         <div className="grid gap-4 mt-8">
-          {b.pieces.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-zinc-800 p-8 text-center">
-              <p className="text-zinc-500 text-[14px]">No pieces in this bucket yet. Use the frameworks above and the hooks below to write one.</p>
-            </div>
-          ) : (
-            b.pieces.map((p) => <PieceCard key={p.n} p={p} />)
-          )}
+          {b.pieces.map((p) => <PieceCard key={p.n} p={p} />)}
         </div>
       </div>
 
       <div>
         <H2>Pick a hook.</H2>
-        <Note>Opening lines in his voice. Click any to copy.</Note>
+        <Note>The opening lines most likely to work, in his voice. Click any to copy.</Note>
         <div className="grid gap-3 mt-8">
           {b.hooks.map((h) => <HookRow key={h} hook={h} />)}
         </div>
@@ -473,16 +625,15 @@ export default function UndeniableShootCard() {
   const active = BUCKETS.find((b) => b.id === activeId) || BUCKETS[0];
 
   return (
-    <Shell title="The Shoot System · Undeniable" description="Four buckets. Pick one. See the framework. Steal a piece. Pick a hook." path="/undeniablenextsteps/shoot-card">
+    <Shell title="The Shoot System · Undeniable" description="Four buckets. Pick one. Open a framework. Steal a piece. Pick a hook." path="/undeniablenextsteps/shoot-card">
       <PageHead
         eyebrow="Operational · The system"
         title="The Shoot"
         accent="System."
-        blurb="Four buckets. Each mapped to an environment. Pick a bucket, pick a framework, pick a format, steal a piece, grab a hook, shoot it."
+        blurb="Four buckets. Each mapped to an environment. Pick a bucket, open a framework, steal a piece, grab a hook, shoot it."
       />
       <Divider />
 
-      {/* Kick-off · keep at top */}
       <Wrap>
         <H2>Kick-off · before you shoot.</H2>
         <Note>Call it out first: is this an education piece or a heart piece? Then run the checklist.</Note>
@@ -504,7 +655,6 @@ export default function UndeniableShootCard() {
       </Wrap>
       <Divider />
 
-      {/* Compact bucket switcher · sticky-ish at top of content */}
       <Wrap>
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mr-2">Bucket</span>
@@ -513,7 +663,7 @@ export default function UndeniableShootCard() {
           ))}
         </div>
         <div className="mt-10" />
-        <BucketContent b={active} />
+        <BucketContent key={active.id} b={active} />
       </Wrap>
     </Shell>
   );
