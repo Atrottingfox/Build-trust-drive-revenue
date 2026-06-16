@@ -188,6 +188,36 @@ const BUCKETS: Bucket[] = [
           'Two hands held up, one for each side',
         ],
       },
+      {
+        name: 'Contrarian with Data',
+        template: 'Claim → The number that proves it → The reframe',
+        example: 'Everyone says post more. I built $5M posting less. My best months came from one video, not thirty. Volume was never the lever.',
+        formats: [
+          'Direct to camera, then the number on screen',
+          'Whiteboard the number mid take',
+          'Walking, state the claim, then show the proof',
+        ],
+      },
+      {
+        name: 'The Costly Myth',
+        template: 'The belief → What it quietly costs → The math → The fix',
+        example: 'You think churn is just part of it. It quietly costs you 60% of your business a year. Do the math, then plug the leak before you chase one more lead.',
+        formats: [
+          'Phone in hand, run the number live',
+          'Whiteboard the leaky bucket',
+          'Direct to camera, then the math on screen',
+        ],
+      },
+      {
+        name: 'Name the Enemy',
+        template: 'Name the enemy → What they do → Why it burns people → What we do',
+        example: 'Pay in full gurus optimise for the screenshot. It burns the client who can\'t afford it. We build offers people can actually pay for.',
+        formats: [
+          'Direct to camera, controlled, not ranting',
+          'Walking, calm conviction',
+          'Sitting in the office, declarative',
+        ],
+      },
     ],
     pieces: [
       { n: '07', framework: 'Fight Me', fields: [
