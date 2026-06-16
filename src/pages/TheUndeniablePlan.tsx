@@ -26,11 +26,17 @@ function Task({ id, children }: { id: string; children: React.ReactNode }) {
 
 const NAME_CLS: Record<string, string> = { Rhys: 'text-blue-400', Corey: 'text-amber-400', Sean: 'text-zinc-300' };
 
-// One person's tasks inside a phase.
 const Who = ({ name, prefix, tasks }: { name: string; prefix: string; tasks: string[] }) => (
   <div className="mb-7">
     <p className={`font-display text-[15px] font-extrabold uppercase tracking-wider mb-1 ${NAME_CLS[name]}`}>{name}</p>
     {tasks.map((t, i) => <Task key={i} id={`${prefix}-${i}`}>{t}</Task>)}
+  </div>
+);
+
+const Ref = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <div className="rounded-xl border border-zinc-800 bg-elevated px-5 py-4 mt-5">
+    <p className="text-zinc-400 font-semibold text-[12px] uppercase tracking-widest mb-2">{label}</p>
+    <div className="text-zinc-300 text-[14px] leading-relaxed space-y-1.5">{children}</div>
   </div>
 );
 
@@ -56,20 +62,15 @@ export default function TheUndeniablePlan() {
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
           <div className="accent-line mb-7" />
           <Eyebrow>The plan</Eyebrow>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-5">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
             The Undeniable <span className="text-blue-500">Plan.</span>
           </h1>
-          <p className="text-zinc-300 text-[18px] leading-relaxed mb-2">
+          <p className="text-white text-[20px] font-semibold leading-snug mb-3">
+            Goal: 2,000 health and fitness businesses scaled by 2028.
+          </p>
+          <p className="text-zinc-400 text-[16px] leading-relaxed">
             12 weeks. Three phases. Build trust, then put money behind what works.
           </p>
-          <p className="text-zinc-500 text-[14px] leading-relaxed italic">
-            Where we're going: 2,000 coaches scaled by 2028, without 80-hour weeks as a content creator.
-          </p>
-
-          <div className="rounded-xl border border-blue-500/40 bg-blue-500/5 px-5 py-4 mt-8">
-            <p className="text-blue-400 font-semibold text-[12px] uppercase tracking-widest mb-1">Do this now</p>
-            <p className="text-white text-[16px] font-medium leading-relaxed">One CTA in the bio. One direction. No matter what.</p>
-          </div>
         </div>
       </section>
 
@@ -79,23 +80,38 @@ export default function TheUndeniablePlan() {
         tag="Phase 1"
         window="First 4 weeks"
         title="Calibrate."
-        why="Get the foundations live and find out what content actually lands, before we spend a cent on ads. We're testing, not perfecting."
+        why="Get the foundations live and find out what actually lands, before we spend a cent on ads. We're testing, not perfecting."
       >
         <Who name="Rhys" prefix="p1r" tasks={[
-          'Publish pillar video 1 (Character).',
-          'Publish pillar video 2 (Rome).',
-          'Film 5 simple videos for the lead magnets. They don\'t need to be perfect.',
-          'Run 4 one-week sprints: new hooks in different formats. See what lands.',
+          'Get the first 2 pillar videos up: the Character video, then Rome.',
+          'Run the first one-week sprints of short form: new hooks in different formats. See what lands.',
           'Daily voice memo at the end of each day.',
         ]} />
         <Who name="Corey" prefix="p1c" tasks={[
-          'Get the 5 lead magnets live (with the PS bridge in each).',
+          'Get the simple lead magnets live, and split test which ones hit.',
           'Get on prospect and client calls. Ask the 7 questions. Level up.',
           'Lead the Monday meeting by week 4.',
         ]} />
         <Who name="Sean" prefix="p1s" tasks={[
           'Weekly strategy call with Corey.',
         ]} />
+
+        <Ref label="The 5 lead magnets (PS bridge in each)">
+          <p>1. The Six Step Profit Path &nbsp; 2. The Sales Success System &nbsp; 3. The Constraint Diagnostic &nbsp; 4. The MACHINE Framework &nbsp; 5. The Churn Calculator</p>
+          <p className="text-zinc-400">PS bridge: "If you want to take this further: 1. Watch the deep-dive on YouTube. 2. Join the next workshop."</p>
+        </Ref>
+        <Ref label="Corey's 7 questions (on every call)">
+          <p>1. Before working with Rhys, what was the day to day in your business like?</p>
+          <p>2. What stressed you out the most back then?</p>
+          <p>3. What did you honestly think about the industry?</p>
+          <p>4. What made this so important to you?</p>
+          <p>5. Right now, what are the top 2 to 3 things you still want to learn about growing your coaching business?</p>
+          <p>6. If Rhys made a 10 video series just for you, what would you want him to talk about?</p>
+          <p>7. What's one thing in the online coaching and content space you wish someone would finally be honest about?</p>
+        </Ref>
+        <Ref label="Daily capture (end of day voice memo)">
+          <p>What did I teach? · What did I learn? · What problem did I solve? · What would I do differently? · What's a thought I can't get out of my head?</p>
+        </Ref>
       </Phase>
 
       <Divider />
@@ -117,6 +133,13 @@ export default function TheUndeniablePlan() {
         <Who name="Sean" prefix="p2s" tasks={[
           'Weekly strategy call. Lock the winning formats and hooks.',
         ]} />
+
+        <Ref label="The 4 ad buckets">
+          <p><span className="text-white font-medium">Status</span> — Alex, Brandon, Luke, Gabe. Borrowed authority, top of funnel.</p>
+          <p><span className="text-white font-medium">Q&A</span> — workshop room: name, revenue, problem, what happens if I don't solve it.</p>
+          <p><span className="text-white font-medium">Asset</span> — straight to the 5 lead magnets.</p>
+          <p><span className="text-white font-medium">Education</span> — specific bottlenecks (hiring, churn, pricing).</p>
+        </Ref>
       </Phase>
 
       <Divider />
@@ -137,6 +160,18 @@ export default function TheUndeniablePlan() {
         <Who name="Sean" prefix="p3s" tasks={[
           'Lead the Day 90 decision: keep going, go deeper, or stop.',
         ]} />
+
+        <Ref label="VSL structure">
+          <p>Hook + promise + length → proof anchor (Sabine: 15K → 80K + the math) → the path → the mechanism (the Authority Engine) → case studies → the invitation (workshop).</p>
+        </Ref>
+        <Ref label="Weekly scorecard">
+          <p>Per piece: hook, environment, format, watch time, saves, shares, comments, ICP-tick rate on commenters.</p>
+          <p>Workshop question: "How long have you known about Rhys?" — track if under-3-month answers go up.</p>
+          <p>The number that matters: qualified booked calls from content.</p>
+        </Ref>
+        <Ref label="Day 90 decision">
+          <p><span className="text-white font-medium">Keep going</span> (advisory) · <span className="text-white font-medium">Go deeper</span> (longer build) · <span className="text-white font-medium">Stop</span> (project closes, all assets stay).</p>
+        </Ref>
       </Phase>
     </Shell>
   );
