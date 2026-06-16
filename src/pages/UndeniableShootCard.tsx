@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Shell, PageHead, Wrap, Divider, Note, H2 } from '../components/undeniable/Bits';
 
-// ─── Kick-off checklist (kept from previous version) ─────────────────────
+// ─── Kick-off checklist (kept) ───────────────────────────────────────────
 
 const KICKOFF: Array<{ title: string; tone: string; rows: string[] }> = [
   { title: 'Education kick-off', tone: 'blue', rows: [
@@ -20,12 +20,11 @@ const KICKOFF: Array<{ title: string; tone: string; rows: string[] }> = [
   ]},
 ];
 
-// ─── The 4 buckets · all content lives inside one of these ───────────────
+// ─── Data ────────────────────────────────────────────────────────────────
 
 type Framework = { name: string; template: string; example: string };
-type Shoot = { n: string; tag: string; hook: string; problem: string; path: string; cta: string };
-
-interface Bucket {
+type Piece = { n: string; framework: string; fields: Array<[string, string]> };
+type Bucket = {
   id: string;
   name: string;
   env: string;
@@ -34,17 +33,18 @@ interface Bucket {
   toneClass: string;
   hexBg: string;
   frameworks: Framework[];
-  shoots: Shoot[];
+  pieces: Piece[];
   hooks: string[];
-}
+};
 
 const BUCKETS: Bucket[] = [
+  // ═══ STORIES ═══════════════════════════════════════════════════════════
   {
     id: 'stories',
     name: 'Stories',
     env: 'Park · outdoors · connection',
     tone: 'Built on an event. Story carries the lesson.',
-    description: 'When you film outside, walking, on the road, in a casual environment. The viewer leans in because the moment is real.',
+    description: 'Outside. Walking. On the road. Casual environments. The viewer leans in because the moment is real.',
     toneClass: 'text-amber-400',
     hexBg: '#f59e0b',
     frameworks: [
@@ -59,13 +59,46 @@ const BUCKETS: Bucket[] = [
         example: 'A client asked to drop to fortnightly because money was tight. I said yes and drove home gutted. That night I saw I\'d built a business that broke the second one person flinched. Your whole income can\'t ride on one client.',
       },
     ],
-    shoots: [
-      { n: '04', tag: 'Transformation', hook: 'I built a $5M fitness business without going viral.', problem: 'Everyone tells you the answer is more reach.', path: 'Principles that work cold work warm. I did it without influence or a following. Here\'s the one that actually moved it.', cta: 'Watch the full story (Rome).' },
-      { n: '06', tag: 'Specific Moment', hook: 'Someone asked me how the gym I work at works, no one can train there. I said, that\'s the whole point.', problem: 'Everyone signals status with what they sell. I signalled it with what I refuse to.', path: 'A 750K gym no one can use says more than any testimonial. Proof you can\'t fake or lease.', cta: 'This is what undeniable looks like.' },
-      { n: '11', tag: 'Specific Moment', hook: 'There\'s a feeling every coach at 30 clients has and can\'t describe. Let me describe it.', problem: 'Two steps forward, two steps back, every month with less oxygen than the last.', path: 'It\'s not a feeling, it\'s a number. It\'s churn. And here\'s the fix.', cta: 'Who feels this? Comment.' },
-      { n: '13', tag: 'Transformation', hook: 'I ran a business for 13 years that almost killed me, so you don\'t have to.', problem: 'Five of those years I did it the wrong way, hating my life.', path: 'Mentorship is a game of leapfrog. I have the battle scars so you can jump the problems.', cta: 'The whole arc (character video).' },
-      { n: '14', tag: 'Specific Moment', hook: 'I built a client a program so bad it was designed to make her quit. She dropped 40 kilos and got on stage.', problem: 'Everyone says they only want committed clients.', path: 'You don\'t find the best client. You build them. There\'s a time to coach the committed, but not on day one.', cta: 'Full story on the channel.' },
-      { n: '15', tag: 'Transformation', hook: 'Three years ago I ran a seminar for 16 people and made $175. I teach the same thing now for 22 grand.', problem: 'People think the information is what changed.', path: 'It didn\'t. The proof did. Same lesson, walked the walk, now it\'s undeniable.', cta: 'This is the why-now.' },
+    pieces: [
+      { n: '01', framework: 'Transformation', fields: [
+        ['Old situation', 'Ten years on the gym floor trading time for money. Couldn\'t scale because I was the product.'],
+        ['Friction / cost', 'Every viral chase failed and felt fake. The grind was breaking me down.'],
+        ['Turning point', 'I stopped trying to reach more people. I started focusing on the ones I already had.'],
+        ['New reality', 'A $5M business. Built without one viral moment. Without selling my soul to the algorithm.'],
+        ['Invitation', 'Watch Rome for the full breakdown.'],
+      ]},
+      { n: '02', framework: 'Specific Moment', fields: [
+        ['The moment', 'Someone asked me how the gym I work at works, no one can train there.'],
+        ['What it cost', 'Most people would have explained, defended, or sold. I just said: that\'s the whole point.'],
+        ['The realisation', 'I\'d signalled status by what I refuse to do, not by what I sell.'],
+        ['The takeaway', 'A 750K gym no one can use says more than any testimonial. Proof you can\'t fake or lease.'],
+      ]},
+      { n: '03', framework: 'Specific Moment', fields: [
+        ['The moment', 'A client texted me "sorry to be annoying" and I knew what was coming. They were leaving.'],
+        ['What it cost', 'Two steps forward, two steps back. Less oxygen than the month before.'],
+        ['The realisation', 'It\'s not a feeling. It\'s a number. It\'s churn.'],
+        ['The takeaway', 'If you feel this and can\'t name it, the math will name it for you.'],
+      ]},
+      { n: '04', framework: 'Transformation', fields: [
+        ['Old situation', 'Five of my 13 years I did this the wrong way. Hating my life. Working 80-hour weeks.'],
+        ['Friction / cost', 'Almost lost the business. Almost lost myself. The mental cost was the worst part.'],
+        ['Turning point', 'I started teaching what nearly killed me. So you don\'t have to learn it the hard way.'],
+        ['New reality', 'Now I leapfrog people over my battle scars. Faster, cleaner, saner.'],
+        ['Invitation', 'The whole arc lives in the character video on the channel.'],
+      ]},
+      { n: '05', framework: 'Specific Moment', fields: [
+        ['The moment', 'She was lazy, complained constantly, treated coaching like a hobby. I built her a program designed to make her quit.'],
+        ['What it cost', 'I was ready to lose her. I was tired of trying.'],
+        ['The realisation', 'She didn\'t quit. She did the work. Dropped 40 kilos. Got on stage.'],
+        ['The takeaway', 'You don\'t find the best client. You build them. Sometimes by raising the bar so high they prove themselves.'],
+      ]},
+      { n: '06', framework: 'Transformation', fields: [
+        ['Old situation', 'First seminar. 16 people in the room. Only 2 paid for tickets. The other 14 came for free.'],
+        ['Friction / cost', 'Made $175. Spent 80 hours preparing. The same content I now charge 22 grand for.'],
+        ['Turning point', 'I didn\'t change the content. I changed who was watching, and what I\'d already done by then.'],
+        ['New reality', 'Same lesson. Now it lands. Now it sells.'],
+        ['Invitation', 'This is the why-now. The full walk-through is on the channel.'],
+      ]},
     ],
     hooks: [
       'I couldn\'t pay my staff two weeks before Christmas. That\'s the year I learned everything.',
@@ -77,12 +110,13 @@ const BUCKETS: Bucket[] = [
     ],
   },
 
+  // ═══ HOT TAKES ════════════════════════════════════════════════════════
   {
     id: 'hot-takes',
     name: 'Hot Takes',
     env: 'Hallway · new office · direct',
     tone: 'Built on a claim. Belief in, belief out.',
-    description: 'Direct to camera in the hallway or the new office. Eye-line tight. One claim, defended cleanly. No setup.',
+    description: 'Direct to camera, hallway or new office. Eye-line tight. One claim, defended cleanly. No setup.',
     toneClass: 'text-red-400',
     hexBg: '#ef4444',
     frameworks: [
@@ -97,13 +131,43 @@ const BUCKETS: Bucket[] = [
         example: 'You\'re not bad at sales. Most coaches freeze on price because they were taught to compete on cheap and helpful. The real issue is an offer that isn\'t built to be paid for. Fix the offer and the price stops being a fight.',
       },
     ],
-    shoots: [
-      { n: '03', tag: 'Reframe', hook: 'If you\'re sick of being called just a PT, even though you\'re over 10K, I finally worked out why.', problem: 'Your business is built like a PT\'s. 12-16 week clients, churn ignored.', path: 'Extend retention to 32 weeks on average. That\'s an instant double on the back end, and marketing gets easier.', cta: 'Full breakdown on the channel.' },
-      { n: '05', tag: 'Belief Flip', hook: 'Which business has more impact, 35 clients done brilliantly or 350 who lose 10 kilos and move on? It\'s the bigger one. Fight me.', problem: 'People separate impact from income.', path: 'Income buys impact. A bigger income purchases more of it. You have a duty to build something big if you\'re impact driven.', cta: 'Comment your take.' },
-      { n: '08', tag: 'Belief Flip', hook: 'Stop learning marketing and just copy this.', problem: 'Coaches drown in tactics, tools and AI and still don\'t grow.', path: 'The one move that beats all of it, copied straight from what works.', cta: 'The complete plan is on the channel.' },
-      { n: '09', tag: 'Reframe', hook: 'You\'re doing 80K months and keeping nothing. Let me show you why.', problem: 'Revenue resets to zero on the first and you panic again. Lifestyle crept up.', path: 'Revenue minus tax, minus GST, minus the lifestyle you adjusted to. Fix profit, not revenue.', cta: 'The fix in the full video.' },
-      { n: '10', tag: 'Belief Flip', hook: 'Imagine if you never lost a client. You\'d stop selling and start choosing.', problem: 'You\'re signing two and losing two, running to stand still.', path: 'Net-zero churn means you only ever add. At some point you turn around and say, I\'m done signing clients.', cta: 'Here\'s how close you are.' },
-      { n: '12', tag: 'Reframe', hook: 'You\'ve been burned before. Good. Stay sceptical and watch this anyway.', problem: 'You paid a mentor who\'d never done it, and now you\'re scared to invest again.', path: 'Check the receipts. Worst case you stay the same. Best case you\'re wrong and you get wealthier.', cta: 'Come with your bullshit meter on high.' },
+    pieces: [
+      { n: '07', framework: 'Reframe', fields: [
+        ['The pain', 'You\'re over 10K a month and still get called "just a PT". It\'s eating you.'],
+        ['Remove the blame', 'You\'re not less than. The label isn\'t your fault.'],
+        ['The real cause', 'Your business is built like a PT\'s. 12-16 week clients. Churn ignored. Pricing based on hours.'],
+        ['The shift', 'Extend retention to 32 weeks. That\'s an instant double on the back end. The label stops mattering.'],
+      ]},
+      { n: '08', framework: 'Belief Flip', fields: [
+        ['Common belief', 'Bigger businesses are less ethical. 35 clients done brilliantly is more honest than 350.'],
+        ['Why accepted', 'It feels noble. It signals craft. It hides the income ceiling.'],
+        ['Why it fails', 'Income buys impact. You\'re not changing the world coaching 25 people.'],
+        ['What\'s true', 'If you\'re impact-driven, you have a duty to build something big. Bigger reach equals bigger impact. Fight me.'],
+      ]},
+      { n: '09', framework: 'Belief Flip', fields: [
+        ['Common belief', 'More learning equals more results. More tactics equals more clients.'],
+        ['Why accepted', 'Learning feels productive. Buying courses feels like action.'],
+        ['Why it fails', 'Coaches drown in tactics, tools and AI and still don\'t grow. The bottleneck isn\'t knowledge.'],
+        ['What\'s true', 'Copy what works. Stop learning marketing. The complete plan is on the channel.'],
+      ]},
+      { n: '10', framework: 'Reframe', fields: [
+        ['The pain', '80K months. Then the first of the month hits and you\'re panicking again.'],
+        ['Remove the blame', 'You\'re not bad with money. The math just doesn\'t fit your business.'],
+        ['The real cause', 'Revenue resets to zero. Tax + GST + lifestyle creep eat the rest. The wins don\'t compound.'],
+        ['The shift', 'Fix profit, not revenue. The 40K month coach often keeps more than the 80K one. Here\'s how.'],
+      ]},
+      { n: '11', framework: 'Belief Flip', fields: [
+        ['Common belief', 'Churn is the cost of doing business. Just sign more.'],
+        ['Why accepted', 'Acquisition feels productive. Replacing leaks feels invisible.'],
+        ['Why it fails', 'You\'re signing two and losing two. Running to stand still. The business stays stuck.'],
+        ['What\'s true', 'Net-zero churn means you only ever add. At some point you stop signing and start choosing.'],
+      ]},
+      { n: '12', framework: 'Reframe', fields: [
+        ['The pain', 'You paid a mentor who\'d never done it. Got nothing. Now you\'re scared to invest again.'],
+        ['Remove the blame', 'You\'re not stupid. You did what most people do. You trusted credentials.'],
+        ['The real cause', 'The industry doesn\'t filter for done-it. The receipts are buried under sales pages.'],
+        ['The shift', 'Check the receipts. Stay sceptical. Worst case you stay the same. Best case you\'re wrong and you get wealthier.'],
+      ]},
     ],
     hooks: [
       'Most coaches think they have to compromise who they are to build something big. They\'re wrong.',
@@ -116,6 +180,7 @@ const BUCKETS: Bucket[] = [
     ],
   },
 
+  // ═══ TEACHING ═════════════════════════════════════════════════════════
   {
     id: 'teaching',
     name: 'Teaching',
@@ -133,8 +198,39 @@ const BUCKETS: Bucket[] = [
       { name: 'The "If I Were Starting Over"', template: 'Hypothetical reset → The first move → Why this not that', example: 'If I lost every client tomorrow, here\'s the first thing I\'d do to rebuild. It\'s not what you think.' },
       { name: 'The Checklist / Order', template: 'The sequence → Why the order matters → What happens if you skip', example: 'The 6 things to lock in before you raise your rates. In order. Skip step 2 and the rest doesn\'t work.' },
     ],
-    shoots: [
-      { n: '07', tag: 'The Comparison', hook: 'Two ways to get leads. Knock on doors every day, or post this specific thing five times a day. Pick one.', problem: 'Vague posting and hoping the algorithm rewards you doesn\'t convert.', path: 'The specific content type, the exact cadence. Vague versus specific.', cta: 'Which one are you? Comment.' },
+    pieces: [
+      { n: '13', framework: 'The Comparison', fields: [
+        ['Two paths', 'Knock on doors every day. Or post this specific thing five times a day.'],
+        ['What each costs', 'Door-knocking: 50 hours a week, low scale. Posting: 5 hours a week, infinite scale once it works.'],
+        ['Which when', 'Door-knocking trains you in sales. Posting trains the algorithm. Both work. Pick one and commit for 90 days.'],
+        ['Verdict', 'Most coaches do both at half-effort. That\'s the worst path. Which one are you?'],
+      ]},
+      { n: '14', framework: 'The Tutorial / Walkthrough', fields: [
+        ['Outcome', 'Add 10K a month within 90 days without taking on more 1-on-1 clients.'],
+        ['Step 1', 'Audit current capacity. What\'s your hour-for-dollar ratio right now?'],
+        ['Step 2', 'Convert your highest-ROI service into a group format. Same outcome, 3-5x capacity.'],
+        ['Step 3', 'Move your existing pipeline into the new offer. Don\'t replace, layer.'],
+        ['What to do next', 'Track for 30 days. Iterate on price, not on structure.'],
+      ]},
+      { n: '15', framework: 'The "If I Were Starting Over"', fields: [
+        ['Hypothetical reset', 'Every client gone tomorrow. Zero pipeline. What do I do Monday?'],
+        ['The first move', 'Audit the last 50 conversations I\'ve had. Find the 3 people who keep coming back to me with the same problem.'],
+        ['Why this not that', 'Not posting. Not running ads. Not learning a new tactic. People who already trust you = lowest cost, fastest cash.'],
+        ['Next', 'Build the offer they need. Sell it to those 3 first. Use that revenue to build the public side.'],
+      ]},
+      { n: '16', framework: 'Framework Explainer', fields: [
+        ['Name your system', 'The Referral Engine. A 3-touch system that runs on autopilot once it\'s installed.'],
+        ['The steps', 'Touch 1: First win, ask for the testimonial. Touch 2: 90 days in, ask who else has this problem. Touch 3: At completion, make them the connection broker.'],
+        ['What it produces', 'If you have 50 clients and 30% become brokers, you don\'t need ads.'],
+        ['Why it works', 'Referrals close 70% faster and at 2x higher ticket than cold leads. Your clients become your salesforce.'],
+      ]},
+      { n: '17', framework: 'The Numbered Breakdown', fields: [
+        ['Number', '3 ways to fill your coaching roster without spending a dollar on ads.'],
+        ['Way 1', 'Win-back email to every dormant client. The cheapest revenue you\'ll ever earn.'],
+        ['Way 2', 'A referral ask after every measurable win. Make it the standard rep, not a request.'],
+        ['Way 3', 'Two specific posts a week that name a problem your ideal client Googles at 11pm.'],
+        ['Reward', 'Run these for 30 days. Your DMs change. Then start ads from a position of strength.'],
+      ]},
     ],
     hooks: [
       'Two paths to grow a coaching business. One caps you. One scales forever.',
@@ -147,6 +243,7 @@ const BUCKETS: Bucket[] = [
     ],
   },
 
+  // ═══ DEMONSTRATION ════════════════════════════════════════════════════
   {
     id: 'demonstration',
     name: 'Demonstration',
@@ -164,9 +261,28 @@ const BUCKETS: Bucket[] = [
       { name: 'The "If I Were Starting Over"', template: 'Whiteboard timeline → Day 1 → Day 7 → Day 30 → Now', example: 'If I lost every client tomorrow, here\'s my first 30 days. Drawn live on the timeline.' },
       { name: 'The Checklist / Order', template: 'List drawn or shown → Tick each item → Why the sequence', example: 'The 6 things to lock in before you raise your rates. Drawn as a vertical checklist with tick boxes.' },
     ],
-    shoots: [
-      { n: '01', tag: 'Framework Explainer', hook: 'My client lost $800,000 and never even knew it.', problem: 'Most coaches count leads coming in. None of them count clients leaking out.', path: 'Do the math: clients in vs out over 12 months. Above 3% churn and you\'re losing 60% of your business a year. Draw the leaky bucket.', cta: 'Comment "CHURN" for the calculator.' },
-      { n: '02', tag: 'The Tutorial / Walkthrough', hook: 'Online coaches think they work a lot. Let\'s actually do the math.', problem: 'You feel flat out at 30 clients and call yourself busy.', path: '100 clients x 15-min check-ins = 25 hours. Add comms, content, program updates. You\'ve finally worked a 40-hour week with 100 clients. You\'re not maxed, you\'re inefficient.', cta: 'Save this and do your own math.' },
+    pieces: [
+      { n: '18', framework: 'Framework Explainer', fields: [
+        ['Name your system', 'The Leaky Bucket Test. The math no one runs on their own business.'],
+        ['Draw it live', 'Draw the bucket. New clients pour in the top. Existing clients leak out the sides. The leaks are where the money goes.'],
+        ['Walk the steps', 'Step 1: Count clients in over 12 months. Step 2: Count clients out. Step 3: Multiply the lost ones by their LTV.'],
+        ['What it produces', 'Above 3% monthly churn? You\'re losing 60% of your business a year. That\'s the $800K my client never saw.'],
+        ['Bridge', 'Comment "CHURN" for the calculator.'],
+      ]},
+      { n: '19', framework: 'The Tutorial / Walkthrough', fields: [
+        ['Outcome', 'Discover whether you\'re actually busy or just inefficient.'],
+        ['Pull out the phone', '100 clients × 15-minute check-ins = 25 hours per week.'],
+        ['Add the rest', 'Comms 5 hours. Content 5 hours. Program updates 5 hours. Total: 40-hour week with 100 clients.'],
+        ['The verdict', 'If you\'re flat out at 30 clients, you\'re not maxed. You\'re inefficient.'],
+        ['Next', 'Save this. Run your own numbers. Tag a coach who needs to see it.'],
+      ]},
+      { n: '20', framework: 'The Numbered Breakdown / Mistakes', fields: [
+        ['Setup', 'Live coaching call. Pulled up his real numbers. Whiteboard out.'],
+        ['Number', '3 numbers that matter more than revenue.'],
+        ['List drawn live', '1. Churn rate (he didn\'t track it). 2. LTV (he\'d never calculated). 3. Profit margin (he assumed).'],
+        ['The reveal', 'He had 80K months and was losing 9K of it to churn. Untracked.'],
+        ['Reward', 'If you don\'t track these 3 numbers monthly, you\'re flying blind.'],
+      ]},
     ],
     hooks: [
       'I did the math on his business live and he went white in the face.',
@@ -182,7 +298,7 @@ const BUCKETS: Bucket[] = [
 
 // ─── Sub-components ──────────────────────────────────────────────────────
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
   const [copied, setCopied] = useState(false);
   const onClick = async () => {
     try {
@@ -197,27 +313,27 @@ function CopyButton({ text }: { text: string }) {
       onClick={onClick}
       className="text-[11px] font-medium text-zinc-500 hover:text-blue-400 transition-colors uppercase tracking-widest"
     >
-      {copied ? '✓ Copied' : 'Copy'}
+      {copied ? '✓ Copied' : label}
     </button>
   );
 }
 
-function ShortCard({ s }: { s: { n: string; tag: string; hook: string; problem: string; path: string; cta: string } }) {
-  const fullText = `Hook: ${s.hook}\n\nProblem: ${s.problem}\n\nPath: ${s.path}\n\nCTA: ${s.cta}`;
+function PieceCard({ p, toneClass }: { p: Piece; toneClass: string }) {
+  const fullText = p.fields.map(([k, v]) => `${k}: ${v}`).join('\n\n');
   return (
     <div className="glow-card p-6">
-      <div className="flex items-center justify-between gap-3 mb-4">
+      <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
         <div className="flex items-center gap-3">
-          <span className="font-display text-[18px] font-extrabold text-blue-400">{s.n}</span>
-          <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-400 border border-zinc-800 rounded-full px-2.5 py-0.5">{s.tag}</span>
+          <span className={`font-display text-[18px] font-extrabold ${toneClass}`}>{p.n}</span>
+          <span className="text-[11px] font-semibold uppercase tracking-widest text-zinc-400 border border-zinc-800 rounded-full px-2.5 py-0.5">{p.framework}</span>
         </div>
         <CopyButton text={fullText} />
       </div>
       <div className="space-y-3">
-        {[['Hook', s.hook], ['Problem', s.problem], ['Path', s.path], ['CTA', s.cta]].map(([k, v]) => (
-          <div key={k} className="grid grid-cols-[64px_1fr] gap-3">
-            <span className="text-[11px] font-semibold uppercase tracking-widest text-blue-400 pt-1">{k}</span>
-            <span className={`text-[14px] leading-relaxed ${k === 'Hook' ? 'text-white font-medium' : 'text-zinc-300'}`}>{v}</span>
+        {p.fields.map(([k, v]) => (
+          <div key={k} className="grid grid-cols-[1fr] md:grid-cols-[140px_1fr] gap-1 md:gap-3">
+            <span className={`text-[11px] font-semibold uppercase tracking-widest ${toneClass} pt-1 md:pt-1`}>{k}</span>
+            <span className="text-[14px] leading-relaxed text-zinc-200">{v}</span>
           </div>
         ))}
       </div>
@@ -263,42 +379,40 @@ function HookRow({ hook }: { hook: string }) {
   );
 }
 
-function BucketOverviewCard({ b }: { b: Bucket }) {
+function BucketTab({ b, active, onClick }: { b: Bucket; active: boolean; onClick: () => void }) {
   return (
-    <a
-      href={`#${b.id}`}
-      className="glow-card p-6 group block hover:scale-[1.01] transition-transform"
-      style={{ borderTop: `3px solid ${b.hexBg}` }}
+    <button
+      type="button"
+      onClick={onClick}
+      className={`rounded-2xl border p-5 text-left transition-all ${
+        active
+          ? 'border-blue-500/40 bg-blue-500/5 shadow-lg'
+          : 'border-zinc-800 bg-elevated/40 hover:border-zinc-700 hover:bg-elevated'
+      }`}
+      style={active ? { borderTop: `3px solid ${b.hexBg}` } : undefined}
     >
-      <h3 className={`font-display text-[22px] font-extrabold ${b.toneClass} mb-1`}>{b.name}</h3>
-      <p className="text-zinc-400 text-[12px] uppercase tracking-widest font-semibold mb-3">{b.env}</p>
-      <p className="text-zinc-300 text-[14px] leading-relaxed mb-4">{b.description}</p>
-      <div className="flex items-center gap-4 text-[11px] uppercase tracking-widest font-semibold text-zinc-500">
+      <h3 className={`font-display text-[18px] md:text-[20px] font-extrabold ${b.toneClass} mb-1`}>{b.name}</h3>
+      <p className="text-zinc-500 text-[10px] md:text-[11px] uppercase tracking-widest font-semibold mb-2">{b.env}</p>
+      <div className="text-[11px] text-zinc-500">
+        <span>{b.pieces.length} piece{b.pieces.length === 1 ? '' : 's'}</span>
+        <span className="mx-1.5 text-zinc-700">·</span>
         <span>{b.frameworks.length} framework{b.frameworks.length === 1 ? '' : 's'}</span>
-        <span className="text-zinc-700">·</span>
-        <span>{b.shoots.length} piece{b.shoots.length === 1 ? '' : 's'}</span>
-        <span className="text-zinc-700">·</span>
-        <span>{b.hooks.length} hooks</span>
       </div>
-      <p className="text-[11px] uppercase tracking-widest font-semibold text-blue-400 mt-4 group-hover:text-blue-300 transition-colors">
-        Open bucket →
-      </p>
-    </a>
+    </button>
   );
 }
 
-function BucketSection({ b }: { b: Bucket }) {
+function BucketContent({ b }: { b: Bucket }) {
   return (
-    <section id={b.id} className="scroll-mt-24">
-      <Wrap>
-        <div className="mb-2">
-          <p className={`text-[12px] uppercase tracking-widest font-semibold ${b.toneClass} mb-2`}>{b.env}</p>
-          <h2 className={`font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] ${b.toneClass} mb-2`}>{b.name}.</h2>
-          <p className="text-zinc-400 text-[15px] leading-relaxed">{b.tone}</p>
-        </div>
-      </Wrap>
+    <div className="space-y-12">
+      <div>
+        <p className={`text-[12px] uppercase tracking-widest font-semibold ${b.toneClass} mb-2`}>{b.env}</p>
+        <h2 className={`font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] ${b.toneClass} mb-3`}>{b.name}.</h2>
+        <p className="text-zinc-400 text-[15px] leading-relaxed">{b.tone}</p>
+        <p className="text-zinc-500 text-[13px] leading-relaxed mt-2">{b.description}</p>
+      </div>
 
-      <Wrap>
+      <div>
         <H2>Pick a framework.</H2>
         <Note>Choose the structure that fits the moment. Then write to that shape.</Note>
         <div className="grid md:grid-cols-2 gap-4 mt-8">
@@ -306,38 +420,39 @@ function BucketSection({ b }: { b: Bucket }) {
             <FrameworkCard key={f.name} f={f} toneClass={b.toneClass} />
           ))}
         </div>
-      </Wrap>
+      </div>
 
-      <Wrap>
+      <div>
         <H2>Steal a piece.</H2>
-        <Note>Shoot-ready. Hook to CTA already written. Tighten the words in your own delivery on camera. Click to copy the full piece.</Note>
+        <Note>Shoot-ready. Each one structured in its framework. Click "Copy" to grab the full piece.</Note>
         <div className="grid gap-4 mt-8">
-          {b.shoots.length === 0 ? (
+          {b.pieces.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-zinc-800 p-8 text-center">
-              <p className="text-zinc-500 text-[14px]">No shoot-ready pieces in this bucket yet. Use the frameworks above and the hooks below to write the first one.</p>
+              <p className="text-zinc-500 text-[14px]">No pieces in this bucket yet. Use the frameworks above and the hooks below to write the first one.</p>
             </div>
           ) : (
-            b.shoots.map((s) => <ShortCard key={s.n} s={s} />)
+            b.pieces.map((p) => <PieceCard key={p.n} p={p} toneClass={b.toneClass} />)
           )}
         </div>
-      </Wrap>
+      </div>
 
-      <Wrap>
+      <div>
         <H2>Pick a hook.</H2>
-        <Note>The opening line, in his voice. Click any of these to copy and use as the first second of camera. Pair with a framework above.</Note>
+        <Note>Opening lines in his voice. Click any to copy and use as the first second of camera. Pair with a framework above.</Note>
         <div className="grid gap-3 mt-8">
           {b.hooks.map((h) => <HookRow key={h} hook={h} />)}
         </div>
-      </Wrap>
-
-      <Divider />
-    </section>
+      </div>
+    </div>
   );
 }
 
 // ─── Main page ───────────────────────────────────────────────────────────
 
 export default function UndeniableShootCard() {
+  const [activeId, setActiveId] = useState<string>(BUCKETS[0].id);
+  const active = BUCKETS.find((b) => b.id === activeId) || BUCKETS[0];
+
   return (
     <Shell title="The Shoot System · Undeniable" description="Four buckets. Pick one. See the framework. Steal a piece. Pick a hook. Shoot it." path="/undeniablenextsteps/shoot-card">
       <PageHead
@@ -367,22 +482,26 @@ export default function UndeniableShootCard() {
             </div>
           ))}
         </div>
-        <Note>The formula every education piece follows: Hook → Problem → Path (tool or "don't do this") → CTA. One problem, one promise, one outcome.</Note>
       </Wrap>
       <Divider />
 
-      {/* The 4 buckets · overview cards */}
+      {/* Bucket tabs · click to switch */}
       <Wrap>
-        <H2>The four buckets.</H2>
-        <Note>Each bucket lives in its own environment. Click a bucket to see its frameworks, its shoot-ready pieces, and the hooks that fit.</Note>
-        <div className="grid md:grid-cols-2 gap-4 mt-8">
-          {BUCKETS.map((b) => <BucketOverviewCard key={b.id} b={b} />)}
+        <H2>Pick a bucket.</H2>
+        <Note>Click a bucket. The frameworks, pieces and hooks for it appear below. One bucket at a time. No scrolling past the others.</Note>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+          {BUCKETS.map((b) => (
+            <BucketTab key={b.id} b={b} active={b.id === activeId} onClick={() => setActiveId(b.id)} />
+          ))}
         </div>
       </Wrap>
+
       <Divider />
 
-      {/* Each bucket section, anchor-linked */}
-      {BUCKETS.map((b) => <BucketSection key={b.id} b={b} />)}
+      {/* Active bucket content */}
+      <Wrap>
+        <BucketContent b={active} />
+      </Wrap>
     </Shell>
   );
 }
