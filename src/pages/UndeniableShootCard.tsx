@@ -128,8 +128,8 @@ const BUCKETS: Bucket[] = [
     frameworks: [
       {
         name: 'Belief Flip',
-        template: 'Common belief → Why it\'s accepted → Why it fails → What\'s true instead',
-        example: 'Another certification won\'t get you clients. It feels productive because learning is safe. But your market never asks for your quals. The coaches booked solid won on positioning and proof.',
+        template: 'Belief → Why accepted → Why fails → Truth',
+        example: 'Another cert won\'t get you clients. Learning feels safe. The market never asks for quals. Booked-solid coaches won on positioning and proof.',
         formats: [
           'Direct to camera, hallway, eye-line tight',
           'Walking confidently, one continuous take',
@@ -138,7 +138,7 @@ const BUCKETS: Bucket[] = [
       },
       {
         name: 'Reframe',
-        template: 'The pain → Remove the blame → The real cause → The shift',
+        template: 'Pain → Blame → Cause → Shift',
         example: 'You\'re not bad at sales. You were taught to compete on cheap and helpful. The real issue is an offer that isn\'t built to be paid for.',
         formats: [
           'Direct to camera, softer tone',
@@ -146,13 +146,54 @@ const BUCKETS: Bucket[] = [
           'Casual hallway, leaning on a wall',
         ],
       },
+      {
+        name: 'Fight Me',
+        template: 'Claim → Why → Stake',
+        example: '35 clients done brilliantly is more impactful than 350. Income buys impact. You\'re not changing the world coaching 25 people. Fight me.',
+        formats: [
+          'Direct to camera, locked-in eye line',
+          'Walking, confident pace, no smile',
+          'Standing in the new office, declarative',
+        ],
+      },
+      {
+        name: 'Stop · Just Do',
+        template: 'Stop → Why → Just do',
+        example: 'Stop learning marketing. Tactic overload is the actual cap. Copy this exact playbook.',
+        formats: [
+          'Direct to camera, blunt',
+          'Walking, declarative',
+          'Casual hallway, leaning on a wall',
+        ],
+      },
+    ],
+    moreFrameworks: [
+      {
+        name: 'Imagine · Inverse',
+        template: 'What if → Picture → Action',
+        example: 'Imagine if you never lost a client. You\'d stop signing and start choosing. Calculate your churn this week.',
+        formats: [
+          'Direct to camera, slower pace',
+          'Walking, reflective',
+          'Sitting, eyes on the camera, painted picture',
+        ],
+      },
+      {
+        name: 'Side by Side',
+        template: 'Their side → My side → Verdict',
+        example: 'Their side: chase viral. My side: $5M without ever going viral. Verdict: manual effort will reign supreme.',
+        formats: [
+          'Direct to camera, gesturing each side',
+          'Walking between two spots, naming each side',
+          'Two hands held up, one for each side',
+        ],
+      },
     ],
     pieces: [
-      { n: '07', framework: 'Belief Flip', fields: [
-        ['Common belief', '35 clients done brilliantly is more impactful than 350 who lose 10 kilos and move on.'],
-        ['Why accepted', 'It feels noble. Hides the income ceiling.'],
-        ['Why it fails', 'Income buys impact. You\'re not changing the world coaching 25 people.'],
-        ['What\'s true', 'If you\'re impact-driven, you have a duty to build something big. Fight me.'],
+      { n: '07', framework: 'Fight Me', fields: [
+        ['Claim', '35 clients done brilliantly is more impactful than 350 who lose 10 kilos and move on.'],
+        ['Why', 'Income buys impact. You\'re not changing the world coaching 25 people. If you\'re impact-driven, you have a duty to build something big.'],
+        ['Stake', 'Fight me.'],
       ]},
       { n: '08', framework: 'Belief Flip', fields: [
         ['Common belief', 'Big business equals ego. Small business equals purpose.'],
@@ -304,55 +345,23 @@ const BUCKETS: Bucket[] = [
     env: 'Whiteboard · desk · shown',
     frameworks: [
       {
-        name: 'Situation',
-        template: 'Setting → Tension → Reveal',
-        example: 'Pull up his calendar. 87 unread messages. The leak is right there on the screen.',
-        formats: [
-          'Show the actual screen / setting',
-          'Walk to the thing and point at it',
-          'Top-down on the artefact (calendar, dashboard, paper)',
-        ],
-      },
-      {
-        name: 'Options',
-        template: 'Option A → Option B → Pick',
-        example: 'Two whiteboards. Door-knock numbers on the left. Posting numbers on the right. Circle the bigger one.',
-        formats: [
-          'Whiteboard split LEFT | RIGHT',
-          'Two pieces of paper top-down',
-          'iPad split view',
-        ],
-      },
-      {
-        name: 'Constraint',
-        template: 'Block → Cost → Workaround',
-        example: 'Draw the leaky bucket. Holes = churn. Cost = 60% of the business a year. Workaround: plug the holes before chasing leads.',
-        formats: [
-          'Whiteboard drawn from scratch',
-          'Top-down on paper',
-          'iPad illustration with arrows',
-        ],
-      },
-      {
-        name: 'List / Steps',
-        template: '1 → 2 → 3 → Reward',
-        example: '100 clients × 15 min = 25 hours. +5 comms, +5 content, +5 programs = 40-hour week. If you\'re flat out at 30, you\'re inefficient.',
+        name: 'Math Live',
+        template: 'Phone → Math → Verdict',
+        example: 'Coaches think 3% churn is fine. Pull out the phone. 100 clients, lose 3 a month, 36 gone in a year. 60% of the business, gone.',
         formats: [
           'Phone in hand, live calculator',
-          'Whiteboard with each step written out',
-          'Top-down on paper, ticking each step',
+          'iPad with numbers typed in',
+          'Whiteboard math written out',
         ],
       },
-    ],
-    moreFrameworks: [
       {
-        name: 'Priority',
-        template: 'First → Second → Why this order',
-        example: 'Fix churn first. Then extend retention. Then chase leads. Reverse the order and you accelerate the leak.',
+        name: 'The Bucket',
+        template: 'Name → Draw → Lesson',
+        example: 'The leaky bucket. Top fills with new clients. Sides leak with churn. Above 3% holes and you lose 60% of the bucket every year.',
         formats: [
-          'Whiteboard with numbered priorities',
-          'Top-down with checklist, in order',
-          'iPad with each step drawn in sequence',
+          'Whiteboard drawn from scratch',
+          'Top-down camera on paper',
+          'iPad illustration',
         ],
       },
       {
@@ -365,6 +374,16 @@ const BUCKETS: Bucket[] = [
           'Whiteboard with one number circled',
         ],
       },
+      {
+        name: 'Split Screen',
+        template: 'Left → Right → Pick',
+        example: '$120,000 left. $600,000 right. Same year, same effort, different sequence. Pick the bigger one.',
+        formats: [
+          'Whiteboard split LEFT | RIGHT',
+          'Two pieces of paper top-down',
+          'iPad split view',
+        ],
+      },
     ],
     pieces: [
       { n: '19', framework: 'Number Reveal', fields: [
@@ -372,31 +391,29 @@ const BUCKETS: Bucket[] = [
         ['Number', '$800,000.'],
         ['Lesson', 'That\'s what hidden churn ate. Wasn\'t on any dashboard. If you\'re not measuring it, you\'re losing it.'],
       ]},
-      { n: '20', framework: 'List / Steps', fields: [
-        ['1', 'Coaches think 3% churn is fine. Let\'s do the math.'],
-        ['2', '100 clients. Lose 3 a month. After 12 months, 36 gone.'],
-        ['3', 'You\'ve replaced 36 just to stand still.'],
-        ['Reward', 'Anything above 3% churn means 60% of the business is gone every year.'],
+      { n: '20', framework: 'Math Live', fields: [
+        ['Phone', 'Coaches think 3% churn is fine. Let\'s pull out the calculator.'],
+        ['Math', '100 clients. Lose 3 a month. After 12 months, 36 gone. You\'ve replaced 36 just to stand still.'],
+        ['Verdict', 'Anything above 3% churn means 60% of the business is gone every year.'],
       ]},
-      { n: '21', framework: 'Constraint', fields: [
-        ['Block', 'The leaky bucket. New clients pour in the top. Existing clients leak out the sides.'],
-        ['Cost', 'If holes are bigger than inflow, you\'re shrinking. Most coaches don\'t measure the holes.'],
-        ['Workaround', 'Plug the holes first. Then fill faster. Imagine if you never lost a client.'],
+      { n: '21', framework: 'The Bucket', fields: [
+        ['Name', 'The leaky bucket.'],
+        ['Draw', 'New clients pour in the top. Existing clients leak out the sides. Holes bigger than inflow = shrinking.'],
+        ['Lesson', 'Plug the holes first. Then fill faster. Imagine if you never lost a client.'],
       ]},
-      { n: '22', framework: 'List / Steps', fields: [
-        ['1', '100 × 15-min check-ins = 25 hours.'],
-        ['2', '+ 5 hours of comms + 5 of content + 5 of programs.'],
-        ['3', 'Total = 40-hour week.'],
-        ['Reward', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
+      { n: '22', framework: 'Math Live', fields: [
+        ['Phone', 'Online coaches think they work a lot. Let\'s do the math on 100 clients.'],
+        ['Math', '100 × 15-min check-ins = 25 hours. +5 comms +5 content +5 programs = 40-hour week.'],
+        ['Verdict', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
       ]},
-      { n: '23', framework: 'Situation', fields: [
-        ['Setting', 'Show the dashboard. Same income every month. Looks like flat growth.'],
-        ['Tension', 'Two clients in, two clients out. Zero net.'],
-        ['Reveal', 'That\'s not a feeling. It\'s a number. Solve it and you stop signing and start choosing.'],
+      { n: '23', framework: 'Number Reveal', fields: [
+        ['Pain', 'Every month feels like running to stand still.'],
+        ['Number', 'Your churn rate.'],
+        ['Lesson', 'Two clients in, two out. Zero net growth. That\'s not a feeling. It\'s a number. Solve it and you stop signing, start choosing.'],
       ]},
-      { n: '24', framework: 'Options', fields: [
-        ['Option A', '$120,000. The number I made extra that year. Felt great.'],
-        ['Option B', '$600,000. The number available if I\'d solved the right problem first.'],
+      { n: '24', framework: 'Split Screen', fields: [
+        ['Left', '$120,000. The number I made extra that year. Felt great.'],
+        ['Right', '$600,000. The number available if I\'d solved the right problem first.'],
         ['Pick', 'Same year. Same effort. Different sequence. Right problem, right order = wealth.'],
       ]},
     ],
