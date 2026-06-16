@@ -404,24 +404,21 @@ function HookRow({ hook }: { hook: string }) {
   );
 }
 
-function BucketTab({ b, active, onClick }: { b: Bucket; active: boolean; onClick: () => void }) {
+function BucketPill({ b, active, onClick }: { b: Bucket; active: boolean; onClick: () => void }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className={`rounded-2xl border p-5 text-left transition-all ${
+      className={`rounded-full border px-4 py-2 text-[13px] font-semibold transition-colors ${
         active
-          ? 'border-blue-500/40 bg-blue-500/5'
-          : 'border-zinc-800 bg-elevated/40 hover:border-zinc-700 hover:bg-elevated'
+          ? 'border-blue-500/50 bg-blue-500/10 text-white'
+          : 'border-zinc-800 bg-elevated/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
       }`}
     >
-      <h3 className="font-display text-[18px] md:text-[20px] font-extrabold text-white mb-1">{b.name}</h3>
-      <p className="text-zinc-500 text-[10px] md:text-[11px] uppercase tracking-widest font-semibold mb-2">{b.env}</p>
-      <div className="text-[11px] text-zinc-500">
-        <span>{b.pieces.length} piece{b.pieces.length === 1 ? '' : 's'}</span>
-        <span className="mx-1.5 text-zinc-700">·</span>
-        <span>{b.frameworks.length} framework{b.frameworks.length === 1 ? '' : 's'}</span>
-      </div>
+      {b.name}
+      <span className={`ml-2 text-[11px] font-normal ${active ? 'text-blue-300/80' : 'text-zinc-600'}`}>
+        {b.pieces.length}
+      </span>
     </button>
   );
 }
@@ -507,21 +504,15 @@ export default function UndeniableShootCard() {
       </Wrap>
       <Divider />
 
-      {/* Bucket tabs */}
+      {/* Compact bucket switcher · sticky-ish at top of content */}
       <Wrap>
-        <H2>Pick a bucket.</H2>
-        <Note>Click one. Frameworks, pieces and hooks for that bucket appear below.</Note>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-8">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mr-2">Bucket</span>
           {BUCKETS.map((b) => (
-            <BucketTab key={b.id} b={b} active={b.id === activeId} onClick={() => setActiveId(b.id)} />
+            <BucketPill key={b.id} b={b} active={b.id === activeId} onClick={() => setActiveId(b.id)} />
           ))}
         </div>
-      </Wrap>
-
-      <Divider />
-
-      {/* Active bucket content */}
-      <Wrap>
+        <div className="mt-10" />
         <BucketContent b={active} />
       </Wrap>
     </Shell>
