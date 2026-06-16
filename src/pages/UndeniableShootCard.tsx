@@ -204,19 +204,29 @@ const BUCKETS: Bucket[] = [
     env: 'Gym · straight to camera',
     frameworks: [
       {
-        name: 'Numbered Breakdown',
-        template: 'Number → Clean list of steps or ways → Reward',
-        example: '3 ways to fill your coaching roster without spending a dollar on ads.',
+        name: 'The List',
+        template: 'Number → Specific list → Reward',
+        example: '3 numbers in your business you\'ve never measured. Each one is costing you six figures.',
         formats: [
           'Count on fingers, direct to camera',
-          'Walking, listing aloud one by one',
+          'Walking, listing one by one with weight on each',
           'Sitting on a bench, casual head-on',
+        ],
+      },
+      {
+        name: 'Old Way · New Way',
+        template: 'Old way → Why it fails → New way → The result',
+        example: 'Old way: chase more leads. New way: plug the churn first. Same revenue, half the work.',
+        formats: [
+          'Direct to camera, one hand for old, the other for new',
+          'Walking, gesturing each side as you say it',
+          'Two settings cut together (old: gym floor, new: office)',
         ],
       },
       {
         name: 'Framework Explainer',
         template: 'Name your system → The principle → What each part does → Why it works',
-        example: 'There is one offer that took me from $3K to $15K months.',
+        example: 'The Ecosystem. Hooks feed pillars. Pillars feed offers. Same hours, ten times the return.',
         formats: [
           'Direct to camera, name the framework like it\'s a known thing',
           'Walking, explaining the parts',
@@ -233,6 +243,8 @@ const BUCKETS: Bucket[] = [
           'Standing between two parts of the gym, pointing each way',
         ],
       },
+    ],
+    moreFrameworks: [
       {
         name: 'The Swipe / Steal This',
         template: 'Hand over the actual asset → How to use it → Permission to steal it',
@@ -243,8 +255,6 @@ const BUCKETS: Bucket[] = [
           'Screen-share showing the actual thing',
         ],
       },
-    ],
-    moreFrameworks: [
       {
         name: 'The Tutorial / Walkthrough',
         template: 'Outcome → Step 1 → Step 2 → Step 3 → Next',
@@ -301,14 +311,20 @@ const BUCKETS: Bucket[] = [
         ['Why', 'I\'m not learning. I\'m running a system I already know works.'],
         ['The end state', '$1M in 12 months. Without going viral. Same way I did it the first time.'],
       ]},
-      { n: '17', framework: 'Numbered Breakdown', fields: [
-        ['Number', '3 things to fix before chasing more leads.'],
-        ['1', 'Churn. Measure it. Above 3% means you\'re losing 60% of the business a year.'],
-        ['2', 'Retention. Extend contracts to 32 weeks. Doubles back-end revenue.'],
-        ['3', 'Comms. Move check-ins from synchronous to async. Buys you 25 hours a week.'],
-        ['Reward', 'Do these three before you spend a dollar on ads or another course.'],
+      { n: '17', framework: 'The List', fields: [
+        ['Number', '3 numbers in your business you\'ve never measured.'],
+        ['1', 'Churn rate. Above 3% means 60% of the business is gone a year.'],
+        ['2', 'Average client lifetime in weeks. Most PTs have 12-16. The math says you need 32.'],
+        ['3', 'True time on task. 100 clients should be a 40-hour week. If you\'re flat out at 30, you\'re inefficient.'],
+        ['Reward', 'Calculate yours this week. Each one is costing you six figures.'],
       ]},
-      { n: '18', framework: 'The Checklist / Order', fields: [
+      { n: '18', framework: 'Old Way · New Way', fields: [
+        ['Old way', '12-16 week clients. Then they leave. You sign two and lose two every month.'],
+        ['Why it fails', 'You\'re running to stand still. Each new client just replaces one you already had.'],
+        ['New way', '32-week retention contracts. Lock the back end. Solve churn before chasing leads.'],
+        ['The result', 'Doubles revenue without doubling leads. The label "just a PT" disappears with it.'],
+      ]},
+      { n: '19', framework: 'The Checklist / Order', fields: [
         ['Outcome', 'Raise your rates without losing clients.'],
         ['1', 'Audit your current churn rate (above 3% and you can\'t raise yet).'],
         ['2', 'Lock in 32-week retention contracts on new clients.'],
