@@ -37,7 +37,6 @@ const GROUPS: Array<{ label: string; items: Array<string | { q: string; star?: b
   ]},
   { label: 'Without X · the differentiator', items: [
     S('I built a $5M fitness business without going viral. Here\'s everything I did.'),
-    S('I did it without influence and without following. So your excuse just disappeared.'),
     'Everyone tells you to go viral. I did the opposite and made more money.',
     "If it worked for me with no following, it'll work for you with one.",
     'Come test me in person. You can fake a script. You can\'t freeball in a room.',
@@ -89,9 +88,7 @@ const GROUPS: Array<{ label: string; items: Array<string | { q: string; star?: b
     'I couldn\'t pay my staff two weeks before Christmas. That\'s the year I learned everything.',
     S('When I was at my worst, we were at our best. We grew 600% and I was ready to walk away from all of it.'),
     'Three years ago I ran a seminar for 16 people and made $175. I teach the same thing now for 22 grand.',
-    'A coach told me he loved coaching. His mate said, I just like making money. One of them is bigger.',
     'I spent 750 grand on a gym no one is allowed to train at. Here\'s why that\'s the smartest thing I\'ve done.',
-    'On the sales call I asked her what she wanted. She said, McLaren money.',
   ]},
   { label: 'Profit vs revenue · higher bracket', items: [
     S('You\'re doing 80K months and keeping nothing. Let me show you why.'),
