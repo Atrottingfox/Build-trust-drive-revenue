@@ -346,8 +346,8 @@ const BUCKETS: Bucket[] = [
     frameworks: [
       {
         name: 'Math Live',
-        template: 'Phone → Math → Verdict',
-        example: 'Coaches think 3% churn is fine. Pull out the phone. 100 clients, lose 3 a month, 36 gone in a year. 60% of the business, gone.',
+        template: 'Show problem → Share solution → Takeaway',
+        example: 'Coaches think 3% churn is fine. Run the math: 100 clients, lose 3 a month, 36 gone in a year. Above 3% means 60% of the business gone every year.',
         formats: [
           'Phone in hand, live calculator',
           'iPad with numbers typed in',
@@ -392,9 +392,9 @@ const BUCKETS: Bucket[] = [
         ['Lesson', 'That\'s what hidden churn ate. Wasn\'t on any dashboard. If you\'re not measuring it, you\'re losing it.'],
       ]},
       { n: '20', framework: 'Math Live', fields: [
-        ['Phone', 'Coaches think 3% churn is fine. Let\'s pull out the calculator.'],
-        ['Math', '100 clients. Lose 3 a month. After 12 months, 36 gone. You\'ve replaced 36 just to stand still.'],
-        ['Verdict', 'Anything above 3% churn means 60% of the business is gone every year.'],
+        ['Show problem', 'Coaches think 3% churn is fine. Let\'s actually do the math.'],
+        ['Share solution', '100 clients. Lose 3 a month. After 12 months, 36 gone. You\'ve replaced 36 just to stand still.'],
+        ['Takeaway', 'Anything above 3% churn means 60% of the business is gone every year.'],
       ]},
       { n: '21', framework: 'The Bucket', fields: [
         ['Name', 'The leaky bucket.'],
@@ -402,9 +402,9 @@ const BUCKETS: Bucket[] = [
         ['Lesson', 'Plug the holes first. Then fill faster. Imagine if you never lost a client.'],
       ]},
       { n: '22', framework: 'Math Live', fields: [
-        ['Phone', 'Online coaches think they work a lot. Let\'s do the math on 100 clients.'],
-        ['Math', '100 × 15-min check-ins = 25 hours. +5 comms +5 content +5 programs = 40-hour week.'],
-        ['Verdict', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
+        ['Show problem', 'Online coaches think they work a lot. Let\'s do the math on 100 clients.'],
+        ['Share solution', '100 × 15-min check-ins = 25 hours. +5 comms +5 content +5 programs = 40-hour week.'],
+        ['Takeaway', 'If you\'re flat out at 30 clients, you\'re not busy. You\'re inefficient.'],
       ]},
       { n: '23', framework: 'Number Reveal', fields: [
         ['Pain', 'Every month feels like running to stand still.'],
