@@ -122,10 +122,6 @@ export default function TheUndeniablePlan() {
             <p><span className="text-white font-medium">Character.</span> 20 to 30 minutes, walking or documentary. "From PT, My First Million." Damaging admissions, the real arc.</p>
             <p><span className="text-white font-medium">Rome.</span> 4 to 5 hours, the 10K to 80K solver. The trust asset everyone comes back to.</p>
           </Detail>
-          <Detail title="The Character brief (Rhys owes 10 lessons)">
-            <p>10 lessons. Each one: an experience with specific pain or money, then the story, then the lesson, then the action, then a one liner.</p>
-            <p className="text-zinc-400">This is the thing only Rhys can produce, and it unblocks the Character video.</p>
-          </Detail>
           <Detail title="The studio (where you film)">
             <p>Dark room: moody, motivational, podcasts. Light room: educational, whiteboard, talking head.</p>
             <p>Top down camera, paper desk, iPad. Jeremy Hayne style: iPad as input, screen on the back wall.</p>
@@ -161,16 +157,7 @@ export default function TheUndeniablePlan() {
           </Detail>
         </Bucket>
 
-        <Bucket n="7" title="Lead routing" owners="R">
-          <Task id="p1-7">Build the path from content to a booked call.</Task>
-          <Detail title="How leads route">
-            <p>Two path thank you page after each lead magnet: pre sold goes to the workshop, not ready yet goes to YouTube.</p>
-            <p>A secret word that routes people by revenue bracket to the right next step.</p>
-            <p>Pixel the YouTube viewers and retarget them.</p>
-          </Detail>
-        </Bucket>
-
-        <Bucket n="8" title="Weekly calls + access" owners="S">
+        <Bucket n="7" title="Weekly calls + access" owners="S">
           <p className="text-zinc-300 text-[15px] leading-relaxed">Weekly calls with Sean, plus WhatsApp access on 0418 554 4311.</p>
         </Bucket>
       </Phase>
@@ -214,13 +201,6 @@ export default function TheUndeniablePlan() {
           <Task id="p2-5">Start 3 to 5 short podcast episodes a week, one problem each.</Task>
           <Detail title="How">
             <p>5 to 15 minutes each, one hyper specific problem per episode, pulled from the 78 framework backlog. Mindset and framing pieces too.</p>
-          </Detail>
-        </Bucket>
-
-        <Bucket n="5" title="Email nurture" owners="R">
-          <Task id="p2-6">Rebuild the workshop emails. Not just reminders.</Task>
-          <Detail title="What to add">
-            <p>Right now it's event reminders. Add founder story, proof, and value so the sequence warms people before they walk in.</p>
           </Detail>
         </Bucket>
       </Phase>
