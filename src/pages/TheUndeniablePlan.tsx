@@ -30,7 +30,6 @@ const OWN: Record<string, { l: string; c: string }> = {
   S: { l: 'Sean', c: 'text-zinc-300 border-zinc-600' },
 };
 
-// Click to expand for the detail.
 function Detail({ title, children }: { title: string; children: React.ReactNode }) {
   const [open, setOpen] = React.useState(false);
   return (
@@ -44,7 +43,6 @@ function Detail({ title, children }: { title: string; children: React.ReactNode 
   );
 }
 
-// A numbered priority inside a phase.
 const Bucket = ({ n, title, owners, children }: { n: string; title: string; owners: string; children: React.ReactNode }) => (
   <div className="mb-9">
     <div className="flex items-baseline gap-3 mb-3 flex-wrap">
@@ -83,14 +81,13 @@ export default function TheUndeniablePlan() {
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
             The Undeniable <span className="text-blue-500">Plan.</span>
           </h1>
-          <p className="text-white text-[20px] font-semibold leading-snug mb-3">
+          <p className="text-white text-[20px] font-semibold leading-snug mb-5">
             Goal: 2,000 health and fitness businesses scaled by 2028.
           </p>
-          <p className="text-zinc-400 text-[16px] leading-relaxed mb-7">
-            12 weeks. Three phases. Build trust, then put money behind what works. Work the priorities in order, tap any line for the detail.
-          </p>
           <div className="rounded-xl border border-zinc-800 bg-elevated px-5 py-3.5">
-            <p className="text-zinc-300 text-[14px] leading-relaxed"><span className="text-white font-semibold">Every week:</span> Sean, Corey and Rhys meet to review and brief the next week.</p>
+            <p className="text-zinc-300 text-[14px] leading-relaxed">
+              <span className="text-white font-semibold">Sean:</span> weekly calls, plus WhatsApp access on 0418 554 4311.
+            </p>
           </div>
         </div>
       </section>
@@ -104,42 +101,46 @@ export default function TheUndeniablePlan() {
         title="Calibrate."
         why="Get the things we need live, find out what actually lands, and get Corey up to speed. We're testing, not perfecting, and we don't spend a cent on ads yet."
       >
-        <Bucket n="1" title="Lead magnets" owners="C">
-          <Task id="p1-1">Get the 5 simple lead magnets live, and split test which ones hit.</Task>
+        <Bucket n="1" title="Lead magnets" owners="R">
+          <Task id="p1-1">Produce simple, already made, quick win lead magnets and get them live. Don't build the entire diagnostic.</Task>
           <Detail title="The 5 magnets + the PS bridge">
-            <p>1. The Six Step Profit Path <span className="text-blue-400">(do not turn off — producing wins)</span></p>
-            <p>2. The Sales Success System</p>
-            <p>3. The Constraint Diagnostic (63-solution bottleneck buster)</p>
-            <p>4. The MACHINE Framework (hiring + leadership)</p>
-            <p>5. The Churn Calculator (the leaky bucket)</p>
+            <p>1. The Customer Journey. Keep it turned on, it's producing wins.</p>
+            <p>2. The Sales Success System.</p>
+            <p>3. The Constraint Diagnostic. Keep it simple, don't build the full thing.</p>
+            <p>4. The MACHINE Framework. Hiring and leadership.</p>
+            <p>5. The Churn Calculator. The leaky bucket.</p>
             <p className="text-zinc-400 pt-1">PS bridge on each: "If you want to take this further: 1. Watch the deep-dive on YouTube. 2. Join the next workshop."</p>
           </Detail>
         </Bucket>
 
-        <Bucket n="2" title="The 2 pillar videos" owners="R">
-          <Task id="p1-2">Get the first 2 pillar videos up: the Character video, then Rome.</Task>
-          <Detail title="What each one is">
-            <p><span className="text-white font-medium">Character</span> — 20-30 min, walking / documentary. "From PT, My First Million." Damaging admissions, the real arc.</p>
-            <p><span className="text-white font-medium">Rome</span> — 4-5 hrs, the 10K → 80K solver. The VSL-grade trust asset everyone comes back to.</p>
-          </Detail>
-          <Detail title="The studio (where you film)">
-            <p>Dark room: moody, motivational, podcasts. Light room: educational, whiteboard, talking head.</p>
-            <p>Top-down camera + paper desk + iPad. Jeremy Hayne style: iPad as input, screen on the back wall.</p>
-            <p>Outdoor: walking, gym, park, drive. Walking-with-doc mode so Rhys can shoot solo.</p>
-          </Detail>
-        </Bucket>
-
-        <Bucket n="3" title="Short-form test" owners="R">
-          <Task id="p1-3">Run the first one-week sprints: new hooks in different formats. See what lands.</Task>
+        <Bucket n="2" title="Short Form Sprints" owners="R">
+          <Task id="p1-2">Run weekly sprints of new hooks in different formats. See what lands.</Task>
           <Detail title="How the test runs">
-            <p>Four one-week sprints. Each week, a fresh batch of new hooks in different formats and environments.</p>
+            <p>Four one week sprints. Each week, a fresh batch of new hooks in different formats and environments.</p>
             <p>We're calibrating what the market responds to, not perfecting. Keep what's already working underneath, pile new tests on top.</p>
           </Detail>
         </Bucket>
 
+        <Bucket n="3" title="The 2 pillar videos" owners="R">
+          <Task id="p1-3">Get the first 2 pillar videos up: the Character video, then Rome.</Task>
+          <Detail title="What each one is">
+            <p><span className="text-white font-medium">Character.</span> 20 to 30 minutes, walking or documentary. "From PT, My First Million." Damaging admissions, the real arc.</p>
+            <p><span className="text-white font-medium">Rome.</span> 4 to 5 hours, the 10K to 80K solver. The trust asset everyone comes back to.</p>
+          </Detail>
+          <Detail title="The studio (where you film)">
+            <p>Dark room: moody, motivational, podcasts. Light room: educational, whiteboard, talking head.</p>
+            <p>Top down camera, paper desk, iPad. Jeremy Hayne style: iPad as input, screen on the back wall.</p>
+            <p>Outdoor: walking, gym, park, drive. Walking with a doc so Rhys can shoot solo.</p>
+          </Detail>
+        </Bucket>
+
         <Bucket n="4" title="Corey's client calls" owners="C">
-          <Task id="p1-4">Get on prospect and client calls, ask the 7 questions, log every problem to its bottleneck.</Task>
-          <Detail title="The 7 questions">
+          <Task id="p1-4">Get on prospect and client calls, ask the questions, and log every problem to its bottleneck.</Task>
+          <Detail title="What Corey opens with, then the 7 questions">
+            <p className="text-zinc-200">Rhys is on a mission to help 2,000 online health and fitness coaches grow and scale by 2028 without having to work 80 hours a week as a content creator to do it.</p>
+            <p className="text-zinc-200">I'm obsessing over 3 things so that I can help him do that. The problems his ideal clients face, why scaling their business really matters to them, and what others like you still want help with so we can make better content for the industry.</p>
+            <p className="text-zinc-200">This isn't a testimonial, there's no right answers. Rhys said you're a weapon, so I just want to learn from you. Cool if we jam for 15 to 20 minutes?</p>
+            <div className="h-1" />
             <p>1. Before working with Rhys, what was the day to day in your business like?</p>
             <p>2. What stressed you out the most back then?</p>
             <p>3. What did you honestly think about the industry?</p>
@@ -148,16 +149,16 @@ export default function TheUndeniablePlan() {
             <p>6. If Rhys made a 10 video series just for you, what would you want him to talk about?</p>
             <p>7. What's one thing in the online coaching and content space you wish someone would finally be honest about?</p>
           </Detail>
-          <Detail title="Why this matters">
-            <p>Corey sits on coaching calls and joins Rhys's client calls (the actual business owners). It's how he absorbs business context and learns to brief shoots from bottleneck thinking.</p>
-          </Detail>
         </Bucket>
 
-        <Bucket n="5" title="Daily capture" owners="RC">
-          <Task id="p1-5">End-of-day voice memo, every day.</Task>
+        <Bucket n="5" title="Track data" owners="C">
+          <Task id="p1-5">Put every post into a Google sheet: views, saves, likes, shares, average watch time, skip rate.</Task>
+        </Bucket>
+
+        <Bucket n="6" title="Daily capture" owners="R">
+          <Task id="p1-6">End of day voice memo, every day.</Task>
           <Detail title="The questions">
-            <p><span className="text-blue-400 font-medium">Rhys:</span> What did I teach? · What did I learn? · What problem did I solve? · What would I do differently? · What's a thought I can't get out of my head?</p>
-            <p><span className="text-amber-400 font-medium">Corey:</span> What did I teach? · What did I learn? · What would I do differently? · What would I tell my younger self? · What's a thought I can't get out of my head?</p>
+            <p>What did I teach? What did I learn? What problem did I solve? What would I do differently? What's a thought I can't get out of my head?</p>
           </Detail>
         </Bucket>
       </Phase>
@@ -169,19 +170,19 @@ export default function TheUndeniablePlan() {
         tag="Phase 2"
         window="Next 4 weeks"
         title="Distribute."
-        why="Now we know what works. Turn on ads and put money behind the winners. Keep the long-form rolling."
+        why="Now we know what works. Turn on ads and put money behind the winners. Keep the long form rolling and build the sales video."
       >
-        <Bucket n="1" title="Ads" owners="C">
-          <Task id="p2-1">Run the 4 ad types and boost the top performers.</Task>
+        <Bucket n="1" title="Ads" owners="R">
+          <Task id="p2-1">Run the 4 ad types and boost what works.</Task>
           <Task id="p2-2">Keep the creative fresh so spend doesn't cap.</Task>
           <Detail title="The 4 ad types">
-            <p><span className="text-white font-medium">Status</span> — Alex, Brandon, Luke, Gabe. Borrowed authority, top of funnel.</p>
-            <p><span className="text-white font-medium">Q&A</span> — workshop room: name, revenue, problem, what happens if I don't solve it. Gabe is the gold standard.</p>
-            <p><span className="text-white font-medium">Asset</span> — straight to the 5 lead magnets. Split-test landing page vs instant form.</p>
-            <p><span className="text-white font-medium">Education</span> — specific bottlenecks: hiring, churn, pricing.</p>
+            <p><span className="text-white font-medium">Status.</span> Alex, Brandon, Luke, Gabe. Borrowed authority, top of funnel.</p>
+            <p><span className="text-white font-medium">Q&A.</span> Workshop room: name, revenue, problem, what happens if I don't solve it. Gabe is the gold standard.</p>
+            <p><span className="text-white font-medium">Asset.</span> Straight to the lead magnets. Split test landing page vs instant form.</p>
+            <p><span className="text-white font-medium">Education.</span> Specific bottlenecks: hiring, churn, pricing.</p>
           </Detail>
           <Detail title="The rules">
-            <p>Boost what works organically (the Jay Wright play). One CTA in the bio, sniper not shotgun. Don't turn off the Profit Path magnet. Diversify creative or spend caps.</p>
+            <p>Boost what works organically. One CTA in the bio. Diversify the creative so spend doesn't cap.</p>
           </Detail>
         </Bucket>
 
@@ -189,10 +190,18 @@ export default function TheUndeniablePlan() {
           <Task id="p2-3">Keep publishing pillar videos (3 and 4).</Task>
         </Bucket>
 
-        <Bucket n="3" title="Audio (bolt on)" owners="R">
-          <Task id="p2-4">Start 3-5 short podcast episodes a week, one problem each.</Task>
+        <Bucket n="3" title="The VSL" owners="R">
+          <Task id="p2-4">Build the value first VSL.</Task>
+          <Detail title="The structure">
+            <p>Hook, promise and length. Then the proof anchor (Sabine: 15K to 80K plus the math). Then the path. Then the mechanism (the Authority Engine). Then case studies. Then the invitation to the workshop.</p>
+            <p className="text-zinc-400">Value first. Sits after the lead magnet and before the workshop. Sells without feeling like a sale.</p>
+          </Detail>
+        </Bucket>
+
+        <Bucket n="4" title="Audio (bolt on)" owners="R">
+          <Task id="p2-5">Start 3 to 5 short podcast episodes a week, one problem each.</Task>
           <Detail title="How">
-            <p>5-15 min each, one hyper-specific problem per episode, pulled from the 78-framework backlog. Mindset and framing pieces too.</p>
+            <p>5 to 15 minutes each, one hyper specific problem per episode, pulled from the 78 framework backlog. Mindset and framing pieces too.</p>
           </Detail>
         </Bucket>
       </Phase>
@@ -204,33 +213,23 @@ export default function TheUndeniablePlan() {
         tag="Phase 3"
         window="Last 4 weeks"
         title="Tune and decide."
-        why="Sharpen what's working, build the sales video, and decide what's next."
+        why="Finish the first cycle, start the second, and decide what's next."
       >
-        <Bucket n="1" title="The VSL" owners="R">
-          <Task id="p3-1">Build the value-first VSL.</Task>
-          <Detail title="The structure">
-            <p>Hook + promise + length → proof anchor (Sabine: 15K → 80K + the math) → the path → the mechanism (the Authority Engine) → case studies → the invitation (workshop).</p>
-            <p className="text-zinc-400">Value-first. Sits post-lead-magnet, pre-workshop. Sells without feeling like a sale.</p>
-          </Detail>
+        <Bucket n="1" title="Finish the first cycle" owners="R">
+          <Task id="p3-1">Publish pillar videos 5 and 6 to finish the first six week cycle.</Task>
         </Bucket>
 
-        <Bucket n="2" title="Finish the pillars" owners="R">
-          <Task id="p3-2">Publish pillar videos 5 and 6.</Task>
+        <Bucket n="2" title="Start the second cycle" owners="R">
+          <Task id="p3-2">Kick off the next six week cycle of pillar videos.</Task>
         </Bucket>
 
-        <Bucket n="3" title="The scorecard" owners="C">
-          <Task id="p3-3">Track the weekly scorecard.</Task>
-          <Detail title="What we track">
-            <p>Per piece: hook, environment, format, watch time, saves, shares, comments, ICP-tick rate on commenters.</p>
-            <p>Workshop question: "How long have you known about Rhys?" — track if under-3-month answers go up.</p>
-            <p>The number that matters: qualified booked calls from content.</p>
-          </Detail>
-        </Bucket>
-
-        <Bucket n="4" title="Day 90 decision" owners="S">
-          <Task id="p3-4">Make the call: keep going, go deeper, or stop.</Task>
+        <Bucket n="3" title="Day 90 decision" owners="S">
+          <Task id="p3-3">Make the call: keep going, go deeper, or stop.</Task>
           <Detail title="The three doors">
-            <p><span className="text-white font-medium">Keep going</span> — advisory. <span className="text-white font-medium">Go deeper</span> — longer build. <span className="text-white font-medium">Stop</span> — project closes, all assets stay.</p>
+            <p><span className="text-white font-medium">Keep going.</span> Advisory.</p>
+            <p><span className="text-white font-medium">Go deeper.</span> Longer build.</p>
+            <p><span className="text-white font-medium">Stop.</span> Project closes, all assets stay.</p>
+            <p className="text-zinc-400 pt-1">Decide on the data and the qualified booked calls coming from content.</p>
           </Detail>
         </Bucket>
       </Phase>

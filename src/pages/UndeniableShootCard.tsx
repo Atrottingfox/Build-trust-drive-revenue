@@ -4,14 +4,14 @@ import { Shell, PageHead, Wrap, Divider, Note, H2 } from '../components/undeniab
 // ─── Kick-off checklist ──────────────────────────────────────────────────
 
 const KICKOFF: Array<{ title: string; rows: string[] }> = [
-  { title: 'Education kick-off', rows: [
+  { title: 'Education reminders', rows: [
     'Hook = a clear promise',
     'One problem. Not three.',
     'Path / solution including a tool OR a "don\'t do this"',
     'Optional CTA: share / save / comment / follow',
     'Native bridge to an asset at ~1/3, or CTA at the end',
   ]},
-  { title: 'Heart kick-off', rows: [
+  { title: 'Personal reminders', rows: [
     'Relatable experience (the scar: pain, money)',
     'The damaging admission / vulnerability',
     'The lesson',
@@ -635,8 +635,7 @@ export default function UndeniableShootCard() {
       <Divider />
 
       <Wrap>
-        <H2>Kick-off · before you shoot.</H2>
-        <Note>Call it out first: is this an education piece or a heart piece? Then run the checklist.</Note>
+        <H2>Before you shoot.</H2>
         <div className="grid md:grid-cols-2 gap-4 mt-8">
           {KICKOFF.map((k) => (
             <div key={k.title} className="glow-card p-6">
