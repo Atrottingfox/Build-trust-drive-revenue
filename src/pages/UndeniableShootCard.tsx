@@ -204,29 +204,29 @@ const BUCKETS: Bucket[] = [
     env: 'Gym · straight to camera',
     frameworks: [
       {
-        name: 'The List',
-        template: 'Number → Specific list → Reward',
-        example: '3 numbers in your business you\'ve never measured. Each one is costing you six figures.',
+        name: 'Steps',
+        template: 'Hook → Problem → Steps → Reward',
+        example: '3 numbers you\'ve never measured. Each costing you six figures. Churn, lifetime, time on task. Calculate them this week.',
         formats: [
           'Count on fingers, direct to camera',
-          'Walking, listing one by one with weight on each',
+          'Walking, listing each step out loud',
           'Sitting on a bench, casual head-on',
         ],
       },
       {
-        name: 'Old Way · New Way',
-        template: 'Old way → Why it fails → New way → The result',
-        example: 'Old way: chase more leads. New way: plug the churn first. Same revenue, half the work.',
+        name: 'Unlock',
+        template: 'Goal → Effort → Bottleneck → Unlock → Shift',
+        example: 'Double your revenue. Stop chasing leads. The cap is 16-week contracts. Lock 32-week retention. Stop signing, start choosing.',
         formats: [
-          'Direct to camera, one hand for old, the other for new',
-          'Walking, gesturing each side as you say it',
-          'Two settings cut together (old: gym floor, new: office)',
+          'Direct to camera, name each stage',
+          'Walking, paced delivery',
+          'In the gym, gesturing each stage',
         ],
       },
       {
-        name: 'The Comparison',
-        template: 'Two paths side by side → What each costs → Which one wins (and when)',
-        example: 'In-person vs online coaching: this is what most people don\'t see.',
+        name: 'Path',
+        template: 'Hook → Problem → Path → Solution → CTA',
+        example: 'Two ways to get leads. Most coaches do both badly. Door-knock or post 5x a day. Pick one for 90 days. Comment which one.',
         formats: [
           'Direct to camera, "this or this"',
           'Walking, gesture between two options',
@@ -234,89 +234,55 @@ const BUCKETS: Bucket[] = [
         ],
       },
       {
-        name: 'The Swipe / Steal This',
-        template: 'Hand over the actual asset → How to use it → Permission to steal it',
-        example: 'The exact DM script that books me four calls a week. Steal it.',
-        formats: [
-          'Direct to camera holding the asset (notes app, paper, doc)',
-          'Top-down shot of the asset itself',
-          'Screen-share showing the actual thing',
-        ],
-      },
-    ],
-    moreFrameworks: [
-      {
-        name: 'The Tutorial / Walkthrough',
-        template: 'Outcome → Step 1 → Step 2 → Step 3 → Next',
-        example: 'How to build your first online offer this weekend, start to finish.',
-        formats: [
-          'Direct to camera, numbered steps',
-          'Walking through the steps verbally',
-          'Casual gym setting, talking it through',
-        ],
-      },
-      {
-        name: 'If I Were Starting Over',
-        template: 'The reset premise → What I\'d do first → Why → The end state',
-        example: 'If I lost every client tomorrow, here\'s the first thing I\'d do to rebuild.',
+        name: 'Belief Shift',
+        template: 'Belief → Cost → Truth → Application',
+        example: 'More content equals more clients. You\'re attracting waiters who never buy. Doers and waiters self-select on tone. Frame for doers.',
         formats: [
           'Direct to camera, declarative',
-          'Walking, reflective tone',
-          'Sitting in the gym, thinking aloud',
-        ],
-      },
-      {
-        name: 'The Checklist / Order',
-        template: 'The outcome → Item 1, 2, 3... → In this order → Why the order matters',
-        example: 'The 6 things to lock in before you raise your rates.',
-        formats: [
-          'Counting through the checklist, direct to camera',
-          'Walking through the items',
-          'Top-down with the actual checklist visible',
+          'Walking, calm conviction',
+          'Casual gym setting, head-on',
         ],
       },
     ],
     pieces: [
-      { n: '13', framework: 'The Comparison', fields: [
-        ['Path A', 'Knock on doors every day.'],
-        ['Path B', 'Post this exact thing five times a day.'],
-        ['What each costs', 'Door-knock: 50 hours a week, low scale. Posting: 5 hours, infinite scale once it works.'],
-        ['Which wins (and when)', 'Pick one and commit for 90 days. Half-effort on both is the worst path.'],
+      { n: '13', framework: 'Path', fields: [
+        ['Hook', 'Two ways to get leads. One scales, one doesn\'t.'],
+        ['Problem', 'Most coaches do both badly. Half-effort on each.'],
+        ['Path', 'Door-knock: 50 hours, low scale. Posting: 5 hours, infinite scale once it works.'],
+        ['Solution', 'Pick one and commit for 90 days. Don\'t switch.'],
+        ['CTA', 'Comment which one you\'re picking.'],
       ]},
-      { n: '14', framework: 'The Comparison', fields: [
-        ['Path A', 'Doers. They test everything.'],
-        ['Path B', 'Waiters. They wait for permission.'],
-        ['What each costs', 'Your content selects which one shows up. Frame for doers, doers come. Frame soft, waiters come.'],
-        ['Which wins (and when)', 'Decide who you\'re talking to. Then talk to them. Not both.'],
+      { n: '14', framework: 'Belief Shift', fields: [
+        ['Belief', 'More content equals more clients.'],
+        ['Cost', 'You\'re attracting waiters who consume and never buy.'],
+        ['Truth', 'Doers and waiters self-select on tone, not volume.'],
+        ['Application', 'Frame for doers. The right people will show up.'],
       ]},
-      { n: '15', framework: 'If I Were Starting Over', fields: [
-        ['The reset premise', 'If I lost every client tomorrow and had to make $1M as a fitness coach again.'],
-        ['What I\'d do first', 'Cap retention at 32 weeks. Build one offer, not five.'],
-        ['Why', 'I\'m not learning. I\'m running a system I already know works.'],
-        ['The end state', '$1M in 12 months. Without going viral. Same way I did it the first time.'],
+      { n: '15', framework: 'Unlock', fields: [
+        ['Goal', 'Make $1M as a fitness coach again.'],
+        ['Effort', 'Coaches grind on more leads, more offers, more platforms.'],
+        ['Bottleneck', 'Tactic overload is the actual cap. The grind keeps you broke.'],
+        ['Unlock', 'Cap retention at 32 weeks. Build one offer. Post the same thing 5x a day.'],
+        ['Shift', 'Run a system you already know works instead of learning forever.'],
       ]},
-      { n: '16', framework: 'The List', fields: [
-        ['Number', '3 numbers in your business you\'ve never measured.'],
-        ['1', 'Churn rate. Above 3% means 60% of the business is gone a year.'],
-        ['2', 'Average client lifetime in weeks. Most PTs have 12-16. The math says you need 32.'],
-        ['3', 'True time on task. 100 clients should be a 40-hour week. If you\'re flat out at 30, you\'re inefficient.'],
-        ['Reward', 'Calculate yours this week. Each one is costing you six figures.'],
+      { n: '16', framework: 'Steps', fields: [
+        ['Hook', '3 numbers in your business you\'ve never measured.'],
+        ['Problem', 'Each one is costing you six figures.'],
+        ['Steps', '1: Churn rate. 2: Average client lifetime. 3: True time on task.'],
+        ['Reward', 'Calculate them this week. Find the leak before you chase a single lead.'],
       ]},
-      { n: '17', framework: 'Old Way · New Way', fields: [
-        ['Old way', '12-16 week clients. Then they leave. You sign two and lose two every month.'],
-        ['Why it fails', 'You\'re running to stand still. Each new client just replaces one you already had.'],
-        ['New way', '32-week retention contracts. Lock the back end. Solve churn before chasing leads.'],
-        ['The result', 'Doubles revenue without doubling leads. The label "just a PT" disappears with it.'],
+      { n: '17', framework: 'Unlock', fields: [
+        ['Goal', 'Double revenue without doubling leads.'],
+        ['Effort', 'Most coaches keep signing 12-16 week clients.'],
+        ['Bottleneck', 'Two clients in, two out. Running to stand still.'],
+        ['Unlock', 'Extend retention to 32 weeks. Lock the back end first.'],
+        ['Shift', 'Stop signing and start choosing. The label "just a PT" disappears with it.'],
       ]},
-      { n: '18', framework: 'The Checklist / Order', fields: [
-        ['Outcome', 'Raise your rates without losing clients.'],
-        ['1', 'Audit your current churn rate (above 3% and you can\'t raise yet).'],
-        ['2', 'Lock in 32-week retention contracts on new clients.'],
-        ['3', 'Document the outcome (numbers, transformation, retention).'],
-        ['4', 'Communicate the change to existing clients with grandfather pricing.'],
-        ['5', 'Update sales assets with the new price + new outcome.'],
-        ['6', 'Hold the line on the first three sales calls. Don\'t flinch.'],
-        ['Why the order', 'Raise rates before churn is fixed and you accelerate the leak. Order matters.'],
+      { n: '18', framework: 'Steps', fields: [
+        ['Hook', '6 things to lock in before you raise your rates.'],
+        ['Problem', 'Raise too early and you accelerate the leak.'],
+        ['Steps', '1: Audit churn. 2: Lock 32-week retention. 3: Document outcomes. 4: Grandfather existing clients. 5: Update sales assets. 6: Hold the line on the first 3 calls.'],
+        ['Reward', 'Raise rates without losing clients. Order matters.'],
       ]},
     ],
     hooks: [
@@ -496,7 +462,8 @@ function PieceCard({ p }: { p: Piece }) {
   );
 }
 
-function FrameworkRow({ f, open, onToggle }: { f: Framework; open: boolean; onToggle: () => void }) {
+function FrameworkRow({ f, tag, open, onToggle }: { f: Framework; tag: string; open: boolean; onToggle: () => void }) {
+  const steps = f.template.split('→').length;
   return (
     <div className="rounded-xl border border-zinc-800 bg-elevated/40 overflow-hidden">
       <button
@@ -507,8 +474,9 @@ function FrameworkRow({ f, open, onToggle }: { f: Framework; open: boolean; onTo
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
-            <p className="font-display text-[16px] md:text-[17px] font-extrabold text-white mb-1.5">{f.name}</p>
-            <p className="text-zinc-400 text-[13px] leading-relaxed">{f.template}</p>
+            <p className="text-zinc-500 text-[10px] uppercase tracking-widest font-semibold mb-2">{tag}</p>
+            <p className="font-display text-[15px] md:text-[16px] font-extrabold text-white leading-snug mb-1.5">{f.template}</p>
+            <p className="text-zinc-500 text-[12px]">{steps} steps</p>
           </div>
           <span className={`text-zinc-500 text-[18px] leading-none transition-transform flex-shrink-0 mt-1 ${open ? 'rotate-45' : ''}`}>+</span>
         </div>
@@ -603,6 +571,7 @@ function BucketContent({ b }: { b: Bucket }) {
             <FrameworkRow
               key={f.name}
               f={f}
+              tag={b.name.toUpperCase()}
               open={openFrameworks.has(f.name)}
               onToggle={() => toggle(f.name)}
             />
@@ -611,6 +580,7 @@ function BucketContent({ b }: { b: Bucket }) {
             <FrameworkRow
               key={f.name}
               f={f}
+              tag={b.name.toUpperCase()}
               open={openFrameworks.has(f.name)}
               onToggle={() => toggle(f.name)}
             />
