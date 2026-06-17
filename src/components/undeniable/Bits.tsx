@@ -110,9 +110,9 @@ export function PageHead({
 
 export const Divider = () => <div className="gradient-line" />;
 
-export function Wrap({ children }: { children: React.ReactNode }) {
+export function Wrap({ children, id }: { children: React.ReactNode; id?: string }) {
   return (
-    <section className="py-14 md:py-16">
+    <section id={id} className="py-14 md:py-16">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <Section>{children}</Section>
       </div>

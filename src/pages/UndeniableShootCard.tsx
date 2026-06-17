@@ -665,17 +665,59 @@ export default function UndeniableShootCard() {
   const [activeId, setActiveId] = useState<string>(BUCKETS[0].id);
   const active = BUCKETS.find((b) => b.id === activeId) || BUCKETS[0];
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const jumpToBucket = (id: string) => {
+    setActiveId(id);
+    setTimeout(() => scrollTo('buckets'), 50);
+  };
+
   return (
-    <Shell title="The Shoot System · Undeniable" description="Four buckets. Pick one. Open a framework. Steal a piece. Pick a hook." path="/undeniablenextsteps/shoot-card">
+    <Shell title="Next Shoot · Undeniable" description="Four buckets. Pick one. Open a framework. Steal a piece. Pick a hook." path="/undeniablenextsteps/shoot-card">
       <PageHead
         eyebrow="Operational · The system"
-        title="The Shoot"
-        accent="System."
+        title="Next"
+        accent="Shoot."
         blurb="Four buckets. Each mapped to an environment. Pick a bucket, open a framework, steal a piece, grab a hook, shoot it."
       />
       <Divider />
 
+      {/* TOC strip */}
       <Wrap>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+          <span className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mr-1">Jump to</span>
+          <button
+            type="button"
+            onClick={() => scrollTo('kickoff')}
+            className="rounded-full border border-zinc-800 bg-elevated/40 hover:border-zinc-700 hover:text-zinc-200 text-zinc-400 transition-colors px-3 py-1.5 text-[12px] font-semibold"
+          >
+            Before you shoot
+          </button>
+          {BUCKETS.map((b) => (
+            <button
+              key={b.id}
+              type="button"
+              onClick={() => jumpToBucket(b.id)}
+              className="rounded-full border border-zinc-800 bg-elevated/40 hover:border-zinc-700 hover:text-zinc-200 text-zinc-400 transition-colors px-3 py-1.5 text-[12px] font-semibold"
+            >
+              {b.name}
+            </button>
+          ))}
+          <button
+            type="button"
+            onClick={() => scrollTo('ad-gold')}
+            className="rounded-full border border-zinc-800 bg-elevated/40 hover:border-zinc-700 hover:text-zinc-200 text-zinc-400 transition-colors px-3 py-1.5 text-[12px] font-semibold"
+          >
+            Ad Gold
+          </button>
+        </div>
+      </Wrap>
+      <Divider />
+
+      <Wrap id="kickoff">
         <H2>Before you shoot.</H2>
         <div className="grid md:grid-cols-2 gap-4 mt-8">
           {KICKOFF.map((k) => (
@@ -695,15 +737,28 @@ export default function UndeniableShootCard() {
       </Wrap>
       <Divider />
 
-      <Wrap>
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mr-2">Bucket</span>
-          {BUCKETS.map((b) => (
-            <BucketPill key={b.id} b={b} active={b.id === activeId} onClick={() => setActiveId(b.id)} />
-          ))}
+      <Wrap id="buckets">
+        <div className="sticky top-4 z-30 -mx-3 px-3 py-3 mb-6 rounded-2xl bg-base/85 backdrop-blur border border-zinc-900">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mr-2">Bucket</span>
+            {BUCKETS.map((b) => (
+              <BucketPill key={b.id} b={b} active={b.id === activeId} onClick={() => setActiveId(b.id)} />
+            ))}
+          </div>
         </div>
-        <div className="mt-10" />
         <BucketContent key={active.id} b={active} />
+      </Wrap>
+      <Divider />
+
+      <Wrap id="ad-gold">
+        <a
+          href="/undeniablenextsteps/ad-gold"
+          className="block group rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/5 transition-colors p-6 md:p-8"
+        >
+          <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Reference · Come back to it later</p>
+          <h3 className="font-display text-2xl md:text-3xl font-extrabold text-white mb-3">Ad Gold <span className="text-blue-400 group-hover:translate-x-1 inline-block transition-transform">&rarr;</span></h3>
+          <p className="text-zinc-400 text-[14px] leading-relaxed max-w-2xl">Verbatim money lines, stories, frames, recognition quotes, avatar voice. Different shape to the hooks above. Use for ads, written creative, sales assets.</p>
+        </a>
       </Wrap>
     </Shell>
   );
