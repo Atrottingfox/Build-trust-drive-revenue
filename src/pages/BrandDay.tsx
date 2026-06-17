@@ -324,7 +324,7 @@ export default function BrandDay() {
                   The Brand Day gives you the system on paper. Some founders are built to run it themselves. Others are built to scale, and I select a small number to continue into the 90 day build.
                 </p>
                 <p>
-                  Over 90 days I build your Authority Engine with you. The diagnostic, the Brand Bible, the blueprint, the posting system, the operator playbook, the scorecard. The same build I run with the founders inside Undeniable.
+                  Over 90 days I install your Authority Engine and tune it to your business. The diagnostic, the Brand Bible, the blueprint, the posting system, the operator playbook, the scorecard. 30 days to calibrate it to you and your team, then 60 days tuning on real data. The same build I run with the founders inside Undeniable.
                 </p>
                 <p>
                   It's selection based. I choose who's suited, and your $5,000 Brand Day fee comes straight off it.

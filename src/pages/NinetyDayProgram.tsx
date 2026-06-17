@@ -76,7 +76,7 @@ export default function NinetyDayProgram() {
                 <span className="text-zinc-500">Program.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
-                Over 90 days I build your Authority Engine with you. Three phases, six components, each one building on what the last produced. This is the continuation of a Brand Day, by selection, for the founders built to scale.
+                Over 90 days I install your Authority Engine and tune it to your business. Three phases, six components, each one building on what the last produced. A 30 day install and calibration, then 60 days tuning on the data. The continuation of a Brand Day, by selection, for the founders built to scale.
               </p>
             </div>
           </Section>
