@@ -37,6 +37,7 @@ const UndeniableHooks = React.lazy(() => import('./pages/UndeniableHooks'));
 const UndeniableAdGold = React.lazy(() => import('./pages/UndeniableAdGold'));
 const UndeniableShootCard = React.lazy(() => import('./pages/UndeniableShootCard'));
 const TheUndeniablePlan = React.lazy(() => import('./pages/TheUndeniablePlan'));
+const ThePlan = React.lazy(() => import('./pages/ThePlan'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
@@ -101,6 +102,8 @@ export default function App() {
           <Route path="/undeniablenextsteps/ad-gold" element={<UndeniableAdGold />} />
           <Route path="/undeniablenextsteps/shoot-card" element={<UndeniableShootCard />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
+          <Route path="/theplan" element={<ThePlan />} />
+          <Route path="/Theplan" element={<ThePlan />} />
           <Route path="/linkninja" element={<LinkNinja />} />
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
