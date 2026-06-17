@@ -76,7 +76,7 @@ export default function NinetyDayProgram() {
                 <span className="text-zinc-500">Program.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
-                Three phases. Six components. A sequential installation where each phase builds directly on what the previous one produced.
+                Over 90 days I build your Authority Engine with you. Three phases, six components, each one building on what the last produced. This is the continuation of a Brand Day, by selection, for the founders built to scale.
               </p>
             </div>
           </Section>
@@ -463,19 +463,19 @@ export default function NinetyDayProgram() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-4 leading-[1.1]">
-              It starts with a conversation.
+              It starts with a Brand Day.
             </h2>
             <p className="text-zinc-400 mb-10">
-              A 30 minute call to confirm this is the right fit. If it's not, we'll tell you.
+              The 90 day build is by selection. It begins with a Brand Day, and the founders I choose to continue carry their $5,000 fee straight onto it.
             </p>
             <a
-              href="/builder"
+              href="/brand-day"
               className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
             >
-              Apply now
+              Start with a Brand Day
               <ArrowRight className="w-4 h-4" />
             </a>
-            <p className="text-zinc-600 text-sm mt-6">$10,000 for the full 90 day build. Maximum 7 companies at any time.</p>
+            <p className="text-zinc-600 text-sm mt-6">By selection only. Pricing discussed privately. Your Brand Day fee credits in.</p>
           </Section>
         </div>
       </section>

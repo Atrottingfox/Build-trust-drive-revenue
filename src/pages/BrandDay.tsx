@@ -308,28 +308,32 @@ export default function BrandDay() {
 
       <div className="gradient-line" />
 
-      {/* 30 Day Backend */}
+      {/* Continuity */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The 30 day backend</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What's next, for those suited</p>
               <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-6">
-                After the Brand Day,
+                The Brand Day is the front door.
                 <br />
-                <span className="text-zinc-500">you get 30 days of advisory. Free.</span>
+                <span className="text-zinc-500">For the right founders, I build the engine.</span>
               </h2>
               <div className="space-y-4 text-zinc-400 leading-relaxed">
                 <p>
-                  The Brand Day gives you the system. The 30 days after prove whether you'll use it.
+                  The Brand Day gives you the system on paper. Some founders are built to run it themselves. Others are built to scale, and I select a small number to continue into the 90 day build.
                 </p>
                 <p>
-                  You get direct advisory access to test, implement, and ship. No extra cost. No upsell pressure.
+                  Over 90 days I build your Authority Engine with you. The diagnostic, the Brand Bible, the blueprint, the posting system, the operator playbook, the scorecard. The same build I run with the founders inside Undeniable.
                 </p>
                 <p>
-                  If you implement, you get invited to continue. If you don't, no hard feelings. The system is still yours.
+                  It's selection based. I choose who's suited, and your $5,000 Brand Day fee comes straight off it.
                 </p>
               </div>
+              <a href="/90dayprogram" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm font-medium mt-8">
+                See the 90 day build
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </Section>
         </div>
@@ -346,7 +350,7 @@ export default function BrandDay() {
               Apply for a Brand Day.
             </h2>
             <p className="text-zinc-400 mb-10">
-              Only 5 spots available. Mondays and Tuesdays. Sean flies to you.
+              First 10 founders at the founding price. Mondays and Tuesdays. Sean flies to you.
             </p>
             <a
               href="/builder"
@@ -355,7 +359,7 @@ export default function BrandDay() {
               Apply now
               <ArrowRight className="w-4 h-4" />
             </a>
-            <p className="text-zinc-600 text-sm mt-6">$5,000. Half day. Everything documented.</p>
+            <p className="text-zinc-600 text-sm mt-6">$5,000 for the first 10. $10,000 from August. Half day, fully documented.</p>
           </Section>
         </div>
       </section>
