@@ -133,16 +133,16 @@ export default function NinetyDayProgram() {
                 </h2>
               </div>
             </div>
-            <p className="text-blue-400 font-semibold text-sm mb-3">Build the strategy. Get the first wins.</p>
+            <p className="text-blue-400 font-semibold text-sm mb-3">Install the engine. Get the first wins.</p>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-16">
-              The first 30 days is a calibration phase. We find out how you actually operate, build the Brand Bible, and launch a four week posting sprint to get data and first wins fast.
+              The first 30 days is the install and calibration. You arrive with your Brand Bible from the Brand Day, so we pressure test how you actually operate and launch a four week posting sprint to get data and first wins fast.
             </p>
 
-            {/* Brand Bible Deep Dive */}
+            {/* Brand Bible */}
             <div className="mb-12">
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">The Brand Bible deep dive</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">The Brand Bible · your foundation from the Brand Day</p>
               <p className="text-zinc-400 leading-relaxed max-w-3xl mb-8">
-                A 2–4 hour session with you and your Media Operator. In person or virtual. This builds the foundation the entire system runs from.
+                Built on your Brand Day and locked before the install begins. The foundation the entire engine runs from, and the components we build every piece of content against.
               </p>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
