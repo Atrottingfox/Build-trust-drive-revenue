@@ -175,14 +175,15 @@ export default function Offer() {
               {deliverables.map((d, i) => (
                 <motion.div
                   key={i}
-                  className="glow-card p-8 flex flex-col items-start gap-4"
+                  className="glow-card p-8"
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08 }}
                 >
-                  <d.icon className="w-6 h-6 text-blue-400" />
-                  <h3 className="text-white font-semibold text-lg leading-tight">{d.name}</h3>
+                  <d.icon className="w-[18px] h-[18px] text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{d.name}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{d.body}</p>
                 </motion.div>
               ))}
             </div>
