@@ -69,6 +69,15 @@ const phases = [
   ]},
 ];
 
+const deliverables = [
+  { name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
+  { name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
+  { name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
+  { name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
+  { name: 'Core Trust Asset', body: 'One long form video built to carry your trust. Path, personal story and case studies, so a stranger watches once and thinks this is my person.' },
+  { name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
+];
+
 export default function Offer() {
   return (
     <div className="min-h-screen bg-base">
@@ -150,14 +159,19 @@ export default function Offer() {
               'Leave with a 30 day Posting Program your team can execute immediately',
             ]} />
 
-            <div className="glow-card p-7 mt-10">
-              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">You walk away with</p>
-              <Ticks items={[
-                'Your Brand Bible',
-                'Your Content Workbook: the bottleneck, demand topics, and the plan',
-                'Your first 30 day Posting Program and scorecard',
-                'A clear weekly rhythm your operator can run without you',
-              ]} />
+            <div className="mt-12">
+              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-6">What you walk away with</p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {deliverables.map((d, i) => (
+                  <div key={d.name} className="glow-card p-6">
+                    <div className="flex items-baseline gap-3 mb-2">
+                      <span className="font-display text-sm font-extrabold text-blue-400">{String(i + 1).padStart(2, '0')}</span>
+                      <h3 className="font-display text-lg font-extrabold text-white leading-tight">{d.name}</h3>
+                    </div>
+                    <p className="text-zinc-400 text-[14px] leading-relaxed">{d.body}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
