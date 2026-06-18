@@ -67,14 +67,20 @@ export default function UndeniableBrand() {
             n="01"
             when="This week"
             title="Ship the bio across every channel."
-            body="One sentence. Avatar + outcome + the thing they hate. Receipts on the next line. Replace it everywhere — IG, YouTube, LinkedIn, email signature. Until that lands, none of the rest of the brand work matters."
+            body="One sentence. Avatar + outcome + the thing they hate. Replace it everywhere. IG, YouTube, LinkedIn, email signature. Until that lands, none of the rest of the brand work matters."
             owner="Rhys signs off · Sean writes"
             doneWhen="The bio is live on 4 channels by Friday"
           >
-            <Artefact label="The bio · copy-paste-ready">
-              <p className="font-display text-white text-[18px] md:text-[20px] font-extrabold leading-snug mb-3">I help <span className="text-blue-300">fitness coaches</span> build <span className="text-blue-300">$1M+ businesses</span> without <span className="text-blue-300">going viral</span>.</p>
-              <p className="text-zinc-300 text-[15px]">$5M built · 82% client retention · 600 coaches taught in person.</p>
-              <p className="text-zinc-400 text-[12px] italic mt-4">Pattern: I help [avatar] [outcome] without [thing they hate]. Receipts: 3 numbers. No fluff.</p>
+            <Artefact label="The bio · primary option">
+              <p className="font-display text-white text-[18px] md:text-[20px] font-extrabold leading-snug">I help health and fitness business owners build $1M+ businesses they don't hate.</p>
+            </Artefact>
+            <div className="mt-3" />
+            <Artefact label="The bio · alternative option">
+              <p className="font-display text-white text-[18px] md:text-[20px] font-extrabold leading-snug">I help health and fitness businesses build $1M+ companies without going viral.</p>
+            </Artefact>
+            <div className="mt-3" />
+            <Artefact label="Also update">
+              <p className="text-zinc-200 text-[14px] leading-relaxed">YouTube channel description (including timeline of events). Sean will go through this with you.</p>
             </Artefact>
           </Move>
 
@@ -82,7 +88,7 @@ export default function UndeniableBrand() {
           <Move
             n="02"
             when="Week 2-4"
-            title="Lock the voice. Brief Corey."
+            title="Lock the voice."
             body="Once the bio is live the brand is set from the surface. Now bake it into every piece. Corey edits in voice. The 3 archetypes drive what Rhys says yes and no to. The voice rules become the editorial filter."
             owner="Sean writes · Rhys approves · Corey runs"
             doneWhen="Corey ships 2 edits without voice flags from Rhys"
@@ -108,6 +114,16 @@ export default function UndeniableBrand() {
           {/* MOVE 03 */}
           <Move
             n="03"
+            when="Week 4"
+            title="Deliver the brand workbook."
+            body="Your brand, documented and built for the team to emulate and use."
+            owner="Sean writes · Rhys signs off"
+            doneWhen="Workbook delivered."
+          />
+
+          {/* MOVE 04 */}
+          <Move
+            n="04"
             when="Week 5-12"
             title="Build the trust asset."
             body="The bio sets the surface. The voice locks the editorial filter. The Character video transfers the trust. 20-30 minutes. Rhys&apos;s arc. Vulnerable. No selling. This is the piece that converts the fence-sitters."

@@ -41,7 +41,8 @@ const ROLES: Array<{ name: string; lane: string; bullets: string[] }> = [
     bullets: [
       'Refine the brand. Increase demand.',
       'Lock the 6 pillar video outlines and the 6 week rotation.',
-      'Fortnightly strategy and accountability sessions.',
+      'Weekly strategy and accountability sessions (first 4 weeks).',
+      'Fortnightly strategy, training and accountability (next 8 weeks).',
       'Voice note and email support between sessions.',
     ],
   },
@@ -62,7 +63,7 @@ const RHYTHM: Array<{ d: string; label: string; shoot: boolean }> = [
 // ─── Posting volume ─────────────────────────────────────────────────────
 
 const POSTING: Array<{ when: string; what: string }> = [
-  { when: 'Each week', what: '14 short form posts (7 Share + 7 Teach), plus carousels and workshop reels as needed.' },
+  { when: 'Each week for 4 weeks', what: '14 short form posts (7 Share + 7 Teach), plus carousels and workshop reels as needed (increased volume if desired from what is currently in the bank).' },
   { when: 'End of week 4', what: 'Pillar video no. 1 (Character) live.' },
   { when: 'Week 5 onward', what: 'One longform pillar per week. Six pillars in rotation.' },
 ];

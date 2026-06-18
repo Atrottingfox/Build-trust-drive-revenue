@@ -21,7 +21,7 @@ const ASSETS: Asset[] = [
   },
   {
     what_it_does: 'Shows a coach how to hire and operate so the business runs without them.',
-    what_it_says: 'A PDF built around the NEXT EXPAND acronym. Already in the book. Built live on stage during the Gabe video.',
+    what_it_says: 'A PDF built around the MACHINE acronym. Already in the book. Built live on stage during the Gabe video.',
   },
   {
     what_it_does: 'Tells a coach whether their business is growing, flat, or shrinking based on current client math.',
@@ -36,7 +36,7 @@ export default function UndeniableLeadMagnets() {
         eyebrow="Working page"
         title="Lead"
         accent="Magnets."
-        blurb="The 5 lead magnet assets that capture demand and funnel into the workshop. For each: what it does and what it covers. Names and status intentionally left out."
+        blurb="The 5 lead magnet assets that capture demand and funnel into the workshop, and toward YouTube to compress trust. For each: what it does and what it covers. Names and status intentionally left out."
       />
       <Divider />
 

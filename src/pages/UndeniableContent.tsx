@@ -155,7 +155,7 @@ const HOOKS: Array<{ name: string; pattern: string; example: string }> = [
   },
   {
     name: 'Story',
-    pattern: 'I _____.',
+    pattern: '',
     example: 'I built a client a program designed to make her quit.',
   },
   {
@@ -388,7 +388,7 @@ export default function UndeniableContent() {
 
       {/* HOOKS */}
       <Wrap id="hooks">
-        <Eyebrow>10 Hooks. Simple reference to start.</Eyebrow>
+        <Eyebrow>10 Simple hook template references to start</Eyebrow>
         <div className="space-y-3">
           {HOOKS.map((h, i) => (
             <div key={h.name} className="rounded-2xl border border-zinc-800 bg-elevated/30 p-5">

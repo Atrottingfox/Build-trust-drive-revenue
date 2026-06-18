@@ -84,7 +84,7 @@ const PHASES: Phase[] = [
   },
   {
     window: 'Weeks 5 to 8',
-    outcome: 'Public VSL live. Long form rotation running.',
+    outcome: 'Public VSL live. Long form rotation running. Train Corey.',
     sections: [
       {
         name: 'Content',
@@ -92,27 +92,27 @@ const PHASES: Phase[] = [
         items: [
           'Weeks 5 to 6 topic and format analysis',
           'Film and ship the Public VSL',
-          'Start the 6 week long form rotation',
+          'Continue the 6 week long form rotation',
         ],
       },
     ],
   },
   {
     window: 'Weeks 9 to 12',
-    outcome: 'Refine the brand. Continue testing. Train Corey.',
+    outcome: 'Refine the brand. Continue testing. Continue training Corey.',
     sections: [
       {
         name: 'Brand',
         href: '/undeniablenextsteps/brand',
         items: [
-          'Refine the brand based on what the data has shown',
+          'Refine the brand based on what the data has shown, what feels good, and how content has performed.',
         ],
       },
       {
         name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Continue hook and format testing',
+          'Continue hook and format testing, refined by data.',
         ],
       },
       {
@@ -276,6 +276,36 @@ export default function UndeniableNextSteps() {
                     </div>
                     <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-4" />
                   </a>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* NEXT STEPS */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Reveal>
+              <Eyebrow>Next steps · to lock the engagement</Eyebrow>
+              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">What we need to nail down to turn this from a plan into a thing.</p>
+              <div className="space-y-3">
+                {[
+                  { who: 'Rhys', what: 'Lock fortnightly call times in the calendar for the 90 days.' },
+                  { who: 'Rhys', what: '5 to 10 stories, moments and outlines for the Character video. Sean will help build it out from there.' },
+                  { who: 'Corey', what: 'List of what is performing well based on data from the last 30 to 90 days.' },
+                  { who: 'Corey', what: 'Audit of what is already in the bank (existing content we can drip).' },
+                  { who: 'Rhys', what: 'Sign off on the bio (primary or alternative option).' },
+                  { who: 'Rhys', what: 'Confirm naming approach on the 5 lead magnet assets.' },
+                  { who: 'Rhys + Corey', what: 'Confirm the 4 shoot environments are accessible (Park, Gym, Hallway, Office or equivalent).' },
+                  { who: 'Sean', what: 'Deliver the brand workbook by end of week 4.' },
+                  { who: 'Sean', what: 'Lock the 6 pillar video outlines and the 6 week rotation.' },
+                ].map((step, i) => (
+                  <div key={i} className="rounded-xl border border-zinc-800 bg-elevated/40 px-5 py-4 grid md:grid-cols-[120px_1fr] gap-3">
+                    <p className="font-display font-extrabold text-blue-300 text-[13px]">{step.who}</p>
+                    <p className="text-zinc-200 text-[14px] leading-relaxed">{step.what}</p>
+                  </div>
                 ))}
               </div>
             </Reveal>
