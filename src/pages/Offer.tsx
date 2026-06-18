@@ -74,7 +74,7 @@ const deliverables = [
   { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
   { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
   { icon: Magnet, name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
-  { icon: Video, name: 'Core Trust Asset', body: 'One long form video built to carry your trust. Path, personal story and case studies, so a stranger watches once and thinks this is my person.' },
+  { icon: Video, name: 'Core Trust Asset', body: 'Your core trust asset, mapped. The long form video that carries your trust: the path, personal story and case studies it needs, so a stranger watches once and thinks this is my person.' },
   { icon: Repeat, name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
 ];
 
