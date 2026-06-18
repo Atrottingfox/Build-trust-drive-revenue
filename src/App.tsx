@@ -42,9 +42,11 @@ const TheRunSheet = React.lazy(() => import('./pages/TheRunSheet'));
 const UndeniableBrand = React.lazy(() => import('./pages/UndeniableBrand'));
 const UndeniableLeadMagnets = React.lazy(() => import('./pages/UndeniableLeadMagnets'));
 const UndeniableContent = React.lazy(() => import('./pages/UndeniableContent'));
+const UndeniableOps = React.lazy(() => import('./pages/UndeniableOps'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
+const Offer = React.lazy(() => import('./pages/Offer'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -108,6 +110,7 @@ export default function App() {
           <Route path="/undeniablenextsteps/brand" element={<UndeniableBrand />} />
           <Route path="/undeniablenextsteps/lead-magnets" element={<UndeniableLeadMagnets />} />
           <Route path="/undeniablenextsteps/content" element={<UndeniableContent />} />
+          <Route path="/undeniablenextsteps/ops" element={<UndeniableOps />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
           <Route path="/theplan" element={<ThePlan />} />
           <Route path="/Theplan" element={<ThePlan />} />
@@ -116,6 +119,7 @@ export default function App() {
           <Route path="/linkninja" element={<LinkNinja />} />
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
+          <Route path="/offer" element={<Offer />} />
         </Routes>
       </Suspense>
     </Router>
