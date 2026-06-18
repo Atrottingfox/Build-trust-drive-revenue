@@ -85,11 +85,11 @@ export default function Offer() {
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine</p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
-              Turn content into clients in 90 days.
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] mb-6">
+              One day to map and lock your brand strategy. Ninety days to install the content system that turns attention into revenue.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
-              Without becoming a full time creator.
+              For founders at $200K+/month who already create content and want to scale without becoming a full time creator.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
