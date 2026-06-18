@@ -145,7 +145,7 @@ export default function Offer() {
             <Ticks items={[
               'Rebuild your on camera identity and positioning',
               'Map your Authority Engine across Instagram, YouTube and podcast, and how each feeds pipeline',
-              'Build your Brand Bible and Posting OS: pillars, formats, CTAs, and a simple content to DM to call to sale path',
+              'Build your Brand Bible and Posting OS: pillars, formats, CTAs, and a simple path to driving sales',
               'Leave with a 30 day Posting Program your team can execute immediately',
             ]} />
 
