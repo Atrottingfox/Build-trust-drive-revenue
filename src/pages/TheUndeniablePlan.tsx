@@ -117,10 +117,10 @@ export default function TheUndeniablePlan() {
         </Bucket>
 
         <Bucket n="3" title="The 2 pillar videos" owners="R">
-          <Task id="p1-3">Get the first 2 pillar videos up: the Character video, then Rome.</Task>
+          <Task id="p1-3">Get the first 2 pillar videos up: the Character video, then The Public VSL.</Task>
           <Detail title="What each one is">
             <p><span className="text-white font-medium">Character.</span> 20 to 30 minutes, walking or documentary. "From PT, My First Million." Damaging admissions, the real arc.</p>
-            <p><span className="text-white font-medium">Rome.</span> 4 to 5 hours, the 10K to 80K solver. The trust asset everyone comes back to.</p>
+            <p><span className="text-white font-medium">The Public VSL.</span> The 10K to 80K solver. The trust asset everyone comes back to.</p>
           </Detail>
           <Detail title="The studio (where you film)">
             <p>Dark room: moody, motivational, podcasts. Light room: educational, whiteboard, talking head.</p>
@@ -168,8 +168,8 @@ export default function TheUndeniablePlan() {
       <Phase
         tag="Phase 2"
         window="Next 4 weeks"
-        title="Distribute."
-        why="Now we know what works. Turn on ads and put money behind the winners. Keep the long form rolling and build the sales video."
+        title="Compress trust."
+        why="Now we know what works. Ship The Public VSL. Keep the long form rolling. Continue testing on short form."
       >
         <Bucket n="1" title="Ads" owners="R">
           <Task id="p2-1">Run the 4 ad types and boost what works.</Task>
@@ -189,8 +189,8 @@ export default function TheUndeniablePlan() {
           <Task id="p2-3">Keep publishing pillar videos (3 and 4).</Task>
         </Bucket>
 
-        <Bucket n="3" title="The VSL" owners="R">
-          <Task id="p2-4">Build the value first VSL.</Task>
+        <Bucket n="3" title="The Public VSL" owners="R">
+          <Task id="p2-4">Build the value first Public VSL.</Task>
           <Detail title="The structure">
             <p>Hook, promise and length. Then the proof anchor (Sabine: 15K to 80K plus the math). Then the path. Then the mechanism (the Authority Engine). Then case studies. Then the invitation to the workshop.</p>
             <p className="text-zinc-400">Value first. Sits after the lead magnet and before the workshop. Sells without feeling like a sale.</p>
@@ -211,19 +211,23 @@ export default function TheUndeniablePlan() {
       <Phase
         tag="Phase 3"
         window="Last 4 weeks"
-        title="Tune and decide."
-        why="Finish the first cycle, start the second, and decide what's next."
+        title="Refine and train."
+        why="Refine the brand based on what the data has shown. Continue testing. Continue training Corey to become a marketer who wields a camera as his tool."
       >
-        <Bucket n="1" title="Finish the first cycle" owners="R">
-          <Task id="p3-1">Publish pillar videos 5 and 6 to finish the first six week cycle.</Task>
+        <Bucket n="1" title="Refine the brand" owners="S">
+          <Task id="p3-1">Refine the brand based on what the data has shown, what feels good, and how content has performed.</Task>
         </Bucket>
 
-        <Bucket n="2" title="Start the second cycle" owners="R">
-          <Task id="p3-2">Kick off the next six week cycle of pillar videos.</Task>
+        <Bucket n="2" title="Continue testing" owners="C">
+          <Task id="p3-2">Continue hook and format testing, refined by data.</Task>
         </Bucket>
 
-        <Bucket n="3" title="Day 90 decision" owners="S">
-          <Task id="p3-3">Make the call: keep going, go deeper, or stop.</Task>
+        <Bucket n="3" title="Train Corey" owners="S">
+          <Task id="p3-3">Continue training Corey to become a marketer who wields a camera as his tool.</Task>
+        </Bucket>
+
+        <Bucket n="4" title="Day 90 decision" owners="S">
+          <Task id="p3-4">Make the call: keep going, go deeper, or stop.</Task>
           <Detail title="The three doors">
             <p><span className="text-white font-medium">Keep going.</span> Advisory.</p>
             <p><span className="text-white font-medium">Go deeper.</span> Longer build.</p>

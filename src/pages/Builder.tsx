@@ -240,9 +240,7 @@ export default function Builder() {
     form.biggestProblem &&
     form.whatToFix.trim() &&
     form.contentOpsPerson &&
-    form.canCommitDay &&
-    form.comfortableWithFilming &&
-    form.whyYouWhyNow.trim();
+    form.canCommitDay;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
