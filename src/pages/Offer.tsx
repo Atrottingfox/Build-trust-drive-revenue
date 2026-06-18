@@ -85,12 +85,11 @@ export default function Offer() {
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine</p>
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.12] mb-6">
-              One day to lock your strategy.
-              <span className="block mt-2">Ninety days to install the system that turns attention into revenue.</span>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
+              Build Your Brand in a Day.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
-              Without becoming a full time creator.
+              Then install the content strategy that turns your attention into revenue, without becoming a full time creator.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
