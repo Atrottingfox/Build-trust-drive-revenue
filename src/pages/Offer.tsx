@@ -246,7 +246,6 @@ export default function Offer() {
                 'Apply and book a fit call',
                 'If accepted, we pick your Brand Day date',
                 'We build your Brand Bible and Authority Engine in a day',
-                'Within 30 days, your system is live and driving leads',
                 'If it is a hell yes for both of us, we roll into the 90 day build at $15,000 total',
               ]} />
             </div>
