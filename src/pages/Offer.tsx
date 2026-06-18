@@ -73,7 +73,7 @@ export default function Offer() {
     <div className="min-h-screen bg-base">
       <SEO
         title="The Authority Engine"
-        description="Start with a Brand Day. An optional 90 day Authority Engine build for the right founders. We refine your brand and turn your content into consistent demand your team can run without you."
+        description="Turn content into clients in 90 days, without becoming a full time creator. We build a simple content system your team can run that reliably turns views into qualified leads and sales. Starts with a $5,000 Brand Day."
         path="/offer"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
