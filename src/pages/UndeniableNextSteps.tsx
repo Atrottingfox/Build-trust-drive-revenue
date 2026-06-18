@@ -203,7 +203,7 @@ export default function UndeniableNextSteps() {
                 <span className="text-blue-400">Plan.</span>
               </h1>
               <p className="text-zinc-400 text-[15px] md:text-[17px] leading-relaxed max-w-2xl">
-                Built from the brand-day session with Rhys. Diagnosis, 90-day roadmap, three working pages.
+                Optional 90 day authority engine.
               </p>
             </Reveal>
           </div>
