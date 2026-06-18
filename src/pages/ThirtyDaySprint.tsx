@@ -520,7 +520,7 @@ export default function ThirtyDaySprint() {
                 <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">But if you...</p>
                 <ul className="space-y-4">
                   {[
-                    'Are doing $100K+ a month and already publishing content consistently',
+                    'Are doing $200K+ a month and already publishing content consistently',
                     'Want to build something where every piece of content has a job',
                     'Want a clear, sharp identity and content that actually drives leads',
                     'Want a client acquisition system, not another course or DFY agency',

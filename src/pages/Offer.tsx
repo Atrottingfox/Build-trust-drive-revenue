@@ -105,7 +105,7 @@ export default function Offer() {
               It starts with a $5,000 Brand Day. For the right founders, it continues into a 90 day Content to Clients Program where we install what we call your Authority Engine: your content acquisition system that builds your brand to increase demand.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $100K a month, turning content into an engine that consistently drives revenue. One client recently crossed $2M a month.
+              I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue. One client recently crossed $2M a month.
             </p>
           </Section>
         </div>
@@ -121,7 +121,7 @@ export default function Offer() {
             <H2>Founders who are ready to scale what already works.</H2>
             <div className="mt-8">
               <Ticks items={[
-                'Already doing at least $100K a month',
+                'Already doing at least $200K a month',
                 'Already create content consistently',
                 'Want content that feels like them and drives revenue',
                 'Want an operator friendly system, not another done for you agency or course',
@@ -257,7 +257,7 @@ export default function Offer() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-10 max-w-lg mx-auto">
-              One day to build it. Ninety days, for the right people, to hard wire it into your team.
+              One day to map and lock your brand strategy. Ninety days to install the content system that turns attention into revenue. For founders at $200K+/month who already create content and want to scale without becoming a full time creator.
             </p>
           </Section>
         </div>
