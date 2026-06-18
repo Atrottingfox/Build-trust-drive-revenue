@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
@@ -70,12 +70,12 @@ const phases = [
 ];
 
 const deliverables = [
-  { name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
-  { name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
-  { name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
-  { name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
-  { name: 'Core Trust Asset', body: 'One long form video built to carry your trust. Path, personal story and case studies, so a stranger watches once and thinks this is my person.' },
-  { name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
+  { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
+  { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
+  { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
+  { icon: Magnet, name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
+  { icon: Video, name: 'Core Trust Asset', body: 'One long form video built to carry your trust. Path, personal story and case studies, so a stranger watches once and thinks this is my person.' },
+  { icon: Repeat, name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
 ];
 
 export default function Offer() {
@@ -159,24 +159,39 @@ export default function Offer() {
               'Leave with a 30 day Posting Program your team can execute immediately',
             ]} />
 
-            <div className="mt-12">
-              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-6">What you walk away with</p>
-              <div className="grid sm:grid-cols-2 gap-4">
-                {deliverables.map((d, i) => (
-                  <div key={d.name} className="glow-card p-6">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span className="font-display text-sm font-extrabold text-blue-400">{String(i + 1).padStart(2, '0')}</span>
-                      <h3 className="font-display text-lg font-extrabold text-white leading-tight">{d.name}</h3>
-                    </div>
-                    <p className="text-zinc-400 text-[14px] leading-relaxed">{d.body}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
               You and your team own filming, editing and posting. I architect, outline and course correct. You execute.
             </p>
+          </Section>
+        </div>
+      </section>
+
+      {/* WHAT YOU WALK AWAY WITH */}
+      <section className="py-24 md:py-32">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Six deliverables.
+              <br />
+              <span className="text-zinc-500">Zero fluff.</span>
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {deliverables.map((d, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <d.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{d.name}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{d.body}</p>
+                </motion.div>
+              ))}
+            </div>
           </Section>
         </div>
       </section>
