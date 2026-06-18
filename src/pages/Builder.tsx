@@ -451,26 +451,6 @@ export default function Builder() {
                     />
                   </motion.div>
                 )}
-                <div>
-                  <Label required>Are you comfortable with us filming the day and using the footage/results as content and case studies?</Label>
-                  <RadioGroup options={['Yes', 'No']} value={form.comfortableWithFilming} onChange={(v) => update('comfortableWithFilming', v)} />
-                </div>
-              </div>
-
-              {/* 7. Why You */}
-              <SectionDivider label="Why you, why now" number={7} />
-
-              <div className="space-y-5 mt-6">
-                <div>
-                  <Label required>If I only have 5 spots available for next month, why should you be one of them?</Label>
-                  <TextArea
-                    value={form.whyYouWhyNow}
-                    onChange={(v) => update('whyYouWhyNow', v)}
-                    placeholder="What makes this the right moment for you?"
-                    rows={4}
-                    required
-                  />
-                </div>
               </div>
 
               {/* Submit */}
