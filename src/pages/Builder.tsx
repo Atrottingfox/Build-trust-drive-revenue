@@ -62,7 +62,7 @@ const initialForm: FormData = {
   whyYouWhyNow: '',
 };
 
-const revenueBands = ['<500k', '500k-1M', '1-3M', '3-10M', '10M+'];
+const revenueBands = ['-1M', '1-3M', '3-10M', '10M+'];
 const channels = ['Instagram', 'YouTube', 'Email', 'LinkedIn', 'Podcast', 'Other'];
 const problems = [
   'Content doesnt match business level',
