@@ -36,7 +36,7 @@ export default function UndeniableLeadMagnets() {
         eyebrow="Working page"
         title="Lead"
         accent="Magnets."
-        blurb="What each asset does and what it covers. Names and status are intentionally not on this page."
+        blurb="The 5 lead magnet assets that capture demand and funnel into the workshop. For each: what it does and what it covers. Names and status intentionally left out."
       />
       <Divider />
 

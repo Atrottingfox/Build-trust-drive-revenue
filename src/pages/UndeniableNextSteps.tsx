@@ -84,14 +84,14 @@ const PHASES: Phase[] = [
   },
   {
     window: 'Weeks 5 to 8',
-    outcome: 'Rome in production. Long form rotation running.',
+    outcome: 'Public VSL live. Long form rotation running.',
     sections: [
       {
         name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
           'Weeks 5 to 6 topic and format analysis',
-          'Film Rome',
+          'Film and ship the Public VSL',
           'Start the 6 week long form rotation',
         ],
       },
@@ -99,14 +99,27 @@ const PHASES: Phase[] = [
   },
   {
     window: 'Weeks 9 to 12',
-    outcome: 'Rome public.',
+    outcome: 'Refine the brand. Continue testing. Train Corey.',
     sections: [
+      {
+        name: 'Brand',
+        href: '/undeniablenextsteps/brand',
+        items: [
+          'Refine the brand based on what the data has shown',
+        ],
+      },
       {
         name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Rome unlisted, then public on YouTube',
-          'Continuous testing locked',
+          'Continue hook and format testing',
+        ],
+      },
+      {
+        name: 'Operations',
+        href: '/undeniablenextsteps/ops',
+        items: [
+          'Train Corey to become a marketer who wields a camera as his tool',
         ],
       },
     ],
@@ -203,7 +216,7 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>Diagnosis</Eyebrow>
-              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">From stranger to sale, 4 bottlenecks. Score each. Clarity and Quality both score 3. The other two hold.</p>
+              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">From stranger to sales there are 4 potential bottlenecks. Clarity and Quality both scored 3. First we focus on Clarity.</p>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
                   { letter: 'C', name: 'Clarity', score: 3, focus: true },
@@ -254,7 +267,7 @@ export default function UndeniableNextSteps() {
                   { to: '/undeniablenextsteps/brand', label: 'Brand', sub: 'The brand voice, identity, and positioning work.' },
                   { to: '/undeniablenextsteps/lead-magnets', label: 'Lead Magnets', sub: '5 assets. Names, formats, status.' },
                   { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Master formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
-                  { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, Monday review, KPI table, open decisions.' },
+                  { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, review cycles, data tracking, open decisions.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5 md:px-7 md:py-6">
                     <div>
@@ -293,31 +306,6 @@ export default function UndeniableNextSteps() {
                   </a>
                 ))}
               </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* WHY NOW */}
-        <section className="py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <Reveal>
-              <Eyebrow>Why now</Eyebrow>
-              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Pulled directly from the working session.</p>
-              <ul className="space-y-4">
-                {[
-                  'Right problem, wrong way is the most expensive place to be. You get small wins, think it is great, and do not find out for five years you could have been three times the size.',
-                  'I made an extra $120,000 that year and thought it was great. Then I realised if I had solved it this way first, we would have made an extra $600,000.',
-                  '82% 12 month L2 retention. The data we already have is the case.',
-                  'In twelve months, you stop being the one borrowing status, and become the asset everyone else wants to borrow.',
-                ].map((q, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                    <span className="text-zinc-300 text-[15px] leading-relaxed italic">"{q}"</span>
-                  </li>
-                ))}
-              </ul>
             </Reveal>
           </div>
         </section>

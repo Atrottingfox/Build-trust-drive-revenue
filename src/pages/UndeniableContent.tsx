@@ -215,7 +215,7 @@ const VIDEO_PILLARS: Pillar[] = [
   {
     n: 'Week 3',
     pillar: 'Niche Authority',
-    label: 'Tactical Operator Video. Rome (the VSL).',
+    label: 'Tactical Operator Video. The Public VSL.',
     question: 'Does this apply specifically to me?',
     titles: [
       "If I Wanted to Make $1M as a Fitness Coach Again, I'd Do This",
@@ -270,18 +270,32 @@ function ToolLink({ to, label }: { to: string; label: string }) {
 export default function UndeniableContent() {
   return (
     <Shell title="Content · Undeniable" description="Master formula, pillars, formats, environments, hooks, cadence, calendar, data." path="/undeniablenextsteps/content">
+      {/* Sticky side nav · desktop only */}
+      <div className="hidden xl:block fixed right-6 top-1/2 -translate-y-1/2 z-30">
+        <nav className="rounded-2xl border border-zinc-800 bg-elevated/90 backdrop-blur-md p-3 min-w-[180px]">
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2 px-2">Jump to</p>
+          <ul className="space-y-0.5">
+            {TOC.map((s) => (
+              <li key={s.id}>
+                <a href={`#${s.id}`} className="block text-zinc-300 text-[12px] px-2 py-1.5 rounded hover:bg-blue-500/10 hover:text-blue-300 transition-colors">{s.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
       <PageHead
         eyebrow="Working page"
         title=""
         accent="Content."
-        blurb=""
+        blurb="The complete content system. Hook > Problem > Path / Solution > Takeaway. 4 pillars. 4 formats. 4 environments. 10 hooks. The shoot cadence. The posting calendar. The data we track."
       />
       <Divider />
 
-      {/* TOC */}
+      {/* TOC · mobile and tablet */}
       <Wrap>
-        <Eyebrow>What\'s on this page</Eyebrow>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+        <Eyebrow>What's on this page</Eyebrow>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 xl:hidden">
           {TOC.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-4 py-3">
               <span className="text-zinc-200 text-[13px] font-medium group-hover:text-white">{s.label}</span>
@@ -289,6 +303,7 @@ export default function UndeniableContent() {
             </a>
           ))}
         </div>
+        <p className="hidden xl:block text-zinc-400 text-[13px] italic">Sticky nav on the right of the page jumps to any section.</p>
       </Wrap>
 
       <Divider />
