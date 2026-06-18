@@ -22,39 +22,39 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 
 const components = [
   {
-    icon: Target,
-    title: 'Clarity',
-    description: 'Your profile and positioning so a stranger knows in seconds who you are for and why you. The bottleneck that caps everything else, fixed first.',
+    icon: BookOpen,
+    title: 'Content Workbook',
+    description: 'Your content strategy, documented. The bottleneck, the demand topics, and the plan your team works from.',
   },
   {
     icon: Video,
-    title: 'The content engine',
-    description: 'One YouTube pillar a week, short form cut from it, everything pointing one direction. A six week cycle that compresses trust from six months to six weeks.',
+    title: 'Pillar Videos',
+    description: 'Your core long form videos, mapped and produced. The trust assets people come back to and buy from.',
   },
   {
-    icon: Layers,
-    title: 'The lead magnets',
-    description: 'The simple assets that turn viewers into booked calls, matched from cold to hot. Promise in the name, in their language.',
+    icon: Zap,
+    title: 'Hook Bank',
+    description: 'A library of hooks in your voice, ready to pull from. No more staring at a blank page on shoot day.',
   },
   {
-    icon: Megaphone,
-    title: 'The ads',
-    description: 'Boost what is already working, and run direct response to fill the calendar. Spend behind proof, not guesses.',
-  },
-  {
-    icon: RefreshCw,
-    title: 'The operating system',
-    description: 'The weekly rhythm so your team makes the content without you. You own the ideas, your operator owns the execution. Idea dump, jam, shoot day.',
-  },
-  {
-    icon: BarChart3,
-    title: 'The scorecard',
-    description: 'A handful of numbers tracked every week. What you published, what landed, where you stalled, what the audience is asking for. Keeps it adaptive.',
+    icon: FileText,
+    title: 'Lead Magnet Briefs',
+    description: 'The simple assets that turn viewers into booked calls. Briefed and built, matched from cold to hot.',
   },
   {
     icon: Users,
-    title: 'Your operator, trained',
-    description: 'By day 90 the engine runs without me in the room. Your operator understands the why, not just the schedule.',
+    title: 'Case Study Bank',
+    description: 'Your client wins, organised into proof you can drop into any piece of content.',
+  },
+  {
+    icon: Calendar,
+    title: 'Run Sheet',
+    description: 'The weekly rhythm your team runs without you. Who does what, and when. Idea, jam, shoot.',
+  },
+  {
+    icon: BarChart3,
+    title: 'KPI Dashboard',
+    description: 'The handful of numbers tracked every week. What you published, what landed, what to do next.',
   },
 ];
 
@@ -63,7 +63,7 @@ export default function NinetyDayProgram() {
     <div className="min-h-screen bg-base">
       <SEO
         title="The 90 Day Program"
-        description="The full Authority Engine, installed over 90 days. Clarity, the content engine, lead magnets, ads, the operating system and the scorecard. By selection, the continuation of a Brand Day."
+        description="The full Authority Engine, installed over 90 days. Your Brand Bible, Content Workbook, Pillar Videos, Hook Bank, Lead Magnets, Case Study Bank and KPI Dashboard, documented in your portal. By selection, the continuation of a Brand Day."
         path="/90dayprogram"
         noIndex
       />
@@ -81,7 +81,7 @@ export default function NinetyDayProgram() {
                 <span className="text-zinc-500">Program.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
-                Over 90 days I install your Authority Engine and tune it to your business. Three phases, seven components, each one building on what the last produced. A 30 day install and calibration, then 60 days tuning on the data. The continuation of a Brand Day, by selection, for the founders built to scale.
+                Over 90 days I install your Authority Engine and tune it to your business. A 30 day install and calibration, then 60 days tuning on the data. You walk away with every asset documented in your portal. The continuation of a Brand Day, by selection, for the founders built to scale.
               </p>
             </div>
           </Section>
@@ -94,14 +94,14 @@ export default function NinetyDayProgram() {
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The system</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you get</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-6">
-              Seven components.
+              Everything documented.
               <br />
-              <span className="text-zinc-500">Installed across 90 days.</span>
+              <span className="text-zinc-500">Yours to keep, in your portal.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              It all sits on the Brand Bible you bring from your Brand Day. Clarity first, then the engine, then the system to run it. Nothing is built in isolation.
+              Every asset is built in your portal, on top of the Brand Bible you bring from your Brand Day. Real documents your team runs from, long after the 90 days are done.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {components.map((item, i) => (
