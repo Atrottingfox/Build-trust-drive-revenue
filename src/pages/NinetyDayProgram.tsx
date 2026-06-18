@@ -22,34 +22,39 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 
 const components = [
   {
-    icon: Gauge,
-    title: 'Work Type Diagnostic',
-    description: 'Establishes whether you operate structured or reactive. Your natural creation rhythm determines how the system is built around you.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Brand Bible',
-    description: 'Voice on camera, messaging, positioning, category ownership, and the blueprint your operator executes from. Built in a 2–4 hour deep dive.',
-  },
-  {
     icon: Target,
-    title: 'Authority Engine Blueprint',
-    description: 'Your customer journey mapped across the Five A\'s. Content pillars and format strategy that move your specific audience from stranger to buyer.',
+    title: 'Clarity',
+    description: 'Your profile and positioning so a stranger knows in seconds who you are for and why you. The bottleneck that caps everything else, fixed first.',
   },
   {
-    icon: Calendar,
-    title: 'Posting OS',
-    description: 'Weekly rhythm: themes, angles, formats, CTAs, and channel allocation. Tied to your offers and revenue targets. Updated monthly as data comes in.',
+    icon: Video,
+    title: 'The content engine',
+    description: 'One YouTube pillar a week, short form cut from it, everything pointing one direction. A six week cycle that compresses trust from six months to six weeks.',
   },
   {
-    icon: FileText,
-    title: 'Media Operator Playbook',
-    description: 'The documentation your operator needs to run the engine. Brand Bible, scorecard, format guides, and the decision making framework.',
+    icon: Layers,
+    title: 'The lead magnets',
+    description: 'The simple assets that turn viewers into booked calls, matched from cold to hot. Promise in the name, in their language.',
+  },
+  {
+    icon: Megaphone,
+    title: 'The ads',
+    description: 'Boost what is already working, and run direct response to fill the calendar. Spend behind proof, not guesses.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'The operating system',
+    description: 'The weekly rhythm so your team makes the content without you. You own the ideas, your operator owns the execution. Idea dump, jam, shoot day.',
   },
   {
     icon: BarChart3,
-    title: 'Weekly Scorecard',
-    description: 'Five data points collected every week. What you published, what landed, where you stalled, what the audience is asking for. This is what makes the strategy adaptive.',
+    title: 'The scorecard',
+    description: 'A handful of numbers tracked every week. What you published, what landed, where you stalled, what the audience is asking for. Keeps it adaptive.',
+  },
+  {
+    icon: Users,
+    title: 'Your operator, trained',
+    description: 'By day 90 the engine runs without me in the room. Your operator understands the why, not just the schedule.',
   },
 ];
 
@@ -58,7 +63,7 @@ export default function NinetyDayProgram() {
     <div className="min-h-screen bg-base">
       <SEO
         title="The 90 Day Program"
-        description="Three phases. Six components. The full Authority Engine installation. Brand Bible, Authority Engine Blueprint, Posting OS, Media Operator Playbook."
+        description="The full Authority Engine, installed over 90 days. Clarity, the content engine, lead magnets, ads, the operating system and the scorecard. By selection, the continuation of a Brand Day."
         path="/90dayprogram"
         noIndex
       />
@@ -76,7 +81,7 @@ export default function NinetyDayProgram() {
                 <span className="text-zinc-500">Program.</span>
               </h1>
               <p className="text-zinc-400 text-lg leading-relaxed max-w-xl">
-                Over 90 days I install your Authority Engine and tune it to your business. Three phases, six components, each one building on what the last produced. A 30 day install and calibration, then 60 days tuning on the data. The continuation of a Brand Day, by selection, for the founders built to scale.
+                Over 90 days I install your Authority Engine and tune it to your business. Three phases, seven components, each one building on what the last produced. A 30 day install and calibration, then 60 days tuning on the data. The continuation of a Brand Day, by selection, for the founders built to scale.
               </p>
             </div>
           </Section>
@@ -91,12 +96,12 @@ export default function NinetyDayProgram() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The system</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-6">
-              Six components.
+              Seven components.
               <br />
-              <span className="text-zinc-500">Delivered across 90 days.</span>
+              <span className="text-zinc-500">Installed across 90 days.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              Each component is built in order. The diagnostic informs the Brand Bible. The Brand Bible informs the Blueprint. The Blueprint informs the Posting OS. Nothing is built in isolation.
+              It all sits on the Brand Bible you bring from your Brand Day. Clarity first, then the engine, then the system to run it. Nothing is built in isolation.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {components.map((item, i) => (
@@ -172,9 +177,9 @@ export default function NinetyDayProgram() {
                     description: 'Fierce frustrations, wants, aspirations, and where they are in the journey right now. Specific enough to write to.',
                   },
                   {
-                    icon: Gauge,
-                    title: 'Work Type Diagnostic',
-                    description: 'Structured or reactive. Your natural creation rhythm determines how the entire system is built around you.',
+                    icon: BookOpen,
+                    title: 'Story and proof',
+                    description: 'Your origin story, your external one liner, and the proof stack. The narrative people repeat and the evidence that backs it.',
                   },
                 ].map((item, i) => (
                   <motion.div
@@ -232,7 +237,7 @@ export default function NinetyDayProgram() {
               <p className="text-zinc-300 text-sm font-medium mb-3">By day 30:</p>
               <ul className="space-y-2">
                 {[
-                  'Brand Bible and Authority Engine Blueprint your operator executes from.',
+                  'The Brand Bible and the content plan your operator executes from.',
                   'Confirmed operating mode based on actual behaviour, not intention.',
                   'First clearly attributable qualified opportunities from the new system.',
                   'A content identity that feels like you and is tied directly to pipeline.',
@@ -266,19 +271,19 @@ export default function NinetyDayProgram() {
             </div>
             <p className="text-blue-400 font-semibold text-sm mb-3">Deploy the strategy. Install the OS.</p>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-16">
-              Phase 1 gave us the data. Phase 2 builds the machine around what that data revealed. The full Posting OS gets installed. The Five A's framework becomes operational.
+              Phase 1 gave us the data. Phase 2 builds the machine around what that data revealed. The full posting system gets installed and the content engine becomes operational.
             </p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   icon: Calendar,
-                  title: 'Full Posting OS installed',
+                  title: 'The posting system installed',
                   description: 'Monthly content program. Weekly rhythm, themes, angles, formats, CTAs, and channel allocation. Tied to your offers and revenue targets.',
                 },
                 {
                   icon: Target,
-                  title: 'Five A\'s framework operational',
+                  title: 'The content engine operational',
                   description: 'Content mix weighted to where your audience actually is in the journey. Not a fixed ratio. Adapts as weekly data comes in.',
                 },
                 {
@@ -321,7 +326,7 @@ export default function NinetyDayProgram() {
               <p className="text-zinc-300 text-sm font-medium mb-3">By day 60:</p>
               <ul className="space-y-2">
                 {[
-                  'A fully operational Posting OS your team runs week to week.',
+                  'A content engine your team runs week to week.',
                   'Content mix calibrated to your audience\'s actual journey stage.',
                   'A Media Operator beginning to make strategic decisions, not just execute tasks.',
                   'Content that is consistent, on brand, and tied to qualified pipeline.',
@@ -382,7 +387,7 @@ export default function NinetyDayProgram() {
                 {
                   icon: Video,
                   title: 'Loom walkthrough recorded',
-                  description: 'A permanent reference of the Brand Bible and Posting OS. Your team uses this without rebuilding from scratch.',
+                  description: 'A permanent reference of the Brand Bible and the content system. Your team uses this without rebuilding from scratch.',
                 },
                 {
                   icon: RefreshCw,
