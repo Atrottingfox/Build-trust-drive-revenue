@@ -10,6 +10,19 @@ const SubEyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300 mb-3">{children}</p>
 );
 
+// ─── TOC sections ───────────────────────────────────────────────────────
+
+const TOC: Array<{ id: string; label: string }> = [
+  { id: 'formula', label: 'Master formula' },
+  { id: 'pillars', label: '4 Pillars and topics' },
+  { id: 'formats', label: '4 Formats' },
+  { id: 'environments', label: '4 Environments' },
+  { id: 'hooks', label: '10 Hooks' },
+  { id: 'short-form', label: 'Short-form' },
+  { id: 'long-form', label: 'Long-form' },
+  { id: 'data', label: 'Data collection' },
+];
+
 // ─── Pillars + topics ───────────────────────────────────────────────────
 
 const PILLARS: Array<{ name: string; topics: string[] }> = [
@@ -105,13 +118,13 @@ const FORMATS: Array<{ name: string; type: string; structure: string[] }> = [
 // ─── Environments ───────────────────────────────────────────────────────
 
 const ENVIRONMENTS: Array<{ format: string; location: string; tone: string }> = [
-  { format: 'Stories', location: 'Outdoors + walk / talk', tone: 'Relatable' },
+  { format: 'Story', location: 'Outdoors + walk / talk', tone: 'Relatable' },
   { format: 'Belief', location: 'Casual hallway / lounge', tone: 'Authentic' },
   { format: 'Teach', location: 'Desk / gym', tone: 'Authoritative' },
   { format: 'Show', location: 'Whiteboard / top down', tone: 'Demonstrative' },
 ];
 
-// ─── Hooks ──────────────────────────────────────────────────────────────
+// ─── Hooks (10 templates) ───────────────────────────────────────────────
 
 const HOOKS: Array<{ name: string; pattern: string; example: string }> = [
   {
@@ -256,26 +269,41 @@ function ToolLink({ to, label }: { to: string; label: string }) {
 
 export default function UndeniableContent() {
   return (
-    <Shell title="Content Engine · Undeniable" description="The content engine. Master formula, pillars, formats, environments, hooks, cadence, calendar, data." path="/undeniablenextsteps/content">
+    <Shell title="Content · Undeniable" description="Master formula, pillars, formats, environments, hooks, cadence, calendar, data." path="/undeniablenextsteps/content">
       <PageHead
         eyebrow="Working page"
-        title="Content"
-        accent="Engine."
+        title=""
+        accent="Content."
         blurb=""
       />
       <Divider />
 
-      {/* MASTER FORMULA */}
+      {/* TOC */}
       <Wrap>
+        <Eyebrow>What\'s on this page</Eyebrow>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {TOC.map((s) => (
+            <a key={s.id} href={`#${s.id}`} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-4 py-3">
+              <span className="text-zinc-200 text-[13px] font-medium group-hover:text-white">{s.label}</span>
+              <ArrowRight className="w-3 h-3 text-zinc-600 group-hover:text-blue-400 transition-colors" />
+            </a>
+          ))}
+        </div>
+      </Wrap>
+
+      <Divider />
+
+      {/* MASTER FORMULA */}
+      <Wrap id="formula">
         <Eyebrow>Master formula</Eyebrow>
         <p className="text-zinc-200 text-[16px] md:text-[18px] leading-relaxed mb-2">Every piece is Hook &gt; Problem &gt; Path / Solution &gt; Takeaway.</p>
-        <p className="text-zinc-400 text-[14px] leading-relaxed">We're always educating. We've just got 4 methods to do it. Broken into two types: Share or Teach.</p>
+        <p className="text-zinc-400 text-[14px] leading-relaxed">We\'re always educating. We\'ve just got 4 methods to do it. Broken into two types: Share or Teach.</p>
       </Wrap>
 
       <Divider />
 
       {/* PILLARS */}
-      <Wrap>
+      <Wrap id="pillars">
         <Eyebrow>4 Pillars and topics</Eyebrow>
         <div className="grid md:grid-cols-2 gap-4">
           {PILLARS.map((p) => (
@@ -297,7 +325,7 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* FORMATS */}
-      <Wrap>
+      <Wrap id="formats">
         <Eyebrow>4 Formats</Eyebrow>
         <p className="text-zinc-400 text-[14px] mb-8">The 4 ways you educate. Two types: Share (Story, Belief) and Teach (Teach, Show).</p>
         <div className="space-y-4">
@@ -323,7 +351,7 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* ENVIRONMENTS */}
-      <Wrap>
+      <Wrap id="environments">
         <Eyebrow>4 Environments</Eyebrow>
         <div className="rounded-2xl border border-zinc-800 overflow-hidden">
           <div className="grid grid-cols-3 gap-0 px-5 py-3 bg-elevated/40 border-b border-zinc-800">
@@ -344,7 +372,7 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* HOOKS */}
-      <Wrap>
+      <Wrap id="hooks">
         <Eyebrow>10 Hooks. Simple reference to start.</Eyebrow>
         <div className="space-y-3">
           {HOOKS.map((h, i) => (
@@ -358,13 +386,17 @@ export default function UndeniableContent() {
             </div>
           ))}
         </div>
+        <div className="mt-6">
+          <ToolLink to="/undeniablenextsteps/hooks" label="The full Hook Bank" />
+        </div>
       </Wrap>
 
       <Divider />
 
-      {/* SHOOT CADENCE */}
-      <Wrap>
-        <Eyebrow>Shoot cadence. First 4 week test cycle.</Eyebrow>
+      {/* SHORT-FORM */}
+      <Wrap id="short-form">
+        <Eyebrow>Short-form</Eyebrow>
+        <p className="text-zinc-400 text-[14px] mb-8">Hook testing weeks 1-2. Optimisation weeks 3-4. Topic and format analysis weeks 5-6. Posting calendar follows.</p>
 
         {/* Weeks 1-2 */}
         <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mb-4">
@@ -437,7 +469,7 @@ export default function UndeniableContent() {
               <p className="text-zinc-300 text-[13px]">When is the optimal throughput per week. Longer, deeper sessions, or more, shorter sessions.</p>
             </div>
           </div>
-          <p className="text-zinc-400 text-[12px] italic mt-4">We're not looking to base everything from templates. These principles give us enough data to build from.</p>
+          <p className="text-zinc-400 text-[12px] italic mt-4">We\'re not looking to base everything from templates. These principles give us enough data to build from.</p>
         </div>
 
         {/* Decisions after 4 weeks */}
@@ -449,11 +481,11 @@ export default function UndeniableContent() {
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-amber-300 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Do we want to add 1-2 podcasts per month?</span></li>
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-amber-300 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Do we want to test new formats / hooks?</span></li>
           </ul>
-          <p className="text-zinc-400 text-[12px] italic mt-4">With the system as we've just cleaned it up, you'll also know which environments are easiest to shoot in consistently, how much throughput a Mon / Wed weekly cycle can really handle, and where the bottleneck is if you push volume (editing vs scripting vs recording).</p>
+          <p className="text-zinc-400 text-[12px] italic mt-4">With the system as we\'ve just cleaned it up, you\'ll also know which environments are easiest to shoot in consistently, how much throughput a Mon / Wed weekly cycle can really handle, and where the bottleneck is if you push volume (editing vs scripting vs recording).</p>
         </div>
 
         {/* Weeks 5-6 */}
-        <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5">
+        <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mb-8">
           <SubEyebrow>Weeks 5-6. Topic / format analysis (not a test, just an observation).</SubEyebrow>
           <ul className="space-y-1.5">
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Each week, select 1-2 high performing topics from the past month (e.g. offer design, churn, lead magnets).</span></li>
@@ -462,34 +494,36 @@ export default function UndeniableContent() {
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">End of week 6: see which format performs best per topic. Make a simple rule (e.g. for churn we show, for niche we tell a story).</span></li>
           </ul>
         </div>
-      </Wrap>
 
-      <Divider />
+        {/* Posting calendar */}
+        <div>
+          <SubEyebrow>Posting calendar. First 4 weeks.</SubEyebrow>
+          <div className="space-y-2">
+            {[
+              { wk: 'Week 1', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
+              { wk: 'Week 2', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
+              { wk: 'Week 3', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
+              { wk: 'Week 4', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: 'Pillar video no. 1 (Character).' },
+            ].map((w) => (
+              <div key={w.wk} className="rounded-xl border border-zinc-800 bg-elevated/30 p-5">
+                <p className="font-display text-white text-[14px] font-extrabold mb-2">{w.wk}</p>
+                <p className="text-zinc-300 text-[13px] mb-1"><span className="text-zinc-500 text-[11px] uppercase tracking-widest font-semibold mr-2">Shorts</span>{w.shorts}</p>
+                {w.longs && <p className="text-zinc-300 text-[13px]"><span className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mr-2">Longs</span>{w.longs}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
 
-      {/* POSTING CALENDAR */}
-      <Wrap>
-        <Eyebrow>Posting calendar. First 4 weeks.</Eyebrow>
-        <div className="space-y-2">
-          {[
-            { wk: 'Week 1', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
-            { wk: 'Week 2', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
-            { wk: 'Week 3', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: '' },
-            { wk: 'Week 4', shorts: '14 new (Teach + Share). Plus carousels, workshop reels, etc.', longs: 'Pillar video no. 1 (Character).' },
-          ].map((w) => (
-            <div key={w.wk} className="rounded-xl border border-zinc-800 bg-elevated/30 p-5">
-              <p className="font-display text-white text-[14px] font-extrabold mb-2">{w.wk}</p>
-              <p className="text-zinc-300 text-[13px] mb-1"><span className="text-zinc-500 text-[11px] uppercase tracking-widest font-semibold mr-2">Shorts</span>{w.shorts}</p>
-              {w.longs && <p className="text-zinc-300 text-[13px]"><span className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mr-2">Longs</span>{w.longs}</p>}
-            </div>
-          ))}
+        <div className="mt-6">
+          <ToolLink to="/undeniablenextsteps/shoot-card" label="The Next Shoot tool" />
         </div>
       </Wrap>
 
       <Divider />
 
-      {/* LONG-FORM PILLARS (YouTube titles) */}
-      <Wrap>
-        <Eyebrow>6 Long-form video pillars</Eyebrow>
+      {/* LONG-FORM */}
+      <Wrap id="long-form">
+        <Eyebrow>Long-form</Eyebrow>
         <p className="text-zinc-400 text-[14px] mb-8">One long-form per week. Six pillars in rotation. Working titles below.</p>
         <div className="space-y-4">
           {VIDEO_PILLARS.map((p) => (
@@ -516,8 +550,9 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* DATA COLLECTION */}
-      <Wrap>
+      <Wrap id="data">
         <Eyebrow>Data collection</Eyebrow>
+        <p className="text-zinc-400 text-[14px] mb-8">Log every piece. Short-form at 24 hours plus 7 days. Long-form at 48 hours plus 7 days.</p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-5">
@@ -558,19 +593,6 @@ export default function UndeniableContent() {
               <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Split test data. Keep winner, split test two more additional thumbnails.</span></li>
             </ul>
           </div>
-        </div>
-      </Wrap>
-
-      <Divider />
-
-      {/* Tools reference */}
-      <Wrap>
-        <Eyebrow>Reference tools</Eyebrow>
-        <div className="grid md:grid-cols-2 gap-3">
-          <ToolLink to="/undeniablenextsteps/shoot-card" label="Next Shoot" />
-          <ToolLink to="/undeniablenextsteps/hooks" label="Hook Bank" />
-          <ToolLink to="/undeniablenextsteps/ad-gold" label="Ad Gold" />
-          <ToolLink to="/undeniablenextsteps/content-system" label="Content System" />
         </div>
       </Wrap>
     </Shell>

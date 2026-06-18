@@ -34,8 +34,7 @@ const ROLES: Array<{ name: string; lane: string; bullets: string[] }> = [
     name: 'Sean',
     lane: 'Strategy. Accountability.',
     bullets: [
-      'Build and deliver the content operating system.',
-      'Write the 4 lead magnet headlines and landing pages.',
+      'Refine the brand. Increase demand.',
       'Lock the 6 pillar video outlines and the 6-week cycle.',
       'Curate Corey\'s resources.',
       'Fortnightly strategy and accountability sessions.',
@@ -45,11 +44,11 @@ const ROLES: Array<{ name: string; lane: string; bullets: string[] }> = [
 ];
 
 const RHYTHM: Array<{ d: string; label: string; shoot: boolean }> = [
-  { d: 'Mon', label: 'Shoot 10-2. Monday review.', shoot: true },
+  { d: 'Mon', label: 'Shoot. Weekly review.', shoot: true },
   { d: 'Tue', label: 'Edit. Client calls.', shoot: false },
-  { d: 'Wed', label: 'Shoot 10-2.', shoot: true },
+  { d: 'Wed', label: 'Shoot.', shoot: true },
   { d: 'Thu', label: 'Edit. Podcast cuts.', shoot: false },
-  { d: 'Fri', label: 'Shoot 10-2. Weekly review.', shoot: true },
+  { d: 'Fri', label: 'Shoot longform.', shoot: true },
   { d: 'Sat', label: 'Off.', shoot: false },
   { d: 'Sun', label: 'Rhys preview next week.', shoot: false },
 ];
@@ -86,12 +85,12 @@ const OPEN_DECISIONS: string[] = [
 
 export default function UndeniableOps() {
   return (
-    <Shell title="Ops and Scorecard · Undeniable" description="Roles, weekly rhythm, Monday review, KPI table, open decisions." path="/undeniablenextsteps/ops">
+    <Shell title="Operations · Undeniable" description="Roles, weekly rhythm, Monday review, KPI table, open decisions." path="/undeniablenextsteps/ops">
       <PageHead
         eyebrow="Working page"
-        title="Ops and"
-        accent="Scorecard."
-        blurb="Roles. Rhythm. The Monday review. The 8 numbers. The open decisions. This is the page you open on Mondays."
+        title=""
+        accent="Operations."
+        blurb="Roles. Rhythm. Monday review. The 8 numbers. Open decisions."
       />
       <Divider />
 

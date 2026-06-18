@@ -42,32 +42,42 @@ type Phase = {
 const PHASES: Phase[] = [
   {
     window: 'Weeks 1-4',
-    outcome: 'Lead magnets live. Shoot cadence locked. Corey shadowing.',
+    outcome: 'Brand work locked. Lead magnets live. Shoot cadence locked. Corey shadowing.',
     sections: [
       {
-        name: 'Leads',
+        name: 'Brand',
+        href: '/undeniablenextsteps/brand',
+        items: [
+          'Brand voice and identity refined',
+          'Positioning sharpened around the avatar',
+          'Bio and pinned posts swapped to new positioning',
+        ],
+      },
+      {
+        name: 'Lead Magnets',
         href: '/undeniablenextsteps/lead-magnets',
         items: [
-          'Relaunch Six Step Profit Path',
-          'Ship From Cold to Sold landing page',
-          'Rebrand the diagnostic (Find the One Thing)',
-          'Ship the Leak Calculator',
+          'Six Step Profit Path relaunched',
+          'Sales Success System named and shipped',
+          'Bottleneck Buster refined',
+          'Client Capacity Calculator named and shipped',
         ],
       },
       {
-        name: 'Content Engine',
+        name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Lock the 30-day shoot test (Mon / Wed / Fri)',
-          '4 environments rotating: Park, Gym, Hallway, Office',
-          '9 shorts week 1, scaling to 14 by week 3',
+          'Hook testing weeks 1-2 (14 posts / week)',
+          '4 environments rotating',
+          'Hook optimisation weeks 3-4',
+          'Pillar video 1 (Character) at end of week 4',
         ],
       },
       {
-        name: 'Ops and Scorecard',
+        name: 'Operations',
         href: '/undeniablenextsteps/ops',
         items: [
-          'Corey 30-day shadowing protocol kicks off',
+          'Corey shadowing protocol kicks off',
           'Install the Monday review (7 questions)',
           'KPI tracking starts',
         ],
@@ -79,17 +89,17 @@ const PHASES: Phase[] = [
     outcome: 'Character video live. Rome in production. Long-form cycle running.',
     sections: [
       {
-        name: 'Content Engine',
+        name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Ship the Character video (10-beat arc, 20-30 min)',
-          'Film Rome (2 to 3 day block)',
+          'Weeks 5-6 topic and format analysis',
+          'Ship the Character video',
+          'Film Rome',
           'Start the 6-week long-form rotation',
-          'Start 3 podcasts per week',
         ],
       },
       {
-        name: 'Ops and Scorecard',
+        name: 'Operations',
         href: '/undeniablenextsteps/ops',
         items: [
           'Corey suggesting content angles at Monday review',
@@ -103,20 +113,19 @@ const PHASES: Phase[] = [
     outcome: 'Rome public. Corey owns Monday review.',
     sections: [
       {
-        name: 'Content Engine',
+        name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
           'Rome unlisted, then public on YouTube',
-          'Continuous testing locked (1 to 2 new formats per month)',
+          'Continuous testing locked',
         ],
       },
       {
-        name: 'Ops and Scorecard',
+        name: 'Operations',
         href: '/undeniablenextsteps/ops',
         items: [
           'Corey drives Monday review from data',
           'KPI dashboard live, updated weekly',
-          'Quarterly review against the 5-year math',
         ],
       },
     ],
@@ -126,10 +135,10 @@ const PHASES: Phase[] = [
     outcome: 'Monday review. Mon / Wed / Fri shoots.',
     sections: [
       {
-        name: 'Ops and Scorecard',
+        name: 'Operations',
         href: '/undeniablenextsteps/ops',
         items: [
-          'Mon / Wed / Fri shoots, 10:00 to 14:00',
+          'Mon / Wed / Fri shoots',
           'Tuesday and Thursday edits',
           'Friday weekly review',
           'Sunday Rhys previews next week',
@@ -203,7 +212,7 @@ export default function UndeniableNextSteps() {
                 <span className="text-blue-400">Plan.</span>
               </h1>
               <p className="text-zinc-400 text-[15px] md:text-[17px] leading-relaxed max-w-2xl">
-                Optional 90 day authority engine.
+                Optional 90 day authority engine. Refine your brand. Increase demand.
               </p>
             </Reveal>
           </div>
@@ -261,12 +270,13 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>Working pages</Eyebrow>
-              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Each page exists to make one decision or action easy. Open the page you need.</p>
+              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Four working pages. Brand sets the voice. Lead Magnets capture demand. Content sustains attention. Operations keeps the team aligned. Open the page you need.</p>
               <div className="space-y-3">
                 {[
-                  { to: '/undeniablenextsteps/lead-magnets', label: 'Leads', sub: '4 lead magnets. Names, headlines, owners, checklists.' },
-                  { to: '/undeniablenextsteps/content', label: 'Content Engine', sub: 'Short-form rhythm. Character. Rome. 6-week rotation with working titles.' },
-                  { to: '/undeniablenextsteps/ops', label: 'Ops and Scorecard', sub: 'Roles. Weekly rhythm. Monday review. KPI table. Open decisions.' },
+                  { to: '/undeniablenextsteps/brand', label: 'Brand', sub: 'The brand voice, identity, and positioning work.' },
+                  { to: '/undeniablenextsteps/lead-magnets', label: 'Lead Magnets', sub: '5 assets. Names, formats, status.' },
+                  { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Master formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
+                  { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, Monday review, KPI table, open decisions.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5 md:px-7 md:py-6">
                     <div>
@@ -277,6 +287,59 @@ export default function UndeniableNextSteps() {
                   </a>
                 ))}
               </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* REFERENCE TOOLS */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Reveal>
+              <Eyebrow>Reference and tools</Eyebrow>
+              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Source-of-truth pages from the brand-day session. Open them when the working pages reference them.</p>
+              <div className="grid md:grid-cols-2 gap-3">
+                {[
+                  { to: '/undeniablenextsteps/hooks', label: 'Hook Bank', sub: 'Around 90 hooks, organised by mechanic.' },
+                  { to: '/undeniablenextsteps/ad-gold', label: 'Ad Gold', sub: 'Verbatim money lines, stories, and frames.' },
+                  { to: '/undeniablenextsteps/shoot-card', label: 'Next Shoot', sub: 'The on-the-day tool. 4 buckets aligned with the 4 formats.' },
+                  { to: '/undeniablenextsteps/content-system', label: 'Content System', sub: 'The original content operating notes.' },
+                ].map((card) => (
+                  <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-5 py-4">
+                    <div>
+                      <h3 className="font-display text-[16px] font-extrabold text-white mb-0.5">{card.label}</h3>
+                      <p className="text-zinc-400 text-[12px]">{card.sub}</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-4" />
+                  </a>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* WHY NOW */}
+        <section className="py-16 md:py-20">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <Reveal>
+              <Eyebrow>Why now</Eyebrow>
+              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Pulled directly from the working session.</p>
+              <ul className="space-y-4">
+                {[
+                  'Right problem, wrong way is the most expensive place to be. You get small wins, think it is great, and do not find out for five years you could have been three times the size.',
+                  'I made an extra $120,000 that year and thought it was great. Then I realised if I had solved it this way first, we would have made an extra $600,000.',
+                  '82% 12-month L2 retention. The data we already have is the case.',
+                  'In twelve months, you stop being the one borrowing status, and become the asset everyone else wants to borrow.',
+                ].map((q, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-300 text-[15px] leading-relaxed italic">"{q}"</span>
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
         </section>

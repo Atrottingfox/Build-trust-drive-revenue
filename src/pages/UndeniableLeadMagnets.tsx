@@ -73,11 +73,11 @@ const ASSETS: Asset[] = [
 
 export default function UndeniableLeadMagnets() {
   return (
-    <Shell title="Leads · Undeniable" description="The lead magnets. Names, formats, status." path="/undeniablenextsteps/lead-magnets">
+    <Shell title="Lead Magnets · Undeniable" description="The lead magnet assets. Names, formats, status." path="/undeniablenextsteps/lead-magnets">
       <PageHead
         eyebrow="Working page"
-        title=""
-        accent="Leads."
+        title="Lead"
+        accent="Magnets."
         blurb="The 5 lead magnet assets. Names, formats, and what each one does."
       />
       <Divider />
