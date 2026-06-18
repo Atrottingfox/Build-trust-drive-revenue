@@ -131,3 +131,49 @@ export function ModuleLink({ to, label, blurb }: { to: string; label: string; bl
     </a>
   );
 }
+
+export function Collapsible({ title, eyebrow, defaultOpen = false, children }: { title: string; eyebrow?: string; defaultOpen?: boolean; children: React.ReactNode }) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  return (
+    <div className="rounded-2xl border border-zinc-800 bg-elevated/30 overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full flex items-center justify-between gap-4 px-5 md:px-6 py-5 text-left hover:bg-elevated/60 transition-colors"
+        aria-expanded={open}
+      >
+        <div className="flex-1 min-w-0">
+          {eyebrow && <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-1">{eyebrow}</p>}
+          <h3 className="font-display text-lg md:text-xl font-extrabold text-white leading-tight">{title}</h3>
+        </div>
+        <span className={`text-zinc-500 text-[22px] leading-none transition-transform flex-shrink-0 ${open ? 'rotate-45' : ''}`}>+</span>
+      </button>
+      {open && (
+        <div className="px-5 md:px-6 pb-6 pt-2 border-t border-zinc-800/60">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function Tabs({ tabs, active, onChange }: { tabs: Array<{ id: string; label: string }>; active: string; onChange: (id: string) => void }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2 mb-10">
+      {tabs.map((t) => (
+        <button
+          key={t.id}
+          type="button"
+          onClick={() => onChange(t.id)}
+          className={`rounded-full border px-5 py-2.5 text-[14px] font-semibold transition-colors ${
+            active === t.id
+              ? 'border-blue-500/50 bg-blue-500/10 text-white'
+              : 'border-zinc-800 bg-elevated/40 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
+          }`}
+        >
+          {t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
