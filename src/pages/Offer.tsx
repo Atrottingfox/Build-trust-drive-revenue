@@ -327,12 +327,6 @@ export default function Offer() {
               ))}
             </div>
 
-            <div className="glow-card border-blue-500/20 p-6 mb-16 max-w-3xl">
-              <p className="text-white text-sm leading-relaxed font-medium">
-                Brand documented. Content engineered. System installed. Demand compounds.
-              </p>
-            </div>
-
             {/* Three phases */}
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Three phases</p>
             <div className="space-y-8">
@@ -499,6 +493,7 @@ export default function Offer() {
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
                 <p className="font-display text-3xl font-extrabold text-white">$5,000</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Price increases every month from July.</p>
               </div>
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Build, if invited</p>
@@ -506,9 +501,12 @@ export default function Offer() {
                 <p className="text-zinc-500 text-[14px] mt-2">Your Brand Day fee credits in, so the balance is $10,000.</p>
               </div>
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
-              I work with a small number of founders at any time, so I can stay close to your team and your data.
-            </p>
+            <div className="glow-card border-blue-500/20 p-6 mt-4">
+              <p className="text-white text-sm font-semibold mb-1">Only 5 spots a month.</p>
+              <p className="text-zinc-400 text-sm leading-relaxed">
+                I work with a small number of founders at a time so I can stay close to your team and your data. The price increases every month from July, so the earlier you start, the less you pay.
+              </p>
+            </div>
           </Section>
         </div>
       </section>
