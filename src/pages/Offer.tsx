@@ -73,7 +73,7 @@ export default function Offer() {
     <div className="min-h-screen bg-base">
       <SEO
         title="The Authority Engine"
-        description="Start with a Brand Day. An optional 90 day Authority Engine build for the right founders. We install a media operating system that turns your content into qualified pipeline your team can run without you."
+        description="Start with a Brand Day. An optional 90 day Authority Engine build for the right founders. We refine your brand and turn your content into consistent demand your team can run without you."
         path="/offer"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -101,7 +101,7 @@ export default function Offer() {
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              We install a media operating system that turns your content into qualified pipeline your team can run without you.
+              We refine your brand and turn your content into consistent demand your team can run without you.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $100K a month, turning content into an engine that consistently drives revenue. One client recently crossed $2M a month.
@@ -138,7 +138,7 @@ export default function Offer() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Step 1 &middot; Brand Day &middot; $5,000</Label>
-            <H2>One focused day to build your media OS and remove the guesswork.</H2>
+            <H2>One focused day to refine your brand and remove the guesswork.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
               With you and your Media Operator, or whoever owns content, we:
             </p>
@@ -194,7 +194,7 @@ export default function Offer() {
             <div className="mt-10">
               <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By day 90 you have</p>
               <Ticks items={[
-                'A media operating system built for your voice, audience and creation style',
+                'A refined brand and a content engine built for your voice, audience and creation style',
                 'A Media Operator who understands the strategy, not just the schedule',
                 'A run sheet and KPI dashboard your team can follow without me',
                 'Three straight weeks hitting your lead targets',
