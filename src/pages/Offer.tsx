@@ -170,12 +170,7 @@ export default function Offer() {
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Six deliverables.
-              <br />
-              <span className="text-zinc-500">Zero fluff.</span>
-            </h2>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-12">What you walk away with</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {deliverables.map((d, i) => (
                 <motion.div
