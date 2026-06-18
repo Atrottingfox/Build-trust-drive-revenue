@@ -104,7 +104,7 @@ export default function Offer() {
               We build a simple content system your team can run that reliably turns views into qualified leads and sales.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              It starts with a $5,000 Brand Day. For the right founders, it continues into a 90 day Content to Clients Program where we install what I call your Authority Engine: the media OS that runs without you.
+              It starts with a $5,000 Brand Day. For the right founders, it continues into a 90 day Content to Clients Program where we install what we call your Authority Engine: your content acquisition system that builds your brand to increase demand.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $100K a month, turning content into an engine that consistently drives revenue. One client recently crossed $2M a month.

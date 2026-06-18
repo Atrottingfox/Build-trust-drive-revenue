@@ -72,6 +72,14 @@ const PHASES: Phase[] = [
           'Character video filmed, edited and live by end of week 4',
         ],
       },
+      {
+        name: 'Operations',
+        href: '/undeniablenextsteps/ops',
+        items: [
+          'Shoot rhythm locked (Mon and Wed short form, Fri longform)',
+          'Edit cadence starts',
+        ],
+      },
     ],
   },
   {
