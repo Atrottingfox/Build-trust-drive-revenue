@@ -172,7 +172,7 @@ function CopyBtn({ text }: { text: string }) {
 
 export default function UndeniableShootCard() {
   return (
-    <Shell title="Next Shoot · Undeniable" description="The on-the-day shoot tool. Master formula, 4 buckets aligned with the 4 formats, real hooks from the Hook Bank." path="/undeniablenextsteps/shoot-card">
+    <Shell title="Next Shoot · Undeniable" description="The on the day shoot tool. Master formula, 4 buckets aligned with the 4 formats, real hooks from the Hook Bank." path="/undeniablenextsteps/shoot-card">
       <PageHead
         eyebrow="Working tool"
         title="Next"

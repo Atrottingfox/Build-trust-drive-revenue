@@ -41,76 +41,57 @@ type Phase = {
 
 const PHASES: Phase[] = [
   {
-    window: 'Weeks 1-4',
-    outcome: 'Brand work locked. Lead magnets live. Shoot cadence locked. Corey shadowing.',
+    window: 'Weeks 1 to 4',
+    outcome: 'Brand locked. Lead magnets live. Character video live. Shoot cadence locked. Corey shadowing.',
     sections: [
       {
         name: 'Brand',
         href: '/undeniablenextsteps/brand',
         items: [
           'Brand voice and identity refined',
-          'Positioning sharpened around the avatar',
-          'Bio and pinned posts swapped to new positioning',
+          'Positioning sharpened',
+          'Bio and pinned posts swapped',
         ],
       },
       {
         name: 'Lead Magnets',
         href: '/undeniablenextsteps/lead-magnets',
         items: [
-          'Six Step Profit Path relaunched',
-          'Sales Success System named and shipped',
-          'Bottleneck Buster refined',
-          'Client Capacity Calculator named and shipped',
+          'All 5 assets shipped',
+          'Naming finalised on each',
+          'Landing pages and follow up routes in place',
         ],
       },
       {
         name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Hook testing weeks 1-2 (14 posts / week)',
+          'Hook testing weeks 1 to 2 (14 posts per week)',
           '4 environments rotating',
-          'Hook optimisation weeks 3-4',
-          'Pillar video 1 (Character) at end of week 4',
-        ],
-      },
-      {
-        name: 'Operations',
-        href: '/undeniablenextsteps/ops',
-        items: [
-          'Corey shadowing protocol kicks off',
-          'Install the Monday review (7 questions)',
-          'KPI tracking starts',
+          'Hook optimisation weeks 3 to 4',
+          'Character video filmed, edited and live by end of week 4',
         ],
       },
     ],
   },
   {
-    window: 'Weeks 5-8',
-    outcome: 'Character video live. Rome in production. Long-form cycle running.',
+    window: 'Weeks 5 to 8',
+    outcome: 'Rome in production. Long form rotation running.',
     sections: [
       {
         name: 'Content',
         href: '/undeniablenextsteps/content',
         items: [
-          'Weeks 5-6 topic and format analysis',
-          'Ship the Character video',
+          'Weeks 5 to 6 topic and format analysis',
           'Film Rome',
-          'Start the 6-week long-form rotation',
-        ],
-      },
-      {
-        name: 'Operations',
-        href: '/undeniablenextsteps/ops',
-        items: [
-          'Corey suggesting content angles at Monday review',
-          'Pattern recognition built from 60 days of metrics',
+          'Start the 6 week long form rotation',
         ],
       },
     ],
   },
   {
-    window: 'Weeks 9-12',
-    outcome: 'Rome public. Corey owns Monday review.',
+    window: 'Weeks 9 to 12',
+    outcome: 'Rome public.',
     sections: [
       {
         name: 'Content',
@@ -120,29 +101,18 @@ const PHASES: Phase[] = [
           'Continuous testing locked',
         ],
       },
-      {
-        name: 'Operations',
-        href: '/undeniablenextsteps/ops',
-        items: [
-          'Corey drives Monday review from data',
-          'KPI dashboard live, updated weekly',
-        ],
-      },
     ],
   },
   {
-    window: 'Always-on',
-    outcome: 'Monday review. Mon / Wed / Fri shoots.',
+    window: 'Always on',
+    outcome: 'Mon / Wed / Fri shoots. Fri longform.',
     sections: [
       {
-        name: 'Operations',
-        href: '/undeniablenextsteps/ops',
+        name: 'Content',
+        href: '/undeniablenextsteps/content',
         items: [
-          'Mon / Wed / Fri shoots',
-          'Tuesday and Thursday edits',
-          'Friday weekly review',
-          'Sunday Rhys previews next week',
-          'End-of-day capture (4 questions) every working day',
+          'Mon and Wed: short form shoots',
+          'Fri: longform shoot',
         ],
       },
     ],
@@ -156,7 +126,7 @@ function RoadmapRow({ phase, isLast }: { phase: Phase; isLast: boolean }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`w-full text-left grid grid-cols-[140px_1fr_auto] md:grid-cols-[180px_1fr_auto] gap-4 md:gap-6 px-5 md:px-7 py-5 md:py-6 hover:bg-elevated/40 transition-colors ${phase.window === 'Always-on' ? 'bg-elevated/30' : ''}`}
+        className={`w-full text-left grid grid-cols-[140px_1fr_auto] md:grid-cols-[180px_1fr_auto] gap-4 md:gap-6 px-5 md:px-7 py-5 md:py-6 hover:bg-elevated/40 transition-colors ${phase.window === 'Always on' ? 'bg-elevated/30' : ''}`}
         aria-expanded={open}
       >
         <p className="font-display text-[14px] md:text-[16px] font-extrabold text-blue-400 leading-tight">{phase.window}</p>
@@ -195,7 +165,7 @@ export default function UndeniableNextSteps() {
       <div className="min-h-screen bg-base">
         <SEO
           title="The Plan · Undeniable"
-          description="Home and roadmap. Diagnosis, 90-day roadmap, working pages."
+          description="Home and roadmap. Diagnosis, 90 day roadmap, working pages."
           path="/undeniablenextsteps"
           noIndex
         />
@@ -252,7 +222,7 @@ export default function UndeniableNextSteps() {
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
-              <Eyebrow>90-day roadmap</Eyebrow>
+              <Eyebrow>90 day roadmap</Eyebrow>
               <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">Click any row to see the core sections that ship in that phase.</p>
               <div className="rounded-2xl border border-zinc-800 overflow-hidden">
                 {PHASES.map((p, i) => (
@@ -303,7 +273,7 @@ export default function UndeniableNextSteps() {
                 {[
                   { to: '/undeniablenextsteps/hooks', label: 'Hook Bank', sub: 'Around 90 hooks, organised by mechanic.' },
                   { to: '/undeniablenextsteps/ad-gold', label: 'Ad Gold', sub: 'Verbatim money lines, stories, and frames.' },
-                  { to: '/undeniablenextsteps/shoot-card', label: 'Next Shoot', sub: 'The on-the-day tool. 4 buckets aligned with the 4 formats.' },
+                  { to: '/undeniablenextsteps/shoot-card', label: 'Next Shoot', sub: 'The on the day tool. 4 buckets aligned with the 4 formats.' },
                   { to: '/undeniablenextsteps/content-system', label: 'Content System', sub: 'The original content operating notes.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-5 py-4">
@@ -331,7 +301,7 @@ export default function UndeniableNextSteps() {
                 {[
                   'Right problem, wrong way is the most expensive place to be. You get small wins, think it is great, and do not find out for five years you could have been three times the size.',
                   'I made an extra $120,000 that year and thought it was great. Then I realised if I had solved it this way first, we would have made an extra $600,000.',
-                  '82% 12-month L2 retention. The data we already have is the case.',
+                  '82% 12 month L2 retention. The data we already have is the case.',
                   'In twelve months, you stop being the one borrowing status, and become the asset everyone else wants to borrow.',
                 ].map((q, i) => (
                   <li key={i} className="flex items-start gap-3">

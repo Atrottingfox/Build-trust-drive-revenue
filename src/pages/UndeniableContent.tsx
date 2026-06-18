@@ -18,8 +18,8 @@ const TOC: Array<{ id: string; label: string }> = [
   { id: 'formats', label: '4 Formats' },
   { id: 'environments', label: '4 Environments' },
   { id: 'hooks', label: '10 Hooks' },
-  { id: 'short-form', label: 'Short-form' },
-  { id: 'long-form', label: 'Long-form' },
+  { id: 'shortform', label: 'Short form' },
+  { id: 'longform', label: 'Long form' },
   { id: 'data', label: 'Data collection' },
 ];
 
@@ -204,7 +204,7 @@ const VIDEO_PILLARS: Pillar[] = [
   {
     n: 'Week 2',
     pillar: 'Authority',
-    label: 'The Positioning Play. Full Playbook.',
+    label: 'The Positioning Play. Full Playbook. 2 to 3 day shoot.',
     question: "Does this person actually know what they're talking about at depth?",
     titles: [
       'F*ck It, This Is How to Build a $1M+ Online Fitness Business',
@@ -215,7 +215,7 @@ const VIDEO_PILLARS: Pillar[] = [
   {
     n: 'Week 3',
     pillar: 'Niche Authority',
-    label: 'Tactical Operator Video. The VSL.',
+    label: 'Tactical Operator Video. Rome (the VSL).',
     question: 'Does this apply specifically to me?',
     titles: [
       "If I Wanted to Make $1M as a Fitness Coach Again, I'd Do This",
@@ -394,8 +394,8 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* SHORT-FORM */}
-      <Wrap id="short-form">
-        <Eyebrow>Short-form</Eyebrow>
+      <Wrap id="shortform">
+        <Eyebrow>Short form</Eyebrow>
         <p className="text-zinc-400 text-[14px] mb-8">Hook testing weeks 1-2. Optimisation weeks 3-4. Topic and format analysis weeks 5-6. Posting calendar follows.</p>
 
         {/* Weeks 1-2 */}
@@ -522,9 +522,9 @@ export default function UndeniableContent() {
       <Divider />
 
       {/* LONG-FORM */}
-      <Wrap id="long-form">
-        <Eyebrow>Long-form</Eyebrow>
-        <p className="text-zinc-400 text-[14px] mb-8">One long-form per week. Six pillars in rotation. Working titles below.</p>
+      <Wrap id="longform">
+        <Eyebrow>Long form</Eyebrow>
+        <p className="text-zinc-400 text-[14px] mb-8">One long form per week. Six pillars in rotation. Working titles below.</p>
         <div className="space-y-4">
           {VIDEO_PILLARS.map((p) => (
             <div key={p.n} className="rounded-2xl border border-zinc-800 bg-elevated/30 p-5 md:p-6">
@@ -552,7 +552,7 @@ export default function UndeniableContent() {
       {/* DATA COLLECTION */}
       <Wrap id="data">
         <Eyebrow>Data collection</Eyebrow>
-        <p className="text-zinc-400 text-[14px] mb-8">Log every piece. Short-form at 24 hours plus 7 days. Long-form at 48 hours plus 7 days.</p>
+        <p className="text-zinc-400 text-[14px] mb-8">Log every piece. Short form at 24 hours plus 7 days. Long form at 48 hours plus 7 days.</p>
 
         <div className="grid md:grid-cols-2 gap-4 mb-4">
           <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-5">
