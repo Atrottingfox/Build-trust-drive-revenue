@@ -85,8 +85,9 @@ export default function Offer() {
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine</p>
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] mb-6">
-              One day to map and lock your brand strategy. Ninety days to install the content system that turns attention into revenue.
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.12] mb-6">
+              One day to lock your strategy.
+              <span className="block mt-2">Ninety days to install the system that turns attention into revenue.</span>
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
               For founders at $200K+/month who already create content and want to scale without becoming a full time creator.
