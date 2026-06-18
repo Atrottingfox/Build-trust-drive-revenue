@@ -464,7 +464,7 @@ export default function Builder() {
 
               <div className="space-y-5 mt-6">
                 <div>
-                  <Label required>If I only pick five people, why should you be one of them?</Label>
+                  <Label required>If I only have 5 spots available for next month, why should you be one of them?</Label>
                   <TextArea
                     value={form.whyYouWhyNow}
                     onChange={(v) => update('whyYouWhyNow', v)}

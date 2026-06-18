@@ -33,6 +33,7 @@ const PILLARS: Array<{ name: string; topics: string[] }> = [
       'Hard and boring work',
       'Identity leveling up',
       'Impact / mission / duty',
+      "Doing what's required",
     ],
   },
   {
@@ -292,10 +293,10 @@ export default function UndeniableContent() {
       />
       <Divider />
 
-      {/* TOC · mobile and tablet */}
+      {/* TOC · all screens */}
       <Wrap>
         <Eyebrow>What's on this page</Eyebrow>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 xl:hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {TOC.map((s) => (
             <a key={s.id} href={`#${s.id}`} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-4 py-3">
               <span className="text-zinc-200 text-[13px] font-medium group-hover:text-white">{s.label}</span>
@@ -303,7 +304,6 @@ export default function UndeniableContent() {
             </a>
           ))}
         </div>
-        <p className="hidden xl:block text-zinc-400 text-[13px] italic">Sticky nav on the right of the page jumps to any section.</p>
       </Wrap>
 
       <Divider />
