@@ -96,9 +96,6 @@ export default function Offer() {
                 'No 12am scrolling for content ideas before shoot day',
                 'No more inconsistency across platforms',
               ]} />
-              <div className="mt-3">
-                <Ticks items={['Less anxiety, more direction, and a lot more leads']} />
-              </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mb-5">
               We build a simple content system your team can run that reliably turns views into qualified leads and sales.
@@ -125,7 +122,7 @@ export default function Offer() {
               <Ticks items={[
                 'Already doing at least $100K a month',
                 'Already create content consistently',
-                'Want content that feels like them and drives cash',
+                'Want content that feels like them and drives revenue',
                 'Want an operator friendly system, not another done for you agency or course',
                 'Willing to fulfil increased demand without dropping standards',
               ]} />
