@@ -90,7 +90,7 @@ export default function Offer() {
               <span className="block mt-2">Ninety days to install the system that turns attention into revenue.</span>
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
-              For founders at $200K+/month who already create content and want to scale without becoming a full time creator.
+              Without becoming a full time creator.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
