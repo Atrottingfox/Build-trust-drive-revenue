@@ -238,113 +238,94 @@ export default function UndeniableNextSteps() {
               <div className="text-center">
                 <Eyebrow>The plan</Eyebrow>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] mb-6">
-                  Three phases.
+                  Four segments.
                   <br />
-                  <span className="text-zinc-400">Sequenced.</span>
+                  <span className="text-zinc-400">Each one its own domain.</span>
                 </h2>
                 <p className="text-zinc-400 text-[16px] md:text-[17px] leading-relaxed max-w-2xl mx-auto">
-                  Stabilise first. Build foundations second. Scale third. Don&apos;t skip ahead. Each phase has the moves, the owners, and the artefacts embedded.
+                  Lead Magnets · Short-form · Long-form Trust · Operations. Each segment self-contained, with the moves, owners, ship dates and artefacts inside.
                 </p>
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* ═══ PHASE 1 · STABILISE ═══ */}
+        {/* ═══ SEGMENT 1 · LEAD MAGNETS ═══ */}
         <Phase
-          tag="Phase 1"
+          tag="Segment 1"
           window="Week 1-4"
-          title="Stabilise."
-          theme="Sharpen clarity. Fix the obvious leaks. Ship the workshop fix. By end of phase 1: the bio is live everywhere, the lead magnets have new headlines, the Q&A card is in workshop production, the 30-day shoot test is running, and Corey is shadowing client calls."
+          title="Lead Magnets."
+          theme="Four critical assets. Two flagship (Profit Path · Cold to Sold). Two workhorses (the diagnostic · the Leak Calculator). Each one named for the outcome it delivers. Deeper detail in /undeniablenextsteps/lead-magnets."
         >
 
           <Move
             n="01"
-            title="Ship the bio across every channel."
-            body="One sentence. Avatar + outcome + the thing they hate. Receipts on the next line. Replace it on IG, YouTube, LinkedIn, email signature. Until this lands, none of the rest of the brand work matters."
-            owner="Rhys signs off · Sean writes"
-            ship="End of week 1"
+            title="Relaunch Six Step Profit Path."
+            body="Rename from &ldquo;Customer Journey Blueprint&rdquo; — that name says nothing. New headline + new landing page. Asset itself stays as is."
+            owner="Sean writes · Rhys team builds"
+            ship="End of week 2"
           >
-            <Artefact label="The bio · copy-paste-ready">
-              <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">I help <span className="text-blue-300">fitness coaches</span> build <span className="text-blue-300">$1M+ businesses</span> without <span className="text-blue-300">going viral</span>.</p>
-              <p className="text-zinc-300 text-[14px]">$5M built · 82% client retention · 600 coaches taught in person.</p>
+            <Artefact label="The headline · ready to paste">
+              <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">Turn cold leads into raving fans.</p>
+              <p className="text-zinc-200 text-[14px] italic">&ldquo;In 5 minutes, you&apos;ll know how to take people from never-heard-of-you to obsessed advocate. Without DMing 100 people a day.&rdquo;</p>
             </Artefact>
           </Move>
 
           <Move
             n="02"
-            title="Lock the voice. Brief Corey."
-            body="Once the bio is live, bake it into every piece. Corey edits in voice. Three archetypes drive what Rhys says yes and no to. The voice rules become the editorial filter for short-form, long-form, ads, emails."
-            owner="Sean writes · Rhys approves · Corey runs"
+            title="Ship From Cold to Sold landing page."
+            body="Best-performing asset for lead quality. Doesn&apos;t need rebuild — just a clean landing page that names what it is."
+            owner="Sean writes · Rhys team builds"
             ship="End of week 2"
           >
-            <Artefact label="Voice + archetypes · one page">
-              <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300 mb-2">Archetypes · who speaks</p>
-              <ul className="space-y-1 text-zinc-100 text-[13px] mb-4">
-                <li><b className="text-white">Guide</b> (primary) · Done it. Sharing the scars.</li>
-                <li><b className="text-white">Protector</b> · Won&apos;t let people get scammed.</li>
-                <li><b className="text-white">Scientist</b> · Runs tests. Shares lessons.</li>
-              </ul>
-              <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300 mb-2">Voice · how it sounds</p>
-              <ul className="space-y-1 text-zinc-100 text-[13px]">
-                <li>Conviction · dry humour · logical · obsessive · outcome-focused.</li>
-                <li>Calm conviction over urgency. Profane when emphatic.</li>
-                <li>No corporate gloss. No motivational fluff. No fake hype.</li>
-              </ul>
+            <Artefact label="The headline · ready to paste">
+              <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">From Cold to Sold.</p>
+              <p className="text-zinc-200 text-[14px] italic">&ldquo;The sales framework I use on every workshop call. Stripped to its bones. Steal it.&rdquo;</p>
             </Artefact>
           </Move>
 
           <Move
             n="03"
-            title="Relaunch the 4 lead magnets with new headlines."
-            body="Two are flagship (Profit Path · Cold to Sold). Two are workhorses (Find the One Thing diagnostic · Leak Calculator). Each gets a clear name, a clear outcome, a clear page. Profit Path replaces &ldquo;Customer Journey Blueprint&rdquo; — that name doesn&apos;t say what it does."
-            owner="Sean writes · Rhys team builds pages"
-            ship="End of week 2"
+            title="Rebrand the diagnostic."
+            body="Highest-value asset on the page. Avoid &ldquo;diagnostic&rdquo; and &ldquo;bottleneck&rdquo; on the landing page — most don&apos;t know the words."
+            owner="Sean writes · Rhys signs off"
+            ship="End of week 3"
           >
-            <Artefact label="The 4 headlines · ready to paste">
-              <div className="space-y-3 text-[13px]">
-                <div className="border-l-2 border-blue-500/40 pl-3">
-                  <p className="font-display font-extrabold text-white">Six Step Profit Path</p>
-                  <p className="text-zinc-200 italic mt-0.5">&ldquo;Turn cold leads into raving fans. In 5 minutes, you&apos;ll know how to take people from never-heard-of-you to obsessed advocate.&rdquo;</p>
-                </div>
-                <div className="border-l-2 border-blue-500/40 pl-3">
-                  <p className="font-display font-extrabold text-white">From Cold to Sold</p>
-                  <p className="text-zinc-200 italic mt-0.5">&ldquo;The sales framework I use on every workshop call. Stripped to its bones. Steal it.&rdquo;</p>
-                </div>
-                <div className="border-l-2 border-blue-500/40 pl-3">
-                  <p className="font-display font-extrabold text-white">Find the one thing capping your business</p>
-                  <p className="text-zinc-200 italic mt-0.5">&ldquo;60-second diagnostic. Personalised blueprint + a video of me walking you through the fix.&rdquo;</p>
-                </div>
-                <div className="border-l-2 border-blue-500/40 pl-3">
-                  <p className="font-display font-extrabold text-white">How big is your leak?</p>
-                  <p className="text-zinc-200 italic mt-0.5">&ldquo;60-second calculator. Pours your business into a leaky bucket. Tells you how fast it&apos;s draining.&rdquo;</p>
-                </div>
-              </div>
+            <Artefact label="The headline · ready to paste">
+              <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">Find the one thing capping your business.</p>
+              <p className="text-zinc-200 text-[14px] italic">&ldquo;60-second diagnostic. Personalised blueprint + a video of me walking you through the fix.&rdquo;</p>
             </Artefact>
           </Move>
 
           <Move
             n="04"
-            title="Enforce the workshop Q&A framework."
-            body="Last workshop, only Gabe asked his question in the framework. Everyone else freeballed. Print the card. Put it on every chair. Set the two-camera angle. Re-prompt if anyone misses the format. The Q&A clips become 12 months of mid-funnel ad creative."
-            owner="Corey runs production · Rhys re-prompts"
-            ship="Next workshop"
+            title="Ship the Leak Calculator."
+            body="Names a problem coaches feel but can&apos;t describe. Inputs: clients in × clients out × 12 months. Output: grow / flat / shrink + lost revenue. Visualise as the leaky bucket. Above 3% triggers a follow-up sequence."
+            owner="Rhys team builds · Sean writes copy"
+            ship="End of week 4"
           >
-            <Artefact label="The card · printed, on every chair">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-blue-300 mb-3">When you ask a question, say:</p>
-              <div className="space-y-1.5 text-zinc-100 text-[15px] leading-relaxed font-medium">
-                <p>&ldquo;I&apos;m a <span className="text-blue-300">[role]</span>.&rdquo;</p>
-                <p>&ldquo;I make <span className="text-blue-300">[revenue]</span>.&rdquo;</p>
-                <p>&ldquo;My main problem is <span className="text-blue-300">[X]</span>.&rdquo;</p>
-                <p>&ldquo;If I don&apos;t fix it, <span className="text-blue-300">[stakes]</span>.&rdquo;</p>
-              </div>
+            <Artefact label="The headline · ready to paste">
+              <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">How big is your leak?</p>
+              <p className="text-zinc-200 text-[14px] italic">&ldquo;60-second calculator. Pours your business into a leaky bucket. Tells you how fast it&apos;s draining. Imagine if you never lost a client.&rdquo;</p>
             </Artefact>
           </Move>
+
+        </Phase>
+
+        <Divider />
+
+        {/* ═══ SEGMENT 2 · SHORT-FORM CONTENT ═══ */}
+        <Phase
+          tag="Segment 2"
+          window="Week 1-12"
+          title="Short-form Content."
+          theme="The volume engine. Mon/Wed/Fri shoot rhythm across 4 environments. 9 shorts week 1, scaling to 14/week by week 3. 30-day test → pick 4 winners → 60-day lock → continuous testing forever. Deeper detail in /undeniablenextsteps/content."
+        >
 
           <Move
             n="05"
             title="Lock the 30-day shoot test."
-            body="Stop reactive shooting. Lock a Mon/Wed/Fri rhythm across 4 environments. Don&apos;t test the environments — rotate them. Test format, length, hook style, CTA. End of 30 days, pick 4 winners that earn their slot for the next 60."
+            body="Stop reactive shooting. Mon/Wed/Fri. 4 environments rotated (Park · Gym · Hallway · Office). Don&apos;t test environments — rotate them. Test format, length, hook style, CTA. End of 30 days, pick 4 winners."
             owner="Corey runs · Rhys shows up"
             ship="Week 1 start"
           >
@@ -354,37 +335,28 @@ export default function UndeniableNextSteps() {
                 <div className="flex gap-3"><span className="font-display font-extrabold text-blue-300 w-20">Wednesday</span><span className="text-zinc-200">Gym · Teach bucket · List + Old Way · New Way · 3 shorts</span></div>
                 <div className="flex gap-3"><span className="font-display font-extrabold text-blue-300 w-20">Friday</span><span className="text-zinc-200">Hallway · Beliefs bucket · Fight Me + Belief Flip · 3 shorts</span></div>
               </div>
-              <p className="text-zinc-400 text-[12px] italic mt-3">9 shorts week 1. Build to 14/week by week 3. Full spec lives in <a href="/undeniablenextsteps/content" className="text-blue-400 hover:text-blue-300 font-semibold">Content →</a></p>
+              <p className="text-zinc-400 text-[12px] italic mt-3">9 shorts week 1. 14/week by week 3.</p>
             </Artefact>
           </Move>
 
           <Move
             n="06"
-            title="Corey shadowing protocol kicks off."
-            body="Week 1: sit in on 3 client calls + 1 workshop. No camera. Just absorb. Week 2: read the curated resource list, pattern-recognise from 30 days of content. Week 3: suggest angles at Monday review. Week 4: drive the review."
-            owner="Corey learns · Rhys exposes · Sean curates"
-            ship="Week 1 start"
-          >
-            <Artefact label="The 30-day protocol">
-              <ul className="space-y-1.5 text-zinc-100 text-[13px]">
-                <li><b className="text-blue-300">Week 1 · Absorb</b> · 3 client calls + 1 workshop + 30 days of metrics</li>
-                <li><b className="text-blue-300">Week 2 · Pattern recognise</b> · resource list + catalogue Rhys stories</li>
-                <li><b className="text-blue-300">Week 3 · Suggest</b> · 3 content angles at Monday review</li>
-                <li><b className="text-blue-300">Week 4 · Drive</b> · lead Monday review · own next-week shoot plan</li>
-              </ul>
-            </Artefact>
-          </Move>
+            title="Continuous testing locked."
+            body="Test 1-2 new short-form formats per month. Forever. The 4 winners from the 30-day test are the base; new tests challenge them quarterly. The system survives drift."
+            owner="Corey leads · Rhys signs off monthly"
+            ship="From week 5 onward"
+          />
 
         </Phase>
 
         <Divider />
 
-        {/* ═══ PHASE 2 · BUILD FOUNDATIONS ═══ */}
+        {/* ═══ SEGMENT 3 · LONG-FORM TRUST ASSETS ═══ */}
         <Phase
-          tag="Phase 2"
-          window="Week 5-8"
-          title="Build foundations."
-          theme="Trust assets ship. The cycle locks. Cadence sticks. By end of phase 2: Character is live, Rome is in production, the Leak Calculator is converting, the six-week content cycle is running, and podcasts are shipping 3 per week."
+          tag="Segment 3"
+          window="Week 5-10"
+          title="Long-form Trust Assets."
+          theme="Character video transfers the trust. Rome closes the loop. Podcasts compound on the audio side. By end of segment: Character is live, Rome ships unlisted then public, 3 podcasts a week are running. These are the assets that compress trust on the fence-sitters."
         >
 
           <Move
@@ -419,10 +391,10 @@ export default function UndeniableNextSteps() {
 
           <Move
             n="08"
-            title="Lock Rome filming days."
-            body="The 4-5 hour VSL. The trust asset others send their friends. Pillars + path + personal + 3 case studies (Luke Miller · Sabine · Gabe). Block-shoot 2-3 days. Edit 14 days. Hosted unlisted on a landing page first."
+            title="Film Rome. Ship unlisted then public."
+            body="The 4-5 hour VSL. The trust asset others send their friends. Pillars + path + personal + 3 case studies (Luke Miller · Sabine · Gabe). Block-shoot 2-3 days. Edit 14 days. Hosted unlisted on a landing page first — fuelling mid-funnel ads and DM traffic. Public on YouTube end of week 10. The day this ships, the trust ceiling lifts."
             owner="Rhys films · Corey produces"
-            ship="Filming locked end of week 6"
+            ship="Filming end of week 6 · public end of week 10"
           >
             <Artefact label="Rome chapter map">
               <div className="space-y-1 text-[13px]">
@@ -448,15 +420,7 @@ export default function UndeniableNextSteps() {
 
           <Move
             n="09"
-            title="Ship the Leak Calculator."
-            body="The web tool that names the problem most coaches feel but can&apos;t describe. Inputs: clients in × clients out × 12 months. Output: grow / flat / shrink + the lost revenue figure. Visualise as the leaky bucket. Above 3% leak triggers a follow-up sequence."
-            owner="Rhys team builds · Sean writes copy"
-            ship="End of week 8"
-          />
-
-          <Move
-            n="10"
-            title="Start the six-week content cycle."
+            title="Start the six-week long-form cycle."
             body="One video a week. Six types in a rotation. Don&apos;t reinvent. Lock it. Replace 1-2 only if the data demands it."
             owner="Rhys writes · Corey shoots & edits"
             ship="Week 5 start"
@@ -475,7 +439,7 @@ export default function UndeniableNextSteps() {
           </Move>
 
           <Move
-            n="11"
+            n="10"
             title="Start podcasts · 3 per week."
             body="One framework per episode. 5-15 minutes. The 78 unfinished chapters from the book become 78 episodes. The pipeline writes itself. Audio first (Spotify + Apple). YouTube audio + IG clip per episode."
             owner="Rhys records · Corey cuts"
@@ -486,28 +450,37 @@ export default function UndeniableNextSteps() {
 
         <Divider />
 
-        {/* ═══ PHASE 3 · SCALE ═══ */}
+        {/* ═══ SEGMENT 4 · OPERATIONS ═══ */}
         <Phase
-          tag="Phase 3"
-          window="Week 9-12"
-          title="Scale."
-          theme="Rome ships. The engine runs. You stop being the bottleneck. By end of phase 3: Rome is live on YouTube, Corey is driving Monday review from data, the KPI dashboard is live, and Rhys is spending more than half the week on product, strategy and relationships."
+          tag="Segment 4"
+          window="Week 1-12"
+          title="Operations."
+          theme="Corey&apos;s evolution from videographer to creative direction. The Monday review installed. The 8 KPIs tracked weekly. By end of segment: Corey runs Monday review from data, the dashboard is live, and the engine runs on the cadence — not on heroic effort."
         >
 
           <Move
-            n="12"
-            title="Rome goes public."
-            body="Hosted unlisted on the dedicated landing page during pre-launch — driving mid-funnel ads + DM traffic. Then public on YouTube. The day this ships, the trust ceiling lifts. Workshop conversion follows."
-            owner="Rhys + Corey · launch coordination"
-            ship="End of week 10"
-          />
+            n="11"
+            title="Corey shadowing protocol kicks off."
+            body="The path from videographer to creative direction. Week-by-week behaviour. By week 4 he&apos;s leading Monday review."
+            owner="Corey learns · Rhys exposes · Sean curates"
+            ship="Week 1 start"
+          >
+            <Artefact label="The 30-day protocol">
+              <ul className="space-y-1.5 text-zinc-100 text-[13px]">
+                <li><b className="text-blue-300">Week 1 · Absorb</b> · 3 client calls + 30 days of metrics</li>
+                <li><b className="text-blue-300">Week 2 · Pattern recognise</b> · resource list + catalogue Rhys stories</li>
+                <li><b className="text-blue-300">Week 3 · Suggest</b> · 3 content angles at Monday review</li>
+                <li><b className="text-blue-300">Week 4 · Drive</b> · lead Monday review · own next-week shoot plan</li>
+              </ul>
+            </Artefact>
+          </Move>
 
           <Move
-            n="13"
-            title="Corey drives Monday review from data."
-            body="By now Corey has 60 days of pattern recognition. He prepares the 7 questions every Monday, presents the data, recommends what to do more of, what to kill. Rhys signs off in 10 minutes."
+            n="12"
+            title="Install the Monday review."
+            body="10 minutes. Every Monday. Corey prepares the answers. Rhys signs off. Drives the week&apos;s decisions."
             owner="Corey runs · Rhys signs off"
-            ship="Week 9 start"
+            ship="Week 1 start"
           >
             <Artefact label="The Monday review · 7 questions">
               <div className="space-y-1 text-[13px]">
@@ -523,9 +496,9 @@ export default function UndeniableNextSteps() {
           </Move>
 
           <Move
-            n="14"
-            title="KPI dashboard live · weekly cadence locked."
-            body="The 8 numbers tracked weekly. Quarterly review against the 5-year math. From here, the engine runs on the cadence, not on heroic effort."
+            n="13"
+            title="KPI dashboard live."
+            body="The 8 numbers tracked weekly. Quarterly review against the 5-year math. The engine runs on the cadence, not on heroic effort."
             owner="Corey tracks · Sean reviews"
             ship="End of week 12"
           >
@@ -544,14 +517,6 @@ export default function UndeniableNextSteps() {
               </div>
             </Artefact>
           </Move>
-
-          <Move
-            n="15"
-            title="Continuous testing locked."
-            body="Test 1-2 new short-form formats per month. Forever. The 4 winners from phase 1 are the base; new tests challenge them quarterly. The system survives drift."
-            owner="Corey leads · Rhys signs off monthly"
-            ship="From week 9 onward"
-          />
 
         </Phase>
 
