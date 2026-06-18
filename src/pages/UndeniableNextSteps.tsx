@@ -27,17 +27,6 @@ const Eyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[12px] font-medium text-zinc-400 uppercase tracking-widest mb-4">{children}</p>
 );
 
-const Bullets = ({ items }: { items: React.ReactNode[] }) => (
-  <ul className="space-y-2.5">
-    {items.map((item, i) => (
-      <li key={i} className="flex items-start gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-        <span className="text-zinc-300 text-[14px] leading-relaxed">{item}</span>
-      </li>
-    ))}
-  </ul>
-);
-
 function Artefact({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="rounded-xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mt-4">
@@ -47,34 +36,19 @@ function Artefact({ label, children }: { label: string; children: React.ReactNod
   );
 }
 
-function Move({
-  n, title, body, owner, ship, children,
-}: {
-  n: string; title: string; body: string; owner: string; ship: string; children?: React.ReactNode;
-}) {
+function Move({ n, title, children }: { n: string; title: string; children?: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-6 md:p-7">
-      <div className="flex items-baseline gap-3 mb-3 flex-wrap">
+      <div className="flex items-baseline gap-3 flex-wrap">
         <span className="font-display text-[20px] font-extrabold text-blue-400 tabular-nums leading-none">{n}</span>
         <h4 className="font-display text-[17px] md:text-[19px] font-extrabold text-white leading-tight">{title}</h4>
       </div>
-      <p className="text-zinc-300 text-[14px] leading-relaxed mb-5">{body}</p>
       {children}
-      <div className="grid md:grid-cols-2 gap-x-6 gap-y-2 mt-5 pt-4 border-t border-zinc-800/80">
-        <div className="flex items-baseline gap-2 text-[12px]">
-          <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">Owner</span>
-          <span className="text-zinc-200">{owner}</span>
-        </div>
-        <div className="flex items-baseline gap-2 text-[12px]">
-          <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">Ship by</span>
-          <span className="text-zinc-200">{ship}</span>
-        </div>
-      </div>
     </div>
   );
 }
 
-function Phase({ tag, window, title, theme, children }: { tag: string; window: string; title: string; theme: string; children: React.ReactNode }) {
+function Phase({ tag, window, title, children }: { tag: string; window: string; title: string; children: React.ReactNode }) {
   return (
     <section className="py-16 md:py-20">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -83,8 +57,7 @@ function Phase({ tag, window, title, theme, children }: { tag: string; window: s
             <span className="text-[11px] uppercase tracking-widest font-semibold text-blue-300 border border-blue-500/40 bg-blue-500/5 rounded-full px-3 py-1">{tag}</span>
             <span className="text-zinc-400 text-[12px] uppercase tracking-widest font-semibold">{window}</span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">{title}</h2>
-          <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed mb-10">{theme}</p>
+          <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">{title}</h2>
           <div className="space-y-4">{children}</div>
         </Reveal>
       </div>
@@ -119,13 +92,10 @@ export default function UndeniableNextSteps() {
                 <br />
                 <span className="text-blue-400">Plan.</span>
               </h1>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/5">
                 <AlertCircle className="w-3.5 h-3.5 text-blue-400" />
                 <span className="text-blue-400 text-xs font-medium italic">Working session output · for the Undeniable team</span>
               </div>
-              <p className="text-zinc-400 text-[17px] md:text-[19px] leading-relaxed">
-                Most of the 15-20K coaches in your category already know who you are. They&apos;re sitting on the fence. The next 90 days compress trust and convert them, instead of chasing new eyeballs.
-              </p>
             </Reveal>
           </div>
         </section>
@@ -137,54 +107,22 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>The diagnosis</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">Four bottlenecks. Two need work.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">Clarity and Quality both score 3. That&apos;s where the 90 days start. The other two hold.</p>
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">One core bottleneck. Clarity.</h2>
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                 {[
-                  { letter: 'C', name: 'Clarity', score: 3, focus: 'Fix first', note: 'Stranger reads 4 of 5 posts as "I\'m a coach."' },
-                  { letter: 'V', name: 'Visibility', score: 4, focus: '', note: 'Strangers in DMs. ICP knows the name.' },
-                  { letter: 'A', name: 'Authority', score: 5, focus: '', note: '$5M built. 82% retention. Receipts unmatched.' },
-                  { letter: 'Q', name: 'Quality', score: 3, focus: 'Fix next', note: 'Leads landing sub-10K. Qualified eventually, not pre-sold.' },
+                  { letter: 'C', name: 'Clarity', score: 3, focus: true },
+                  { letter: 'V', name: 'Visibility', score: 4, focus: false },
+                  { letter: 'A', name: 'Authority', score: 5, focus: false },
+                  { letter: 'Q', name: 'Quality', score: 3, focus: false },
                 ].map((b) => (
-                  <div key={b.letter} className={`rounded-2xl border p-4 md:p-5 ${b.focus ? 'border-blue-500/30 bg-blue-500/[0.04]' : 'border-zinc-800 bg-elevated/40'}`}>
-                    <div className="flex items-baseline justify-between mb-2">
-                      <span className="font-display text-[24px] md:text-[28px] font-extrabold text-white">{b.letter}</span>
-                      <span className={`font-display text-[24px] md:text-[28px] font-extrabold ${b.focus ? 'text-blue-400' : 'text-zinc-400'}`}>{b.score}</span>
+                  <div key={b.letter} className={`rounded-2xl border p-5 md:p-6 ${b.focus ? 'border-blue-500/40 bg-blue-500/[0.05]' : 'border-zinc-800 bg-elevated/40'}`}>
+                    <div className="flex items-baseline justify-between mb-4">
+                      <span className="font-display text-[28px] md:text-[32px] font-extrabold text-white">{b.letter}</span>
+                      <span className={`font-display text-[28px] md:text-[32px] font-extrabold ${b.focus ? 'text-blue-400' : 'text-zinc-400'}`}>{b.score}</span>
                     </div>
-                    <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-1">{b.name}</p>
-                    {b.focus && <p className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold mb-2">{b.focus}</p>}
-                    <p className="text-zinc-300 text-[12px] md:text-[13px] leading-relaxed mt-2">{b.note}</p>
+                    <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400">{b.name}</p>
                   </div>
                 ))}
-              </div>
-
-              {/* PRIORITISATION */}
-              <div className="mt-12">
-                <Eyebrow>Why this order</Eyebrow>
-                <h3 className="font-display text-xl md:text-2xl font-extrabold text-white mb-6">Clarity first. Then Quality. Visibility and Authority hold.</h3>
-                <div className="space-y-3">
-                  <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span className="font-display text-blue-400 text-[16px] font-extrabold">01</span>
-                      <p className="font-display text-white text-[15px] md:text-[16px] font-extrabold">Clarity gates everything downstream.</p>
-                    </div>
-                    <p className="text-zinc-300 text-[14px] leading-relaxed">A stranger decides in under 10 posts whether you&apos;re for them. Until the profile + bio + pinned content reads as &ldquo;he helps fitness coaches build $1M+ businesses without going viral,&rdquo; every dollar spent on Visibility and every brick of Authority lands on the wrong audience. <b className="text-white">Fix: moves 01-02</b> · the bio, the voice, the editorial filter.</p>
-                  </div>
-                  <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span className="font-display text-blue-400 text-[16px] font-extrabold">02</span>
-                      <p className="font-display text-white text-[15px] md:text-[16px] font-extrabold">Quality is what makes the room worth being in.</p>
-                    </div>
-                    <p className="text-zinc-300 text-[14px] leading-relaxed">Clarity sharpens who shows up. Quality sharpens who they are when they show up — pre-sold, on-budget, on-frame. Sub-10K leads dilute the workshop signal and tank the close rate. <b className="text-white">Fix: moves 03-04, 07</b> · lead magnets named for the right outcome, the Q&A framework enforced, the Character video doing the trust transfer.</p>
-                  </div>
-                  <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-5">
-                    <div className="flex items-baseline gap-3 mb-2">
-                      <span className="font-display text-zinc-400 text-[16px] font-extrabold">03</span>
-                      <p className="font-display text-white text-[15px] md:text-[16px] font-extrabold">Visibility and Authority don&apos;t need investment right now.</p>
-                    </div>
-                    <p className="text-zinc-300 text-[14px] leading-relaxed">Visibility at 4 = the reach is fine. Authority at 5 = the receipts are unmatched. Pouring effort here would be procrastination dressed as growth. Both compound automatically once Clarity and Quality are fixed. <b className="text-white">Action: hold both</b>.</p>
-                  </div>
-                </div>
               </div>
             </Reveal>
           </div>
@@ -197,73 +135,24 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>The avatar</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">Built from Sabine and Josh.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">One coach. Both archetypes baked in. Every brand and content decision asks: does this land for them?</p>
-              <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-7 md:p-8">
-                <p className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mb-3">The Patient Operator</p>
-                <p className="font-display text-white text-[24px] md:text-[28px] font-extrabold leading-tight mb-5">Already doing 10K-80K. Already knows your work.</p>
-                <p className="text-zinc-200 text-[15px] leading-relaxed mb-5">
-                  Self-identifies as a doer. Tries first. Asks when stuck. Has consumed your content for months — possibly years. Has a hidden inefficiency they can&apos;t yet name: a leak, a ceiling, a churn rate they&apos;ve never measured. They&apos;re not waiting for permission. They&apos;re waiting for the proof they can&apos;t argue with.
-                </p>
-                <div className="grid md:grid-cols-2 gap-4 pt-5 border-t border-zinc-800/80">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">What they say</p>
-                    <ul className="space-y-1.5 text-zinc-300 text-[13px] italic">
-                      <li>&ldquo;Sorry if I&apos;m being annoying.&rdquo;</li>
-                      <li>&ldquo;You don&apos;t know what you don&apos;t know.&rdquo;</li>
-                      <li>&ldquo;You won&apos;t hear from me until I&apos;ve done 80K a month.&rdquo;</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">How they convert</p>
-                    <ul className="space-y-1.5 text-zinc-300 text-[13px]">
-                      <li>On proof, not pitch.</li>
-                      <li>On math they can run themselves.</li>
-                      <li>On stories that mirror their stuck point.</li>
-                      <li>On a single number they hadn&apos;t calculated.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">Doing 10K-80K. Already knows your work.</h2>
             </Reveal>
           </div>
         </section>
 
         <Divider />
 
-        {/* ═══ THE PLAN HEADER ═══ */}
-        <section className="py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <Reveal>
-              <div className="text-center">
-                <Eyebrow>The plan</Eyebrow>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.1] mb-6">
-                  Four segments.
-                  <br />
-                  <span className="text-zinc-400">Each one its own domain.</span>
-                </h2>
-                <p className="text-zinc-400 text-[16px] md:text-[17px] leading-relaxed max-w-2xl mx-auto">
-                  Lead Magnets · Short-form · Long-form Trust · Operations. Each segment self-contained, with the moves, owners, ship dates and artefacts inside.
-                </p>
-              </div>
-            </Reveal>
-          </div>
-        </section>
 
         {/* ═══ SEGMENT 1 · LEAD MAGNETS ═══ */}
         <Phase
           tag="Segment 1"
           window="Week 1-4"
           title="Lead Magnets."
-          theme="Four critical assets. Two flagship (Profit Path · Cold to Sold). Two workhorses (the diagnostic · the Leak Calculator). Each one named for the outcome it delivers. Deeper detail in /undeniablenextsteps/lead-magnets."
         >
 
           <Move
             n="01"
             title="Relaunch Six Step Profit Path."
-            body="Rename from &ldquo;Customer Journey Blueprint&rdquo; — that name says nothing. New headline + new landing page. Asset itself stays as is."
-            owner="Sean writes · Rhys team builds"
-            ship="End of week 2"
           >
             <Artefact label="The headline · ready to paste">
               <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">Turn cold leads into raving fans.</p>
@@ -274,9 +163,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="02"
             title="Ship From Cold to Sold landing page."
-            body="Best-performing asset for lead quality. Doesn&apos;t need rebuild — just a clean landing page that names what it is."
-            owner="Sean writes · Rhys team builds"
-            ship="End of week 2"
           >
             <Artefact label="The headline · ready to paste">
               <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">From Cold to Sold.</p>
@@ -287,9 +173,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="03"
             title="Rebrand the diagnostic."
-            body="Highest-value asset on the page. Avoid &ldquo;diagnostic&rdquo; and &ldquo;bottleneck&rdquo; on the landing page — most don&apos;t know the words."
-            owner="Sean writes · Rhys signs off"
-            ship="End of week 3"
           >
             <Artefact label="The headline · ready to paste">
               <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">Find the one thing capping your business.</p>
@@ -300,9 +183,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="04"
             title="Ship the Leak Calculator."
-            body="Names a problem coaches feel but can&apos;t describe. Inputs: clients in × clients out × 12 months. Output: grow / flat / shrink + lost revenue. Visualise as the leaky bucket. Above 3% triggers a follow-up sequence."
-            owner="Rhys team builds · Sean writes copy"
-            ship="End of week 4"
           >
             <Artefact label="The headline · ready to paste">
               <p className="font-display text-white text-[17px] md:text-[18px] font-extrabold leading-snug mb-2">How big is your leak?</p>
@@ -319,15 +199,11 @@ export default function UndeniableNextSteps() {
           tag="Segment 2"
           window="Week 1-12"
           title="Short-form Content."
-          theme="The volume engine. Mon/Wed/Fri shoot rhythm across 4 environments. 9 shorts week 1, scaling to 14/week by week 3. 30-day test → pick 4 winners → 60-day lock → continuous testing forever. Deeper detail in /undeniablenextsteps/content."
         >
 
           <Move
             n="05"
             title="Lock the 30-day shoot test."
-            body="Stop reactive shooting. Mon/Wed/Fri. 4 environments rotated (Park · Gym · Hallway · Office). Don&apos;t test environments — rotate them. Test format, length, hook style, CTA. End of 30 days, pick 4 winners."
-            owner="Corey runs · Rhys shows up"
-            ship="Week 1 start"
           >
             <Artefact label="Week 1 shoot grid">
               <div className="space-y-2 text-[13px]">
@@ -342,9 +218,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="06"
             title="Continuous testing locked."
-            body="Test 1-2 new short-form formats per month. Forever. The 4 winners from the 30-day test are the base; new tests challenge them quarterly. The system survives drift."
-            owner="Corey leads · Rhys signs off monthly"
-            ship="From week 5 onward"
           />
 
         </Phase>
@@ -356,15 +229,11 @@ export default function UndeniableNextSteps() {
           tag="Segment 3"
           window="Week 5-10"
           title="Long-form Trust Assets."
-          theme="Character video transfers the trust. Rome closes the loop. Podcasts compound on the audio side. By end of segment: Character is live, Rome ships unlisted then public, 3 podcasts a week are running. These are the assets that compress trust on the fence-sitters."
         >
 
           <Move
             n="07"
             title="Ship the Character video."
-            body="The Trojan horse. 20-30 minutes. Rhys&apos;s arc from gym floor to $5M. Vulnerable. No selling. Damaging admissions OK. Bridges to Rome at the end. This is the piece that converts the fence-sitters."
-            owner="Rhys films · Corey shoots & edits"
-            ship="End of week 6"
           >
             <Artefact label="The 10-beat arc">
               <div className="space-y-1.5 text-[13px]">
@@ -392,9 +261,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="08"
             title="Film Rome. Ship unlisted then public."
-            body="The 4-5 hour VSL. The trust asset others send their friends. Pillars + path + personal + 3 case studies (Luke Miller · Sabine · Gabe). Block-shoot 2-3 days. Edit 14 days. Hosted unlisted on a landing page first — fuelling mid-funnel ads and DM traffic. Public on YouTube end of week 10. The day this ships, the trust ceiling lifts."
-            owner="Rhys films · Corey produces"
-            ship="Filming end of week 6 · public end of week 10"
           >
             <Artefact label="Rome chapter map">
               <div className="space-y-1 text-[13px]">
@@ -421,9 +287,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="09"
             title="Start the six-week long-form cycle."
-            body="One video a week. Six types in a rotation. Don&apos;t reinvent. Lock it. Replace 1-2 only if the data demands it."
-            owner="Rhys writes · Corey shoots & edits"
-            ship="Week 5 start"
           >
             <Artefact label="The 6 weekly types">
               <div className="space-y-1 text-[13px]">
@@ -441,9 +304,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="10"
             title="Start podcasts · 3 per week."
-            body="One framework per episode. 5-15 minutes. The 78 unfinished chapters from the book become 78 episodes. The pipeline writes itself. Audio first (Spotify + Apple). YouTube audio + IG clip per episode."
-            owner="Rhys records · Corey cuts"
-            ship="Week 5 start"
           />
 
         </Phase>
@@ -455,15 +315,11 @@ export default function UndeniableNextSteps() {
           tag="Segment 4"
           window="Week 1-12"
           title="Operations."
-          theme="Corey&apos;s evolution from videographer to creative direction. The Monday review installed. The 8 KPIs tracked weekly. By end of segment: Corey runs Monday review from data, the dashboard is live, and the engine runs on the cadence — not on heroic effort."
         >
 
           <Move
             n="11"
             title="Corey shadowing protocol kicks off."
-            body="The path from videographer to creative direction. Week-by-week behaviour. By week 4 he&apos;s leading Monday review."
-            owner="Corey learns · Rhys exposes · Sean curates"
-            ship="Week 1 start"
           >
             <Artefact label="The 30-day protocol">
               <ul className="space-y-1.5 text-zinc-100 text-[13px]">
@@ -478,9 +334,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="12"
             title="Install the Monday review."
-            body="10 minutes. Every Monday. Corey prepares the answers. Rhys signs off. Drives the week&apos;s decisions."
-            owner="Corey runs · Rhys signs off"
-            ship="Week 1 start"
           >
             <Artefact label="The Monday review · 7 questions">
               <div className="space-y-1 text-[13px]">
@@ -498,9 +351,6 @@ export default function UndeniableNextSteps() {
           <Move
             n="13"
             title="KPI dashboard live."
-            body="The 8 numbers tracked weekly. Quarterly review against the 5-year math. The engine runs on the cadence, not on heroic effort."
-            owner="Corey tracks · Sean reviews"
-            ship="End of week 12"
           >
             <Artefact label="The 8 weekly numbers">
               <div className="grid md:grid-cols-2 gap-2 text-[12px]">
@@ -527,43 +377,16 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>Roles</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">Three people. Clear lanes.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-10">No overlap. If two people own a thing, no-one does.</p>
-              <div className="space-y-4">
-                <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-6">
-                  <p className="font-display font-extrabold text-white text-[16px] mb-4">Rhys · talent + IP + final call</p>
-                  <Bullets items={[
-                    'Show up to Mon/Wed/Fri shoots',
-                    'Write hook + problem for each weekly video',
-                    'Film Character (1 day) and Rome (2-3 day block-shoot)',
-                    'Record 2-3 podcast episodes per week',
-                    'Sign off Monday review in 10 minutes',
-                    'Capture (4 questions) end of each working day',
-                    'Final call on every named asset, framework, hire',
-                  ]} />
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">Three lanes.</h2>
+              <div className="space-y-3">
+                <div className="rounded-2xl border border-zinc-800 bg-elevated/40 px-6 py-5">
+                  <p className="font-display font-extrabold text-white text-[16px]">Rhys · talent</p>
                 </div>
-                <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-6">
-                  <p className="font-display font-extrabold text-white text-[16px] mb-4">Corey · capture + operations → creative direction</p>
-                  <Bullets items={[
-                    'Run the Mon/Wed/Fri shoots (14 shorts/wk by week 3)',
-                    'Edit short-form to ship 2/day cadence',
-                    'Two-camera minimum on long-form',
-                    'Log daily metrics, run Monday review',
-                    'Build pattern recognition (frameworks, stories)',
-                    'By week 3: suggest content angles. By week 4: drive direction.',
-                  ]} />
+                <div className="rounded-2xl border border-zinc-800 bg-elevated/40 px-6 py-5">
+                  <p className="font-display font-extrabold text-white text-[16px]">Corey · operations</p>
                 </div>
-                <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-6">
-                  <p className="font-display font-extrabold text-blue-300 text-[16px] mb-4">Sean · strategy + frameworks + accountability</p>
-                  <Bullets items={[
-                    'Build + deliver the content operating system',
-                    'Write the 4 lead magnet headlines + landing pages',
-                    'Facilitate the 10 character lessons',
-                    'Lock the 6 pillar video outlines and 6-week cycle',
-                    'Name the signature mechanisms (MACHINE, leaky bucket, etc.)',
-                    'Fortnightly strategy + accountability sessions',
-                    'Voice note + email support between sessions',
-                  ]} />
+                <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] px-6 py-5">
+                  <p className="font-display font-extrabold text-blue-300 text-[16px]">Sean · strategy</p>
                 </div>
               </div>
             </Reveal>
@@ -576,9 +399,8 @@ export default function UndeniableNextSteps() {
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
-              <Eyebrow>Operating rhythm</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">What every week looks like.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-10">Shoot Mon / Wed / Fri. Edit Tue / Thu. Friday closes the week. Sunday Rhys scans next week.</p>
+              <Eyebrow>Rhythm</Eyebrow>
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">The week.</h2>
               <div className="grid grid-cols-2 md:grid-cols-7 gap-2">
                 {[
                   { d: 'Mon', label: 'Shoot 10-2 · Monday review', shoot: true },
@@ -606,20 +428,18 @@ export default function UndeniableNextSteps() {
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
               <Eyebrow>Pending</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">Decisions still open.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-10">Don&apos;t block week 1. Get them off the list by week 4.</p>
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">Open decisions.</h2>
               <div className="space-y-3">
                 {[
-                  { q: 'Custom GPT route', detail: 'Rotate weekly (1-2 new) OR pick 4-8 workhorses and lock. Recommend the workhorse path.' },
-                  { q: 'Bottleneck Buster · rename?', detail: '"Diagnostic" + "Bottleneck" are both words most don\'t know. Test a softer name.' },
-                  { q: 'Linktree replacement', detail: 'One link form = friction. Decide: single CTA-led landing page that branches.' },
-                  { q: 'Reese Livingstone vs Undeniable channel', detail: 'Currently posting on both. Pick a primary, support the other. Recommend Reese Livingstone as primary.' },
-                  { q: 'Ad boost on shorts', detail: 'Currently not boosted. Test on top 3 performers per month with a fixed $50 boost.' },
-                  { q: 'Re-cut workshop VSL', detail: '83% completion is great. Sub-2% page conversion is not. Add scrubber + pause + segment audiences upstream.' },
-                ].map((d, i) => (
-                  <div key={i} className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-5">
-                    <p className="font-display text-[15px] font-extrabold text-amber-300 mb-1">{d.q}</p>
-                    <p className="text-zinc-300 text-[13px] leading-relaxed">{d.detail}</p>
+                  'Custom GPT route',
+                  'Bottleneck Buster · rename?',
+                  'Linktree replacement',
+                  'Reese Livingstone vs Undeniable channel',
+                  'Ad boost on shorts',
+                  'Re-cut workshop VSL',
+                ].map((q, i) => (
+                  <div key={i} className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-5 py-4">
+                    <p className="font-display text-[15px] font-extrabold text-amber-300">{q}</p>
                   </div>
                 ))}
               </div>
@@ -633,37 +453,24 @@ export default function UndeniableNextSteps() {
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
             <Reveal>
-              <Eyebrow>The working tools</Eyebrow>
-              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">Open these on shoot day.</h2>
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-10">Source-of-truth working pages, not reference docs. Live tools the team uses.</p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <a href="/undeniablenextsteps/shoot-card" className="group block rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-[18px] font-extrabold text-white">Next Shoot</h3>
-                    <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
-                  </div>
-                  <p className="text-zinc-400 text-[14px] leading-relaxed">4 buckets · frameworks · 22 shoot-ready pieces · hook bank per bucket.</p>
+              <Eyebrow>Tools</Eyebrow>
+              <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-10">The working pages.</h2>
+              <div className="grid md:grid-cols-2 gap-3">
+                <a href="/undeniablenextsteps/shoot-card" className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5">
+                  <h3 className="font-display text-[18px] font-extrabold text-white">Next Shoot</h3>
+                  <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
                 </a>
-                <a href="/undeniablenextsteps/hooks" className="group block rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-[18px] font-extrabold text-white">Hook Bank</h3>
-                    <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
-                  </div>
-                  <p className="text-zinc-400 text-[14px] leading-relaxed">~90 hooks organised by mechanic.</p>
+                <a href="/undeniablenextsteps/hooks" className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5">
+                  <h3 className="font-display text-[18px] font-extrabold text-white">Hook Bank</h3>
+                  <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
                 </a>
-                <a href="/undeniablenextsteps/ad-gold" className="group block rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-[18px] font-extrabold text-white">Ad Gold</h3>
-                    <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
-                  </div>
-                  <p className="text-zinc-400 text-[14px] leading-relaxed">Verbatim money lines, stories, frames.</p>
+                <a href="/undeniablenextsteps/ad-gold" className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5">
+                  <h3 className="font-display text-[18px] font-extrabold text-white">Ad Gold</h3>
+                  <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
                 </a>
-                <a href="/undeniablenextsteps/content" className="group block rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-display text-[18px] font-extrabold text-white">Content System</h3>
-                    <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
-                  </div>
-                  <p className="text-zinc-400 text-[14px] leading-relaxed">Pillars · formats · environments · hooks · cadence · data log.</p>
+                <a href="/undeniablenextsteps/content" className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5">
+                  <h3 className="font-display text-[18px] font-extrabold text-white">Content System</h3>
+                  <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-blue-400 transition-colors" />
                 </a>
               </div>
             </Reveal>
