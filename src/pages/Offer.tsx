@@ -51,7 +51,8 @@ const Crosses = ({ items }: { items: string[] }) => (
 );
 
 const phases = [
-  { tag: 'Weeks 1 to 4', name: 'Activation', line: 'Install the engine. Get first wins.', items: [
+  { tag: 'Weeks 1 to 4', name: 'Activation', line: 'Install the engine. I advise you directly while you get first wins.', items: [
+    'I am in it with you each week, advising directly as we install and calibrate the system',
     'Pressure test your Brand Bible in the real world',
     'Run a 4 week posting sprint for data and first clearly attributable leads',
     'Lock your weekly rhythm and the minimal content to DM to call path',
@@ -195,8 +196,7 @@ export default function Offer() {
               <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By day 90 you have</p>
               <Ticks items={[
                 'A refined brand and a content engine built for your voice, audience and creation style',
-                'A Media Operator who understands the strategy, not just the schedule',
-                'A run sheet and KPI dashboard your team can follow without me',
+                'A clear path of what to post and why it works, so you can keep scaling without me',
                 'Three straight weeks hitting your lead targets',
               ]} />
             </div>
