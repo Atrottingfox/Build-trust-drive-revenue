@@ -196,7 +196,7 @@ export default function Offer() {
             <Label>Step 1 &middot; Brand Day &middot; $5,000</Label>
             <H2>One focused day to refine your brand and remove the guesswork.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              With you and your Media Operator, or whoever owns content, we:
+              With you and your key people, we:
             </p>
             <Ticks items={[
               'Rebuild your on camera identity and positioning',
