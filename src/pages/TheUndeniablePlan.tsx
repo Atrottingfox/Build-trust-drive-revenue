@@ -160,6 +160,10 @@ export default function TheUndeniablePlan() {
         <Bucket n="7" title="Weekly calls + access" owners="S">
           <p className="text-zinc-300 text-[15px] leading-relaxed">Weekly calls with Sean, plus WhatsApp access on 0418 554 4311.</p>
         </Bucket>
+
+        <Bucket n="8" title="Train Corey" owners="S">
+          <Task id="p1-8">Corey shadows every shoot and edit. Start training him to think like a marketer, not just an editor.</Task>
+        </Bucket>
       </Phase>
 
       <Divider />
