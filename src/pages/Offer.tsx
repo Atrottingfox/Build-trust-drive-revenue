@@ -153,10 +153,10 @@ export default function Offer() {
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
-              Build Your Brand in a Day.
+              Own your Category.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
-              Then install the content strategy that turns your attention into revenue, without becoming a full time creator.
+              Engineer how content drives revenue, build a brand that commands attention from the right people, and install the infrastructure that lets your team keep scaling without you becoming a full time creator.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
