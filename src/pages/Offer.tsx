@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
@@ -109,6 +109,13 @@ const cadence = [
   ]},
 ];
 
+const bottlenecks = [
+  { icon: Compass, title: 'Clarity', q: 'Can a stranger tell what you do, who for, and why, in under 10 posts?' },
+  { icon: Eye, title: 'Visibility', q: 'Are you reaching enough of the right people? Do strangers land in your DMs because of your content?' },
+  { icon: Shield, title: 'Authority', q: 'When your ideal client needs help in your category, are you one of the first names they think of?' },
+  { icon: Target, title: 'Quality', q: 'Are the leads landing in your inbox pre sold and properly qualified?' },
+];
+
 const deliverables = [
   { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
   { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
@@ -182,6 +189,34 @@ export default function Offer() {
                 'Want an operator friendly system, not another done for you agency or course',
                 'Willing to fulfil increased demand without dropping standards',
               ]} />
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* THE DIAGNOSTIC */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The diagnostic</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Four bottlenecks.
+              <br />
+              <span className="text-zinc-500">One fix first.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
+              From a stranger to a sale, there are four things that can hold you back. We score you on each, find the one costing you the most, and fix that first.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {bottlenecks.map((b, i) => (
+                <div key={i} className="glow-card p-7">
+                  <b.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <p className="text-white font-semibold text-base mb-3">{b.title}</p>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{b.q}</p>
+                </div>
+              ))}
             </div>
           </Section>
         </div>
