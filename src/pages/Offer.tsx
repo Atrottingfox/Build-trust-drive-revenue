@@ -110,21 +110,9 @@ const cadence = [
 ];
 
 const diagnostic = [
-  { icon: Check, label: 'Strengths', sub: 'What you bring', items: [
-    'Genuine expertise and results that already convert.',
-    'An audience and proof you have already built.',
-    'Content that works in pockets, ready to be systemised.',
-  ]},
-  { icon: Compass, label: 'Gaps', sub: 'What is missing', items: [
-    'A documented brand and one source of truth.',
-    'A mapped journey from stranger to buyer.',
-    'A repeatable system your team can run without you.',
-  ]},
-  { icon: Zap, label: 'Opportunities', sub: 'What we build', items: [
-    'Your IP turned into named lead magnets.',
-    'A core trust asset that sells for you.',
-    'A demand cycle that compounds without you.',
-  ]},
+  { icon: Check, label: 'Strengths', sub: 'What is working', desc: 'The expertise, proof, and audience already worth building on. We map what is there so we amplify it, rather than start from scratch.' },
+  { icon: Compass, label: 'Gaps', sub: 'Where it leaks', desc: 'The points between a stranger finding you and becoming a buyer where attention, trust, or clarity falls away.' },
+  { icon: Zap, label: 'Opportunities', sub: 'What we build', desc: 'The core elements that turn the strengths and the gaps into one working engine over the next 90 days.' },
 ];
 
 const deliverables = [
@@ -226,14 +214,7 @@ export default function Offer() {
                   <d.icon className="w-5 h-5 text-blue-400 mb-4" />
                   <p className="text-white font-semibold text-base">{d.label}</p>
                   <p className="text-zinc-500 text-[11px] uppercase tracking-widest font-semibold mb-4">{d.sub}</p>
-                  <ul className="space-y-3">
-                    {d.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-zinc-400 text-sm leading-relaxed">{d.desc}</p>
                 </div>
               ))}
             </div>
