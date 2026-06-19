@@ -191,10 +191,6 @@ export default function TheUndeniablePlan() {
 
         <Bucket n="3" title="The Public VSL" owners="R">
           <Task id="p2-4">Build the value first Public VSL.</Task>
-          <Detail title="The structure">
-            <p>Hook, promise and length. Then the proof anchor (Sabine: 15K to 80K plus the math). Then the path. Then the mechanism (the Authority Engine). Then case studies. Then the invitation to the workshop.</p>
-            <p className="text-zinc-400">Value first. Sits after the lead magnet and before the workshop. Sells without feeling like a sale.</p>
-          </Detail>
         </Bucket>
 
         <Bucket n="4" title="Audio (bolt on)" owners="R">
