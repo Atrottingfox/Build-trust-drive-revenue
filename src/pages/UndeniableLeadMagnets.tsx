@@ -8,16 +8,16 @@ type Asset = {
 
 const ASSETS: Asset[] = [
   {
-    what_it_does: 'Takes a lead from never-heard-of-you through to advocate.',
+    what_it_does: 'Takes a lead from never heard of you through to advocate.',
     what_it_says: 'A 6 phase framework: awareness, consideration, research, hope, purchase, advocacy. Delivered as a PDF with a video lesson, an audio lesson, and bonus GPTs.',
   },
   {
     what_it_does: 'Hands over the sales framework used on every workshop call.',
-    what_it_says: 'A PDF and video walk-through of the sales conversation, stripped to its frame so a coach can run it themselves.',
+    what_it_says: 'A PDF and video walk through of the sales conversation, stripped to its frame so a coach can run it themselves.',
   },
   {
     what_it_does: 'Surfaces the single biggest problem in a coach\'s business and gives them the fix.',
-    what_it_says: 'An interactive tool with 63 personalised solution combinations. 30 day re-submission lockout. Each output comes with a video walking through the fix.',
+    what_it_says: 'An interactive tool with 63 personalised solution combinations. 30 day resubmission lockout. Each output comes with a video walking through the fix.',
   },
   {
     what_it_does: 'Shows a coach how to hire and operate so the business runs without them.',

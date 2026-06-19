@@ -312,6 +312,7 @@ export default function UndeniableNextSteps() {
                   { to: '/undeniablenextsteps/brand', label: 'Brand', sub: 'The brand voice, identity, and positioning work.' },
                   { to: '/undeniablenextsteps/lead-magnets', label: 'Lead Magnets', sub: '5 assets. Names, formats, status.' },
                   { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Master formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
+                  { to: '/undeniablenextsteps/content-bank', label: 'Content Database', sub: 'Every piece to shoot, by pillar. Read the hook, tap to approve.' },
                   { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, review cycles, data tracking, open decisions.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5 md:px-7 md:py-6">

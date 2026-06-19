@@ -36,7 +36,7 @@ const BUCKETS: Bucket[] = [
       'Realisation / lesson / shift',
       'Takeaway one liner + tool (implementable)',
     ],
-    // Pulled from Hook Bank: Story openers, Without X, Money-problem (story openers)
+    // Pulled from Hook Bank: Story openers, Without X, Money problem (story openers)
     hooks: [
       'I built a $5M fitness business without going viral. Here\'s everything I did.',
       'I built a client a program so bad it was designed to make her quit. She dropped 40 kilos and got on stage.',
@@ -70,7 +70,7 @@ const BUCKETS: Bucket[] = [
       'If it triggers you, it\'s probably true.',
       'Your competitors are setting your prices, not your clients. That\'s why you\'re underpaid.',
       'Old way: just show up online. New way: build an ecosystem. One of these makes money.',
-      'Old way: loom check-ins. New way: written check-ins anyone can run. Here\'s the difference in your week.',
+      'Old way: loom check ins. New way: written check ins anyone can run. Here\'s the difference in your week.',
       'There are two ways to run a business at 80 clients. One of them is killing you.',
       'There\'s a feeling every coach at 30 clients has and can\'t describe. Let me describe it for you.',
       'You feel like you\'re treading water and working harder to stay in the same place. There\'s a reason.',
@@ -79,7 +79,7 @@ const BUCKETS: Bucket[] = [
       'You\'re not just a PT. But your business is built like you are.',
       'Coaching used to be a hobby. If you still treat it like one, you\'ll stay broke.',
       'Stop learning marketing and just copy this.',
-      'Stop running pay-in-full offers. They look great in screenshots and they\'re killing your cash flow.',
+      'Stop running pay in-full offers. They look great in screenshots and they\'re killing your cash flow.',
       'Stop trying to choose your niche. Your content already chose it for you.',
       'Imagine if you never lost a client. You\'d stop selling and start choosing.',
       'Imagine if you didn\'t have to compromise. 50 clients on stage and a business that doesn\'t suck to own.',
@@ -128,13 +128,13 @@ const BUCKETS: Bucket[] = [
       'Say what that means for them. One liner.',
       'Takeaway / next step',
     ],
-    // Pulled from Hook Bank: The math, Churn, Money-problem (math/show ones), Profit vs revenue
+    // Pulled from Hook Bank: The math, Churn, Money problem (math/show ones), Profit vs revenue
     hooks: [
       'Online coaches think they work a lot. Let\'s actually do the math.',
       'You\'ve got 100 clients and think you\'re flat out. You\'re working a 12-hour week and don\'t know it.',
       'Everyone\'s the show pony. Let me be the logical one for a second and just do the numbers.',
       'I\'m going to do the math on your business and you\'re not going to like it.',
-      'A 20-minute check-in doesn\'t make you a better coach. It makes you a slower one.',
+      'A 20-minute check in doesn\'t make you a better coach. It makes you a slower one.',
       'My client lost $800,000 and never even knew it.',
       'I did the math on his business live and he went white in the face.',
       'You\'re losing more money in your business right now than you\'re making. Let me show you where.',

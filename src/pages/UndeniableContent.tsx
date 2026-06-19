@@ -408,14 +408,14 @@ export default function UndeniableContent() {
 
       <Divider />
 
-      {/* SHORT-FORM */}
+      {/* SHORT FORM */}
       <Wrap id="shortform">
         <Eyebrow>Short form</Eyebrow>
-        <p className="text-zinc-400 text-[14px] mb-8">Hook testing weeks 1-2. Optimisation weeks 3-4. Topic and format analysis weeks 5-6. Posting calendar follows.</p>
+        <p className="text-zinc-400 text-[14px] mb-8">Hook testing weeks 1 to 2. Optimisation weeks 3 to 4. Topic and format analysis weeks 5 to 6. Posting calendar follows.</p>
 
-        {/* Weeks 1-2 */}
+        {/* Weeks 1 to 2 */}
         <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mb-4">
-          <SubEyebrow>Weeks 1-2. Hook testing.</SubEyebrow>
+          <SubEyebrow>Weeks 1 to 2. Hook testing.</SubEyebrow>
           <p className="text-zinc-200 text-[14px] mb-3">Total: 14 Posts (7 Share, 7 Teach).</p>
           <ul className="space-y-1.5 mb-2">
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Monday: Shoot 8 across 2 locations. Select top 7.</span></li>
@@ -436,9 +436,9 @@ export default function UndeniableContent() {
           </ul>
         </div>
 
-        {/* Weeks 3-4 */}
+        {/* Weeks 3 to 4 */}
         <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mb-4">
-          <SubEyebrow>Weeks 3-4. Hook optimisation.</SubEyebrow>
+          <SubEyebrow>Weeks 3 to 4. Hook optimisation.</SubEyebrow>
           <ul className="space-y-1.5">
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Monday: Shoot 8 across 2 similar locations. Half new hooks, half top / similar.</span></li>
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Wednesday: Shoot 8 across 2 similar locations. Half new hooks, half top / similar (2 per location).</span></li>
@@ -499,9 +499,9 @@ export default function UndeniableContent() {
           <p className="text-zinc-400 text-[12px] italic mt-4">With the system as we\'ve just cleaned it up, you\'ll also know which environments are easiest to shoot in consistently, how much throughput a Mon / Wed weekly cycle can really handle, and where the bottleneck is if you push volume (editing vs scripting vs recording).</p>
         </div>
 
-        {/* Weeks 5-6 */}
+        {/* Weeks 5 to 6 */}
         <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-5 mb-8">
-          <SubEyebrow>Weeks 5-6. Topic / format analysis (not a test, just an observation).</SubEyebrow>
+          <SubEyebrow>Weeks 5 to 6. Topic / format analysis (not a test, just an observation).</SubEyebrow>
           <ul className="space-y-1.5">
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">Each week, select 1-2 high performing topics from the past month (e.g. offer design, churn, lead magnets).</span></li>
             <li className="flex items-start gap-2.5"><span className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" /><span className="text-zinc-200 text-[13px]">For each topic, do two formats in that week: Story vs Belief, or Show vs Teach.</span></li>
@@ -536,7 +536,7 @@ export default function UndeniableContent() {
 
       <Divider />
 
-      {/* LONG-FORM */}
+      {/* LONG FORM */}
       <Wrap id="longform">
         <Eyebrow>Long form</Eyebrow>
         <p className="text-zinc-400 text-[14px] mb-8">One long form per week. Six pillars in rotation. Working titles below.</p>
