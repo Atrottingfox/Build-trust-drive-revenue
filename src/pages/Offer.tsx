@@ -109,11 +109,22 @@ const cadence = [
   ]},
 ];
 
-const bottlenecks = [
-  { icon: Compass, title: 'Clarity', q: 'Can a stranger tell what you do, who for, and why, in under 10 posts?' },
-  { icon: Eye, title: 'Visibility', q: 'Are you reaching enough of the right people? Do strangers land in your DMs because of your content?' },
-  { icon: Shield, title: 'Authority', q: 'When your ideal client needs help in your category, are you one of the first names they think of?' },
-  { icon: Target, title: 'Quality', q: 'Are the leads landing in your inbox pre sold and properly qualified?' },
+const diagnostic = [
+  { icon: Check, label: 'Strengths', sub: 'What you bring', items: [
+    'Genuine expertise and results that already convert.',
+    'An audience and proof you have already built.',
+    'Content that works in pockets, ready to be systemised.',
+  ]},
+  { icon: Compass, label: 'Gaps', sub: 'What is missing', items: [
+    'A documented brand and one source of truth.',
+    'A mapped journey from stranger to buyer.',
+    'A repeatable system your team can run without you.',
+  ]},
+  { icon: Zap, label: 'Opportunities', sub: 'What we build', items: [
+    'Your IP turned into named lead magnets.',
+    'A core trust asset that sells for you.',
+    'A demand cycle that compounds without you.',
+  ]},
 ];
 
 const deliverables = [
@@ -202,19 +213,27 @@ export default function Offer() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The diagnostic</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Four bottlenecks.
+              Strengths. Gaps.
               <br />
-              <span className="text-zinc-500">One fix first.</span>
+              <span className="text-zinc-500">Opportunities.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              From a stranger to a sale, there are four things that can hold you back. We score you on each, find the one costing you the most, and fix that first.
+              Every Build Day starts with a diagnostic. What you already have, what is missing, and the core elements we build from it.
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {bottlenecks.map((b, i) => (
-                <div key={i} className="glow-card p-7">
-                  <b.icon className="w-5 h-5 text-blue-400 mb-4" />
-                  <p className="text-white font-semibold text-base mb-3">{b.title}</p>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{b.q}</p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {diagnostic.map((d, i) => (
+                <div key={i} className="glow-card p-8">
+                  <d.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <p className="text-white font-semibold text-base">{d.label}</p>
+                  <p className="text-zinc-500 text-[11px] uppercase tracking-widest font-semibold mb-4">{d.sub}</p>
+                  <ul className="space-y-3">
+                    {d.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
