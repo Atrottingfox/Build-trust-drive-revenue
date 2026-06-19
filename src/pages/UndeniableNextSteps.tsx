@@ -256,51 +256,6 @@ export default function UndeniableNextSteps() {
 
         <Divider />
 
-        {/* BY DAY 90 */}
-        <section className="py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <Reveal>
-              <Eyebrow>By day 90</Eyebrow>
-              <p className="text-zinc-400 text-[14px] md:text-[15px] mb-8 max-w-2xl">What Rhys actually has at the end of the 90 days.</p>
-              <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-6 md:p-8">
-                <ul className="space-y-2.5">
-                  {[
-                    'New bio live across every channel.',
-                    'Voice rules locked. Corey edits in voice.',
-                    'Brand workbook delivered. Team can use it.',
-                    'All 5 lead magnets shipped, named, with landing pages and follow ups in place.',
-                    'Character video live.',
-                    'Public VSL live on YouTube.',
-                    '6 week long form rotation running.',
-                    'Hook and format winners locked from the 4 week test cycle.',
-                    'Corey trained and growing into creative direction.',
-                    'Data tracking and review cycles running on rhythm.',
-                  ].map((it) => (
-                    <li key={it} className="flex items-start gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-100 text-[14px] md:text-[15px] leading-relaxed">{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <Divider />
-
-        {/* WORKSHOP INTEGRATION */}
-        <section className="py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <Reveal>
-              <Eyebrow>Workshop</Eyebrow>
-              <p className="text-zinc-200 text-[16px] md:text-[18px] leading-relaxed max-w-2xl">Everything feeds the workshop. Lead magnets capture demand. Long form compresses trust. The workshop is where it converts.</p>
-            </Reveal>
-          </div>
-        </section>
-
-        <Divider />
-
         {/* WORKING PAGES */}
         <section className="py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -312,7 +267,6 @@ export default function UndeniableNextSteps() {
                   { to: '/undeniablenextsteps/brand', label: 'Brand', sub: 'The brand voice, identity, and positioning work.' },
                   { to: '/undeniablenextsteps/lead-magnets', label: 'Lead Magnets', sub: '5 assets. Names, formats, status.' },
                   { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Master formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
-                  { to: '/undeniablenextsteps/content-bank', label: 'Content Database', sub: 'Every piece to shoot, by pillar. Read the hook, tap to approve.' },
                   { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, review cycles, data tracking, open decisions.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5 md:px-7 md:py-6">

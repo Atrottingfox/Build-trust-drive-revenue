@@ -15,7 +15,7 @@ function Move({
         <span className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold border border-blue-500/30 bg-blue-500/5 rounded-full px-2.5 py-0.5">{when}</span>
       </div>
       <h3 className="font-display text-xl md:text-2xl font-extrabold text-white leading-tight mb-3">{title}</h3>
-      <p className="text-zinc-300 text-[15px] leading-relaxed mb-6">{body}</p>
+      {body && <p className="text-zinc-300 text-[15px] leading-relaxed mb-6">{body}</p>}
       {children}
       <div className="grid md:grid-cols-2 gap-x-6 gap-y-2 mt-6 pt-5 border-t border-zinc-800">
         <div className="flex items-baseline gap-2 text-[12px]">
@@ -68,7 +68,7 @@ export default function UndeniableBrand() {
             when="This week"
             title="Ship the bio across every channel."
             body="One sentence. Avatar + outcome + the thing they hate. Replace it everywhere. IG, YouTube, LinkedIn, email signature. Until that lands, none of the rest of the brand work matters."
-            owner="Rhys signs off · Sean writes"
+            owner="Rhys signs off"
             doneWhen="The bio is live on 4 channels by Friday"
           >
             <Artefact label="The bio · primary option">
@@ -87,10 +87,10 @@ export default function UndeniableBrand() {
           {/* MOVE 02 */}
           <Move
             n="02"
-            when="Week 2-4"
-            title="Lock the voice."
-            body="Once the bio is live the brand is set from the surface. Now bake it into every piece. Corey edits in voice. The 3 archetypes drive what Rhys says yes and no to. The voice rules become the editorial filter."
-            owner="Sean writes · Rhys approves · Corey runs"
+            when="Week 2 to 4"
+            title="Lock the archetype."
+            body=""
+            owner="Rhys approves · Corey runs"
             doneWhen="Corey ships 2 edits without voice flags from Rhys"
           >
             <Artefact label="The voice + archetypes · one page">
@@ -117,106 +117,40 @@ export default function UndeniableBrand() {
             when="Week 4"
             title="Deliver the brand workbook."
             body="Your brand, documented and built for the team to emulate and use."
-            owner="Sean writes · Rhys signs off"
+            owner="Rhys signs off"
             doneWhen="Workbook delivered."
           />
 
-          {/* MOVE 04 */}
-          <Move
-            n="04"
-            when="Week 5-12"
-            title="Build the trust asset."
-            body="The bio sets the surface. The voice locks the editorial filter. The Character video transfers the trust. 20-30 minutes. Rhys&apos;s arc. Vulnerable. No selling. This is the piece that converts the fence-sitters."
-            owner="Rhys films · Corey shoots & edits · Sean facilitates"
-            doneWhen="Character video live on YouTube + landing page"
-          >
-            <Artefact label="Where the spec lives">
-              <p className="text-zinc-200 text-[14px] leading-relaxed mb-3">The full 10-beat arc + tone rules + shoot setup lives in:</p>
-              <a href="/undeniablenextsteps/content" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-[14px]">
-                Content → Longform → Character video →
-              </a>
-              <p className="text-zinc-400 text-[12px] italic mt-3">Shoot 1 day. Edit 2-3 days. Walking + sitting + voice-over with B-roll. Lo-fi. No over-production.</p>
-            </Artefact>
-          </Move>
-
         </div>
       </Wrap>
 
       <Divider />
 
-      {/* ═══ THE DREAM CLIENTS · CONTEXT ═══ */}
+      {/* ═══ THE CORE AVATAR ═══ */}
       <Wrap>
         <H2>Who we&apos;re aiming at.</H2>
-        <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">Every brand decision answers one question: does this land for Sabine or Josh? If not, cut it.</p>
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-6">
-            <p className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mb-2">Sabine</p>
-            <p className="font-display text-white text-[20px] font-extrabold mb-3">15K → 80K months</p>
-            <p className="text-zinc-300 text-[14px] leading-relaxed mb-3">Consumed everything. Listened to every podcast back to the Livingstone days. Problem-solver. Patient. Tries first, asks when stuck.</p>
-            <p className="text-zinc-400 text-[13px] italic">&ldquo;You don&apos;t know what you don&apos;t know.&rdquo; · Undiagnosed churn problem.</p>
-          </div>
-          <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-6">
-            <p className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mb-2">Josh</p>
-            <p className="font-display text-white text-[20px] font-extrabold mb-3">Gym owner · 2 locations</p>
-            <p className="text-zinc-300 text-[14px] leading-relaxed mb-3">Did the math on his churn. Lost $800,000 and never knew. Sat white in the face. Shows up to every call.</p>
-            <p className="text-zinc-400 text-[13px] italic">&ldquo;You won&apos;t hear from me until I&apos;ve done 80K a month.&rdquo;</p>
-          </div>
-        </div>
-      </Wrap>
-
-      <Divider />
-
-      {/* ═══ DIAGNOSIS · CONTEXT ═══ */}
-      <Wrap>
-        <H2>Why these three moves.</H2>
-        <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">The bottlenecks set the priority. Clarity and Quality both score 3. Authority and Visibility hold.</p>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {[
-            { letter: 'C', name: 'Clarity', score: 3, focus: 'Fix first', note: 'Stranger reads 4 of 5 posts as "I\'m a coach."' },
-            { letter: 'V', name: 'Visibility', score: 4, focus: '', note: 'Strangers in DMs. ICP knows the name.' },
-            { letter: 'A', name: 'Authority', score: 5, focus: '', note: '$5M built. 82% retention. Receipts unmatched.' },
-            { letter: 'Q', name: 'Quality', score: 3, focus: 'Fix next', note: 'Leads landing sub-10K. Qualified eventually, not pre-sold.' },
-          ].map((b) => (
-            <div key={b.letter} className={`rounded-2xl border p-4 md:p-5 ${b.focus ? 'border-blue-500/30 bg-blue-500/[0.04]' : 'border-zinc-800 bg-elevated/40'}`}>
-              <div className="flex items-baseline justify-between mb-2">
-                <span className="font-display text-[24px] md:text-[28px] font-extrabold text-white">{b.letter}</span>
-                <span className={`font-display text-[24px] md:text-[28px] font-extrabold ${b.focus ? 'text-blue-400' : 'text-zinc-400'}`}>{b.score}</span>
+        <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">One core avatar. Every brand decision answers one question: does this land for them? If not, cut it.</p>
+        <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-6 md:p-8">
+          <p className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mb-2">The core avatar</p>
+          <p className="font-display text-white text-[20px] md:text-[22px] font-extrabold leading-snug mb-6">A health and fitness coach already doing 10K+ months, building toward a $1M business they don&apos;t hate.</p>
+          <div className="grid md:grid-cols-2 gap-x-8 gap-y-5">
+            {[
+              { label: 'Believes', text: 'There is a better way than grinding 1 to 1 forever. They are capable of more. Sick of being seen as just a PT.' },
+              { label: 'Values', text: 'Integrity. Speed. Doing the work. They respect people who have actually done it, not influencers.' },
+              { label: 'Behaves', text: 'Consumes everything. Has watched from the fence for months. Problem solver. Tries first, asks when stuck. Shows up to every call. A high motivation buyer, not a tyre kicker.' },
+              { label: 'Fears', text: 'Plateauing after a fast climb. Losing clients out the back without knowing why. Staying capped at 30 clients forever.' },
+              { label: 'Wants', text: 'To scale without going viral. Systems so the business runs without them. Speed. To stop being the bottleneck.' },
+              { label: 'Buys', text: 'On trust transfer, not hype. They buy when they finally believe you can get them there, not just that you know your stuff.' },
+            ].map((p) => (
+              <div key={p.label}>
+                <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1.5">{p.label}</p>
+                <p className="text-zinc-200 text-[14px] leading-relaxed">{p.text}</p>
               </div>
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-1">{b.name}</p>
-              {b.focus && <p className="text-blue-300 text-[10px] uppercase tracking-widest font-semibold mb-2">{b.focus}</p>}
-              <p className="text-zinc-300 text-[12px] md:text-[13px] leading-relaxed mt-2">{b.note}</p>
-            </div>
-          ))}
-        </div>
-        <p className="text-zinc-400 text-[14px] italic mt-6">Move 01 (bio) is the biggest single Clarity lift. Move 03 (Character) is the biggest single Quality lift. Move 02 (voice) makes both stick.</p>
-      </Wrap>
-
-      <Divider />
-
-      {/* ═══ DONE WHEN ═══ */}
-      <Wrap>
-        <H2>Done when.</H2>
-        <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">90 days from start. What &ldquo;done&rdquo; looks like.</p>
-        <div className="grid md:grid-cols-2 gap-4">
-          <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/[0.04] p-6">
-            <p className="text-emerald-300 text-[11px] uppercase tracking-widest font-semibold mb-4">The state · by day 90</p>
-            <BulletList items={[
-              'Clarity moves 3 → 5. Stranger 10-post test passes.',
-              'Quality moves 3 → 4. Workshop room locked above 10K-month coaches.',
-              'Character video live. Trust transfer asset working.',
-              'Voice rules locked. Corey edits in voice without prompts.',
-              'Recognition line showing up in comments: "He\'s the one who actually did it."',
-            ]} />
+            ))}
           </div>
-          <div className="rounded-2xl border border-zinc-800 bg-elevated/40 p-6">
-            <p className="text-zinc-400 text-[11px] uppercase tracking-widest font-semibold mb-4">The signals · how we&apos;ll know</p>
-            <BulletList items={[
-              'Cold DMs use the ICP language back to Rhys',
-              'Workshop call quality climbs (pre-sold leads)',
-              'Character video → DM traffic correlation',
-              'Workshop landing page conversion rises from sub-2% to 5%+',
-              'Corey runs a Monday review without flagging brand issues',
-            ]} />
+          <div className="mt-7 pt-6 border-t border-zinc-800 space-y-2">
+            <p className="text-zinc-400 text-[14px] italic">&ldquo;You don&apos;t know what you don&apos;t know.&rdquo;</p>
+            <p className="text-zinc-400 text-[14px] italic">&ldquo;You won&apos;t hear from me until I&apos;ve done 80K a month.&rdquo;</p>
           </div>
         </div>
       </Wrap>
