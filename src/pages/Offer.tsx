@@ -72,14 +72,14 @@ const buildPhases = [
     outcomes: [
       'A documented brand. Voice, positioning, category lens, contrarian takes.',
       'A Customer Journey Map. Cold to warm to buyer to advocate.',
-      'The shape of the monthly demand cycle, mapped to your launch and promo calendar.',
+      'The shape of the monthly demand cycle, mapped to your calendar.',
       'Agreed success metrics for the 90 days.',
     ],
   },
   {
-    num: '02', tag: 'Phase 02 · Install · Weeks 1 to 4', title: 'Wrap the engine around your next launch.',
+    num: '02', tag: 'Phase 02 · Install · Weeks 1 to 4', title: 'Get the engine built and live.',
     paras: [
-      'One 60 minute call per week with your content lead. Founder welcome.',
+      'One 60 minute call per week with you and your key people.',
       'Short form, long form, lead magnets, the Trojan Horse VSL, and the Media Operating System get built and wired up. The first cycle runs live so we test it on real audience.',
     ],
     outcomes: [],
@@ -97,12 +97,12 @@ const buildPhases = [
 const cadence = [
   { phase: 'Phase 01 · Build', when: '4 to 6 hours', text: 'Brand Day intensive. One in person session with you and whoever owns your content.', items: [] },
   { phase: 'Phase 02 · Install', when: 'Weeks 1 to 4', text: '', items: [
-    '1x 60 minute call per week with your content lead.',
+    '1x 60 minute call per week with you and your key people.',
     'Founder welcome.',
     'The engine gets built and wired up.',
   ]},
   { phase: 'Phase 03 · Tune', when: 'Weeks 5 to 12', text: '', items: [
-    '1x 60 minute call per fortnight with you and your content lead.',
+    '1x 60 minute call per fortnight with you and your key people.',
     '1x Operator Clinic per fortnight for implementation questions.',
     'Up to 1 Loom per week for asset review.',
     '24 hour feedback via WhatsApp.',
@@ -422,7 +422,7 @@ export default function Offer() {
                   'This is not a guarantee of revenue. We agree the metrics. We test. The data tells us what worked.',
                   'This is not full time CMO services. I show up for the cadence we agreed. Not in your inbox at 11pm.',
                   'This is not a content factory. I do not write or edit every script. Your team produces.',
-                  'This is not a forever contract. At Day 90 we both pick.',
+                  'This is not a forever contract. At Day 90 we both choose whether to continue with ongoing advisory.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <X className="w-5 h-5 text-zinc-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -477,7 +477,7 @@ export default function Offer() {
                 'Apply and book a fit call',
                 'If accepted, we pick your Brand Day date',
                 'We build your Brand Bible and Authority Engine in a day',
-                'If it is a hell yes for both of us, we roll into the 90 day build at $15,000 total',
+                'If it is a hell yes for both of us, we roll into the 90 day build',
               ]} />
             </div>
             <a
