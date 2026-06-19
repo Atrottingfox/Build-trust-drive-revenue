@@ -50,24 +50,6 @@ const Crosses = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-const diagnostic = [
-  { icon: Check, title: 'Strengths', items: [
-    'A clear avatar and real results.',
-    'A playbook that already delivers outcomes.',
-    'Proof and word of mouth building momentum.',
-  ]},
-  { icon: Compass, title: 'Gaps', items: [
-    'No single documented journey from cold to sold.',
-    'Hooks and formats that work but are not systemised into a bank your team can re use.',
-    'A trust channel you are underusing.',
-  ]},
-  { icon: Zap, title: 'Opportunities · Next 90 days', items: [
-    'Turn your best clients into a reference bank for proof and breakdowns.',
-    'Build a content cycle so you know exactly what to shoot and why.',
-    'Craft a small set of lead magnets that take people from just found you to I am in.',
-  ]},
-];
-
 const outputs = [
   { icon: Zap, title: 'Short Form', description: 'Discovery layer. Hooks, formats, and angles that open new audiences and pull the right people toward you.' },
   { icon: Video, title: 'Long Form', description: 'Trust depth. The pieces that get watched, shared, and remembered. The reason cold viewers turn into buyers.' },
@@ -200,41 +182,6 @@ export default function Offer() {
                 'Want an operator friendly system, not another done for you agency or course',
                 'Willing to fulfil increased demand without dropping standards',
               ]} />
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* THE DIAGNOSTIC */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The diagnostic</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Strengths. Gaps.
-              <br />
-              <span className="text-zinc-500">Opportunities.</span>
-            </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              Before we build, we run a diagnostic. We score you on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. Then we map where you stand.
-            </p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {diagnostic.map((d, i) => (
-                <div key={i} className="glow-card p-8">
-                  <d.icon className="w-5 h-5 text-blue-400 mb-4" />
-                  <p className="text-white font-semibold text-base mb-4">{d.title}</p>
-                  <ul className="space-y-3">
-                    {d.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                        <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
             </div>
           </Section>
         </div>
