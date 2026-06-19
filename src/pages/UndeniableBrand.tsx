@@ -105,7 +105,6 @@ export default function UndeniableBrand() {
                 <li>Conviction · dry humour · logical · obsessive · outcome-focused.</li>
                 <li>Calm conviction over urgency. Profane when emphatic.</li>
                 <li>Values: integrity, speed, excellence, morality, duty.</li>
-                <li>No corporate gloss. No motivational fluff. No fake hype.</li>
                 <li>Recognition line we&apos;re building toward: &ldquo;He&apos;s the one who actually did it.&rdquo;</li>
               </ul>
             </Artefact>
