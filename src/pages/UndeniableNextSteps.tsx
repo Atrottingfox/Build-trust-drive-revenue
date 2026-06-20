@@ -202,9 +202,6 @@ export default function UndeniableNextSteps() {
                 <br />
                 <span className="text-blue-400">Plan.</span>
               </h1>
-              <p className="text-zinc-400 text-[15px] md:text-[17px] leading-relaxed max-w-2xl">
-                Optional 90 day authority engine. Refine your brand. Increase demand.
-              </p>
             </Reveal>
           </div>
         </section>
@@ -266,7 +263,7 @@ export default function UndeniableNextSteps() {
                 {[
                   { to: '/undeniablenextsteps/brand', label: 'Brand', sub: 'The brand voice, identity, and positioning work.' },
                   { to: '/undeniablenextsteps/lead-magnets', label: 'Lead Magnets', sub: '5 assets. Names, formats, status.' },
-                  { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Master formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
+                  { to: '/undeniablenextsteps/content', label: 'Content', sub: 'Formula, pillars, formats, environments, hooks, cadence, calendar, data.' },
                   { to: '/undeniablenextsteps/ops', label: 'Operations', sub: 'Roles, weekly rhythm, review cycles, data tracking, open decisions.' },
                 ].map((card) => (
                   <a key={card.to} href={card.to} className="group flex items-center justify-between rounded-2xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-6 py-5 md:px-7 md:py-6">

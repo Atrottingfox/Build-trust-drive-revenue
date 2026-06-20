@@ -87,14 +87,14 @@ export function Shell({
 }
 
 export function PageHead({
-  eyebrow, title, accent, blurb,
-}: { eyebrow: string; title: string; accent: string; blurb: string }) {
+  eyebrow, title, accent, blurb, backHref = '/undeniablenextsteps', backLabel = 'Next Steps hub',
+}: { eyebrow: string; title: string; accent: string; blurb: string; backHref?: string; backLabel?: string }) {
   return (
     <section className="pt-32 pb-12 md:pt-40 md:pb-16">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         <Section>
-          <a href="/undeniablenextsteps" className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-[13px] font-medium mb-8">
-            <ArrowLeft className="w-4 h-4" /> Next Steps hub
+          <a href={backHref} className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-[13px] font-medium mb-8">
+            <ArrowLeft className="w-4 h-4" /> {backLabel}
           </a>
           <div className="accent-line mb-7" />
           <p className="text-[13px] font-medium text-zinc-400 uppercase tracking-widest mb-5">{eyebrow}</p>

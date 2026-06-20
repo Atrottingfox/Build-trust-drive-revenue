@@ -1,10 +1,6 @@
-import React, { useState } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { Shell, PageHead, Wrap, Divider } from '../components/undeniable/Bits';
-
-const Eyebrow = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[12px] font-medium text-zinc-500 uppercase tracking-widest mb-5">{children}</p>
-);
+import React, { useEffect, useRef, useState } from 'react';
+import { ArrowRight, Star, Plus, Trash2 } from 'lucide-react';
+import { Shell, PageHead, Wrap, Divider, Tabs } from '../components/undeniable/Bits';
 
 const SubEyebrow = ({ children }: { children: React.ReactNode }) => (
   <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300 mb-3">{children}</p>
@@ -36,7 +32,6 @@ const BUCKETS: Bucket[] = [
       'Realisation / lesson / shift',
       'Takeaway one liner + tool (implementable)',
     ],
-    // Pulled from Hook Bank: Story openers, Without X, Money problem (story openers)
     hooks: [
       'I built a $5M fitness business without going viral. Here\'s everything I did.',
       'I built a client a program so bad it was designed to make her quit. She dropped 40 kilos and got on stage.',
@@ -61,7 +56,6 @@ const BUCKETS: Bucket[] = [
       'Explanation plus one proof / example',
       'Takeaway',
     ],
-    // Pulled from Hook Bank: Contrarian, Old way vs new way, Stop X, Imagine, Just a PT, The feeling
     hooks: [
       'Which business has more impact, 35 clients done brilliantly or 350 who lose 10 kilos and move on? It\'s the bigger one. Fight me.',
       'Income buys you impact. You\'re not changing the world coaching 25 people.',
@@ -97,7 +91,6 @@ const BUCKETS: Bucket[] = [
       '3 to 5 steps (with a tool or a "don\'t do this")',
       'One core takeaway line',
     ],
-    // Pulled from Hook Bank: Binary, Promise+timebox, Scepticism, If you're still
     hooks: [
       'There are two ways to get leads. Knock on doors every day, or post this specific thing five times a day. Pick one.',
       'Two paths to grow a coaching business. One caps you. One scales forever.',
@@ -128,7 +121,6 @@ const BUCKETS: Bucket[] = [
       'Say what that means for them. One liner.',
       'Takeaway / next step',
     ],
-    // Pulled from Hook Bank: The math, Churn, Money problem (math/show ones), Profit vs revenue
     hooks: [
       'Online coaches think they work a lot. Let\'s actually do the math.',
       'You\'ve got 100 clients and think you\'re flat out. You\'re working a 12-hour week and don\'t know it.',
@@ -154,6 +146,49 @@ const BUCKETS: Bucket[] = [
   },
 ];
 
+// ─── Persistence ────────────────────────────────────────────────────────
+
+type Hook = { id: string; text: string; starred: boolean };
+
+const KEY = (formatId: string) => `shoot-hooks-v1:${formatId}`;
+
+function loadHooks(b: Bucket): Hook[] {
+  try {
+    const raw = localStorage.getItem(KEY(b.id));
+    if (raw) {
+      const parsed = JSON.parse(raw) as Hook[];
+      if (Array.isArray(parsed) && parsed.length) return parsed;
+    }
+  } catch { /* noop */ }
+  return b.hooks.map((text, i) => ({ id: `${b.id}-${i}`, text, starred: false }));
+}
+
+function saveHooks(formatId: string, hooks: Hook[]) {
+  try { localStorage.setItem(KEY(formatId), JSON.stringify(hooks)); } catch { /* noop */ }
+}
+
+// ─── Auto growing textarea ──────────────────────────────────────────────
+
+function AutoTextarea({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
+  const ref = useRef<HTMLTextAreaElement | null>(null);
+  const resize = () => {
+    const el = ref.current;
+    if (el) { el.style.height = 'auto'; el.style.height = `${el.scrollHeight}px`; }
+  };
+  useEffect(resize, [value]);
+  return (
+    <textarea
+      ref={ref}
+      value={value}
+      rows={1}
+      placeholder={placeholder}
+      onChange={(e) => onChange(e.target.value)}
+      onInput={resize}
+      className="w-full bg-transparent text-zinc-200 text-[14px] leading-relaxed resize-none outline-none focus:text-white placeholder:text-zinc-600"
+    />
+  );
+}
+
 function CopyBtn({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
   const onClick = async () => {
@@ -165,105 +200,112 @@ function CopyBtn({ text }: { text: string }) {
   };
   return (
     <button onClick={onClick} className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 hover:text-blue-400 transition-colors flex-shrink-0">
-      {copied ? '✓ Copied' : 'Copy'}
+      {copied ? '✓' : 'Copy'}
     </button>
   );
 }
 
-export default function UndeniableShootCard() {
+// ─── The board for one format ───────────────────────────────────────────
+
+function HookBoard({ bucket }: { bucket: Bucket }) {
+  const [hooks, setHooks] = useState<Hook[]>(() => loadHooks(bucket));
+
+  // Reload when the format changes.
+  useEffect(() => { setHooks(loadHooks(bucket)); }, [bucket.id]);
+
+  const commit = (next: Hook[]) => { setHooks(next); saveHooks(bucket.id, next); };
+
+  const toggleStar = (id: string) => commit(hooks.map((h) => h.id === id ? { ...h, starred: !h.starred } : h));
+  const editText = (id: string, text: string) => commit(hooks.map((h) => h.id === id ? { ...h, text } : h));
+  const remove = (id: string) => commit(hooks.filter((h) => h.id !== id));
+  const add = () => commit([{ id: `${bucket.id}-c${hooks.length}-${hooks.reduce((m, h) => Math.max(m, h.text.length), 0)}-${hooks.length}`, text: '', starred: true }, ...hooks]);
+  const reset = () => { try { localStorage.removeItem(KEY(bucket.id)); } catch { /* noop */ } setHooks(loadHooks(bucket)); };
+
+  // Starred float to the top, original order otherwise.
+  const ordered = [...hooks].sort((a, b) => Number(b.starred) - Number(a.starred));
+  const starredCount = hooks.filter((h) => h.starred).length;
+
   return (
-    <Shell title="Next Shoot · Undeniable" description="The on the day shoot tool. Master formula, 4 buckets aligned with the 4 formats, real hooks from the Hook Bank." path="/undeniablenextsteps/shoot-card">
+    <div>
+      <div className="flex items-center justify-between mb-3">
+        <SubEyebrow>Hooks{starredCount > 0 ? ` · ${starredCount} starred` : ''}</SubEyebrow>
+        <button onClick={add} className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-blue-400 hover:text-blue-300 transition-colors">
+          <Plus className="w-3.5 h-3.5" /> Add a hook
+        </button>
+      </div>
+      <p className="text-zinc-500 text-[12px] mb-5">Star the best to push them to the top. Tap any line to edit it for this shoot.</p>
+
+      <div className="space-y-2">
+        {ordered.map((h) => (
+          <div key={h.id} className={`rounded-xl border px-3 py-3 flex items-start gap-3 transition-colors ${h.starred ? 'border-blue-500/40 bg-blue-500/[0.05]' : 'border-zinc-800 bg-elevated/40'}`}>
+            <button onClick={() => toggleStar(h.id)} className="flex-shrink-0 mt-0.5" aria-label={h.starred ? 'Unstar' : 'Star'}>
+              <Star className={`w-4 h-4 transition-colors ${h.starred ? 'fill-blue-400 text-blue-400' : 'text-zinc-600 hover:text-zinc-400'}`} />
+            </button>
+            <div className="flex-1 min-w-0">
+              <AutoTextarea value={h.text} onChange={(v) => editText(h.id, v)} placeholder="Write your hook…" />
+            </div>
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <CopyBtn text={h.text} />
+              <button onClick={() => remove(h.id)} className="text-zinc-600 hover:text-red-400 transition-colors" aria-label="Delete">
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-5 flex items-center gap-5">
+        <a href="/undeniablenextsteps/hooks" className="text-blue-400 hover:text-blue-300 text-[13px] inline-flex items-center gap-1">
+          Open the full Hook Bank <ArrowRight className="w-3 h-3" />
+        </a>
+        <button onClick={reset} className="text-zinc-600 hover:text-zinc-400 text-[12px] transition-colors">Reset to defaults</button>
+      </div>
+    </div>
+  );
+}
+
+export default function UndeniableShootCard() {
+  const [active, setActive] = useState('story');
+  const b = BUCKETS.find((x) => x.id === active) || BUCKETS[0];
+
+  return (
+    <Shell title="Next Shoot · Undeniable" description="The on the day shoot tool. Pick a format, prioritise your best hooks, edit them for the shoot." path="/undeniablenextsteps/shoot-card">
       <PageHead
         eyebrow="Working tool"
         title="Next"
         accent="Shoot."
-        blurb="Hook > Problem > Path / Solution > Takeaway. 4 buckets: Story, Belief, Teach, Show. Hooks pulled from the Hook Bank."
+        blurb="Pick what you're shooting. Star your best hooks to push them to the top, edit any of them for this shoot, add your own. It saves as you go."
+        backHref="/undeniablenextsteps/content/short-form"
+        backLabel="Short form"
       />
       <Divider />
 
-      {/* TOC */}
       <Wrap>
-        <Eyebrow>What\'s on this page</Eyebrow>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-          {BUCKETS.map((b) => (
-            <a key={b.id} href={`#${b.id}`} className="group flex items-center justify-between rounded-xl border border-zinc-800 bg-elevated/40 hover:border-blue-500/40 hover:bg-blue-500/[0.04] transition-colors px-4 py-3">
-              <span className="text-zinc-200 text-[13px] font-medium group-hover:text-white">{b.name}</span>
-              <ArrowRight className="w-3 h-3 text-zinc-600 group-hover:text-blue-400 transition-colors" />
-            </a>
-          ))}
+        <Tabs tabs={BUCKETS.map((x) => ({ id: x.id, label: x.name }))} active={active} onChange={setActive} />
+
+        {/* Context line for the chosen format */}
+        <div className="flex flex-wrap gap-x-6 gap-y-1.5 mb-9 text-[13px]">
+          <span className="text-zinc-300"><span className="text-zinc-600 uppercase tracking-widest text-[10px] font-semibold mr-2">Type</span>{b.type}</span>
+          <span className="text-zinc-300"><span className="text-zinc-600 uppercase tracking-widest text-[10px] font-semibold mr-2">Where</span>{b.env}</span>
+          <span className="text-zinc-300"><span className="text-zinc-600 uppercase tracking-widest text-[10px] font-semibold mr-2">Tone</span>{b.tone}</span>
         </div>
-        <a href="/undeniablenextsteps/content" className="text-blue-400 hover:text-blue-300 text-[13px] inline-flex items-center gap-1">
-          Open the full Content page for pillars, cadence, calendar, data <ArrowRight className="w-3 h-3" />
-        </a>
+
+        {/* Structure */}
+        <div className="mb-9">
+          <SubEyebrow>Structure to follow</SubEyebrow>
+          <ol className="space-y-1.5">
+            {b.structure.map((s, i) => (
+              <li key={s} className="flex items-start gap-3">
+                <span className="font-display text-blue-400 text-[11px] font-extrabold mt-0.5 flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                <span className="text-zinc-200 text-[14px] leading-relaxed">{s}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Editable, prioritisable hooks */}
+        <HookBoard key={active} bucket={b} />
       </Wrap>
-
-      <Divider />
-
-      {/* MASTER FORMULA */}
-      <Wrap>
-        <Eyebrow>Master formula</Eyebrow>
-        <p className="text-zinc-200 text-[16px] md:text-[18px] leading-relaxed mb-2">Every piece is Hook &gt; Problem &gt; Path / Solution &gt; Takeaway.</p>
-        <p className="text-zinc-400 text-[14px] leading-relaxed">4 ways to do it. Two types: Share (Story, Belief) and Teach (Teach, Show).</p>
-      </Wrap>
-
-      <Divider />
-
-      {/* BUCKETS */}
-      {BUCKETS.map((b, idx) => (
-        <React.Fragment key={b.id}>
-          <Wrap id={b.id}>
-            <Eyebrow>{b.name}</Eyebrow>
-
-            <div className="grid md:grid-cols-3 gap-3 mb-8">
-              <div className="rounded-xl border border-zinc-800 bg-elevated/40 px-4 py-3">
-                <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Type</p>
-                <p className="text-zinc-200 text-[13px]">{b.type}</p>
-              </div>
-              <div className="rounded-xl border border-zinc-800 bg-elevated/40 px-4 py-3">
-                <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Environment</p>
-                <p className="text-zinc-200 text-[13px]">{b.env}</p>
-              </div>
-              <div className="rounded-xl border border-zinc-800 bg-elevated/40 px-4 py-3">
-                <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Tone</p>
-                <p className="text-zinc-200 text-[13px]">{b.tone}</p>
-              </div>
-            </div>
-
-            {/* Structure */}
-            <div className="mb-8">
-              <SubEyebrow>Structure</SubEyebrow>
-              <ol className="space-y-1.5">
-                {b.structure.map((s, i) => (
-                  <li key={s} className="flex items-start gap-3">
-                    <span className="font-display text-blue-400 text-[11px] font-extrabold mt-0.5 flex-shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                    <span className="text-zinc-200 text-[13px] leading-relaxed">{s}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {/* Hooks from Hook Bank */}
-            <div>
-              <SubEyebrow>Hooks (from the Hook Bank)</SubEyebrow>
-              <div className="space-y-2">
-                {b.hooks.map((h) => (
-                  <div key={h} className="rounded-xl border border-zinc-800 bg-elevated/40 px-4 py-3 flex items-start gap-3">
-                    <span className="w-1 h-1 rounded-full bg-blue-400 mt-2.5 flex-shrink-0" />
-                    <p className="text-zinc-200 text-[13px] leading-relaxed flex-1">"{h}"</p>
-                    <CopyBtn text={h} />
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4">
-                <a href="/undeniablenextsteps/hooks" className="text-blue-400 hover:text-blue-300 text-[13px] inline-flex items-center gap-1">
-                  Open the full Hook Bank <ArrowRight className="w-3 h-3" />
-                </a>
-              </div>
-            </div>
-          </Wrap>
-          {idx < BUCKETS.length - 1 && <Divider />}
-        </React.Fragment>
-      ))}
     </Shell>
   );
 }

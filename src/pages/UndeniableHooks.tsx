@@ -1,5 +1,6 @@
-import React from 'react';
-import { Shell, PageHead, Wrap, Divider, Block, Quotes, Note } from '../components/undeniable/Bits';
+import React, { useEffect, useState } from 'react';
+import { Star } from 'lucide-react';
+import { Shell, PageHead, Wrap, Divider, Block, Note } from '../components/undeniable/Bits';
 
 const S = (q: string) => ({ q, star: true });
 
@@ -123,22 +124,77 @@ const GROUPS: Array<{ label: string; items: Array<string | { q: string; star?: b
   ]},
 ];
 
-export default function UndeniableHooks() {
+// ─── Rating · saved on the device ───────────────────────────────────────
+
+const RKEY = 'hookbank-ratings-v1';
+
+function loadRatings(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(RKEY);
+    if (raw) return JSON.parse(raw) as Record<string, number>;
+  } catch { /* noop */ }
+  return {};
+}
+
+const norm = (raw: string | { q: string; star?: boolean }) =>
+  typeof raw === 'string' ? { text: raw, seed: false } : { text: raw.q, seed: !!raw.star };
+
+function StarRater({ value, onSet }: { value: number; onSet: (v: number) => void }) {
   return (
-    <Shell title="Hook Bank · Undeniable" description="Around 90 hooks built from the session, in Rhys's voice, organised by mechanic." path="/undeniablenextsteps/hooks">
+    <div className="flex gap-0.5 flex-shrink-0 pt-0.5">
+      {[1, 2, 3, 4, 5].map((k) => (
+        <button key={k} onClick={() => onSet(k === value ? 0 : k)} aria-label={`Rate ${k}`} className="leading-none">
+          <Star className={`w-3.5 h-3.5 transition-colors ${k <= value ? 'fill-blue-400 text-blue-400' : 'text-zinc-700 hover:text-zinc-500'}`} />
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function UndeniableHooks() {
+  const [ratings, setRatings] = useState<Record<string, number>>(() => loadRatings());
+
+  const setRating = (id: string, val: number) => {
+    setRatings((prev) => {
+      const next = { ...prev, [id]: val };
+      try { localStorage.setItem(RKEY, JSON.stringify(next)); } catch { /* noop */ }
+      return next;
+    });
+  };
+
+  // Editorial high-conviction picks start at 5 until the user rates them.
+  const ratingOf = (id: string, seed: boolean) => (id in ratings ? ratings[id] : (seed ? 5 : 0));
+
+  return (
+    <Shell title="Hook Bank · Undeniable" description="Around 90 hooks built from the session, in Rhys's voice, organised by mechanic. Rate them and the best float up." path="/undeniablenextsteps/hooks">
       <PageHead
         eyebrow="Reference · Hooks"
         title="The Hook"
         accent="Bank."
-        blurb="Around 90 hooks, built from his own lines, organised by mechanic. Grab and shoot. The blue star marks the highest-conviction pulls. Rule one: don't run three of the same mechanic in a row, and test the starred lines first."
+        blurb="Around 90 hooks, built from your own lines, organised by mechanic. Rate each one as you test, and the best float to the top of their group. Our highest-conviction pulls start at five stars. Rule one: don't run three of the same mechanic in a row."
       />
       <Divider />
       <Wrap>
-        {GROUPS.map((g) => (
-          <Block key={g.label} label={g.label}>
-            <Quotes items={g.items} />
-          </Block>
-        ))}
+        {GROUPS.map((g, gi) => {
+          const rows = g.items
+            .map((raw, ii) => ({ id: `${gi}-${ii}`, ...norm(raw) }))
+            .sort((a, b) => ratingOf(b.id, b.seed) - ratingOf(a.id, a.seed));
+          return (
+            <Block key={g.label} label={g.label}>
+              <ul className="space-y-2">
+                {rows.map((r) => {
+                  const rating = ratingOf(r.id, r.seed);
+                  return (
+                    <li key={r.id} className={`rounded-xl border px-4 py-3 flex items-start gap-4 transition-colors ${rating >= 4 ? 'border-blue-500/30 bg-blue-500/[0.04]' : 'border-zinc-800 bg-elevated/30'}`}>
+                      <span className="text-zinc-200 text-[15px] md:text-[16px] leading-relaxed italic flex-1 min-w-0">&ldquo;{r.text}&rdquo;</span>
+                      <StarRater value={rating} onSet={(v) => setRating(r.id, v)} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </Block>
+          );
+        })}
         <Note>For short form, the hook is line one. Then problem, then path (with a tool or a "don't do this"), then a native bridge or CTA. Every story opener doubles as a long-form: shoot the line as a short and the full story as a pillar.</Note>
       </Wrap>
     </Shell>

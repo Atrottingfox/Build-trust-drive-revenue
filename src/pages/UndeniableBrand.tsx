@@ -147,10 +147,6 @@ export default function UndeniableBrand() {
               </div>
             ))}
           </div>
-          <div className="mt-7 pt-6 border-t border-zinc-800 space-y-2">
-            <p className="text-zinc-400 text-[14px] italic">&ldquo;You don&apos;t know what you don&apos;t know.&rdquo;</p>
-            <p className="text-zinc-400 text-[14px] italic">&ldquo;You won&apos;t hear from me until I&apos;ve done 80K a month.&rdquo;</p>
-          </div>
         </div>
       </Wrap>
     </Shell>

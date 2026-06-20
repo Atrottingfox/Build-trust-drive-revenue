@@ -42,6 +42,10 @@ const TheRunSheet = React.lazy(() => import('./pages/TheRunSheet'));
 const UndeniableBrand = React.lazy(() => import('./pages/UndeniableBrand'));
 const UndeniableLeadMagnets = React.lazy(() => import('./pages/UndeniableLeadMagnets'));
 const UndeniableContent = React.lazy(() => import('./pages/UndeniableContent'));
+const UndeniableContentFoundation = React.lazy(() => import('./pages/UndeniableContentFoundation'));
+const UndeniableContentShortForm = React.lazy(() => import('./pages/UndeniableContentShortForm'));
+const UndeniableContentLongForm = React.lazy(() => import('./pages/UndeniableContentLongForm'));
+const UndeniableContentData = React.lazy(() => import('./pages/UndeniableContentData'));
 const UndeniableOps = React.lazy(() => import('./pages/UndeniableOps'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
@@ -110,6 +114,10 @@ export default function App() {
           <Route path="/undeniablenextsteps/brand" element={<UndeniableBrand />} />
           <Route path="/undeniablenextsteps/lead-magnets" element={<UndeniableLeadMagnets />} />
           <Route path="/undeniablenextsteps/content" element={<UndeniableContent />} />
+          <Route path="/undeniablenextsteps/content/foundation" element={<UndeniableContentFoundation />} />
+          <Route path="/undeniablenextsteps/content/short-form" element={<UndeniableContentShortForm />} />
+          <Route path="/undeniablenextsteps/content/long-form" element={<UndeniableContentLongForm />} />
+          <Route path="/undeniablenextsteps/content/data" element={<UndeniableContentData />} />
           <Route path="/undeniablenextsteps/ops" element={<UndeniableOps />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
           <Route path="/theplan" element={<ThePlan />} />
