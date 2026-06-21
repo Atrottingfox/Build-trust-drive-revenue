@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
 import { Shell, PageHead, Wrap, Divider, Block, Note } from '../components/undeniable/Bits';
+import { supabase } from '../lib/supabase';
 
 const S = (q: string) => ({ q, star: true });
 
@@ -124,16 +125,14 @@ const GROUPS: Array<{ label: string; items: Array<string | { q: string; star?: b
   ]},
 ];
 
-// ─── Rating · saved on the device ───────────────────────────────────────
+// ─── Rating · shared across the team via Supabase ───────────────────────
+// Keyed by a stable hash of the hook text, so reordering the source list
+// never scrambles ratings. Table: public.undeniable_hook_ratings.
 
-const RKEY = 'hookbank-ratings-v1';
-
-function loadRatings(): Record<string, number> {
-  try {
-    const raw = localStorage.getItem(RKEY);
-    if (raw) return JSON.parse(raw) as Record<string, number>;
-  } catch { /* noop */ }
-  return {};
+function hookId(text: string): string {
+  let h = 5381;
+  for (let i = 0; i < text.length; i++) h = ((h << 5) + h + text.charCodeAt(i)) | 0;
+  return `h${(h >>> 0).toString(36)}`;
 }
 
 const norm = (raw: string | { q: string; star?: boolean }) =>
@@ -152,17 +151,33 @@ function StarRater({ value, onSet }: { value: number; onSet: (v: number) => void
 }
 
 export default function UndeniableHooks() {
-  const [ratings, setRatings] = useState<Record<string, number>>(() => loadRatings());
+  const [ratings, setRatings] = useState<Record<string, number>>({});
+
+  // Load the shared ratings once on mount. Falls back to editorial order if the
+  // table isn't reachable yet.
+  useEffect(() => {
+    let active = true;
+    supabase
+      .from('undeniable_hook_ratings')
+      .select('hook_id, rating')
+      .then(({ data, error }) => {
+        if (!active || error || !data) return;
+        const map: Record<string, number> = {};
+        data.forEach((r: { hook_id: string; rating: number }) => { map[r.hook_id] = r.rating; });
+        setRatings(map);
+      });
+    return () => { active = false; };
+  }, []);
 
   const setRating = (id: string, val: number) => {
-    setRatings((prev) => {
-      const next = { ...prev, [id]: val };
-      try { localStorage.setItem(RKEY, JSON.stringify(next)); } catch { /* noop */ }
-      return next;
-    });
+    setRatings((prev) => ({ ...prev, [id]: val }));
+    supabase
+      .from('undeniable_hook_ratings')
+      .upsert({ hook_id: id, rating: val, updated_at: new Date().toISOString() }, { onConflict: 'hook_id' })
+      .then(({ error }) => { if (error) console.warn('rating save failed', error.message); });
   };
 
-  // Editorial high-conviction picks start at 5 until the user rates them.
+  // Editorial high-conviction picks start at 5 until someone rates them.
   const ratingOf = (id: string, seed: boolean) => (id in ratings ? ratings[id] : (seed ? 5 : 0));
 
   return (
@@ -175,9 +190,12 @@ export default function UndeniableHooks() {
       />
       <Divider />
       <Wrap>
-        {GROUPS.map((g, gi) => {
+        {GROUPS.map((g) => {
           const rows = g.items
-            .map((raw, ii) => ({ id: `${gi}-${ii}`, ...norm(raw) }))
+            .map((raw) => {
+              const n = norm(raw);
+              return { id: hookId(n.text), ...n };
+            })
             .sort((a, b) => ratingOf(b.id, b.seed) - ratingOf(a.id, a.seed));
           return (
             <Block key={g.label} label={g.label}>
