@@ -75,8 +75,8 @@ export default function Geronimo() {
     <PasswordGate storageKey="geronimo-unlocked">
     <div className="min-h-screen bg-base">
       <SEO
-        title="Geronimo. 12 Week Media OS Plan"
-        description="Free Nate from the weeds. Feed growth on purpose. A 12 week plan to break the editing bottleneck and install a Media OS that reliably drives Geronimo's growth."
+        title="Geronimo. 12 Week Media OS Transition Plan"
+        description="Get the system out of Nate's head, keep output steady, and put a new Media Lead in the seat before he walks. A 12 week plan to document the media engine and install an owner who runs it without you."
         path="/geronimo"
         noIndex
       />
@@ -88,12 +88,12 @@ export default function Geronimo() {
           <Section>
             <div className="max-w-3xl">
               <div className="accent-line mb-8" />
-              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">12 Week Plan</p>
+              <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">12 Week Transition Plan</p>
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 Geronimo.
               </h1>
               <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl">
-                Free Nate from the weeds. Feed growth on purpose.
+                Install a Media OS. Put an owner in the seat who runs it without you.
               </p>
             </div>
           </Section>
@@ -108,20 +108,20 @@ export default function Geronimo() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · The Goal</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Make the media engine boring.
+              Get the system out of Nate's head.
               <br />
-              <span className="text-zinc-500">Make growth intentional.</span>
+              <span className="text-zinc-500">Put a new owner in the seat.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-8">
-              The point of this project is simple.
+              The plan changed. Nate is leaving, and he has roughly 90 days. So the point of this project changed with it.
             </p>
 
             <div className="glow-card p-8 md:p-10 mb-10 max-w-3xl">
               <ul className="space-y-4">
                 {[
-                  'Break the editing bottleneck for good.',
-                  'Turn Nate from super editor into a confident operator and strategist.',
-                  "Build a simple Media OS that reliably feeds Geronimo's growth, and keeps HeyDoza moving, without anyone needing to white knuckle it.",
+                  "Get everything Nate runs out of his head and documented, so nothing walks out the door with him.",
+                  'Keep output steady through the transition. No dip while the seat changes hands.',
+                  "Install a simple Media OS and put a new Media Lead in the seat who runs it without you.",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -134,9 +134,9 @@ export default function Geronimo() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Over 12 weeks</p>
             <div className="max-w-3xl space-y-4 mb-12">
               {[
-                'Fix editing so Nate is out of 80% of the cutting.',
-                'Install a repeatable content cadence and operating rhythm.',
-                'Map outputs directly to the business strategy, with clear roles and responsibilities everyone agrees on.',
+                'Extract every process Nate runs and turn his taste into checklists anyone can follow.',
+                'Break the editing bottleneck so output no longer depends on one person.',
+                'Design the Media Lead role, then hire and hand over so a new owner is in the seat by the time Nate walks.',
               ].map((item, i) => (
                 <p key={i} className="text-zinc-300 font-medium leading-relaxed">
                   <span className="text-zinc-500">Step {i + 1}.</span> {item}
@@ -147,7 +147,7 @@ export default function Geronimo() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
               <p className="text-blue-400 font-semibold text-sm mb-3">My role</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                To be the architect and advisor. Nate leads the implementation.
+                Architect the OS, lead the extraction from Nate, and advise on the hire and handover. Your team runs it. I don't.
               </p>
             </div>
           </Section>
@@ -162,9 +162,9 @@ export default function Geronimo() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Challenge</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Inside, the intent is clear.
+              The engine works.
               <br />
-              <span className="text-zinc-500">Outside, the process isn't.</span>
+              <span className="text-zinc-500">It just lives in one person's head.</span>
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-10">
@@ -189,7 +189,7 @@ export default function Geronimo() {
                 <p className="text-white font-semibold text-base mb-4">But</p>
                 <ul className="space-y-3">
                   {[
-                    'Nate is stuck in the weeds. Editing, clipping, trying to hit daily posts.',
+                    'Nate is leaving. He has roughly 90 days, and most of how the media runs lives in his head.',
                     'Editors are under utilised. They are paid, but not truly empowered to own the 80%.',
                     'Hayley is on the hook for triages and sales, but does not have clear visibility or a simple way to direct the media machine.',
                     'HeyDoza and Geronimo are intertwined, without a clean, simple structure.',
@@ -204,9 +204,9 @@ export default function Geronimo() {
             </div>
 
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-blue-400 font-semibold text-sm mb-3">The gap</p>
+              <p className="text-blue-400 font-semibold text-sm mb-3">The risk</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Everything feels like a sprint. Nothing feels like a system.
+                The whole media engine lives in Nate's head. And he's walking in 90 days.
               </p>
             </div>
           </Section>
@@ -234,7 +234,7 @@ export default function Geronimo() {
                 {
                   icon: Compass,
                   title: 'Strategy',
-                  description: "We want a media machine that reliably produces the right content to drive Geronimo's growth, while Doza still builds his founder brand, and Nate isn't editing 24/7.",
+                  description: "We want a media machine that reliably produces the right content to drive Geronimo's growth, while Doza still builds his founder brand, and no single person is the point of failure.",
                 },
                 {
                   icon: Layers,
@@ -249,7 +249,7 @@ export default function Geronimo() {
                 {
                   icon: Zap,
                   title: 'Sprints',
-                  description: 'Short, focused periods where we attack a single bottleneck. Right now, editing.',
+                  description: "Short, focused periods where we attack a single bottleneck. Right now, extracting Nate's system before he leaves.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -270,9 +270,9 @@ export default function Geronimo() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Over 12 weeks, we use this lens to</p>
             <ul className="space-y-4 max-w-3xl">
               {[
-                'Break the editing bottleneck and get Nate out of 80% of the cutting.',
+                "Extract Nate's system and break the editing bottleneck so the work no longer depends on him.",
                 'Install a predictable weekly rhythm across Geronimo and HeyDoza.',
-                'Tie content to business strategy and lock clear ownership so Nate is empowered to make decisions and Hayley can steer with confidence.',
+                'Design the Media Lead seat, then hire and hand over so ownership is clear and Hayley can steer with confidence.',
               ].map((item, i) => (
                 <li key={i} className="flex items-start gap-3">
                   <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -292,9 +292,9 @@ export default function Geronimo() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · Phase 1 · Weeks 1 to 4</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Calibration Sprint.
+              Extraction Sprint.
               <br />
-              <span className="text-zinc-500">Break the editing bottleneck.</span>
+              <span className="text-zinc-500">Get it out of Nate's head.</span>
             </h2>
             <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-6">
               <p>This is the slow down to speed up month.</p>
@@ -302,7 +302,7 @@ export default function Geronimo() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl mb-12">
               <p className="text-blue-400 font-semibold text-sm mb-3">Goal</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Get editing off Nate's plate, 80% plus, and build his confidence as the person who runs the operation, not the person who does all the doing.
+                Get everything Nate runs out of his head and documented, and get editing off his plate, 80% plus, so output holds steady while the seat changes hands.
               </p>
             </div>
 
@@ -312,7 +312,7 @@ export default function Geronimo() {
               {[
                 { role: 'Doza', tag: 'the who', description: 'Mission, story.' },
                 { role: 'Hayley', tag: 'the why', description: 'What business outcome content must drive.' },
-                { role: 'Nate', tag: 'the how, when, where', description: 'How it is said on media, when and where it goes out.' },
+                { role: 'Media Lead', tag: 'the how, when, where', description: 'The seat Nate holds today, and the one we document and hire into.' },
                 { role: 'Editors', tag: 'the doers', description: 'Make the assets.' },
               ].map((item, i) => (
                 <div key={i} className="glow-card p-6">
@@ -326,12 +326,16 @@ export default function Geronimo() {
             <PhaseWeeks
               weeks={[
                 {
-                  label: 'Week 1 · Map & Batch',
-                  title: 'Get the pipeline full.',
+                  label: 'Week 1 · Teardown Day',
+                  title: 'Pull the whole operation apart.',
+                  body: [
+                    'We book one deep work day with Nate and pull the operation apart, piece by piece. This is where I start working directly with him to get everything on the table.',
+                  ],
                   points: [
-                    'Align on roles at a high level so everyone knows their lane.',
-                    'Map 4 weeks of low effort, high leverage content in advance for Geronimo, plus 1 to 2 founder pieces a week for HeyDoza.',
-                    'Nate batches shooting with the crew in one heavy week, so editors have a full pipeline while he documents and trains.',
+                    'Map every process end to end. Ideas, filming, edit, review, publish, measure. Who touches it, what tools, where it breaks.',
+                    'Inventory everything Nate is running right now and everything sitting in his pipeline.',
+                    'Sort it into must ship in the next 30 days, nice to have, and can die.',
+                    'Find the key man risks. If Nate walked tomorrow, what breaks first.',
                   ],
                 },
                 {
@@ -343,14 +347,14 @@ export default function Geronimo() {
                   points: [
                     'Translate that into simple, explicit checklists for each edit type.',
                     'No vague language like flow or pop.',
-                    'Only observable, step by step instructions.',
+                    'Only observable, step by step instructions anyone can follow.',
                   ],
                 },
                 {
                   label: 'Week 3 · Train the Editors · 10/80/10',
                   title: 'Install the training loop.',
                   body: [
-                    'We install a training loop so editors can match Nate’s standard. For each editor: Demonstrate, Nate edits a piece following the checklist out loud, screen recorded. Duplicate, the editor edits a new piece while Nate watches them follow the same checklist, any confusion means the checklist gets updated. Solo plus Loom, the editor edits in batches alone, Nate reviews at 2x speed and gives Loom feedback tied directly to specific checklist steps.',
+                    'We install a training loop so editors can match Nate’s standard, and hold it after he’s gone. For each editor: Demonstrate, Nate edits a piece following the checklist out loud, screen recorded. Duplicate, the editor edits a new piece while Nate watches them follow the same checklist, any confusion means the checklist gets updated. Solo plus Loom, the editor edits in batches alone, Nate reviews at 2x speed and gives Loom feedback tied directly to specific checklist steps.',
                   ],
                   points: [
                     'One editor leads short form.',
@@ -359,14 +363,14 @@ export default function Geronimo() {
                   ],
                 },
                 {
-                  label: 'Week 4 · Get Nate Out of the Weeds',
+                  label: 'Week 4 · Output Off Nate',
                   title: '80% of edits done by editors.',
                   body: [
                     'Target, 80% plus of all edits are done by editors, not Nate. Nate only touches the first 10%, creative direction and briefs, and the last 10%, QA, approvals, Loom feedback.',
                   ],
                   points: [
                     'Is Nate still editing timelines?',
-                    'Are editors shipping to standard?',
+                    'Are editors shipping to standard on their own?',
                     'Does Hayley know what is coming the next 2 weeks?',
                   ],
                 },
@@ -376,7 +380,7 @@ export default function Geronimo() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl mt-10">
               <p className="text-blue-400 font-semibold text-sm mb-3">By the end of Week 4</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                The editing bottleneck is broken, and Nate feels more confident and empowered to make operational decisions, not just get a post out today.
+                Nate's system is documented in Notion and Looms, the editing bottleneck is broken, and output holds steady without him touching every timeline. His brain is on paper, not just in his head.
               </p>
             </div>
           </Section>
@@ -393,17 +397,17 @@ export default function Geronimo() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Build the Media OS.
               <br />
-              <span className="text-zinc-500">Lock the cadence.</span>
+              <span className="text-zinc-500">Design the seat.</span>
             </h2>
             <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-6">
               <p>
-                Once editing is off Nate's hands and documented, we move up a level. Delegate more of the process beyond just editing. Let Nate and Hayley map the structure together.
+                With editing off Nate's hands and his system documented, we move up a level. Build the clean Media OS, then spec the role that runs it. Nate helps define the seat he is leaving, so we hire against reality, not a guess.
               </p>
             </div>
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl mb-12">
               <p className="text-blue-400 font-semibold text-sm mb-3">Goal</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                A clear, simple cadence for Geronimo and HeyDoza, with Nate owning the media operation and Hayley steering it toward business outcomes.
+                A clean Media OS with a locked weekly cadence, and a defined Media Lead role. Scorecard, KPIs, and clear ownership. The spec for the person we hire.
               </p>
             </div>
 
@@ -433,24 +437,24 @@ export default function Geronimo() {
                 },
                 {
                   label: 'Week 7 · Lock the Weekly Rhythm',
-                  title: 'Turn structure into checklists.',
+                  title: 'Turn structure into a repeatable week.',
                   points: [
                     'Monday. Quick look back at what shipped and what worked. Lock the next 2 to 4 weeks in the content board with Hayley.',
                     'Thursday. Shoot block with a simple shot list for Geronimo, plus 1 to 2 founder pieces.',
                     'Friday. Short review. What went live, early numbers, any changes needed next week.',
-                    'Nate owns the how, when, where. Hayley owns the why. Everyone sees the same board.',
+                    'The Media Lead owns the how, when, where. Hayley owns the why. Everyone sees the same board.',
                   ],
                 },
                 {
-                  label: 'Week 8 · Delegate Other Parts of the Process',
-                  title: 'Hand off beyond editing.',
+                  label: 'Week 8 · Design the Media Lead Role',
+                  title: 'Write the spec for the replacement.',
                   body: [
-                    'With editing solid, we can safely start delegating more. Nate and I map these together so he sees both the benefits and the consequences of the choices, and feels fully responsible for what he chooses to own vs delegate.',
+                    'We turn everything we documented into a real role. Nate helps define what the seat actually owns day to day, so the person we hire steps into a clear job, not a mystery.',
                   ],
                   points: [
-                    'Uploading and scheduling.',
-                    'Thumbnails and titles, within Nate’s standards.',
-                    'Basic analytics collection.',
+                    'Write the Media Lead scorecard. What good looks like in the seat.',
+                    'Set the KPIs the role is accountable for.',
+                    'Map what the Media Lead owns vs Hayley vs editors. Uploading, scheduling, thumbnails, titles, analytics, all assigned.',
                   ],
                 },
               ]}
@@ -467,13 +471,13 @@ export default function Geronimo() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · Phase 3 · Weeks 9 to 12</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Tune. Empower.
+              Hire the owner.
               <br />
-              <span className="text-zinc-500">Align the roles.</span>
+              <span className="text-zinc-500">Hand over the OS.</span>
             </h2>
             <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-12">
               <p>
-                By now the machine should be running. The last month is about tuning based on data, clarifying roles and responsibilities, and empowering Nate to choose where he wants to spend his time, within the needs of the business.
+                By now the machine runs and the role is defined. The last month is about finding the right person, putting them in the seat, and proving the system runs without me, or Nate.
               </p>
             </div>
 
@@ -481,9 +485,9 @@ export default function Geronimo() {
               weeks={[
                 {
                   label: 'Week 9 · Data & Diagnostic',
-                  title: 'Do more of what works.',
+                  title: 'Lock what good looks like.',
                   body: [
-                    'Review 4 to 6 weeks of content performance.',
+                    'Review 4 to 6 weeks of content performance so we know the benchmark the new hire has to hit.',
                   ],
                   points: [
                     'Identify top performing pieces by views, saves, replies, triages.',
@@ -493,39 +497,39 @@ export default function Geronimo() {
                   ],
                 },
                 {
-                  label: 'Week 10 · Roles, Responsibilities, Ownership',
-                  title: 'Make the tradeoffs explicit.',
+                  label: 'Week 10 · Hiring Scorecard & Rubric',
+                  title: 'Turn the role into a hiring kit.',
                   body: [
-                    'We sit down, you, Hayley, Nate, I facilitate, and map clear roles and responsibilities. What Hayley owns, targets, campaigns, offers. What Nate owns, people, creative, QA, channel strategy. What editors own, throughput to standard.',
+                    'We take the Week 8 role spec and turn it into everything you need to hire well. A scorecard, an interview rubric, and a paid test project so you see the work, not just the pitch.',
                   ],
                   points: [
-                    'Give Nate space to say what he wants to own.',
-                    'Where he wants to spend more time. Strategy, ops, or craft.',
-                    'Make the tradeoffs explicit so he sees how his choices play out in the system.',
+                    'Finalise the Media Lead scorecard and interview rubric.',
+                    'Design a short paid test project that mirrors the real work.',
+                    'Agree who sits in on interviews and how you score them.',
                   ],
                 },
                 {
-                  label: 'Week 11 · OS Review & Future Cadence',
-                  title: 'Confirm it runs without me.',
+                  label: 'Week 11 · Interview, Test, Shadow',
+                  title: 'Run the process. Make the hire.',
                   body: [
-                    'Final pass over the Media OS. Board structure, checklists, meeting rhythm, documentation.',
+                    'Run interviews and the test project against the rubric, then make the call. The new hire starts inside the documented OS while Nate is still here to shadow.',
                   ],
                   points: [
-                    'Nate can run this without me.',
-                    'Hayley can steer it without surprise.',
-                    'Editors know the game and the rules.',
+                    'Score candidates against the rubric, not gut feel.',
+                    'New Media Lead starts and runs real cycles inside the OS.',
+                    'They shadow Nate while he is still in the building.',
                   ],
                 },
                 {
-                  label: 'Week 12 · Handover & Next Steps',
-                  title: 'Decide what comes next.',
+                  label: 'Week 12 · Handover & QA',
+                  title: 'Confirm it runs without us.',
                   body: [
-                    'We review what we installed, how it has felt to run, and what the numbers are telling us.',
+                    'Nate hands over. I QA that the new Media Lead can run the system to standard, without either of us in the seat.',
                   ],
                   points: [
-                    'Do we keep going in an advisory capacity?',
-                    'Do we deepen the engagement?',
-                    'Or is this a clean, finished project and you run from here?',
+                    'New Media Lead runs a full week solo. Nate on standby, not doing the work.',
+                    'QA against the scorecard. Output holds to standard.',
+                    'Decide what comes next. Clean finish, or advisory from here.',
                   ],
                 },
               ]}
@@ -553,10 +557,10 @@ export default function Geronimo() {
                 <p className="text-blue-400 font-semibold text-sm mb-4">My role</p>
                 <ul className="space-y-3">
                   {[
-                    'Design the Media OS and the 12 week plan.',
-                    'Advise Nate on structure, systems, and creative direction.',
-                    'Help you read the data and connect content to business outcomes.',
-                    'Hold the frame so we actually fix the bottlenecks, not just talk about them.',
+                    'Architect the Media OS and the 12 week transition plan.',
+                    "Lead the extraction from Nate and turn his system into documentation anyone can run.",
+                    'Design the Media Lead role and advise on the hire and handover.',
+                    'Hold the frame so the system actually gets installed, and the seat actually gets filled.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
@@ -570,7 +574,7 @@ export default function Geronimo() {
                 <p className="text-blue-400 font-semibold text-sm mb-4">Async support</p>
                 <ul className="space-y-3">
                   {[
-                    'Up to 1 to 2 Loom reviews per week. Edits, systems, docs.',
+                    'Up to 1 to 2 Loom reviews per week. Edits, systems, docs, hiring.',
                     'Async access via WhatsApp or Slack for quick questions between calls.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -586,10 +590,10 @@ export default function Geronimo() {
             <div className="grid md:grid-cols-3 gap-6">
               <div className="glow-card p-8">
                 <p className="text-blue-400 font-semibold text-sm mb-1">Weeks 1 to 4</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Implementation & training</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Extraction & training</p>
                 <ul className="space-y-2">
                   {[
-                    '1x call per week with Nate.',
+                    'Teardown Day with Nate, then 1x call per week.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
@@ -600,7 +604,7 @@ export default function Geronimo() {
               </div>
               <div className="glow-card p-8">
                 <p className="text-blue-400 font-semibold text-sm mb-1">Weeks 5 to 8</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Tuning & delegation</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">OS build & role design</p>
                 <ul className="space-y-2">
                   {[
                     '1x call per fortnight with Nate.',
@@ -615,10 +619,10 @@ export default function Geronimo() {
               </div>
               <div className="glow-card p-8">
                 <p className="text-blue-400 font-semibold text-sm mb-1">Weeks 9 to 12</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Roles, strategy, OS review</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Hire & handover</p>
                 <ul className="space-y-2">
                   {[
-                    '1x call per fortnight. Roles, strategy alignment, OS review.',
+                    '1x call per fortnight. Hiring, handover, OS review.',
                     '1x Operator Clinic per fortnight.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -649,9 +653,9 @@ export default function Geronimo() {
             <div className="glow-card p-8 md:p-10 max-w-3xl">
               <ul className="space-y-5">
                 {[
-                  'This is not a done for you content agency. Your team implements. I design, advise, and read the data with you.',
-                  'This is not me becoming your full time manager. I will not be the one chasing tasks. Nate will.',
-                  'This is not a forever contract. At 12 weeks, we decide together what, if anything, comes next.',
+                  'This is not a done for you content agency. Your team implements. I architect, advise, and read the data with you.',
+                  'This is not me stepping into Nate’s seat. I am not your interim Media Lead or fractional CD, and I am not running your media indefinitely.',
+                  'This is not a forever contract. The whole point is a new owner in the seat by Day 90, not a dependency on me.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <X className="w-5 h-5 text-zinc-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -673,14 +677,14 @@ export default function Geronimo() {
             <div className="accent-line mx-auto mb-10" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Bottom line</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-8 leading-[1.15]">
-              Break editing. Build the cadence.
+              Capture the system. Install the owner.
               <br />
-              <span className="text-zinc-500">Lock the roles.</span>
+              <span className="text-zinc-500">Step out clean.</span>
             </h2>
             <div className="space-y-3 text-zinc-400 mb-10 leading-relaxed">
-              <p>First 4 weeks we break editing and build Nate's confidence as an operator.</p>
-              <p>Next 4 weeks we build the cadence and structure with him in the driver's seat.</p>
-              <p>Final 4 weeks we map it cleanly to the business strategy and lock roles so everyone knows exactly what they own.</p>
+              <p>First 4 weeks we pull the operation apart, document Nate's system, and break the editing bottleneck.</p>
+              <p>Next 4 weeks we build the Media OS and spec the Media Lead role we're hiring into.</p>
+              <p>Final 4 weeks we hire, hand over, and prove the system runs without Nate, or me.</p>
             </div>
             <a
               href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
