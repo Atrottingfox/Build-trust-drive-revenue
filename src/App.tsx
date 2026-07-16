@@ -52,6 +52,7 @@ const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
+const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -130,6 +131,7 @@ export default function App() {
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/geronimo" element={<Geronimo />} />
+          <Route path="/geronimonextsteps" element={<GeronimoNextSteps />} />
         </Routes>
       </Suspense>
     </Router>

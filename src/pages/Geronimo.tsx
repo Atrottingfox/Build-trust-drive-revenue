@@ -695,6 +695,16 @@ export default function Geronimo() {
               Book the working session
               <ArrowRight className="w-4 h-4" />
             </a>
+
+            <div className="mt-8">
+              <a
+                href="/geronimonextsteps"
+                className="group inline-flex items-center gap-2 text-zinc-400 hover:text-blue-400 transition-colors text-[14px] font-medium"
+              >
+                See the clear next steps
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
           </Section>
         </div>
       </section>
