@@ -59,9 +59,9 @@ const offers = [
   },
   {
     num: '03',
-    title: '15 Month Advisory',
+    title: '12 Month Advisory',
     price: '$48k total',
-    rolled: 'from Day 0 · 28k additional',
+    rolled: '12 months on top · 28k additional',
     description: 'Offered around Day 30 to 60 once the Engine is live and working. Your original 20k rolls in, so it is 28k to keep Sean and the OS on your business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp, plus one extra in person day.',
   },
 ];
@@ -69,7 +69,7 @@ const offers = [
 const revenueMetrics = [
   { stat: '$5k', label: 'Strategy Day', sub: 'Entry point. Credits into the install' },
   { stat: '$20k', label: 'Install', sub: 'Strategy Day + 90 day build' },
-  { stat: '$48k', label: '15 month advisory', sub: 'Full path, from Day 0' },
+  { stat: '$48k', label: '12 month advisory', sub: 'Full path · 12 months on top' },
   { stat: '$15,270', label: 'Floor LTGP', sub: '20k path, no upgrades (~76% gross)' },
   { stat: '$37,940', label: 'Full path LTGP', sub: '48k path (~79% gross)' },
   { stat: '$20.9k-24.3k', label: 'Expected LTGP', sub: 'At 25 to 40% advisory upgrade' },
@@ -327,7 +327,7 @@ export default function BusinessMap() {
                     'No online presence or expertise yet',
                     'Looking for someone to do it all for you',
                     'Not willing to film and show up',
-                    'Under $500k revenue',
+                    'Under $200k/month in revenue',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <X className="w-4 h-4 text-zinc-600 mt-1 flex-shrink-0" />
@@ -443,7 +443,7 @@ export default function BusinessMap() {
                 { stat: '65%', label: 'Strategy Day margin', description: '5k revenue, 1.73k cost, 3.27k profit. Time, travel, and delivery.' },
                 { stat: '80%', label: '90 Day Install margin', description: '15k backend, 3k cost, 12k profit. No inventory, no office, no team at stage 0.' },
                 { stat: '$15,270', label: '20k path LTGP', description: 'Strategy Day plus 90 day install. ~76% gross across the entry path.' },
-                { stat: '$37,940', label: '48k path LTGP', description: 'Full advisory path. ~79% gross across 15 months together.' },
+                { stat: '$37,940', label: '48k path LTGP', description: 'Full advisory path. ~79% gross across the install and 12 months of advisory.' },
                 { stat: '$20.9k-24.3k', label: 'Expected LTGP', description: 'Blended at a 25 to 40% advisory upgrade rate off the 20k floor.' },
                 { stat: '5-8k', label: 'Target CAC', description: '3 to 5x LTV:CAC, client financed inside the first 90 days.' },
               ].map((m, i) => (
