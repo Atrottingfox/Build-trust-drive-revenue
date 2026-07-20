@@ -45,51 +45,44 @@ const problems = [
 const offers = [
   {
     num: '01',
-    title: 'Brand Day',
+    title: 'Strategy Day',
     price: '$5k',
-    rolled: 'Entry',
-    description: 'The intensive. Brand, positioning, narrative, pillar content captured on site. Everything documented inside The Engineroom. The foundation the rest of the engine runs on.',
+    rolled: 'Authority Engine Build Day',
+    description: '1:1, in person intensive. Brand, positioning, narrative, customer journey, and Authority Engine blueprint documented inside The Engineroom. This is Phase 1 of the install, not a random workshop. The 5k credits in full toward the 90 day.',
   },
   {
     num: '02',
     title: '90 Day Install',
-    price: '+$10k',
-    rolled: '$15k all in',
-    description: 'Offered at the close of Brand Day. The full install. 3 cycles of 4 weeks each. Brand, content, scale. Brand Day rolls over. Operator trained. Engine running by Day 90.',
+    price: '$20k total',
+    rolled: '5k credits in · 15k additional',
+    description: 'Offered at the close of the Strategy Day. Your 5k day rolls in 100%, so it is 15k more to start. Over 90 days we build, install, and tune the Engine with your team so it is running by Day 90.',
   },
   {
     num: '03',
-    title: '6 Month Bundle',
-    price: '+$13k',
-    rolled: '$28k all in',
-    description: 'Offered at Day 30. Roll the rest of the 90 days and 6 months of advisory into one decision. $28k flat for 9 months together. Commit at Day 30 and get a bonus in person day with Sean.',
-  },
-  {
-    num: '04',
-    title: 'Advisory',
-    price: '$30k PIF / 12 months',
-    rolled: 'or $3k / month thereafter',
-    description: 'Continues after the bundle. Annual paid in full is $30k for 12 months. Month to month is $3k after the bundle. Monthly Founder Strategy Pod. Monthly 1:1 with the Operator or CD. Weekly Operator Clinic. Up to 1 Loom per week.',
+    title: '15 Month Advisory',
+    price: '$48k total',
+    rolled: 'from Day 0 · 28k additional',
+    description: 'Offered around Day 30 to 60 once the Engine is live and working. Your original 20k rolls in, so it is 28k to keep Sean and the OS on your business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp, plus one extra in person day.',
   },
 ];
 
 const revenueMetrics = [
-  { stat: '$5k', label: 'Brand Day', sub: 'Entry point' },
-  { stat: '$15k', label: 'Install', sub: 'Brand Day + 90 day build' },
-  { stat: '$28k', label: 'Year 1 per client', sub: '6 month bundle all in' },
-  { stat: '60-80%', label: 'Brand Day to Install', sub: 'When the day is strong and pre framed' },
-  { stat: '40-50%', label: 'Install to Bundle', sub: 'Offered at Day 30 to strong fits' },
-  { stat: '$1k', label: 'CAC', sub: 'Warm outreach + content' },
+  { stat: '$5k', label: 'Strategy Day', sub: 'Entry point. Credits into the install' },
+  { stat: '$20k', label: 'Install', sub: 'Strategy Day + 90 day build' },
+  { stat: '$48k', label: '15 month advisory', sub: 'Full path, from Day 0' },
+  { stat: '$15,270', label: 'Floor LTGP', sub: '20k path, no upgrades (~76% gross)' },
+  { stat: '$37,940', label: 'Full path LTGP', sub: '48k path (~79% gross)' },
+  { stat: '$20.9k-24.3k', label: 'Expected LTGP', sub: 'At 25 to 40% advisory upgrade' },
 ];
 
 const sixMonthPlan = [
-  { month: 'Month 1', brandDays: 4,  installs: 3, bundles: 0, revenue: '$35k' },
-  { month: 'Month 2', brandDays: 6,  installs: 5, bundles: 2, revenue: '$111k' },
-  { month: 'Month 3', brandDays: 8,  installs: 6, bundles: 2, revenue: '$126k' },
-  { month: 'Month 4', brandDays: 10, installs: 8, bundles: 3, revenue: '$169k' },
-  { month: 'Month 5', brandDays: 10, installs: 8, bundles: 3, revenue: '$169k' },
-  { month: 'Month 6', brandDays: 11, installs: 9, bundles: 5, revenue: '$210k' },
-  { month: 'Month 7', brandDays: 11, installs: 9, bundles: 5, revenue: '$210k' },
+  { month: 'Month 1', brandDays: 4,  installs: 3, revenue: '$65k' },
+  { month: 'Month 2', brandDays: 6,  installs: 5, revenue: '$105k' },
+  { month: 'Month 3', brandDays: 8,  installs: 6, revenue: '$130k' },
+  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$170k' },
+  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$170k' },
+  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$190k' },
+  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$190k' },
 ];
 
 const pillars = [
@@ -121,8 +114,8 @@ const fiveAs = [
 const acquisitionPaths = [
   {
     icon: Users,
-    title: 'Brand Day',
-    description: '1:1, intensive, $5k. The entry to the engine.',
+    title: 'Strategy Day',
+    description: '1:1, in person, $5k. Phase 1 of the 90 Day Install.',
   },
   {
     icon: Building,
@@ -158,17 +151,17 @@ const stages = [
     year: 'Year 1',
     title: 'Advisory',
     revenue: '$0 to $1M',
-    description: 'Sean delivers everything. Brand Day, 90 day install, advisory. Every client generates IP, case studies, and proof.',
-    model: '60 Brand Days, 48 Installs, 20 six month bundles ≈ $1.04M. Conversion targets: Brand Day to Install 60-80%, Install to Bundle 40-50%.',
+    description: 'Sean delivers everything. Strategy Day, 90 day install, advisory. Every client generates IP, case studies, and proof.',
+    model: '5k Day to 20k Install to 48k Advisory. About 60 Strategy Days and 48 Installs puts Stage 0 at a $1M+ run rate, with advisory as upside on top. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 25 to 40%.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
-    metric: 'Install conversion rate (target 60-80%). Secondary: Install to Bundle attach (target 40-50%).',
+    metric: 'Install conversion rate (target 60 to 80%). Secondary: Install to Advisory attach (target 25 to 40%).',
   },
   {
     stage: 'STAGE 1',
     year: 'Year 2',
     title: 'Licensed Operators',
     revenue: '$1M to $3M',
-    description: 'Licensed operators run the full pipeline on their own client base. Same delivery, just no longer through Sean. Annual license. Revenue share back.',
+    description: 'Licensed operators run the full pipeline on their own client base. Same delivery, just no longer through Sean. Annual license. Revenue share back. This is the beginning of the training and licensing business. We certify Media OS Operators to run the Authority Engine on their own client base under our brand.',
     model: 'Each operator targets ~$300k/year. 5 to 8 operators plus Sean\'s direct installs = $1M to $3M.',
     mission: 'The first Founding Operators get licensed. Status comes from being early and close to the source.',
     metric: "Operator retention rate. Target 70%+ of Sean's rate.",
@@ -178,8 +171,8 @@ const stages = [
     year: 'Year 3',
     title: 'Bolt on Talent',
     revenue: '$3M to $10M',
-    description: 'Trained operators alongside the advisory. Clients get the system AND the person to run it.',
-    model: 'Install $10k. Operator placement $3k to $5k/mo. Advisory $3k/mo. Junior operators at $80k manage 3 to 4 clients each.',
+    description: 'Trained operators alongside the advisory. Clients get the system AND the person to run it. This is the placement, business in a box arm.',
+    model: 'Clients buy the Authority Engine plus a certified Operator to run it. We charge for the Install plus a monthly Operator fee. Operators are trained in the Academy and placed into accounts. We keep the training and IP, and take placement fees plus rev share. Junior operators at $80k manage 3 to 4 clients each.',
     mission: 'Founders buy the system plus the operator. The ladder from good editor to trusted creative director becomes a real path.',
     metric: 'Operator utilisation. Target 3 to 4 clients per operator.',
   },
@@ -188,7 +181,7 @@ const stages = [
     year: 'Year 4',
     title: 'Academy',
     revenue: '$10M to $20M',
-    description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists.',
+    description: 'Training becomes a product. The Authority Engine Academy certifies operators and content strategists. The core product of the company becomes training and certification of Media OS Operators and Content Directors. Advisory and placement build on top.',
     model: 'Certification $5k to $10k per person. Annual Engineroom license $2k to $5k.',
     mission: 'The Content Director School opens. Training free or low cost. Badge, platform, and placement are the product.',
     metric: 'Graduates deliver independently within 90 days of certification.',
@@ -254,7 +247,7 @@ export default function BusinessMap() {
 
             <div className="glow-card p-8 md:p-10">
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-                <span className="text-white font-semibold">Mission:</span> Build the content infrastructure for 7 & 8 figure founders, and a growth ladder for the media operators who run it.
+                <span className="text-white font-semibold">Mission:</span> Build the Media Operating System for 7 & 8 figure founders, and the training & placement ladder for the media operators who run it.
               </p>
             </div>
           </Section>
@@ -356,7 +349,7 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The offer ladder</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Four steps.
+              Three steps.
               <br />
               <span className="text-zinc-500">One system.</span>
             </h2>
@@ -385,6 +378,15 @@ export default function BusinessMap() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="glow-card p-6 mt-6">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mb-2">
+                <h3 className="text-white font-semibold text-base">Concierge Install + Team Build</h3>
+                <span className="text-blue-400 font-medium text-sm">$40k</span>
+                <span className="text-zinc-600 text-xs uppercase tracking-widest">By selection only</span>
+              </div>
+              <p className="text-zinc-500 text-sm leading-relaxed">For founders without a solid operator. Includes the 90 Day Install plus help designing, hiring, and ramping a Media Operator or Content Lead. Not on the public ladder, offered only when lack of talent is the main constraint.</p>
             </div>
           </Section>
         </div>
@@ -419,6 +421,9 @@ export default function BusinessMap() {
                 </motion.div>
               ))}
             </div>
+            <p className="text-zinc-400 text-sm leading-relaxed max-w-3xl mt-8">
+              We design for 3 to 5x LTV:CAC. With LTGP in the ~21 to 24k range, that supports CAC of ~4 to 8k per client at scale.
+            </p>
           </Section>
         </div>
       </section>
@@ -435,9 +440,12 @@ export default function BusinessMap() {
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { stat: '85-90%', label: 'Gross Margin', description: "Costs are Sean's time, flights, and tools. No inventory. No office. No team at stage 0." },
-                { stat: '$28k', label: 'Year 1 LTV', description: '$5k Brand Day entry. 60-80% Install conversion. 40-50% take the 6 month bundle. Plus advisory upside in year 2.' },
-                { stat: '28:1', label: 'LTV to CAC', description: 'At $1k CAC from warm outreach and content. Anything above 3:1 is considered excellent.' },
+                { stat: '65%', label: 'Strategy Day margin', description: '5k revenue, 1.73k cost, 3.27k profit. Time, travel, and delivery.' },
+                { stat: '80%', label: '90 Day Install margin', description: '15k backend, 3k cost, 12k profit. No inventory, no office, no team at stage 0.' },
+                { stat: '$15,270', label: '20k path LTGP', description: 'Strategy Day plus 90 day install. ~76% gross across the entry path.' },
+                { stat: '$37,940', label: '48k path LTGP', description: 'Full advisory path. ~79% gross across 15 months together.' },
+                { stat: '$20.9k-24.3k', label: 'Expected LTGP', description: 'Blended at a 25 to 40% advisory upgrade rate off the 20k floor.' },
+                { stat: '5-8k', label: 'Target CAC', description: '3 to 5x LTV:CAC, client financed inside the first 90 days.' },
               ].map((m, i) => (
                 <motion.div
                   key={i}
@@ -454,6 +462,23 @@ export default function BusinessMap() {
                   <p className="text-zinc-500 text-sm leading-relaxed">{m.description}</p>
                 </motion.div>
               ))}
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-8 mt-6">
+              <p className="text-white text-sm font-semibold mb-5">CAC caps at 3:1 LTV:CAC</p>
+              <div className="grid sm:grid-cols-3 gap-6 mb-5">
+                {[
+                  { rate: '0% upgrade', cap: '$5.1k' },
+                  { rate: '25% upgrade', cap: '$7.0k' },
+                  { rate: '40% upgrade', cap: '$8.1k' },
+                ].map((c, i) => (
+                  <div key={i}>
+                    <p className="font-display text-2xl font-extrabold text-white tracking-tight">{c.cap}</p>
+                    <p className="text-zinc-500 text-xs">max CAC · {c.rate}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-zinc-400 text-sm leading-relaxed">Design rule: always safe target at or below 5k per client. Aggressive but fine if upgrades hold, up to 7 to 8k. All client financed in the first 90 days.</p>
             </div>
           </Section>
         </div>
@@ -472,27 +497,23 @@ export default function BusinessMap() {
             <p className="text-zinc-500 text-lg mb-12">The Stage 0 ramp, month by month.</p>
 
             <div className="glow-card overflow-hidden mb-8">
-              <div className="hidden md:grid md:grid-cols-5 gap-4 px-6 py-4 border-b border-zinc-800 text-zinc-500 text-xs font-semibold uppercase tracking-widest">
+              <div className="hidden md:grid md:grid-cols-4 gap-4 px-6 py-4 border-b border-zinc-800 text-zinc-500 text-xs font-semibold uppercase tracking-widest">
                 <div>Month</div>
-                <div className="text-right">Brand Days $5k</div>
-                <div className="text-right">Installs +$10k</div>
-                <div className="text-right">6 Month Bundles +$13k</div>
+                <div className="text-right">Strategy Days $5k</div>
+                <div className="text-right">Installs +$15k</div>
                 <div className="text-right">Revenue</div>
               </div>
               {sixMonthPlan.map((row, i) => (
                 <div
                   key={i}
-                  className="grid grid-cols-2 md:grid-cols-5 gap-4 px-6 py-5 border-b border-zinc-900 last:border-b-0 text-sm"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-4 px-6 py-5 border-b border-zinc-900 last:border-b-0 text-sm"
                 >
                   <div className="text-white font-medium md:col-span-1 col-span-2">{row.month}</div>
                   <div className="text-zinc-400 md:text-right">
-                    <span className="md:hidden text-zinc-600 mr-2">Brand Days:</span>{row.brandDays}
+                    <span className="md:hidden text-zinc-600 mr-2">Strategy Days:</span>{row.brandDays}
                   </div>
                   <div className="text-zinc-400 md:text-right">
                     <span className="md:hidden text-zinc-600 mr-2">Installs:</span>{row.installs}
-                  </div>
-                  <div className="text-zinc-400 md:text-right">
-                    <span className="md:hidden text-zinc-600 mr-2">Bundles:</span>{row.bundles}
                   </div>
                   <div className="text-blue-400 font-semibold md:text-right col-span-2 md:col-span-1">{row.revenue}</div>
                 </div>
@@ -502,11 +523,11 @@ export default function BusinessMap() {
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Totals</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">60 Brand Days. 48 Installs. 20 six month bundles.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days. 48 Installs. Advisory is upside on top.</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Six month total</p>
-                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.04M</p>
+                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.02M</p>
               </div>
             </div>
           </Section>
@@ -524,7 +545,7 @@ export default function BusinessMap() {
               The Authority Engine.
             </h2>
             <p className="text-zinc-500 text-lg mb-4">Brand. Content. Scale.</p>
-            <p className="text-zinc-600 text-sm mb-12">The Authority Engine is the system. The Engineroom is the software that stores, nudges, and measures it.</p>
+            <p className="text-zinc-600 text-sm mb-12">The Authority Engine is the Media Operating System. Brand, Content, and Scale running as one Engine your operator can control. The Engineroom is the software that stores, nudges, and measures it.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {pillars.map((p, i) => (
                 <motion.div
@@ -605,7 +626,7 @@ export default function BusinessMap() {
               ))}
             </div>
             <p className="text-zinc-500 text-sm text-center">
-              Workshops and events qualify. Brand Day is direct entry.
+              Workshops and events qualify. The Strategy Day is direct entry.
             </p>
           </Section>
         </div>
@@ -723,7 +744,7 @@ export default function BusinessMap() {
                 {
                   icon: TrendingUp,
                   title: 'Talent multiplier',
-                  description: 'A $80k operator delivers $180k in billable value because the data does the thinking. The gap between cost and value IS the platform.',
+                  description: 'A $80k operator delivers $180k in billable value because the data does the thinking. The gap between cost and value IS the platform. We train them, place them, and keep them sharp. The training, data, and network is what no standalone agency or in house hire can match.',
                 },
                 {
                   icon: Network,
@@ -761,7 +782,7 @@ export default function BusinessMap() {
               </h3>
               <div className="space-y-4">
                 {[
-                  { stage: 'Stage 0', metric: 'Install conversion (target 60-80%). Secondary: Bundle attach (target 40-50%).' },
+                  { stage: 'Stage 0', metric: 'Install conversion (target 60 to 80%). Secondary: Advisory attach (target 25 to 40%).' },
                   { stage: 'Stage 1', metric: "Licensed operator retention (target 70%+ of Sean's rate)" },
                   { stage: 'Stage 2', metric: 'Operator utilisation (target 3 to 4 clients per operator)' },
                   { stage: 'Stage 3', metric: 'Certification graduation rate' },
