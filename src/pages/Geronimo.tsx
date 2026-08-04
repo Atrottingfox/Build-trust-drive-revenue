@@ -286,10 +286,22 @@ export default function Geronimo() {
 
             <div className="glow-card border-blue-500/20 p-8 md:p-10 max-w-3xl mb-12">
               <p className="text-blue-400 font-semibold text-sm mb-3">The commitment</p>
-              <p className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white leading-none mb-4">$5,000</p>
-              <p className="text-white text-base leading-relaxed font-medium">
+              <div className="flex items-baseline gap-2 mb-4">
+                <p className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.02em] text-white leading-none">$5,000</p>
+                <p className="text-zinc-500 text-lg font-semibold tracking-tight">AUD</p>
+              </div>
+              <p className="text-white text-base leading-relaxed font-medium mb-8">
                 One day. That is the whole commitment right now. Everything after it is a decision you make later, with better information.
               </p>
+              <a
+                href="https://buy.stripe.com/14A3co6uA0Vi5Swfdh0000h"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
+              >
+                Pay now
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
 
             {/* The two sides */}
@@ -631,17 +643,28 @@ export default function Geronimo() {
             <div className="space-y-3 text-zinc-400 mb-10 leading-relaxed">
               <p>One day. We pull the operation apart, find the bottlenecks, document the pipeline, and build it to something a videographer can slot into.</p>
               <p>Hayley walks out knowing how production runs, not just what it produced.</p>
-              <p>$5,000. Then you run the four weeks and decide whether it needs me in it.</p>
+              <p>$5,000 AUD. Then you run the four weeks and decide whether it needs me in it.</p>
             </div>
-            <a
-              href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
-            >
-              Book the Strategy Day
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
+              >
+                Book the Strategy Day
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="https://buy.stripe.com/14A3co6uA0Vi5Swfdh0000h"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#111113] border border-white/[0.10] text-white px-7 py-3.5 rounded-full text-[15px] font-semibold hover:border-white/[0.24] hover:bg-[#161618] transition-colors"
+              >
+                Pay now
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
 
             <div className="mt-8">
               <a
