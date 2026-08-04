@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Users, Layers, Settings, Check, Compass, Zap, Shield, AlertCircle, X } from 'lucide-react';
+import { ArrowRight, Users, Layers, Settings, Check, Compass, Zap, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import PasswordGate from '../components/PasswordGate';
@@ -76,7 +76,7 @@ export default function Geronimo() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Geronimo. Strategy Day"
-        description="Get the system out of Nate's head before he walks. One day to pull the operation apart, document it, and hand Hayley a pipeline she can run with a bench of videographers."
+        description="One day to pull the operation apart, find the bottlenecks, document the pipeline, and build a production operation that is systematised, simple, scalable, and decentralised."
         path="/geronimo"
         noIndex
       />
@@ -92,9 +92,18 @@ export default function Geronimo() {
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 Geronimo.
               </h1>
-              <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl">
-                Pull the operation apart. Document it. Hand Hayley a pipeline she can run.
-              </p>
+              <div className="space-y-2">
+                {[
+                  'Pull the operation apart.',
+                  'Find the bottlenecks.',
+                  'Document the pipeline.',
+                  'Build it right.',
+                ].map((line, i) => (
+                  <p key={i} className="text-zinc-300 text-lg md:text-xl leading-relaxed">
+                    {line}
+                  </p>
+                ))}
+              </div>
             </div>
           </Section>
         </div>
@@ -108,16 +117,17 @@ export default function Geronimo() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · The Goal</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              Get the system out of Nate's head.
+              Build the system.
               <br />
-              <span className="text-zinc-500">Put it in Hayley's hands.</span>
+              <span className="text-zinc-500">Hand it to Hayley.</span>
             </h2>
             <div className="glow-card p-8 md:p-10 mb-10 max-w-3xl">
               <ul className="space-y-4">
                 {[
-                  "Get everything Nate runs out of his head and documented, so nothing walks out the door with him.",
-                  'Keep output steady through the transition. No dip while the seat changes hands.',
-                  "Hand the system to Hayley, and make it something a contract videographer can slot into without a briefing call.",
+                  'A production pipeline that is documented, refined, and ready to hand over.',
+                  'Output holds steady through the transition. No dip while the seat changes hands.',
+                  'Any videographer on the bench can slot in and hit the standard without a briefing call.',
+                  'Hayley runs it from day one, with no gap in between.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -130,9 +140,9 @@ export default function Geronimo() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">First, next, then</p>
             <div className="max-w-3xl space-y-4 mb-12">
               {[
-                'First. One Strategy Day while Nate is still here. Pull the operation apart, document it, and bulletproof it.',
-                'Next. You run your six week test with the bench and see what holds.',
-                'Then. You decide what the test told you, with data instead of a guess.',
+                'First. The Strategy Day. Pull the operation apart, find the bottlenecks, document the pipeline, build it right.',
+                'Next. A four week test. An experiment to see what it is actually like running without a creative director.',
+                'Then. We decide what the experiment tells us, measured against three things.',
               ].map((item, i) => (
                 <p key={i} className="text-zinc-300 font-medium leading-relaxed">
                   <span className="text-zinc-500">Step {i + 1}.</span> {item}
@@ -140,10 +150,41 @@ export default function Geronimo() {
               ))}
             </div>
 
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">How we read the four weeks</p>
+            <div className="grid md:grid-cols-3 gap-6 mb-10">
+              {[
+                {
+                  metric: 'Ease',
+                  description: 'How simple was it to run. Where did it feel heavy, and what took more effort than it should have.',
+                },
+                {
+                  metric: 'Energy',
+                  description: 'How the team felt doing it. Drag or momentum. A system nobody wants to run is not a system.',
+                },
+                {
+                  metric: 'Output',
+                  description: 'The data. Did we hit the KPIs, where were the bottlenecks, and what did we learn.',
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight mb-3">{String(i + 1).padStart(2, '0')}</p>
+                  <h3 className="text-white font-semibold text-lg mb-2">{item.metric}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-blue-400 font-semibold text-sm mb-3">My role</p>
+              <p className="text-blue-400 font-semibold text-sm mb-3">Then you run it again</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Architect the OS and lead the extraction from Nate. Your team runs it. I don't.
+                Four weeks is the cycle. You calibrate against ease, energy, and output, change what the data tells you to change, and go again.
               </p>
             </div>
           </Section>
@@ -152,73 +193,11 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 02 · THE CHALLENGE */}
+      {/* 02 · THE OPPORTUNITY */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Challenge</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              The engine works.
-              <br />
-              <span className="text-zinc-500">It just lives in one person's head.</span>
-            </h2>
-
-            <div className="grid md:grid-cols-2 gap-6 mb-10">
-              <div className="glow-card p-8">
-                <Check className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-white font-semibold text-base mb-4">What's working</p>
-                <ul className="space-y-3">
-                  {[
-                    'A strong product, a big mission, and a growing audience.',
-                    'Geronimo is already bringing in the most leads.',
-                    'The new shape is lighter. Hayley on growth, a bench of videographers who slot in, no creative director salary.',
-                    'Six weeks is enough of a test to get a real read on whether it holds.',
-                    'Doza still needs to show up as a founder with a bigger story than the Instagram content guy.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="glow-card p-8">
-                <AlertCircle className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-white font-semibold text-base mb-4">But</p>
-                <ul className="space-y-3">
-                  {[
-                    'Nate is out at the end of the month, and most of how the media runs lives in his head.',
-                    'Editors are under utilised. They are paid, but not truly empowered to own the 80%.',
-                    'Hayley picks up the system without having run the production side of it before.',
-                    'A videographer on the bench can only hit a standard that is written down. There is no written standard yet.',
-                    'HeyDoza and Geronimo are intertwined, without a clean, simple structure.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
-              <p className="text-blue-400 font-semibold text-sm mb-3">The risk</p>
-              <p className="text-white text-base leading-relaxed font-medium">
-                The whole media engine lives in Nate's head. He walks at the end of the month, and you are testing a brand new model on top of an undocumented pipeline.
-              </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* 03 · THE OPPORTUNITY */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · The Opportunity</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Opportunity</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Strategy. Structure.
               <br />
@@ -248,7 +227,7 @@ export default function Geronimo() {
                 {
                   icon: Zap,
                   title: 'Sprints',
-                  description: "Short, focused periods where we attack a single bottleneck. Right now, extracting Nate's system before he leaves.",
+                  description: "Short, focused periods where we attack a single bottleneck. Right now, documenting the pipeline and building it to hand over.",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -269,7 +248,7 @@ export default function Geronimo() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">On the day, we use this lens to</p>
             <ul className="space-y-4 max-w-3xl">
               {[
-                "Extract Nate's system and break the editing bottleneck so the work no longer depends on him.",
+                "Document the pipeline and break the bottlenecks, so the work no longer depends on any one person.",
                 'Set a predictable weekly rhythm across Geronimo and HeyDoza that survives a change of videographer.',
                 'Make ownership clear on every stage, so Hayley can steer with confidence and nothing sits unowned.',
               ].map((item, i) => (
@@ -285,23 +264,23 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 04 · THE STRATEGY DAY */}
+      {/* 03 · THE STRATEGY DAY */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The Strategy Day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · The Strategy Day</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               One day.
               <br />
-              <span className="text-zinc-500">Get it out of Nate's head.</span>
+              <span className="text-zinc-500">Pull it apart and build it right.</span>
             </h2>
             <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-6">
-              <p>This is the slow down to speed up day. Nate is in the room while we still have him. Hayley is in the room so the system has an owner who understands it.</p>
+              <p>This is the slow down to speed up day. Everyone who touches the machine is in the room, so what we write down is what actually happens, not what is supposed to happen.</p>
             </div>
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl mb-12">
               <p className="text-blue-400 font-semibold text-sm mb-3">Goal</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Get everything Nate runs out of his head and documented, refined to the point that a videographer who has never worked with you can slot in and hit the standard.
+                A production operation that is systematised, simple, scalable, and decentralised. Documented and refined to the point that a videographer who has never worked with you can slot in and hit the standard.
               </p>
             </div>
 
@@ -313,12 +292,40 @@ export default function Geronimo() {
               </p>
             </div>
 
+            {/* The two sides */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">The two sides</p>
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {[
+                {
+                  icon: Compass,
+                  side: 'Ideation',
+                  description: 'Where ideas come from, what business outcome each one is for, and how they get chosen. The thinking side.',
+                },
+                {
+                  icon: Settings,
+                  side: 'Production',
+                  description: 'How a chosen idea becomes a published asset. Brief, shoot, edit, review, publish. The machine side.',
+                },
+              ].map((item, i) => (
+                <div key={i} className="glow-card p-8">
+                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold text-lg mb-2">{item.side}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl mb-12">
+              <p className="text-white text-base leading-relaxed font-medium">
+                Most operations break at the seam between the two. The day makes that seam seamless, so an idea moves into production without anyone having to carry it across by hand.
+              </p>
+            </div>
+
             {/* Roles callout */}
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">The roles, at a high level</p>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
               {[
                 { role: 'Doza', tag: 'the who', description: 'Mission, story.' },
-                { role: 'Hayley', tag: 'the why, and the how', description: 'The business outcome content must drive, and the person who now runs the pipeline that drives it.' },
+                { role: 'Hayley', tag: 'the why, and the how', description: 'The business outcome content must drive, and the person who runs the pipeline that drives it.' },
                 { role: 'Videographers', tag: 'the bench', description: 'Contractors who slot in for a shoot. They need a brief and a standard, not a relationship.' },
                 { role: 'Editors', tag: 'the doers', description: 'Make the assets.' },
               ].map((item, i) => (
@@ -336,25 +343,25 @@ export default function Geronimo() {
                   label: 'Teardown',
                   title: 'Pull the whole operation apart.',
                   body: [
-                    'We pull the operation apart, piece by piece. This is where I work directly with Nate to get everything on the table while he is still here to put it there.',
+                    'We take the operation apart, piece by piece, and get everything on the table. What is actually running, who is actually doing it, and what is quietly held together by one person remembering to do it.',
                   ],
                   points: [
                     'Map every process end to end. Ideas, filming, edit, review, publish, measure. Who touches it, what tools, where it breaks.',
-                    'Inventory everything Nate is running right now and everything sitting in his pipeline.',
+                    'Inventory everything in flight and everything sitting in the pipeline.',
                     'Sort it into must ship in the next 30 days, nice to have, and can die.',
-                    'Find the key man risks. When Nate walks, what breaks first.',
+                    'Find the key man risks. If any one person stopped tomorrow, what breaks first.',
                   ],
                 },
                 {
-                  label: 'Idea to outcome',
-                  title: 'The production pipeline, on the wall.',
+                  label: 'Find the bottlenecks',
+                  title: 'Where the pipeline actually jams.',
                   body: [
-                    'The full path an idea takes to become a published outcome, drawn out so everyone is looking at the same thing.',
+                    'With the full path from idea to outcome on the wall, the weak points stop being opinions.',
                   ],
                   points: [
-                    'Every stage named, with who owns it today and who owns it once Nate is gone.',
                     'Where work queues up and waits.',
-                    'Responsibilities Nate carries that nobody has picked up.',
+                    'Responsibilities nobody has picked up.',
+                    'Stages that depend on one person being available.',
                     'Gaps a contract videographer cannot cover, and that need a hire instead.',
                   ],
                 },
@@ -362,13 +369,26 @@ export default function Geronimo() {
                   label: 'Document the standards',
                   title: 'Turn taste into checklists.',
                   body: [
-                    'For each core asset type, shorts, longform YT, podcasts and highlights, Nate chooses good vs bad examples and annotates exactly what makes them good or bad. Hook, framing, pacing, captions, CTA.',
+                    'For each core asset type, shorts, longform YT, podcasts and highlights, we take good vs bad examples and annotate exactly what makes them good or bad. Hook, framing, pacing, captions, CTA.',
                   ],
                   points: [
                     'Translate that into simple, explicit checklists for each edit type.',
                     'No vague language like flow or pop.',
                     'Only observable, step by step instructions anyone can follow.',
                     'A brief format you can hand a videographer cold, the day before a shoot.',
+                  ],
+                },
+                {
+                  label: 'Build it right',
+                  title: 'Systematised, simple, scalable, decentralised.',
+                  body: [
+                    'The pipeline gets rebuilt against four tests, so it holds when people change.',
+                  ],
+                  points: [
+                    'Systematised. Every stage has a documented way it gets done.',
+                    'Simple. If it needs explaining twice, it gets cut down.',
+                    'Scalable. More output does not mean more meetings.',
+                    'Decentralised. No stage depends on one specific person being there.',
                   ],
                 },
                 {
@@ -390,8 +410,8 @@ export default function Geronimo() {
                     'The day closes with the plan ordered, so nobody has to work out what matters most on the Monday after.',
                   ],
                   points: [
-                    'First. What has to be true before Nate walks.',
-                    'Next. What the six week test needs in place to be a fair test.',
+                    'First. What has to be true before the handover.',
+                    'Next. What the four week test needs in place to be a fair test.',
                     'Then. What we only decide once the test gives us something to read.',
                   ],
                 },
@@ -401,7 +421,7 @@ export default function Geronimo() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl mt-10">
               <p className="text-blue-400 font-semibold text-sm mb-3">By the end of the day</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                Nate's system is documented in Notion and Looms, the pipeline has a named owner on every stage, and Hayley knows how production runs. His brain is on paper, not just in his head.
+                The pipeline is documented in Notion and Looms, every stage has a named owner, and Hayley knows how production runs. The system is on paper, not in anyone's head.
               </p>
             </div>
           </Section>
@@ -410,11 +430,11 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 05 · AFTER THE DAY */}
+      {/* 04 · AFTER THE DAY */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · After the day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · After the day</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Two routes.
               <br />
@@ -433,7 +453,7 @@ export default function Geronimo() {
                 </h3>
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                   <p>
-                    We run the new model as an experiment and watch what breaks. Four weeks sitting inside your six week test, so you get the read before you have to commit to the model.
+                    We run the new model as an experiment and watch what breaks. Four weeks, read against ease, energy, and output, so you get a real answer instead of a hunch.
                   </p>
                 </div>
                 <ul className="space-y-3">
@@ -484,50 +504,31 @@ export default function Geronimo() {
       <div className="gradient-line" />
 
 
-      {/* 06 · HOW WE WORK */}
+      {/* 05 · HOW WE WORK */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · How we work</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · How we work</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              My role.
+              Support.
               <br />
               <span className="text-zinc-500">Cadence.</span>
             </h2>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              <div className="glow-card p-8">
-                <Shield className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-blue-400 font-semibold text-sm mb-4">My role</p>
-                <ul className="space-y-3">
-                  {[
-                    'Architect the Media OS and run the Strategy Day.',
-                    "Lead the extraction from Nate and turn his system into documentation anyone can run.",
-                    'Name the gaps, and say plainly which ones a contractor covers and which ones need a hire.',
-                    'Hold the frame so the system actually gets written down while Nate is still here.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="glow-card p-8">
-                <Users className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-blue-400 font-semibold text-sm mb-4">Async support</p>
-                <ul className="space-y-3">
-                  {[
-                    'Included on either route. Up to 1 to 2 Loom reviews per week. Edits, systems, docs.',
-                    'Async access via WhatsApp or Slack for quick questions between calls.',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
-                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="glow-card p-8 max-w-3xl mb-12">
+              <Users className="w-5 h-5 text-blue-400 mb-4" />
+              <p className="text-blue-400 font-semibold text-sm mb-4">Async support</p>
+              <ul className="space-y-3">
+                {[
+                  'Included on either route. Up to 1 to 2 Loom reviews per week. Edits, systems, docs.',
+                  'Async access via WhatsApp or Slack for quick questions between calls.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
@@ -537,7 +538,7 @@ export default function Geronimo() {
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Extraction & documentation</p>
                 <ul className="space-y-2">
                   {[
-                    'One deep work day on site with Nate and Hayley.',
+                    'One deep work day on site with the team.',
                     'Docs and checklists delivered in the week after.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -584,11 +585,11 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 07 · WHAT THIS IS NOT */}
+      {/* 06 · WHAT THIS IS NOT */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · What this is not</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · What this is not</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Boundaries.
               <br />
@@ -599,8 +600,8 @@ export default function Geronimo() {
               <ul className="space-y-5">
                 {[
                   'This is not a done for you content agency. Your team implements. I architect, advise, and read the data with you.',
-                  'This is not me stepping into Nate’s seat. I am not your interim Media Lead or fractional CD, and I am not running your media indefinitely.',
-                  'This is not a 90 day commitment. One day, then you decide what the six weeks needs.',
+                  'This is not me stepping into a seat on your team. I am not your interim media lead or fractional CD, and I am not running your media indefinitely.',
+                  'This is not a 90 day commitment. One day, then you decide what the four weeks needs.',
                   'This is not a retainer with a day bolted on the front. If the day gives you everything, we stop there.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
@@ -628,9 +629,9 @@ export default function Geronimo() {
               <span className="text-zinc-500">Then test it.</span>
             </h2>
             <div className="space-y-3 text-zinc-400 mb-10 leading-relaxed">
-              <p>One day while Nate is still in the building. We pull the operation apart, document his system, and refine it to something a videographer can slot into.</p>
+              <p>One day. We pull the operation apart, find the bottlenecks, document the pipeline, and build it to something a videographer can slot into.</p>
               <p>Hayley walks out knowing how production runs, not just what it produced.</p>
-              <p>$5,000. Then you run your six weeks and decide whether it needs me in it.</p>
+              <p>$5,000. Then you run the four weeks and decide whether it needs me in it.</p>
             </div>
             <a
               href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
