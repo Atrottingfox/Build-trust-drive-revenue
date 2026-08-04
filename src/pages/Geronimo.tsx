@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, Compass, Zap, AlertCircle, X, Layers } from 'lucide-react';
+import { ArrowRight, Users, Layers, Settings, Check, Compass, Zap, Shield, AlertCircle, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import PasswordGate from '../components/PasswordGate';
@@ -21,17 +21,17 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
   );
 }
 
-type Block = {
+type Week = {
   label: string;
   title: string;
   body?: string[];
   points?: string[];
 };
 
-function DayBlocks({ blocks }: { blocks: Block[] }) {
+function PhaseWeeks({ weeks }: { weeks: Week[] }) {
   return (
     <div className="space-y-8">
-      {blocks.map((block, i) => (
+      {weeks.map((week, i) => (
         <motion.div
           key={i}
           className="glow-card p-8 md:p-10"
@@ -43,20 +43,20 @@ function DayBlocks({ blocks }: { blocks: Block[] }) {
           <div className="flex items-center gap-3 mb-5">
             <p className="font-display text-4xl md:text-5xl font-extrabold text-zinc-800 tracking-tight">{String(i + 1).padStart(2, '0')}</p>
             <div>
-              <p className="text-zinc-600 text-xs uppercase tracking-widest">{block.label}</p>
+              <p className="text-zinc-600 text-xs uppercase tracking-widest">{week.label}</p>
               <h3 className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
-                {block.title}
+                {week.title}
               </h3>
             </div>
           </div>
-          {block.body && (
+          {week.body && (
             <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
-              {block.body.map((p, j) => <p key={j}>{p}</p>)}
+              {week.body.map((p, j) => <p key={j}>{p}</p>)}
             </div>
           )}
-          {block.points && (
+          {week.points && (
             <ul className="space-y-2">
-              {block.points.map((item, j) => (
+              {week.points.map((item, j) => (
                 <li key={j} className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
                   <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
@@ -76,7 +76,7 @@ export default function Geronimo() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Geronimo. Strategy Day"
-        description="One day. Pull the whole production pipeline apart, document it, and leave with a system your team can run without Nate."
+        description="Get the system out of Nate's head before he walks. One day to pull the operation apart, document it, and hand Hayley a pipeline she can run with a bench of videographers."
         path="/geronimo"
         noIndex
       />
@@ -93,7 +93,7 @@ export default function Geronimo() {
                 Geronimo.
               </h1>
               <p className="text-zinc-300 text-lg md:text-xl leading-relaxed max-w-2xl">
-                One day. Pull the whole operation apart, write it down, and leave with a pipeline your team can run without Nate.
+                Pull the operation apart. Document it. Hand Hayley a pipeline she can run.
               </p>
             </div>
           </Section>
@@ -102,30 +102,82 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 01 · WHAT CHANGED */}
+      {/* 01 · THE GOAL */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · What changed</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">01 · The Goal</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
-              The plan changed.
+              Get the system out of Nate's head.
               <br />
-              <span className="text-zinc-500">So this changed with it.</span>
+              <span className="text-zinc-500">Put it in Hayley's hands.</span>
             </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              Nate is out at the end of the month. There is no 90 day runway, and you are not replacing him with a creative director.
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-8">
+              The plan changed again. Nate is out at the end of the month, not in 90 days. And you are not replacing him with a creative director. So the point of this project changed with it.
             </p>
+
+            <div className="glow-card p-8 md:p-10 mb-10 max-w-3xl">
+              <ul className="space-y-4">
+                {[
+                  "Get everything Nate runs out of his head and documented, so nothing walks out the door with him.",
+                  'Keep output steady through the transition. No dip while the seat changes hands.',
+                  "Hand the system to Hayley, and make it something a contract videographer can slot into without a briefing call.",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                    <span className="text-white text-base md:text-lg leading-relaxed font-medium">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">First, next, then</p>
+            <div className="max-w-3xl space-y-4 mb-12">
+              {[
+                'First. One Strategy Day while Nate is still here. Pull the operation apart, document it, and bulletproof it.',
+                'Next. You run your six week test with the bench and see what holds.',
+                'Then. You decide what the test told you, with data instead of a guess.',
+              ].map((item, i) => (
+                <p key={i} className="text-zinc-300 font-medium leading-relaxed">
+                  <span className="text-zinc-500">Step {i + 1}.</span> {item}
+                </p>
+              ))}
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
+              <p className="text-blue-400 font-semibold text-sm mb-3">My role</p>
+              <p className="text-white text-base leading-relaxed font-medium">
+                Architect the OS and lead the extraction from Nate. Your team runs it. I don't.
+              </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 02 · THE CHALLENGE */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Challenge</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              The engine works.
+              <br />
+              <span className="text-zinc-500">It just lives in one person's head.</span>
+            </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-10">
               <div className="glow-card p-8">
                 <Check className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-white font-semibold text-base mb-4">The new shape</p>
+                <p className="text-white font-semibold text-base mb-4">What's working</p>
                 <ul className="space-y-3">
                   {[
-                    'Nate leaves at the end of the month.',
-                    'No creative director. A bench of contract videographers who slot in when you need them.',
-                    'Hayley runs the system. Closer to a head of growth than a media lead. Marketing function, owning the pipeline.',
-                    'Six weeks to test whether that model holds.',
+                    'A strong product, a big mission, and a growing audience.',
+                    'Geronimo is already bringing in the most leads.',
+                    'The new shape is lighter. Hayley on growth, a bench of videographers who slot in, no creative director salary.',
+                    'Six weeks is enough of a test to get a real read on whether it holds.',
+                    'Doza still needs to show up as a founder with a bigger story than the Instagram content guy.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
@@ -136,13 +188,14 @@ export default function Geronimo() {
               </div>
               <div className="glow-card p-8">
                 <AlertCircle className="w-5 h-5 text-blue-400 mb-4" />
-                <p className="text-white font-semibold text-base mb-4">What that leaves open</p>
+                <p className="text-white font-semibold text-base mb-4">But</p>
                 <ul className="space-y-3">
                   {[
-                    'The pipeline still lives in Nate’s head, and he walks in weeks.',
-                    'A contractor can only hit a standard that is written down. There isn’t one yet.',
-                    'Hayley owns the system without having run the production side of it before.',
-                    'Nobody has named which responsibilities Nate carries that nobody else has picked up.',
+                    'Nate is out at the end of the month, and most of how the media runs lives in his head.',
+                    'Editors are under utilised. They are paid, but not truly empowered to own the 80%.',
+                    'Hayley picks up the system without having run the production side of it before.',
+                    'A videographer on the bench can only hit a standard that is written down. There is no written standard yet.',
+                    'HeyDoza and Geronimo are intertwined, without a clean, simple structure.',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
@@ -156,7 +209,7 @@ export default function Geronimo() {
             <div className="glow-card border-blue-500/20 p-8 max-w-3xl">
               <p className="text-blue-400 font-semibold text-sm mb-3">The risk</p>
               <p className="text-white text-base leading-relaxed font-medium">
-                You are testing a brand new model on an undocumented pipeline, and the only person who holds that pipeline is leaving.
+                The whole media engine lives in Nate's head. He walks at the end of the month, and you are testing a brand new model on top of an undocumented pipeline.
               </p>
             </div>
           </Section>
@@ -165,22 +218,94 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 02 · THE STRATEGY DAY */}
+      {/* 03 · THE OPPORTUNITY */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">02 · The Strategy Day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · The Opportunity</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              Strategy. Structure.
+              <br />
+              <span className="text-zinc-500">Systems. Sprints.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
+              The model I'm working from is simple.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              {[
+                {
+                  icon: Compass,
+                  title: 'Strategy',
+                  description: "We want a media machine that reliably produces the right content to drive Geronimo's growth, while Doza still builds his founder brand, and no single person is the point of failure.",
+                },
+                {
+                  icon: Layers,
+                  title: 'Structure',
+                  description: 'The non negotiables. Shoot cadence, days, formats, and the roles, who does what, so weeks look the same whichever videographer is on the floor.',
+                },
+                {
+                  icon: Settings,
+                  title: 'Systems',
+                  description: 'Documentation, checklists, boards, and simple scorecards so the structure runs without heroics.',
+                },
+                {
+                  icon: Zap,
+                  title: 'Sprints',
+                  description: "Short, focused periods where we attack a single bottleneck. Right now, extracting Nate's system before he leaves.",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                >
+                  <item.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{item.title}</h3>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">On the day, we use this lens to</p>
+            <ul className="space-y-4 max-w-3xl">
+              {[
+                "Extract Nate's system and break the editing bottleneck so the work no longer depends on him.",
+                'Set a predictable weekly rhythm across Geronimo and HeyDoza that survives a change of videographer.',
+                'Make ownership clear on every stage, so Hayley can steer with confidence and nothing sits unowned.',
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                  <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 04 · THE STRATEGY DAY */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · The Strategy Day</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               One day.
               <br />
-              <span className="text-zinc-500">Pull it apart and bulletproof it.</span>
+              <span className="text-zinc-500">Get it out of Nate's head.</span>
             </h2>
-            <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-8">
-              <p>
-                We book one deep work day and take the operation apart, piece by piece. Every process from idea through to published outcome gets mapped, documented, and refined until it holds without Nate in it.
-              </p>
-              <p>
-                Nate is in the room while we still have him. Hayley is in the room so the system has an owner who understands it.
+            <div className="space-y-4 text-zinc-400 leading-relaxed max-w-3xl mb-6">
+              <p>This is the slow down to speed up day. Nate is in the room while we still have him. Hayley is in the room so the system has an owner who understands it.</p>
+            </div>
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl mb-12">
+              <p className="text-blue-400 font-semibold text-sm mb-3">Goal</p>
+              <p className="text-white text-base leading-relaxed font-medium">
+                Get everything Nate runs out of his head and documented, refined to the point that a videographer who has never worked with you can slot in and hit the standard.
               </p>
             </div>
 
@@ -192,51 +317,69 @@ export default function Geronimo() {
               </p>
             </div>
 
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">How the day runs</p>
+            {/* Roles callout */}
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">The roles, at a high level</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              {[
+                { role: 'Doza', tag: 'the who', description: 'Mission, story.' },
+                { role: 'Hayley', tag: 'the why, and the how', description: 'The business outcome content must drive, and the person who now runs the pipeline that drives it.' },
+                { role: 'Videographers', tag: 'the bench', description: 'Contractors who slot in for a shoot. They need a brief and a standard, not a relationship.' },
+                { role: 'Editors', tag: 'the doers', description: 'Make the assets.' },
+              ].map((item, i) => (
+                <div key={i} className="glow-card p-6">
+                  <p className="text-white font-semibold text-base mb-1">{item.role}</p>
+                  <p className="text-blue-400 text-xs uppercase tracking-widest mb-3">{item.tag}</p>
+                  <p className="text-zinc-500 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
 
-            <DayBlocks
-              blocks={[
+            <PhaseWeeks
+              weeks={[
                 {
-                  label: 'Block 1 · Map the pipeline',
-                  title: 'Idea to outcome, end to end.',
+                  label: 'Teardown',
+                  title: 'Pull the whole operation apart.',
                   body: [
-                    'We walk the full production pipeline on the wall. Where an idea enters, what happens to it at every stage, who touches it, and what it looks like when it ships.',
+                    'We pull the operation apart, piece by piece. This is where I work directly with Nate to get everything on the table while he is still here to put it there.',
                   ],
                   points: [
-                    'Every stage named. Ideas, briefs, filming, edit, review, publish, measure.',
-                    'Who owns each stage today, and who owns it the day Nate is gone.',
-                    'The tools, files, and access each stage depends on.',
+                    'Map every process end to end. Ideas, filming, edit, review, publish, measure. Who touches it, what tools, where it breaks.',
+                    'Inventory everything Nate is running right now and everything sitting in his pipeline.',
+                    'Sort it into must ship in the next 30 days, nice to have, and can die.',
+                    'Find the key man risks. When Nate walks, what breaks first.',
                   ],
                 },
                 {
-                  label: 'Block 2 · Find what breaks',
-                  title: 'Bottlenecks and blind spots.',
+                  label: 'Idea to outcome',
+                  title: 'The production pipeline, on the wall.',
                   body: [
-                    'With the whole pipeline visible, the weak points stop being opinions.',
+                    'The full path an idea takes to become a published outcome, drawn out so everyone is looking at the same thing.',
                   ],
                   points: [
+                    'Every stage named, with who owns it today and who owns it once Nate is gone.',
                     'Where work queues up and waits.',
                     'Responsibilities Nate carries that nobody has picked up.',
-                    'Gaps a contractor cannot cover, and that need a hire instead.',
+                    'Gaps a contract videographer cannot cover, and that need a hire instead.',
                   ],
                 },
                 {
-                  label: 'Block 3 · Document the standard',
+                  label: 'Document the standards',
                   title: 'Turn taste into checklists.',
                   body: [
-                    'A videographer who slots in for two days can only hit a standard that is written down. We turn how Nate judges the work into checklists anyone can shoot and cut against.',
+                    'For each core asset type, shorts, longform YT, podcasts and highlights, Nate chooses good vs bad examples and annotates exactly what makes them good or bad. Hook, framing, pacing, captions, CTA.',
                   ],
                   points: [
-                    'Explicit checklists per asset type. Short form, long form YouTube, podcast.',
-                    'No vague language like flow or pop. Only what someone can observe and follow.',
-                    'A brief format you can hand a contract videographer cold.',
+                    'Translate that into simple, explicit checklists for each edit type.',
+                    'No vague language like flow or pop.',
+                    'Only observable, step by step instructions anyone can follow.',
+                    'A brief format you can hand a videographer cold, the day before a shoot.',
                   ],
                 },
                 {
-                  label: 'Block 4 · Bring Hayley up to speed',
+                  label: 'Hayley up to speed',
                   title: 'The system gets an owner who understands it.',
                   body: [
-                    'Hayley spends the day inside the pipeline rather than receiving a summary of it. She leaves knowing how production actually works, what to ask for, and what good looks like at each stage.',
+                    'Hayley spends the day inside the pipeline rather than being handed a summary of it. She leaves knowing how production actually works, what to ask for, and what good looks like at each stage.',
                   ],
                   points: [
                     'How a shoot day gets planned, briefed, and run.',
@@ -245,7 +388,7 @@ export default function Geronimo() {
                   ],
                 },
                 {
-                  label: 'Block 5 · First, next, then',
+                  label: 'First, next, then',
                   title: 'Leave with a sequence.',
                   body: [
                     'The day closes with the plan ordered, so nobody has to work out what matters most on the Monday after.',
@@ -258,39 +401,12 @@ export default function Geronimo() {
                 },
               ]}
             />
-          </Section>
-        </div>
-      </section>
 
-      <div className="gradient-line" />
-
-      {/* 03 · WHAT YOU WALK OUT WITH */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">03 · What you walk out with</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Documented.
-              <br />
-              <span className="text-zinc-500">Sequenced. Owned.</span>
-            </h2>
-
-            <div className="glow-card p-8 md:p-10 max-w-3xl">
-              <Layers className="w-5 h-5 text-blue-400 mb-6" />
-              <ul className="space-y-5">
-                {[
-                  'A documented production pipeline, idea to outcome, with a named owner on every stage.',
-                  'Checklists per asset type that a contract videographer can shoot and cut against.',
-                  'A named list of the gaps, and which of them need a hire rather than a contractor.',
-                  'Hayley across the production process, not just the reporting on it.',
-                  'A first, next, then sequence for the six weeks that follow.',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
-                    <span className="text-zinc-300 text-base leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="glow-card border-blue-500/20 p-8 max-w-3xl mt-10">
+              <p className="text-blue-400 font-semibold text-sm mb-3">By the end of the day</p>
+              <p className="text-white text-base leading-relaxed font-medium">
+                Nate's system is documented in Notion and Looms, the pipeline has a named owner on every stage, and Hayley knows how production runs. His brain is on paper, not just in his head.
+              </p>
             </div>
           </Section>
         </div>
@@ -298,18 +414,18 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 04 · AFTER THE DAY */}
+      {/* 05 · AFTER THE DAY */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">04 · After the day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · After the day</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Two routes.
               <br />
               <span className="text-zinc-500">Both optional.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              You do not decide either of these on the day. The day stands on its own. If the pipeline holds after it, that may be everything you need from me.
+              Neither of these gets decided on the day. The day stands on its own. If the pipeline holds after it, that may be everything you need from me.
             </p>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -347,7 +463,7 @@ export default function Geronimo() {
                 </h3>
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                   <p>
-                    If the call is that Hayley should lead structure rather than co ordinate it, we train her into that properly. Long form and short form, both.
+                    If the call is that Hayley should lead structure rather than just run the schedule, we train her into it properly. Long form and short form, both.
                   </p>
                 </div>
                 <ul className="space-y-3">
@@ -371,11 +487,112 @@ export default function Geronimo() {
 
       <div className="gradient-line" />
 
-      {/* 05 · WHAT THIS IS NOT */}
+
+      {/* 06 · HOW WE WORK */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">05 · What this is not</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">06 · How we work</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              My role.
+              <br />
+              <span className="text-zinc-500">Cadence.</span>
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-12">
+              <div className="glow-card p-8">
+                <Shield className="w-5 h-5 text-blue-400 mb-4" />
+                <p className="text-blue-400 font-semibold text-sm mb-4">My role</p>
+                <ul className="space-y-3">
+                  {[
+                    'Architect the Media OS and run the Strategy Day.',
+                    "Lead the extraction from Nate and turn his system into documentation anyone can run.",
+                    'Name the gaps, and say plainly which ones a contractor covers and which ones need a hire.',
+                    'Hold the frame so the system actually gets written down while Nate is still here.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <Users className="w-5 h-5 text-blue-400 mb-4" />
+                <p className="text-blue-400 font-semibold text-sm mb-4">Async support</p>
+                <ul className="space-y-3">
+                  {[
+                    'Included on either route. Up to 1 to 2 Loom reviews per week. Edits, systems, docs.',
+                    'Async access via WhatsApp or Slack for quick questions between calls.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1 h-1 rounded-full bg-zinc-600 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-1">The day</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Extraction & documentation</p>
+                <ul className="space-y-2">
+                  {[
+                    'One deep work day on site with Nate and Hayley.',
+                    'Docs and checklists delivered in the week after.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-1">Route A · Four weeks</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Calibration</p>
+                <ul className="space-y-2">
+                  {[
+                    '1x call per week with Hayley. What broke, what gets refined.',
+                    '2x shoot days with me on the floor across the four weeks.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-blue-400 font-semibold text-sm mb-1">Route B · 90 days</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">Install & advisory</p>
+                <ul className="space-y-2">
+                  {[
+                    '1x call per fortnight. Training Hayley into structure.',
+                    '1x group Operator Clinic per fortnight. Editors and Doza welcome for Q&A.',
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                      <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* 07 · WHAT THIS IS NOT */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">07 · What this is not</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
               Boundaries.
               <br />
@@ -386,7 +603,7 @@ export default function Geronimo() {
               <ul className="space-y-5">
                 {[
                   'This is not a done for you content agency. Your team implements. I architect, advise, and read the data with you.',
-                  'This is not me stepping into Nate’s seat. I am not your interim media lead or fractional creative director.',
+                  'This is not me stepping into Nate’s seat. I am not your interim Media Lead or fractional CD, and I am not running your media indefinitely.',
                   'This is not a 90 day commitment. One day, then you decide what the six weeks needs.',
                   'This is not a retainer with a day bolted on the front. If the day gives you everything, we stop there.',
                 ].map((item, i) => (
@@ -410,14 +627,14 @@ export default function Geronimo() {
             <div className="accent-line mx-auto mb-10" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">Bottom line</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white mb-8 leading-[1.15]">
-              Pull it apart. Write it down.
+              Capture the system. Hand it over.
               <br />
-              <span className="text-zinc-500">Hand it over.</span>
+              <span className="text-zinc-500">Then test it.</span>
             </h2>
             <div className="space-y-3 text-zinc-400 mb-10 leading-relaxed">
-              <p>One day with Nate still in the building. We map the pipeline end to end, find what breaks, and document the standard a contractor can hit.</p>
+              <p>One day while Nate is still in the building. We pull the operation apart, document his system, and refine it to something a videographer can slot into.</p>
               <p>Hayley walks out knowing how production runs, not just what it produced.</p>
-              <p>$5,000. Then you decide whether the six weeks needs me in it.</p>
+              <p>$5,000. Then you run your six weeks and decide whether it needs me in it.</p>
             </div>
             <a
               href="https://calendar.app.google/jSpGKkQbgje7TaQZ6"
@@ -428,6 +645,16 @@ export default function Geronimo() {
               Book the Strategy Day
               <ArrowRight className="w-4 h-4" />
             </a>
+
+            <div className="mt-8">
+              <a
+                href="/geronimonextsteps"
+                className="group inline-flex items-center gap-2 text-zinc-400 hover:text-blue-400 transition-colors text-[14px] font-medium"
+              >
+                See the clear next steps
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </a>
+            </div>
           </Section>
         </div>
       </section>
