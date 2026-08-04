@@ -112,10 +112,6 @@ export default function Geronimo() {
               <br />
               <span className="text-zinc-500">Put it in Hayley's hands.</span>
             </h2>
-            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-8">
-              The plan changed again. Nate is out at the end of the month, not in 90 days. And you are not replacing him with a creative director. So the point of this project changed with it.
-            </p>
-
             <div className="glow-card p-8 md:p-10 mb-10 max-w-3xl">
               <ul className="space-y-4">
                 {[
