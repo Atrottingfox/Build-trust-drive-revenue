@@ -362,7 +362,7 @@ export default function Offer() {
             <Label>Step 2 &middot; 90 Day Authority Engine Install &middot; by invitation</Label>
             <H2>Install an Authority Engine.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-4">
-              After the Brand Day, I invite a small number of founders into the 90 day Install. Your $5,000 Brand Day fee credits toward it.
+              After the Brand Day, I invite a small number of founders into the 90 day Install.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               Three core content output areas. Plus the connective tissue that turns them into a repeatable monthly demand cycle.
