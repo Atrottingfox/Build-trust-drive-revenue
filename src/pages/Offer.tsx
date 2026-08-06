@@ -58,7 +58,44 @@ const outputs = [
 
 const connectiveTissue = [
   { icon: Megaphone, title: 'Trojan Horse VSL', description: 'A value first video sales letter. Seeds the offer while delivering deep value. Does the selling without feeling like a sale.' },
-  { icon: Settings, title: 'Documented Media Operating System', description: 'A system your team can run week to week. Captures the brand, the cycle, and the playbook in one place. Survives team changes.' },
+  { icon: Settings, title: 'Documented Authority Engine', description: 'A system your team can run week to week. Captures the brand, the cycle, and the playbook in one place. Survives team changes.' },
+];
+
+const ladder = [
+  {
+    icon: Compass,
+    stage: 'Brand',
+    when: '1 Day · Authority Engine Build Day',
+    intro: '',
+    items: [
+      'Diagnose what is working and where your content leaks',
+      'Map your brand, message, and Authority Engine across IG / YT / podcast',
+      'Leave with a 30 day content plan your team can run immediately',
+    ],
+  },
+  {
+    icon: Zap,
+    stage: 'Content',
+    when: '90 Days · Authority Engine Install',
+    intro: 'Turn that blueprint into a working Engine: short form cadence, long form trust assets, and a simple scorecard that links content to revenue.',
+    items: [
+      'Short form cadence and Capture Block',
+      '1 to 2 long form trust assets (YouTube / podcast)',
+      'Simple scorecard and weekly review',
+      'Your operator is running the rhythm. You are spending under 2 hours a week on it',
+    ],
+  },
+  {
+    icon: Repeat,
+    stage: 'Scale',
+    when: '12 Months · Advisory, by invitation',
+    intro: 'For a small handful of founders, ongoing advisory to weaponise your operator and scale the Engine over a full year.',
+    items: [
+      "Monthly founder and operator 'board' call",
+      'Ongoing tuning of topics, packaging, and offers',
+      'Deeper tracking so you can see content > pipeline clearly over time',
+    ],
+  },
 ];
 
 const buildPhases = [
@@ -70,7 +107,7 @@ const buildPhases = [
       'This is where we build your customer journey, craft your plan, and map your core pillar videos.',
     ],
     outcomes: [
-      'A documented brand. Voice, positioning, category lens, contrarian takes.',
+      'A documented brand. Personality, positioning, perspective, messaging and voice.',
       'A Customer Journey Map. Cold to warm to buyer to advocate.',
       'The shape of the monthly demand cycle, mapped to your calendar.',
       'Agreed success metrics for the 90 days.',
@@ -80,7 +117,7 @@ const buildPhases = [
     num: '02', tag: 'Phase 02 · Install · Weeks 1 to 4', title: 'Get the engine built and live.',
     paras: [
       'One 60 minute call per week with you and your key people.',
-      'Short form, long form, lead magnets, the Trojan Horse VSL, and the Media Operating System get built and wired up. The first cycle runs live so we test it on real audience.',
+      'Short form, long form, lead magnets, the Trojan Horse VSL, and the documented Authority Engine get built and wired up. The first cycle runs live so we test it on real audience.',
     ],
     outcomes: [],
   },
@@ -160,7 +197,7 @@ export default function Offer() {
               We design a simple content system your team can run that reliably turns attention into qualified leads and sales.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              It starts with an Authority Engine Build Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and turn it into a documented brand and media operating system.
+              It starts with an Authority Engine Build Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and turn it into a documented brand and Authority Engine.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
               For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and scorecard so the Engine keeps compounding without you ever becoming a full time creator.
@@ -168,6 +205,50 @@ export default function Offer() {
             <p className="text-zinc-400 leading-relaxed">
               I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with one client recently crossing $2M a month.
             </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* THE LADDER */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The progression</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8">
+              How the Authority Engine
+              <br />
+              <span className="text-zinc-500">works over time.</span>
+            </h2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
+              Brand, then Content, then Scale. Each stage earns the next.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6">
+              {ladder.map((l, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <l.icon className="w-5 h-5 text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold text-base">{l.stage}</h3>
+                  <p className="text-zinc-500 text-[11px] uppercase tracking-widest font-semibold mb-4">{l.when}</p>
+                  {l.intro && <p className="text-zinc-400 text-sm leading-relaxed mb-4">{l.intro}</p>}
+                  <ul className="space-y-2">
+                    {l.items.map((item, j) => (
+                      <li key={j} className="flex items-start gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-[7px] flex-shrink-0" />
+                        <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
           </Section>
         </div>
       </section>
@@ -278,10 +359,10 @@ export default function Offer() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Step 2 &middot; 90 Day Authority Engine Build &middot; by selection</Label>
+            <Label>Step 2 &middot; 90 Day Authority Engine Install &middot; by invitation</Label>
             <H2>Install an Authority Engine.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-4">
-              After the Brand Day, I invite a small number of founders into a 90 day build. Your $5,000 Brand Day fee credits toward it.
+              After the Brand Day, I invite a small number of founders into the 90 day Install. Your $5,000 Brand Day fee credits toward it.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               Three core content output areas. Plus the connective tissue that turns them into a repeatable monthly demand cycle.
@@ -348,11 +429,22 @@ export default function Offer() {
             </div>
 
             <div className="mt-10">
-              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By day 90 you have</p>
+              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By Day 90 you have</p>
               <Ticks items={[
-                'A refined brand and a content engine built for your voice, audience and creation style',
-                'A clear path of what to post and why it works, so you can keep scaling without me',
-                'Three straight weeks hitting your lead targets',
+                'One fully documented Authority Engine for your business. Brand, content, and customer journey mapped',
+                'A personalised short form system your operator runs every week. Capture block, operating system and content scorecard',
+                '1 to 2 long form trust assets and a YouTube plan that actually gets watched by buyers',
+                'Three straight weeks hitting agreed lead and pipeline targets',
+              ]} />
+            </div>
+
+            <div className="glow-card border-blue-500/20 p-8 mt-10">
+              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-2">Short Form Sprint</p>
+              <p className="text-white font-semibold text-base mb-5">Bonus, unlocked when you join.</p>
+              <Ticks items={[
+                'Capture block training and SOP',
+                'Short form OS and operator checklist',
+                '30 day scorecard so your team can start improving short form immediately',
               ]} />
             </div>
 
@@ -448,16 +540,16 @@ export default function Offer() {
               <span className="text-zinc-500">So we both stay sharp.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-10">
-              For clarity on both sides.
+              For clarity on both sides. This is not:
             </p>
             <div className="glow-card p-8 md:p-10 max-w-3xl">
               <ul className="space-y-5">
                 {[
-                  'This is not a done for you content agency. Your team implements. I design, advise, and read the data with you.',
-                  'This is not a guarantee of revenue. We agree the metrics. We test. The data tells us what worked.',
-                  'This is not full time CMO services. I show up for the cadence we agreed. Not in your inbox at 11pm.',
-                  'This is not a content factory. I do not write or edit every script. Your team produces.',
-                  'This is not a forever contract. At Day 90 we both choose whether to continue with ongoing advisory.',
+                  'A done for you content agency. Your team films, edits and posts. I design the Authority Engine, train your operator, and read the data with you.',
+                  'Full time CMO or creative director services. I show up for the cadence we agree, not to manage your entire media team.',
+                  'A guarantee of revenue. We agree the metrics, test, and the data tells us what worked.',
+                  'A content factory. I do not write or edit every script. Your team produces.',
+                  'A forever contract. At Day 90 we both choose whether to continue with advisory.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <X className="w-5 h-5 text-zinc-500 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
@@ -481,19 +573,31 @@ export default function Offer() {
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
                 <p className="font-display text-3xl font-extrabold text-white">$5,000</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Price increases every month from July.</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Founding rate. Increasing towards $10,000 as capacity fills.</p>
               </div>
               <div className="glow-card p-7">
-                <p className="text-zinc-400 text-[14px] mb-1">90 Day Build, if invited</p>
-                <p className="font-display text-3xl font-extrabold text-white">$15,000 total</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Your Brand Day fee credits in, so the balance is $10,000.</p>
+                <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
+                <p className="font-display text-3xl font-extrabold text-white">$15,000</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Brand Day. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
               </div>
             </div>
-            <div className="glow-card border-blue-500/20 p-6 mt-4">
-              <p className="text-white text-sm font-semibold mb-1">Only 5 spots a month.</p>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                I work with a small number of founders at a time so I can stay close to your team and your data. The price increases every month from July, so the earlier you start, the less you pay.
-              </p>
+            <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
+              I am taking a small group of founders through the full Authority Engine at this rate in exchange for wholehearted implementation, blunt feedback, and permission to share results as case studies.
+            </p>
+            <div className="glow-card border-blue-500/20 p-6 mt-6">
+              <p className="text-white text-sm font-semibold mb-3">Capacity.</p>
+              <ul className="space-y-3">
+                {[
+                  'We are limited to 10 strategy days per month.',
+                  'I keep the number of active 90 day Installs low so I can stay close to your team and your data.',
+                  'The 90 day Install and any ongoing advisory are by invitation only, offered to founders where I am confident we can hit the outcomes we set on your Build Day.',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Section>
         </div>
@@ -512,7 +616,7 @@ export default function Offer() {
                 'Apply and book a fit call',
                 'If accepted, we pick your Brand Day date',
                 'We build your Brand Bible and Authority Engine in a day',
-                'If it is a hell yes for both of us, we roll into the 90 day build',
+                'If it is a hell yes for both of us, we roll into the 90 day Install',
               ]} />
             </div>
             <a
