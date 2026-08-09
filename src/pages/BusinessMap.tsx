@@ -48,41 +48,38 @@ const offers = [
     title: 'Strategy Day',
     price: '$5k',
     rolled: 'Authority Engine Build Day',
-    description: '1:1, in person intensive. Brand, positioning, narrative, customer journey, and Authority Engine blueprint documented inside The Engineroom. This is Phase 1 of the install, not a random workshop. The 5k credits in full toward the 90 day.',
+    description: '1:1, in person intensive. Brand, positioning, narrative, customer journey, and Authority Engine blueprint documented inside The Engineroom. This is Phase 1 of the install, not a random workshop. The 5k credits in full toward the 90 day install.',
   },
   {
     num: '02',
     title: '90 Day Install',
-    price: '$20k total',
-    rolled: '5k credits in · 15k additional',
-    description: 'Offered at the close of the Strategy Day. Your 5k day rolls in 100%, so it is 15k more to start. Over 90 days we build, install, and tune the Engine with your team so it is running by Day 90.',
+    price: '$15k',
+    rolled: '5k credits in · 10k additional',
+    description: 'Offered at the close of the Strategy Day, by invitation. The 5k day rolls in 100%, so it is 10k more to start. Over 90 days we build, install, and tune the Engine with the team so it is running by Day 90.',
   },
   {
     num: '03',
     title: '12 Month Advisory',
-    price: '$48k total',
-    rolled: '12 months on top · 28k additional',
-    description: 'Offered around Day 30 to 60 once the Engine is live and working. Your original 20k rolls in, so it is 28k to keep Sean and the OS on your business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp, plus one extra in person day.',
+    price: '$48k list',
+    rolled: 'Day 28 · 28k additional',
+    description: 'Offered at Day 28, by invitation, once the Engine is live and working. The 15k already paid credits in, so it is 28k to keep Sean and the OS on the business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp, plus one extra in person day.',
   },
 ];
 
 const revenueMetrics = [
   { stat: '$5k', label: 'Strategy Day', sub: 'Entry point. Credits into the install' },
-  { stat: '$20k', label: 'Install', sub: 'Strategy Day + 90 day build' },
-  { stat: '$48k', label: '12 month advisory', sub: 'Full path · 12 months on top' },
-  { stat: '$15,270', label: 'Floor LTGP', sub: '20k path, no upgrades (~76% gross)' },
-  { stat: '$37,940', label: 'Full path LTGP', sub: '48k path (~79% gross)' },
-  { stat: '$20.9k-24.3k', label: 'Expected LTGP', sub: 'At 25 to 40% advisory upgrade' },
+  { stat: '$15k', label: '90 Day Install', sub: 'By invitation. 5k credits in' },
+  { stat: '$48k', label: '12 Month Advisory', sub: 'List. 28k additional at Day 28' },
 ];
 
 const sixMonthPlan = [
-  { month: 'Month 1', brandDays: 4,  installs: 3, revenue: '$65k' },
-  { month: 'Month 2', brandDays: 6,  installs: 5, revenue: '$105k' },
-  { month: 'Month 3', brandDays: 8,  installs: 6, revenue: '$130k' },
-  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$170k' },
-  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$170k' },
-  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$190k' },
-  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$190k' },
+  { month: 'Month 1', brandDays: 4,  installs: 3, revenue: '$50k' },
+  { month: 'Month 2', brandDays: 6,  installs: 5, revenue: '$80k' },
+  { month: 'Month 3', brandDays: 8,  installs: 6, revenue: '$100k' },
+  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$130k' },
+  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$130k' },
+  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$145k' },
+  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$145k' },
 ];
 
 const pillars = [
@@ -421,65 +418,6 @@ export default function BusinessMap() {
                 </motion.div>
               ))}
             </div>
-            <p className="text-zinc-400 text-sm leading-relaxed max-w-3xl mt-8">
-              We design for 3 to 5x LTV:CAC. With LTGP in the ~21 to 24k range, that supports CAC of ~4 to 8k per client at scale.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Unit Economics */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Unit economics</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              Why this model compounds.
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { stat: '65%', label: 'Strategy Day margin', description: '5k revenue, 1.73k cost, 3.27k profit. Time, travel, and delivery.' },
-                { stat: '80%', label: '90 Day Install margin', description: '15k backend, 3k cost, 12k profit. No inventory, no office, no team at stage 0.' },
-                { stat: '$15,270', label: '20k path LTGP', description: 'Strategy Day plus 90 day install. ~76% gross across the entry path.' },
-                { stat: '$37,940', label: '48k path LTGP', description: 'Full advisory path. ~79% gross across the install and 12 months of advisory.' },
-                { stat: '$20.9k-24.3k', label: 'Expected LTGP', description: 'Blended at a 25 to 40% advisory upgrade rate off the 20k floor.' },
-                { stat: '5-8k', label: 'Target CAC', description: '3 to 5x LTV:CAC, client financed inside the first 90 days.' },
-              ].map((m, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-8 text-center"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <p className="font-display text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">
-                    {m.stat}
-                  </p>
-                  <p className="text-zinc-300 font-medium mb-2">{m.label}</p>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{m.description}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-5">CAC caps at 3:1 LTV:CAC</p>
-              <div className="grid sm:grid-cols-3 gap-6 mb-5">
-                {[
-                  { rate: '0% upgrade', cap: '$5.1k' },
-                  { rate: '25% upgrade', cap: '$7.0k' },
-                  { rate: '40% upgrade', cap: '$8.1k' },
-                ].map((c, i) => (
-                  <div key={i}>
-                    <p className="font-display text-2xl font-extrabold text-white tracking-tight">{c.cap}</p>
-                    <p className="text-zinc-500 text-xs">max CAC · {c.rate}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">Design rule: always safe target at or below 5k per client. Aggressive but fine if upgrades hold, up to 7 to 8k. All client financed in the first 90 days.</p>
-            </div>
           </Section>
         </div>
       </section>
@@ -492,7 +430,7 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The first $1M</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              Six months. One million.
+              The Stage 0 ramp.
             </h2>
             <p className="text-zinc-500 text-lg mb-12">The Stage 0 ramp, month by month.</p>
 
@@ -500,7 +438,7 @@ export default function BusinessMap() {
               <div className="hidden md:grid md:grid-cols-4 gap-4 px-6 py-4 border-b border-zinc-800 text-zinc-500 text-xs font-semibold uppercase tracking-widest">
                 <div>Month</div>
                 <div className="text-right">Strategy Days $5k</div>
-                <div className="text-right">Installs +$15k</div>
+                <div className="text-right">Installs +$10k</div>
                 <div className="text-right">Revenue</div>
               </div>
               {sixMonthPlan.map((row, i) => (
@@ -523,11 +461,12 @@ export default function BusinessMap() {
             <div className="grid sm:grid-cols-2 gap-6">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Totals</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days. 48 Installs. Advisory is upside on top.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days. 48 Installs. Around 9 advisory ascensions at 28k, roughly 18 percent of installs, closes the gap to $1M.</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Six month total</p>
-                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.02M</p>
+                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$780k</p>
+                <p className="text-zinc-600 text-xs mt-2">Days and Installs only. Advisory on top.</p>
               </div>
             </div>
           </Section>
