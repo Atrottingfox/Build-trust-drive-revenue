@@ -23,6 +23,7 @@ const CongruenceAudit = React.lazy(() => import('./pages/CongruenceAudit'));
 const BrandDay = React.lazy(() => import('./pages/BrandDay'));
 const Advisory = React.lazy(() => import('./pages/Advisory'));
 const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
+const OfferLadder = React.lazy(() => import('./pages/OfferLadder'));
 const TheEngine = React.lazy(() => import('./pages/TheEngine'));
 const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
 const ThirtyDaySprint = React.lazy(() => import('./pages/ThirtyDaySprint'));
@@ -99,6 +100,7 @@ export default function App() {
           <Route path="/brand-day" element={<BrandDay />} />
           <Route path="/advisory" element={<Advisory />} />
           <Route path="/map" element={<BusinessMap />} />
+          <Route path="/ladder" element={<OfferLadder />} />
           <Route path="/engine" element={<TheEngine />} />
           <Route path="/90dayprogram" element={<NinetyDayProgram />} />
           <Route path="/30-day-sprint" element={<ThirtyDaySprint />} />

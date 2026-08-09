@@ -2,4 +2,14 @@
   command = "npm run build"
   publish = "dist"
   functions = "netlify/functions"
+  edge_functions = "netlify/edge-functions"
 
+# Internal offer ladder. Gated at the edge so neither the route nor its
+# JavaScript chunk is served without credentials.
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/ladder"
+
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/ladder-private/*"
