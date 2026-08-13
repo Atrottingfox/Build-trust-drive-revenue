@@ -13,6 +13,62 @@ const headers = {
   "Content-Type": "application/json",
 };
 
+const GHL_API = "https://services.leadconnectorhq.com";
+const GHL_VERSION = "2021-07-28";
+
+// Custom field IDs are NEVER hardcoded. Each one is read from a Netlify env var
+// populated from the real sub-account via scripts/ghl-custom-fields.mjs.
+// A missing env var means that field is skipped, not guessed.
+const GHL_FIELD_ENV: Record<string, string> = {
+  location: "GHL_FIELD_LOCATION_CITY",
+  revenueBand: "GHL_FIELD_ANNUAL_REVENUE",
+  primaryOffer: "GHL_FIELD_PRIMARY_OFFER",
+  activeChannels: "GHL_FIELD_CHANNELS_ACTIVE",
+  audienceSize: "GHL_FIELD_AUDIENCE_SIZE",
+  biggestProblem: "GHL_FIELD_WHATS_BROKEN",
+  whatToFix: "GHL_FIELD_ONE_THING_TO_FIX",
+  contentOpsPerson: "GHL_FIELD_OPERATOR_STATUS",
+  canCommitDay: "GHL_FIELD_CAN_COMMIT_30_DAYS",
+  operatorName: "GHL_FIELD_OPERATOR_NAME",
+  operatorEmail: "GHL_FIELD_OPERATOR_EMAIL",
+};
+
+/**
+ * Australian mobiles arrive as "0400 000 000". GHL accepts a malformed number
+ * without complaint and then silently fails to SMS it, so anything we cannot
+ * confidently resolve is reported rather than sent as-is.
+ */
+export function toE164AU(raw: string): { phone: string; confident: boolean } {
+  const input = (raw || "").trim();
+  if (!input) return { phone: "", confident: true };
+
+  if (input.startsWith("+")) {
+    const digits = input.slice(1).replace(/\D/g, "");
+    return { phone: digits ? `+${digits}` : "", confident: digits.length >= 8 };
+  }
+
+  let digits = input.replace(/\D/g, "");
+
+  // 0011 is the Australian international dialling prefix, so what follows is
+  // already a full international number.
+  if (digits.startsWith("0011")) {
+    const intl = digits.slice(4);
+    return { phone: intl ? `+${intl}` : "", confident: intl.length >= 8 };
+  }
+
+  if (digits.startsWith("61") && digits.length >= 11) {
+    return { phone: `+${digits}`, confident: true };
+  }
+  if (digits.startsWith("0") && digits.length === 10) {
+    return { phone: `+61${digits.slice(1)}`, confident: true };
+  }
+  if (digits.length === 9 && digits.startsWith("4")) {
+    return { phone: `+61${digits}`, confident: true };
+  }
+
+  return { phone: digits ? `+${digits}` : "", confident: false };
+}
+
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers, body: "" };
@@ -50,7 +106,9 @@ const handler: Handler = async (event) => {
       "Biggest Problem": data.biggestProblem ? { select: { name: data.biggestProblem } } : undefined,
       "What To Fix": { rich_text: [{ text: { content: data.whatToFix || "" } }] },
       "Content Ops Person": data.contentOpsPerson ? { select: { name: data.contentOpsPerson } } : undefined,
+      "Operator Name": { rich_text: [{ text: { content: data.operatorName || "" } }] },
       "Ops Person Role": { rich_text: [{ text: { content: data.opsPersonRole || "" } }] },
+      "How Did You Hear": { rich_text: [{ text: { content: data.howDidYouHear || "" } }] },
       "Can Commit Day": data.canCommitDay ? { select: { name: data.canCommitDay } } : undefined,
       "Blackout Dates": { rich_text: [{ text: { content: data.blackoutDates || "" } }] },
       "Comfortable With Filming": data.comfortableWithFilming ? { select: { name: data.comfortableWithFilming } } : undefined,
@@ -60,6 +118,8 @@ const handler: Handler = async (event) => {
 
     if (data.website) properties.Website = { url: data.website };
     if (data.email) properties.Email = { email: data.email };
+    if (data.phone) properties.Phone = { phone_number: data.phone };
+    if (data.operatorEmail) properties["Operator Email"] = { email: data.operatorEmail };
 
     // Remove undefined values
     Object.keys(properties).forEach((key) => {
@@ -89,6 +149,96 @@ const handler: Handler = async (event) => {
       };
     }
 
+    // Hand the application to GoHighLevel via the v2 contacts API.
+    // The `applied` tag is what fires every downstream automation, and the
+    // returned contact id is what Stripe payment links carry as
+    // client_reference_id so a payment matches back to the right contact.
+    // A GHL failure must never reach the applicant: the Notion row already
+    // exists and the Slack alert still fires, so we degrade instead of erroring.
+    let ghlContactId: string | null = null;
+    let ghlDegraded = false;
+
+    const ghlToken = process.env.GHL_TOKEN;
+    const ghlLocationId = process.env.GHL_LOCATION_ID;
+
+    if (ghlToken && ghlLocationId) {
+      try {
+        const [firstName, ...rest] = (data.name || "").trim().split(" ");
+        const { phone, confident } = toE164AU(data.phone || "");
+        if (data.phone && !confident) {
+          console.error(
+            `Phone "${data.phone}" could not be confidently normalised to E.164 (sending "${phone}"). SMS to this contact may silently fail.`
+          );
+        }
+
+        const customFields: Array<{ id: string; value: string }> = [];
+        const missingFieldEnv: string[] = [];
+
+        for (const [key, envVar] of Object.entries(GHL_FIELD_ENV)) {
+          const fieldId = process.env[envVar];
+          const raw = key === "activeChannels"
+            ? (data.activeChannels || []).join(", ")
+            : data[key];
+          const value = typeof raw === "string" ? raw.trim() : raw ? String(raw) : "";
+          if (!value) continue;
+          if (!fieldId) {
+            missingFieldEnv.push(envVar);
+            continue;
+          }
+          customFields.push({ id: fieldId, value });
+        }
+
+        if (missingFieldEnv.length) {
+          console.error(
+            "GHL custom field env vars not set, those answers were dropped:",
+            missingFieldEnv.join(", ")
+          );
+        }
+
+        // upsert, not create: a second application updates one contact
+        // rather than leaving two half-complete records.
+        const ghlRes = await fetch(`${GHL_API}/contacts/upsert`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${ghlToken}`,
+            Version: GHL_VERSION,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            locationId: ghlLocationId,
+            firstName: firstName || "",
+            lastName: rest.join(" "),
+            email: data.email || "",
+            phone,
+            companyName: data.company || "",
+            website: data.website || "",
+            source: isApply ? "apply page" : "builder page",
+            tags: ["applied"],
+            customFields,
+          }),
+        });
+
+        if (!ghlRes.ok) {
+          ghlDegraded = true;
+          console.error("GHL upsert returned", ghlRes.status, await ghlRes.text());
+        } else {
+          const ghlJson = await ghlRes.json();
+          ghlContactId = ghlJson?.contact?.id || ghlJson?.id || null;
+          if (!ghlContactId) {
+            ghlDegraded = true;
+            console.error("GHL upsert succeeded but returned no contact id:", JSON.stringify(ghlJson));
+          }
+        }
+      } catch (ghlErr) {
+        ghlDegraded = true;
+        console.error("GHL upsert failed:", ghlErr);
+      }
+    } else {
+      ghlDegraded = true;
+      console.error("GHL_TOKEN or GHL_LOCATION_ID not set, skipping GHL sync.");
+    }
+
     // Add to Kit (ConvertKit)
     const kitApiSecret = process.env.KIT_API_SECRET;
     if (kitApiSecret && data.email) {
@@ -106,7 +256,7 @@ const handler: Handler = async (event) => {
               revenue: data.revenueBand || '',
               instagram: data.audienceSize || '',
               website: data.website || '',
-              phone: data.location || '',
+              phone: data.phone || '',
             },
           }),
         });
@@ -123,7 +273,22 @@ const handler: Handler = async (event) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            text: `*New ${isApply ? 'Apply Now Lead' : 'Builder Application'}*\n*Name:* ${data.name || 'N/A'}\n*Email:* ${data.email || 'N/A'}\n*Business:* ${data.company || 'N/A'}\n*Type:* ${data.primaryOffer || 'N/A'}\n*Instagram:* ${data.audienceSize || 'N/A'}\n*Website:* ${data.website || 'N/A'}\n*Revenue:* ${data.revenueBand || 'N/A'}\n*Phone:* ${data.location || 'N/A'}`,
+            text: [
+              isApply ? '*NEW LEAD — Apply Now*' : '*NEW APPLICATION — Brand Builder Day*',
+              '',
+              `*${data.name || 'No name'}* . ${data.company || 'No company'}`,
+              `${data.revenueBand || 'Revenue not given'} . Operator: ${data.contentOpsPerson || 'not given'}${data.operatorName ? ` (${data.operatorName}, ${data.operatorEmail || 'no email'})` : ''}`,
+              `📱 ${data.phone || 'NO NUMBER'}   ✉️ ${data.email || 'N/A'}`,
+              data.website ? `🔗 ${data.website}` : null,
+              data.audienceSize ? `Audience: ${data.audienceSize}` : null,
+              data.canCommitDay ? `Can commit a day in 30: *${data.canCommitDay}*` : null,
+              data.howDidYouHear ? `Heard via: ${data.howDidYouHear}` : null,
+              '',
+              data.biggestProblem ? `_Broken:_ ${data.biggestProblem}` : null,
+              data.whatToFix ? `_Wants fixed:_ ${data.whatToFix}` : null,
+              '',
+              '✅ invite  ·  🚀 concierge  ·  ❌ decline',
+            ].filter(Boolean).join('\n'),
           }),
         });
       } catch (slackErr) {
@@ -134,7 +299,12 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({
+        success: true,
+        ok: true,
+        contactId: ghlContactId,
+        ...(ghlDegraded ? { degraded: true } : {}),
+      }),
     };
   } catch (err) {
     console.error("Builder application error:", err);

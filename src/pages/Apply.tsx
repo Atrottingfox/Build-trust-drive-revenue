@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Navigate } from 'react-router-dom';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import SEO from '../components/SEO';
 
+/* /apply is retired. It ran a shorter form into a second Notion database,
+   which meant triage only ever saw half the applications. /builder is the
+   canonical application page. Flip this to false only to bring /apply back. */
+const REDIRECT_TO_BUILDER = true;
+
 export default function Apply() {
+  if (REDIRECT_TO_BUILDER) return <Navigate to="/builder" replace />;
+  return <ApplyForm />;
+}
+
+function ApplyForm() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -47,7 +58,7 @@ export default function Apply() {
           company: form.company || form.business_type,
           website: form.website || undefined,
           primaryOffer: form.business_type,
-          location: form.phone || '',
+          phone: form.phone || '',
           revenueBand: form.revenue_band || undefined,
           audienceSize: form.instagram || '',
           contentOpsPerson: form.content_ops || undefined,

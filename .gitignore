@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local Netlify folder
+.netlify
+
+# Secrets. .env.local is already covered by *.local, the rest are not.
+.env
+.env.*
+!.env.example

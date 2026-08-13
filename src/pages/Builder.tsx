@@ -25,6 +25,7 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 interface FormData {
   name: string;
   email: string;
+  phone: string;
   company: string;
   website: string;
   location: string;
@@ -35,16 +36,18 @@ interface FormData {
   biggestProblem: string;
   whatToFix: string;
   contentOpsPerson: string;
+  operatorName: string;
+  operatorEmail: string;
   opsPersonRole: string;
   canCommitDay: string;
   blackoutDates: string;
-  comfortableWithFilming: string;
-  whyYouWhyNow: string;
+  howDidYouHear: string;
 }
 
 const initialForm: FormData = {
   name: '',
   email: '',
+  phone: '',
   company: '',
   website: '',
   location: '',
@@ -55,14 +58,24 @@ const initialForm: FormData = {
   biggestProblem: '',
   whatToFix: '',
   contentOpsPerson: '',
+  operatorName: '',
+  operatorEmail: '',
   opsPersonRole: '',
   canCommitDay: '',
   blackoutDates: '',
-  comfortableWithFilming: '',
-  whyYouWhyNow: '',
+  howDidYouHear: '',
 };
 
+/* Values are stored exactly as the GHL "Annual revenue" dropdown options.
+   A mismatch means GHL silently drops the answer, so these strings and the
+   dropdown in the sub-account have to move together. */
 const revenueBands = ['-1M', '1-3M', '3-10M', '10M+'];
+const revenueLabels: Record<string, string> = {
+  '-1M': 'Under $1M',
+  '1-3M': '$1M - $3M',
+  '3-10M': '$3M - $10M',
+  '10M+': '$10M+',
+};
 const channels = ['Instagram', 'YouTube', 'Email', 'LinkedIn', 'Podcast', 'Other'];
 const problems = [
   'Content doesnt match business level',
@@ -76,6 +89,22 @@ const problemLabels: Record<string, string> = {
   'Message unclear / fragmented': 'Our message is unclear / fragmented',
   'Creates a lot but no pipeline': "We create a lot but it doesn't turn into pipeline",
 };
+/* Capacity ramp. Only months we've actually committed to appear here.
+   Any month not listed renders without a spots count rather than guessing. */
+const spotsByMonth: Record<string, number> = {
+  '2026-08': 5,
+  '2026-09': 6,
+  '2026-10': 8,
+  '2026-11': 8,
+  '2026-12': 10,
+};
+
+function spotsThisMonth(): number | null {
+  const now = new Date();
+  const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+  return spotsByMonth[key] ?? null;
+}
+
 const opsOptions = ['Yes, full time', 'Yes, part time', 'No'];
 const opsToNotion: Record<string, string> = {
   'Yes, full time': 'Yes full-time',
@@ -234,13 +263,18 @@ export default function Builder() {
   const isValid =
     form.name.trim() &&
     form.email.trim() &&
+    form.phone.trim() &&
     form.company.trim() &&
     form.revenueBand &&
     form.primaryOffer.trim() &&
     form.biggestProblem &&
     form.whatToFix.trim() &&
     form.contentOpsPerson &&
+    (form.contentOpsPerson === 'No' ||
+      (form.operatorName.trim() && form.operatorEmail.trim())) &&
     form.canCommitDay;
+
+  const spots = spotsThisMonth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -262,6 +296,20 @@ export default function Builder() {
 
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || 'Submission failed');
+
+      // GHL contact id, stashed under sessionStorage key `ae_contact_id`.
+      // Every Stripe payment link gets ?client_reference_id=<id> appended from
+      // here, so a payment matches back to this contact instead of being
+      // guessed from the email address.
+      // A missing id means GHL degraded, not that the application failed, so
+      // the applicant still goes through to the thank-you screen.
+      if (data.contactId) {
+        try {
+          sessionStorage.setItem('ae_contact_id', data.contactId);
+        } catch {
+          // Private browsing blocks sessionStorage. Not worth failing over.
+        }
+      }
 
       setSubmitted(true);
     } catch (err: any) {
@@ -285,7 +333,7 @@ export default function Builder() {
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mx-auto">
               One day. Your office. A complete brand rebuild and content shoot.
-              Five spots. Apply below.
+              {spots !== null && ` ${spots} spots this month.`} Apply below.
             </p>
           </div>
         </Section>
@@ -341,10 +389,25 @@ export default function Builder() {
                     <Input value={form.website} onChange={(v) => update('website', v)} placeholder="https://" />
                   </div>
                 </div>
-                <div>
-                  <Label>Where are you based?</Label>
-                  <Input value={form.location} onChange={(v) => update('location', v)} placeholder="City, Country" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Where are you based?</Label>
+                    <Input value={form.location} onChange={(v) => update('location', v)} placeholder="City, Country" />
+                  </div>
+                  <div>
+                    <Label required>Mobile</Label>
+                    <Input
+                      value={form.phone}
+                      onChange={(v) => update('phone', v)}
+                      placeholder="04XX XXX XXX"
+                      type="tel"
+                      required
+                    />
+                  </div>
                 </div>
+                <p className="text-zinc-600 text-xs">
+                  Mobile so I can reach you if something breaks in the booking.
+                </p>
               </div>
 
               {/* 2. Business Snapshot */}
@@ -353,7 +416,7 @@ export default function Builder() {
               <div className="space-y-5 mt-6">
                 <div>
                   <Label required>Current annual revenue</Label>
-                  <RadioGroup options={revenueBands} value={form.revenueBand} onChange={(v) => update('revenueBand', v)} />
+                  <RadioGroup options={revenueBands} value={form.revenueBand} onChange={(v) => update('revenueBand', v)} labels={revenueLabels} />
                 </div>
                 <div>
                   <Label required>Primary offer and price point</Label>
@@ -419,13 +482,38 @@ export default function Builder() {
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
                   >
-                    <Label>Who are they and what's their role today?</Label>
-                    <TextArea
-                      value={form.opsPersonRole}
-                      onChange={(v) => update('opsPersonRole', v)}
-                      placeholder="e.g. VA who handles social scheduling, 20hrs/week"
-                      rows={2}
-                    />
+                    <div className="space-y-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <Label required>Their name</Label>
+                          <Input
+                            value={form.operatorName}
+                            onChange={(v) => update('operatorName', v)}
+                            placeholder="Dan Smith"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label required>Their email</Label>
+                          <Input
+                            value={form.operatorEmail}
+                            onChange={(v) => update('operatorEmail', v)}
+                            placeholder="dan@company.com"
+                            type="email"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <Label>What's their role today?</Label>
+                        <TextArea
+                          value={form.opsPersonRole}
+                          onChange={(v) => update('opsPersonRole', v)}
+                          placeholder="e.g. VA who handles social scheduling, 20hrs/week"
+                          rows={2}
+                        />
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </div>
@@ -451,6 +539,20 @@ export default function Builder() {
                     />
                   </motion.div>
                 )}
+              </div>
+
+              {/* 7. Last thing */}
+              <SectionDivider label="Last thing" number={7} />
+
+              <div className="space-y-5 mt-6">
+                <div>
+                  <Label>How did you hear about this?</Label>
+                  <Input
+                    value={form.howDidYouHear}
+                    onChange={(v) => update('howDidYouHear', v)}
+                    placeholder="e.g. Instagram, a podcast, someone sent it to me"
+                  />
+                </div>
               </div>
 
               {/* Submit */}
