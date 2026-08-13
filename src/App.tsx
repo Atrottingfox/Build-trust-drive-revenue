@@ -52,6 +52,7 @@ const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
+const LockIn = React.lazy(() => import('./pages/LockIn'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 
@@ -132,6 +133,7 @@ export default function App() {
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
+          <Route path="/lock-in" element={<LockIn />} />
           <Route path="/geronimo" element={<Geronimo />} />
           <Route path="/geronimonextsteps" element={<GeronimoNextSteps />} />
         </Routes>
