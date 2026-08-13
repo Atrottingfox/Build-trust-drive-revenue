@@ -20,9 +20,12 @@ import Footer from '../components/Footer';
 
 const BRAND_DAY_PRICE = '$5,000 AUD';
 
-// Dropped in once the Brand Builder Day calendar exists in GHL. Until then the
-// step renders an honest placeholder rather than a broken iframe.
-const GHL_CALENDAR_EMBED_URL = '';
+/*
+  Paste the Calendly event URL for the Brand Builder Day here, e.g.
+  https://calendly.com/seanfox/brand-builder-day
+  Left empty the step renders an honest note instead of a broken embed.
+*/
+const CALENDLY_URL: string = '';
 
 type Stage = 'pay' | 'paid';
 
@@ -52,6 +55,32 @@ export default function LockIn() {
       }
     }
   }, []);
+
+  /*
+    The contact id rides into Calendly as utm_content. Calendly echoes it back
+    on the invitee.created webhook, which is how netlify/functions/calendly-booked
+    matches the booking to the right GHL contact and tags brand-day-booked.
+    Without it the booking cannot be tied to anyone and the whole post-booking
+    chain has nothing to fire on.
+  */
+  const calendlyUrl = CALENDLY_URL
+    ? `${CALENDLY_URL}${CALENDLY_URL.includes('?') ? '&' : '?'}hide_gdpr_banner=1${
+        contactId ? `&utm_content=${encodeURIComponent(contactId)}` : ''
+      }`
+    : '';
+
+  // Calendly's widget script only does its work once the target div is present,
+  // so it loads after payment rather than on mount.
+  useEffect(() => {
+    if (stage !== 'paid' || !CALENDLY_URL) return;
+    const existing = document.querySelector<HTMLScriptElement>('script[data-calendly]');
+    if (existing) return;
+    const s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.async = true;
+    s.dataset.calendly = 'true';
+    document.body.appendChild(s);
+  }, [stage]);
 
   const startCheckout = async () => {
     if (loading) return;
@@ -171,14 +200,11 @@ export default function LockIn() {
             </div>
 
             {stage === 'paid' ? (
-              GHL_CALENDAR_EMBED_URL ? (
-                <iframe
-                  src={`${GHL_CALENDAR_EMBED_URL}${
-                    contactId ? `?contact_id=${encodeURIComponent(contactId)}` : ''
-                  }`}
-                  title="Choose your Brand Builder Day"
-                  className="w-full rounded-xl border border-zinc-800"
-                  style={{ height: 720 }}
+              CALENDLY_URL ? (
+                <div
+                  className="calendly-inline-widget w-full rounded-xl overflow-hidden border border-zinc-800"
+                  data-url={calendlyUrl}
+                  style={{ minWidth: 320, height: 760 }}
                 />
               ) : (
                 <p className="text-zinc-400 leading-relaxed">
