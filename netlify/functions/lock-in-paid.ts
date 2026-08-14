@@ -9,8 +9,14 @@ import type { Handler } from "@netlify/functions";
   already hold. No payload mapping, no guessing at field paths, no matching on
   email address.
 
-  WF6 in GHL triggers on this tag and chases anyone who paid but never picked a
-  date, which is the one crack this flow can still leak through.
+  It also tags `paid-no-date`, and calendly-booked.ts removes that tag the moment
+  a date is chosen. Between those two calls, `paid-no-date` means exactly what it
+  says: this person has paid $5,000 and has no Brand Day.
+
+  That gap is real. Payment now comes before the calendar, so someone can close
+  the tab on the success redirect and end up paid with nothing booked. The tag
+  makes that visible as a filter in GHL instead of silent, and gives the chase
+  workflow something to trigger on.
 */
 
 const headers = {
@@ -53,7 +59,7 @@ const handler: Handler = async (event) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ tags: ["brand-day-paid"] }),
+      body: JSON.stringify({ tags: ["brand-day-paid", "paid-no-date"] }),
     });
 
     if (!res.ok) {
