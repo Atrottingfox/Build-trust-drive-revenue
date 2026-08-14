@@ -307,33 +307,35 @@ const handler: Handler = async (event) => {
             */
             text: [
               isApply ? '*New Apply Now Lead*' : '*New Brand Builder Day Application*',
-              `*Name:* ${data.name || '-'}`,
+              // Labels mirror the questions actually asked on /builder, in the
+              // order the form asks them, so the alert reads like the form.
+              `*Full name:* ${data.name || '-'}`,
               `*Email:* ${data.email || '-'}`,
-              `*Phone:* ${data.phone || '-'}`,
-              `*Business:* ${data.company || '-'}`,
-              data.primaryOffer ? `*Type:* ${data.primaryOffer}` : null,
-              // Same field, different question per form: /apply asks for their
-              // Instagram, /builder asks for rough audience size per channel.
-              data.audienceSize
-                ? `*${isApply ? 'Instagram' : 'Audience'}:* ${data.audienceSize}`
-                : null,
+              `*Mobile:* ${data.phone || '-'}`,
+              `*Company:* ${data.company || '-'}`,
               data.website ? `*Website:* ${data.website}` : null,
-              data.revenueBand ? `*Revenue:* ${data.revenueBand}` : null,
-              data.location ? `*Based:* ${data.location}` : null,
-              data.activeChannels?.length ? `*Channels:* ${data.activeChannels.join(', ')}` : null,
-              data.biggestProblem ? `*Whats broken:* ${data.biggestProblem}` : null,
-              data.whatToFix ? `*Wants fixed:* ${data.whatToFix}` : null,
+              data.location ? `*Where are they based:* ${data.location}` : null,
+              data.revenueBand ? `*Current annual revenue:* ${data.revenueBand}` : null,
+              data.primaryOffer ? `*Primary offer and price point:* ${data.primaryOffer}` : null,
+              data.activeChannels?.length
+                ? `*Currently active on:* ${data.activeChannels.join(', ')}`
+                : null,
+              data.audienceSize
+                ? `*${isApply ? 'Instagram' : 'Audience size per channel'}:* ${data.audienceSize}`
+                : null,
+              data.biggestProblem ? `*Most broken right now:* ${data.biggestProblem}` : null,
+              data.whatToFix ? `*#1 thing to fix:* ${data.whatToFix}` : null,
               data.contentOpsPerson
-                ? `*Operator:* ${data.contentOpsPerson}${
+                ? `*Someone to own content ops:* ${data.contentOpsPerson}${
                     data.operatorName
-                      ? ` (${data.operatorName}, ${data.operatorEmail || 'no email'})`
+                      ? ` — ${data.operatorName}, ${data.operatorEmail || 'no email'}`
                       : ''
                   }`
                 : null,
-              data.opsPersonRole ? `*Their role:* ${data.opsPersonRole}` : null,
-              data.canCommitDay ? `*Can commit a day in 30:* ${data.canCommitDay}` : null,
+              data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
+              data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.blackoutDates ? `*Blackout dates:* ${data.blackoutDates}` : null,
-              data.howDidYouHear ? `*Heard via:* ${data.howDidYouHear}` : null,
+              data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
             ].filter(Boolean).join('\n'),
           }),
         });
