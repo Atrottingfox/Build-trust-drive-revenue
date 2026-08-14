@@ -275,7 +275,7 @@ export default function LockIn() {
     could show availability and then have no way to actually book it.
   */
   const calendlyUrl =
-    `${CALENDLY_URL}?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
+    `${CALENDLY_URL}?hide_gdpr_banner=1` +
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
     (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '');
 
@@ -284,7 +284,7 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_400px] items-start">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_380px] items-start">
 
           {/* Left: what they are securing */}
           <div>
