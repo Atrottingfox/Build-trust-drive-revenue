@@ -301,7 +301,11 @@ const handler: Handler = async (event) => {
               `*Phone:* ${data.phone || '-'}`,
               `*Business:* ${data.company || '-'}`,
               data.primaryOffer ? `*Type:* ${data.primaryOffer}` : null,
-              data.audienceSize ? `*Instagram:* ${data.audienceSize}` : null,
+              // Same field, different question per form: /apply asks for their
+              // Instagram, /builder asks for rough audience size per channel.
+              data.audienceSize
+                ? `*${isApply ? 'Instagram' : 'Audience'}:* ${data.audienceSize}`
+                : null,
               data.website ? `*Website:* ${data.website}` : null,
               data.revenueBand ? `*Revenue:* ${data.revenueBand}` : null,
               data.location ? `*Based:* ${data.location}` : null,
