@@ -37,7 +37,6 @@ interface FormData {
   whatToFix: string;
   contentOpsPerson: string;
   operatorName: string;
-  operatorEmail: string;
   opsPersonRole: string;
   canCommitDay: string;
   blackoutDates: string;
@@ -59,7 +58,6 @@ const initialForm: FormData = {
   whatToFix: '',
   contentOpsPerson: '',
   operatorName: '',
-  operatorEmail: '',
   opsPersonRole: '',
   canCommitDay: '',
   blackoutDates: '',
@@ -270,8 +268,7 @@ export default function Builder() {
     form.biggestProblem &&
     form.whatToFix.trim() &&
     form.contentOpsPerson &&
-    (form.contentOpsPerson === 'No' ||
-      (form.operatorName.trim() && form.operatorEmail.trim())) &&
+    (form.contentOpsPerson === 'No' || form.operatorName.trim()) &&
     form.canCommitDay;
 
   const spots = spotsThisMonth();
@@ -491,26 +488,14 @@ export default function Builder() {
                     exit={{ opacity: 0, height: 0 }}
                   >
                     <div className="space-y-5">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                          <Label required>Their name</Label>
-                          <Input
-                            value={form.operatorName}
-                            onChange={(v) => update('operatorName', v)}
-                            placeholder="Dan Smith"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <Label required>Their email</Label>
-                          <Input
-                            value={form.operatorEmail}
-                            onChange={(v) => update('operatorEmail', v)}
-                            placeholder="dan@company.com"
-                            type="email"
-                            required
-                          />
-                        </div>
+                      <div>
+                        <Label required>Their name</Label>
+                        <Input
+                          value={form.operatorName}
+                          onChange={(v) => update('operatorName', v)}
+                          placeholder="Dan Smith"
+                          required
+                        />
                       </div>
                       <div>
                         <Label>What's their role today?</Label>

@@ -30,7 +30,6 @@ const GHL_FIELD_ENV: Record<string, string> = {
   contentOpsPerson: "GHL_FIELD_OPERATOR_STATUS",
   canCommitDay: "GHL_FIELD_CAN_COMMIT_30_DAYS",
   operatorName: "GHL_FIELD_OPERATOR_NAME",
-  operatorEmail: "GHL_FIELD_OPERATOR_EMAIL",
   opsPersonRole: "GHL_FIELD_OPS_PERSON_ROLE",
   blackoutDates: "GHL_FIELD_BLACKOUT_DATES",
   howDidYouHear: "GHL_FIELD_HOW_DID_YOU_HEAR",
@@ -146,7 +145,6 @@ const handler: Handler = async (event) => {
     if (data.website) properties.Website = { url: data.website };
     if (data.email) properties.Email = { email: data.email };
     if (data.phone) properties.Phone = { phone_number: data.phone };
-    if (data.operatorEmail) properties["Operator Email"] = { email: data.operatorEmail };
 
     // Remove undefined values
     Object.keys(properties).forEach((key) => {
@@ -328,7 +326,7 @@ const handler: Handler = async (event) => {
               data.contentOpsPerson
                 ? `*Someone to own content ops:* ${data.contentOpsPerson}${
                     data.operatorName
-                      ? ` — ${data.operatorName}, ${data.operatorEmail || 'no email'}`
+                      ? `: ${data.operatorName}`
                       : ''
                   }`
                 : null,
