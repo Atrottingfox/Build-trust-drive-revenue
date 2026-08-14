@@ -92,7 +92,32 @@ const handler: Handler = async (event) => {
       */
       const customerField = process.env.GHL_FIELD_STRIPE_CUSTOMER;
       const intentField = process.env.GHL_FIELD_STRIPE_PAYMENT_INTENT;
+      const slugField = process.env.GHL_FIELD_CLIENT_SLUG;
+      const prepField = process.env.GHL_FIELD_PREP_DOC_URL;
       const customFields: Array<{ id: string; value: string }> = [];
+
+      /*
+        The client workspace on brand.contentengine.live is created by its own
+        Stripe webhook, off the same session, so it never reports back here.
+        Rather than have GHL ask a second system where someone's prep doc lives,
+        the slug is written from the session metadata that created it and the
+        URL derived from it.
+
+        That is what lets a GHL email say "here is your prep doc" with a merge
+        field, instead of an operator looking it up by hand.
+      */
+      const slug = session.metadata?.client_slug;
+      if (slug) {
+        if (slugField) customFields.push({ id: slugField, value: String(slug) });
+        if (prepField) {
+          customFields.push({
+            id: prepField,
+            value: `https://brand.contentengine.live/workbooks/prep?client=${encodeURIComponent(String(slug))}`,
+          });
+        }
+      } else {
+        console.warn("Paid session with no client_slug metadata, no prep doc recorded:", sessionId);
+      }
       if (customerField && session.customer) {
         customFields.push({ id: customerField, value: String(session.customer) });
       }
