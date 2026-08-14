@@ -11,8 +11,14 @@
 
     brand-day-booked      a date is chosen
     brand-day-paid        the money cleared
-    booked-no-payment     a date is held with nothing paid  (the recovery state)
+    booked-no-payment     a date held with nothing paid     (recovery)
+    paid-no-date          money in with no date chosen      (recovery)
     brand-day-confirmed   both are true                     (the go signal)
+
+  The two recovery states are opposites and both are real. The page asks for the
+  date first, so booked-no-payment is the common one, but a payment can still
+  arrive on its own from a link sent by hand. Whichever half is missing is the
+  one to chase.
 
   Whichever of the two events lands second calls `reconcile`, which is what
   applies `brand-day-confirmed` and clears `booked-no-payment`. Order does not
@@ -89,15 +95,19 @@ export async function reconcile(token: string, contactId: string): Promise<{
     if (!tags.includes("brand-day-confirmed")) {
       await addTags(token, contactId, ["brand-day-confirmed"]);
     }
-    if (tags.includes("booked-no-payment")) {
-      await removeTags(token, contactId, ["booked-no-payment"]);
-    }
+    const stale = ["booked-no-payment", "paid-no-date"].filter((t) => tags.includes(t));
+    if (stale.length) await removeTags(token, contactId, stale);
     return { booked, paid, confirmed: true };
   }
 
-  // A date held with nothing paid. This is the one worth chasing.
+  // A date held with nothing paid.
   if (booked && !paid && !tags.includes("booked-no-payment")) {
     await addTags(token, contactId, ["booked-no-payment"]);
+  }
+
+  // Money in with no date chosen.
+  if (paid && !booked && !tags.includes("paid-no-date")) {
+    await addTags(token, contactId, ["paid-no-date"]);
   }
 
   return { booked, paid, confirmed: false };
