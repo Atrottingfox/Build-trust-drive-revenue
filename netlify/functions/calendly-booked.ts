@@ -71,13 +71,18 @@ const handler: Handler = async (event) => {
       Accept: "application/json",
     };
 
+    /*
+      Both tags, because the VIP Day event collects the $5,000 inside Calendly.
+      A booking therefore IS a payment, and the two can never disagree. This is
+      also what stops WF3 chasing someone who has already paid.
+    */
     const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
       method: "POST",
       headers: ghlHeaders,
-      body: JSON.stringify({ tags: ["brand-day-booked"] }),
+      body: JSON.stringify({ tags: ["brand-day-paid", "brand-day-booked"] }),
     });
     if (!tagRes.ok) {
-      console.error("GHL tag brand-day-booked failed:", tagRes.status, await tagRes.text());
+      console.error("GHL tagging failed:", tagRes.status, await tagRes.text());
     }
 
     // Write the date so the D-7 and D-1 emails have something to count back from.
