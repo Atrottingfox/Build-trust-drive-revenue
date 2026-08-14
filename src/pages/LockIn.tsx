@@ -55,7 +55,6 @@ const DAYS_LEFT = DAYS_TOTAL - DAYS_DONE;
 
 const AFTER_PAYMENT = [
   'Immediately choose your Brand Builder Day date in my calendar',
-  'Get prep instructions and the Short Form Sprint',
   'Join a short prep call so I can get under the hood before the Day',
 ];
 
@@ -136,17 +135,53 @@ export default function LockIn() {
     }
 
     const justPaid = params.get('paid') === '1';
+    const sessionId = params.get('session_id');
+
     if (justPaid || store.get('ae_paid') === '1') {
       setPaid(true);
       store.set('ae_paid', '1');
     }
 
+    if (!justPaid || paidSent.current) return;
+    paidSent.current = true;
+
     /*
-      Tag the payment in GHL once, on the trip back from Stripe. Guarded on
-      `justPaid` so a refresh of an already paid page does not fire it again.
+      Two ways back from Stripe, and they are not equally trustworthy.
+
+      With a session id, embedded checkout is in play and the server can ask
+      Stripe whether this was really paid, then tag GHL itself. That is proof.
+
+      Without one, this is the buy button and `?paid=1` is all the browser gets.
+      Tag from the contact id we are holding and accept that the parameter is
+      forgeable. Someone typing it by hand still cannot get a Brand Day out of
+      it: there is no payment, so there is nothing to refund and Sean sees an
+      unpaid booking immediately.
     */
-    if (justPaid && id && !paidSent.current) {
-      paidSent.current = true;
+    if (sessionId) {
+      fetch('/.netlify/functions/verify-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId }),
+      })
+        .then((r) => r.json())
+        .then((v) => {
+          if (v?.verified && v.paid === false) {
+            // Stripe says this session was never paid. Lock it back down.
+            setPaid(false);
+            try {
+              localStorage.removeItem('ae_paid');
+            } catch {
+              // Nothing to clear.
+            }
+          }
+        })
+        .catch(() => {
+          // Verification is a bonus, not a gate. They keep the calendar.
+        });
+      return;
+    }
+
+    if (id) {
       fetch('/.netlify/functions/lock-in-paid', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -273,8 +308,16 @@ export default function LockIn() {
     document.body.appendChild(s);
   }, [paid]);
 
+  /*
+    Calendly's own booking engine, wearing the site's palette. These are the
+    only presentation levers the embed exposes, so this is as close to the site
+    look as real Calendly plumbing gets. A hand built calendar is not an option:
+    there is no public Calendly endpoint for creating a booking, so a custom UI
+    could show availability and then have no way to actually book it.
+  */
   const calendlyUrl =
-    `${CALENDLY_URL}?hide_gdpr_banner=1` +
+    `${CALENDLY_URL}?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
+    `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
     (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '');
 
   return (
@@ -342,15 +385,17 @@ export default function LockIn() {
 
                 {/* Embedded checkout mounts here. Empty until Stripe is
                     configured server side, in which case the buy button below
-                    renders instead. */}
-                <div id="stripe-checkout" />
+                    renders instead. Centred either way. */}
+                <div id="stripe-checkout" className="w-full" />
 
                 {!embedded && (
-                  <stripe-buy-button
-                    buy-button-id={STRIPE_BUY_BUTTON_ID}
-                    publishable-key={STRIPE_PUBLISHABLE_KEY}
-                    {...(contactId ? { 'client-reference-id': contactId } : {})}
-                  />
+                  <div className="flex justify-center">
+                    <stripe-buy-button
+                      buy-button-id={STRIPE_BUY_BUTTON_ID}
+                      publishable-key={STRIPE_PUBLISHABLE_KEY}
+                      {...(contactId ? { 'client-reference-id': contactId } : {})}
+                    />
+                  </div>
                 )}
 
                 <div className="mt-9 pt-7 border-t border-zinc-800/80">
