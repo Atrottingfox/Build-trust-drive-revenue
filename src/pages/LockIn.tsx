@@ -94,7 +94,7 @@ function LockedCalendar() {
           ))}
         </div>
         <div className="grid grid-cols-7 gap-2">
-          {Array.from({ length: 35 }).map((_, i) => (
+          {Array.from({ length: 28 }).map((_, i) => (
             <div
               key={i}
               className="aspect-square rounded-md border border-zinc-600/70"
@@ -324,147 +324,131 @@ export default function LockIn() {
     <div className="min-h-screen bg-base">
       <div className="gradient-border-top" />
 
-      <Container className="pt-32 pb-14">
-        <div className="max-w-xl mx-auto text-center">
-          <div className="accent-line mx-auto mb-6" />
-          <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
-            Secure your date
-          </h1>
-          <p className="text-zinc-300 text-lg leading-relaxed max-w-xl mx-auto">
-            To reserve one of our limited strategy days per month, secure your payment.
-          </p>
+      <Container className="pt-32 pb-24">
+        <div className="max-w-6xl mx-auto grid gap-12 lg:gap-16 lg:grid-cols-[1.05fr_0.95fr] items-start">
 
-          <div className="mt-9 inline-flex flex-col items-center rounded-xl border border-zinc-800 bg-zinc-900/50 px-7 py-5">
-            <p className="text-white text-[15px]">
-              <span className="font-display text-2xl align-middle mr-1.5">{DAYS_LEFT}</span>
-              of {DAYS_TOTAL} Days left at 5,000 AUD
+          {/* Left: what they are securing */}
+          <div>
+            <div className="accent-line mb-6" />
+            <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
+              Secure your date
+            </h1>
+            <p className="text-zinc-300 text-lg leading-relaxed">
+              To reserve one of our limited strategy days per month, secure your payment.
             </p>
-            <p className="text-zinc-500 text-sm mt-1.5">
-              After that the price goes to 10,000.
-            </p>
-          </div>
-        </div>
-      </Container>
 
-      <Container className="pb-32">
-        <div className="max-w-xl mx-auto">
-          {/* Step 1 - pay */}
-          <motion.section
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`rounded-2xl border p-7 sm:p-9 transition-colors ${
-              paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
-            }`}
-          >
-            {paid ? (
-              <div className="flex items-center gap-3.5">
-                <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                  <Check size={16} />
-                </div>
-                <div>
-                  <h2 className="font-display text-lg text-white leading-tight">Payment received</h2>
-                  <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
-                </div>
-              </div>
-            ) : (
-              <>
-                <p className="text-zinc-400 text-[15px] leading-relaxed mb-8">
-                  If after your application is reviewed and we do a prep call either of us decide
-                  it's not the right move, you'll be fully refunded.
-                </p>
-
-                <p className="text-white font-medium mb-4">After payment, you'll:</p>
-                <ul className="space-y-3 mb-9">
-                  {AFTER_PAYMENT.map((line) => (
-                    <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
-                      <Check className="text-zinc-600 shrink-0 mt-1" size={15} />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/*
-                  Stripe renders its own markup here and it comes out light, so
-                  it gets a deliberate panel to sit in rather than landing as a
-                  bare white rectangle on a dark page. The colours inside the
-                  frame come from Stripe dashboard branding, not from here.
-                */}
-                <div
-                  className={
-                    embedded
-                      ? 'rounded-xl bg-white p-4 sm:p-5 shadow-[0_1px_0_rgba(255,255,255,0.06)] ring-1 ring-white/10'
-                      : ''
-                  }
-                >
-                  <div id="stripe-checkout" className="w-full" />
-                </div>
-
-                {!embedded && (
-                  <div className="flex justify-center">
-                    <stripe-buy-button
-                      buy-button-id={STRIPE_BUY_BUTTON_ID}
-                      publishable-key={STRIPE_PUBLISHABLE_KEY}
-                      {...(contactId ? { 'client-reference-id': contactId } : {})}
-                    />
-                  </div>
-                )}
-
-                <div className="mt-9 pt-7 border-t border-zinc-800/80">
-                  <p className="text-zinc-300 leading-relaxed">
-                    All I ask is wholehearted implementation and advocacy.
-                  </p>
-                  <p className="text-zinc-500 text-sm leading-relaxed mt-4">
-                    P.s. if we decide we're not a fit right now, I'll direct you to someone who
-                    can help you in your current situation.
-                  </p>
-                </div>
-              </>
-            )}
-          </motion.section>
-
-          <div className="my-3 h-8 w-px bg-gradient-to-b from-zinc-800 to-transparent mx-auto" />
-
-          {/* Step 2 - the calendar, locked until payment clears */}
-          <motion.section
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.06 }}
-            className={`rounded-2xl border p-7 sm:p-9 transition-colors ${
-              paid ? 'border-zinc-700 bg-zinc-900/40' : 'border-zinc-800/80 bg-zinc-950/40'
-            }`}
-          >
-            <div className="flex items-center gap-3 mb-6">
-              {booked && (
-                <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                  <Check size={16} />
-                </div>
-              )}
-              <h2 className={`font-display text-lg ${paid ? 'text-white' : 'text-zinc-500'}`}>
-                {booked ? 'Your date is locked in' : 'Choose your Brand Builder Day'}
-              </h2>
+            <div className="mt-7 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
+              <p className="text-white text-[15px]">
+                <span className="font-display text-2xl align-middle mr-1.5">{DAYS_LEFT}</span>
+                of {DAYS_TOTAL} Days left at 5,000 AUD
+              </p>
+              <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
             </div>
 
-            {!paid && <LockedCalendar />}
+            <div className="mt-11">
+              <div className="flex items-center gap-3 mb-5">
+                {booked && (
+                  <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                    <Check size={15} />
+                  </div>
+                )}
+                <h2 className={`font-display text-lg ${paid ? 'text-white' : 'text-zinc-500'}`}>
+                  {booked ? 'Your date is locked in' : 'Choose your Brand Builder Day'}
+                </h2>
+              </div>
 
-            {paid && booked && (
-              <p className="text-zinc-400 leading-relaxed">
-                It's in both our calendars. Prep instructions, your Short Form Sprint access and
-                the prep call invite are on their way to your inbox.
-              </p>
-            )}
+              {!paid && <LockedCalendar />}
 
-            {paid && !booked && (
-              <div
-                className="calendly-inline-widget w-full rounded-xl overflow-hidden border border-zinc-800"
-                data-url={calendlyUrl}
-                style={{ minWidth: 320, height: 760 }}
-              />
-            )}
-          </motion.section>
+              {paid && booked && (
+                <p className="text-zinc-400 leading-relaxed">
+                  It's in both our calendars. Prep instructions and the prep call invite are on
+                  their way to your inbox.
+                </p>
+              )}
 
-          <p className="text-zinc-600 text-xs text-center mt-10">
-            Trouble with either step? Reply to my email and I will sort it out.
-          </p>
+              {paid && !booked && (
+                <div
+                  className="calendly-inline-widget w-full rounded-xl overflow-hidden border border-zinc-800"
+                  data-url={calendlyUrl}
+                  style={{ minWidth: 280, height: 720 }}
+                />
+              )}
+            </div>
+          </div>
+
+          {/* Right: payment. Sticky so it stays put while the calendar scrolls. */}
+          <div className="lg:sticky lg:top-28">
+            <motion.section
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`rounded-2xl border p-7 ${
+                paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
+              }`}
+            >
+              {paid ? (
+                <div className="flex items-center gap-3.5">
+                  <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                    <Check size={16} />
+                  </div>
+                  <div>
+                    <h2 className="font-display text-lg text-white leading-tight">Payment received</h2>
+                    <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <p className="text-white font-medium mb-4">After payment, you'll:</p>
+                  <ul className="space-y-3 mb-7">
+                    {AFTER_PAYMENT.map((line) => (
+                      <li key={line} className="flex gap-3 text-zinc-300 text-[15px] leading-relaxed">
+                        <Check className="text-zinc-600 shrink-0 mt-1" size={15} />
+                        <span>{line}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/*
+                    Stripe renders its own markup here and it comes out light, so
+                    it gets a deliberate panel to sit in rather than landing as a
+                    bare white rectangle on a dark page. The colours inside the
+                    frame come from Stripe dashboard branding, not from here.
+                  */}
+                  <div className={embedded ? 'rounded-xl bg-white p-3 ring-1 ring-white/10' : ''}>
+                    <div id="stripe-checkout" className="w-full" />
+                  </div>
+
+                  {!embedded && (
+                    <div className="flex justify-center">
+                      <stripe-buy-button
+                        buy-button-id={STRIPE_BUY_BUTTON_ID}
+                        publishable-key={STRIPE_PUBLISHABLE_KEY}
+                        {...(contactId ? { 'client-reference-id': contactId } : {})}
+                      />
+                    </div>
+                  )}
+
+                  <p className="text-zinc-500 text-sm leading-relaxed mt-7">
+                    If after your application is reviewed and we do a prep call either of us
+                    decide it's not the right move, you'll be fully refunded.
+                  </p>
+
+                  <div className="mt-6 pt-6 border-t border-zinc-800/80">
+                    <p className="text-zinc-300 text-[15px] leading-relaxed">
+                      All I ask is wholehearted implementation and advocacy.
+                    </p>
+                    <p className="text-zinc-500 text-sm leading-relaxed mt-3">
+                      P.s. if we decide we're not a fit right now, I'll direct you to someone who
+                      can help you in your current situation.
+                    </p>
+                  </div>
+                </>
+              )}
+            </motion.section>
+
+            <p className="text-zinc-600 text-xs text-center mt-6">
+              Trouble with either step? Reply to my email and I will sort it out.
+            </p>
+          </div>
         </div>
       </Container>
 
