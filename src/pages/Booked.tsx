@@ -4,10 +4,12 @@ import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
 
 /*
-  /booked - where Calendly redirects after the VIP Day is paid and booked.
+  /booked - the fallback landing page if a redirect is left on the Calendly
+  VIP Day event.
 
-  This is the first thing someone sees after handing over $5,000, so it has one
-  job: confirm it worked and tell them exactly what happens next. No upsell, no
+  The real flow lives on /lock-in: pay, then pick the date, both on that page.
+  This page exists so a stray Calendly redirect cannot swallow the booking. It
+  confirms what happened and tells them what comes next. No upsell, no
   navigation away.
 
   Calendly appends its own query params (invitee name, event start time) to the
@@ -32,10 +34,13 @@ const NEXT = [
 
 export default function Booked() {
   /*
-    Stripe sends them here after the buy button overlay completes, and the
-    query string does not survive the trip. The contact id was stashed in
-    localStorage on /lock-in, so read it back and tag `brand-day-paid` in GHL.
-    That is what links the payment to the person without a Stripe webhook.
+    Anyone landing here has paid and booked, because the only way to reach the
+    calendar is through payment on /lock-in. The contact id was stashed in
+    localStorage there, so read it back and tag both in GHL.
+
+    Both tags are re-sent deliberately. GHL tags are idempotent, so a duplicate
+    costs nothing, and it means a Calendly redirect firing before the page can
+    tag the booking never loses it.
   */
   useEffect(() => {
     let id: string | null = null;
@@ -46,12 +51,23 @@ export default function Booked() {
     }
     if (!id) return;
 
-    fetch('/.netlify/functions/lock-in-paid', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId: id }),
-    }).catch(() => {
-      // They have paid. Nothing here may interrupt the confirmation.
+    const post = (fn: string, body: unknown) =>
+      fetch(`/.netlify/functions/${fn}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      }).catch(() => {
+        // They have paid and booked. Nothing here may interrupt the confirmation.
+      });
+
+    post('lock-in-paid', { contactId: id });
+    post('calendly-booked', {
+      event: 'invitee.created',
+      fromPage: true,
+      payload: {
+        tracking: { utm_content: id },
+        scheduled_event: { name: 'VIP Day' },
+      },
     });
   }, []);
 
