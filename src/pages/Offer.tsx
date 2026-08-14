@@ -613,10 +613,9 @@ export default function Offer() {
             <H2>The next step.</H2>
             <div className="text-left max-w-xl mx-auto mt-10 mb-12">
               <Ticks items={[
-                'Apply and book a fit call',
-                'If accepted, we pick your Brand Day date',
-                'We build your Brand Bible and Authority Engine in a day',
-                'If it is a hell yes for both of us, we roll into the 90 day Install',
+                'Apply for a Brand Builder Day below',
+                'If accepted, you will be invited to secure your Day with a 5,000 AUD payment and choose your date',
+                'We get on a short prep call and then spend a full day together rebuilding your brand and Authority Engine',
               ]} />
             </div>
             <a

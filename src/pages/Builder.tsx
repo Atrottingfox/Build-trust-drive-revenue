@@ -297,21 +297,32 @@ export default function Builder() {
       const data = await res.json();
       if (!res.ok || data.error) throw new Error(data.error || 'Submission failed');
 
-      // GHL contact id, stashed under sessionStorage key `ae_contact_id`.
-      // Every Stripe payment link gets ?client_reference_id=<id> appended from
-      // here, so a payment matches back to this contact instead of being
-      // guessed from the email address.
-      // A missing id means GHL degraded, not that the application failed, so
-      // the applicant still goes through to the thank-you screen.
+      /*
+        Straight to the secure page. No thank-you screen, no waiting to hear
+        back: the moment the application lands they are looking at the $5,000
+        and the calendar.
+
+        The contact id rides along in ?c= so the payment and the booking both
+        attach to this exact person in GHL instead of being guessed from an
+        email address. It is also mirrored into storage, because Stripe's
+        overlay drops the query string on the way back from checkout.
+
+        A missing id means GHL degraded, not that the application failed. They
+        still go through. Payment works without it and I reconcile by email.
+      */
       if (data.contactId) {
         try {
           sessionStorage.setItem('ae_contact_id', data.contactId);
+          localStorage.setItem('ae_contact_id', data.contactId);
         } catch {
-          // Private browsing blocks sessionStorage. Not worth failing over.
+          // Private browsing blocks storage. Not worth failing over.
         }
       }
 
-      setSubmitted(true);
+      window.location.href = data.contactId
+        ? `/lock-in?c=${encodeURIComponent(data.contactId)}`
+        : '/lock-in';
+      return;
     } catch (err: any) {
       console.error('Submission error:', err);
       setError('Something went wrong. Try again or reach out directly.');
