@@ -464,6 +464,17 @@ export default function LockIn() {
                   )}
 
                   <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-4">
+                    {/*
+                      Required, not decoration. The card is stored off session at
+                      checkout so the Install can be charged later. Charging a
+                      saved card the holder was never told about is how you earn
+                      a dispute, and Stripe sides with the cardholder.
+                    */}
+                    <p className="text-zinc-500 text-[13px] leading-relaxed">
+                      Your card is stored securely with Stripe. If you decide to go ahead with the
+                      90 Day Install, I'll charge that same card for it, only after you have said
+                      yes. Nothing is charged without your go ahead.
+                    </p>
                     <p className="text-zinc-500 text-[13px] leading-relaxed">
                       If after your application is reviewed and we do a prep call either of us
                       decide it's not the right move, you'll be fully refunded.
