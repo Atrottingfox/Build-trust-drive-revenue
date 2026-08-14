@@ -39,7 +39,6 @@ interface FormData {
   operatorName: string;
   opsPersonRole: string;
   canCommitDay: string;
-  blackoutDates: string;
   howDidYouHear: string;
 }
 
@@ -60,7 +59,6 @@ const initialForm: FormData = {
   operatorName: '',
   opsPersonRole: '',
   canCommitDay: '',
-  blackoutDates: '',
   howDidYouHear: '',
 };
 
@@ -519,19 +517,6 @@ export default function Builder() {
                   <Label required>Can you commit one full day in the next 30 days, on site at your office?</Label>
                   <RadioGroup options={['Yes', 'No']} value={form.canCommitDay} onChange={(v) => update('canCommitDay', v)} />
                 </div>
-                {form.canCommitDay === 'Yes' && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                  >
-                    <Label>Any blackout dates?</Label>
-                    <Input
-                      value={form.blackoutDates}
-                      onChange={(v) => update('blackoutDates', v)}
-                      placeholder="e.g. April 7-11"
-                    />
-                  </motion.div>
-                )}
               </div>
 
               {/* 7. Last thing */}

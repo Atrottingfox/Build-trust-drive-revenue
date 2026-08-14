@@ -31,7 +31,6 @@ const GHL_FIELD_ENV: Record<string, string> = {
   canCommitDay: "GHL_FIELD_CAN_COMMIT_30_DAYS",
   operatorName: "GHL_FIELD_OPERATOR_NAME",
   opsPersonRole: "GHL_FIELD_OPS_PERSON_ROLE",
-  blackoutDates: "GHL_FIELD_BLACKOUT_DATES",
   howDidYouHear: "GHL_FIELD_HOW_DID_YOU_HEAR",
 };
 
@@ -136,7 +135,6 @@ const handler: Handler = async (event) => {
       "Ops Person Role": { rich_text: [{ text: { content: data.opsPersonRole || "" } }] },
       "How Did You Hear": { rich_text: [{ text: { content: data.howDidYouHear || "" } }] },
       "Can Commit Day": data.canCommitDay ? { select: { name: data.canCommitDay } } : undefined,
-      "Blackout Dates": { rich_text: [{ text: { content: data.blackoutDates || "" } }] },
       "Comfortable With Filming": data.comfortableWithFilming ? { select: { name: data.comfortableWithFilming } } : undefined,
       "Why You Why Now": { rich_text: [{ text: { content: data.whyYouWhyNow || "" } }] },
       Status: { select: { name: "New" } },
@@ -332,7 +330,6 @@ const handler: Handler = async (event) => {
                 : null,
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
-              data.blackoutDates ? `*Blackout dates:* ${data.blackoutDates}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
             ].filter(Boolean).join('\n'),
           }),
