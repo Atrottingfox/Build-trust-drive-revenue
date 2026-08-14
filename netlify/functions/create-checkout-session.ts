@@ -110,8 +110,24 @@ const handler: Handler = async (event) => {
     const session = await res.json();
 
     if (!res.ok) {
-      console.error("Stripe session create failed:", res.status, JSON.stringify(session?.error || session));
-      return { statusCode: 200, headers, body: JSON.stringify({ configured: false, error: true }) };
+      /*
+        Surface Stripe's own reason. It is almost always a restricted key
+        missing a permission, and without it the page just silently falls back
+        to the buy button with no clue why. Stripe error messages carry no
+        secrets, only the code and the human readable message are passed on.
+      */
+      const e = session?.error || {};
+      console.error("Stripe session create failed:", res.status, JSON.stringify(e));
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({
+          configured: false,
+          error: true,
+          stripeCode: e.code || e.type || null,
+          stripeMessage: e.message || null,
+        }),
+      };
     }
 
     return {
