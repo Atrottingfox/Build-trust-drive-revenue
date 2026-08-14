@@ -284,7 +284,7 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_330px] items-start">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_400px] items-start">
 
           {/* Left: what they are securing */}
           <div>
@@ -383,7 +383,7 @@ export default function LockIn() {
                     frame come from Stripe dashboard branding, not from here.
                   */}
                   <div className="mt-5 pt-5 border-t border-zinc-800/80">
-                    <div className={embedded ? 'rounded-xl bg-white p-2 ring-1 ring-white/10' : ''}>
+                    <div className={embedded ? 'rounded-xl overflow-hidden ring-1 ring-white/10' : ''}>
                       <div id="stripe-checkout" className="w-full" />
                     </div>
 

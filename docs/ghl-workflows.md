@@ -5,7 +5,7 @@ where Sean reviewed each application and sent an invitation by hand. That model
 is gone. The site now redirects straight from the application to payment, which
 deletes most of the old spec.
 
-Five workflows. Build them in this order. Leave every one in **Draft**;
+Six workflows. Build them in this order. Leave every one in **Draft**;
 publishing is Sean's.
 
 ---
@@ -20,6 +20,10 @@ it.
 | Application submitted | Creates the GHL contact, writes all 17 fields, tags `applied`, redirects to `/lock-in?c=<contactId>` |
 | Stripe payment succeeds | Tags `brand-day-paid` and `paid-no-date` |
 | Date chosen in Calendly | Tags `brand-day-booked`, writes `Brand day date`, removes `paid-no-date` |
+
+The calendar and the payment now sit side by side on `/lock-in`, both live from
+the moment the page loads. Either can happen first, or one without the other, so
+there are two ways to end up half finished and each needs its own chase.
 
 Every workflow below triggers on one of those tags. None of them need to set a
 tag the site already sets.
@@ -111,7 +115,40 @@ internally. At that point it is a phone call, not an email.
 
 ---
 
-## WF5. Booked, here is what happens next
+## WF5. Booked, no payment
+
+**Trigger:** tag `brand-day-booked`
+**Wait:** 30 minutes
+**Exit on:** tag `brand-day-paid`
+
+The mirror of WF4. The calendar is open alongside the payment, so a date can be
+taken before any money moves. This catches that.
+
+Thirty minutes, because the likely story is someone who picked a day and then
+went to pay and got interrupted.
+
+**Subject:** Your day is held, let's make it yours
+
+```
+Hey {{contact.first_name}},
+
+You've picked a day. I'm holding it, but it isn't confirmed until the 5,000 is
+in:
+
+[Secure link]
+
+I only run a handful of these, so I can't sit on a date indefinitely. If
+something has changed, reply and tell me and I'll release it for someone else.
+
+Sean
+```
+
+Add a second step: wait a further 12 hours, same exit condition, and notify Sean
+internally. A held day with no payment is worth a phone call, not a third email.
+
+---
+
+## WF6. Booked, here is what happens next
 
 **Trigger:** tag `brand-day-booked`
 **Wait:** none
@@ -165,11 +202,20 @@ AND tag is not `brand-day-paid`
 AND created more than 48 hours ago
 ```
 
-And the one worth checking daily:
+And the two worth checking daily:
 
 ```
 tag is `paid-no-date`
 ```
 
-Anyone on that second list has given Sean $5,000 and has no Brand Day. It should
-be empty almost all the time. If it is not, that is a phone call today.
+Anyone on that list has given Sean $5,000 and has no Brand Day.
+
+```
+tag is `brand-day-booked` AND tag is not `brand-day-paid`
+```
+
+Anyone on that one is holding a day they have not paid for.
+
+Both should be empty almost all the time. Anyone sitting on either is a phone
+call today, not an email tomorrow. Between these two and the applied-and-dropped
+list, nobody can fall out of this funnel without appearing somewhere.
