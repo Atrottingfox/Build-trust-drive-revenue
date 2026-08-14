@@ -94,11 +94,12 @@ const handler: Handler = async (event) => {
     }
 
     /*
-      The VIP Day event collects the $5,000 inside Calendly, so a booking IS a
-      payment and the two tags can never disagree. That is also what stops WF3
-      chasing someone who has already paid.
+      Booking only. Payment is taken by Stripe on /lock-in, and lock-in-paid.ts
+      owns the `brand-day-paid` tag. Tagging paid from here would mark someone
+      as having paid the moment they picked a date, which is the wrong order and
+      would silence the chase sequence for anyone who books without paying.
     */
-    const tags = isPrepCall ? ["prep-call-booked"] : ["brand-day-paid", "brand-day-booked"];
+    const tags = isPrepCall ? ["prep-call-booked"] : ["brand-day-booked"];
 
     const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
       method: "POST",
