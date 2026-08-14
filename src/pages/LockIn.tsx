@@ -89,6 +89,7 @@ export default function LockIn() {
   const [bookedAt, setBookedAt] = useState<string | null>(null);
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
+  const [calHeight, setCalHeight] = useState(700);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -173,6 +174,20 @@ export default function LockIn() {
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
       if (typeof e.origin === 'string' && !e.origin.includes('calendly.com')) return;
+
+      /*
+        Calendly's steps are different heights: the date picker is short, the
+        details form is tall. A fixed height means one of them scrolls inside
+        its own frame, which reads as broken. The embed broadcasts its content
+        height on every step, so the container follows it and nothing ever
+        scrolls internally.
+      */
+      if (e.data?.event === 'calendly.page_height') {
+        const h = parseInt(String(e.data?.payload?.height || ''), 10);
+        if (h > 0) setCalHeight(h);
+        return;
+      }
+
       if (e.data?.event !== 'calendly.event_scheduled') return;
 
       setBooked(true);
@@ -358,7 +373,7 @@ export default function LockIn() {
                   <div
                     className="calendly-inline-widget w-full"
                     data-url={calendlyUrl}
-                    style={{ minWidth: 280, height: 660 }}
+                    style={{ minWidth: 280, height: calHeight }}
                   />
                 </div>
               )}
