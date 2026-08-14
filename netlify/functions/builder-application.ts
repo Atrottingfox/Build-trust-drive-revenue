@@ -31,7 +31,18 @@ const GHL_FIELD_ENV: Record<string, string> = {
   canCommitDay: "GHL_FIELD_CAN_COMMIT_30_DAYS",
   operatorName: "GHL_FIELD_OPERATOR_NAME",
   operatorEmail: "GHL_FIELD_OPERATOR_EMAIL",
+  opsPersonRole: "GHL_FIELD_OPS_PERSON_ROLE",
+  blackoutDates: "GHL_FIELD_BLACKOUT_DATES",
+  howDidYouHear: "GHL_FIELD_HOW_DID_YOU_HEAR",
 };
+
+/*
+  The Slack alert shows a field only if that field is also written to GHL.
+  Anything the form collects but does not store is worse than useless: it reads
+  as captured, gets acted on, and is not there when you go back for it.
+  Adding a question to the form therefore means adding a GHL field and an entry
+  in the map above, or it does not appear in Slack either.
+*/
 
 /**
  * Australian mobiles arrive as "0400 000 000". GHL accepts a malformed number
@@ -319,7 +330,9 @@ const handler: Handler = async (event) => {
                       : ''
                   }`
                 : null,
+              data.opsPersonRole ? `*Their role:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a day in 30:* ${data.canCommitDay}` : null,
+              data.blackoutDates ? `*Blackout dates:* ${data.blackoutDates}` : null,
               data.howDidYouHear ? `*Heard via:* ${data.howDidYouHear}` : null,
             ].filter(Boolean).join('\n'),
           }),
