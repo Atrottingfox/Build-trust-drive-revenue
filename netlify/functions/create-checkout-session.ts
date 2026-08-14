@@ -39,8 +39,14 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-/* Used only when STRIPE_PRICE_ID is unset. Matches the existing Stripe product. */
-const PRICE_AUD_CENTS = 500000;
+/*
+  Used only when STRIPE_PRICE_ID is unset. Matches the existing Stripe product.
+
+  CHECKOUT_AMOUNT_CENTS overrides it, which exists so the real page can be walked
+  end to end for a dollar instead of five thousand. Set it, run the journey,
+  unset it. A test that skips the checkout is not a test of the checkout.
+*/
+const PRICE_AUD_CENTS = Number(process.env.CHECKOUT_AMOUNT_CENTS) || 500000;
 const PRODUCT_NAME = "VIP In person Strategy Day";
 
 const GHL_API = "https://services.leadconnectorhq.com";
@@ -147,7 +153,8 @@ const handler: Handler = async (event) => {
       Without it, bill the same amount inline so a missing STRIPE_PRICE_ID never
       stops anyone paying.
     */
-    if (priceId) {
+    // An explicit test amount always wins, even over the catalogue price.
+    if (priceId && !process.env.CHECKOUT_AMOUNT_CENTS) {
       form.set("line_items[0][price]", priceId);
     } else {
       form.set("line_items[0][price_data][currency]", "aud");
