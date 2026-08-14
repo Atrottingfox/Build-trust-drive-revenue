@@ -49,10 +49,6 @@ const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
 
 /* 20 Days at this price, total. Sean updates DAYS_DONE as they are delivered. */
-/* Stripe needs roughly 400px to render without truncating, so the frame is
-   drawn at that width and scaled to fit a narrower column. */
-const CHECKOUT_SCALE = 0.82;
-
 const DAYS_TOTAL = 20;
 const DAYS_DONE = 2;
 const DAYS_LEFT = DAYS_TOTAL - DAYS_DONE;
@@ -85,8 +81,6 @@ export default function LockIn() {
   const [booked, setBooked] = useState(false);
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
-  const scaleOuter = useRef<HTMLDivElement | null>(null);
-  const scaleInner = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -279,34 +273,13 @@ export default function LockIn() {
     look as real Calendly plumbing gets. A hand built calendar is not an option:
     there is no public Calendly endpoint for creating a booking, so a custom UI
     could show availability and then have no way to actually book it.
+
+    Event details are hidden because the page already says what this is, and
+    Calendly's own details block is tall enough to force the widget to scroll
+    inside itself, which is where the clipping came from.
   */
-  /*
-    Stripe controls the layout inside its iframe, and squeezing the column just
-    truncates the card name and the email. So the frame is rendered at a
-    comfortable width and scaled down visually instead.
-
-    The inner element is sized 1/SCALE so that after scaling it lands exactly on
-    the column width. A transform does not change the layout box, so the outer
-    height is set from the inner height every time Stripe resizes itself.
-    Without that, a scaled frame leaves dead space underneath it.
-  */
-  useEffect(() => {
-    const outer = scaleOuter.current;
-    const inner = scaleInner.current;
-    if (!outer || !inner || !embedded) return;
-
-    const sync = () => {
-      outer.style.height = `${inner.offsetHeight * CHECKOUT_SCALE}px`;
-    };
-    sync();
-
-    const ro = new ResizeObserver(sync);
-    ro.observe(inner);
-    return () => ro.disconnect();
-  }, [embedded]);
-
   const calendlyUrl =
-    `${CALENDLY_URL}?hide_gdpr_banner=1` +
+    `${CALENDLY_URL}?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
     (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '');
 
@@ -315,7 +288,7 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_340px] items-start">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_420px] items-start">
 
           {/* Left: what they are securing */}
           <div>
@@ -353,11 +326,17 @@ export default function LockIn() {
                   their way to your inbox.
                 </p>
               ) : (
-                <div
-                  className="calendly-inline-widget w-full rounded-xl overflow-hidden border border-zinc-800"
-                  data-url={calendlyUrl}
-                  style={{ minWidth: 280, height: 820 }}
-                />
+                <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
+                  <div className="px-5 py-4 border-b border-zinc-800">
+                    <p className="text-white text-[15px] font-medium">1:1 VIP Strategy Day</p>
+                    <p className="text-zinc-500 text-sm mt-0.5">Six hours, on site at your office</p>
+                  </div>
+                  <div
+                    className="calendly-inline-widget w-full"
+                    data-url={calendlyUrl}
+                    style={{ minWidth: 280, height: 660 }}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -383,16 +362,6 @@ export default function LockIn() {
                 </div>
               ) : (
                 <>
-                  <p className="text-white text-[15px] font-medium mb-3">After payment, you'll:</p>
-                  <ul className="space-y-2.5 mb-5">
-                    {AFTER_PAYMENT.map((line) => (
-                      <li key={line} className="flex gap-2.5 text-zinc-400 text-[13.5px] leading-relaxed">
-                        <Check className="text-zinc-600 shrink-0 mt-1" size={15} />
-                        <span>{line}</span>
-                      </li>
-                    ))}
-                  </ul>
-
                   <p className="text-zinc-500 text-[13px] leading-relaxed">
                     If after your application is reviewed and we do a prep call either of us
                     decide it's not the right move, you'll be fully refunded.
@@ -414,25 +383,7 @@ export default function LockIn() {
                     frame come from Stripe dashboard branding, not from here.
                   */}
                   <div className="mt-5 pt-5 border-t border-zinc-800/80">
-                    <div
-                      ref={scaleOuter}
-                      className={embedded ? 'rounded-xl overflow-hidden ring-1 ring-white/10' : ''}
-                    >
-                      <div
-                        ref={scaleInner}
-                        style={
-                          embedded
-                            ? {
-                                transform: `scale(${CHECKOUT_SCALE})`,
-                                transformOrigin: 'top left',
-                                width: `${100 / CHECKOUT_SCALE}%`,
-                              }
-                            : undefined
-                        }
-                      >
-                        <div id="stripe-checkout" className="w-full" />
-                      </div>
-                    </div>
+                    <div id="stripe-checkout" className="w-full" />
 
                     {!embedded && (
                       <div className="flex justify-center">
