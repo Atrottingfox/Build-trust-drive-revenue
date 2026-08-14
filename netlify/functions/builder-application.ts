@@ -80,6 +80,22 @@ const handler: Handler = async (event) => {
 
   try {
     const data = JSON.parse(event.body || "{}");
+
+    /*
+      This endpoint is public, so anything can POST to it. Without this guard an
+      empty or junk request writes a blank Notion row and fires a blank Slack
+      alert, and one of those eventually looks real enough to waste time on.
+      A genuine submission always has a name and an email; the form requires both.
+    */
+    if (!data.name?.trim() || !data.email?.trim()) {
+      console.warn("Rejected submission with no name or email.");
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: "Name and email are required" }),
+      };
+    }
+
     const isApply = data.source === 'apply';
     const notionDbId = isApply ? NOTION_APPLY_DB : NOTION_BUILDER_DB;
     const kitTagId = isApply ? KIT_TAG_APPLY : KIT_TAG_BUILDER;
@@ -273,21 +289,34 @@ const handler: Handler = async (event) => {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            /*
+              Plain labelled lines, one field per row. Every line that has a
+              value is shown and every line that does not is dropped, so the
+              alert is always readable at a glance without hunting.
+            */
             text: [
-              isApply ? '*NEW LEAD — Apply Now*' : '*NEW APPLICATION — Brand Builder Day*',
-              '',
-              `*${data.name || 'No name'}* . ${data.company || 'No company'}`,
-              `${data.revenueBand || 'Revenue not given'} . Operator: ${data.contentOpsPerson || 'not given'}${data.operatorName ? ` (${data.operatorName}, ${data.operatorEmail || 'no email'})` : ''}`,
-              `📱 ${data.phone || 'NO NUMBER'}   ✉️ ${data.email || 'N/A'}`,
-              data.website ? `🔗 ${data.website}` : null,
-              data.audienceSize ? `Audience: ${data.audienceSize}` : null,
-              data.canCommitDay ? `Can commit a day in 30: *${data.canCommitDay}*` : null,
-              data.howDidYouHear ? `Heard via: ${data.howDidYouHear}` : null,
-              '',
-              data.biggestProblem ? `_Broken:_ ${data.biggestProblem}` : null,
-              data.whatToFix ? `_Wants fixed:_ ${data.whatToFix}` : null,
-              '',
-              '✅ invite  ·  🚀 concierge  ·  ❌ decline',
+              isApply ? '*New Apply Now Lead*' : '*New Brand Builder Day Application*',
+              `*Name:* ${data.name || '-'}`,
+              `*Email:* ${data.email || '-'}`,
+              `*Phone:* ${data.phone || '-'}`,
+              `*Business:* ${data.company || '-'}`,
+              data.primaryOffer ? `*Type:* ${data.primaryOffer}` : null,
+              data.audienceSize ? `*Instagram:* ${data.audienceSize}` : null,
+              data.website ? `*Website:* ${data.website}` : null,
+              data.revenueBand ? `*Revenue:* ${data.revenueBand}` : null,
+              data.location ? `*Based:* ${data.location}` : null,
+              data.activeChannels?.length ? `*Channels:* ${data.activeChannels.join(', ')}` : null,
+              data.biggestProblem ? `*Whats broken:* ${data.biggestProblem}` : null,
+              data.whatToFix ? `*Wants fixed:* ${data.whatToFix}` : null,
+              data.contentOpsPerson
+                ? `*Operator:* ${data.contentOpsPerson}${
+                    data.operatorName
+                      ? ` (${data.operatorName}, ${data.operatorEmail || 'no email'})`
+                      : ''
+                  }`
+                : null,
+              data.canCommitDay ? `*Can commit a day in 30:* ${data.canCommitDay}` : null,
+              data.howDidYouHear ? `*Heard via:* ${data.howDidYouHear}` : null,
             ].filter(Boolean).join('\n'),
           }),
         });
