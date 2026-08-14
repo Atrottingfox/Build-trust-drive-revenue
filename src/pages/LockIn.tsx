@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Container } from '../components/ui/Container';
-import { Check, Lock } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
 
 /*
@@ -81,7 +81,6 @@ export default function LockIn() {
   const [booked, setBooked] = useState(false);
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
-  const calWrap = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -275,16 +274,6 @@ export default function LockIn() {
     there is no public Calendly endpoint for creating a booking, so a custom UI
     could show availability and then have no way to actually book it.
   */
-  /*
-    pointer-events alone stops a mouse but leaves the iframe reachable by
-    keyboard, so the wrapper is marked inert until payment clears. Booking
-    without paying is the one thing this page exists to prevent.
-  */
-  useEffect(() => {
-    const el = calWrap.current;
-    if (el) (el as any).inert = !paid;
-  }, [paid]);
-
   const calendlyUrl =
     `${CALENDLY_URL}?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
@@ -295,7 +284,7 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        <div className="max-w-6xl mx-auto grid gap-12 lg:gap-16 lg:grid-cols-[1.05fr_0.95fr] items-start">
+        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_330px] items-start">
 
           {/* Left: what they are securing */}
           <div>
@@ -333,30 +322,11 @@ export default function LockIn() {
                   their way to your inbox.
                 </p>
               ) : (
-                <div className="relative rounded-xl overflow-hidden border border-zinc-800">
-                  <div
-                    ref={calWrap}
-                    className={`calendly-inline-widget w-full transition-opacity duration-300 ${
-                      paid ? '' : 'opacity-40 pointer-events-none select-none'
-                    }`}
-                    data-url={calendlyUrl}
-                    style={{ minWidth: 280, height: 720 }}
-                  />
-
-                  {!paid && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 bg-base/55 backdrop-blur-[1px]">
-                      <div className="h-11 w-11 rounded-full border border-zinc-700 bg-zinc-900 flex items-center justify-center mb-4">
-                        <Lock className="text-zinc-400" size={17} />
-                      </div>
-                      <p className="text-white text-[15px] font-medium">
-                        These are the days I have open
-                      </p>
-                      <p className="text-zinc-400 text-sm mt-1.5 max-w-xs">
-                        Pick yours the moment your payment goes through
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <div
+                  className="calendly-inline-widget w-full rounded-xl overflow-hidden border border-zinc-800"
+                  data-url={calendlyUrl}
+                  style={{ minWidth: 280, height: 820 }}
+                />
               )}
             </div>
           </div>
@@ -366,7 +336,7 @@ export default function LockIn() {
             <motion.section
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`rounded-2xl border p-7 ${
+              className={`rounded-2xl border p-5 ${
                 paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
               }`}
             >
@@ -382,26 +352,26 @@ export default function LockIn() {
                 </div>
               ) : (
                 <>
-                  <p className="text-white font-medium mb-4">After payment, you'll:</p>
-                  <ul className="space-y-3 mb-7">
+                  <p className="text-white text-[15px] font-medium mb-3">After payment, you'll:</p>
+                  <ul className="space-y-2.5 mb-5">
                     {AFTER_PAYMENT.map((line) => (
-                      <li key={line} className="flex gap-3 text-zinc-300 text-[15px] leading-relaxed">
+                      <li key={line} className="flex gap-2.5 text-zinc-400 text-[13.5px] leading-relaxed">
                         <Check className="text-zinc-600 shrink-0 mt-1" size={15} />
                         <span>{line}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <p className="text-zinc-500 text-sm leading-relaxed">
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
                     If after your application is reviewed and we do a prep call either of us
                     decide it's not the right move, you'll be fully refunded.
                   </p>
 
-                  <p className="text-zinc-300 text-[15px] leading-relaxed mt-5">
+                  <p className="text-zinc-300 text-[13.5px] leading-relaxed mt-4">
                     All I ask is wholehearted implementation and advocacy.
                   </p>
 
-                  <p className="text-zinc-500 text-sm leading-relaxed mt-3">
+                  <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                     P.s. if we decide we're not a fit right now, I'll direct you to someone who
                     can help you in your current situation.
                   </p>
@@ -412,8 +382,8 @@ export default function LockIn() {
                     bare white rectangle on a dark page. The colours inside the
                     frame come from Stripe dashboard branding, not from here.
                   */}
-                  <div className="mt-7 pt-7 border-t border-zinc-800/80">
-                    <div className={embedded ? 'rounded-xl bg-white p-3 ring-1 ring-white/10' : ''}>
+                  <div className="mt-5 pt-5 border-t border-zinc-800/80">
+                    <div className={embedded ? 'rounded-xl bg-white p-2 ring-1 ring-white/10' : ''}>
                       <div id="stripe-checkout" className="w-full" />
                     </div>
 
