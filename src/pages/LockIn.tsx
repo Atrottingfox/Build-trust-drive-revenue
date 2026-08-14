@@ -325,7 +325,7 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-14">
-        <div className="max-w-2xl mx-auto text-center">
+        <div className="max-w-xl mx-auto text-center">
           <div className="accent-line mx-auto mb-6" />
           <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
             Secure your date
@@ -347,7 +347,7 @@ export default function LockIn() {
       </Container>
 
       <Container className="pb-32">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-xl mx-auto">
           {/* Step 1 - pay */}
           <motion.section
             initial={{ opacity: 0, y: 14 }}
@@ -383,10 +383,21 @@ export default function LockIn() {
                   ))}
                 </ul>
 
-                {/* Embedded checkout mounts here. Empty until Stripe is
-                    configured server side, in which case the buy button below
-                    renders instead. Centred either way. */}
-                <div id="stripe-checkout" className="w-full" />
+                {/*
+                  Stripe renders its own markup here and it comes out light, so
+                  it gets a deliberate panel to sit in rather than landing as a
+                  bare white rectangle on a dark page. The colours inside the
+                  frame come from Stripe dashboard branding, not from here.
+                */}
+                <div
+                  className={
+                    embedded
+                      ? 'rounded-xl bg-white p-4 sm:p-5 shadow-[0_1px_0_rgba(255,255,255,0.06)] ring-1 ring-white/10'
+                      : ''
+                  }
+                >
+                  <div id="stripe-checkout" className="w-full" />
+                </div>
 
                 {!embedded && (
                   <div className="flex justify-center">
