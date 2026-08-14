@@ -1,6 +1,6 @@
 # Brand Builder Day emails
 
-Two emails. That is the whole follow up. There is no nurture sequence.
+Three emails. That is the whole follow up. There is no nurture sequence.
 
 Both are sent from GoHighLevel. The site cannot send them: the Private
 Integration Token is not authorised for the conversations scope, so the Netlify
@@ -54,7 +54,40 @@ the secure page, so this email exists for the person who closed the tab.
 
 ---
 
-## Email 2. The one reminder
+## Email 2. Abandoned cart, 20 minutes
+
+**Trigger:** tag `applied`
+**Timing:** wait 20 minutes
+**Exit on:** tag `brand-day-paid`
+
+They applied, landed on the secure page, and did not pay. Twenty minutes is
+long enough that they have stopped, and short enough that the decision is still
+warm.
+
+No number of Days left in this one. It sends over weeks and a hardcoded count
+goes stale.
+
+**Subject:** You stopped at the last step
+
+```
+Hey {{contact.first_name}},
+
+You applied for a Brand Builder Day, then stopped before securing it.
+
+If something got in the way, reply and tell me what it was. If it was just life
+getting loud, here's where you left off:
+
+[Secure link]
+
+Worth saying plainly: there are a limited number of Days at 5,000 before the
+price goes to 10,000. When they're gone, they're gone.
+
+Sean
+```
+
+---
+
+## Email 3. The one reminder
 
 **Trigger:** tag `applied`
 **Timing:** wait 48 hours
@@ -81,7 +114,7 @@ reply and let me know so I can free up the slot for someone else.
 Sean
 ```
 
-One reminder. Nothing after this. Silence is a no.
+Last one. Nothing after this. Silence is a no.
 
 ---
 

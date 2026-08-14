@@ -5,7 +5,7 @@ where Sean reviewed each application and sent an invitation by hand. That model
 is gone. The site now redirects straight from the application to payment, which
 deletes most of the old spec.
 
-Four workflows. Build them in this order. Leave every one in **Draft**;
+Five workflows. Build them in this order. Leave every one in **Draft**;
 publishing is Sean's.
 
 ---
@@ -17,7 +17,7 @@ it.
 
 | Event | The site does this itself |
 |---|---|
-| Application submitted | Creates the GHL contact, writes all 19 fields, tags `applied`, redirects to `/lock-in?c=<contactId>` |
+| Application submitted | Creates the GHL contact, writes all 17 fields, tags `applied`, redirects to `/lock-in?c=<contactId>` |
 | Stripe payment succeeds | Tags `brand-day-paid` and `paid-no-date` |
 | Date chosen in Calendly | Tags `brand-day-booked`, writes `Brand day date`, removes `paid-no-date` |
 
@@ -43,9 +43,29 @@ Sends Email 1 from `brand-day-emails.md`.
 The application already redirects them to the secure page, so this is purely for
 the person who closed the tab. It is the cheapest insurance in the funnel.
 
+**Worth considering before building this:** it fires the instant they apply,
+while they are still looking at the payment page. Someone who pays three minutes
+later still receives an email telling them to go and pay. WF2 does the same job
+twenty minutes later and only reaches people who actually stopped. Building WF2
+and skipping this one is the cleaner funnel, and one less email in the first
+hour.
+
 ---
 
-## WF2. The one reminder
+## WF2. Abandoned cart, 20 minutes
+
+**Trigger:** tag `applied`
+**Wait:** 20 minutes
+**Exit on:** tag `brand-day-paid`
+
+Sends the abandoned cart email from `brand-day-emails.md`.
+
+They saw the price and stopped. Twenty minutes is long enough to know they are
+not mid checkout, short enough that the decision has not gone cold.
+
+---
+
+## WF3. The one reminder
 
 **Trigger:** tag `applied`
 **Wait:** 48 hours
@@ -60,7 +80,7 @@ people who have already paid.
 
 ---
 
-## WF3. Paid, no date
+## WF4. Paid, no date
 
 **Trigger:** tag `paid-no-date`
 **Wait:** 1 hour
@@ -91,13 +111,13 @@ internally. At that point it is a phone call, not an email.
 
 ---
 
-## WF4. Booked, here is what happens next
+## WF5. Booked, here is what happens next
 
 **Trigger:** tag `brand-day-booked`
 **Wait:** none
 **Exit on:** none
 
-The confirmation. WF1 and WF2 both promise this, so it has to exist before either
+The confirmation. WF1 and WF3 both promise this, so it has to exist before either
 of them goes out.
 
 Sends:
