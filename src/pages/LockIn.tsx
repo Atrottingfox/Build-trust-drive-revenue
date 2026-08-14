@@ -49,6 +49,13 @@ const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
 
 /* 20 Days at this price, total. Sean updates DAYS_DONE as they are delivered. */
+/* Sean's own words, lifted from the VIP Day description in his Calendly. */
+const LEAVE_WITH = [
+  'More clarity',
+  'More efficiency',
+  'A roadmap that unlocks your next move',
+];
+
 const DAYS_TOTAL = 20;
 const DAYS_DONE = 2;
 const DAYS_LEFT = DAYS_TOTAL - DAYS_DONE;
@@ -288,65 +295,116 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        <div className="max-w-7xl mx-auto grid gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_420px] items-start">
-
-          {/* Left: what they are securing */}
-          <div>
-            <div className="accent-line mb-6" />
-            <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
-              Secure your date
-            </h1>
-            <p className="text-zinc-300 text-lg leading-relaxed">
-              To reserve one of our limited strategy days per month, secure your payment.
+        <div className="max-w-5xl mx-auto text-center mb-16">
+          <div className="accent-line mx-auto mb-6" />
+          <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
+            Secure your date
+          </h1>
+          <p className="text-zinc-300 text-lg leading-relaxed max-w-xl mx-auto">
+            To reserve one of our limited strategy days per month, secure your payment.
+          </p>
+          <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
+            <p className="text-white text-[15px]">
+              <span className="font-display text-2xl align-middle mr-1.5">{DAYS_LEFT}</span>
+              of {DAYS_TOTAL} Days left at 5,000 AUD
             </p>
+            <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
+          </div>
+        </div>
 
-            <div className="mt-7 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
-              <p className="text-white text-[15px]">
-                <span className="font-display text-2xl align-middle mr-1.5">{DAYS_LEFT}</span>
-                of {DAYS_TOTAL} Days left at 5,000 AUD
-              </p>
-              <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
-            </div>
+        <div className="max-w-6xl mx-auto grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_420px] items-start">
 
-            <div className="mt-11">
-              <div className="flex items-center gap-3 mb-5">
-                {booked && (
-                  <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                    <Check size={15} />
+          {/* Left: the Day itself. Once paid, the calendar takes the top of this
+              column and the walkthrough stays below it, still worth reading. */}
+          <div>
+            {paid && (
+              <div className="mb-14">
+                <div className="flex items-center gap-3 mb-5">
+                  {booked && (
+                    <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                      <Check size={15} />
+                    </div>
+                  )}
+                  <h2 className="font-display text-xl text-white">
+                    {booked ? 'Your date is locked in' : 'Choose your Brand Builder Day'}
+                  </h2>
+                </div>
+
+                {booked ? (
+                  <p className="text-zinc-400 leading-relaxed">
+                    It's in both our calendars. Prep instructions and the prep call invite are on
+                    their way to your inbox.
+                  </p>
+                ) : (
+                  <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
+                    <div
+                      className="calendly-inline-widget w-full"
+                      data-url={calendlyUrl}
+                      style={{ minWidth: 280, height: 660 }}
+                    />
                   </div>
                 )}
-                <h2 className={`font-display text-lg ${paid ? 'text-white' : 'text-zinc-500'}`}>
-                  {booked ? 'Your date is locked in' : 'Choose your Brand Builder Day'}
-                </h2>
               </div>
+            )}
 
-              {booked ? (
-                <p className="text-zinc-400 leading-relaxed">
-                  It's in both our calendars. Prep instructions and the prep call invite are on
-                  their way to your inbox.
-                </p>
-              ) : (
-                <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
-                  <div className="px-5 py-4 border-b border-zinc-800">
-                    <p className="text-white text-[15px] font-medium">1:1 VIP Strategy Day</p>
-                    <p className="text-zinc-500 text-sm mt-0.5">Six hours, on site at your office</p>
-                  </div>
-                  <div
-                    className="calendly-inline-widget w-full"
-                    data-url={calendlyUrl}
-                    style={{ minWidth: 280, height: 660 }}
-                  />
+            <div className="space-y-12">
+              <section>
+                <h2 className="font-display text-xl text-white mb-4">The Day</h2>
+                <div className="space-y-4 text-zinc-400 leading-relaxed">
+                  <p>Think of this session like a marketing pit stop.</p>
+                  <p>
+                    You come in with your current content engine. We lift the hood, diagnose
+                    performance issues, and help you upgrade the hidden bottlenecks slowing you
+                    down.
+                  </p>
+                  <p>
+                    We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
+                    tune your strategy so your core acquisition engine runs smoother, faster, and
+                    more profitably.
+                  </p>
                 </div>
-              )}
+              </section>
+
+              <section>
+                <h2 className="font-display text-xl text-white mb-4">Before we meet</h2>
+                <div className="space-y-4 text-zinc-400 leading-relaxed">
+                  <p>
+                    Together we go through your prep doc so I turn up already knowing exactly what
+                    we need to attack, and what problems to solve.
+                  </p>
+                  <p>Bring your operator if you have one.</p>
+                </div>
+              </section>
+
+              <section>
+                <h2 className="font-display text-xl text-white mb-5">You leave with</h2>
+                <ul className="space-y-3.5">
+                  {LEAVE_WITH.map((line) => (
+                    <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+                      <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="border-l-2 border-zinc-700 pl-6">
+                <p className="text-zinc-200 text-lg leading-relaxed">
+                  If there's just one thing you'll get from this, it's leverage.
+                </p>
+                <p className="text-zinc-400 leading-relaxed mt-2">
+                  So you get more output from every action you take.
+                </p>
+              </section>
             </div>
           </div>
 
-          {/* Right: payment. Sticky so it stays put while the calendar scrolls. */}
+          {/* Right: payment, sticky */}
           <div className="lg:sticky lg:top-28">
             <motion.section
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`rounded-2xl border p-5 ${
+              className={`rounded-2xl border p-6 ${
                 paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
               }`}
             >
@@ -362,38 +420,30 @@ export default function LockIn() {
                 </div>
               ) : (
                 <>
-                  <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    If after your application is reviewed and we do a prep call either of us
-                    decide it's not the right move, you'll be fully refunded.
-                  </p>
+                  <div id="stripe-checkout" className="w-full" />
 
-                  <p className="text-zinc-300 text-[13.5px] leading-relaxed mt-4">
-                    All I ask is wholehearted implementation and advocacy.
-                  </p>
+                  {!embedded && (
+                    <div className="flex justify-center">
+                      <stripe-buy-button
+                        buy-button-id={STRIPE_BUY_BUTTON_ID}
+                        publishable-key={STRIPE_PUBLISHABLE_KEY}
+                        {...(contactId ? { 'client-reference-id': contactId } : {})}
+                      />
+                    </div>
+                  )}
 
-                  <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
-                    P.s. if we decide we're not a fit right now, I'll direct you to someone who
-                    can help you in your current situation.
-                  </p>
-
-                  {/*
-                    Stripe renders its own markup here and it comes out light, so
-                    it gets a deliberate panel to sit in rather than landing as a
-                    bare white rectangle on a dark page. The colours inside the
-                    frame come from Stripe dashboard branding, not from here.
-                  */}
-                  <div className="mt-5 pt-5 border-t border-zinc-800/80">
-                    <div id="stripe-checkout" className="w-full" />
-
-                    {!embedded && (
-                      <div className="flex justify-center">
-                        <stripe-buy-button
-                          buy-button-id={STRIPE_BUY_BUTTON_ID}
-                          publishable-key={STRIPE_PUBLISHABLE_KEY}
-                          {...(contactId ? { 'client-reference-id': contactId } : {})}
-                        />
-                      </div>
-                    )}
+                  <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-4">
+                    <p className="text-zinc-500 text-[13px] leading-relaxed">
+                      If after your application is reviewed and we do a prep call either of us
+                      decide it's not the right move, you'll be fully refunded.
+                    </p>
+                    <p className="text-zinc-300 text-[13.5px] leading-relaxed">
+                      All I ask is wholehearted implementation and advocacy.
+                    </p>
+                    <p className="text-zinc-500 text-[13px] leading-relaxed">
+                      P.s. if we decide we're not a fit right now, I'll direct you to someone who
+                      can help you in your current situation.
+                    </p>
                   </div>
                 </>
               )}
