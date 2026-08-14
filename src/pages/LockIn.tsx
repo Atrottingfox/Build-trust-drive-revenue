@@ -86,6 +86,7 @@ export default function LockIn() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [paid, setPaid] = useState(false);
   const [booked, setBooked] = useState(false);
+  const [bookedAt, setBookedAt] = useState<string | null>(null);
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
 
@@ -95,6 +96,13 @@ export default function LockIn() {
     if (id) {
       setContactId(id);
       store.set('ae_contact_id', id);
+    }
+
+    // A booking survives a refresh, so the payment step does not vanish.
+    const seenBooking = store.get('ae_booked') === '1';
+    if (seenBooking) {
+      setBooked(true);
+      setBookedAt(store.get('ae_booked_at'));
     }
 
     const justPaid = params.get('paid') === '1';
@@ -168,6 +176,13 @@ export default function LockIn() {
       if (e.data?.event !== 'calendly.event_scheduled') return;
 
       setBooked(true);
+      store.set('ae_booked', '1');
+
+      const startsAt = e.data?.payload?.event?.start_time || '';
+      if (startsAt) {
+        setBookedAt(startsAt);
+        store.set('ae_booked_at', startsAt);
+      }
 
       const id = contactId || store.get('ae_contact_id');
       if (!id) return;
@@ -198,7 +213,7 @@ export default function LockIn() {
     wrong, fall through to the buy button. Someone must always be able to pay.
   */
   useEffect(() => {
-    if (paid) return;
+    if (paid || !booked) return;
     let checkout: any = null;
     let cancelled = false;
 
@@ -228,7 +243,10 @@ export default function LockIn() {
         const res = await fetch('/.netlify/functions/create-checkout-session', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contactId: contactId || store.get('ae_contact_id') }),
+          body: JSON.stringify({
+            contactId: contactId || store.get('ae_contact_id'),
+            brandDayDate: bookedAt || store.get('ae_booked_at') || '',
+          }),
         });
         const data = await res.json();
         if (!data?.configured || !data.clientSecret) throw new Error('not configured');
@@ -258,7 +276,7 @@ export default function LockIn() {
         // Already gone.
       }
     };
-  }, [paid, contactId]);
+  }, [paid, booked, contactId, bookedAt]);
 
   /*
     Calendly loads straight away so the real availability is on the page from
@@ -317,35 +335,34 @@ export default function LockIn() {
           {/* Left: the Day itself. Once paid, the calendar takes the top of this
               column and the walkthrough stays below it, still worth reading. */}
           <div>
-            {paid && (
-              <div className="mb-14">
-                <div className="flex items-center gap-3 mb-5">
-                  {booked && (
-                    <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                      <Check size={15} />
-                    </div>
-                  )}
-                  <h2 className="font-display text-xl text-white">
-                    {booked ? 'Your date is locked in' : 'Choose your Brand Builder Day'}
-                  </h2>
-                </div>
-
-                {booked ? (
-                  <p className="text-zinc-400 leading-relaxed">
-                    It's in both our calendars. Prep instructions and the prep call invite are on
-                    their way to your inbox.
-                  </p>
-                ) : (
-                  <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
-                    <div
-                      className="calendly-inline-widget w-full"
-                      data-url={calendlyUrl}
-                      style={{ minWidth: 280, height: 660 }}
-                    />
+            <div className="mb-14">
+              <div className="flex items-center gap-3 mb-5">
+                {booked && (
+                  <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                    <Check size={15} />
                   </div>
                 )}
+                <h2 className="font-display text-xl text-white">
+                  {booked ? 'Your date is held' : 'Choose your Brand Builder Day'}
+                </h2>
               </div>
-            )}
+
+              {booked ? (
+                <p className="text-zinc-400 leading-relaxed">
+                  {paid
+                    ? "It's locked in. Prep instructions and the prep call invite are on their way to your inbox."
+                    : 'Held for now. Complete your payment to confirm it.'}
+                </p>
+              ) : (
+                <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
+                  <div
+                    className="calendly-inline-widget w-full"
+                    data-url={calendlyUrl}
+                    style={{ minWidth: 280, height: 660 }}
+                  />
+                </div>
+              )}
+            </div>
 
             <div className="space-y-12">
               <section>
@@ -418,8 +435,22 @@ export default function LockIn() {
                     <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
                   </div>
                 </div>
+              ) : !booked ? (
+                <div className="text-center py-4">
+                  <p className="text-zinc-400 text-[15px] leading-relaxed">
+                    Pick your day first.
+                  </p>
+                  <p className="text-zinc-600 text-sm leading-relaxed mt-2">
+                    Payment opens as soon as you have one.
+                  </p>
+                </div>
               ) : (
                 <>
+                  <p className="text-white font-medium mb-1">Confirm your day</p>
+                  <p className="text-zinc-500 text-sm mb-6">
+                    5,000 AUD. Your date is held until this clears.
+                  </p>
+
                   <div id="stripe-checkout" className="w-full" />
 
                   {!embedded && (

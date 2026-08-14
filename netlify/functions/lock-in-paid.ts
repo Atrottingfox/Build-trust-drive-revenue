@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { reconcile } from "./_ghl";
 
 /*
   Tags the GHL contact `brand-day-paid` after Stripe succeeds.
@@ -9,14 +10,10 @@ import type { Handler } from "@netlify/functions";
   already hold. No payload mapping, no guessing at field paths, no matching on
   email address.
 
-  It also tags `paid-no-date`, and calendly-booked.ts removes that tag the moment
-  a date is chosen. Between those two calls, `paid-no-date` means exactly what it
-  says: this person has paid $5,000 and has no Brand Day.
-
-  That gap is real. Payment now comes before the calendar, so someone can close
-  the tab on the success redirect and end up paid with nothing booked. The tag
-  makes that visible as a filter in GHL instead of silent, and gives the chase
-  workflow something to trigger on.
+  The date is chosen before payment, so `paid-no-date` is no longer applied here.
+  The gap that matters now runs the other way: booked without paying. That shows
+  up as `brand-day-booked` with no `brand-day-paid`, which is a filter in GHL and
+  the trigger for the chase workflow.
 */
 
 const headers = {
@@ -59,13 +56,15 @@ const handler: Handler = async (event) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({ tags: ["brand-day-paid", "paid-no-date"] }),
+      body: JSON.stringify({ tags: ["brand-day-paid"] }),
     });
 
     if (!res.ok) {
       console.error("GHL tag failed:", res.status, await res.text(), "contact:", contactId);
       return { statusCode: 200, headers, body: JSON.stringify({ ok: true, degraded: true }) };
     }
+
+    await reconcile(token, contactId);
 
     return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
   } catch (err) {

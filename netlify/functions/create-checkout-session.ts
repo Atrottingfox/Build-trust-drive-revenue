@@ -43,6 +43,66 @@ const headers = {
 const PRICE_AUD_CENTS = 500000;
 const PRODUCT_NAME = "VIP In person Strategy Day";
 
+const GHL_API = "https://services.leadconnectorhq.com";
+const GHL_VERSION = "2021-07-28";
+
+/*
+  brand.contentengine.live creates the client workspace from Stripe's
+  `checkout.session.completed` event, and reads these four keys off the session
+  metadata. Its prep workbook then lives at
+  https://brand.contentengine.live/workbooks/prep?client=<slug>
+
+  brand_day_date comes from the booking. The calendar comes first now, so the
+  date is already known by the time this session is created.
+*/
+function slugify(name: string): string {
+  return (name || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40);
+}
+
+/*
+  Looks up the contact so the client workspace is named after the person rather
+  than an id. Kept on a short leash: this sits in the payment path, and a slow
+  GHL must never hold up someone's checkout. A failure here costs the automatic
+  workspace, not the sale.
+*/
+async function clientMetadata(contactId: string): Promise<Record<string, string>> {
+  const token = process.env.GHL_TOKEN;
+  if (!token || !contactId) return {};
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 2500);
+  try {
+    const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+      headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, Accept: "application/json" },
+      signal: ctrl.signal,
+    });
+    if (!res.ok) return {};
+
+    const contact = (await res.json())?.contact || {};
+    const name = [contact.firstName, contact.lastName].filter(Boolean).join(" ").trim();
+    const slug = slugify(name);
+    if (!slug) return {};
+
+    const locationFieldId = process.env.GHL_FIELD_LOCATION_CITY;
+    const location = locationFieldId
+      ? (contact.customFields || []).find((f: any) => f.id === locationFieldId)?.value || ""
+      : "";
+
+    return { client_slug: slug, client_name: name, brand_day_date: "", location };
+  } catch {
+    // Aborted or unreachable. Take the payment anyway.
+    return {};
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 const RETURN_URL =
   "https://authorityengine.com.au/lock-in?paid=1&session_id={CHECKOUT_SESSION_ID}";
 
@@ -65,16 +125,21 @@ const handler: Handler = async (event) => {
   }
 
   try {
-    const { contactId } = JSON.parse(event.body || "{}");
+    const { contactId, brandDayDate } = JSON.parse(event.body || "{}");
 
     const form = new URLSearchParams({
       "ui_mode": "embedded",
       "mode": "payment",
       "line_items[0][quantity]": "1",
       "return_url": RETURN_URL,
-      // Keeps the card on file so the 90 Day Install can be charged later
-      // without asking for it again.
+      /*
+        The two lines that make the 90 Day Install chargeable later without
+        asking for the card again. off_session saves the payment method for
+        merchant initiated charges, and that needs a Customer to attach to, so
+        one is always created rather than only when Stripe decides it is needed.
+      */
       "payment_intent_data[setup_future_usage]": "off_session",
+      "customer_creation": "always",
     });
 
     /*
@@ -97,6 +162,16 @@ const handler: Handler = async (event) => {
       hand.
     */
     if (contactId) form.set("client_reference_id", String(contactId));
+
+    /*
+      Metadata for brand.contentengine.live. Its stripe-webhook function reads
+      these to create the client workspace and, with it, their prep doc.
+    */
+    const meta = await clientMetadata(String(contactId || ""));
+    // The date is known by now: they pick it before they pay.
+    if (brandDayDate) meta.brand_day_date = String(brandDayDate);
+    for (const [k, v] of Object.entries(meta)) form.set(`metadata[${k}]`, v);
+    if (contactId) form.set("metadata[ghl_contact_id]", String(contactId));
 
     const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",

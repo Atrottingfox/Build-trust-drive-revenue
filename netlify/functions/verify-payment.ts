@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { reconcile } from "./_ghl";
 
 /*
   Asks Stripe whether a checkout session was actually paid, then tags GHL.
@@ -76,10 +77,45 @@ const handler: Handler = async (event) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ tags: ["brand-day-paid", "paid-no-date"] }),
+        body: JSON.stringify({ tags: ["brand-day-paid"] }),
       });
       if (!tagRes.ok) {
         console.error("GHL tag failed after verified payment:", tagRes.status, await tagRes.text(), contactId);
+      }
+
+      /*
+        Write the Stripe customer onto the contact. This is what makes the
+        90 Day Install a decision rather than a transaction: the card is already
+        saved off session, and this is the thread from the person in GHL to the
+        customer in Stripe who holds it. Without it, matching them up later
+        means searching Stripe by email and hoping.
+      */
+      const customerField = process.env.GHL_FIELD_STRIPE_CUSTOMER;
+      const intentField = process.env.GHL_FIELD_STRIPE_PAYMENT_INTENT;
+      const customFields: Array<{ id: string; value: string }> = [];
+      if (customerField && session.customer) {
+        customFields.push({ id: customerField, value: String(session.customer) });
+      }
+      if (intentField && session.payment_intent) {
+        customFields.push({ id: intentField, value: String(session.payment_intent) });
+      }
+
+      await reconcile(token, contactId);
+
+      if (customFields.length) {
+        const fieldRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Version: GHL_VERSION,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ customFields }),
+        });
+        if (!fieldRes.ok) {
+          console.error("Failed to record Stripe customer on contact:", fieldRes.status, await fieldRes.text(), contactId);
+        }
       }
     } else if (!contactId) {
       console.error("Verified payment with no client_reference_id. Reconcile by hand:", sessionId);

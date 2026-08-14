@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { reconcile } from "./_ghl";
 
 /*
   Receives Calendly's `invitee.created` webhook and pushes the booking into GHL.
@@ -111,27 +112,12 @@ const handler: Handler = async (event) => {
     }
 
     /*
-      Picking a date closes the paid-no-date gap, so clear the tag. lock-in-paid
-      applies it at payment and this is the only thing that removes it, which
-      means anyone still carrying it has paid and has no Brand Day.
-
-      Brand Day only. A prep call booking says nothing about whether the Day
-      itself is in the calendar.
+      A date is now held. Whether that means confirmed or merely held depends on
+      whether the money has landed, which reconcile works out by reading the
+      contact back. Brand Day only: a prep call booking says nothing about the
+      Day itself.
     */
-    if (isBrandDay) {
-      const clearRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
-        method: "DELETE",
-        headers: ghlHeaders,
-        body: JSON.stringify({ tags: ["paid-no-date"] }),
-      });
-      if (!clearRes.ok) {
-        // Not fatal, but it leaves them looking unbooked when they are not.
-        console.error(
-          "Failed to clear paid-no-date:", clearRes.status, await clearRes.text(),
-          "contact:", contactId
-        );
-      }
-    }
+    if (isBrandDay) await reconcile(token, contactId);
 
     // Write the date so the D-7 and D-1 emails have something to count back
     // from. Brand Day only: a prep call booking must never overwrite it.
