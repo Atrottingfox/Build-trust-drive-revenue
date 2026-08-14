@@ -45,20 +45,63 @@ export default function LockIn() {
   const [contactId, setContactId] = useState<string | null>(null);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setContactId(params.get('c'));
+    const id = new URLSearchParams(window.location.search).get('c');
+    setContactId(id);
+    // Stripe's overlay sends them to the success page and the query string is
+    // lost on the way, so keep the id where /booked can pick it up again.
+    if (id) {
+      try {
+        localStorage.setItem('ae_contact_id', id);
+      } catch {
+        // Private browsing. client-reference-id on the payment still records it.
+      }
+    }
   }, []);
 
-  // Calendly's inline embed talks to the parent page through postMessage.
-  // `calendly.event_scheduled` fires the moment a booking is confirmed.
+  /*
+    Calendly's inline embed talks to the parent page through postMessage, and
+    `calendly.event_scheduled` fires the moment a booking is confirmed.
+
+    We tag GHL straight from here rather than waiting on a Calendly webhook.
+    Webhooks are not available on every Calendly plan, and this needs no API
+    token, no plan upgrade and no configuration. It is what actually links the
+    booking to the person in GHL.
+  */
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
       if (typeof e.origin === 'string' && !e.origin.includes('calendly.com')) return;
-      if (e.data?.event === 'calendly.event_scheduled') setBooked(true);
+      if (e.data?.event !== 'calendly.event_scheduled') return;
+
+      setBooked(true);
+
+      const id = contactId || (() => {
+        try {
+          return localStorage.getItem('ae_contact_id');
+        } catch {
+          return null;
+        }
+      })();
+
+      if (!id) return;
+      fetch('/.netlify/functions/calendly-booked', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'invitee.created',
+          fromPage: true,
+          payload: {
+            tracking: { utm_content: id },
+            scheduled_event: { name: 'VIP Day' },
+          },
+        }),
+      }).catch(() => {
+        // Never block them on this. They have a booking either way, and the
+        // function logs failures so it can be reconciled by hand.
+      });
     };
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, []);
+  }, [contactId]);
 
   useEffect(() => {
     if (document.querySelector('script[data-calendly]')) return;

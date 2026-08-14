@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container } from '../components/ui/Container';
 import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
@@ -30,6 +31,30 @@ const NEXT = [
 ];
 
 export default function Booked() {
+  /*
+    Stripe sends them here after the buy button overlay completes, and the
+    query string does not survive the trip. The contact id was stashed in
+    localStorage on /lock-in, so read it back and tag `brand-day-paid` in GHL.
+    That is what links the payment to the person without a Stripe webhook.
+  */
+  useEffect(() => {
+    let id: string | null = null;
+    try {
+      id = localStorage.getItem('ae_contact_id');
+    } catch {
+      id = null;
+    }
+    if (!id) return;
+
+    fetch('/.netlify/functions/lock-in-paid', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contactId: id }),
+    }).catch(() => {
+      // They have paid. Nothing here may interrupt the confirmation.
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-base flex flex-col">
       <div className="gradient-border-top" />
