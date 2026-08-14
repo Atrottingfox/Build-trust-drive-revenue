@@ -256,6 +256,29 @@ export default function Builder() {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
+  /*
+    The multiple choice questions render as buttons, not radio inputs, so the
+    browser's own validation cannot see them. Submitting with one unanswered
+    used to fail silently: no message, no highlight, nothing to act on. This
+    names what is missing so the form can say so.
+  */
+  const missing: string[] = [
+    !form.name.trim() && 'Full name',
+    !form.email.trim() && 'Email',
+    !form.phone.trim() && 'Mobile',
+    !form.company.trim() && 'Company',
+    !form.revenueBand && 'Current annual revenue',
+    !form.primaryOffer.trim() && 'Primary offer and price point',
+    !form.biggestProblem && 'What feels most broken right now',
+    !form.whatToFix.trim() && 'The #1 thing you want to fix',
+    !form.contentOpsPerson && 'Someone to own content ops',
+    form.contentOpsPerson &&
+      form.contentOpsPerson !== 'No' &&
+      !form.operatorName.trim() &&
+      "That person's name",
+    !form.canCommitDay && 'Can you commit one full day',
+  ].filter(Boolean) as string[];
+
   const isValid =
     form.name.trim() &&
     form.email.trim() &&
@@ -273,7 +296,22 @@ export default function Builder() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isValid || submitting) return;
+    if (submitting) return;
+
+    if (!isValid) {
+      setError(
+        missing.length === 1
+          ? `One question left: ${missing[0]}.`
+          : `Still to answer: ${missing.join(', ')}.`
+      );
+      // The browser cannot focus a button group, so take them to it.
+      requestAnimationFrame(() => {
+        document
+          .querySelector('[data-form-error]')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      return;
+    }
 
     setSubmitting(true);
     setError('');
@@ -536,15 +574,20 @@ export default function Builder() {
               {/* Submit */}
               <div className="mt-12 pb-4">
                 {error && (
-                  <p className="text-red-400 text-sm mb-4">{error}</p>
+                  <p data-form-error className="text-red-400 text-sm mb-4">{error}</p>
                 )}
+                {/*
+                  Deliberately clickable while incomplete. Disabling it meant a
+                  click did nothing and said nothing, leaving no way to find the
+                  one unanswered question. Now it answers that question.
+                */}
                 <button
                   type="submit"
-                  disabled={!isValid || submitting}
+                  disabled={submitting}
                   className={`w-full sm:w-auto px-8 py-4 rounded-full text-sm font-semibold transition-all flex items-center justify-center gap-2 btn-shine ${
-                    isValid && !submitting
-                      ? 'bg-white text-black hover:bg-zinc-200'
-                      : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                    submitting
+                      ? 'bg-zinc-800 text-zinc-500'
+                      : 'bg-white text-black hover:bg-zinc-200'
                   }`}
                 >
                   {submitting ? (
