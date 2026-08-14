@@ -15,9 +15,13 @@ import type { Handler } from "@netlify/functions";
   Stripe's REST API is called directly rather than via the SDK. It is one form
   encoded POST and it keeps a dependency out of the bundle.
 
-  Needs one env var:
+  Needs one env var, either name:
 
-    STRIPE_SECRET_KEY   sk_live_... or a restricted key with Checkout Sessions write
+    STRIPE_SECRET_KEY   sk_live_..., or
+    STRIPE_API_KEY      rk_live_... restricted key with Checkout Sessions write
+
+  A restricted key is the better choice. It needs write on Checkout Sessions and
+  read on Checkout Sessions for verify-payment to confirm a payment afterwards.
 
   STRIPE_PRICE_ID is optional. Set it to bill against the existing product in
   the Stripe catalogue, which keeps reporting tidy. Left unset, the session is
@@ -48,7 +52,7 @@ const handler: Handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  const secret = process.env.STRIPE_SECRET_KEY;
+  const secret = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
   const priceId = process.env.STRIPE_PRICE_ID;
 
   if (!secret) {
@@ -56,7 +60,7 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ configured: false, missing: ["STRIPE_SECRET_KEY"] }),
+      body: JSON.stringify({ configured: false, missing: ["STRIPE_SECRET_KEY or STRIPE_API_KEY"] }),
     };
   }
 

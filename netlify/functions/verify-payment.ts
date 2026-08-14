@@ -34,7 +34,7 @@ const handler: Handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
-  const secret = process.env.STRIPE_SECRET_KEY;
+  const secret = process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
 
   try {
     const { sessionId } = JSON.parse(event.body || "{}");
