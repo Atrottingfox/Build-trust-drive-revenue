@@ -34,13 +34,20 @@ const NEXT = [
 
 export default function Booked() {
   /*
-    Anyone landing here has paid and booked, because the only way to reach the
-    calendar is through payment on /lock-in. The contact id was stashed in
-    localStorage there, so read it back and tag both in GHL.
+    This page re-sends the tags as a safety net, but it must only claim what it
+    can actually prove.
 
-    Both tags are re-sent deliberately. GHL tags are idempotent, so a duplicate
-    costs nothing, and it means a Calendly redirect firing before the page can
-    tag the booking never loses it.
+    Payment is safe to assert: there is no route here that does not go through
+    Stripe. Booking is not. If the Stripe buy button's success URL still points
+    at /booked, someone lands here the instant they pay, before they have seen a
+    calendar. Tagging `brand-day-booked` there would be a lie, and worse, it
+    would clear `paid-no-date` and hide the one failure that tag exists to catch:
+    paid $5,000, no Day in the diary.
+
+    So booking is only tagged on evidence. Calendly appends its own invitee
+    params to a redirect, and Stripe does not, which makes them the tell. No
+    Calendly params means this was Stripe or a direct visit, and the booking tag
+    stays off.
   */
   useEffect(() => {
     let id: string | null = null;
@@ -57,18 +64,26 @@ export default function Booked() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       }).catch(() => {
-        // They have paid and booked. Nothing here may interrupt the confirmation.
+        // They have paid. Nothing here may interrupt the confirmation.
       });
 
     post('lock-in-paid', { contactId: id });
-    post('calendly-booked', {
-      event: 'invitee.created',
-      fromPage: true,
-      payload: {
-        tracking: { utm_content: id },
-        scheduled_event: { name: 'VIP Day' },
-      },
-    });
+
+    const params = new URLSearchParams(window.location.search);
+    const startTime = params.get('event_start_time');
+    const cameFromCalendly =
+      Boolean(startTime) || params.has('invitee_uuid') || params.has('event_type_name');
+
+    if (cameFromCalendly) {
+      post('calendly-booked', {
+        event: 'invitee.created',
+        fromPage: true,
+        payload: {
+          tracking: { utm_content: id },
+          scheduled_event: { name: 'VIP Day', ...(startTime ? { start_time: startTime } : {}) },
+        },
+      });
+    }
   }, []);
 
   return (

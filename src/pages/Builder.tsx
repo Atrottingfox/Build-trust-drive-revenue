@@ -416,9 +416,6 @@ export default function Builder() {
                     />
                   </div>
                 </div>
-                <p className="text-zinc-600 text-xs">
-                  Mobile so I can reach you if something breaks in the booking.
-                </p>
               </div>
 
               {/* 2. Business Snapshot */}
