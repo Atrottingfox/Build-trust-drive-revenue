@@ -94,8 +94,8 @@ const Bullets = ({ items, tone = 'zinc' }: { items: string[]; tone?: 'zinc' | 'b
 /* ---------------------------------------------------------------- */
 
 const seen = [
-  'What a real operator looks like.',
-  'How the right media lead compounds a business',
+  'What a legit operator looks like',
+  'How the right media compounds a business',
   'How the wrong hire burns time, money, and trust',
 ];
 
@@ -279,9 +279,9 @@ const isNot = [
 ];
 
 const investmentIncludes = [
-  'Brand Builder Day',
-  'Operator Blueprint + Hiring Sprint',
-  '90 Day Authority Engine Install',
+  { name: 'Brand Builder Day', amount: '5,000 AUD', founding: true },
+  { name: '90 Day Authority Engine Install', amount: '15,000 AUD', founding: true },
+  { name: 'Operator Blueprint + Hiring Sprint', amount: '20,000 AUD', founding: false },
 ];
 
 /* ---------------------------------------------------------------- */
@@ -323,8 +323,7 @@ function OperatorPage() {
               A weaponised creative director.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-5">
-              I have been behind the scenes of multiple 7 &amp; 8 figure operators + media teams. Therefore, I know
-              exactly:
+              I have been behind the scenes of multiple 7 &amp; 8 figure operators + media teams. I&apos;ve seen exactly:
             </p>
             <Bullets items={seen} tone="blue" />
 
@@ -620,10 +619,24 @@ function OperatorPage() {
           <Section>
             <Label>Investment, capacity and next step</Label>
             <div className="glow-card border-blue-500/20 p-8">
-              <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
-              <p className="font-display text-4xl font-extrabold text-white mb-6">30,000 AUD</p>
+              <p className="text-zinc-400 text-[14px] mb-1">Current price</p>
+              <p className="font-display text-4xl font-extrabold text-white mb-6">40,000 AUD</p>
               <p className="text-white text-sm font-semibold mb-4">All in for:</p>
-              <Bullets items={investmentIncludes} tone="blue" />
+              <ul className="space-y-4">
+                {investmentIncludes.map((it, i) => (
+                  <li key={i} className="flex items-baseline justify-between gap-4 border-b border-zinc-800 pb-3 last:border-0 last:pb-0">
+                    <span className="text-zinc-300 text-[15px] leading-relaxed">
+                      {it.name}
+                      {it.founding && (
+                        <span className="ml-2 text-blue-400 text-[13px] font-medium whitespace-nowrap">
+                          founding rate
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-white font-semibold text-[15px] whitespace-nowrap">{it.amount}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at a founding rate. After that it moves to 50k.
