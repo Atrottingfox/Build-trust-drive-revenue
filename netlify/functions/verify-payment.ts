@@ -67,6 +67,7 @@ const handler: Handler = async (event) => {
     */
     const contactId = session.client_reference_id;
     const token = process.env.GHL_TOKEN;
+    let tagged = false;
 
     if (contactId && token) {
       const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
@@ -79,6 +80,7 @@ const handler: Handler = async (event) => {
         },
         body: JSON.stringify({ tags: ["brand-day-paid"] }),
       });
+      tagged = tagRes.ok;
       if (!tagRes.ok) {
         console.error("GHL tag failed after verified payment:", tagRes.status, await tagRes.text(), contactId);
       }
@@ -144,6 +146,44 @@ const handler: Handler = async (event) => {
       }
     } else if (!contactId) {
       console.error("Verified payment with no client_reference_id. Reconcile by hand:", sessionId);
+    }
+
+    /*
+      A confirmed payment that could not be attached to anyone is the worst
+      failure this system has: money in, and nothing in the CRM to act on. It
+      happens if the contact was deleted or merged between checkout starting and
+      finishing, and it happened once in testing.
+
+      Never let it pass quietly. Put it in Slack with everything needed to fix it
+      by hand.
+    */
+    const attached = Boolean(contactId) && customFields.length >= 0 && tagged;
+    if (!attached) {
+      const slack = process.env.SLACK_WEBHOOK_URL;
+      if (slack) {
+        const amount = ((session.amount_total || 0) / 100).toFixed(2);
+        await fetch(slack, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            text: [
+              "*Payment received that could not be linked to a contact*",
+              `*Amount:* ${amount} ${String(session.currency || "").toUpperCase()}`,
+              `*Email:* ${session.customer_details?.email || "unknown"}`,
+              `*Stripe customer:* ${session.customer || "none"}`,
+              `*Session:* ${sessionId}`,
+              contactId
+                ? `*Contact id on the payment:* ${contactId} (tagging it failed, it may have been deleted)`
+                : "*No contact id on the payment.*",
+              "",
+              "They have paid. Find or recreate them in GHL and tag brand-day-paid by hand.",
+            ].join("\n"),
+          }),
+        }).catch(() => {
+          // Nothing further to do. It is already in the function logs.
+        });
+      }
+      console.error("Payment could not be linked to a GHL contact:", sessionId, contactId || "(none)");
     }
 
     return {

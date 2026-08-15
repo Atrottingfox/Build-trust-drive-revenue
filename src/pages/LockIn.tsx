@@ -56,10 +56,6 @@ const LEAVE_WITH = [
   'A roadmap that unlocks your next move',
 ];
 
-const DAYS_TOTAL = 20;
-const DAYS_DONE = 2;
-const DAYS_LEFT = DAYS_TOTAL - DAYS_DONE;
-
 const AFTER_PAYMENT = [
   'Immediately choose your Brand Builder Day date in my calendar',
   'Join a short prep call so I can get under the hood before the Day',
@@ -90,6 +86,7 @@ export default function LockIn() {
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
   const [calHeight, setCalHeight] = useState(700);
+  const [days, setDays] = useState<{ total: number; remaining: number } | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -336,13 +333,15 @@ export default function LockIn() {
           <p className="text-zinc-300 text-lg leading-relaxed max-w-xl mx-auto">
             To reserve one of our limited strategy days per month, secure your payment.
           </p>
-          <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
-            <p className="text-white text-[15px]">
-              <span className="font-display text-2xl align-middle mr-1.5">{DAYS_LEFT}</span>
-              of {DAYS_TOTAL} Days left at 5,000 AUD
-            </p>
-            <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
-          </div>
+          {days && (
+            <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
+              <p className="text-white text-[15px]">
+                <span className="font-display text-2xl align-middle mr-1.5">{days.remaining}</span>
+                of {days.total} Days left at 5,000 AUD
+              </p>
+              <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
+            </div>
+          )}
         </div>
 
         <div className="max-w-6xl mx-auto grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_420px] items-start">

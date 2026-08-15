@@ -1,0 +1,79 @@
+import type { Handler } from "@netlify/functions";
+
+/*
+  How many Brand Days are left at the founding price.
+
+  This is a public promise on /lock-in ("18 of 20 Days left at 5,000 AUD, after
+  that the price goes to 10,000"), so it has to be true. It used to be two
+  constants in the page, which meant every Day delivered needed a code change to
+  keep the number honest. Nobody remembers to do that, and a stale scarcity
+  count is worse than none.
+
+  So it is counted from GHL instead: every contact carrying `brand-day-confirmed`
+  has both paid and picked a date, which is exactly what spends one of the
+  twenty.
+
+  DAYS_ALREADY_RUN covers the ones delivered before this system existed, since
+  those contacts were never tagged.
+
+  Falls back to the configured total rather than showing nothing. A slightly
+  generous number beats a broken page, and it is logged so it can be spotted.
+*/
+
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Cache-Control": "public, max-age=60",
+  "Content-Type": "application/json",
+};
+
+const GHL_API = "https://services.leadconnectorhq.com";
+const GHL_VERSION = "2021-07-28";
+
+const handler: Handler = async () => {
+  const total = Number(process.env.DAYS_TOTAL_AT_PRICE) || 20;
+  const alreadyRun = Number(process.env.DAYS_ALREADY_RUN) || 0;
+  const token = process.env.GHL_TOKEN;
+  const locationId = process.env.GHL_LOCATION_ID;
+
+  const fallback = { total, remaining: Math.max(0, total - alreadyRun), counted: false };
+
+  if (!token || !locationId) {
+    return { statusCode: 200, headers, body: JSON.stringify(fallback) };
+  }
+
+  try {
+    const res = await fetch(`${GHL_API}/contacts/search`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Version: GHL_VERSION,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        locationId,
+        filters: [{ field: "tags", operator: "contains", value: "brand-day-confirmed" }],
+        pageLimit: 1,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("days-remaining: GHL search failed:", res.status, await res.text());
+      return { statusCode: 200, headers, body: JSON.stringify(fallback) };
+    }
+
+    const confirmed = Number((await res.json())?.total) || 0;
+    const remaining = Math.max(0, total - alreadyRun - confirmed);
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ total, remaining, counted: true, confirmed, alreadyRun }),
+    };
+  } catch (err) {
+    console.error("days-remaining error:", err);
+    return { statusCode: 200, headers, body: JSON.stringify(fallback) };
+  }
+};
+
+export { handler };
