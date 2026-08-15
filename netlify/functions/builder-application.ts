@@ -106,16 +106,42 @@ const handler: Handler = async (event) => {
     }
 
     const isApply = data.source === 'apply';
-    const notionDbId = isApply ? NOTION_APPLY_DB : NOTION_BUILDER_DB;
+    /*
+      The Operator Intensive is a separate offer at a separate price, so it gets
+      its own Slack alert and its own GHL tag. It deliberately does NOT reuse the
+      builder or apply Notion database: those two feed Brand Builder Day triage,
+      and mixing a 30k Intensive application into that queue makes both harder to
+      read. Its Notion database is optional and read from an env var, so the
+      endpoint works the moment it is deployed and starts writing to Notion later
+      if Sean creates one.
+    */
+    const isOperator = data.source === 'operator-intensive';
+
+    const notionDbId = isOperator
+      ? (process.env.NOTION_OPERATOR_DB || '')
+      : isApply
+        ? NOTION_APPLY_DB
+        : NOTION_BUILDER_DB;
     const kitTagId = isApply ? KIT_TAG_APPLY : KIT_TAG_BUILDER;
 
     const notionKey = process.env.NOTION_API_KEY;
-    if (!notionKey) {
+    /*
+      For builder and apply a missing Notion config is fatal: Notion IS the queue,
+      and a silent success would lose the application. For the Operator Intensive
+      Slack is the queue, so a missing database degrades instead of failing.
+    */
+    if (!notionKey && !isOperator) {
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({ error: "Notion integration not configured" }),
       };
+    }
+    const writeNotion = Boolean(notionKey && notionDbId);
+    if (isOperator && !writeNotion) {
+      console.warn(
+        "Operator Intensive application received with no NOTION_OPERATOR_DB set. Slack and GHL still fire; nothing was written to Notion."
+      );
     }
 
     const activeChannels = (data.activeChannels || []).map((ch: string) => ({ name: ch }));
@@ -149,27 +175,33 @@ const handler: Handler = async (event) => {
       if (properties[key] === undefined) delete properties[key];
     });
 
-    const res = await fetch("https://api.notion.com/v1/pages", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${notionKey}`,
-        "Notion-Version": "2022-06-28",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        parent: { database_id: notionDbId },
-        properties,
-      }),
-    });
+    if (writeNotion) {
+      const res = await fetch("https://api.notion.com/v1/pages", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${notionKey}`,
+          "Notion-Version": "2022-06-28",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          parent: { database_id: notionDbId },
+          properties,
+        }),
+      });
 
-    if (!res.ok) {
-      const err = await res.text();
-      console.error("Notion API error:", err);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: "Failed to submit application" }),
-      };
+      if (!res.ok) {
+        const err = await res.text();
+        console.error("Notion API error:", err);
+        // Same reasoning as the config check above: Notion is the queue for
+        // builder and apply, but not for the Operator Intensive.
+        if (!isOperator) {
+          return {
+            statusCode: 500,
+            headers,
+            body: JSON.stringify({ error: "Failed to submit application" }),
+          };
+        }
+      }
     }
 
     // Hand the application to GoHighLevel via the v2 contacts API.
@@ -236,8 +268,11 @@ const handler: Handler = async (event) => {
             phone,
             companyName: data.company || "",
             website: data.website || "",
-            source: isApply ? "apply page" : "builder page",
-            tags: ["applied"],
+            source: isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page",
+            // `applied` fires the existing downstream automation for everyone.
+            // The Operator Intensive carries a second tag so it can be filtered
+            // and automated separately without touching those workflows.
+            tags: isOperator ? ["applied", "operator-intensive"] : ["applied"],
             customFields,
           }),
         });
@@ -262,9 +297,11 @@ const handler: Handler = async (event) => {
       console.error("GHL_TOKEN or GHL_LOCATION_ID not set, skipping GHL sync.");
     }
 
-    // Add to Kit (ConvertKit)
+    // Add to Kit (ConvertKit). Skipped for the Operator Intensive: it has no Kit
+    // tag of its own, and dropping it into the Brand Builder Day tag would put a
+    // 30k Intensive applicant into the wrong email sequence.
     const kitApiSecret = process.env.KIT_API_SECRET;
-    if (kitApiSecret && data.email) {
+    if (kitApiSecret && data.email && !isOperator) {
       try {
         await fetch(`https://api.convertkit.com/v3/tags/${kitTagId}/subscribe`, {
           method: 'POST',
@@ -301,7 +338,18 @@ const handler: Handler = async (event) => {
               value is shown and every line that does not is dropped, so the
               alert is always readable at a glance without hunting.
             */
-            text: [
+            text: (isOperator ? [
+              ':rotating_light: *New OPERATOR INTENSIVE Application* (30k)',
+              `*Full name:* ${data.name || '-'}`,
+              `*Email:* ${data.email || '-'}`,
+              `*Mobile:* ${data.phone || '-'}`,
+              `*Company:* ${data.company || '-'}`,
+              data.website ? `*Website / Instagram:* ${data.website}` : null,
+              data.revenueBand ? `*Current annual revenue:* ${data.revenueBand}` : null,
+              data.contentOpsPerson ? `*Who owns media today:* ${data.contentOpsPerson}` : null,
+              data.whatToFix ? `*What the Operator must own:* ${data.whatToFix}` : null,
+              data.canCommitDay ? `*Ready to commit ~4 months:* ${data.canCommitDay}` : null,
+            ] : [
               isApply ? '*New Apply Now Lead*' : '*New Brand Builder Day Application*',
               // Labels mirror the questions actually asked on /builder, in the
               // order the form asks them, so the alert reads like the form.
@@ -331,7 +379,7 @@ const handler: Handler = async (event) => {
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
-            ].filter(Boolean).join('\n'),
+            ]).filter(Boolean).join('\n'),
           }),
         });
       } catch (slackErr) {
