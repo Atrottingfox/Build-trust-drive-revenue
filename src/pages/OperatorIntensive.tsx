@@ -298,42 +298,11 @@ function OperatorPage() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">
               Invite only &middot; The Authority Engine
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04]">
               Operator + Authority
               <br />
               Engine Intensive.
             </h1>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              Bring in your media Operator and install the Engine in one focused project.
-            </p>
-
-            <div className="glow-card border-blue-500/20 p-7 mb-8">
-              <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
-              <p className="font-display text-4xl font-extrabold text-white">30,000 AUD</p>
-              <p className="text-zinc-500 text-[14px] mt-2">Will move to 40k and capped once fully built.</p>
-              <div className="mt-5 pt-5 border-t border-zinc-800">
-                <p className="text-blue-400 text-[15px] font-semibold">
-                  Number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at this rate.
-                </p>
-                <p className="text-zinc-500 text-[14px] mt-1">
-                  After the {FOUNDING_TOTAL === 5 ? 'fifth' : FOUNDING_TOTAL}, it moves to 40k.
-                </p>
-              </div>
-            </div>
-
-            <p className="text-zinc-400 leading-relaxed mb-5">
-              You are seeing this because you applied for The Authority Engine or reached out directly, and it is
-              clear your biggest constraint is not "more content".
-            </p>
-            <p className="text-zinc-400 leading-relaxed mb-5">It is this:</p>
-            <p className="text-white text-lg leading-relaxed mb-5 pl-5 border-l-2 border-blue-500/40">
-              "We do not have the right person in the seat, and no system for them to run."
-            </p>
-            <p className="text-zinc-400 leading-relaxed mb-8">
-              This Intensive is where we fix that in one focused project.
-            </p>
-
-            <ApplyButton />
           </Section>
         </div>
       </section>
