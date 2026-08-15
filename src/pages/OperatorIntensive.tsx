@@ -116,7 +116,7 @@ const forYou = [
 const notForYou = [
   'Early stage founders still figuring out what they sell',
   'Founders looking for "done for you everything"',
-  'Founders who do not see their creative director as their number one business asset',
+  'Founders who do not see media as their number one business asset',
   'Anyone who will not show up for interviews or decisions',
 ];
 
