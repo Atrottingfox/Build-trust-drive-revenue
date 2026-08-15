@@ -9,7 +9,7 @@ type SEOProps = {
 };
 
 const SITE_URL = 'https://authorityengine.com.au';
-const DEFAULT_IMAGE = 'https://authorityengine.com.au/logo.svg';
+const DEFAULT_IMAGE = 'https://authorityengine.com.au/og-image.png';
 
 export default function SEO({ title, description, path, image, noIndex }: SEOProps) {
   const url = `${SITE_URL}${path}`;
