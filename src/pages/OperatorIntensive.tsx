@@ -15,7 +15,7 @@ import Footer from '../components/Footer';
 const APPLY_URL = '/applyforoperatorintensive';
 
 /* Founding cohort counter. Sean runs FOUNDING_TOTAL of these at 30k before the
-   price moves to 40 to 50k. Bump FOUNDING_CURRENT as each one is sold; it is the
+   price moves to 40k. Bump FOUNDING_CURRENT as each one is sold; it is the
    only place the number lives, so the hero and the investment section stay in
    step. Separate from the per quarter capacity cap, which is about how many can
    run at once, not how many are left at this price. */
@@ -310,13 +310,13 @@ function OperatorPage() {
             <div className="glow-card border-blue-500/20 p-7 mb-8">
               <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
               <p className="font-display text-4xl font-extrabold text-white">30,000 AUD</p>
-              <p className="text-zinc-500 text-[14px] mt-2">Will move to 40 to 50k and capped once fully built.</p>
+              <p className="text-zinc-500 text-[14px] mt-2">Will move to 40k and capped once fully built.</p>
               <div className="mt-5 pt-5 border-t border-zinc-800">
                 <p className="text-blue-400 text-[15px] font-semibold">
                   Number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at this rate.
                 </p>
                 <p className="text-zinc-500 text-[14px] mt-1">
-                  After the {FOUNDING_TOTAL === 5 ? 'fifth' : FOUNDING_TOTAL}, it moves to 40 to 50k.
+                  After the {FOUNDING_TOTAL === 5 ? 'fifth' : FOUNDING_TOTAL}, it moves to 40k.
                 </p>
               </div>
             </div>
@@ -367,7 +367,7 @@ function OperatorPage() {
             <p className="text-zinc-400 leading-relaxed mt-10 mb-5">This Intensive exists to:</p>
             <Ticks items={existsTo} />
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
-              This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 40 to 50k.
+              This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 40k.
               This is number {FOUNDING_CURRENT}.
             </p>
           </Section>
@@ -660,8 +660,7 @@ function OperatorPage() {
               <Bullets items={investmentIncludes} tone="blue" />
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at the founding rate. After that it moves to
-              40 to 50k.
+              This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at the founding rate. After that it moves to 40k.
             </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-4">How the money works</p>
