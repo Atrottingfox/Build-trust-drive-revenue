@@ -44,6 +44,7 @@ declare global {
 }
 
 const CALENDLY_URL = 'https://calendly.com/sean-authorityengine/vip-day';
+const PREP_CALL_URL = 'https://calendly.com/sean-authorityengine/prep-call';
 const STRIPE_BUY_BUTTON_ID = 'buy_btn_1U49VS2niRrgrA5OR7ldFuJQ';
 const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
@@ -361,11 +362,42 @@ export default function LockIn() {
                 </h2>
               </div>
 
-              {booked ? (
+              {booked && paid ? (
+                /*
+                  The moment both halves are done, this is the only thing
+                  carrying them forward. Telling someone an email is coming and
+                  then sending nothing is worse than saying nothing, so the next
+                  step is here on the page rather than promised.
+                */
+                <div className="rounded-xl border border-zinc-700 bg-zinc-900/40 p-6 sm:p-7">
+                  <p className="text-zinc-400 leading-relaxed">
+                    Your Brand Builder Day is paid for and in both our calendars.
+                  </p>
+
+                  <div className="mt-6 pt-6 border-t border-zinc-800">
+                    <p className="text-white font-medium mb-1">One thing left: the prep call</p>
+                    <p className="text-zinc-400 text-[15px] leading-relaxed mb-5">
+                      Twenty minutes. We go through your prep doc together so I turn up already
+                      knowing what we need to attack, and what problems to solve. Bring your
+                      operator if you have one.
+                    </p>
+                    <a
+                      href={PREP_CALL_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
+                    >
+                      Book your prep call
+                    </a>
+                  </div>
+
+                  <p className="text-zinc-500 text-sm leading-relaxed mt-6">
+                    Your receipt is in your inbox now. Prep instructions follow before we meet.
+                  </p>
+                </div>
+              ) : booked ? (
                 <p className="text-zinc-400 leading-relaxed">
-                  {paid
-                    ? "It's locked in. Prep instructions and the prep call invite are on their way to your inbox."
-                    : 'Held for now. Complete your payment to confirm it.'}
+                  Held for now. Complete your payment to confirm it.
                 </p>
               ) : (
                 <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
