@@ -9,17 +9,18 @@ import SEO from '../components/SEO';
   which is what routes it to its own Slack alert and its own GHL tag.
 */
 
-const REVENUE_BANDS = ['-1M', '1-3M', '3-10M', '10M+'];
+/* Uppercase M is kept so 1-3M and 3-10M still match the existing GHL dropdown
+   options exactly. The three new bands sit outside that list; GHL stores them
+   anyway, but see the note in the reply about filtering. */
+const REVENUE_BANDS = ['0-1M', '1-3M', '3-10M', '10-20M', '20-50M', '50M+'];
 
 const MEDIA_TODAY = [
-  'No one owns it',
-  'A video editor',
+  'A content lead',
+  'An agency',
+  'An editor',
   'A VA or marketing coordinator',
-  'A creative director I want to replace',
   'Me',
 ];
-
-const COMMIT = ['Yes, ready to commit 4 months', 'Probably, want to talk it through', 'Not sure yet'];
 
 export default function ApplyOperatorIntensive() {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,6 @@ export default function ApplyOperatorIntensive() {
     revenue_band: '',
     media_today: '',
     operator_owns: '',
-    commit: '',
   });
 
   const handleChange = (
@@ -68,7 +68,6 @@ export default function ApplyOperatorIntensive() {
           revenueBand: form.revenue_band || undefined,
           contentOpsPerson: form.media_today || undefined,
           whatToFix: form.operator_owns || '',
-          canCommitDay: form.commit || undefined,
         }),
       });
       if (!res.ok) {
@@ -233,19 +232,6 @@ export default function ApplyOperatorIntensive() {
                   className={`${inputClass} resize-none`}
                 />
 
-                <select
-                  name="commit"
-                  value={form.commit}
-                  onChange={handleChange}
-                  className={`${inputClass} ${form.commit ? 'text-white' : 'text-zinc-600'}`}
-                >
-                  <option value="">Ready to commit around 4 months</option>
-                  {COMMIT.map((c) => (
-                    <option key={c} value={c} className="text-white bg-zinc-900">
-                      {c}
-                    </option>
-                  ))}
-                </select>
 
                 {error && <p className="text-red-400 text-sm">{error}</p>}
 

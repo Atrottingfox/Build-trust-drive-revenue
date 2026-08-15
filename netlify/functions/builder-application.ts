@@ -348,7 +348,6 @@ const handler: Handler = async (event) => {
               data.revenueBand ? `*Current annual revenue:* ${data.revenueBand}` : null,
               data.contentOpsPerson ? `*Who owns media today:* ${data.contentOpsPerson}` : null,
               data.whatToFix ? `*What the Operator must own:* ${data.whatToFix}` : null,
-              data.canCommitDay ? `*Ready to commit ~4 months:* ${data.canCommitDay}` : null,
             ] : [
               isApply ? '*New Apply Now Lead*' : '*New Brand Builder Day Application*',
               // Labels mirror the questions actually asked on /builder, in the
