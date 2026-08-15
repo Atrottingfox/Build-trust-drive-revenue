@@ -281,7 +281,7 @@ const isNot = [
 const investmentIncludes = [
   { name: 'Brand Builder Day', amount: '5,000 AUD', founding: true },
   { name: '90 Day Authority Engine Install', amount: '15,000 AUD', founding: true },
-  { name: 'Operator Blueprint + Hiring Sprint', amount: '20,000 AUD', founding: false },
+  { name: 'Operator Blueprint + Hiring Sprint', amount: '20,000 AUD', founding: true },
 ];
 
 /* ---------------------------------------------------------------- */
@@ -299,11 +299,14 @@ function OperatorPage() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">
               Invite only &middot; The Authority Engine
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04]">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
               Operator + Authority
               <br />
               Engine Intensive.
             </h1>
+            <p className="text-zinc-300 text-lg leading-relaxed">
+              One person to own your Authority Engine, 90 days to weaponise them.
+            </p>
           </Section>
         </div>
       </section>
@@ -619,8 +622,8 @@ function OperatorPage() {
           <Section>
             <Label>Investment, capacity and next step</Label>
             <div className="glow-card border-blue-500/20 p-8">
-              <p className="text-zinc-400 text-[14px] mb-1">Current price</p>
-              <p className="font-display text-4xl font-extrabold text-white mb-6">40,000 AUD</p>
+              <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
+              <p className="font-display text-4xl font-extrabold text-white mb-6">30,000 AUD</p>
               <p className="text-white text-sm font-semibold mb-4">All in for:</p>
               <ul className="space-y-4">
                 {investmentIncludes.map((it, i) => (
