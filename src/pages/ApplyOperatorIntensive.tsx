@@ -124,8 +124,7 @@ export default function ApplyOperatorIntensive() {
               Bring in your media Operator and install the Engine in one focused project.
             </p>
             <p className="text-zinc-500 text-[15px] max-w-sm leading-relaxed">
-              Founding rate 30,000 AUD. A very small number of operators per quarter, so I read every
-              application myself.
+              Founding rate 30,000 AUD. 5 per quarter, so I read every application myself.
             </p>
           </div>
 

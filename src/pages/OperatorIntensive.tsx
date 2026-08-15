@@ -14,6 +14,14 @@ import Footer from '../components/Footer';
    its own GHL tag rather than landing in the Brand Builder Day queue. */
 const APPLY_URL = '/applyforoperatorintensive';
 
+/* Founding cohort counter. Sean runs FOUNDING_TOTAL of these at 30k before the
+   price moves to 40 to 50k. Bump FOUNDING_CURRENT as each one is sold; it is the
+   only place the number lives, so the hero and the investment section stay in
+   step. Separate from the per quarter capacity cap, which is about how many can
+   run at once, not how many are left at this price. */
+const FOUNDING_CURRENT = 4;
+const FOUNDING_TOTAL = 5;
+
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   return (
@@ -303,6 +311,14 @@ function OperatorPage() {
               <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
               <p className="font-display text-4xl font-extrabold text-white">30,000 AUD</p>
               <p className="text-zinc-500 text-[14px] mt-2">Will move to 40 to 50k and capped once fully built.</p>
+              <div className="mt-5 pt-5 border-t border-zinc-800">
+                <p className="text-blue-400 text-[15px] font-semibold">
+                  Number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at this rate.
+                </p>
+                <p className="text-zinc-500 text-[14px] mt-1">
+                  After the {FOUNDING_TOTAL === 5 ? 'fifth' : FOUNDING_TOTAL}, it moves to 40 to 50k.
+                </p>
+              </div>
             </div>
 
             <p className="text-zinc-400 leading-relaxed mb-5">
@@ -351,8 +367,8 @@ function OperatorPage() {
             <p className="text-zinc-400 leading-relaxed mt-10 mb-5">This Intensive exists to:</p>
             <Ticks items={existsTo} />
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
-              This is a founding cohort rate. As we harden the process and fill capacity, this will move to 40 to 50k
-              and be capped at a handful of clients per quarter.
+              This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 40 to 50k.
+              This is number {FOUNDING_CURRENT}.
             </p>
           </Section>
         </div>
@@ -644,8 +660,8 @@ function OperatorPage() {
               <Bullets items={investmentIncludes} tone="blue" />
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              This will move to 40 to 50k and be capped at a handful of clients per quarter once the offer is fully
-              productised and case studied.
+              This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at the founding rate. After that it moves to
+              40 to 50k.
             </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-4">How the money works</p>
@@ -668,8 +684,8 @@ function OperatorPage() {
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-3">Capacity</p>
               <p className="text-zinc-400 text-sm leading-relaxed mb-4">
-                This is invite only. There is no public link, no buy now button. I cap these at a tiny number per
-                quarter so I can stay close to:
+                This is invite only. There is no public link, no buy now button. I cap these at 5 per quarter so
+                I can stay close to:
               </p>
               <Bullets items={['Your operator', 'Your content', 'Your pipeline data']} tone="blue" />
             </div>
@@ -677,7 +693,6 @@ function OperatorPage() {
               <p className="text-white text-sm font-semibold mb-3">To lock before this goes out</p>
               <ul className="space-y-3">
                 {[
-                  'The number behind "a very small number of operators per quarter".',
                   'Who carries the Operator\'s salary once they are hired, and from when.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
