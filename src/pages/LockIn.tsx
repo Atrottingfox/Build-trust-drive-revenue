@@ -79,6 +79,62 @@ const store = {
   },
 };
 
+/* The Day itself. Read before booking, and still worth reading after. */
+function Walkthrough() {
+  return (
+    <div className="space-y-12">
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">The Day</h2>
+        <div className="space-y-4 text-zinc-400 leading-relaxed">
+          <p>Think of this session like a marketing pit stop.</p>
+          <p>
+            You come in with your current content engine. We lift the hood, diagnose
+            performance issues, and help you upgrade the hidden bottlenecks slowing you
+            down.
+          </p>
+          <p>
+            We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
+            tune your strategy so your core acquisition engine runs smoother, faster, and
+            more profitably.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">Before we meet</h2>
+        <div className="space-y-4 text-zinc-400 leading-relaxed">
+          <p>
+            Together we go through your prep doc so I turn up already knowing exactly what
+            we need to attack, and what problems to solve.
+          </p>
+          <p>Bring your operator if you have one.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl text-white mb-5">You leave with</h2>
+        <ul className="space-y-3.5">
+          {LEAVE_WITH.map((line) => (
+            <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+              <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border-l-2 border-zinc-700 pl-6">
+        <p className="text-zinc-200 text-lg leading-relaxed">
+          If there's just one thing you'll get from this, it's leverage.
+        </p>
+        <p className="text-zinc-400 leading-relaxed mt-2">
+          So you get more output from every action you take.
+        </p>
+      </section>
+    </div>
+  );
+}
+
 export default function LockIn() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [paid, setPaid] = useState(false);
@@ -321,6 +377,73 @@ export default function LockIn() {
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
     (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '');
 
+  /*
+    Once both halves are done this stops being a checkout. Leaving the two
+    columns up with a tick on each reads as two half-finished tasks rather than
+    a confirmation, so the page becomes a confirmation instead.
+  */
+  if (paid && booked) {
+    return (
+      <div className="min-h-screen bg-base">
+        <div className="gradient-border-top" />
+
+        <Container className="pt-32 pb-24">
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="mx-auto mb-7 h-14 w-14 rounded-full border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center">
+              <Check className="text-emerald-400" size={24} />
+            </div>
+            <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
+              You're locked in
+            </h1>
+            <p className="text-zinc-300 text-lg leading-relaxed">
+              Your Brand Builder Day is paid for and in both our calendars. Your receipt is in
+              your inbox.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto mt-14">
+            <div className="rounded-2xl border border-zinc-700 bg-zinc-900/40 p-7 sm:p-8">
+              <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-3">
+                One thing left
+              </p>
+              <h2 className="font-display text-2xl text-white mb-3">Book your prep call</h2>
+              <p className="text-zinc-400 leading-relaxed mb-7">
+                Twenty minutes. We go through your prep doc together so I turn up already knowing
+                exactly what we need to attack, and what problems to solve. Bring your operator if
+                you have one.
+              </p>
+              <a
+                href={PREP_CALL_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
+              >
+                Book your prep call
+              </a>
+            </div>
+
+            <p className="text-zinc-500 text-sm leading-relaxed text-center mt-8">
+              Bring your operator, or whoever owns content, to the Day itself. It works far better
+              with them in the room.
+            </p>
+            <p className="text-zinc-600 text-xs text-center mt-4">
+              Nothing arrived within a few minutes? Reply to my email and I will sort it.
+            </p>
+
+            <div className="mt-20 pt-14 border-t border-zinc-800">
+              <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8 text-center">
+                What we are doing on the Day
+              </p>
+              <Walkthrough />
+            </div>
+          </div>
+        </Container>
+
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-base">
       <div className="gradient-border-top" />
@@ -410,56 +533,7 @@ export default function LockIn() {
               )}
             </div>
 
-            <div className="space-y-12">
-              <section>
-                <h2 className="font-display text-xl text-white mb-4">The Day</h2>
-                <div className="space-y-4 text-zinc-400 leading-relaxed">
-                  <p>Think of this session like a marketing pit stop.</p>
-                  <p>
-                    You come in with your current content engine. We lift the hood, diagnose
-                    performance issues, and help you upgrade the hidden bottlenecks slowing you
-                    down.
-                  </p>
-                  <p>
-                    We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
-                    tune your strategy so your core acquisition engine runs smoother, faster, and
-                    more profitably.
-                  </p>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="font-display text-xl text-white mb-4">Before we meet</h2>
-                <div className="space-y-4 text-zinc-400 leading-relaxed">
-                  <p>
-                    Together we go through your prep doc so I turn up already knowing exactly what
-                    we need to attack, and what problems to solve.
-                  </p>
-                  <p>Bring your operator if you have one.</p>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="font-display text-xl text-white mb-5">You leave with</h2>
-                <ul className="space-y-3.5">
-                  {LEAVE_WITH.map((line) => (
-                    <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
-                      <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
-                      <span>{line}</span>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-
-              <section className="border-l-2 border-zinc-700 pl-6">
-                <p className="text-zinc-200 text-lg leading-relaxed">
-                  If there's just one thing you'll get from this, it's leverage.
-                </p>
-                <p className="text-zinc-400 leading-relaxed mt-2">
-                  So you get more output from every action you take.
-                </p>
-              </section>
-            </div>
+            <Walkthrough />
           </div>
 
           {/* Right: payment, sticky */}
