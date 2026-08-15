@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import {
   Check, X, Target, Zap, FileText, Megaphone, Settings, ArrowRight,
-  ClipboardCheck, UserPlus, Video, AlertTriangle, Crosshair,
+  ClipboardCheck, UserPlus, Video, Crosshair,
 } from 'lucide-react';
 import PasswordGate from '../components/PasswordGate';
 import Footer from '../components/Footer';
@@ -15,11 +15,11 @@ import Footer from '../components/Footer';
 const APPLY_URL = '/applyforoperatorintensive';
 
 /* Founding cohort counter. Sean runs FOUNDING_TOTAL of these at 30k before the
-   price moves to 40k. Bump FOUNDING_CURRENT as each one is sold; it is the
+   price moves to 50k. Bump FOUNDING_CURRENT as each one is sold; it is the
    only place the number lives, so the hero and the investment section stay in
    step. Separate from the per quarter capacity cap, which is about how many can
    run at once, not how many are left at this price. */
-const FOUNDING_CURRENT = 4;
+const FOUNDING_CURRENT = 3;
 const FOUNDING_TOTAL = 5;
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -94,7 +94,7 @@ const Bullets = ({ items, tone = 'zinc' }: { items: string[]; tone?: 'zinc' | 'b
 /* ---------------------------------------------------------------- */
 
 const seen = [
-  'What a real operator looks like (and what a pure "editor" looks like)',
+  'What a real operator looks like.',
   'How the right media lead compounds a business',
   'How the wrong hire burns time, money, and trust',
 ];
@@ -103,20 +103,20 @@ const existsTo = [
   'Design the right role for your business',
   'Help you set up and run a hiring process that attracts, tests, and closes the right person',
   'Often jump in to personally hunt and sell A players when it makes sense',
-  'Then spend 90 days turning them into a dangerous Operator running your Authority Engine',
+  'Then spend 90 days turning them into a weaponised Operator running your Authority Engine',
 ];
 
 const forYou = [
   'You are doing 200k+/month with clear offers and a working sales process',
   'You are either replacing your current creative director / media lead or know you want a weaponised creative director in that seat',
   'You want an internal media lead, not another agency retainer',
-  'You want one person and one Engine that can grow with you over years',
-  'You are ready to move quickly and commit around 4 months to getting this right',
+  'You want one person that can own your Authority Engine and scale it alongside you over years',
 ];
 
 const notForYou = [
   'Early stage founders still figuring out what they sell',
   'Founders looking for "done for you everything"',
+  'Founders who do not see their creative director as their number one business asset',
   'Anyone who will not show up for interviews or decisions',
 ];
 
@@ -147,27 +147,28 @@ const outcome = [
     title: 'A 90 day installed Authority Engine they run',
     body: '',
     sub: [
-      'Weekly Capture Block with you',
-      'Short form system and scorecard',
-      '1 to 2 long form trust assets / YouTube plan',
+      'Short form system with daily data entries',
+      '1 x 6 video Authority Engine trust asset cycle',
+      'Weekly reviews + training + content advisory board',
       'A simple cadence and review rhythm that links content to pipeline',
     ],
   },
 ];
 
 const phase1Items = [
-  'Rebuild your brand story, positioning, and on camera identity',
+  'Diagnose the biggest constraint from turning strangers into buyers.',
+  'Align your personality, positioning and perspective to key content buckets of demand',
   'Map your Authority Engine across Instagram, YouTube, podcast, and email',
-  'Diagnose where your current media function is leaking opportunity',
+  'Assess where your current media operation is leaking opportunity',
   'Define exactly what this Operator / Creative Director must own week to week in your business',
-  'Clarify your 12 month vision for the business, you, and your media Operator',
+  'Clarify your 12 month vision for you and your media Operator',
   'Set 3 to 5 clear 90 day outcomes for content and pipeline',
 ];
 
 const phase1Deliverables = [
-  'Authority Engine Blueprint (Scorecard, Journey Map, Brand Bible, Channel Map)',
-  '30 day content and pipeline plan',
-  'Initial Operator role definition and 90 day scorecard',
+  'Authority Engine Blueprint',
+  '90 day content plan',
+  "Initial Operator role definition and 90 day scorecard with clear KPI's",
 ];
 
 const hiringSprint = [
@@ -241,9 +242,9 @@ const phase3 = [
     icon: Video,
     title: 'Long form and Trust Assets',
     items: [
-      '1 to 2 long form trust assets / pillar videos',
+      '1 x 6-8 video pillar video trust cycle',
       'Trojan Horse VSL tied directly to your core offer',
-      'Recording Day checklist and plan so it actually gets done',
+      'Exact lead magnet trust assets mapped to each video',
     ],
   },
   {
@@ -314,29 +315,31 @@ function OperatorPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Why this exists</Label>
-            <H2>Build a weaponised operator.</H2>
+            <H2>You do not need another "video guy".</H2>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
               You need one person owning media like a profit centre and one Engine they can run every week.
             </p>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-4">
-              A media Operator. Somebody to operate the media operation.
+              A weaponised creative director.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-5">
-              I have been behind the scenes of multiple 7 to 8 figure operators and media teams. I have seen:
+              I have been behind the scenes of multiple 7 &amp; 8 figure operators + media teams. Therefore, I know
+              exactly:
             </p>
-            <Ticks items={seen} />
+            <Bullets items={seen} tone="blue" />
 
             <div className="glow-card border-blue-500/20 p-7 mt-10">
               <p className="text-zinc-300 text-[16px] leading-relaxed">
-                My unfair advantage is simple: I have watched multiple operators up close, and I like hunting for
-                talent. I am very good at selling sharp people on epic roles because I actually understand the work.
+                My unfair advantage is simple. I hunt for fun. Give as much as possible, and help the good guys
+                win. Nobody sells the position like me because I am the exact product of the next opportunity they
+                are about to walk into. I know exactly what a creative director needs better than they do.
               </p>
             </div>
 
             <p className="text-zinc-400 leading-relaxed mt-10 mb-5">This Intensive exists to:</p>
             <Ticks items={existsTo} />
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
-              This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 40k.
+              This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 50k.
               This is number {FOUNDING_CURRENT}.
             </p>
           </Section>
@@ -452,7 +455,7 @@ function OperatorPage() {
               </div>
             </div>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-8">
-              We do not throw up a vague "content person" ad and hope someone good appears.
+              I am not going to throw up a seek ad. Do that yourself. This is what I will do.
             </p>
           </Section>
         </div>
@@ -577,7 +580,7 @@ function OperatorPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <p className="text-zinc-300 text-[17px] leading-relaxed">
-              By Day 90, your Operator is dangerous and you have one Engine they can keep running without you being
+              By Day 90, your Operator is weaponised and you have one Engine they can keep running without you being
               dragged into the weeds.
             </p>
           </Section>
@@ -605,12 +608,6 @@ function OperatorPage() {
                 </div>
               ))}
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-10 mb-3">
-              This is a focused, 4 month project to solve one key problem:
-            </p>
-            <p className="text-white text-lg leading-relaxed pl-5 border-l-2 border-blue-500/40">
-              "We do not have the right person or system owning media."
-            </p>
           </Section>
         </div>
       </section>
@@ -629,14 +626,14 @@ function OperatorPage() {
               <Bullets items={investmentIncludes} tone="blue" />
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at the founding rate. After that it moves to 40k.
+              This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at a founding rate. After that it moves to 50k.
             </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-4">How the money works</p>
               <Bullets
                 items={[
                   '5,000 AUD to secure your Brand Builder Day (Phase 1)',
-                  'If, at the end of the Day, we both agree to move into the full Intensive, the remaining 25,000 AUD is due on a simple schedule we set (typically split between the start of the Hiring Sprint and your Operator\'s start date)',
+                  'If, at the end of the Day, we both agree to move into the full Intensive, the remaining 25,000 AUD is broken into $10,000 to place, and 3 x $5,000 payments thereafter',
                 ]}
                 tone="blue"
               />
@@ -646,8 +643,7 @@ function OperatorPage() {
               </p>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              No games. No fine print. Just a premium, white glove project for founders where I am confident we can
-              win together.
+              This is a white glove project exclusively for founders where I am confident we can win together.
             </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-3">Capacity</p>
@@ -655,20 +651,7 @@ function OperatorPage() {
                 This is invite only. There is no public link, no buy now button. I cap these at 5 per quarter so
                 I can stay close to:
               </p>
-              <Bullets items={['Your operator', 'Your content', 'Your pipeline data']} tone="blue" />
-            </div>
-            <div className="glow-card border-amber-400/20 p-6 mt-4">
-              <p className="text-white text-sm font-semibold mb-3">To lock before this goes out</p>
-              <ul className="space-y-3">
-                {[
-                  'Who carries the Operator\'s salary once they are hired, and from when.',
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <AlertTriangle className="w-3.5 h-3.5 text-amber-400 mt-1 flex-shrink-0" />
-                    <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <Bullets items={['Your operator', 'Your content', 'Your data']} tone="blue" />
             </div>
           </Section>
         </div>
@@ -690,8 +673,8 @@ function OperatorPage() {
               ]} />
             </div>
             <p className="text-zinc-400 leading-relaxed mb-12">
-              From there the default is simple. We spend a day together, then move straight into finding and
-              weaponising the person who will own your media Engine.
+              From there the default is simple. We spend a day together, then so long as we both agree, we move
+              straight into finding and weaponising the person who will own your Authority Engine.
             </p>
             <ApplyButton size="lg" />
           </Section>
