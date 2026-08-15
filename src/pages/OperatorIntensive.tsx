@@ -108,7 +108,7 @@ const existsTo = [
 
 const forYou = [
   'You are doing 200k+/month with clear offers and a working sales process',
-  'You are either replacing your current creative director / media lead or know you want a serious Operator in that seat',
+  'You are either replacing your current creative director / media lead or know you want a weaponised creative director in that seat',
   'You want an internal media lead, not another agency retainer',
   'You want one person and one Engine that can grow with you over years',
   'You are ready to move quickly and commit around 4 months to getting this right',
