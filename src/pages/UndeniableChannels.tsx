@@ -500,14 +500,6 @@ export default function UndeniableChannels() {
           </p>
         </div>
 
-        <div className="mt-6 border-l-2 border-zinc-800 pl-5">
-          <p className="text-zinc-500 text-[13px] leading-relaxed">
-            Provenance. The five channel scores are Sean's. The stack recommendation and the proof guardrail came from
-            a research pass citing the $100M Playbook Proof Checklist, so treat the guardrail as a borrowed principle
-            rather than owned IP until it has been rewritten. That source called the monthly session "Boardroom Live",
-            renamed here to Live room to stay clear of Taki's Boardroom.
-          </p>
-        </div>
       </Wrap>
     </Shell>
   );

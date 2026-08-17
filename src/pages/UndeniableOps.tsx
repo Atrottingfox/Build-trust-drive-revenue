@@ -24,7 +24,7 @@ const ROLES: Array<{ name: string; lane: string; bullets: string[] }> = [
     ],
   },
   {
-    name: 'Corey',
+    name: 'Jacob',
     lane: 'Operations. Shoots and edits. Grows into creative direction.',
     bullets: [
       'Run the Mon and Wed short form shoots.',
@@ -218,7 +218,7 @@ export default function UndeniableOps() {
       {/* REVIEW CYCLES */}
       <Wrap>
         <Eyebrow>Review cycles</Eyebrow>
-        <p className="text-zinc-400 text-[14px] mb-6">Corey runs each review. From the content cadence spec.</p>
+        <p className="text-zinc-400 text-[14px] mb-6">Jacob runs each review. From the content cadence spec.</p>
         <div className="space-y-3">
           {REVIEWS.map((r) => (
             <div key={r.when} className="rounded-2xl border border-zinc-800 bg-elevated/30 p-5">

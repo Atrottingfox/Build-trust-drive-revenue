@@ -201,10 +201,10 @@ export default function ThePlan() {
             <BulletList items={[
               <><b className="text-white font-semibold">Pre-production wins half the battle.</b> Hook + problem written before each shoot. Reference: 24 shorts in 2.5 hrs.</>,
               <><b className="text-white font-semibold">Two-camera minimum.</b> Cuts lined up so the second angle is exact. Lo-fi, no pop-ups, "relatively Joey."</>,
-              <><b className="text-white font-semibold">Walk-the-doc (Cole Gordon).</b> Laptop in front, walk a Google doc, record. Rhys self-directs when Corey is editing.</>,
+              <><b className="text-white font-semibold">Walk-the-doc (Cole Gordon).</b> Laptop in front, walk a Google doc, record. Rhys self-directs when Jacob is editing.</>,
             ]} />
           </Block>
-          <Block label="Corey · videographer → creative direction">
+          <Block label="Jacob · videographer → creative direction">
             <BulletList items={[
               'Stop just shooting. Start sitting in on client calls + workshops. Pattern-recognise the problems they bring.',
               'Monday meeting: bring the bottleneck scores + numbers + the "what worked last week" read. Drive creative direction off the data.',
@@ -286,7 +286,7 @@ export default function ThePlan() {
         <div className="mt-8">
           <BulletList items={[
             <><b className="text-white font-semibold">1 · Rename + ship Six Step Profit Path landing page.</b> New name + headline ("Turn cold leads into raving fans without spending hours on camera"). Asset itself stays as is.</>,
-            <><b className="text-white font-semibold">2 · Lock the 30-day shoot plan.</b> 4 environments, 14 shorts/week, Mon/Wed/Fri schedule. Corey owns the run sheet.</>,
+            <><b className="text-white font-semibold">2 · Lock the 30-day shoot plan.</b> 4 environments, 14 shorts/week, Mon/Wed/Fri schedule. Jacob owns the run sheet.</>,
             <><b className="text-white font-semibold">3 · Block-shoot the Character video.</b> 20-30 min. Walking + sitting in the gym, recounting the arc. No tight production. Vulnerable.</>,
             <><b className="text-white font-semibold">4 · Start writing Rome.</b> VSL outline: pain → path → personal story → 3 case studies → CTA. 4-5 hour target.</>,
             <><b className="text-white font-semibold">5 · Spin out the Churn Calculator.</b> Ship the leaky-bucket analogy as a tool + asset. Easy win, ties to the Quality bottleneck fix.</>,

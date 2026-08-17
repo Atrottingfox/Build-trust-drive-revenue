@@ -58,7 +58,7 @@ const DONE: Array<{ head: string; detail: string }> = [
   },
   {
     head: 'Added leadership support',
-    detail: '[CONFIRM NAME] is now helping across a few different parts of the business. Big unlock.',
+    detail: 'Someone new is now helping across a few different parts of the business. Big unlock.',
   },
   {
     head: 'Locked two calls a week',
@@ -142,12 +142,12 @@ const TIMELINE: Stop[] = [
   {
     day: 'Day 30',
     when: 'This Friday',
-    title: 'Training 01 · Hooks',
+    title: 'Training 01',
     kind: 'work',
     items: [
-      'Five people on the call.',
-      'Break hooks down live. Why this one works. Why this one does not.',
-      'Then what we do about it and how we improve it.',
+      'The weekly training starts here and runs every Friday from now on.',
+      'Topic for this one is hooks.',
+      'Break it down live. What is working, what is not, and what we change.',
     ],
   },
   {
@@ -313,7 +313,7 @@ const CALLS: Array<{ day: string; name: string; who: string; agenda: string[] }>
     name: 'Training',
     who: 'Sean + Jacob + the room',
     agenda: [
-      'One skill per session. Session 01 is hooks.',
+      'One topic per session, picked from what the work needs next.',
       'Work on real examples, not theory.',
       'Jacob leaves with something he applies on Monday.',
     ],
@@ -442,13 +442,6 @@ const OWNERS: Array<{ name: string; lane: string; bullets: string[] }> = [
       'Take on long form through day 30 to 60.',
       'Track his time and score his own effectiveness.',
       'Bring the numbers to the content board and lead it.',
-    ],
-  },
-  {
-    name: '[CONFIRM NAME]',
-    lane: 'Leadership support.',
-    bullets: [
-      '[CONFIRM WHAT THEY OWN]',
     ],
   },
   {
@@ -905,23 +898,38 @@ export default function UndeniableMap() {
 
       {/* FRIDAY TRAINING */}
       <Wrap>
-        <Eyebrow>Training · session 01</Eyebrow>
-        <Lead>The upskilling rhythm. This is the piece that has been missing.</Lead>
-        <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-6 md:p-7">
-          <SubEyebrow>Hooks</SubEyebrow>
-          <Bullets
-            items={[
-              'Friday morning. Every week from here.',
-              'Five people on the call.',
-              'We break hooks down live. Why this one is good. Why this one is bad.',
-              'Then what we do about it, and how we improve it.',
-              'Jacob leaves with something he applies on Monday.',
-            ]}
-          />
-          <div className="mt-6 pt-5 border-t border-zinc-800">
-            <a href="/undeniablenextsteps/hooks" className="text-blue-400 hover:text-blue-300 text-[13px] font-semibold">
-              Pull the session material from the Hook Bank
-            </a>
+        <Eyebrow>Friday training</Eyebrow>
+        <Lead>One topic a week, picked from what the work needs next. The upskilling rhythm that has been missing.</Lead>
+
+        <div className="grid md:grid-cols-2 gap-3">
+          <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-6 md:p-7">
+            <SubEyebrow>How it runs</SubEyebrow>
+            <Bullets
+              items={[
+                'Friday morning. Every week from here.',
+                'One topic per session.',
+                'We break it down live. What is working, what is not, and what we change.',
+                'Jacob leaves with something he applies on Monday.',
+              ]}
+            />
+          </div>
+
+          <div className="rounded-2xl border border-blue-500/40 bg-blue-500/[0.05] p-6 md:p-7">
+            <SubEyebrow>The lenses we look through</SubEyebrow>
+            <div className="flex flex-wrap gap-2 mb-5">
+              {['Psychographics', 'Brand', 'Content', 'Formats', 'Direction'].map((lens) => (
+                <span
+                  key={lens}
+                  className="rounded-lg border border-blue-500/25 bg-blue-500/[0.07] px-3 py-1.5 text-[12.5px] font-semibold text-blue-200"
+                >
+                  {lens}
+                </span>
+              ))}
+            </div>
+            <p className="text-zinc-400 text-[13px] leading-relaxed">
+              Not a fixed list. The topic each week comes from whatever is holding the output back, looked at through
+              whichever of these it sits under.
+            </p>
           </div>
         </div>
       </Wrap>

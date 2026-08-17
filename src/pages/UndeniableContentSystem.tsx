@@ -62,7 +62,7 @@ export default function UndeniableContentSystem() {
             <><b className="text-white font-semibold">Saves are a warning, not a win.</b> High saves can mean too dense to action now. Treat it as a flag to simplify.</>,
             <><b className="text-white font-semibold">"How I" over "how to."</b> Disarming, less threatening, built for the burned audience.</>,
             <><b className="text-white font-semibold">The bridge beats the bolt on CTA.</b> Bridge an asset ~1/3 through. Native. Not tacked on the end.</>,
-            <><b className="text-white font-semibold">Never let it feel like an ad.</b> Corey's ads instinct is the trap. Organic, woven, not salesy.</>,
+            <><b className="text-white font-semibold">Never let it feel like an ad.</b> The ads instinct is the trap. Organic, woven, not salesy.</>,
             <><b className="text-white font-semibold">Package belief into story.</b> Chocolate and broccoli. Relatability ladder: experiences → interests → values → beliefs → identity.</>,
           ]} />
         </Block>
@@ -75,7 +75,7 @@ export default function UndeniableContentSystem() {
         <div className="mt-8" />
         <BulletList items={[
           <><b className="text-white font-semibold">End of day four questions</b> (voice note): What did they learn? What problem did I solve? What did I teach? What do I do differently?</>,
-          <><b className="text-white font-semibold">Mid week client problem note.</b> Worth a piece? Voice note it, send to Corey as base content.</>,
+          <><b className="text-white font-semibold">Mid week client problem note.</b> Worth a piece? Voice note it, send to Jacob as base content.</>,
           <><b className="text-white font-semibold">Content installs behaviour.</b> The binary format trains people to self identify as doers before they walk in.</>,
         ]} />
       </Wrap>
@@ -93,7 +93,7 @@ export default function UndeniableContentSystem() {
             'First thing each morning: review yesterday. Monday: best stat, highest watch video, the topic.',
             'Drop off at 3-4 seconds? Put a rehook there, or layer the CTA right there.',
             <><b className="text-white font-semibold">The real optimisation is the ICP check</b> — are the people commenting the avatar, not raw views.</>,
-            'Topic selection is where strategy lives. It gets Corey off "let me just sit and edit."',
+            'Topic selection is where strategy lives. It gets Jacob off "let me just sit and edit."',
           ]} />
         </Block>
       </Wrap>
@@ -105,7 +105,7 @@ export default function UndeniableContentSystem() {
           <BulletList items={[
             <><b className="text-white font-semibold">Pre production is half the win.</b> Write the hook + problem before each shoot. Reference speed: 24 shorts in 2.5 hours.</>,
             'Two camera minimum, lined up so the second cut is exact. Lo fi, no pop ups, "relatively Joey."',
-            <><b className="text-white font-semibold">Walk the doc (Cole Gordon).</b> Laptop in front, walk a Google doc, press record. Rhys self directs when Corey\'s tied up.</>,
+            <><b className="text-white font-semibold">Walk the doc (Cole Gordon).</b> Laptop in front, walk a Google doc, press record. Rhys self directs when Jacob\'s tied up.</>,
             'iPad draw behind (Jeremy Haynes) for visual frameworks.',
           ]} />
         </Block>
@@ -128,7 +128,7 @@ export default function UndeniableContentSystem() {
           <><b className="text-white font-semibold">Isolate the new content ~2 weeks</b> for clean data. No collabs during the test.</>,
           <><b className="text-white font-semibold">After 30 days: keep winners, kill duds, lock 4 types</b> for the next 60. Test 1-2 new a month.</>,
         ]} />
-        <Note>Next: the Shoot Card turns all of this into the one page Corey holds on the day.</Note>
+        <Note>Next: the Shoot Card turns all of this into the one page Jacob holds on the day.</Note>
       </Wrap>
     </Shell>
   );

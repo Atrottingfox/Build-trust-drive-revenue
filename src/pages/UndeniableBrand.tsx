@@ -90,8 +90,8 @@ export default function UndeniableBrand() {
             when="Week 2 to 4"
             title="Lock the archetype."
             body=""
-            owner="Rhys approves · Corey runs"
-            doneWhen="Corey ships 2 edits without voice flags from Rhys"
+            owner="Rhys approves · Jacob runs"
+            doneWhen="Jacob ships 2 edits without voice flags from Rhys"
           >
             <Artefact label="The voice + archetypes · one page">
               <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-300 mb-2">Archetypes · who speaks</p>

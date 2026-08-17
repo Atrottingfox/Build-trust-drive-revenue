@@ -26,7 +26,7 @@ const TIMELINE: Week[] = [
     'Reese Livingstone account · pinned posts swapped (old testimonials → new positioning)',
     'Workshop Q&A card · printed, ready for next workshop',
     'Sales Success System · landing page live (asset already exists)',
-    'Corey · sits in on 3 client calls. No camera. Just pattern recognition.',
+    'Jacob · sits in on 3 client calls. No camera. Just pattern recognition.',
   ]},
   { range: 'Week 2', theme: 'Lock the run sheet', ships: [
     '30-day test plan locked · 4 environments × 14 shorts/week, Mon/Wed/Fri',
@@ -39,7 +39,7 @@ const TIMELINE: Week[] = [
     'Character video · shot in 1 day (walking + sitting in gym, recounting arc)',
     'First 14 shorts shot at Mon/Wed/Fri cadence',
     'Podcast batch 1 · 3 episodes recorded from book chapters',
-    'Monday review template installed (Corey runs it weekly)',
+    'Monday review template installed (Jacob runs it weekly)',
   ]},
   { range: 'Week 4', theme: 'Rome prep + character ships', ships: [
     'Character video · live on YouTube + dedicated landing page',
@@ -64,21 +64,21 @@ const TIMELINE: Week[] = [
     'Rome VSL · live on YouTube (Reese Livingstone channel)',
     'Six-week cycle · weeks 5-6 close. New cycle starts week 7.',
     'Test 1-2 new content formats per month (continuous testing locked in)',
-    'Corey · presenting Monday creative direction off data (not vibes)',
+    'Jacob · presenting Monday creative direction off data (not vibes)',
     'KPI dashboard · first quarterly review run',
   ]},
 ];
 
 // ─── Weekly rhythm ───────────────────────────────────────────────────────
 
-const RHYTHM: Array<{ day: string; rhys: string; corey: string }> = [
-  { day: 'Monday', rhys: 'AM: ideation + last week review. 10-2: shoot. PM: capture (4 questions, voice note).', corey: 'AM: pull last week\'s data, prep Monday review. 10-2: run the shoot. PM: dump rushes, mark keeper shots.' },
-  { day: 'Tuesday', rhys: 'Client calls. End of day: capture (4 questions).', corey: 'Edit · short-form batch 1 (target: 4-5 shorts ready by EOD).' },
-  { day: 'Wednesday', rhys: '10-2: shoot. End of day: capture.', corey: '10-2: run the shoot. PM: dump rushes.' },
-  { day: 'Thursday', rhys: 'Client calls. End of day: capture.', corey: 'Edit · short-form batch 2 + podcast cuts.' },
-  { day: 'Friday', rhys: '10-2: shoot. End of day: weekly review with Corey.', corey: '10-2: run the shoot. PM: weekly review. Schedule next week\'s shoots.' },
-  { day: 'Saturday', rhys: 'Off (or content review if travelling).', corey: 'Off.' },
-  { day: 'Sunday', rhys: 'Eve: scan next week\'s shoot list. Approve.', corey: 'Pre-load Monday\'s prompts in shared doc.' },
+const RHYTHM: Array<{ day: string; rhys: string; jacob: string }> = [
+  { day: 'Monday', rhys: 'AM: ideation + last week review. 10-2: shoot. PM: capture (4 questions, voice note).', jacob: 'AM: pull last week\'s data, prep Monday review. 10-2: run the shoot. PM: dump rushes, mark keeper shots.' },
+  { day: 'Tuesday', rhys: 'Client calls. End of day: capture (4 questions).', jacob: 'Edit · short-form batch 1 (target: 4-5 shorts ready by EOD).' },
+  { day: 'Wednesday', rhys: '10-2: shoot. End of day: capture.', jacob: '10-2: run the shoot. PM: dump rushes.' },
+  { day: 'Thursday', rhys: 'Client calls. End of day: capture.', jacob: 'Edit · short-form batch 2 + podcast cuts.' },
+  { day: 'Friday', rhys: '10-2: shoot. End of day: weekly review with Jacob.', jacob: '10-2: run the shoot. PM: weekly review. Schedule next week\'s shoots.' },
+  { day: 'Saturday', rhys: 'Off (or content review if travelling).', jacob: 'Off.' },
+  { day: 'Sunday', rhys: 'Eve: scan next week\'s shoot list. Approve.', jacob: 'Pre-load Monday\'s prompts in shared doc.' },
 ];
 
 // ─── Asset specs ─────────────────────────────────────────────────────────
@@ -279,8 +279,8 @@ export default function TheRunSheet() {
                   <p className="text-zinc-300 text-[13px] leading-relaxed">{r.rhys}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Corey</p>
-                  <p className="text-zinc-300 text-[13px] leading-relaxed">{r.corey}</p>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Jacob</p>
+                  <p className="text-zinc-300 text-[13px] leading-relaxed">{r.jacob}</p>
                 </div>
               </div>
             </div>
@@ -416,7 +416,7 @@ export default function TheRunSheet() {
           <BulletList items={[
             <><b className="text-white font-semibold">Monday AM</b> · Pick the week\'s type. Write hook + problem (Rhys).</>,
             <><b className="text-white font-semibold">Monday or Wednesday</b> · Shoot (10-2 window).</>,
-            <><b className="text-white font-semibold">Thursday</b> · First edit (Corey).</>,
+            <><b className="text-white font-semibold">Thursday</b> · First edit (Jacob).</>,
             <><b className="text-white font-semibold">Friday</b> · Review + final tweaks.</>,
             <><b className="text-white font-semibold">Sunday</b> · Post.</>,
           ]} />
@@ -511,7 +511,7 @@ export default function TheRunSheet() {
             <><b className="text-white font-semibold">Best save + share rate</b></>,
             <><b className="text-white font-semibold">Best ICP comment rate</b> (qualitative read, not just count)</>,
             <><b className="text-white font-semibold">Best Rhys-enjoyed</b> · if he doesn\'t want to shoot it, it won\'t survive</>,
-            <><b className="text-white font-semibold">Best Corey-can-replicate</b> · format that doesn\'t need Rhys\'s presence to ideate</>,
+            <><b className="text-white font-semibold">Best Jacob-can-replicate</b> · format that doesn\'t need Rhys\'s presence to ideate</>,
           ]} />
           <Note>Then test 1-2 new formats per month from week 5 onwards. The lock isn\'t permanent — it\'s a base rhythm.</Note>
         </Block>
@@ -522,7 +522,7 @@ export default function TheRunSheet() {
       <Wrap>
         <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">10 · Monday review</p>
         <H2>The 7-question check. Every Monday. 10 minutes.</H2>
-        <Note>Corey prepares it. Rhys signs off. Drives the week\'s decisions.</Note>
+        <Note>Jacob prepares it. Rhys signs off. Drives the week\'s decisions.</Note>
         <div className="mt-8 grid gap-2">
           {[
             'Best stat from last week (single number, named)',

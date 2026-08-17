@@ -42,7 +42,7 @@ type Phase = {
 const PHASES: Phase[] = [
   {
     window: 'Weeks 1 to 4',
-    outcome: 'Brand locked. Lead magnets live. Character video live. Shoot cadence locked. Corey shadowing.',
+    outcome: 'Brand locked. Lead magnets live. Character video live. Shoot cadence locked. Jacob shadowing.',
     sections: [
       {
         name: 'Brand',
@@ -84,7 +84,7 @@ const PHASES: Phase[] = [
   },
   {
     window: 'Weeks 5 to 8',
-    outcome: 'Public VSL live. Long form rotation running. Train Corey.',
+    outcome: 'Public VSL live. Long form rotation running. Train Jacob.',
     sections: [
       {
         name: 'Content',
@@ -99,7 +99,7 @@ const PHASES: Phase[] = [
   },
   {
     window: 'Weeks 9 to 12',
-    outcome: 'Refine the brand. Continue testing. Continue training Corey.',
+    outcome: 'Refine the brand. Continue testing. Continue training Jacob.',
     sections: [
       {
         name: 'Brand',
@@ -119,7 +119,7 @@ const PHASES: Phase[] = [
         name: 'Operations',
         href: '/undeniablenextsteps/ops',
         items: [
-          'Train Corey to become a marketer who wields a camera as his tool',
+          'Train Jacob to become a marketer who wields a camera as his tool',
         ],
       },
     ],
@@ -215,7 +215,7 @@ export default function UndeniableNextSteps() {
                     <h3 className="font-display text-[20px] md:text-[24px] font-extrabold text-white mb-2">The Map</h3>
                     <p className="text-zinc-300 text-[14px] leading-relaxed">
                       Where we're at, what we've built, what's missing, and what we do next. Read this before anything
-                      below. The pages underneath are the original 90 day plan and still reference the previous operator.
+                      below. The pages underneath are the original 90 day plan and still hold the detail.
                     </p>
                   </div>
                   <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
@@ -310,11 +310,11 @@ export default function UndeniableNextSteps() {
                 {[
                   { who: 'Rhys', what: 'Lock fortnightly call times in the calendar for the 90 days.' },
                   { who: 'Rhys', what: '5 to 10 stories, moments and outlines for the Character video. Sean will help build it out from there.' },
-                  { who: 'Corey', what: 'List of what is performing well based on data from the last 30 to 90 days.' },
-                  { who: 'Corey', what: 'Audit of what is already in the bank (existing content we can drip).' },
+                  { who: 'Jacob', what: 'List of what is performing well based on data from the last 30 to 90 days.' },
+                  { who: 'Jacob', what: 'Audit of what is already in the bank (existing content we can drip).' },
                   { who: 'Rhys', what: 'Sign off on the bio (primary or alternative option).' },
                   { who: 'Rhys', what: 'Confirm naming approach on the 5 lead magnet assets.' },
-                  { who: 'Rhys + Corey', what: 'Confirm the 4 shoot environments are accessible (Park, Gym, Hallway, Office or equivalent).' },
+                  { who: 'Rhys + Jacob', what: 'Confirm the 4 shoot environments are accessible (Park, Gym, Hallway, Office or equivalent).' },
                   { who: 'Sean', what: 'Deliver the brand workbook by end of week 4.' },
                   { who: 'Sean', what: 'Lock the 6 pillar video outlines and the 6 week rotation.' },
                 ].map((step, i) => (

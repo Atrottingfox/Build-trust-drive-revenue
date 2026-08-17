@@ -26,7 +26,7 @@ function Task({ id, children }: { id: string; children: React.ReactNode }) {
 
 const OWN: Record<string, { l: string; c: string }> = {
   R: { l: 'Rhys', c: 'text-blue-400 border-blue-500/40' },
-  C: { l: 'Corey', c: 'text-amber-400 border-amber-500/40' },
+  J: { l: 'Jacob', c: 'text-amber-400 border-amber-500/40' },
   S: { l: 'Sean', c: 'text-zinc-300 border-zinc-600' },
 };
 
@@ -110,7 +110,7 @@ export default function TheUndeniablePlan() {
           </div>
           <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.08] mb-4">Calibrate.</h2>
           <p className="text-zinc-400 text-[16px] leading-relaxed mb-12">
-            Get what we need live, find out what actually lands, and get Corey up to speed. Testing, not perfecting. No ad spend yet.
+            Get what we need live, find out what actually lands, and get Jacob up to speed. Testing, not perfecting. No ad spend yet.
           </p>
 
           {/* Ship these — the four things you act on */}
@@ -149,9 +149,9 @@ export default function TheUndeniablePlan() {
             </Detail>
           </Bucket>
 
-          <Bucket n="4" title="Corey's client calls" owners="C">
+          <Bucket n="4" title="Jacob's client calls" owners="J">
             <Task id="p1-4">Get on prospect and client calls, ask the questions, and log every problem to its bottleneck.</Task>
-            <Detail title="What Corey opens with, then the 7 questions">
+            <Detail title="What Jacob opens with, then the 7 questions">
               <p className="text-zinc-200">Rhys is on a mission to help 2,000 online health and fitness coaches grow and scale by 2028 without having to work 80 hours a week as a content creator to do it.</p>
               <p className="text-zinc-200">I'm obsessing over 3 things so that I can help him do that. The problems his ideal clients face, why scaling their business really matters to them, and what others like you still want help with so we can make better content for the industry.</p>
               <p className="text-zinc-200">This isn't a testimonial, there's no right answers. Rhys said you're a weapon, so I just want to learn from you. Cool if we jam for 15 to 20 minutes?</p>
@@ -169,10 +169,10 @@ export default function TheUndeniablePlan() {
           {/* Running underneath — habits, not tasks */}
           <div className="mt-12 rounded-2xl border border-zinc-800/70 bg-elevated/20 p-6">
             <GroupLabel>Running underneath</GroupLabel>
-            <Habit owners="C">Every post into a Google sheet: views, saves, likes, shares, average watch time, skip rate.</Habit>
+            <Habit owners="J">Every post into a Google sheet: views, saves, likes, shares, average watch time, skip rate.</Habit>
             <Habit owners="R">End of day voice memo, every day.</Habit>
             <Habit owners="S">Weekly calls with Sean, plus WhatsApp access on 0418 554 4311.</Habit>
-            <Habit owners="S">Corey shadows every shoot and edit. Train him to think like a marketer, not just an editor.</Habit>
+            <Habit owners="S">Jacob shadows every shoot and edit. Train him to think like a marketer, not just an editor.</Habit>
           </div>
         </div>
       </section>
@@ -195,11 +195,11 @@ export default function TheUndeniablePlan() {
             </Collapsible>
 
             <Collapsible eyebrow="Phase 3 · Weeks 9-12" title="Refine and train.">
-              <p className="text-zinc-400 text-[15px] leading-relaxed mb-4">Refine the brand on what the data showed. Keep testing. Keep turning Corey into a marketer who wields a camera as his tool.</p>
+              <p className="text-zinc-400 text-[15px] leading-relaxed mb-4">Refine the brand on what the data showed. Keep testing. Keep turning Jacob into a marketer who wields a camera as his tool.</p>
               <ul className="space-y-1.5">
                 <FutureRow owners="S">Refine the brand on what the data showed, what feels good, and how content performed.</FutureRow>
-                <FutureRow owners="C">Continue hook and format testing, refined by data.</FutureRow>
-                <FutureRow owners="S">Keep training Corey to become a marketer who wields a camera as his tool.</FutureRow>
+                <FutureRow owners="J">Continue hook and format testing, refined by data.</FutureRow>
+                <FutureRow owners="S">Keep training Jacob to become a marketer who wields a camera as his tool.</FutureRow>
                 <FutureRow owners="S">Day 90 decision: keep going (advisory), go deeper (longer build), or stop (project closes, all assets stay). Decide on the data and qualified booked calls from content.</FutureRow>
               </ul>
             </Collapsible>
