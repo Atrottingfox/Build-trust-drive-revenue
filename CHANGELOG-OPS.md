@@ -28,7 +28,7 @@ Newest entries at the top.
 - Rollback: `git revert <deploy commit>` and push, or one click "Publish deploy" on the previous build in the Netlify dashboard.
 - Triggered by: Sean, via agent
 - Why: the engagement went blurry after the creative director was replaced. Sean wanted one map showing where they are, what phase, and what is needed next.
-- Result: pending deploy verification
+- Result: verified ok. Deploy d25053c ready. All three URLs render live and password gate works.
 
 ---
 
