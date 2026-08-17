@@ -203,6 +203,25 @@ export default function UndeniableNextSteps() {
                 <span className="text-blue-400">Plan.</span>
               </h1>
             </Reveal>
+
+            <Reveal>
+              <a
+                href="/undeniablenextsteps/map"
+                className="group block rounded-2xl border border-blue-500/40 bg-blue-500/[0.05] hover:bg-blue-500/[0.09] transition-colors p-7 md:p-8 mt-4"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-blue-300 text-[11px] uppercase tracking-widest font-semibold mb-2">Start here · current state</p>
+                    <h3 className="font-display text-[20px] md:text-[24px] font-extrabold text-white mb-2">The Map</h3>
+                    <p className="text-zinc-300 text-[14px] leading-relaxed">
+                      Where we're at, what we've built, what's missing, and what we do next. Read this before anything
+                      below. The pages underneath are the original 90 day plan and still reference the previous operator.
+                    </p>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-blue-400 group-hover:translate-x-0.5 transition-transform flex-shrink-0" />
+                </div>
+              </a>
+            </Reveal>
           </div>
         </section>
 

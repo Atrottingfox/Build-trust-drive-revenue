@@ -35,6 +35,8 @@ const CalvinOriginal = React.lazy(() => import('./pages/CalvinOriginal'));
 const Undeniable = React.lazy(() => import('./pages/Undeniable'));
 const UndeniableNotes = React.lazy(() => import('./pages/UndeniableNotes'));
 const UndeniableNextSteps = React.lazy(() => import('./pages/UndeniableNextSteps'));
+const UndeniableMap = React.lazy(() => import('./pages/UndeniableMap'));
+const UndeniableChannels = React.lazy(() => import('./pages/UndeniableChannels'));
 const UndeniableContentSystem = React.lazy(() => import('./pages/UndeniableContentSystem'));
 const UndeniableHooks = React.lazy(() => import('./pages/UndeniableHooks'));
 const UndeniableAdGold = React.lazy(() => import('./pages/UndeniableAdGold'));
@@ -118,6 +120,8 @@ export default function App() {
           <Route path="/undeniable" element={<Undeniable />} />
           <Route path="/undeniable-notes" element={<UndeniableNotes />} />
           <Route path="/undeniablenextsteps" element={<UndeniableNextSteps />} />
+          <Route path="/undeniablenextsteps/map" element={<UndeniableMap />} />
+          <Route path="/undeniablenextsteps/channels" element={<UndeniableChannels />} />
           <Route path="/undeniablenextsteps/content-system" element={<UndeniableContentSystem />} />
           <Route path="/undeniablenextsteps/hooks" element={<UndeniableHooks />} />
           <Route path="/undeniablenextsteps/ad-gold" element={<UndeniableAdGold />} />
