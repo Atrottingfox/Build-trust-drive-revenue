@@ -404,7 +404,7 @@ const GAPS: Gap[] = [
   {
     n: '06',
     title: 'Training',
-    problem: 'Sean is not training him well enough right now. That is on Sean.',
+    problem: 'The training needs to be better, and it needs to be weekly.',
     action: 'Two calls a week. Monday sets the week. Friday is training. First session is hooks.',
     owner: 'Sean',
     when: 'This week',
