@@ -58,6 +58,7 @@ const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const Booked = React.lazy(() => import('./pages/Booked'));
+const Install = React.lazy(() => import('./pages/Install'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 
@@ -145,6 +146,7 @@ export default function App() {
           <Route path="/offer" element={<Offer />} />
           <Route path="/lock-in" element={<LockIn />} />
           <Route path="/booked" element={<Booked />} />
+          <Route path="/install" element={<Install />} />
           <Route path="/geronimo" element={<Geronimo />} />
           <Route path="/geronimonextsteps" element={<GeronimoNextSteps />} />
         </Routes>
