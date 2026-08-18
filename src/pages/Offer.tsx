@@ -80,7 +80,8 @@ const ladder = [
     intro: 'Turn that blueprint into a working Engine: short form cadence, long form trust assets, and a simple scorecard that links content to revenue.',
     items: [
       'Short form cadence and Capture Block',
-      '1 to 2 long form trust assets (YouTube / podcast)',
+      'Long form trust asset cycle on rotation (YouTube / podcast)',
+      'One training per week for you and your team',
       'Simple scorecard and weekly review',
       'Your operator is running the rhythm. You are spending under 2 hours a week on it',
     ],
@@ -106,6 +107,7 @@ const buildPhases = [
       'We extract the genius. The founder beliefs, contrarian takes, the stories. Everything gets built and documented live. The entire engine runs from this.',
       'This is where we build your customer journey, craft your plan, and map your core pillar videos.',
     ],
+    rhythm: [],
     outcomes: [
       'A documented brand. Personality, positioning, perspective, messaging and voice.',
       'A Customer Journey Map. Cold to warm to buyer to advocate.',
@@ -116,8 +118,11 @@ const buildPhases = [
   {
     num: '02', tag: 'Phase 02 · Install · Weeks 1 to 4', title: 'Get the engine built and live.',
     paras: [
-      'One 60 minute call per week with you and your key people.',
       'Short form, long form, lead magnets, the Trojan Horse VSL, and the documented Authority Engine get built and wired up. The first cycle runs live so we test it on real audience.',
+    ],
+    rhythm: [
+      '1x 60 minute call per week with you and your key people.',
+      '1x training per week for you and your team.',
     ],
     outcomes: [],
   },
@@ -127,23 +132,64 @@ const buildPhases = [
       'Your team runs the cycle. I act as advisor. We tighten hooks, lead magnets, longform structure, and the VSL on real data. We test the strongest pieces with your warmest audience.',
       'End of 90 days you have one documented Authority Engine, one repeatable monthly demand cycle, and a clear view of what happens if we keep going.',
     ],
+    rhythm: [
+      '1x 60 minute call per fortnight with you and your key people.',
+      '1x training per week for you and your team.',
+      '1x Operator Clinic per fortnight for implementation questions.',
+      'Up to 1 Loom per week for asset review.',
+      '24 hour feedback via WhatsApp.',
+    ],
     outcomes: [],
   },
 ];
 
-const cadence = [
-  { phase: 'Phase 01 · Build', when: '4 to 6 hours', text: 'Brand Day intensive. One in person session with you and whoever owns your content.', items: [] },
-  { phase: 'Phase 02 · Install', when: 'Weeks 1 to 4', text: '', items: [
-    '1x 60 minute call per week with you and your key people.',
-    'Founder welcome.',
-    'The engine gets built and wired up.',
-  ]},
-  { phase: 'Phase 03 · Tune', when: 'Weeks 5 to 12', text: '', items: [
-    '1x 60 minute call per fortnight with you and your key people.',
-    '1x Operator Clinic per fortnight for implementation questions.',
-    'Up to 1 Loom per week for asset review.',
-    '24 hour feedback via WhatsApp.',
-  ]},
+const dayNinety = [
+  {
+    group: 'Authority Engine Blueprint',
+    items: [
+      'Bottleneck Scorecard (Clarity, Visibility, Authority, Quality)',
+      'Customer Journey Map, cold to warm to buyer to advocate',
+      'Brand Bible: voice, positioning, pillars, formats, CTAs',
+      'Authority Engine Map: which channel does discovery, depth, conversion',
+      '30 Day Posting Program with dates, formats, CTAs and owners',
+    ],
+  },
+  {
+    group: 'Short form Engine',
+    items: [
+      'Weekly Capture Block locked in your calendar',
+      'Capture SOP plus a prompt bank your team actually uses',
+      'Operator Weekly Playbook (Mon capture, Tue to Thu cut and post, Fri review)',
+      'Short form scorecard filled for 3+ consecutive weeks',
+    ],
+  },
+  {
+    group: 'Long form core',
+    items: [
+      '1 to 2 pillar topics chosen and packaged (titles, thumbnail angles)',
+      'Pillar outlines written to the template, not scripted',
+      '1 Trust Video or Trojan Horse VSL outlined, ideally filmed',
+      'Lead magnet spec, built from assets you already have where possible',
+    ],
+  },
+  {
+    group: 'Cadence and review',
+    items: [
+      'Weekly cadence form filled most weeks by you and your operator',
+      'Content to Cash scoreboard showing content, DMs, apps and opps',
+      'Operator sending a Friday Loom: best clip, worst clip, what they will test',
+    ],
+  },
+  {
+    group: 'Your Media Operator, trained',
+    items: [
+      'A Media Operator who understands the strategy, not just the schedule',
+      'An Operator Playbook any future hire can follow without re onboarding',
+      'They know their role and their KPIs without being reminded',
+      'They run the weekly rhythm without me chasing',
+      'Dangerous by Day 90. Weaponised is the 12 month job, not this one.',
+    ],
+  },
 ];
 
 const diagnostic = [
@@ -411,6 +457,19 @@ export default function Offer() {
                   <div className="space-y-4 text-zinc-400 text-sm leading-relaxed mb-6">
                     {p.paras.map((para, j) => <p key={j}>{para}</p>)}
                   </div>
+                  {p.rhythm.length > 0 && (
+                    <div className="mb-6">
+                      <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">Rhythm</p>
+                      <ul className="space-y-2">
+                        {p.rhythm.map((item, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                            <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   {p.outcomes.length > 0 && (
                     <>
                       <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase 1</p>
@@ -430,12 +489,26 @@ export default function Offer() {
 
             <div className="mt-10">
               <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By Day 90 you have</p>
-              <Ticks items={[
-                'One fully documented Authority Engine for your business. Brand, content, and customer journey mapped',
-                'A personalised short form system your operator runs every week. Capture block, operating system and content scorecard',
-                '1 to 2 long form trust assets and a YouTube plan that actually gets watched by buyers',
-                'Three straight weeks hitting agreed lead and pipeline targets',
-              ]} />
+              <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                {dayNinety.map((g, i) => (
+                  <div key={i}>
+                    <p className="text-white font-semibold text-[15px] mb-3">{g.group}</p>
+                    <ul className="space-y-2.5">
+                      {g.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-3">
+                          <Check className="w-[18px] h-[18px] text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
+                          <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 pt-6 border-t border-zinc-800">
+                <Ticks items={[
+                  'Three straight weeks hitting agreed lead and pipeline targets',
+                ]} />
+              </div>
             </div>
 
             <div className="glow-card border-blue-500/20 p-8 mt-10">
@@ -457,7 +530,7 @@ export default function Offer() {
 
       <div className="gradient-line" />
 
-      {/* ROLES & CADENCE */}
+      {/* ROLES */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
@@ -465,7 +538,7 @@ export default function Offer() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
               Roles.
               <br />
-              <span className="text-zinc-500">Cadence.</span>
+              <span className="text-zinc-500">Who owns what.</span>
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6 mb-12">
@@ -503,26 +576,6 @@ export default function Offer() {
               </div>
             </div>
 
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Cadence</p>
-            <div className="grid md:grid-cols-3 gap-6">
-              {cadence.map((c, i) => (
-                <div key={i} className="glow-card p-8">
-                  <p className="text-blue-400 font-semibold text-sm mb-1">{c.phase}</p>
-                  <p className="text-zinc-500 text-xs uppercase tracking-widest mb-4">{c.when}</p>
-                  {c.text && <p className="text-zinc-300 text-sm leading-relaxed">{c.text}</p>}
-                  {c.items.length > 0 && (
-                    <ul className="space-y-2">
-                      {c.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                          <span className="text-zinc-300 text-sm leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
           </Section>
         </div>
       </section>
