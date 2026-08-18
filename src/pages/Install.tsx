@@ -34,10 +34,30 @@ const STRIPE_PUBLISHABLE_KEY =
    exists the step shows as coming rather than linking somewhere broken. */
 const WEEKLY_CALL_URL = '';
 
-const OVERVIEW = [
-  ['What I do', 'Extract the genius, document the brand, and build the Engine with you. Strategy, frameworks and advisory.'],
-  ['What your team does', 'Implements. Films, publishes, and runs the cycle, led by your Media Owner.'],
-  ['What success looks like', 'One documented Authority Engine and one repeatable monthly demand cycle, running without you in it every day.'],
+/*
+  They have already done the Brand Day, so this overview is about the 90 days
+  specifically. It is the three phases from /offer, in the order they happen, so
+  the page and the sales page and the agreement all say the same thing.
+*/
+const PHASES = [
+  {
+    when: 'Weeks 1 to 4',
+    title: 'Install',
+    body: 'Short form, long form, lead magnets, the Trojan Horse VSL and the documented Authority Engine get built and wired up. The first cycle runs live, so we test it on real audience.',
+    rhythm: 'One 60 minute call a week with you and your key people. One training a week for your team.',
+  },
+  {
+    when: 'Weeks 5 to 12',
+    title: 'Tune',
+    body: 'Your team runs the cycle and I move to advisor. We tighten hooks, lead magnets, long form structure and the VSL on real data, and test the strongest pieces with your warmest audience.',
+    rhythm: 'A 60 minute call a fortnight, a training a week, an Operator Clinic a fortnight, up to one Loom a week, and 24 hour feedback on WhatsApp.',
+  },
+  {
+    when: 'Day 90',
+    title: 'What you have',
+    body: 'One documented Authority Engine, one repeatable monthly demand cycle, and your operator running the rhythm. You spend under two hours a week on it.',
+    rhythm: '',
+  },
 ];
 
 const store = {
@@ -243,27 +263,37 @@ export default function Install() {
               {TERMS_TITLE}
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed">
-              Three things to do, then we start.
+              You have done the Day. Here is what the next 90 look like, and the three
+              things to sort before we start.
             </p>
           </div>
 
-          {/* What they just bought, before anything is asked of them */}
+          {/* The 90 days specifically. They have already done the Brand Day. */}
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-8 mb-4">
-            <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-5">
-              Here is what you just bought
+            <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-6">
+              What the next 90 days look like
             </p>
-            <div className="space-y-5">
-              {OVERVIEW.map(([label, body]) => (
-                <div key={label}>
-                  <p className="text-white text-[15px] font-medium mb-1">{label}</p>
-                  <p className="text-zinc-400 text-[15px] leading-relaxed">{body}</p>
+
+            <div className="space-y-7">
+              {PHASES.map((phase) => (
+                <div key={phase.title} className="grid sm:grid-cols-[110px_1fr] gap-2 sm:gap-5">
+                  <p className="text-zinc-500 text-[13px] font-medium sm:pt-0.5">{phase.when}</p>
+                  <div>
+                    <p className="text-white text-[15px] font-medium mb-1.5">{phase.title}</p>
+                    <p className="text-zinc-400 text-[15px] leading-relaxed">{phase.body}</p>
+                    {phase.rhythm && (
+                      <p className="text-zinc-500 text-sm leading-relaxed mt-2">{phase.rhythm}</p>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
-            <p className="text-zinc-500 text-sm leading-relaxed mt-6 pt-6 border-t border-zinc-800">
-              90 days. AUD $10,000, paid $5,000 today and $5,000 in 30 days. There is no third
-              payment: the day 60 instalment is waived because you came through a Brand Builder
-              Day.
+
+            <p className="text-zinc-500 text-sm leading-relaxed mt-7 pt-6 border-t border-zinc-800">
+              I provide the strategy, frameworks and advisory. Your team implements, led by your
+              Media Owner. AUD $10,000 for the 90 days, paid $5,000 today and $5,000 in 30 days.
+              There is no third payment: the day 60 instalment is waived because you came through
+              a Brand Builder Day.
             </p>
           </div>
 
