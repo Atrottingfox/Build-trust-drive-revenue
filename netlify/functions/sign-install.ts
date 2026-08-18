@@ -72,7 +72,7 @@ const handler: Handler = async (event) => {
       }
     }
 
-    await addTags(token, contactId, ["install-signed"]);
+    await addTags(token, contactId, ["install-signed", "step-1-signed"]);
 
     // The IP is logged rather than stored on the contact. It is evidence if a
     // signature is ever disputed, and clutter on the record otherwise.

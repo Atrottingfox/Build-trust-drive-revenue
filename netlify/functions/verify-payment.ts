@@ -29,6 +29,79 @@ const headers = {
 const GHL_API = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
 
+/*
+  Raises the day 30 instalment as an invoice against the saved card. Any failure
+  here is logged loudly rather than thrown: the first payment has already
+  succeeded and must not be undone by a problem scheduling the second.
+*/
+async function scheduleSecondInstalment(
+  stripeKey: string,
+  customerId: string,
+  contactId: string | null
+): Promise<void> {
+  const amount = process.env.INSTALL_PAYMENT_2_CENTS;
+  const days = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
+  if (!amount) {
+    console.error("INSTALL_PAYMENT_2_CENTS not set, second instalment NOT scheduled for", customerId);
+    return;
+  }
+
+  const auth = { Authorization: `Bearer ${stripeKey}`, "Content-Type": "application/x-www-form-urlencoded" };
+
+  try {
+    const dueDate = Math.floor(Date.now() / 1000) + days * 86400;
+
+    // The line item has to exist before the invoice that collects it.
+    const itemRes = await fetch("https://api.stripe.com/v1/invoiceitems", {
+      method: "POST",
+      headers: auth,
+      body: new URLSearchParams({
+        customer: customerId,
+        amount: String(amount),
+        currency: "aud",
+        description: "90 Day Authority Engine Install, second instalment",
+      }).toString(),
+    });
+    if (!itemRes.ok) {
+      console.error("Failed to create invoice item:", await itemRes.text(), customerId);
+      return;
+    }
+
+    const invRes = await fetch("https://api.stripe.com/v1/invoices", {
+      method: "POST",
+      headers: auth,
+      body: new URLSearchParams({
+        customer: customerId,
+        collection_method: "charge_automatically",
+        auto_advance: "true",
+        due_date: String(dueDate),
+        description: `Second instalment, due ${days} days after signing`,
+        ...(contactId ? { "metadata[ghl_contact_id]": String(contactId) } : {}),
+      }).toString(),
+    });
+    const invoice = await invRes.json();
+
+    if (!invRes.ok) {
+      console.error("Failed to create second instalment invoice:", JSON.stringify(invoice?.error || invoice), customerId);
+      return;
+    }
+
+    // Finalising is what puts it on Stripe's schedule. Left as a draft it never charges.
+    const finalRes = await fetch(
+      `https://api.stripe.com/v1/invoices/${encodeURIComponent(invoice.id)}/finalize`,
+      { method: "POST", headers: auth, body: "auto_advance=true" }
+    );
+    if (!finalRes.ok) {
+      console.error("Second instalment invoice created but NOT finalised:", invoice.id, await finalRes.text());
+      return;
+    }
+
+    console.log("Second instalment scheduled:", invoice.id, "customer:", customerId, "due in", days, "days");
+  } catch (err) {
+    console.error("Error scheduling second instalment for", customerId, err);
+  }
+}
+
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
   if (event.httpMethod !== "POST") {
@@ -78,7 +151,12 @@ const handler: Handler = async (event) => {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({ tags: ["brand-day-paid"] }),
+        body: JSON.stringify({
+          tags:
+            session.metadata?.payment === "install-1"
+              ? ["step-2-paid", "install-payment-1-paid"]
+              : ["brand-day-paid"],
+        }),
       });
       tagged = tagRes.ok;
       if (!tagRes.ok) {
@@ -128,6 +206,20 @@ const handler: Handler = async (event) => {
       }
 
       await reconcile(token, contactId);
+
+      /*
+        The 90 Day Install is one commitment paid in two instalments, and
+        signing agrees to both. So the second is raised as a Stripe invoice due
+        in 30 days, set to charge the saved card automatically.
+
+        Stripe owns the schedule rather than a GHL workflow firing a charge.
+        That matters: a workflow can be left unpublished, a tag can fail to
+        land, and the money then silently never arrives. Stripe also handles
+        retries and dunning, which nothing here would.
+      */
+      if (session.metadata?.payment === "install-1" && session.customer) {
+        await scheduleSecondInstalment(secret, String(session.customer), contactId);
+      }
 
       if (customFields.length) {
         const fieldRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
