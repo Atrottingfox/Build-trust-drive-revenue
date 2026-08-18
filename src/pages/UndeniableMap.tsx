@@ -35,7 +35,7 @@ const SIGNALS: Array<{ label: string; value: string; read: string; tone: 'down' 
 
 // ─── What we've done ────────────────────────────────────────────────────
 
-const DONE: Array<{ head: string; detail: string }> = [
+const DONE: Array<{ head: string; detail?: string }> = [
   {
     head: 'Recalibrated on the creative director',
     detail: 'We got him out. Then we rebuilt from the foundation up. That was hard and it cost us momentum, and it was the right call.',
@@ -57,12 +57,7 @@ const DONE: Array<{ head: string; detail: string }> = [
     detail: 'That gave him everything he needed to begin.',
   },
   {
-    head: 'Added leadership support',
-    detail: 'Someone new is now helping across a few different parts of the business. Big unlock.',
-  },
-  {
-    head: 'Locked two calls a week',
-    detail: 'Monday sets the week. Friday is training. Both in the calendar, both recurring.',
+    head: 'Built the foundation for scale from the bottom up',
   },
 ];
 
@@ -661,10 +656,7 @@ export default function UndeniableMap() {
       {/* WHERE WE'RE AT */}
       <Wrap>
         <Eyebrow>Where we're at</Eyebrow>
-        <Lead>
-          We spent the last stretch rebuilding instead of scaling. Views paid for that. What we got back is a base
-          we can actually build on top of, and an operator who is showing real promise.
-        </Lead>
+        <Lead>We rebuilt instead of scaling. Views paid for that. What we got back is a base we can build on.</Lead>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {SIGNALS.map((s) => (
             <div
@@ -693,12 +685,12 @@ export default function UndeniableMap() {
       {/* WHAT WE'VE DONE */}
       <Wrap>
         <Eyebrow>What we've done</Eyebrow>
-        <Lead>The foundation work. This is what the last stretch bought us.</Lead>
+        <Lead>What the last stretch bought us.</Lead>
         <div className="space-y-3">
           {DONE.map((d) => (
             <div key={d.head} className="rounded-xl border border-zinc-800 bg-elevated/40 px-5 py-4 md:px-6 md:py-5">
-              <h3 className="font-display text-[15px] md:text-[16px] font-extrabold text-white mb-1.5">{d.head}</h3>
-              <p className="text-zinc-400 text-[13px] md:text-[14px] leading-relaxed">{d.detail}</p>
+              <h3 className={`font-display text-[15px] md:text-[16px] font-extrabold text-white ${d.detail ? 'mb-1.5' : ''}`}>{d.head}</h3>
+              {d.detail && <p className="text-zinc-400 text-[13px] md:text-[14px] leading-relaxed">{d.detail}</p>}
             </div>
           ))}
         </div>
@@ -709,10 +701,7 @@ export default function UndeniableMap() {
       {/* THE PHASE WE'RE IN */}
       <Wrap>
         <Eyebrow>The phase we're in</Eyebrow>
-        <Lead>
-          Jacob's clock, not the engagement clock. Day 30 lands this week, which makes it the gate we walk through
-          before anything ramps.
-        </Lead>
+        <Lead>Jacob is 30 days in. Day 30 lands this week. Nothing ramps until we get through it.</Lead>
         <div className="grid gap-3 md:grid-cols-3">
           {PHASES.map((p) => (
             <PhaseCard key={p.window} phase={p} />
@@ -725,10 +714,7 @@ export default function UndeniableMap() {
       {/* THE TIMELINE */}
       <Wrap>
         <Eyebrow>The timeline · from here</Eyebrow>
-        <Lead>
-          Every dated thing between now and day 90. Filled dots are the gates. Everything else is the work that gets
-          us to them.
-        </Lead>
+        <Lead>Everything dated between now and day 90. Blue dots are the gates.</Lead>
         <div>
           {TIMELINE.map((s, i) => (
             <TimelineStop key={`${s.day}-${s.title}`} stop={s} isLast={i === TIMELINE.length - 1} />
@@ -763,10 +749,7 @@ export default function UndeniableMap() {
       {/* THE 12 MONTHS */}
       <Wrap>
         <Eyebrow>The 12 months</Eyebrow>
-        <Lead>
-          Zoom out. The 90 days is the first quarter of a year, and everything after it depends on what the 90 days
-          produces.
-        </Lead>
+        <Lead>The 90 days is the first quarter. What comes after depends on what it produces.</Lead>
 
         <HorizonBar />
 
@@ -833,10 +816,7 @@ export default function UndeniableMap() {
       {/* THE CONTENT BOARD */}
       <Wrap>
         <Eyebrow>The content board</Eyebrow>
-        <Lead>
-          Monthly. Its own slot. Jacob runs it and we sit in it. He comes to us with the numbers, not the other way
-          around. First one is this week.
-        </Lead>
+        <Lead>Monthly, in its own slot. Jacob runs it and brings the numbers. First one is this week.</Lead>
 
         <BoardLoop />
 
@@ -899,7 +879,7 @@ export default function UndeniableMap() {
       {/* FRIDAY TRAINING */}
       <Wrap>
         <Eyebrow>Friday training</Eyebrow>
-        <Lead>One topic a week, picked from what the work needs next. The upskilling rhythm that has been missing.</Lead>
+        <Lead>One topic a week, picked from what the work needs next.</Lead>
 
         <div className="grid md:grid-cols-2 gap-3">
           <div className="rounded-2xl border border-zinc-800 bg-elevated/30 p-6 md:p-7">
@@ -939,7 +919,7 @@ export default function UndeniableMap() {
       {/* WHERE SEAN CAN HELP */}
       <Wrap>
         <Eyebrow>Where I can help</Eyebrow>
-        <Lead>Beyond strategy and training, these are the areas I will get into directly.</Lead>
+        <Lead>Where I will get in directly.</Lead>
         <div className="grid md:grid-cols-2 gap-3">
           {SUPPORT.map((s) => (
             <div key={s.area} className="rounded-xl border border-zinc-800 bg-elevated/40 px-5 py-4">
