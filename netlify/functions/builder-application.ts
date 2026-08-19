@@ -1,5 +1,4 @@
 import type { Handler } from "@netlify/functions";
-import { sendEmail, applicationReceivedEmail, applicationAlertEmail } from "./_email";
 
 const NOTION_BUILDER_DB = "f8cdb64d3910451b9607600fb326bf6e";
 const NOTION_APPLY_DB = "ef00b2eb6dfb825da88101e3c99717d0";
@@ -401,62 +400,6 @@ const handler: Handler = async (event) => {
       } catch (slackErr) {
         console.error('Slack notification failed:', slackErr);
       }
-    }
-
-    /*
-      The two emails. Both are fire and forget, and both are caught inside
-      sendEmail, so neither can fail an application that has already been
-      written to Notion, Slack, Kit and GHL.
-
-      Sent from here rather than a GHL workflow because a workflow lives in a UI
-      nobody can test from, and it is where this has stalled for a week.
-
-      Only /builder gets these. The Apply page and the Operator Intensive have
-      their own shapes and neither has copy written for it yet.
-    */
-    if (!isApply && !isOperator) {
-      const acceptUrl = ghlContactId
-        ? `https://authorityengine.com.au/lock-in?c=${encodeURIComponent(ghlContactId)}`
-        : null;
-
-      const applicant = applicationReceivedEmail(data.name || '');
-      const alert = applicationAlertEmail(
-        data.name || '',
-        [
-          ['Email', data.email],
-          ['Mobile', data.phone],
-          ['Company', data.company],
-          ['Website', data.website],
-          ['Based', data.location],
-          ['Annual revenue', data.revenueBand],
-          ['Primary offer', data.primaryOffer],
-          ['Audience', data.audienceSize],
-          ['Most broken', data.biggestProblem],
-          ['#1 thing to fix', data.whatToFix],
-          ['Owns content ops', data.contentOpsPerson],
-          ['Operator name', data.operatorName],
-          ['Can commit a day in 30', data.canCommitDay],
-          ['How they heard', data.howDidYouHear],
-        ],
-        acceptUrl
-      );
-
-      const alertTo = process.env.EMAIL_ALERT_TO;
-
-      await Promise.all([
-        data.email
-          ? sendEmail({ to: data.email, subject: applicant.subject, text: applicant.text })
-          : Promise.resolve(false),
-        alertTo
-          ? sendEmail({
-              to: alertTo,
-              subject: alert.subject,
-              text: alert.text,
-              // Reply goes to the applicant, not into your own inbox.
-              replyTo: data.email || undefined,
-            })
-          : Promise.resolve(false),
-      ]);
     }
 
     return {

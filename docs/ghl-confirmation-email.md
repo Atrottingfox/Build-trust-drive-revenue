@@ -145,36 +145,6 @@ prefer `accepted`, rename `invited` rather than adding alongside it, and rename
 
 ---
 
-## Click by click
-
-GHL renames its menus between versions, so labels below are "look for this", not gospel.
-The shape of the thing does not change.
-
-1. **Log in and check the sub-account.** Top left switcher. You want the one whose id is
-   `B7IFxtiHwcLoDatUHVF6`. Everything below is wrong if you build it in the agency view.
-2. **Left sidebar > Automation.** Older versions call it Workflows, or hide it under Marketing.
-3. **Find `Application Tag Workflow`** in the list. Do not click New Workflow.
-4. **Note whether it says Draft or Published** before you open it. If it has been sitting in
-   Draft, that alone explains why nothing has ever sent.
-5. **Open it. Check the trigger first.** It should read Contact Tag, tag `applied`. If it says
-   anything else, fix that before adding actions, or you will build onto a trigger that never
-   fires.
-6. **Read every action that is already in there.** Any action referencing a custom field: click
-   into it and confirm a field is actually selected. This workflow was built by GHL's AI 17
-   minutes before the custom fields existed, and its sibling was found with an empty reference.
-7. **Delete any Slack action.** The Netlify function already posts to Slack. Two alerts per
-   applicant was the 14 Aug problem.
-8. **Add the applicant email.** Plus icon under the trigger > Send Email. Set from name and from
-   address. Paste the subject and body from above. **Switch the editor to plain text or the code
-   view.** The drag and drop builder wraps everything in a template with a logo and a button,
-   which contradicts "I read these myself" before they finish the sentence.
-9. **Add your own copy.** Plus icon again > Internal Notification > type Email > your address.
-   Paste the second block from above.
-10. **Check re-entry.** In workflow settings, leave re-entry off. On means a second application
-    from the same person sends the confirmation twice.
-11. **Save, then Publish.** These are two separate things in GHL. Saving a workflow that stays in
-    Draft does nothing at all, silently, forever. The toggle is top right.
-
 ## Test before it goes near a real applicant
 
 1. Apply at `/builder` with your own details.
