@@ -66,6 +66,14 @@ const REASONS: Record<string, { title: string; line: string }> = {
     title: "Paid, no date chosen",
     line: "Money is in and they have no Brand Day. Sort this today.",
   },
+  "opened-not-signed": {
+    title: "Read the agreement, went quiet",
+    line: "They opened the 90 day page, read it, and did not sign. Something in there gave them pause.",
+  },
+  "signed-not-paid": {
+    title: "Signed, payment did not go through",
+    line: "They agreed to the terms and the money did not move. Usually the card, not the decision.",
+  },
   "install-payment-failed": {
     title: "Install charge declined",
     line: "The saved card refused an off-session charge. Usually means it wants the holder present.",
