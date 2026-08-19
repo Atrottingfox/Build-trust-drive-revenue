@@ -378,6 +378,22 @@ const handler: Handler = async (event) => {
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
+              /*
+                The invitation link, ready to paste, and only for /builder.
+
+                /builder no longer hands anyone the date-and-payment page. Sean
+                accepts first, then sends this link himself. So the alert has to
+                carry it, or accepting someone means going and finding their
+                contact id in GHL by hand.
+
+                The ?c= is the whole point: payments are matched on contact id,
+                never on email, because a personal address applies and a company
+                card pays. Without an id there is no link worth pasting, so the
+                line is dropped rather than shown broken.
+              */
+              !isApply && ghlContactId
+                ? `\n:white_check_mark: *Accept and send:* https://authorityengine.com.au/lock-in?c=${encodeURIComponent(ghlContactId)}`
+                : null,
             ]).filter(Boolean).join('\n'),
           }),
         });

@@ -39,6 +39,19 @@ const Ticks = ({ items }: { items: string[] }) => (
   </ul>
 );
 
+const Cta = ({ label = 'Apply now', note, className = '' }: { label?: string; note?: string; className?: string }) => (
+  <div className={className}>
+    <a
+      href="/builder"
+      className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
+    >
+      {label}
+      <ArrowRight className="w-4 h-4" />
+    </a>
+    {note && <p className="text-zinc-500 text-sm mt-4">{note}</p>}
+  </div>
+);
+
 const Crosses = ({ items }: { items: string[] }) => (
   <ul className="space-y-3">
     {items.map((t, i) => (
@@ -101,22 +114,7 @@ const ladder = [
 
 const buildPhases = [
   {
-    num: '01', tag: 'Phase 01 · Build · 4 to 6 hours', title: 'Extract the genius. Document the brand.',
-    paras: [
-      'Brand Day intensive. One in person session with you and whoever owns your content. Four to six hours. Two hours with you. The rest with your content lead.',
-      'We extract the genius. The founder beliefs, contrarian takes, the stories. Everything gets built and documented live. The entire engine runs from this.',
-      'This is where we build your customer journey, craft your plan, and map your core pillar videos.',
-    ],
-    rhythm: [],
-    outcomes: [
-      'A documented brand. Personality, positioning, perspective, messaging and voice.',
-      'A Customer Journey Map. Cold to warm to buyer to advocate.',
-      'The shape of the monthly demand cycle, mapped to your calendar.',
-      'Agreed success metrics for the 90 days.',
-    ],
-  },
-  {
-    num: '02', tag: 'Phase 02 · Install · Weeks 1 to 4', title: 'Get the engine built and live.',
+    num: '01', tag: 'Phase 01 · Install · Weeks 1 to 4', title: 'Get the engine built and live.',
     paras: [
       'Short form, long form, lead magnets, the Trojan Horse VSL, and the documented Authority Engine get built and wired up. The first cycle runs live so we test it on real audience.',
     ],
@@ -127,7 +125,7 @@ const buildPhases = [
     outcomes: [],
   },
   {
-    num: '03', tag: 'Phase 03 · Tune · Weeks 5 to 12', title: 'Tune the engine based on data.',
+    num: '02', tag: 'Phase 02 · Tune · Weeks 5 to 12', title: 'Tune the engine based on data.',
     paras: [
       'Your team runs the cycle. I act as advisor. We tighten hooks, lead magnets, longform structure, and the VSL on real data. We test the strongest pieces with your warmest audience.',
       'End of 90 days you have one documented Authority Engine, one repeatable monthly demand cycle, and a clear view of what happens if we keep going.',
@@ -210,6 +208,7 @@ export default function Offer() {
             <p className="text-zinc-400 leading-relaxed">
               I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with one client recently crossing $2M a month.
             </p>
+            <Cta label="Apply for a Build Day" className="mt-10" />
           </Section>
         </div>
       </section>

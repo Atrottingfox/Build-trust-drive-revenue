@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Container } from '../components/ui/Container';
@@ -294,6 +294,53 @@ export default function Builder() {
 
   const spots = spotsThisMonth();
 
+  /*
+    Capture the people who start this and never finish it.
+
+    The form is long by design, and until now someone who typed their name and
+    email and then stalled on question nine left nothing behind. There was no
+    way to see how many start and drop, let alone follow one up.
+
+    Fires once per page load, as soon as there is a name and an email that could
+    actually be contacted. It tags `application-started` in GHL and nothing else.
+    The full submit upserts the same contact and adds `applied`, so the abandoned
+    list is "has application-started, does not have applied".
+
+    Deliberately silent. Nobody is waiting on it, it must never interrupt someone
+    who is still typing, and a failure here is not worth a word on screen.
+  */
+  const startedSent = useRef(false);
+
+  useEffect(() => {
+    if (startedSent.current || submitted) return;
+
+    const email = form.email.trim();
+    const name = form.name.trim();
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+    // They may still be typing the last character of their domain.
+    const t = setTimeout(() => {
+      if (startedSent.current) return;
+      startedSent.current = true;
+
+      fetch('/.netlify/functions/application-started', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: form.phone.trim(),
+          company: form.company.trim(),
+          website: form.website.trim(),
+        }),
+      }).catch(() => {
+        /* Never surfaced. They are mid-application. */
+      });
+    }, 1200);
+
+    return () => clearTimeout(t);
+  }, [form.email, form.name, form.phone, form.company, form.website, submitted]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (submitting) return;
@@ -331,17 +378,23 @@ export default function Builder() {
       if (!res.ok || data.error) throw new Error(data.error || 'Submission failed');
 
       /*
-        Straight to the secure page. No thank-you screen, no waiting to hear
-        back: the moment the application lands they are looking at the $5,000
-        and the calendar.
+        The application ends here, on the thank you screen. It deliberately does
+        NOT hand out the date-and-payment page.
 
-        The contact id rides along in ?c= so the payment and the booking both
-        attach to this exact person in GHL instead of being guessed from an
-        email address. It is also mirrored into storage, because Stripe's
-        overlay drops the query string on the way back from checkout.
+        Applying and being accepted are two different events. Sean reads the
+        application, moves them from `applied` to `accepted`, and the /lock-in
+        link is delivered separately in the invitation email. That gap is the
+        product: "this isn't a sales form, it's a filter" is only true if
+        something actually filters.
 
-        A missing id means GHL degraded, not that the application failed. They
-        still go through. Payment works without it and I reconcile by email.
+        It also protects the client. Someone with nobody to own content ops
+        cannot buy a day that builds a system nobody runs, because they never
+        reach the checkout.
+
+        The contact id is still mirrored into storage. The invitation carries
+        ?c=<contactId> so payment and booking attach to this exact person in
+        GHL, and storage is the fallback for when Stripe's overlay drops the
+        query string on the way back from checkout.
       */
       if (data.contactId) {
         try {
@@ -352,9 +405,7 @@ export default function Builder() {
         }
       }
 
-      window.location.href = data.contactId
-        ? `/lock-in?c=${encodeURIComponent(data.contactId)}`
-        : '/lock-in';
+      setSubmitted(true);
       return;
     } catch (err: any) {
       console.error('Submission error:', err);
