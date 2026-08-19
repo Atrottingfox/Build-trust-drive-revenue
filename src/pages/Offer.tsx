@@ -144,52 +144,11 @@ const buildPhases = [
 ];
 
 const dayNinety = [
-  {
-    group: 'Authority Engine Blueprint',
-    items: [
-      'Bottleneck Scorecard (Clarity, Visibility, Authority, Quality)',
-      'Customer Journey Map, cold to warm to buyer to advocate',
-      'Brand Bible: voice, positioning, pillars, formats, CTAs',
-      'Authority Engine Map: which channel does discovery, depth, conversion',
-      '30 Day Posting Program with dates, formats, CTAs and owners',
-    ],
-  },
-  {
-    group: 'Short form Engine',
-    items: [
-      'Weekly Capture Block locked in your calendar',
-      'Capture SOP plus a prompt bank your team actually uses',
-      'Operator Weekly Playbook (Mon capture, Tue to Thu cut and post, Fri review)',
-      'Short form scorecard filled for 3+ consecutive weeks',
-    ],
-  },
-  {
-    group: 'Long form core',
-    items: [
-      '1 to 2 pillar topics chosen and packaged (titles, thumbnail angles)',
-      'Pillar outlines written to the template, not scripted',
-      '1 Trust Video or Trojan Horse VSL outlined, ideally filmed',
-      'Lead magnet spec, built from assets you already have where possible',
-    ],
-  },
-  {
-    group: 'Cadence and review',
-    items: [
-      'Weekly cadence form filled most weeks by you and your operator',
-      'Content to Cash scoreboard showing content, DMs, apps and opps',
-      'Operator sending a Friday Loom: best clip, worst clip, what they will test',
-    ],
-  },
-  {
-    group: 'Your Media Operator, trained',
-    items: [
-      'A Media Operator who understands the strategy, not just the schedule',
-      'An Operator Playbook any future hire can follow without re onboarding',
-      'They know their role and their KPIs without being reminded',
-      'They run the weekly rhythm without me chasing',
-      'Dangerous by Day 90. Weaponised is the 12 month job, not this one.',
-    ],
-  },
+  'A documented Authority Engine your team runs. Brand Bible, journey map, 30 day Posting Program',
+  'A short form system your operator runs off a weekly Capture Block',
+  'One YouTube trust cycle filmed, including all trust assets',
+  'A Media Operator trained to run the rhythm, with a playbook any future hire can follow',
+  'Three straight weeks hitting agreed lead and pipeline targets',
 ];
 
 const diagnostic = [
@@ -489,26 +448,7 @@ export default function Offer() {
 
             <div className="mt-10">
               <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">By Day 90 you have</p>
-              <div className="grid md:grid-cols-2 gap-x-12 gap-y-8">
-                {dayNinety.map((g, i) => (
-                  <div key={i}>
-                    <p className="text-white font-semibold text-[15px] mb-3">{g.group}</p>
-                    <ul className="space-y-2.5">
-                      {g.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-3">
-                          <Check className="w-[18px] h-[18px] text-blue-400 mt-0.5 flex-shrink-0" strokeWidth={2.5} />
-                          <span className="text-zinc-400 text-sm leading-relaxed">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 pt-6 border-t border-zinc-800">
-                <Ticks items={[
-                  'Three straight weeks hitting agreed lead and pipeline targets',
-                ]} />
-              </div>
+              <Ticks items={dayNinety} />
             </div>
 
             <div className="glow-card border-blue-500/20 p-8 mt-10">
