@@ -35,16 +35,27 @@ const authHeaders = (token: string) => ({
   Accept: "application/json",
 });
 
-export async function getTags(token: string, contactId: string): Promise<string[]> {
+/*
+  The whole contact, for callers that want more than the tags. Same request
+  getTags makes, so asking for both costs one call rather than two.
+*/
+export async function getContact(
+  token: string,
+  contactId: string
+): Promise<Record<string, any> | null> {
   try {
     const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
       headers: authHeaders(token),
     });
-    if (!res.ok) return [];
-    return (await res.json())?.contact?.tags || [];
+    if (!res.ok) return null;
+    return (await res.json())?.contact || null;
   } catch {
-    return [];
+    return null;
   }
+}
+
+export async function getTags(token: string, contactId: string): Promise<string[]> {
+  return (await getContact(token, contactId))?.tags || [];
 }
 
 export async function addTags(token: string, contactId: string, tags: string[]): Promise<boolean> {

@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { GHL_API, GHL_VERSION, addTags, getTags } from "./_ghl";
+import { GHL_API, GHL_VERSION, addTags, getContact } from "./_ghl";
 
 /*
   Records that a client opened their hub, and how far they have got.
@@ -37,7 +37,16 @@ const handler: Handler = async (event) => {
     const { contactId } = JSON.parse(event.body || "{}");
     if (!contactId) return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };
 
-    const tags = await getTags(token, contactId);
+    const contact = await getContact(token, contactId);
+    const tags: string[] = contact?.tags || [];
+
+    /*
+      Name and email come back so /lock-in can prefill Calendly. They already
+      typed both on the application; asking again at the moment they pick a
+      date is friction for no reason.
+    */
+    const fullName = [contact?.firstName, contact?.lastName]
+      .filter(Boolean).join(" ").trim() || contact?.name || "";
 
     if (!tags.includes("hub-opened")) {
       await addTags(token, contactId, ["hub-opened"]);
@@ -82,6 +91,8 @@ const handler: Handler = async (event) => {
         */
         brandDayPaid: tags.includes("brand-day-paid"),
         brandDayBooked: tags.includes("brand-day-booked"),
+        name: fullName,
+        email: contact?.email || "",
       }),
     };
   } catch (err) {

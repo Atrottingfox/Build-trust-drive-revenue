@@ -58,7 +58,7 @@ const LEAVE_WITH = [
 ];
 
 const AFTER_PAYMENT = [
-  'Immediately choose your Brand Builder Day date in my calendar',
+  'Immediately choose your Brand Day date in my calendar',
   'Join a short prep call so I can get under the hood before the Day',
 ];
 
@@ -144,9 +144,40 @@ export default function LockIn() {
   const paidSent = useRef(false);
   const [calHeight, setCalHeight] = useState(700);
   const [days, setDays] = useState<{ total: number; remaining: number } | null>(null);
+  /* Name and email from GHL, used to prefill Calendly so they do not retype
+     what they already gave us on the application. */
+  const [prefill, setPrefill] = useState<{ name: string; email: string }>({ name: '', email: '' });
 
   /* Remembered progress belongs to the contact, never to the browser. */
   const key = (name: string) => (contactId ? `ae_${name}_${contactId}` : `ae_${name}`);
+
+  /*
+    Finishing a step changes the page underneath them: paying unlocks the
+    calendar, booking turns the page into a confirmation. Both happen further
+    down than they are looking, so send them back to the top to see it.
+
+    Only on the transition into done, never on load. Someone arriving already
+    paid is not completing anything, and yanking a returning visitor to the top
+    of a page they opened deliberately is just rude.
+  */
+  const wasPaid = useRef<boolean | null>(null);
+  const wasBooked = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    const first = wasPaid.current === null && wasBooked.current === null;
+    const justCompleted =
+      (wasPaid.current === false && paid) || (wasBooked.current === false && booked);
+
+    wasPaid.current = paid;
+    wasBooked.current = booked;
+
+    if (first || !justCompleted) return;
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+  }, [paid, booked]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -202,6 +233,7 @@ export default function LockIn() {
           if (!d?.ok) return;
           setPaid(Boolean(d.brandDayPaid));
           setBooked(Boolean(d.brandDayBooked));
+          if (d.name || d.email) setPrefill({ name: d.name || '', email: d.email || '' });
           if (d.brandDayPaid) store.set(k('paid'), '1');
           else localStorage.removeItem(k('paid'));
           if (d.brandDayBooked) store.set(k('booked'), '1');
@@ -426,10 +458,20 @@ export default function LockIn() {
     Calendly's own details block is tall enough to force the widget to scroll
     inside itself, which is where the clipping came from.
   */
-  const calendlyUrl =
-    `${CALENDLY_URL}?hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
+  /*
+    Shared by both embeds. `utm_content` carries the contact id so the booking
+    webhook can match the person, and name/email are prefilled from GHL so the
+    details step is already filled in when they reach it.
+  */
+  const calendlyParams =
+    `hide_gdpr_banner=1&hide_event_type_details=1&hide_landing_page_details=1` +
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
-    (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '');
+    (contactId ? `&utm_content=${encodeURIComponent(contactId)}` : '') +
+    (prefill.name ? `&name=${encodeURIComponent(prefill.name)}` : '') +
+    (prefill.email ? `&email=${encodeURIComponent(prefill.email)}` : '');
+
+  const calendlyUrl = `${CALENDLY_URL}?${calendlyParams}`;
+  const prepCallUrl = `${PREP_CALL_URL}?${calendlyParams}`;
 
   /*
     Once both halves are done this stops being a checkout. Leaving the two
@@ -450,7 +492,7 @@ export default function LockIn() {
               You're locked in
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              Your Brand Builder Day is paid for and in both our calendars. Your receipt is in
+              Your Brand Day is paid for and in both our calendars. Your receipt is in
               your inbox.
             </p>
           </div>
@@ -466,14 +508,16 @@ export default function LockIn() {
                 exactly what we need to attack, and what problems to solve. Bring your operator if
                 you have one.
               </p>
-              <a
-                href={PREP_CALL_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
-              >
-                Book your prep call
-              </a>
+              {/* Booked here, on this page. Sending them out to a Calendly tab
+                  means the confirmation lands somewhere they have already
+                  closed, and we never see them come back. */}
+              <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
+                <div
+                  className="calendly-inline-widget w-full"
+                  data-url={prepCallUrl}
+                  style={{ minWidth: 280, height: calHeight }}
+                />
+              </div>
             </div>
 
             <p className="text-zinc-500 text-sm leading-relaxed text-center mt-8">
@@ -522,154 +566,127 @@ export default function LockIn() {
           )}
         </div>
 
-        <div className="max-w-6xl mx-auto grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_420px] items-start">
+        {/*
+          One column, in the order the decision is actually made: what the Day
+          is, then paying for it, then choosing the date. The date sits last
+          because it stays locked until payment clears, and a locked step is
+          only reassuring once you know what you are unlocking.
+        */}
+        <div className="max-w-3xl mx-auto space-y-16">
 
-          {/* Left: the Day itself. Once paid, the calendar takes the top of this
-              column and the walkthrough stays below it, still worth reading. */}
-          <div>
-            <div className="mb-14">
-              <div className="flex items-center gap-3 mb-5">
-                {booked && (
-                  <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                    <Check size={15} />
+          {/* 1. The Day itself, read before any of it is paid for. */}
+          <section>
+            <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
+              What we are doing on the Day
+            </p>
+            <Walkthrough />
+          </section>
+
+          {/* 2. Payment. */}
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`rounded-2xl border p-6 sm:p-7 ${
+              paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
+            }`}
+          >
+            {paid ? (
+              <div className="flex items-center gap-3.5">
+                <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                  <Check size={16} />
+                </div>
+                <div>
+                  <h2 className="font-display text-lg text-white leading-tight">Payment received</h2>
+                  <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
+                </div>
+              </div>
+            ) : (
+              <>
+                <p className="text-white font-medium mb-1">Secure your Brand Day</p>
+                <p className="text-zinc-500 text-sm mb-6">
+                  $5,000 AUD. Your calendar opens as soon as this clears.
+                </p>
+
+                <div id="stripe-checkout" className="w-full" />
+
+                {!embedded && (
+                  <div className="flex justify-center">
+                    <stripe-buy-button
+                      buy-button-id={STRIPE_BUY_BUTTON_ID}
+                      publishable-key={STRIPE_PUBLISHABLE_KEY}
+                      {...(contactId ? { 'client-reference-id': contactId } : {})}
+                    />
                   </div>
                 )}
-                <h2 className="font-display text-xl text-white">
-                  {booked ? 'Your date is held' : 'Choose your Brand Builder Day'}
-                </h2>
-                {/* Payment first, then the date. So the calendar is shown locked
-                    rather than hidden: paying reads as unlocking it, and a date
-                    is never held by someone who has not paid for it. */}
-              </div>
 
-              {booked && paid ? (
-                /*
-                  The moment both halves are done, this is the only thing
-                  carrying them forward. Telling someone an email is coming and
-                  then sending nothing is worse than saying nothing, so the next
-                  step is here on the page rather than promised.
-                */
-                <div className="rounded-xl border border-zinc-700 bg-zinc-900/40 p-6 sm:p-7">
-                  <p className="text-zinc-400 leading-relaxed">
-                    Your Brand Builder Day is paid for and in both our calendars.
+                <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-4">
+                  {/*
+                    Required, not decoration. The card is stored off session at
+                    checkout so the Install can be charged later. Charging a
+                    saved card the holder was never told about is how you earn
+                    a dispute, and Stripe sides with the cardholder.
+                  */}
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    Your card is stored securely with Stripe. If you decide to go ahead with the
+                    90 Day Install, I'll charge that same card for it, only after you have said
+                    yes. Nothing is charged without your go ahead.
                   </p>
-
-                  <div className="mt-6 pt-6 border-t border-zinc-800">
-                    <p className="text-white font-medium mb-1">One thing left: the prep call</p>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed mb-5">
-                      Twenty minutes. We go through your prep doc together so I turn up already
-                      knowing what we need to attack, and what problems to solve. Bring your
-                      operator if you have one.
-                    </p>
-                    <a
-                      href={PREP_CALL_URL}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
-                    >
-                      Book your prep call
-                    </a>
-                  </div>
-
-                  <p className="text-zinc-500 text-sm leading-relaxed mt-6">
-                    Your receipt is in your inbox now. Prep instructions follow before we meet.
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    If after your application is reviewed and we do a prep call either of us
+                    decide it's not the right move, you'll be fully refunded.
+                  </p>
+                  <p className="text-zinc-300 text-[13.5px] leading-relaxed">
+                    All I ask is wholehearted implementation and advocacy.
+                  </p>
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    P.s. if we decide we're not a fit right now, I'll direct you to someone who
+                    can help you in your current situation.
                   </p>
                 </div>
-              ) : !paid ? (
-                <div className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-7">
-                  <p className="text-zinc-400 leading-relaxed">
-                    Your calendar opens the moment your payment clears, and you pick your day
-                    right here.
-                  </p>
-                  <p className="text-zinc-500 text-sm leading-relaxed mt-3">
-                    Dates are held in the order they are paid, so nothing is taken by someone
-                    still deciding.
-                  </p>
-                </div>
-              ) : (
-                <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
-                  <div
-                    className="calendly-inline-widget w-full"
-                    data-url={calendlyUrl}
-                    style={{ minWidth: 280, height: calHeight }}
-                  />
+              </>
+            )}
+          </motion.section>
+
+          {/* 3. The date. Shown locked rather than hidden: paying reads as
+              unlocking it, and a date is never held by someone who has not
+              paid for it. */}
+          <section>
+            <div className="flex items-center gap-3 mb-5">
+              {booked && (
+                <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                  <Check size={15} />
                 </div>
               )}
+              <h2 className="font-display text-xl text-white">
+                {booked ? 'Your date is held' : 'Choose your Brand Day'}
+              </h2>
             </div>
 
-            <Walkthrough />
-          </div>
+            {!paid ? (
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-7">
+                <p className="text-zinc-400 leading-relaxed">
+                  Your calendar opens the moment your payment clears, and you pick your day
+                  right here.
+                </p>
+                <p className="text-zinc-500 text-sm leading-relaxed mt-3">
+                  Dates are held in the order they are paid, so nothing is taken by someone
+                  still deciding.
+                </p>
+              </div>
+            ) : (
+              <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
+                <div
+                  className="calendly-inline-widget w-full"
+                  data-url={calendlyUrl}
+                  style={{ minWidth: 280, height: calHeight }}
+                />
+              </div>
+            )}
+          </section>
 
-          {/* Right: payment, sticky */}
-          <div className="lg:sticky lg:top-28">
-            <motion.section
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              className={`rounded-2xl border p-6 ${
-                paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
-              }`}
-            >
-              {paid ? (
-                <div className="flex items-center gap-3.5">
-                  <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
-                    <Check size={16} />
-                  </div>
-                  <div>
-                    <h2 className="font-display text-lg text-white leading-tight">Payment received</h2>
-                    <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <p className="text-white font-medium mb-1">Secure your Brand Builder Day</p>
-                  <p className="text-zinc-500 text-sm mb-6">
-                    5,000 AUD. Your calendar opens as soon as this clears.
-                  </p>
-
-                  <div id="stripe-checkout" className="w-full" />
-
-                  {!embedded && (
-                    <div className="flex justify-center">
-                      <stripe-buy-button
-                        buy-button-id={STRIPE_BUY_BUTTON_ID}
-                        publishable-key={STRIPE_PUBLISHABLE_KEY}
-                        {...(contactId ? { 'client-reference-id': contactId } : {})}
-                      />
-                    </div>
-                  )}
-
-                  <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-4">
-                    {/*
-                      Required, not decoration. The card is stored off session at
-                      checkout so the Install can be charged later. Charging a
-                      saved card the holder was never told about is how you earn
-                      a dispute, and Stripe sides with the cardholder.
-                    */}
-                    <p className="text-zinc-500 text-[13px] leading-relaxed">
-                      Your card is stored securely with Stripe. If you decide to go ahead with the
-                      90 Day Install, I'll charge that same card for it, only after you have said
-                      yes. Nothing is charged without your go ahead.
-                    </p>
-                    <p className="text-zinc-500 text-[13px] leading-relaxed">
-                      If after your application is reviewed and we do a prep call either of us
-                      decide it's not the right move, you'll be fully refunded.
-                    </p>
-                    <p className="text-zinc-300 text-[13.5px] leading-relaxed">
-                      All I ask is wholehearted implementation and advocacy.
-                    </p>
-                    <p className="text-zinc-500 text-[13px] leading-relaxed">
-                      P.s. if we decide we're not a fit right now, I'll direct you to someone who
-                      can help you in your current situation.
-                    </p>
-                  </div>
-                </>
-              )}
-            </motion.section>
-
-            <p className="text-zinc-600 text-xs text-center mt-6">
-              Trouble with either step? Reply to my email and I will sort it out.
-            </p>
-          </div>
+          <p className="text-zinc-600 text-xs text-center">
+            Trouble with either step? Reply to my email and I will sort it out.
+          </p>
         </div>
       </Container>
 
