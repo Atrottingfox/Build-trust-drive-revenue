@@ -458,6 +458,11 @@ const handler: Handler = async (event) => {
           annoyance. An applicant silently missing from the CRM is the thing
           this whole system exists to prevent, so the tag is now only ever
           added.
+
+          Nothing is lost by that any more. The confirmation no longer depends
+          on this tag firing a workflow: it is sent directly, on every
+          application, by _confirmation-email.ts. The tag is free to be what it
+          should always have been, a permanent record that they applied.
         */
         if (ghlContactId) {
           const tags = isOperator ? ["applied", "operator-intensive"] : ["applied"];
@@ -472,47 +477,6 @@ const handler: Handler = async (event) => {
           }
         }
 
-        // Flagged rather than buried in a log, because it needs a human merge.
-        if (phoneCollision && ghlContactId) {
-          await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
-            method: "POST",
-            headers: ghlAuth,
-            body: JSON.stringify({ tags: ["duplicate-phone"] }),
-          }).catch(() => {
-            /* The application is saved. The flag is a nicety. */
-          });
-        }
-
-        /*
-          Tags are applied separately, and `applied` is removed first.
-
-          GHL's workflow trigger is "tag added". Re-adding a tag a contact
-          already carries is a no-op, which means a returning applicant gets no
-          confirmation email and no notification: the exact silence Sean hit.
-          Taking it off and putting it back guarantees the trigger fires every
-          time an application is submitted.
-        */
-        if (ghlContactId) {
-          const tags = isOperator ? ["applied", "operator-intensive"] : ["applied"];
-          try {
-            await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
-              method: "DELETE",
-              headers: ghlAuth,
-              body: JSON.stringify({ tags: ["applied"] }),
-            });
-          } catch {
-            // Not there to remove. Adding below still fires the trigger.
-          }
-          const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
-            method: "POST",
-            headers: ghlAuth,
-            body: JSON.stringify({ tags }),
-          });
-          if (!tagRes.ok) {
-            ghlDegraded = true;
-            console.error("GHL tagging failed:", tagRes.status, await tagRes.text(), ghlContactId);
-          }
-        }
       } catch (ghlErr) {
         ghlDegraded = true;
         console.error("GHL upsert failed:", ghlErr);
