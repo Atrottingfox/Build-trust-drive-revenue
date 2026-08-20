@@ -137,6 +137,7 @@ function Walkthrough() {
 export default function LockIn() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [paid, setPaid] = useState(false);
+  const [checkoutSession, setCheckoutSession] = useState<string | null>(null);
   const [booked, setBooked] = useState(false);
   const [bookedAt, setBookedAt] = useState<string | null>(null);
   const [embedded, setEmbedded] = useState(false);
@@ -240,6 +241,13 @@ export default function LockIn() {
       setPaid(true);
       store.set(k('paid'), '1');
     }
+
+    /* Keep the Stripe session id. It is the only thing that ties this browser
+       to the client record the Brand Day webhook just created, and it is how
+       the intake form below knows who is filling it in. Stored because it is
+       only in the URL on the return trip, and they may well come back later. */
+    if (sessionId) store.set(k('cs'), sessionId);
+    setCheckoutSession(sessionId || store.get(k('cs')));
 
     /*
       Then ask GoHighLevel what is actually true and correct the page.
@@ -710,6 +718,38 @@ export default function LockIn() {
               </div>
             )}
           </section>
+
+          {/* 4. Where to find them. Deliberately the last step and only once
+              the day is actually held: nothing is asked of anyone before they
+              have paid, and asking mid-booking would compete with the calendar.
+
+              The link carries the Stripe session id rather than a name, because
+              that is what the Brand Day webhook stored against the client record
+              it created when payment cleared. The intake page resolves it to
+              them and starts the research on their work. */}
+          {paid && booked && checkoutSession && (
+            <section>
+              <div className="flex items-center gap-3 mb-5">
+                <h2 className="font-display text-xl text-white">One last thing</h2>
+              </div>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-7">
+                <p className="text-zinc-400 leading-relaxed">
+                  Before your day, I go and study how you already show up. Point me at your
+                  work and I will do the reading. It takes about a minute.
+                </p>
+                <a
+                  href={`https://brand.contentengine.live/welcome?session_id=${encodeURIComponent(checkoutSession)}`}
+                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-white px-5 py-3 font-medium text-zinc-900 transition hover:bg-zinc-200"
+                >
+                  Add your channels
+                </a>
+                <p className="text-zinc-500 text-sm leading-relaxed mt-4">
+                  Your YouTube, your Instagram, and three to five podcast appearances you
+                  would be happy to be judged on.
+                </p>
+              </div>
+            </section>
+          )}
 
           <p className="text-zinc-600 text-xs text-center">
             Trouble with either step? Reply to my email and I will sort it out.
