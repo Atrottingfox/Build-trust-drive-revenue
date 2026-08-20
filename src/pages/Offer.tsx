@@ -65,7 +65,7 @@ const Crosses = ({ items }: { items: string[] }) => (
 
 const outputs = [
   { icon: Zap, title: 'Short Form', description: 'Discovery layer. Hooks, formats, and angles that open new audiences and pull the right people toward you.' },
-  { icon: Video, title: 'Long Form', description: 'Trust depth. The pieces that get watched, shared, and remembered. The reason cold viewers turn into buyers.' },
+  { icon: Video, title: 'Long Form', description: 'Trust depth. One 6 video trust cycle, with the exact lead magnet trust assets mapped to each video. The reason cold viewers turn into buyers.' },
   { icon: FileText, title: 'Lead Magnets', description: 'Trust bridge. Assets that take someone from interested to invested. One core evergreen plus video specific magnets.' },
 ];
 
@@ -401,7 +401,7 @@ export default function Offer() {
             </div>
 
             {/* Three phases */}
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Three phases</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-4">Two phases</p>
             <div className="space-y-8">
               {buildPhases.map((p, i) => (
                 <div key={i} className="glow-card p-8 md:p-10">
