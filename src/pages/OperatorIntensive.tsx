@@ -280,8 +280,8 @@ const isNot = [
 
 const investmentIncludes = [
   { name: 'Brand Day', amount: '$5,000 AUD', founding: true },
-  { name: '90 Day Authority Engine Install', amount: '15,000 AUD', founding: true },
-  { name: 'Operator Blueprint + Hiring Sprint', amount: '20,000 AUD', founding: true },
+  { name: '90 Day Authority Engine Install', amount: '$15,000 AUD', founding: true },
+  { name: 'Operator Blueprint + Hiring Sprint', amount: '$20,000 AUD', founding: true },
 ];
 
 /* ---------------------------------------------------------------- */

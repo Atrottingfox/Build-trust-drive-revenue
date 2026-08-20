@@ -78,6 +78,22 @@ export function toE164AU(raw: string): { phone: string; confident: boolean } {
   return { phone: digits ? `+${digits}` : "", confident: false };
 }
 
+/*
+  `ctaSource` is read from a ?src= parameter, so it is whatever was in the URL.
+  It reaches a GHL contact record and a Slack message, and neither should ever
+  be handed raw user input: a long string bloats the CRM field and Slack
+  control characters can reshape the alert Sean reads to triage applicants.
+
+  The CTA labels this is meant to carry are all short kebab-case slugs, so
+  anything outside that is not a lost measurement, it is noise.
+*/
+export function cleanCtaSource(value: unknown): string {
+  return String(value ?? "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "")
+    .slice(0, 64);
+}
+
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers, body: "" };
@@ -257,9 +273,11 @@ const handler: Handler = async (event) => {
           Accept: "application/json",
         };
 
-        const source = data.ctaSource
-          ? `${isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page"} (${data.ctaSource})`
-          : isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page";
+        const pageSource = isOperator
+          ? "operator intensive page"
+          : isApply ? "apply page" : "builder page";
+        const cleanSource = cleanCtaSource(data.ctaSource);
+        const source = cleanSource ? `${pageSource} (${cleanSource})` : pageSource;
 
         const body = {
           locationId: ghlLocationId,
@@ -506,7 +524,7 @@ const handler: Handler = async (event) => {
               /* Which button on which page started this. Set by the ?src= param
                  the CTAs carry, so "how they heard" stays their words and this
                  stays the measured answer. */
-              data.ctaSource ? `*Came from:* ${data.ctaSource}` : null,
+              cleanCtaSource(data.ctaSource) ? `*Came from:* ${cleanCtaSource(data.ctaSource)}` : null,
               /*
                 The invitation link, ready to paste, and only for /builder.
 

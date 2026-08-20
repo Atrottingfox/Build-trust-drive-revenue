@@ -44,9 +44,18 @@ const handler: Handler = async (event) => {
       Name and email come back so /lock-in can prefill Calendly. They already
       typed both on the application; asking again at the moment they pick a
       date is friction for no reason.
+
+      Only for a contact who has paid. This endpoint takes a contact id and no
+      credential, so whatever it returns is readable by anyone holding an id.
+      Booking state is low stakes; a name and email are not. Gating on the paid
+      tag means a stray id cannot be turned into someone's details, and costs
+      nothing: the calendar that uses the prefill only renders after payment.
     */
-    const fullName = [contact?.firstName, contact?.lastName]
-      .filter(Boolean).join(" ").trim() || contact?.name || "";
+    const hasPaid = tags.includes("brand-day-paid");
+    const fullName = hasPaid
+      ? [contact?.firstName, contact?.lastName].filter(Boolean).join(" ").trim() ||
+        contact?.name || ""
+      : "";
 
     if (!tags.includes("hub-opened")) {
       await addTags(token, contactId, ["hub-opened"]);
@@ -92,7 +101,7 @@ const handler: Handler = async (event) => {
         brandDayPaid: tags.includes("brand-day-paid"),
         brandDayBooked: tags.includes("brand-day-booked"),
         name: fullName,
-        email: contact?.email || "",
+        email: hasPaid ? contact?.email || "" : "",
       }),
     };
   } catch (err) {

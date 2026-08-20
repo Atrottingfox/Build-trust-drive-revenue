@@ -37,16 +37,27 @@ export function trackCta(location: string) {
   }
 }
 
-/* Read the origin on the application page. The URL wins when present, then we
-   remember it, so the value survives a refresh or a step change in the form. */
+/*
+  Read the origin on the application page. The URL wins when present, then we
+  remember it, so the value survives a refresh or a step change in the form.
+
+  Anything arriving in ?src= is just whatever was in the URL, so it is cleaned
+  to the shape a CTA label actually has before being stored or submitted. The
+  server cleans it again on the way in: this end keeps the stored value tidy,
+  the server end is the one that is actually trusted.
+*/
+const clean = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9_-]/g, '').slice(0, 64);
+
 export function readCtaSource(): string {
   try {
     const fromUrl = new URLSearchParams(window.location.search).get(SRC_PARAM);
     if (fromUrl) {
-      sessionStorage.setItem(SRC_STORAGE_KEY, fromUrl);
-      return fromUrl;
+      const safe = clean(fromUrl);
+      if (safe) sessionStorage.setItem(SRC_STORAGE_KEY, safe);
+      return safe;
     }
-    return sessionStorage.getItem(SRC_STORAGE_KEY) || '';
+    return clean(sessionStorage.getItem(SRC_STORAGE_KEY) || '');
   } catch {
     return '';
   }

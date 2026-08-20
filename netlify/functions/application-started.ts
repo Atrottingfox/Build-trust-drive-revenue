@@ -1,6 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { GHL_API, GHL_VERSION } from "./_ghl";
-import { toE164AU } from "./builder-application";
+import { toE164AU, cleanCtaSource } from "./builder-application";
 
 /*
   Captures someone who starts the Brand Builder Day application and does not
@@ -87,8 +87,8 @@ const handler: Handler = async (event) => {
         phone: e164,
         companyName: String(company || "").trim(),
         website: String(website || "").trim(),
-        source: ctaSource
-          ? `builder page, started (${String(ctaSource)})`
+        source: cleanCtaSource(ctaSource)
+          ? `builder page, started (${cleanCtaSource(ctaSource)})`
           : "builder page, started",
         /*
           Only `application-started`. Adding `applied` here would make every
