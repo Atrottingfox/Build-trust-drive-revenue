@@ -246,6 +246,53 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     found.length ? `DKIM found: ${found.join(", ")}` : "No DKIM. Mail from GHL will be junked by Outlook and Hotmail."
   );
 
+  /* ── Kit, which is what actually emails the applicant ──
+     The confirmation is sent by a Kit automation on a tag. If the secret is
+     rotated or a tag is deleted, applications keep succeeding and nobody is
+     ever emailed, which is the failure this whole file exists to catch. */
+  const kitSecret = process.env.KIT_API_SECRET;
+  if (!kitSecret) {
+    add("Email", "Kit configured", false, true, "KIT_API_SECRET is not set, no applicant is emailed");
+  } else {
+    try {
+      const res = await fetch(`https://api.convertkit.com/v3/tags?api_secret=${encodeURIComponent(kitSecret)}`);
+      if (!res.ok) {
+        add("Email", "Kit confirmation tags", false, true, `Kit returned ${res.status}, the secret may be rotated`);
+      } else {
+        const tags = (await res.json())?.tags || [];
+        for (const [label, id] of [
+          ["Builder confirmation tag", 18814834],
+          ["Apply confirmation tag", 18845355],
+        ] as Array<[string, number]>) {
+          const found = tags.some((t: { id?: number }) => t?.id === id);
+          add("Email", label, found, true, found ? `tag ${id} exists` : `tag ${id} is gone, nothing is triggered`);
+        }
+      }
+    } catch (err) {
+      add("Email", "Kit confirmation tags", false, true, String(err));
+    }
+  }
+
+  /* ── The GHL field ids that carry the answers ──
+     A missing id is not fatal, the contact is still created, but that answer
+     is silently dropped on every application from then on. */
+  const fieldEnvs = [
+    "GHL_FIELD_ANNUAL_REVENUE",
+    "GHL_FIELD_PRIMARY_OFFER",
+    "GHL_FIELD_CHANNELS_ACTIVE",
+    "GHL_FIELD_WHATS_BROKEN",
+    "GHL_FIELD_ONE_THING_TO_FIX",
+    "GHL_FIELD_HOW_DID_YOU_HEAR",
+  ];
+  const missingFields = fieldEnvs.filter((k) => !process.env[k]);
+  add(
+    "Config",
+    "GHL application field ids",
+    missingFields.length === 0,
+    false,
+    missingFields.length ? `not set, these answers are dropped: ${missingFields.join(", ")}` : `all ${fieldEnvs.length} present`
+  );
+
   /* ── Payments, deep only ── */
   if (deep) {
     for (const [label, fn, body] of [
@@ -280,7 +327,24 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
               "Notion-Version": "2022-06-28",
             },
           });
-          add("Queue", label, res.ok, true, res.ok ? undefined : `HTTP ${res.status}`);
+          if (!res.ok) {
+            add("Queue", label, false, true, `HTTP ${res.status}`);
+          } else {
+            /* Reachable is not usable. The write sets these by name, so a
+               rename in Notion breaks applications and nothing says so until
+               someone applies. */
+            const props = Object.keys((await res.json())?.properties || {});
+            const missing = ["Name", "Email", "Company", "Revenue Band", "Status"].filter(
+              (r) => !props.includes(r)
+            );
+            add(
+              "Queue",
+              label,
+              missing.length === 0,
+              true,
+              missing.length ? `missing properties: ${missing.join(", ")}` : `${props.length} properties`
+            );
+          }
         } catch (err) {
           add("Queue", label, false, true, String(err));
         }
