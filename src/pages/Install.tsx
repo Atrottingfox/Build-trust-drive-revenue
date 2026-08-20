@@ -30,9 +30,16 @@ declare global {
 const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
 
-/* The recurring weekly slot. Sean creates this event in Calendly; until it
-   exists the step shows as coming rather than linking somewhere broken. */
-const WEEKLY_CALL_URL = '';
+/*
+  The weekly slot for weeks 1 to 4. Weeks 5 to 12 move to the fortnightly event,
+  and week 4 is the Content Board: same slot, different agenda, so it needs no
+  separate booking.
+
+  Stays empty until the event has Wednesday availability and is switched on in
+  Calendly, because a calendar showing no times is worse than an honest line
+  saying it is coming.
+*/
+const WEEKLY_CALL_URL = 'https://calendly.com/sean-authorityengine/90-day-install-weekly';
 
 /*
   They have already done the Brand Day, so this overview is about the 90 days
