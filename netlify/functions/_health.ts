@@ -372,6 +372,127 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     }
   }
 
+  /* ── Workflows: published, or quietly doing nothing ──
+
+     Four of six workflows sat in Draft for a week. A Draft workflow does not
+     error, does not warn, and does not run. Every application landed correctly
+     and nothing happened, and the only reason it surfaced was Sean noticing a
+     missing email days later.
+
+     A workflow with a trigger and no publish is the most expensive kind of
+     nothing, so its state belongs on the dashboard permanently. */
+  if (token && locationId) {
+    try {
+      const res = await fetch(`${GHL_API}/workflows/?locationId=${encodeURIComponent(locationId)}`, {
+        headers: ghlAuth(token),
+      });
+      if (res.ok) {
+        const flows = (await res.json())?.workflows || [];
+        add("Workflows", "Workflow list readable", true, false, `${flows.length} found`);
+        for (const f of flows) {
+          const name = String(f?.name || "unnamed");
+          /* An abandoned "New Workflow : 1786…" is clutter, not an outage. */
+          const junk = /^New Workflow\s*:/i.test(name);
+          const published = String(f?.status || "").toLowerCase() === "published";
+          add(
+            "Workflows",
+            name,
+            published || junk,
+            !junk,
+            published ? "published" : junk ? "draft, but it is an empty stub. Delete it." : "DRAFT — this never runs"
+          );
+        }
+      } else {
+        add("Workflows", "Workflow list readable", false, true, `HTTP ${res.status}`);
+      }
+    } catch (err) {
+      add("Workflows", "Workflow list readable", false, true, String(err));
+    }
+  }
+
+  /* ── Deliveries: did real applicants actually get an email ──
+
+     The question that matters and the one nothing else answers. Tags can write,
+     workflows can be published, and an applicant can still hear nothing.
+
+     So rather than test a synthetic contact, this looks at the people who
+     actually applied recently and asks GHL whether an email went out to each of
+     them afterwards. Any applicant with no outbound email is money on the floor
+     and is reported by name. */
+  if (token && locationId) {
+    try {
+      const res = await fetch(`${GHL_API}/contacts/search`, {
+        method: "POST",
+        headers: ghlAuth(token),
+        body: JSON.stringify({
+          locationId,
+          pageLimit: 10,
+          sort: [{ field: "dateAdded", direction: "desc" }],
+          filters: [{ field: "tags", operator: "contains", value: "applied" }],
+        }),
+      });
+
+      if (!res.ok) {
+        add("Deliveries", "Recent applicants readable", false, true, `HTTP ${res.status}`);
+      } else {
+        const contacts = ((await res.json())?.contacts || []).filter(
+          (c: any) => !String(c?.email || "").startsWith("zz-")
+        );
+
+        /* Two days, so a quiet weekend does not look like an outage. */
+        const cutoff = Date.now() - 48 * 3600 * 1000;
+        const recent = contacts.filter((c: any) => new Date(c?.dateAdded || 0).getTime() > cutoff);
+
+        if (!recent.length) {
+          add("Deliveries", "Applicants in the last 48 hours", true, false, "none to check");
+        }
+
+        for (const c of recent.slice(0, 5)) {
+          const who = c?.email || c?.id;
+          try {
+            const conv = await fetch(
+              `${GHL_API}/conversations/search?locationId=${encodeURIComponent(locationId)}&contactId=${encodeURIComponent(c.id)}`,
+              { headers: ghlAuth(token) }
+            );
+            const convs = conv.ok ? (await conv.json())?.conversations || [] : [];
+
+            let sent = 0;
+            let lastSubject = "";
+            for (const cv of convs) {
+              const m = await fetch(`${GHL_API}/conversations/${encodeURIComponent(cv.id)}/messages`, {
+                headers: ghlAuth(token),
+              });
+              if (!m.ok) continue;
+              const body = await m.json();
+              const msgs = body?.messages?.messages || body?.messages || [];
+              for (const msg of msgs) {
+                if (msg?.messageType !== "TYPE_EMAIL" || msg?.direction !== "outbound") continue;
+                /* Only mail sent after they applied counts. */
+                if (new Date(msg?.dateAdded || 0).getTime() < new Date(c?.dateAdded || 0).getTime() - 60000) continue;
+                sent += 1;
+                lastSubject = lastSubject || (msg?.meta?.email?.subject ?? "");
+              }
+            }
+
+            add(
+              "Deliveries",
+              `${who} received an email`,
+              sent > 0,
+              true,
+              sent > 0
+                ? `${sent} sent${lastSubject ? `, latest "${lastSubject}"` : ""}`
+                : "APPLIED AND RECEIVED NOTHING"
+            );
+          } catch (err) {
+            add("Deliveries", `${who} received an email`, false, true, String(err));
+          }
+        }
+      }
+    } catch (err) {
+      add("Deliveries", "Recent applicants readable", false, true, String(err));
+    }
+  }
+
   /* ── The approve buttons in the notification email ── */
   try {
     const res = await fetch(`${SITE}/.netlify/functions/decide?c=healthcheck&do=invite`, { redirect: "manual" });
