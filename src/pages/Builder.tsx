@@ -66,12 +66,14 @@ const initialForm: FormData = {
 /* Values are stored exactly as the GHL "Annual revenue" dropdown options.
    A mismatch means GHL silently drops the answer, so these strings and the
    dropdown in the sub-account have to move together. */
-const revenueBands = ['-1M', '1-3M', '3-10M', '10M+'];
+const revenueBands = ['0-1M', '1-3M', '3-10M', '10-20M', '20-50M', '50M+'];
 const revenueLabels: Record<string, string> = {
-  '-1M': 'Under $1M',
+  '0-1M': '$0 - $1M',
   '1-3M': '$1M - $3M',
   '3-10M': '$3M - $10M',
-  '10M+': '$10M+',
+  '10-20M': '$10M - $20M',
+  '20-50M': '$20M - $50M',
+  '50M+': '$50M+',
 };
 const channels = ['Instagram', 'YouTube', 'Email', 'LinkedIn', 'Podcast', 'Other'];
 const problems = [

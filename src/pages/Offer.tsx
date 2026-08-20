@@ -196,32 +196,26 @@ export default function Offer() {
               Own your category.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-3">
-              Engineer how content drives revenue, build a brand that commands attention from the right people, and install the infrastructure that lets your team keep scaling without you becoming a full time creator.
+              Engineer how content drives revenue, build a brand that commands attention from the right people, and install the buying beliefs your best clients need so your team can keep scaling without you becoming a full time creator.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              For 7 to 8 figure coaches, consultants, and B2B founders doing at least $200K/month.
+              For 7-8 figure coaches, consultants, and B2B founders doing at least $200K/month.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
-                'No dancing on camera',
-                'No 12am scrolling for content ideas',
-                'No more random, inconsistent posts',
+                'No dancing on camera.',
+                'No 12am scrolling for content ideas.',
+                'No more random, inconsistent posts.',
               ]} />
             </div>
-            {/* Early intent. Anyone already sold does not need the next five
-                paragraphs, and this separates them from the ones who read on. */}
-            <Cta label="Apply for a Brand Day" location="offer-hero-top" className="mb-10" />
             <p className="text-zinc-400 leading-relaxed mb-5">
-              We design a simple content system your team can run that reliably turns attention into qualified leads and sales.
+              We design a simple, trust led content system your team can run that reliably turns attention into qualified leads and sales without you or your team guessing what to post each week. It starts with a Brand Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map: the specific beliefs your ICP must hold about their problem, your solution, and you before they buy. Then we turn that into a documented brand and Authority Engine.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              It starts with a Brand Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and turn it into a documented brand and Authority Engine.
-            </p>
-            <p className="text-zinc-400 leading-relaxed mb-5">
-              For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and scorecard so the Engine keeps compounding without you ever becoming a full time creator.
+              For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and a scorecard that tracks how well your content is installing those beliefs and converting into pipeline, so the Engine keeps compounding without you ever becoming a full time creator.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with one client recently crossing $2M a month.
+              I've spent the last 24 months behind the scenes with 7 & 8 figure consultants, coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with another client recently crossing $2M a month.
             </p>
             <Cta label="Apply for a Brand Day" location="offer-hero" className="mt-10" />
           </Section>
@@ -334,10 +328,10 @@ export default function Offer() {
               With you and your key people, we:
             </p>
             <Ticks items={[
-              'Rebuild your on camera identity and positioning',
-              'Map your Authority Engine across Instagram and YouTube, and how each feeds pipeline',
-              'Build your Brand Bible and Posting OS: pillars, formats, CTAs, and a simple path to driving sales',
-              'Leave with a 30 day Posting Program your team can execute immediately',
+              'Diagnose the biggest constraint from turning strangers into buyers.',
+              'Align your personality, positioning and perspective to key content buckets of demand',
+              'Map your Authority Engine across Instagram, YouTube, podcast, and email',
+              'Assess where your current media operation is leaking opportunity',
             ]} />
 
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
