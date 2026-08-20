@@ -56,7 +56,7 @@ const handler: Handler = async (event) => {
   }
 
   try {
-    const { name, email, phone, company, website } = JSON.parse(event.body || "{}");
+    const { name, email, phone, company, website, ctaSource } = JSON.parse(event.body || "{}");
 
     /*
       An email that cannot be contacted is not a lead, it is noise in the
@@ -87,8 +87,8 @@ const handler: Handler = async (event) => {
         phone: e164,
         companyName: String(company || "").trim(),
         website: String(website || "").trim(),
-        source: data.ctaSource
-          ? `builder page, started (${data.ctaSource})`
+        source: ctaSource
+          ? `builder page, started (${String(ctaSource)})`
           : "builder page, started",
         /*
           Only `application-started`. Adding `applied` here would make every
