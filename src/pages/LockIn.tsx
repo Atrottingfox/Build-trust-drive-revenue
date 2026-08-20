@@ -191,7 +191,13 @@ export default function LockIn() {
     fetch('/.netlify/functions/days-remaining')
       .then((r) => r.json())
       .then((d) => {
-        if (typeof d?.total === 'number' && typeof d?.remaining === 'number') {
+        /*
+          `counted` is only true when the number came from an actual GHL count.
+          Its fallback is the configured total with nothing subtracted, which
+          on a page that has already sold Days would read "20 of 20 left" and
+          be a straight lie. So the block shows the counted number or nothing.
+        */
+        if (d?.counted && typeof d.total === 'number' && typeof d.remaining === 'number') {
           setDays({ total: d.total, remaining: d.remaining });
         }
       })
