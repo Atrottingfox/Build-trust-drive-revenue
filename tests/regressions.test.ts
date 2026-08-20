@@ -378,3 +378,35 @@ describe("Self healing stays inside its lane", () => {
     expect(fn("self-heal.ts")).toContain("GRACE_MINUTES");
   });
 });
+
+describe("The 90 Day nudge asks rather than acts", () => {
+  it("never sends the invitation on its own", () => {
+    /* Whether someone belongs in the 90 days is judged in the room. An
+       invitation that arrives without that judgement is billing on autopilot. */
+    const src = codeOf(fn("brand-day-followup.ts"));
+    expect(src).not.toMatch(/tags:\s*\[\s*["']install-invited["']/);
+  });
+
+  it("asks about a Brand Day once", () => {
+    expect(fn("brand-day-followup.ts")).toContain("install-nudge-sent");
+  });
+
+  it("only marks it asked once Slack has taken it", () => {
+    /* A failed Slack post that still marked the contact would lose the nudge
+       for good, and it is the highest value message of the week. */
+    const src = fn("brand-day-followup.ts");
+    expect(src).toContain("if (posted.ok)");
+  });
+
+  it("skips anyone already invited or signed", () => {
+    const src = fn("brand-day-followup.ts");
+    expect(src).toContain('tags.includes("install-invited")');
+    expect(src).toContain('tags.includes("install-signed")');
+  });
+
+  it("the link it sends resolves to a real action", () => {
+    expect(fn("brand-day-followup.ts")).toContain("do=install-invite");
+    expect(fn("decide.ts")).toContain('"install-invite"');
+    expect(fn("decide.ts")).toContain("install-invited");
+  });
+});

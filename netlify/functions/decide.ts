@@ -39,6 +39,20 @@ const ACTIONS: Record<string, { tag: string; label: string; done: string }> = {
     label: "Send to Concierge",
     done: "Marked concierge. This is the one worth a conversation rather than an email.",
   },
+  /*
+    The day after a Brand Day, from the Slack nudge. Tagging `install-invited`
+    is what fires the 90 Day Install Invite workflow, so this one button both
+    records the decision and sends the invitation.
+
+    Deliberately not automatic. Whether someone is right for the 90 days is a
+    judgement made in the room, and an invitation that arrives without it is
+    just billing on autopilot.
+  */
+  "install-invite": {
+    tag: "install-invited",
+    label: "Send the 90 Day link",
+    done: "Invited. The 90 Day Install email is on its way to them.",
+  },
 };
 
 const page = (title: string, body: string, tone: "ask" | "ok" | "bad") => `<!doctype html>

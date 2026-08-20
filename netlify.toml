@@ -16,6 +16,11 @@
 [functions."self-heal"]
   schedule = "17 * * * *"
 
+# The morning after a Brand Day, ask whether to invite them into the 90 days.
+# 21:00 UTC is 07:00 Brisbane. One Slack message, one link, no app needed.
+[functions."brand-day-followup"]
+  schedule = "0 21 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]

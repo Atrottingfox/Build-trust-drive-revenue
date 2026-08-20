@@ -392,6 +392,14 @@ const handler: Handler = async (event) => {
           application is not.
         */
         let phoneCollision = false;
+        /*
+          GHL names the contact in its duplicate error. Holding onto that id
+          matters more than whether the write itself recovered: without an id
+          the tagging below is skipped, and the tagging is what fires every
+          downstream automation. An application that lands in Notion but never
+          tags the contact is invisible to the CRM.
+        */
+        let knownContactId: string | null = null;
         if (!ghlRes.ok && ghlRes.status === 400) {
           const raw = await ghlRes.text();
           let meta: any = {};
@@ -400,6 +408,7 @@ const handler: Handler = async (event) => {
           } catch {
             // Not the duplicate shape. Handled as a plain failure below.
           }
+          if (meta.contactId) knownContactId = meta.contactId;
 
           if (meta.matchingField === "email" && meta.contactId) {
             // Our lookup missed it. Update the contact GHL just named.
@@ -424,9 +433,12 @@ const handler: Handler = async (event) => {
         if (!ghlRes.ok) {
           ghlDegraded = true;
           console.error("GHL contact write returned", ghlRes.status, await ghlRes.text());
+          /* The details may not have saved, but we know who they are, so the
+             tags below still run and the automations still fire. */
+          ghlContactId = knownContactId;
         } else {
           const ghlJson = await ghlRes.json();
-          ghlContactId = ghlJson?.contact?.id || ghlJson?.id || existingId || null;
+          ghlContactId = ghlJson?.contact?.id || ghlJson?.id || existingId || knownContactId || null;
           if (!ghlContactId) {
             ghlDegraded = true;
             console.error("GHL contact write succeeded but returned no id:", JSON.stringify(ghlJson));
@@ -445,32 +457,36 @@ const handler: Handler = async (event) => {
         }
 
         /*
-          Tags are applied separately, and `applied` is NEVER removed.
+          `application-started` is put on by the abandoned-application capture
+          the moment someone types a usable email. It means "began, did not
+          finish", and it is what the follow up list is built from.
 
-          This used to remove it before adding it back, so that GHL's "tag
-          added" trigger would fire for someone applying a second time. That was
-          a mistake. It opens a window where the contact carries no `applied`
-          tag at all, and two overlapping submissions can leave it removed for
-          good: one request deletes while the other has already added.
+          Submitting is exactly the event that stops being true. It was never
+          cleared though, so finished applicants sat in the unfinished list
+          forever, and the CRM could not tell the two apart.
 
-          It happened. A real applicant ended up tagged only
-          `application-started` even though their workflow had fired, which took
-          them out of every filter, every smart list, and the delivery check
-          that is supposed to notice when somebody hears nothing.
+          So the state moves: `application-started` off, `applied` on.
 
-          A re-applicant not getting a second confirmation is a small
-          annoyance. An applicant silently missing from the CRM is the thing
-          this whole system exists to prevent, so the tag is now only ever
-          added.
-
-          Nothing is lost by that any more. The confirmation no longer depends
-          on this tag firing a workflow: it is sent directly, on every
-          application, by _confirmation-email.ts. The tag is free to be what it
-          should always have been, a permanent record that they applied.
+          `applied` itself is only ever added, never cycled. Filters, smart
+          lists and the delivery check all read it, and removing it even for a
+          moment has already stripped a real applicant out of every one of them
+          when two submissions overlapped. Re-firing for a repeat applicant is
+          the trigger tag's job, further down, precisely so this one can stay
+          still.
         */
         if (ghlContactId) {
+          const tagUrl = `${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`;
+
+          await fetch(tagUrl, {
+            method: "DELETE",
+            headers: ghlAuth,
+            body: JSON.stringify({ tags: ["application-started"] }),
+          }).catch(() => {
+            /* Not there, which is fine: they never abandoned one. */
+          });
+
           const tags = isOperator ? ["applied", "operator-intensive"] : ["applied"];
-          const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+          const tagRes = await fetch(tagUrl, {
             method: "POST",
             headers: ghlAuth,
             body: JSON.stringify({ tags }),
@@ -479,6 +495,9 @@ const handler: Handler = async (event) => {
             ghlDegraded = true;
             console.error("GHL tagging failed:", tagRes.status, await tagRes.text(), ghlContactId);
           }
+        } else {
+          ghlDegraded = true;
+          console.error("No GHL contact id, so nothing was tagged. No automation will fire for", data.email);
         }
 
       } catch (ghlErr) {
