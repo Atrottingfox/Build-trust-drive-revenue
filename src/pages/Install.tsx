@@ -39,7 +39,15 @@ const STRIPE_PUBLISHABLE_KEY =
   Calendly, because a calendar showing no times is worse than an honest line
   saying it is coming.
 */
-const WEEKLY_CALL_URL = 'https://calendly.com/sean-authorityengine/90-day-install-weekly';
+/*
+  Deliberately empty, and staying that way.
+
+  A paid client should not be sent a booking link for a meeting that is not
+  optional: it is a step that can be skipped, and if they skip it the delivery
+  rhythm never starts. The slot is agreed on the prep call instead, and
+  meeting-series turns that one answer into the whole 90 day rhythm.
+*/
+const WEEKLY_CALL_URL = '';
 
 /*
   They have already done the Brand Day, so this overview is about the 90 days

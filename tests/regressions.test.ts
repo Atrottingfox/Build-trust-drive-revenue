@@ -410,3 +410,40 @@ describe("The 90 Day nudge asks rather than acts", () => {
     expect(fn("decide.ts")).toContain("install-invited");
   });
 });
+
+describe("The meeting series builds the right rhythm", () => {
+  it("only generates on POST", () => {
+    /* Chat and mail clients fetch links before a human sees them. A GET that
+       generated a series would fire on its own. */
+    expect(fn("meeting-series.ts")).toContain('event.httpMethod !== "POST"');
+  });
+
+  it("refuses without the shared secret", () => {
+    expect(fn("meeting-series.ts")).toContain("q.k !== secret");
+  });
+
+  it("marks week four as the Content Board", () => {
+    const src = fn("meeting-series.ts");
+    expect(src).toContain("Content Board");
+    expect(src).toContain("i === 3");
+  });
+
+  it("goes weekly then fortnightly, eight meetings", () => {
+    const src = fn("meeting-series.ts");
+    expect(src).toContain("6 + i * 2");
+    expect(src).toContain("(week - 1) * 7");
+  });
+
+  it("uses a fixed Brisbane offset, which is correct all year", () => {
+    /* Queensland does not observe daylight saving, so this cannot drift. */
+    expect(fn("meeting-series.ts")).toContain("hh - 10");
+  });
+});
+
+describe("/install does not send a paid client to book a mandatory meeting", () => {
+  it("leaves the weekly booking link empty", () => {
+    /* The slot is agreed on the prep call. A booking link is a step that can
+       be skipped, and if it is, the delivery rhythm never starts. */
+    expect(page("Install.tsx")).toMatch(/const WEEKLY_CALL_URL = '';/);
+  });
+});

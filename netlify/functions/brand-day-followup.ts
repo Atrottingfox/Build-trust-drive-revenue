@@ -105,6 +105,10 @@ const handler: Handler = async () => {
         c.id
       )}&do=install-invite&k=${encodeURIComponent(secret)}`;
 
+      const slotLink = `https://authorityengine.com.au/.netlify/functions/meeting-series?c=${encodeURIComponent(
+        c.id
+      )}&k=${encodeURIComponent(secret)}`;
+
       const text = [
         `:calendar: *Brand Day done with ${name}*`,
         c?.companyName ? `${c.companyName}` : null,
@@ -112,6 +116,9 @@ const handler: Handler = async () => {
         "",
         "If they belong in the 90 days, this sends the invitation and tags them:",
         `<${link}|Send the 90 Day link>`,
+        "",
+        "Slot agreed in the room? This builds the whole rhythm from one answer:",
+        `<${slotLink}|Set their weekly slot>`,
         "",
         "_Nothing happens until you confirm on the page. Ignore this if they are not a fit._",
       ]
