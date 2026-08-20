@@ -305,18 +305,60 @@ const handler: Handler = async (event) => {
           }
         }
 
-        const ghlRes = existingId
-          ? await fetch(`${GHL_API}/contacts/${encodeURIComponent(existingId)}`, {
-              method: "PUT",
-              headers: ghlAuth,
-              // locationId is rejected on update.
-              body: JSON.stringify({ ...body, locationId: undefined }),
-            })
-          : await fetch(`${GHL_API}/contacts/`, {
-              method: "POST",
-              headers: ghlAuth,
-              body: JSON.stringify(body),
-            });
+        const putContact = (id: string, payload: Record<string, unknown>) =>
+          fetch(`${GHL_API}/contacts/${encodeURIComponent(id)}`, {
+            method: "PUT",
+            headers: ghlAuth,
+            // locationId is rejected on update.
+            body: JSON.stringify({ ...payload, locationId: undefined }),
+          });
+
+        const postContact = (payload: Record<string, unknown>) =>
+          fetch(`${GHL_API}/contacts/`, { method: "POST", headers: ghlAuth, body: JSON.stringify(payload) });
+
+        let ghlRes = existingId ? await putContact(existingId, body) : await postContact(body);
+
+        /*
+          This sub-account refuses duplicates, and it decides what counts as one.
+          A 400 here says the details belong to somebody already, and GHL is good
+          enough to say who and on which field.
+
+          Phone collision is the dangerous one. Two founders in the same office,
+          or one digit mistyped into a stranger's number, and this application
+          cannot be created at all. Losing it is not acceptable, so it is
+          retried without the phone and flagged for Sean to merge by hand. A
+          contact missing a mobile is a small problem. A silently lost $5,000
+          application is not.
+        */
+        let phoneCollision = false;
+        if (!ghlRes.ok && ghlRes.status === 400) {
+          const raw = await ghlRes.text();
+          let meta: any = {};
+          try {
+            meta = JSON.parse(raw)?.meta || {};
+          } catch {
+            // Not the duplicate shape. Handled as a plain failure below.
+          }
+
+          if (meta.matchingField === "email" && meta.contactId) {
+            // Our lookup missed it. Update the contact GHL just named.
+            console.warn("GHL duplicate on email, updating", meta.contactId);
+            ghlRes = await putContact(meta.contactId, body);
+            if (ghlRes.ok) existingId = meta.contactId;
+          } else if (meta.matchingField === "phone") {
+            phoneCollision = true;
+            console.error(
+              "GHL phone collision: this number already belongs to",
+              meta.contactId,
+              `(${meta.contactName}).`,
+              "Creating without the phone so the application is not lost. Merge by hand:",
+              data.email
+            );
+            ghlRes = await postContact({ ...body, phone: "" });
+          } else {
+            console.error("GHL contact write returned 400:", raw);
+          }
+        }
 
         if (!ghlRes.ok) {
           ghlDegraded = true;
@@ -328,6 +370,17 @@ const handler: Handler = async (event) => {
             ghlDegraded = true;
             console.error("GHL contact write succeeded but returned no id:", JSON.stringify(ghlJson));
           }
+        }
+
+        // Flagged rather than buried in a log, because it needs a human merge.
+        if (phoneCollision && ghlContactId) {
+          await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+            method: "POST",
+            headers: ghlAuth,
+            body: JSON.stringify({ tags: ["duplicate-phone"] }),
+          }).catch(() => {
+            /* The application is saved. The flag is a nicety. */
+          });
         }
 
         /*
