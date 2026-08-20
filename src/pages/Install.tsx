@@ -137,6 +137,8 @@ export default function Install() {
   const [embedded, setEmbedded] = useState(false);
   const complete = termsAreComplete();
   const checkoutRef = useRef<any>(null);
+  // Stripe's return can be reloaded. Verifying twice would double-invoice.
+  const verifySent = useRef(false);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -145,7 +147,42 @@ export default function Install() {
     setContactId(id);
     store.set('ae_contact_id', id);
 
-    if (params.get('paid') === '1') setPaid(true);
+    /*
+      Coming back from Stripe.
+
+      `?paid=1` is shown optimistically so the page does not flicker through the
+      unpaid state, but it is only a query parameter and anyone can type it. The
+      session id is the part that proves anything, and verify-payment is what
+      turns it into the three things that actually matter:
+
+        - the `step-2-paid` tag, so this page shows the right state on any
+          device instead of offering an already-paid client a fresh checkout
+        - the Stripe customer written onto the contact
+        - THE SECOND $5,000, raised as a Stripe invoice due in 30 days
+
+      Without this call none of that happens. The client pays, GHL never finds
+      out, and the second instalment is never invoiced at all.
+    */
+    const justPaid = params.get('paid') === '1';
+    const sessionId = params.get('session_id');
+    if (justPaid) setPaid(true);
+
+    if (justPaid && sessionId && !verifySent.current) {
+      verifySent.current = true;
+      fetch('/.netlify/functions/verify-payment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId }),
+      })
+        .then((r) => r.json())
+        .then((v) => {
+          // Stripe says this session was never paid. Put the checkout back.
+          if (v?.verified && v.paid === false) setPaid(false);
+        })
+        .catch(() => {
+          /* The tagging is retried by track-hub on the next open. */
+        });
+    }
 
     /*
       Record the open and read back the real state. GHL is the source of truth

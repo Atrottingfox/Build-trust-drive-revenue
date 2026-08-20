@@ -37,7 +37,8 @@ const GHL_VERSION = "2021-07-28";
 async function scheduleSecondInstalment(
   stripeKey: string,
   customerId: string,
-  contactId: string | null
+  contactId: string | null,
+  sessionId: string
 ): Promise<void> {
   const amount = process.env.INSTALL_PAYMENT_2_CENTS;
   const days = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
@@ -48,13 +49,28 @@ async function scheduleSecondInstalment(
 
   const auth = { Authorization: `Bearer ${stripeKey}`, "Content-Type": "application/x-www-form-urlencoded" };
 
+  /*
+    This function raises a real $5,000 invoice, and the page that calls it is a
+    Stripe return URL. Return URLs get refreshed, opened twice, and restored by
+    browsers reopening tabs, so "called once" is not something to rely on.
+
+    The checkout session id is unique to one payment and never changes, so it
+    makes a stable idempotency key. Stripe returns the ORIGINAL object for a
+    repeated key rather than creating another, which means a refresh cannot
+    produce a second invoice item or a second invoice.
+
+    Suffixed per call because Stripe scopes a key to one endpoint, and reusing
+    the same string for the item and the invoice would collide.
+  */
+  const idem = (suffix: string) => ({ "Idempotency-Key": `install-2-${sessionId}-${suffix}` });
+
   try {
     const dueDate = Math.floor(Date.now() / 1000) + days * 86400;
 
     // The line item has to exist before the invoice that collects it.
     const itemRes = await fetch("https://api.stripe.com/v1/invoiceitems", {
       method: "POST",
-      headers: auth,
+      headers: { ...auth, ...idem("item") },
       body: new URLSearchParams({
         customer: customerId,
         amount: String(amount),
@@ -69,7 +85,7 @@ async function scheduleSecondInstalment(
 
     const invRes = await fetch("https://api.stripe.com/v1/invoices", {
       method: "POST",
-      headers: auth,
+      headers: { ...auth, ...idem("invoice") },
       body: new URLSearchParams({
         customer: customerId,
         collection_method: "charge_automatically",
