@@ -312,6 +312,18 @@ export default function Builder() {
   */
   const startedSent = useRef(false);
 
+  /*
+    Capture where they came from on arrival, not at submit.
+
+    readCtaSource stores the value so it survives a refresh, but it was only
+    ever called while sending, which meant the stored copy was written at the
+    exact moment the URL was still there to be read and never once before it.
+    Reading it on mount is what makes the fallback do anything at all.
+  */
+  useEffect(() => {
+    readCtaSource();
+  }, []);
+
   useEffect(() => {
     if (startedSent.current || submitted) return;
 
