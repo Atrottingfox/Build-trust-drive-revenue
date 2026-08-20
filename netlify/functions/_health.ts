@@ -1,4 +1,5 @@
 import { GHL_API, GHL_VERSION } from "./_ghl";
+import { ghlOptionContracts } from "../../src/lib/formOptions";
 
 /*
   The whole funnel, checked.
@@ -256,6 +257,61 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
 
   const dmarc = (await txt(`_dmarc.${SENDER}`))[0] || (await txt("_dmarc.authorityengine.com.au"))[0];
   add("Email", "DMARC record exists", Boolean(dmarc), false, dmarc ? dmarc.slice(0, 60) : "none");
+
+  /*
+    ── Do the form's answers still fit the boxes GHL keeps them in? ──
+
+    Several application fields are GHL dropdowns with a fixed set of allowed
+    values. Send a value that is not on the list and GHL drops it. The contact
+    is still created, Slack still fires, the applicant still gets through, and
+    that one answer is simply gone. Nothing errors.
+
+    This is how the revenue bands broke: the form went from four options to six
+    and the GHL dropdown still only knew the original four, so four of the six
+    would have been silently discarded on every application.
+
+    The form's lists and this check read the same definition, so the only way
+    they can disagree is if the GHL side was not updated. Which is the mistake
+    worth catching.
+  */
+  if (token && locationId) {
+    for (const contract of ghlOptionContracts) {
+      const fieldId = process.env[contract.envVar];
+      if (!fieldId) {
+        add("Contracts", `${contract.label} field id`, false, false, `${contract.envVar} is not set`);
+        continue;
+      }
+      try {
+        const res = await fetch(
+          `${GHL_API}/locations/${encodeURIComponent(locationId)}/customFields/${encodeURIComponent(fieldId)}`,
+          { headers: ghlAuth(token) }
+        );
+        if (!res.ok) {
+          add("Contracts", `${contract.label} options`, false, true, `GHL returned ${res.status}`);
+          continue;
+        }
+        const field = (await res.json())?.customField;
+        const allowed: string[] = field?.picklistOptions || [];
+        /* A free text field accepts anything, so there is nothing to drift. */
+        if (!String(field?.dataType || "").includes("OPTIONS")) {
+          add("Contracts", `${contract.label} options`, true, false, `${field?.dataType} accepts any value`);
+          continue;
+        }
+        const missing = contract.values.filter((v) => !allowed.includes(v));
+        add(
+          "Contracts",
+          `${contract.label} options`,
+          missing.length === 0,
+          true,
+          missing.length
+            ? `GHL will DROP these answers: ${missing.join(", ")}. Add them to the dropdown.`
+            : `all ${contract.values.length} form values accepted`
+        );
+      } catch (err) {
+        add("Contracts", `${contract.label} options`, false, true, String(err));
+      }
+    }
+  }
 
   /* ── Payments, deep only ── */
   if (deep) {

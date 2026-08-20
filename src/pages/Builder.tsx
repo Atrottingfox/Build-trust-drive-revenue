@@ -5,6 +5,16 @@ import { Container } from '../components/ui/Container';
 import { ArrowRight, Check, Loader2 } from 'lucide-react';
 import Footer from '../components/Footer';
 import { readCtaSource } from '../lib/track';
+/* Shared with the health dashboard, which checks these against what GHL will
+   actually accept. See src/lib/formOptions.ts. */
+import {
+  revenueBands,
+  revenueLabels,
+  channels,
+  problems,
+  opsOptions,
+  opsToStored as opsToNotion,
+} from '../lib/formOptions';
 
 /* ─── animation helpers ─── */
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -66,22 +76,7 @@ const initialForm: FormData = {
 /* Values are stored exactly as the GHL "Annual revenue" dropdown options.
    A mismatch means GHL silently drops the answer, so these strings and the
    dropdown in the sub-account have to move together. */
-const revenueBands = ['0-1M', '1-3M', '3-10M', '10-20M', '20-50M', '50M+'];
-const revenueLabels: Record<string, string> = {
-  '0-1M': '$0 - $1M',
-  '1-3M': '$1M - $3M',
-  '3-10M': '$3M - $10M',
-  '10-20M': '$10M - $20M',
-  '20-50M': '$20M - $50M',
-  '50M+': '$50M+',
-};
-const channels = ['Instagram', 'YouTube', 'Email', 'LinkedIn', 'Podcast', 'Other'];
-const problems = [
-  'Content doesnt match business level',
-  'Inconsistent / founder dependent',
-  'Message unclear / fragmented',
-  'Creates a lot but no pipeline',
-];
+
 const problemLabels: Record<string, string> = {
   'Content doesnt match business level': "Our content doesn't match the level of our business",
   'Inconsistent / founder dependent': "We're inconsistent / founder dependent",
@@ -104,12 +99,7 @@ function spotsThisMonth(): number | null {
   return spotsByMonth[key] ?? null;
 }
 
-const opsOptions = ['Yes, full time', 'Yes, part time', 'No'];
-const opsToNotion: Record<string, string> = {
-  'Yes, full time': 'Yes full-time',
-  'Yes, part time': 'Yes part-time',
-  'No': 'No',
-};
+
 
 /* ─── reusable form atoms ─── */
 
