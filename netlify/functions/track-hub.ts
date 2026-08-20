@@ -74,6 +74,14 @@ const handler: Handler = async (event) => {
         signed: tags.includes("step-1-signed"),
         paid: tags.includes("step-2-paid"),
         callsBooked: tags.includes("step-3-calls-booked"),
+        /*
+          The Brand Day half, for /lock-in. That page used to believe
+          localStorage, which is per browser, so one machine that had ever paid
+          showed "You're locked in" for every contact opened in it afterwards.
+          The tags are the record, so the page asks for them.
+        */
+        brandDayPaid: tags.includes("brand-day-paid"),
+        brandDayBooked: tags.includes("brand-day-booked"),
       }),
     };
   } catch (err) {

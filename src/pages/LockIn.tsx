@@ -145,6 +145,9 @@ export default function LockIn() {
   const [calHeight, setCalHeight] = useState(700);
   const [days, setDays] = useState<{ total: number; remaining: number } | null>(null);
 
+  /* Remembered progress belongs to the contact, never to the browser. */
+  const key = (name: string) => (contactId ? `ae_${name}_${contactId}` : `ae_${name}`);
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('c') || store.get('ae_contact_id');
@@ -153,19 +156,60 @@ export default function LockIn() {
       store.set('ae_contact_id', id);
     }
 
+    /*
+      Progress is remembered PER CONTACT.
+
+      These keys used to be global, so one browser that had ever completed a
+      payment showed "You're locked in" to every contact whose link was opened
+      in it afterwards. Someone forwarded a link, or Sean checking a client's
+      page, saw a paid and booked Day that did not exist.
+
+      Scoping to the contact id makes the memory belong to the person rather
+      than the machine.
+    */
+    const k = (name: string) => (id ? `ae_${name}_${id}` : `ae_${name}`);
+
     // A booking survives a refresh, so the payment step does not vanish.
-    const seenBooking = store.get('ae_booked') === '1';
-    if (seenBooking) {
+    if (store.get(k('booked')) === '1') {
       setBooked(true);
-      setBookedAt(store.get('ae_booked_at'));
+      setBookedAt(store.get(k('booked_at')));
     }
 
     const justPaid = params.get('paid') === '1';
     const sessionId = params.get('session_id');
 
-    if (justPaid || store.get('ae_paid') === '1') {
+    if (justPaid || store.get(k('paid')) === '1') {
       setPaid(true);
-      store.set('ae_paid', '1');
+      store.set(k('paid'), '1');
+    }
+
+    /*
+      Then ask GoHighLevel what is actually true and correct the page.
+
+      localStorage is a convenience for surviving a refresh, never the source of
+      truth: it is per browser, it goes stale, and it cannot know about a
+      payment made on a phone. The tags are the record, so they win. This is
+      also what makes the link work on a device that has never seen it before.
+    */
+    if (id) {
+      fetch('/.netlify/functions/track-hub', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contactId: id }),
+      })
+        .then((r) => r.json())
+        .then((d) => {
+          if (!d?.ok) return;
+          setPaid(Boolean(d.brandDayPaid));
+          setBooked(Boolean(d.brandDayBooked));
+          if (d.brandDayPaid) store.set(k('paid'), '1');
+          else localStorage.removeItem(k('paid'));
+          if (d.brandDayBooked) store.set(k('booked'), '1');
+          else localStorage.removeItem(k('booked'));
+        })
+        .catch(() => {
+          /* Offline. The remembered state stands. */
+        });
     }
 
     if (!justPaid || paidSent.current) return;
@@ -195,7 +239,7 @@ export default function LockIn() {
             // Stripe says this session was never paid. Lock it back down.
             setPaid(false);
             try {
-              localStorage.removeItem('ae_paid');
+              localStorage.removeItem(key('paid'));
             } catch {
               // Nothing to clear.
             }
@@ -245,12 +289,12 @@ export default function LockIn() {
       if (e.data?.event !== 'calendly.event_scheduled') return;
 
       setBooked(true);
-      store.set('ae_booked', '1');
+      store.set(key('booked'), '1');
 
       const startsAt = e.data?.payload?.event?.start_time || '';
       if (startsAt) {
         setBookedAt(startsAt);
-        store.set('ae_booked_at', startsAt);
+        store.set(key('booked_at'), startsAt);
       }
 
       const id = contactId || store.get('ae_contact_id');
@@ -316,7 +360,7 @@ export default function LockIn() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             contactId: contactId || store.get('ae_contact_id'),
-            brandDayDate: bookedAt || store.get('ae_booked_at') || '',
+            brandDayDate: bookedAt || store.get(key('booked_at')) || '',
           }),
         });
         const data = await res.json();
