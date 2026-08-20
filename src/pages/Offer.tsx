@@ -208,6 +208,9 @@ export default function Offer() {
                 'No more random, inconsistent posts',
               ]} />
             </div>
+            {/* Early intent. Anyone already sold does not need the next five
+                paragraphs, and this separates them from the ones who read on. */}
+            <Cta label="Apply for a Brand Day" location="offer-hero-top" className="mb-10" />
             <p className="text-zinc-400 leading-relaxed mb-5">
               We design a simple content system your team can run that reliably turns attention into qualified leads and sales.
             </p>
