@@ -1,5 +1,9 @@
 import type { Handler } from "@netlify/functions";
-import { sendConfirmationEmail } from "./_confirmation-email";
+
+/* The tag the GHL confirmation workflow listens for. Cycled on every
+   application so a repeat applicant still gets an email. Nothing else may
+   depend on this tag: it exists only to fire the workflow. */
+const CONFIRMATION_TRIGGER_TAG = "application-received";
 
 const NOTION_BUILDER_DB = "f8cdb64d3910451b9607600fb326bf6e";
 const NOTION_APPLY_DB = "ef00b2eb6dfb825da88101e3c99717d0";
@@ -487,22 +491,58 @@ const handler: Handler = async (event) => {
     }
 
     /*
-      The confirmation, sent unconditionally.
+      The confirmation is sent by GHL, triggered by a tag. That is the right
+      shape: the email lives in a workflow Sean can edit, not in this code.
 
-      Not conditional on being new, not conditional on a tag, not conditional on
-      a setting in another product. They applied, so they get told the
-      application arrived. A repeat applicant six weeks later gets the same
-      email as a first timer, because from their side the same thing happened.
+      The catch is that GHL fires "tag added" only when the tag is genuinely
+      added. Re-adding one a contact already carries does nothing, so a repeat
+      applicant got silence.
+
+      `applied` cannot be cycled to work around that. It is a state tag: filters,
+      smart lists and the delivery check all read it, and removing it even
+      briefly has already lost a real applicant when two submissions overlapped.
+
+      So the trigger is its own tag. `application-received` means nothing except
+      "an application just arrived", nothing filters on it, and it is removed and
+      re-added on every submission so the workflow fires every time. If the race
+      drops it for a moment, nothing anywhere cares.
     */
     let confirmation: string;
     if (isOperator) {
-      confirmation = "n/a (Operator Intensive is answered personally)";
-    } else if (!ghlContactId) {
-      confirmation = "NOT SENT: no GHL contact to send to";
-    } else if (!ghlToken) {
-      confirmation = "NOT SENT: GHL_TOKEN is not set";
+      confirmation = 'n/a (Operator Intensive is answered personally)';
+    } else if (!ghlContactId || !ghlToken) {
+      confirmation = 'NOT TRIGGERED: no GHL contact to tag';
     } else {
-      confirmation = await sendConfirmationEmail(ghlToken, ghlContactId);
+      const tagUrl = `${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`;
+      const auth = {
+        Authorization: `Bearer ${ghlToken}`,
+        Version: GHL_VERSION,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      };
+      try {
+        /* Clear it first so the add below is a real transition, not a no-op. */
+        await fetch(tagUrl, {
+          method: 'DELETE',
+          headers: auth,
+          body: JSON.stringify({ tags: [CONFIRMATION_TRIGGER_TAG] }),
+        }).catch(() => {
+          /* First application, nothing to clear. The add still fires. */
+        });
+
+        const res = await fetch(tagUrl, {
+          method: 'POST',
+          headers: auth,
+          body: JSON.stringify({ tags: [CONFIRMATION_TRIGGER_TAG] }),
+        });
+        confirmation = res.ok ? 'triggered' : `FAILED: GHL returned ${res.status}`;
+        if (!res.ok) {
+          console.error('Confirmation trigger tag failed:', res.status, await res.text());
+        }
+      } catch (err) {
+        confirmation = 'FAILED: could not reach GHL';
+        console.error('Confirmation trigger tag failed:', err);
+      }
     }
 
     // Send Slack notification
@@ -562,7 +602,7 @@ const handler: Handler = async (event) => {
                  attempt is in Notion; this says it is there and how old. */
               history ? `:repeat: *Applied before:* ${history}` : null,
               /* Never assume the applicant was emailed. Say so either way. */
-              confirmation === 'sent'
+              confirmation === 'triggered'
                 ? null
                 : `:warning: *Confirmation email:* ${confirmation}`,
               /* Which button on which page started this. Set by the ?src= param

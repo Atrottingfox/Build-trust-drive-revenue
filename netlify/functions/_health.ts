@@ -314,49 +314,46 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
   }
 
   /*
-    ── Can the token actually send the confirmation? ──
+    ── Is the workflow that emails the applicant actually on? ──
 
-    The applicant's confirmation is sent through the Conversations API. Reading
-    conversations and sending one are separate scopes on a GHL private
-    integration token, so a token can look healthy, pass every other check here,
-    and still be unable to send a single email.
+    The confirmation is not sent by this codebase. An application cycles the
+    `application-received` tag and a GHL workflow does the rest, which is the
+    right split: the copy lives somewhere Sean can edit it.
 
-    That is what happened: applications succeeded, Slack fired, and every
-    applicant got a 401 in place of their confirmation.
+    The cost of that split is that the last step happens in another product,
+    where it can be paused, renamed or deleted without anything here noticing.
+    An unpublished workflow looks exactly like a working one from the outside:
+    applications succeed, the tag is written, and no email is ever sent.
 
-    Probed with a contact id that cannot exist. A permission failure answers 401
-    before the contact is looked up, so the scope is proven without sending mail
-    to anybody.
+    The API cannot show which tag a workflow triggers on, so this proves the
+    workflow exists and is published, not that it is wired to the right tag.
+    Worth knowing what this does and does not tell you.
   */
-  if (token) {
+  if (token && locationId) {
     try {
-      const res = await fetch(`${GHL_API}/conversations/messages`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Version: "2021-04-15",
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          type: "Email",
-          contactId: "health-check-not-a-real-contact",
-          subject: "scope probe",
-          message: "scope probe",
-        }),
+      const res = await fetch(`${GHL_API}/workflows/?locationId=${encodeURIComponent(locationId)}`, {
+        headers: ghlAuth(token),
       });
-      const canSend = res.status !== 401 && res.status !== 403;
-      add(
-        "Email",
-        "Token may send the confirmation",
-        canSend,
-        true,
-        canSend
-          ? "conversations/message.write granted"
-          : "401 from GHL. Add the Conversations message write scope to the private integration token, or no applicant is emailed."
-      );
+      if (!res.ok) {
+        add("Email", "Confirmation workflow", false, true, `GHL returned ${res.status}`);
+      } else {
+        const workflows = (await res.json())?.workflows || [];
+        const wanted = "Brand Day Confirmation Email";
+        const found = workflows.find((w: { name?: string }) => w?.name === wanted);
+        add(
+          "Email",
+          "Confirmation workflow published",
+          Boolean(found && found.status === "published"),
+          true,
+          !found
+            ? `No workflow named "${wanted}". It was renamed or deleted, and applicants are not being emailed.`
+            : found.status === "published"
+              ? "published"
+              : `status is ${found.status}, so it is not sending`
+        );
+      }
     } catch (err) {
-      add("Email", "Token may send the confirmation", false, true, String(err));
+      add("Email", "Confirmation workflow published", false, true, String(err));
     }
   }
 
