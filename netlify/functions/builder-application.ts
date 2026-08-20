@@ -250,44 +250,114 @@ const handler: Handler = async (event) => {
           );
         }
 
-        // upsert, not create: a second application updates one contact
-        // rather than leaving two half-complete records.
-        const ghlRes = await fetch(`${GHL_API}/contacts/upsert`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${ghlToken}`,
-            Version: GHL_VERSION,
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            locationId: ghlLocationId,
-            firstName: firstName || "",
-            lastName: rest.join(" "),
-            email: data.email || "",
-            phone,
-            companyName: data.company || "",
-            website: data.website || "",
-            source: data.ctaSource
-              ? `${isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page"} (${data.ctaSource})`
-              : isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page",
-            // `applied` fires the existing downstream automation for everyone.
-            // The Operator Intensive carries a second tag so it can be filtered
-            // and automated separately without touching those workflows.
-            tags: isOperator ? ["applied", "operator-intensive"] : ["applied"],
-            customFields,
-          }),
-        });
+        const ghlAuth = {
+          Authorization: `Bearer ${ghlToken}`,
+          Version: GHL_VERSION,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        };
+
+        const source = data.ctaSource
+          ? `${isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page"} (${data.ctaSource})`
+          : isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page";
+
+        const body = {
+          locationId: ghlLocationId,
+          firstName: firstName || "",
+          lastName: rest.join(" "),
+          email: data.email || "",
+          phone,
+          companyName: data.company || "",
+          website: data.website || "",
+          source,
+          customFields,
+        };
+
+        /*
+          Deliberately NOT /contacts/upsert.
+
+          GHL's upsert matches on phone as well as email, and the match wins
+          silently. Two applicants sharing an office number, or one mistyping a
+          digit into someone else's, and the second application overwrites the
+          first: name, email, answers, all of it. The lost application never
+          shows up as an error because the write succeeds.
+
+          Email is the identity here. Look the contact up by email, update that
+          exact id if it exists, create a new one if it does not. A shared phone
+          number can then never clobber anybody.
+        */
+        let existingId: string | null = null;
+        if (data.email) {
+          try {
+            const lookup = await fetch(
+              `${GHL_API}/contacts/?locationId=${encodeURIComponent(ghlLocationId)}&query=${encodeURIComponent(data.email)}`,
+              { headers: ghlAuth }
+            );
+            if (lookup.ok) {
+              const found = (await lookup.json())?.contacts || [];
+              const match = found.find(
+                (c: any) => (c?.email || "").toLowerCase() === String(data.email).toLowerCase()
+              );
+              existingId = match?.id || null;
+            }
+          } catch (lookupErr) {
+            console.error("GHL email lookup failed, will create:", lookupErr);
+          }
+        }
+
+        const ghlRes = existingId
+          ? await fetch(`${GHL_API}/contacts/${encodeURIComponent(existingId)}`, {
+              method: "PUT",
+              headers: ghlAuth,
+              // locationId is rejected on update.
+              body: JSON.stringify({ ...body, locationId: undefined }),
+            })
+          : await fetch(`${GHL_API}/contacts/`, {
+              method: "POST",
+              headers: ghlAuth,
+              body: JSON.stringify(body),
+            });
 
         if (!ghlRes.ok) {
           ghlDegraded = true;
-          console.error("GHL upsert returned", ghlRes.status, await ghlRes.text());
+          console.error("GHL contact write returned", ghlRes.status, await ghlRes.text());
         } else {
           const ghlJson = await ghlRes.json();
-          ghlContactId = ghlJson?.contact?.id || ghlJson?.id || null;
+          ghlContactId = ghlJson?.contact?.id || ghlJson?.id || existingId || null;
           if (!ghlContactId) {
             ghlDegraded = true;
-            console.error("GHL upsert succeeded but returned no contact id:", JSON.stringify(ghlJson));
+            console.error("GHL contact write succeeded but returned no id:", JSON.stringify(ghlJson));
+          }
+        }
+
+        /*
+          Tags are applied separately, and `applied` is removed first.
+
+          GHL's workflow trigger is "tag added". Re-adding a tag a contact
+          already carries is a no-op, which means a returning applicant gets no
+          confirmation email and no notification: the exact silence Sean hit.
+          Taking it off and putting it back guarantees the trigger fires every
+          time an application is submitted.
+        */
+        if (ghlContactId) {
+          const tags = isOperator ? ["applied", "operator-intensive"] : ["applied"];
+          try {
+            await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+              method: "DELETE",
+              headers: ghlAuth,
+              body: JSON.stringify({ tags: ["applied"] }),
+            });
+          } catch {
+            // Not there to remove. Adding below still fires the trigger.
+          }
+          const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+            method: "POST",
+            headers: ghlAuth,
+            body: JSON.stringify({ tags }),
+          });
+          if (!tagRes.ok) {
+            ghlDegraded = true;
+            console.error("GHL tagging failed:", tagRes.status, await tagRes.text(), ghlContactId);
           }
         }
       } catch (ghlErr) {

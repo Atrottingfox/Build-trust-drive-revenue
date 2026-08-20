@@ -4,6 +4,12 @@
   functions = "netlify/functions"
   edge_functions = "netlify/edge-functions"
 
+# Hourly proof that an application can still reach GoHighLevel. Added after a
+# submission produced a Slack alert and no contact at all, with nothing erroring.
+# Alerts to Slack and tags healthcheck-failed in GHL.
+[functions."health-check"]
+  schedule = "@hourly"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
