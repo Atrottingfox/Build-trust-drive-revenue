@@ -49,7 +49,6 @@ const STRIPE_BUY_BUTTON_ID = 'buy_btn_1U49VS2niRrgrA5OR7ldFuJQ';
 const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
 
-/* 20 Days at this price, total. Sean updates DAYS_DONE as they are delivered. */
 /* Sean's own words, lifted from the VIP Day description in his Calendly. */
 const LEAVE_WITH = [
   'More clarity',
@@ -178,6 +177,28 @@ export default function LockIn() {
       window.scrollTo(0, 0);
     }
   }, [paid, booked]);
+
+  /*
+    The scarcity line is a public promise, so it is counted from GHL rather than
+    typed into the page: every `brand-day-confirmed` contact has both paid and
+    picked a date, which is exactly what spends one of the Days at this price.
+
+    The endpoint has existed since the line was written but nothing ever called
+    it, so the block silently never rendered. It stays hidden if the count
+    cannot be fetched: no number at all beats a number that might be a lie.
+  */
+  useEffect(() => {
+    fetch('/.netlify/functions/days-remaining')
+      .then((r) => r.json())
+      .then((d) => {
+        if (typeof d?.total === 'number' && typeof d?.remaining === 'number') {
+          setDays({ total: d.total, remaining: d.remaining });
+        }
+      })
+      .catch(() => {
+        /* Say nothing rather than guess. */
+      });
+  }, []);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -559,9 +580,9 @@ export default function LockIn() {
             <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
               <p className="text-white text-[15px]">
                 <span className="font-display text-2xl align-middle mr-1.5">{days.remaining}</span>
-                of {days.total} Days left at 5,000 AUD
+                of {days.total} Days left at $5,000 AUD
               </p>
-              <p className="text-zinc-500 text-sm mt-1">After that the price goes to 10,000.</p>
+              <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
             </div>
           )}
         </div>

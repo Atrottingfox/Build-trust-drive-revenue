@@ -428,7 +428,7 @@ export default function Builder() {
           <div className="max-w-2xl mx-auto text-center">
             <div className="accent-line mx-auto mb-6" />
             <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
-              Brand Builder Day
+              Brand Day
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mx-auto">
               One day. Your office. A complete brand rebuild and content shoot.
@@ -553,7 +553,7 @@ export default function Builder() {
                   <RadioGroup options={problems} value={form.biggestProblem} onChange={(v) => update('biggestProblem', v)} labels={problemLabels} />
                 </div>
                 <div>
-                  <Label required>In your own words, what's the #1 thing you want to fix on a Brand Builder Day?</Label>
+                  <Label required>In your own words, what's the #1 thing you want to fix on a Brand Day?</Label>
                   <TextArea
                     value={form.whatToFix}
                     onChange={(v) => update('whatToFix', v)}

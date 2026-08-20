@@ -330,7 +330,7 @@ export default function Install() {
               I provide the strategy, frameworks and advisory. Your team implements, led by your
               Media Owner. AUD $10,000 for the 90 days, paid $5,000 today and $5,000 in 30 days.
               There is no third payment: the day 60 instalment is waived because you came through
-              a Brand Builder Day.
+              a Brand Day.
             </p>
           </div>
 

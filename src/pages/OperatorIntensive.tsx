@@ -279,7 +279,7 @@ const isNot = [
 ];
 
 const investmentIncludes = [
-  { name: 'Brand Builder Day', amount: '5,000 AUD', founding: true },
+  { name: 'Brand Day', amount: '$5,000 AUD', founding: true },
   { name: '90 Day Authority Engine Install', amount: '15,000 AUD', founding: true },
   { name: 'Operator Blueprint + Hiring Sprint', amount: '20,000 AUD', founding: true },
 ];
@@ -427,12 +427,12 @@ function OperatorPage() {
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">01</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Builder Day and Operator Blueprint</p>
+                <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Day and Operator Blueprint</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">1 day in your office &middot; included (normally 5,000 AUD)</p>
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-8">
-              We start with the same Brand Builder Day I use to architect every Authority Engine, then extend it into the Operator blueprint. On this day we:
+              We start with the same Brand Day I use to architect every Authority Engine, then extend it into the Operator blueprint. On this day we:
             </p>
             <Ticks items={phase1Items} />
             <div className="glow-card p-7 mt-10">
@@ -648,7 +648,7 @@ function OperatorPage() {
               <p className="text-white text-sm font-semibold mb-4">How the money works</p>
               <Bullets
                 items={[
-                  '5,000 AUD to secure your Brand Builder Day (Phase 1)',
+                  '$5,000 AUD to secure your Brand Day (Phase 1)',
                   'If, at the end of the Day, we both agree to move into the full Intensive, the remaining 25,000 AUD is broken into $10,000 to place, and 3 x $5,000 payments thereafter',
                 ]}
                 tone="blue"
@@ -685,7 +685,7 @@ function OperatorPage() {
               <Ticks items={[
                 'Send your application using the button below',
                 'We do a short call to confirm fit and logistics',
-                'If we are both in, you secure your Brand Builder Day with 5k and we book dates',
+                'If we are both in, you secure your Brand Day with 5k and we book dates',
               ]} />
             </div>
             <p className="text-zinc-400 leading-relaxed mb-12">

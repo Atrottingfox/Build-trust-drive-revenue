@@ -150,7 +150,7 @@ export default function ApplyOperatorIntensive() {
                 <h2 className="font-display text-2xl font-bold text-white mb-3">That is in.</h2>
                 <p className="text-zinc-400 text-[15px] leading-relaxed">
                   I read these myself, usually the same day. If it looks like a fit I will come back to you
-                  to lock your Brand Builder Day and start Phase 1.
+                  to lock your Brand Day and start Phase 1.
                 </p>
               </motion.div>
             ) : (

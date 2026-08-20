@@ -100,7 +100,7 @@ export default function Booked() {
               You're locked in
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed">
-              Your Brand Builder Day is paid for and in both our calendars.
+              Your Brand Day is paid for and in both our calendars.
             </p>
           </div>
 
