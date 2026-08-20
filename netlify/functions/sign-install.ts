@@ -56,6 +56,14 @@ const handler: Handler = async (event) => {
       versionField && { id: versionField, value: String(termsVersion) },
     ].filter(Boolean);
 
+    /*
+      A signature that did not persist is worse than one that failed loudly.
+      If this returns ok while nothing was written, the client believes they
+      have signed, Sean's record says they never did, and neither of them finds
+      out until it matters. So the write result decides the response.
+    */
+    let written = true;
+
     if (customFields.length) {
       const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
         method: "PUT",
@@ -68,11 +76,14 @@ const handler: Handler = async (event) => {
         body: JSON.stringify({ customFields }),
       });
       if (!res.ok) {
+        written = false;
         console.error("sign-install: failed to write signature:", res.status, await res.text(), contactId);
       }
     }
 
-    await addTags(token, contactId, ["install-signed", "step-1-signed"]);
+    // `install-signed` is the tag that says the agreement is agreed. Without it
+    // nothing downstream knows they signed, so it counts as a failed signing.
+    const tagged = await addTags(token, contactId, ["install-signed", "step-1-signed"]);
 
     // The IP is logged rather than stored on the contact. It is evidence if a
     // signature is ever disputed, and clutter on the record otherwise.
@@ -84,7 +95,7 @@ const handler: Handler = async (event) => {
       "ip:", event.headers["x-nf-client-connection-ip"] || event.headers["client-ip"] || "unknown"
     );
 
-    return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ ok: written && tagged }) };
   } catch (err) {
     console.error("sign-install error:", err);
     return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };

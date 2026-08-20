@@ -360,6 +360,27 @@ export default function Install() {
                     <p className="text-zinc-500 text-sm mt-6">
                       This agreement is still being finalised. Signing opens once it is.
                     </p>
+                  ) : !contactId ? (
+                    /*
+                      No contact id, so a signature could not be attached to
+                      anyone and sign-install would reject it.
+
+                      Said here rather than at the end. Letting someone read the
+                      terms, type their name, tick the box and press sign, only
+                      to fail, is the worst possible moment to hit an error:
+                      they are agreeing to $10,000 and the page has just told
+                      them it is broken.
+                    */
+                    <div className="mt-7 rounded-xl border border-amber-500/25 bg-amber-500/[0.06] p-5">
+                      <p className="text-amber-200/90 text-[15px] font-medium mb-1.5">
+                        This link is missing your personal code
+                      </p>
+                      <p className="text-zinc-400 text-sm leading-relaxed">
+                        Signing needs the full link I sent you, the one ending in{' '}
+                        <span className="font-mono text-zinc-300">?c=</span> and a code. Reply to my
+                        email and I will send you a fresh one.
+                      </p>
+                    </div>
                   ) : (
                     <div className="mt-7">
                       <label className="block text-sm font-medium text-zinc-300 mb-2">
