@@ -87,7 +87,9 @@ const handler: Handler = async (event) => {
         phone: e164,
         companyName: String(company || "").trim(),
         website: String(website || "").trim(),
-        source: "builder page, started",
+        source: data.ctaSource
+          ? `builder page, started (${data.ctaSource})`
+          : "builder page, started",
         /*
           Only `application-started`. Adding `applied` here would make every
           abandoned form look like a finished application, which is the exact

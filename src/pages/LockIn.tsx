@@ -282,7 +282,9 @@ export default function LockIn() {
     wrong, fall through to the buy button. Someone must always be able to pay.
   */
   useEffect(() => {
-    if (paid || !booked) return;
+    // Payment comes first now, so the checkout mounts on arrival rather than
+    // waiting for a date to be held.
+    if (paid) return;
     let checkout: any = null;
     let cancelled = false;
 
@@ -352,14 +354,22 @@ export default function LockIn() {
     the first look. Before payment the embed is held inert, so they can see the
     actual dates without being able to take one.
   */
+  /*
+    Loaded only once payment has cleared, because that is when the widget's
+    container first exists. Calendly's script scans the page for
+    .calendly-inline-widget when it loads and does nothing for one that appears
+    afterwards, so loading it on mount would leave an empty box where the
+    calendar should be.
+  */
   useEffect(() => {
+    if (!paid) return;
     if (document.querySelector('script[data-calendly]')) return;
     const s = document.createElement('script');
     s.src = 'https://assets.calendly.com/assets/external/widget.js';
     s.async = true;
     s.dataset.calendly = 'true';
     document.body.appendChild(s);
-  }, []);
+  }, [paid]);
 
   /*
     Calendly's own booking engine, wearing the site's palette. These are the
@@ -483,6 +493,9 @@ export default function LockIn() {
                 <h2 className="font-display text-xl text-white">
                   {booked ? 'Your date is held' : 'Choose your Brand Builder Day'}
                 </h2>
+                {/* Payment first, then the date. So the calendar is shown locked
+                    rather than hidden: paying reads as unlocking it, and a date
+                    is never held by someone who has not paid for it. */}
               </div>
 
               {booked && paid ? (
@@ -518,10 +531,17 @@ export default function LockIn() {
                     Your receipt is in your inbox now. Prep instructions follow before we meet.
                   </p>
                 </div>
-              ) : booked ? (
-                <p className="text-zinc-400 leading-relaxed">
-                  Held for now. Complete your payment to confirm it.
-                </p>
+              ) : !paid ? (
+                <div className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-7">
+                  <p className="text-zinc-400 leading-relaxed">
+                    Your calendar opens the moment your payment clears, and you pick your day
+                    right here.
+                  </p>
+                  <p className="text-zinc-500 text-sm leading-relaxed mt-3">
+                    Dates are held in the order they are paid, so nothing is taken by someone
+                    still deciding.
+                  </p>
+                </div>
               ) : (
                 <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
                   <div
@@ -555,20 +575,11 @@ export default function LockIn() {
                     <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
                   </div>
                 </div>
-              ) : !booked ? (
-                <div className="text-center py-4">
-                  <p className="text-zinc-400 text-[15px] leading-relaxed">
-                    Pick your day first.
-                  </p>
-                  <p className="text-zinc-600 text-sm leading-relaxed mt-2">
-                    Payment opens as soon as you have one.
-                  </p>
-                </div>
               ) : (
                 <>
-                  <p className="text-white font-medium mb-1">Confirm your day</p>
+                  <p className="text-white font-medium mb-1">Secure your Brand Builder Day</p>
                   <p className="text-zinc-500 text-sm mb-6">
-                    5,000 AUD. Your date is held until this clears.
+                    5,000 AUD. Your calendar opens as soon as this clears.
                   </p>
 
                   <div id="stripe-checkout" className="w-full" />

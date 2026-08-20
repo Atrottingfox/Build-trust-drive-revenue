@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
+import { trackCta, SRC_PARAM } from '../lib/track';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -39,10 +40,21 @@ const Ticks = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-const Cta = ({ label = 'Apply now', note, className = '' }: { label?: string; note?: string; className?: string }) => (
+/*
+  Every CTA on this page goes to /builder. `location` is the only thing that
+  differs: it names which block on the page did the convincing, fires that as a
+  GA4 event, and rides along on the URL so it lands on the application itself.
+*/
+const Cta = ({
+  label = 'Apply now',
+  location,
+  note,
+  className = '',
+}: { label?: string; location: string; note?: string; className?: string }) => (
   <div className={className}>
     <a
-      href="/builder"
+      href={`/builder?${SRC_PARAM}=${location}`}
+      onClick={() => trackCta(location)}
       className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
     >
       {label}
@@ -78,11 +90,11 @@ const ladder = [
   {
     icon: Compass,
     stage: 'Brand',
-    when: '1 Day · Authority Engine Build Day',
+    when: '1 Day · Brand Day',
     intro: '',
     items: [
       'Diagnose what is working and where your content leaks',
-      'Map your brand, message, and Authority Engine across IG / YT / podcast',
+      'Map your brand, message, and Authority Engine across IG and YouTube',
       'Leave with a 30 day content plan your team can run immediately',
     ],
   },
@@ -93,7 +105,7 @@ const ladder = [
     intro: 'Turn that blueprint into a working Engine: short form cadence, long form trust assets, and a simple scorecard that links content to revenue.',
     items: [
       'Short form cadence and Capture Block',
-      'Long form trust asset cycle on rotation (YouTube / podcast)',
+      'The 6 video trust cycle on rotation',
       'One training per week for you and your team',
       'Simple scorecard and weekly review',
       'Your operator is running the rhythm. You are spending under 2 hours a week on it',
@@ -144,8 +156,8 @@ const buildPhases = [
 const dayNinety = [
   'A documented Authority Engine your team runs. Brand Bible, journey map, 30 day Posting Program',
   'A short form system your operator runs off a weekly Capture Block',
-  'One YouTube trust cycle filmed, including all trust assets',
-  'A Media Operator trained to run the rhythm, with a playbook any future hire can follow',
+  'The 6 video trust cycle filmed, including all trust assets',
+  'A Media Operator trained to run the rhythm, with a playbook they run from',
   'Three straight weeks hitting agreed lead and pipeline targets',
 ];
 
@@ -169,7 +181,7 @@ export default function Offer() {
     <div className="min-h-screen bg-base">
       <SEO
         title="The Authority Engine"
-        description="Turn content into clients in 90 days, without becoming a full time creator. We build a simple content system your team can run that reliably turns views into qualified leads and sales. Starts with a $5,000 Brand Day."
+        description="Turn content into clients in 90 days, without becoming a full time creator. We build a simple content system your team can run that reliably turns views into qualified leads and sales. Starts with a $5,000 AUD Brand Day."
         path="/offer"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -200,7 +212,7 @@ export default function Offer() {
               We design a simple content system your team can run that reliably turns attention into qualified leads and sales.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              It starts with an Authority Engine Build Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and turn it into a documented brand and Authority Engine.
+              It starts with a Brand Day, where we analyse your current bottlenecks, map how content actually drives revenue in your business, and turn it into a documented brand and Authority Engine.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
               For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and scorecard so the Engine keeps compounding without you ever becoming a full time creator.
@@ -208,7 +220,7 @@ export default function Offer() {
             <p className="text-zinc-400 leading-relaxed">
               I have spent the last 24 months behind the scenes with 7 to 8 figure coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with one client recently crossing $2M a month.
             </p>
-            <Cta label="Apply for a Build Day" className="mt-10" />
+            <Cta label="Apply for a Brand Day" location="offer-hero" className="mt-10" />
           </Section>
         </div>
       </section>
@@ -291,7 +303,7 @@ export default function Offer() {
               <span className="text-zinc-500">Opportunities.</span>
             </h2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mb-12">
-              Every Build Day starts with a diagnostic. What you already have, what is missing, and the core elements we build from it.
+              Every Brand Day starts with a diagnostic. What you already have, what is missing, and the core elements we build from it.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {diagnostic.map((d, i) => (
@@ -313,14 +325,14 @@ export default function Offer() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Step 1 &middot; Brand Day &middot; $5,000</Label>
+            <Label>Step 1 &middot; Brand Day &middot; $5,000 AUD</Label>
             <H2>One focused day to refine your brand and remove the guesswork.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
               With you and your key people, we:
             </p>
             <Ticks items={[
               'Rebuild your on camera identity and positioning',
-              'Map your Authority Engine across Instagram, YouTube and podcast, and how each feeds pipeline',
+              'Map your Authority Engine across Instagram and YouTube, and how each feeds pipeline',
               'Build your Brand Bible and Posting OS: pillars, formats, CTAs, and a simple path to driving sales',
               'Leave with a 30 day Posting Program your team can execute immediately',
             ]} />
@@ -430,7 +442,7 @@ export default function Offer() {
                   )}
                   {p.outcomes.length > 0 && (
                     <>
-                      <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase 1</p>
+                      <p className="text-zinc-500 text-xs uppercase tracking-widest mb-3">By end of Phase {p.num}</p>
                       <ul className="space-y-2">
                         {p.outcomes.map((item, j) => (
                           <li key={j} className="flex items-start gap-3">
@@ -564,12 +576,12 @@ export default function Offer() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
-                <p className="font-display text-3xl font-extrabold text-white">$5,000</p>
+                <p className="font-display text-3xl font-extrabold text-white">$5,000 AUD</p>
                 <p className="text-zinc-500 text-[14px] mt-2">Founding rate. Increasing towards $10,000 as capacity fills.</p>
               </div>
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
-                <p className="font-display text-3xl font-extrabold text-white">$15,000</p>
+                <p className="font-display text-3xl font-extrabold text-white">$15,000 AUD</p>
                 <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Brand Day. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
               </div>
             </div>
@@ -582,7 +594,7 @@ export default function Offer() {
                 {[
                   'We are limited to 10 strategy days per month.',
                   'I keep the number of active 90 day Installs low so I can stay close to your team and your data.',
-                  'The 90 day Install and any ongoing advisory are by invitation only, offered to founders where I am confident we can hit the outcomes we set on your Build Day.',
+                  'The 90 day Install and any ongoing advisory are by invitation only, offered to founders where I am confident we can hit the outcomes we set on your Brand Day.',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
@@ -605,18 +617,12 @@ export default function Offer() {
             <H2>The next step.</H2>
             <div className="text-left max-w-xl mx-auto mt-10 mb-12">
               <Ticks items={[
-                'Apply for a Brand Builder Day below',
-                'If accepted, you will be invited to secure your Day with a 5,000 AUD payment and choose your date',
+                'Apply for a Brand Day below',
+                'If accepted, you will be invited to secure your Day with a $5,000 AUD payment and choose your date',
                 'We get on a short prep call and then spend a full day together rebuilding your brand and Authority Engine',
               ]} />
             </div>
-            <a
-              href="/builder"
-              className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
-            >
-              Apply now
-              <ArrowRight className="w-4 h-4" />
-            </a>
+            <Cta label="Apply now" location="offer-next-step" />
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-10 max-w-lg mx-auto">
               One day to map and lock your brand strategy. Ninety days to install the content system that turns attention into revenue. For founders at $200K+/month who already create content and want to scale without becoming a full time creator.
             </p>

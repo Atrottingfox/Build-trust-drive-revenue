@@ -268,7 +268,9 @@ const handler: Handler = async (event) => {
             phone,
             companyName: data.company || "",
             website: data.website || "",
-            source: isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page",
+            source: data.ctaSource
+              ? `${isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page"} (${data.ctaSource})`
+              : isOperator ? "operator intensive page" : isApply ? "apply page" : "builder page",
             // `applied` fires the existing downstream automation for everyone.
             // The Operator Intensive carries a second tag so it can be filtered
             // and automated separately without touching those workflows.
@@ -378,6 +380,10 @@ const handler: Handler = async (event) => {
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
+              /* Which button on which page started this. Set by the ?src= param
+                 the CTAs carry, so "how they heard" stays their words and this
+                 stays the measured answer. */
+              data.ctaSource ? `*Came from:* ${data.ctaSource}` : null,
               /*
                 The invitation link, ready to paste, and only for /builder.
 

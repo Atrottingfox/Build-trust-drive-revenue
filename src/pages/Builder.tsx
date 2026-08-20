@@ -4,6 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { Container } from '../components/ui/Container';
 import { ArrowRight, Check, Loader2 } from 'lucide-react';
 import Footer from '../components/Footer';
+import { readCtaSource } from '../lib/track';
 
 /* ─── animation helpers ─── */
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -332,6 +333,7 @@ export default function Builder() {
           phone: form.phone.trim(),
           company: form.company.trim(),
           website: form.website.trim(),
+          ctaSource: readCtaSource(),
         }),
       }).catch(() => {
         /* Never surfaced. They are mid-application. */
@@ -369,6 +371,8 @@ export default function Builder() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           source: 'builder',
+          /* Which CTA sent them here, carried from the ?src= param. */
+          ctaSource: readCtaSource(),
           ...form,
           contentOpsPerson: opsToNotion[form.contentOpsPerson] || form.contentOpsPerson,
         }),
