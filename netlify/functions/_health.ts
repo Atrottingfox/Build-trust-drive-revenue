@@ -313,6 +313,53 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     }
   }
 
+  /*
+    ── Can the token actually send the confirmation? ──
+
+    The applicant's confirmation is sent through the Conversations API. Reading
+    conversations and sending one are separate scopes on a GHL private
+    integration token, so a token can look healthy, pass every other check here,
+    and still be unable to send a single email.
+
+    That is what happened: applications succeeded, Slack fired, and every
+    applicant got a 401 in place of their confirmation.
+
+    Probed with a contact id that cannot exist. A permission failure answers 401
+    before the contact is looked up, so the scope is proven without sending mail
+    to anybody.
+  */
+  if (token) {
+    try {
+      const res = await fetch(`${GHL_API}/conversations/messages`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Version: "2021-04-15",
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          type: "Email",
+          contactId: "health-check-not-a-real-contact",
+          subject: "scope probe",
+          message: "scope probe",
+        }),
+      });
+      const canSend = res.status !== 401 && res.status !== 403;
+      add(
+        "Email",
+        "Token may send the confirmation",
+        canSend,
+        true,
+        canSend
+          ? "conversations/message.write granted"
+          : "401 from GHL. Add the Conversations message write scope to the private integration token, or no applicant is emailed."
+      );
+    } catch (err) {
+      add("Email", "Token may send the confirmation", false, true, String(err));
+    }
+  }
+
   /* ── Payments, deep only ── */
   if (deep) {
     for (const [label, fn, body] of [
