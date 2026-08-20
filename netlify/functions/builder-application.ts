@@ -444,9 +444,35 @@ const handler: Handler = async (event) => {
     // tag of its own, and dropping it into the Brand Builder Day tag would put a
     // 30k Intensive applicant into the wrong email sequence.
     const kitApiSecret = process.env.KIT_API_SECRET;
-    if (kitApiSecret && data.email && !isOperator) {
+
+    /*
+      The applicant's confirmation email is sent by a Kit automation that fires
+      when this tag is ADDED. That has two silent failure modes, and both cost
+      an applicant their confirmation without anyone noticing:
+
+      1. The response was never checked. `await fetch` only throws on a network
+         error, so a 401 from a rotated secret, or a 4xx of any kind, looked
+         exactly like success.
+
+      2. Adding a tag someone already carries is a no-op, so the automation does
+         not fire again. Anyone who applied before, which includes every test
+         Sean runs on his own address, gets no email. Nothing is broken and
+         nothing says so, which is the worst possible shape for a bug.
+
+      So the outcome is now measured and reported to Slack instead of assumed.
+      `created_at` on the returned subscription is the tell: an existing
+      subscription comes back with its ORIGINAL timestamp.
+    */
+    let kitOutcome: string;
+    if (isOperator) {
+      kitOutcome = 'n/a (Operator Intensive has no Kit tag)';
+    } else if (!kitApiSecret) {
+      kitOutcome = 'NOT SENT: KIT_API_SECRET is not set';
+    } else if (!data.email) {
+      kitOutcome = 'NOT SENT: no email on the application';
+    } else {
       try {
-        await fetch(`https://api.convertkit.com/v3/tags/${kitTagId}/subscribe`, {
+        const kitRes = await fetch(`https://api.convertkit.com/v3/tags/${kitTagId}/subscribe`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -463,7 +489,27 @@ const handler: Handler = async (event) => {
             },
           }),
         });
+
+        if (!kitRes.ok) {
+          kitOutcome = `FAILED: Kit returned ${kitRes.status}`;
+          console.error('Kit subscribe failed:', kitRes.status, await kitRes.text());
+        } else {
+          const kitJson = await kitRes.json();
+          const createdAt = kitJson?.subscription?.created_at;
+          const ageMs = createdAt ? Date.now() - new Date(createdAt).getTime() : 0;
+          /*
+            A tag added just now is seconds old. Anything older means the tag
+            was already there and the automation did not run.
+          */
+          kitOutcome = ageMs > 120000
+            ? 'NOT SENT: already carried this tag, so the Kit automation did not re-fire'
+            : 'sent';
+          if (ageMs > 120000) {
+            console.warn('Kit tag already present, no confirmation email sent for', data.email);
+          }
+        }
       } catch (kitErr) {
+        kitOutcome = 'FAILED: could not reach Kit';
         console.error('Kit subscription failed:', kitErr);
       }
     }
@@ -521,6 +567,10 @@ const handler: Handler = async (event) => {
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
+              /* Never assume the applicant was emailed. Say so either way. */
+              kitOutcome === 'sent'
+                ? null
+                : `:warning: *Confirmation email:* ${kitOutcome}`,
               /* Which button on which page started this. Set by the ?src= param
                  the CTAs carry, so "how they heard" stays their words and this
                  stays the measured answer. */

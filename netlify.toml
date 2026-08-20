@@ -16,6 +16,18 @@
   function = "ladder-auth"
   path = "/ladder"
 
+# The health dashboard names environment variables and reports whether they are
+# set, so it sits behind the same credentials as the ladder.
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/health"
+
+# The data behind it, gated too. The page being protected is no use if the
+# endpoint it calls will answer anybody.
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/.netlify/functions/health-status"
+
 [[edge_functions]]
   function = "ladder-auth"
   path = "/ladder-private/*"
