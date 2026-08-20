@@ -1,10 +1,9 @@
 import type { Handler } from "@netlify/functions";
+import { sendConfirmationEmail } from "./_confirmation-email";
 
 const NOTION_BUILDER_DB = "f8cdb64d3910451b9607600fb326bf6e";
 const NOTION_APPLY_DB = "ef00b2eb6dfb825da88101e3c99717d0";
 
-const KIT_TAG_BUILDER = 18814834;
-const KIT_TAG_APPLY = 18845355;
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -138,7 +137,6 @@ const handler: Handler = async (event) => {
       : isApply
         ? NOTION_APPLY_DB
         : NOTION_BUILDER_DB;
-    const kitTagId = isApply ? KIT_TAG_APPLY : KIT_TAG_BUILDER;
 
     const notionKey = process.env.NOTION_API_KEY;
     /*
@@ -190,6 +188,47 @@ const handler: Handler = async (event) => {
     Object.keys(properties).forEach((key) => {
       if (properties[key] === undefined) delete properties[key];
     });
+
+    /*
+      Has this person applied before?
+
+      Notion gets a new row per application rather than an update, so it is the
+      application log: the six week old attempt is still there with what they
+      said at the time. Nothing surfaced it though, so a repeat applicant read
+      as a first timer and the earlier context was only found by scrolling.
+
+      Asked before the new row is written, so the count describes their history
+      rather than including the row we are about to add.
+    */
+    let history = "";
+    if (writeNotion && data.email) {
+      try {
+        const prior = await fetch(`https://api.notion.com/v1/databases/${notionDbId}/query`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${notionKey}`,
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            filter: { property: "Email", email: { equals: data.email } },
+            sorts: [{ timestamp: "created_time", direction: "ascending" }],
+            page_size: 100,
+          }),
+        });
+        if (prior.ok) {
+          const rows = (await prior.json())?.results || [];
+          if (rows.length) {
+            const firstAt = new Date(rows[0].created_time);
+            const days = Math.round((Date.now() - firstAt.getTime()) / 86400000);
+            const when = days < 1 ? "today" : days === 1 ? "yesterday" : `${days} days ago`;
+            history = `applied ${rows.length} time${rows.length > 1 ? "s" : ""} before, first ${when} (${firstAt.toISOString().slice(0, 10)})`;
+          }
+        }
+      } catch (err) {
+        console.error("Prior application lookup failed:", err);
+      }
+    }
 
     if (writeNotion) {
       const res = await fetch("https://api.notion.com/v1/pages", {
@@ -402,6 +441,49 @@ const handler: Handler = async (event) => {
         }
 
         /*
+          Tags are applied separately, and `applied` is NEVER removed.
+
+          This used to remove it before adding it back, so that GHL's "tag
+          added" trigger would fire for someone applying a second time. That was
+          a mistake. It opens a window where the contact carries no `applied`
+          tag at all, and two overlapping submissions can leave it removed for
+          good: one request deletes while the other has already added.
+
+          It happened. A real applicant ended up tagged only
+          `application-started` even though their workflow had fired, which took
+          them out of every filter, every smart list, and the delivery check
+          that is supposed to notice when somebody hears nothing.
+
+          A re-applicant not getting a second confirmation is a small
+          annoyance. An applicant silently missing from the CRM is the thing
+          this whole system exists to prevent, so the tag is now only ever
+          added.
+        */
+        if (ghlContactId) {
+          const tags = isOperator ? ["applied", "operator-intensive"] : ["applied"];
+          const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+            method: "POST",
+            headers: ghlAuth,
+            body: JSON.stringify({ tags }),
+          });
+          if (!tagRes.ok) {
+            ghlDegraded = true;
+            console.error("GHL tagging failed:", tagRes.status, await tagRes.text(), ghlContactId);
+          }
+        }
+
+        // Flagged rather than buried in a log, because it needs a human merge.
+        if (phoneCollision && ghlContactId) {
+          await fetch(`${GHL_API}/contacts/${encodeURIComponent(ghlContactId)}/tags`, {
+            method: "POST",
+            headers: ghlAuth,
+            body: JSON.stringify({ tags: ["duplicate-phone"] }),
+          }).catch(() => {
+            /* The application is saved. The flag is a nicety. */
+          });
+        }
+
+        /*
           Tags are applied separately, and `applied` is removed first.
 
           GHL's workflow trigger is "tag added". Re-adding a tag a contact
@@ -440,78 +522,23 @@ const handler: Handler = async (event) => {
       console.error("GHL_TOKEN or GHL_LOCATION_ID not set, skipping GHL sync.");
     }
 
-    // Add to Kit (ConvertKit). Skipped for the Operator Intensive: it has no Kit
-    // tag of its own, and dropping it into the Brand Builder Day tag would put a
-    // 30k Intensive applicant into the wrong email sequence.
-    const kitApiSecret = process.env.KIT_API_SECRET;
-
     /*
-      The applicant's confirmation email is sent by a Kit automation that fires
-      when this tag is ADDED. That has two silent failure modes, and both cost
-      an applicant their confirmation without anyone noticing:
+      The confirmation, sent unconditionally.
 
-      1. The response was never checked. `await fetch` only throws on a network
-         error, so a 401 from a rotated secret, or a 4xx of any kind, looked
-         exactly like success.
-
-      2. Adding a tag someone already carries is a no-op, so the automation does
-         not fire again. Anyone who applied before, which includes every test
-         Sean runs on his own address, gets no email. Nothing is broken and
-         nothing says so, which is the worst possible shape for a bug.
-
-      So the outcome is now measured and reported to Slack instead of assumed.
-      `created_at` on the returned subscription is the tell: an existing
-      subscription comes back with its ORIGINAL timestamp.
+      Not conditional on being new, not conditional on a tag, not conditional on
+      a setting in another product. They applied, so they get told the
+      application arrived. A repeat applicant six weeks later gets the same
+      email as a first timer, because from their side the same thing happened.
     */
-    let kitOutcome: string;
+    let confirmation: string;
     if (isOperator) {
-      kitOutcome = 'n/a (Operator Intensive has no Kit tag)';
-    } else if (!kitApiSecret) {
-      kitOutcome = 'NOT SENT: KIT_API_SECRET is not set';
-    } else if (!data.email) {
-      kitOutcome = 'NOT SENT: no email on the application';
+      confirmation = "n/a (Operator Intensive is answered personally)";
+    } else if (!ghlContactId) {
+      confirmation = "NOT SENT: no GHL contact to send to";
+    } else if (!ghlToken) {
+      confirmation = "NOT SENT: GHL_TOKEN is not set";
     } else {
-      try {
-        const kitRes = await fetch(`https://api.convertkit.com/v3/tags/${kitTagId}/subscribe`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            api_secret: kitApiSecret,
-            email: data.email,
-            first_name: (data.name || '').split(' ')[0],
-            fields: {
-              company: data.company || '',
-              business_type: data.primaryOffer || '',
-              revenue: data.revenueBand || '',
-              instagram: data.audienceSize || '',
-              website: data.website || '',
-              phone: data.phone || '',
-            },
-          }),
-        });
-
-        if (!kitRes.ok) {
-          kitOutcome = `FAILED: Kit returned ${kitRes.status}`;
-          console.error('Kit subscribe failed:', kitRes.status, await kitRes.text());
-        } else {
-          const kitJson = await kitRes.json();
-          const createdAt = kitJson?.subscription?.created_at;
-          const ageMs = createdAt ? Date.now() - new Date(createdAt).getTime() : 0;
-          /*
-            A tag added just now is seconds old. Anything older means the tag
-            was already there and the automation did not run.
-          */
-          kitOutcome = ageMs > 120000
-            ? 'NOT SENT: already carried this tag, so the Kit automation did not re-fire'
-            : 'sent';
-          if (ageMs > 120000) {
-            console.warn('Kit tag already present, no confirmation email sent for', data.email);
-          }
-        }
-      } catch (kitErr) {
-        kitOutcome = 'FAILED: could not reach Kit';
-        console.error('Kit subscription failed:', kitErr);
-      }
+      confirmation = await sendConfirmationEmail(ghlToken, ghlContactId);
     }
 
     // Send Slack notification
@@ -567,10 +594,13 @@ const handler: Handler = async (event) => {
               data.opsPersonRole ? `*Their role today:* ${data.opsPersonRole}` : null,
               data.canCommitDay ? `*Can commit a full day in 30:* ${data.canCommitDay}` : null,
               data.howDidYouHear ? `*How they heard:* ${data.howDidYouHear}` : null,
+              /* Repeat applicants used to look like first timers. Their earlier
+                 attempt is in Notion; this says it is there and how old. */
+              history ? `:repeat: *Applied before:* ${history}` : null,
               /* Never assume the applicant was emailed. Say so either way. */
-              kitOutcome === 'sent'
+              confirmation === 'sent'
                 ? null
-                : `:warning: *Confirmation email:* ${kitOutcome}`,
+                : `:warning: *Confirmation email:* ${confirmation}`,
               /* Which button on which page started this. Set by the ?src= param
                  the CTAs carry, so "how they heard" stays their words and this
                  stays the measured answer. */

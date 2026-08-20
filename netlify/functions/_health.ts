@@ -426,18 +426,29 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
         headers: ghlAuth(token),
         body: JSON.stringify({
           locationId,
-          pageLimit: 10,
+          pageLimit: 15,
           sort: [{ field: "dateAdded", direction: "desc" }],
-          filters: [{ field: "tags", operator: "contains", value: "applied" }],
         }),
       });
 
       if (!res.ok) {
         add("Deliveries", "Recent applicants readable", false, true, `HTTP ${res.status}`);
       } else {
-        const contacts = ((await res.json())?.contacts || []).filter(
-          (c: any) => !String(c?.email || "").startsWith("zz-")
-        );
+        /*
+          Everyone who came through the site recently, NOT everyone currently
+          tagged `applied`.
+
+          Keying off the tag hid the exact failure this is meant to catch: a
+          real applicant lost their `applied` tag to a race and vanished from
+          the check, while still being someone who applied and heard nothing.
+          Source is written once when the contact is created and never changes,
+          so it cannot be undone by a later bug.
+        */
+        const contacts = ((await res.json())?.contacts || []).filter((c: any) => {
+          const email = String(c?.email || "").toLowerCase();
+          if (email.startsWith("zz-") || email.startsWith("zzcard")) return false;
+          return /builder|apply/i.test(String(c?.source || ""));
+        });
 
         /* Two days, so a quiet weekend does not look like an outage. */
         const cutoff = Date.now() - 48 * 3600 * 1000;
