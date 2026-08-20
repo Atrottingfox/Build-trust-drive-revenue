@@ -33,6 +33,17 @@
   function = "ladder-auth"
   path = "/health"
 
+# Lists client names and can send a $15,000 invitation, so it is gated like the
+# rest of the internal surface. The endpoint is gated too: a protected page in
+# front of an open endpoint protects nothing.
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/clients"
+
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/.netlify/functions/clients"
+
 # The data behind it, gated too. The page being protected is no use if the
 # endpoint it calls will answer anybody.
 [[edge_functions]]
