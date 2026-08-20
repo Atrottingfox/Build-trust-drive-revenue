@@ -110,9 +110,19 @@ describe("The applied tag is only ever added", () => {
     tagged only `application-started`, invisible to every filter and to the
     delivery check meant to notice they heard nothing.
   */
-  it("never sends a DELETE to the tags endpoint", () => {
-    const deletes = codeOf(fn("builder-application.ts")).match(/method:\s*["']DELETE["']/g) || [];
-    expect(deletes).toHaveLength(0);
+  it("never deletes the applied tag", () => {
+    /*
+      A dedicated trigger tag IS cycled, and that is the right answer: it means
+      nothing, nothing filters on it, and losing it to a race costs nothing. The
+      invariant is narrower than "no deletes". It is that `applied`, which every
+      filter and smart list depends on, is only ever added.
+    */
+    const src = codeOf(fn("builder-application.ts"));
+    const deleteBlocks = src.split(/method:\s*["']DELETE["']/).slice(1);
+    for (const block of deleteBlocks) {
+      const payload = block.slice(0, 220);
+      expect(payload).not.toMatch(/tags:\s*\[\s*["']applied["']/);
+    }
   });
 });
 
@@ -328,7 +338,43 @@ describe("The application endpoint, end to end", () => {
     });
 
     await invoke();
-    expect(calls.some((c) => c.method === "DELETE")).toBe(false);
+    /* The trigger tag may be cycled. `applied` may not. */
+    const deletedApplied = calls.some(
+      (c) => c.method === "DELETE" && (c.body?.tags || []).includes("applied")
+    );
+    expect(deletedApplied).toBe(false);
     expect(calls.some((c) => c.url.includes("/tags") && c.body?.tags?.includes("applied"))).toBe(true);
+  });
+});
+
+describe("Self healing stays inside its lane", () => {
+  /*
+    A system that repairs itself is only safe while the correct state is
+    unambiguous. Anything involving a decision must stay with the person.
+  */
+  it("never rewrites prices", () => {
+    /* A $1 price is usually a deliberate test. Auto-reverting it would be a
+       system overruling a person. */
+    const src = codeOf(fn("self-heal.ts"));
+    expect(src).not.toContain("CHECKOUT_AMOUNT_CENTS");
+    expect(src).not.toContain("INSTALL_PAYMENT");
+  });
+
+  it("retries a person at most once, ever", () => {
+    /* Without this it is a loop that mails an applicant every hour. */
+    const src = fn("self-heal.ts");
+    expect(src).toContain("delivery-retried");
+    expect(src).toMatch(/tags \|\| \[\]\)\.includes\(RETRIED_TAG\)/);
+  });
+
+  it("marks the retry as spent before re-firing, not after", () => {
+    /* If the re-fire throws after the tag dance, the contact must still be
+       marked, or the next run tries again. */
+    const src = fn("self-heal.ts");
+    expect(src.indexOf("RETRIED_TAG]")).toBeLessThan(src.indexOf('tags: ["applied"] }),\n      });\n      const re'));
+  });
+
+  it("gives a slow workflow time before deciding it failed", () => {
+    expect(fn("self-heal.ts")).toContain("GRACE_MINUTES");
   });
 });

@@ -10,6 +10,12 @@
 [functions."health-check"]
   schedule = "@hourly"
 
+# Repairs rather than reports. Recreates the Calendly webhook if it goes
+# missing, and re-fires the workflow for any applicant who received nothing.
+# Runs after the health check has had its say.
+[functions."self-heal"]
+  schedule = "17 * * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
