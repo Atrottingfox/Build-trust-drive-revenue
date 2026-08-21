@@ -10,6 +10,12 @@
 [functions."health-check"]
   schedule = "@hourly"
 
+# Once a day, prove an application still produces an email. Everything else
+# guards one side; this guards the contract between the code and GoHighLevel,
+# which is where it actually broke. Daily, not hourly: it sends a real email.
+[functions."canary"]
+  schedule = "0 20 * * *"
+
 # Repairs rather than reports. Recreates the Calendly webhook if it goes
 # missing, and re-fires the workflow for any applicant who received nothing.
 # Runs after the health check has had its say.

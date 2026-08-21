@@ -696,3 +696,31 @@ describe("The prep page ends rather than sitting there", () => {
     expect(src).toContain("You can close this page now. Keen to rip in.");
   });
 });
+
+describe("The canary guards the contract with GHL", () => {
+  /*
+    Tests guard this codebase. The health check guards the plumbing up to GHL's
+    door. Nothing guarded the agreement between them, and that is where it
+    broke: the site stopped cycling `applied` and the workflow kept listening
+    for it. Neither side was wrong alone. They just no longer agreed.
+  */
+  it("tests the tag the site actually cycles", () => {
+    const canary = fn("canary.ts");
+    const app = fn("builder-application.ts");
+    expect(canary).toContain('const TRIGGER_TAG = "application-received"');
+    expect(app).toContain('CONFIRMATION_TRIGGER_TAG = "application-received"');
+  });
+
+  it("asserts an email came out, not that a tag went in", () => {
+    const src = fn("canary.ts");
+    expect(src).toContain('m?.messageType === "TYPE_EMAIL"');
+    expect(src).toContain("sent === 0");
+  });
+
+  it("always removes its test contact", () => {
+    /* Or an invented applicant sits in the queue looking real. */
+    const src = fn("canary.ts");
+    expect(src).toContain("cleanUp");
+    expect(src).toMatch(/method:\s*"DELETE"/);
+  });
+});
