@@ -549,3 +549,23 @@ describe("Nothing ever removes the applied tag", () => {
     });
   }
 });
+
+describe("Approve links fire even when the tag is already there", () => {
+  /*
+    GHL fires a workflow on a tag being ADDED. Adding one already present is a
+    silent no-op, so a contact invited before got a page saying "Invited" and
+    no email. The link worked, the tag was written, nothing sent.
+  */
+  it("removes an existing tag so the add is a real transition", () => {
+    const src = fn("decide.ts");
+    expect(src).toContain("before.includes(action.tag)");
+    expect(src).toContain("if (had)");
+  });
+
+  it("shouts if it strips a tag and cannot put it back", () => {
+    /* Otherwise the repair leaves the record worse than the problem. */
+    const src = fn("decide.ts");
+    expect(src).toContain("!ok && had");
+    expect(src).toContain("Tag not restored");
+  });
+});

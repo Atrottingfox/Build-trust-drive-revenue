@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { GHL_API, GHL_VERSION, addTags } from "./_ghl";
+import { GHL_API, GHL_VERSION, addTags, getTags } from "./_ghl";
 
 /*
   Approve or decline an application from the notification email.
@@ -129,8 +129,50 @@ const handler: Handler = async (event) => {
     );
   }
 
+  /*
+    GHL fires a workflow when a tag is ADDED, and adding one that is already
+    there is a silent no-op. So a contact who has been invited before gets
+    tagged, gets a page saying "Invited", and gets no email. Sean hit exactly
+    this: the link worked, the tag was written, nothing sent.
+
+    If the tag is already present it is removed first so the add is a real
+    transition. Safe here in a way it is not in the request path: this is one
+    person deliberately pressing a button, one contact at a time.
+
+    The risk that remains is the add failing after the delete, which would strip
+    a tag every filter depends on. So that case is reported loudly rather than
+    dressed up as success.
+  */
+  const before = await getTags(token, contactId);
+  const had = before.includes(action.tag);
+
+  if (had) {
+    await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, "Content-Type": "application/json" },
+      body: JSON.stringify({ tags: [action.tag] }),
+    }).catch(() => {
+      /* Still there. The add below is then a no-op, which is the old behaviour
+         rather than a new failure. */
+    });
+  }
+
   const ok = await addTags(token, contactId, [action.tag]);
-  console.log("decide:", action.tag, contactId, ok ? "applied" : "FAILED");
+
+  if (!ok && had) {
+    console.error("decide: removed", action.tag, "and FAILED to re-add it:", contactId);
+    return html(
+      page(
+        "Needs fixing by hand",
+        `<h1>Tag not restored</h1>
+         <p>GoHighLevel accepted the removal of <b>${action.tag}</b> and refused to put it back.
+         Open ${who} and add it manually, or they will be missing from your filters.</p>`,
+        "bad"
+      )
+    );
+  }
+
+  console.log("decide:", action.tag, contactId, ok ? (had ? "re-fired" : "applied") : "FAILED");
 
   return html(
     ok
