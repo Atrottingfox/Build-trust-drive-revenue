@@ -18,7 +18,7 @@ import { GHL_API, GHL_VERSION, getContact, addTags } from "./_ghl";
   so the tagging happens here and the page only ever sends a contact id.
 
   Gated by the same basic auth as /ladder and /health: it lists client names and
-  can send an invitation to a $15,000 programme.
+  can send an invitation to a $10,000 programme.
 */
 
 const headers = {

@@ -15,7 +15,7 @@ import { RefreshCw, Check, ArrowRight } from 'lucide-react';
   fires the 90 Day Install Invite workflow. One tag, one meaning, reachable two
   ways.
 
-  It asks first. This sends an invitation to a $15,000 programme, and a stray
+  It asks first. This sends an invitation to a $10,000 programme, and a stray
   tap on a phone should not be able to do that.
 
   Gated behind the same basic auth as /ladder and /health.
