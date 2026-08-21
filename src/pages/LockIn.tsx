@@ -118,6 +118,25 @@ const LEAVE_WITH_DETAIL = [
 function Walkthrough() {
   return (
     <div className="space-y-12">
+      {/* Sean's original framing, kept above the detail. It sets what kind of
+          session this is before the three questions get specific. */}
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">The Day</h2>
+        <div className="space-y-4 text-zinc-400 leading-relaxed">
+          <p>Think of this session like a marketing pit stop.</p>
+          <p>
+            You come in with your current content engine. We lift the hood, diagnose
+            performance issues, and help you upgrade the hidden bottlenecks slowing you
+            down.
+          </p>
+          <p>
+            We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
+            tune your strategy so your core acquisition engine runs smoother, faster, and
+            more profitably.
+          </p>
+        </div>
+      </section>
+
       <section>
         <h2 className="font-display text-xl text-white mb-4">What the Day is</h2>
         <p className="text-zinc-400 leading-relaxed mb-5">
@@ -649,12 +668,6 @@ export default function LockIn() {
               Nothing arrived within a few minutes? Reply to my email and I will sort it.
             </p>
 
-            <div className="mt-20 pt-14 border-t border-zinc-800">
-              <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8 text-center">
-                What we are doing on the Day
-              </p>
-              <Walkthrough />
-            </div>
           </div>
         </Container>
 
@@ -679,7 +692,17 @@ export default function LockIn() {
           {days && (
             <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
               <p className="text-white text-[15px]">
-                <span className="font-display text-2xl align-middle mr-1.5">{days.remaining}</span>
+                <span className="font-display text-2xl align-middle mr-1.5">
+                  {/*
+                    Counted from GHL, where a Day is only spent once it is both
+                    paid AND booked. Between those two moments the client has
+                    paid and the number has not moved, which reads as though
+                    their payment did not register. So it is taken down by one
+                    locally for exactly that window, and GHL is trusted again
+                    the moment the booking lands.
+                  */}
+                  {paid && !booked ? Math.max(0, days.remaining - 1) : days.remaining}
+                </span>
                 of {days.total} Days left at $5,000 AUD
               </p>
               <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
@@ -695,13 +718,22 @@ export default function LockIn() {
         */}
         <div className="max-w-3xl mx-auto space-y-16">
 
-          {/* 1. The Day itself, read before any of it is paid for. */}
-          <section>
-            <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
-              What we are doing on the Day
-            </p>
-            <Walkthrough />
-          </section>
+          {/*
+            1. The Day itself, and only while it is still being decided.
+
+            Once the money has cleared they have bought it, and leaving the
+            pitch on the page makes a paid client scroll past a sales section to
+            reach the one thing they still have to do. Paying should shorten the
+            page, not leave it the same length.
+          */}
+          {!paid && (
+            <section>
+              <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
+                What we are doing on the Day
+              </p>
+              <Walkthrough />
+            </section>
+          )}
 
           {/* 2. Payment. */}
           <motion.section

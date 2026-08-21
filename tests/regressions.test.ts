@@ -591,3 +591,27 @@ describe("Paying never re-locks the calendar", () => {
     expect(src).toContain("setPaid(false)");
   });
 });
+
+describe("Paying shortens the page rather than leaving the pitch up", () => {
+  it("the walkthrough is hidden once payment lands", () => {
+    /* A paid client should not scroll past a sales section to reach the one
+       thing they still have to do. */
+    expect(page("LockIn.tsx")).toContain("{!paid && (");
+  });
+
+  it("the confirmation view carries no sales copy at all", () => {
+    const src = page("LockIn.tsx");
+    const walkthroughs = src.match(/<Walkthrough \/>/g) || [];
+    expect(walkthroughs).toHaveLength(1);
+  });
+
+  it("the counter moves on payment, before GHL catches up", () => {
+    /* GHL only spends a Day once it is paid AND booked. Between those two
+       moments the number not moving reads as the payment not registering. */
+    expect(page("LockIn.tsx")).toContain("paid && !booked ? Math.max(0, days.remaining - 1)");
+  });
+
+  it("completing a step scrolls back to the top", () => {
+    expect(page("LockIn.tsx")).toContain("window.scrollTo({ top: 0, behavior: 'smooth' })");
+  });
+});
