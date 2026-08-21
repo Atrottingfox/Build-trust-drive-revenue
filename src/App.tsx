@@ -59,6 +59,7 @@ const Offer = React.lazy(() => import('./pages/Offer'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const Booked = React.lazy(() => import('./pages/Booked'));
 const Install = React.lazy(() => import('./pages/Install'));
+const Prep = React.lazy(() => import('./pages/Prep'));
 const Health = React.lazy(() => import('./pages/Health'));
 const Clients = React.lazy(() => import('./pages/Clients'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
@@ -150,6 +151,10 @@ export default function App() {
           <Route path="/lock-in/:contactId" element={<LockIn />} />
           <Route path="/booked" element={<Booked />} />
           <Route path="/install" element={<Install />} />
+          {/* The prep call, with the contact id so the booking comes back attached
+              to a person. Both link shapes, same as the others. */}
+          <Route path="/prep" element={<Prep />} />
+          <Route path="/prep/:contactId" element={<Prep />} />
           {/* The invitation email uses /install/<id>. Both shapes must work. */}
           <Route path="/install/:contactId" element={<Install />} />
           <Route path="/health" element={<Health />} />

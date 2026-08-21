@@ -650,10 +650,18 @@ export default function LockIn() {
               </p>
               <h2 className="font-display text-2xl text-white mb-3">Check your inbox</h2>
               <p className="text-zinc-400 leading-relaxed">
-                Your confirmation and invoice are on their way, along with a link to book your
-                twenty minute prep call. We go through your prep doc together so I turn up already
-                knowing exactly what we need to attack.
+                Your confirmation and invoice are on their way. There is one thing left after
+                that: a twenty minute prep call, so I turn up already knowing exactly what we
+                need to attack.
               </p>
+              {contactId && (
+                <a
+                  href={`/prep?c=${encodeURIComponent(contactId)}`}
+                  className="inline-flex items-center gap-2 mt-6 bg-white text-black px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
+                >
+                  Book your prep call
+                </a>
+              )}
             </div>
 
             <p className="text-zinc-500 text-sm leading-relaxed text-center mt-8">

@@ -664,3 +664,27 @@ describe("The confirmation asks for nothing more", () => {
     expect(src).not.toContain("prepCallUrl");
   });
 });
+
+describe("A prep call booking can be matched to a person", () => {
+  /*
+    Removing the embed from the confirmation was right. Replacing it with a
+    bare Calendly link was not: no contact id means calendly-booked cannot
+    match the booking, prep-call-booked never lands, and the reminder chases
+    people who have already booked.
+  */
+  it("the prep page passes the contact id to Calendly", () => {
+    const src = page("Prep.tsx");
+    expect(src).toContain("utm_content=${encodeURIComponent(contactId)}");
+  });
+
+  it("it says so before the calendar when the id is missing", () => {
+    /* Rather than letting somebody book into a void. */
+    expect(page("Prep.tsx")).toContain("{!contactId && (");
+  });
+
+  it("the page is routed both ways", () => {
+    const src = readFileSync(join(__dirname, "..", "src", "App.tsx"), "utf8");
+    expect(src).toContain('path="/prep"');
+    expect(src).toContain('path="/prep/:contactId"');
+  });
+});
