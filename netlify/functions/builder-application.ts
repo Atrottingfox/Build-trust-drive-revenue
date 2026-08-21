@@ -641,6 +641,11 @@ const handler: Handler = async (event) => {
               /* The CRM half of the alert. Silence here is what let a missing
                  `applied` tag survive for eight days. */
               ghlDegraded ? `:rotating_light: *CRM:* ${ghlOutcome}` : null,
+              /* Straight to the person, so acting on this is one click rather
+                 than a search in GHL for a name they may have typed oddly. */
+              ghlContactId
+                ? `<https://app.gohighlevel.com/v2/location/${ghlLocationId}/contacts/detail/${ghlContactId}|Open ${data.name || "them"} in GHL>`
+                : null,
               /* Never assume the applicant was emailed. Say so either way. */
               confirmation === 'triggered'
                 ? null

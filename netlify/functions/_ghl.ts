@@ -39,6 +39,19 @@ const authHeaders = (token: string) => ({
   The whole contact, for callers that want more than the tags. Same request
   getTags makes, so asking for both costs one call rather than two.
 */
+/*
+  A link straight to the person in GHL.
+
+  Every alert names somebody Sean then has to go and find, and finding them
+  means opening GHL, searching a name that may be spelled differently to how
+  they typed it, and hoping there is only one. The id is already in hand at the
+  moment the alert is written, so the link costs nothing and removes the step.
+*/
+export function contactUrl(contactId: string): string {
+  const location = process.env.GHL_LOCATION_ID || "";
+  return `https://app.gohighlevel.com/v2/location/${location}/contacts/detail/${contactId}`;
+}
+
 export async function getContact(
   token: string,
   contactId: string

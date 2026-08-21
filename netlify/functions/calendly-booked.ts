@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { reconcile } from "./_ghl";
+import { reconcile, contactUrl } from "./_ghl";
 
 /*
   Receives Calendly's `invitee.created` webhook and pushes the booking into GHL.
@@ -134,6 +134,49 @@ const handler: Handler = async (event) => {
       }
     } else if (isBrandDay && !brandDayDateFieldId) {
       console.error("GHL_FIELD_BRAND_DAY_DATE not set, booking date not recorded.");
+    }
+
+    /*
+      Somebody just locked in a date and nothing said so.
+
+      Payment alerts, application alerts and lapse alerts all existed. The one
+      moment a client actually commits to a day in the calendar passed in
+      silence, which meant the first Sean knew of a booking was seeing it in
+      Calendly later, with no way back to the CRM record from there.
+
+      Deliberately after the tagging and the date write: the alert reports what
+      was actually recorded, not what was about to be attempted.
+    */
+    const slack = process.env.SLACK_WEBHOOK_URL;
+    if (slack) {
+      const when = startTime
+        ? new Date(startTime).toLocaleString("en-AU", {
+            dateStyle: "full",
+            timeStyle: "short",
+            timeZone: "Australia/Brisbane",
+          })
+        : "date not supplied by Calendly";
+      await fetch(slack, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          text: [
+            isPrepCall
+              ? ":telephone_receiver: *Prep call booked*"
+              : ":calendar: *Brand Day locked in*",
+            `*Who:* ${payload.name || payload.email || contactId}`,
+            payload.email ? `*Email:* ${payload.email}` : null,
+            `*When:* ${when}`,
+            !tagRes.ok ? `:rotating_light: *CRM:* tagging failed ${tagRes.status}, nothing downstream will fire` : null,
+            `<${contactUrl(contactId)}|Open them in GHL>`,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        }),
+      }).catch((slackErr) => {
+        /* The booking is recorded. The announcement is not worth failing over. */
+        console.error("calendly-booked Slack alert failed:", slackErr);
+      });
     }
 
     return {
