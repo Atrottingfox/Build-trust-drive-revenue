@@ -79,44 +79,89 @@ const store = {
 };
 
 /* The Day itself. Read before booking, and still worth reading after. */
+/* Sean's words for the Day, kept as he wrote them. */
+const WHAT_IT_ANSWERS = [
+  'Where is money leaking between content and revenue?',
+  'What beliefs do your best buyers need before they say yes?',
+  'What content and channels should your team run to install those beliefs and drive demand?',
+];
+
+const BEFORE_WE_MEET = [
+  'You complete a short prep doc so I have your offers, numbers, and links upfront.',
+  'I review your current content, funnels, and metrics so we start from reality.',
+  'You bring your operator / media lead if you have one (or whoever owns marketing).',
+];
+
+const LEAVE_WITH_DETAIL = [
+  {
+    name: 'Demand Bottleneck Snapshot',
+    body: 'We score your business on the four levers that move a stranger to a sale, Clarity, Visibility, Authority, Quality, and surface the single biggest demand bottleneck stealing the most revenue.',
+  },
+  {
+    name: 'Buying Belief Map',
+    body: 'Engineer the key beliefs your ICP must hold about their problem, your solution, and you before they buy, and where these are installed into your content.',
+  },
+  {
+    name: 'Your Brand Demand Workbook',
+    body: 'Beliefs, topics, hooks, and channels mapped for your core offers based on who you are and what makes you unique.',
+  },
+  {
+    name: 'Core Trust Assets',
+    body: 'We map the highest leverage assets required for ideal prospects to turn into buyers.',
+  },
+  {
+    name: 'A concrete 30 day demand plan',
+    body: 'What your team should publish and do next month, tied to clear demand targets (DMs, apps, opps).',
+  },
+];
+
 function Walkthrough() {
   return (
     <div className="space-y-12">
       <section>
-        <h2 className="font-display text-xl text-white mb-4">The Day</h2>
-        <div className="space-y-4 text-zinc-400 leading-relaxed">
-          <p>Think of this session like a marketing pit stop.</p>
-          <p>
-            You come in with your current content engine. We lift the hood, diagnose
-            performance issues, and help you upgrade the hidden bottlenecks slowing you
-            down.
-          </p>
-          <p>
-            We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
-            tune your strategy so your core acquisition engine runs smoother, faster, and
-            more profitably.
-          </p>
-        </div>
+        <h2 className="font-display text-xl text-white mb-4">What the Day is</h2>
+        <p className="text-zinc-400 leading-relaxed mb-5">
+          This is a working session to answer three questions:
+        </p>
+        <ol className="space-y-3">
+          {WHAT_IT_ANSWERS.map((q, i) => (
+            <li key={q} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+              <span className="text-zinc-600 shrink-0 tabular-nums">{i + 1}.</span>
+              <span>{q}</span>
+            </li>
+          ))}
+        </ol>
+        <p className="text-zinc-400 leading-relaxed mt-5">
+          We make decisions, document them, and leave with a simple plan your team can execute.
+        </p>
       </section>
 
       <section>
         <h2 className="font-display text-xl text-white mb-4">Before we meet</h2>
-        <div className="space-y-4 text-zinc-400 leading-relaxed">
-          <p>
-            Together we go through your prep doc so I turn up already knowing exactly what
-            we need to attack, and what problems to solve.
-          </p>
-          <p>Bring your operator if you have one.</p>
-        </div>
+        <p className="text-zinc-400 leading-relaxed mb-5">After you secure your Day:</p>
+        <ul className="space-y-3.5">
+          {BEFORE_WE_MEET.map((line) => (
+            <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+              <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-zinc-400 leading-relaxed mt-5">
+          By the time we sit down, we already know what problems we're attacking.
+        </p>
       </section>
 
       <section>
         <h2 className="font-display text-xl text-white mb-5">You leave with</h2>
-        <ul className="space-y-3.5">
-          {LEAVE_WITH.map((line) => (
-            <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+        <ul className="space-y-6">
+          {LEAVE_WITH_DETAIL.map((item) => (
+            <li key={item.name} className="flex gap-3.5">
               <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
-              <span>{line}</span>
+              <div>
+                <p className="text-white font-medium">{item.name}</p>
+                <p className="text-zinc-400 leading-relaxed mt-1">{item.body}</p>
+              </div>
             </li>
           ))}
         </ul>
@@ -124,10 +169,10 @@ function Walkthrough() {
 
       <section className="border-l-2 border-zinc-700 pl-6">
         <p className="text-zinc-200 text-lg leading-relaxed">
-          If there's just one thing you'll get from this, it's leverage.
+          If there's one thing you'll feel when you walk out, it's leverage.
         </p>
         <p className="text-zinc-400 leading-relaxed mt-2">
-          So you get more output from every action you take.
+          More demand from the content you're already creating.
         </p>
       </section>
     </div>
@@ -274,6 +319,19 @@ export default function LockIn() {
       truth: it is per browser, it goes stale, and it cannot know about a
       payment made on a phone. The tags are the record, so they win. This is
       also what makes the link work on a device that has never seen it before.
+
+      EXCEPT on the trip back from Stripe.
+
+      The tag is written by lock-in-paid and verify-payment, which are still in
+      flight while this page is loading. Asking GHL a second after paying gets
+      "not paid", because it is not tagged YET. Letting that answer win meant
+      the calendar unlocked on arrival and locked itself again a moment later,
+      which is precisely what someone who has just handed over $5,000 must never
+      see.
+
+      So a fresh return can only ever be upgraded by the server, never undone by
+      it. The one thing allowed to take payment back is Stripe itself saying the
+      session was not paid, further down.
     */
     if (id) {
       fetch('/.netlify/functions/track-hub', {
@@ -284,13 +342,23 @@ export default function LockIn() {
         .then((r) => r.json())
         .then((d) => {
           if (!d?.ok) return;
-          setPaid(Boolean(d.brandDayPaid));
-          setBooked(Boolean(d.brandDayBooked));
+          if (d.brandDayPaid) {
+            setPaid(true);
+            store.set(k('paid'), '1');
+          } else if (!justPaid) {
+            setPaid(false);
+            localStorage.removeItem(k('paid'));
+          }
+
+          if (d.brandDayBooked) {
+            setBooked(true);
+            store.set(k('booked'), '1');
+          } else if (!justPaid) {
+            setBooked(false);
+            localStorage.removeItem(k('booked'));
+          }
+
           if (d.name || d.email) setPrefill({ name: d.name || '', email: d.email || '' });
-          if (d.brandDayPaid) store.set(k('paid'), '1');
-          else localStorage.removeItem(k('paid'));
-          if (d.brandDayBooked) store.set(k('booked'), '1');
-          else localStorage.removeItem(k('booked'));
         })
         .catch(() => {
           /* Offline. The remembered state stands. */
@@ -656,8 +724,10 @@ export default function LockIn() {
             ) : (
               <>
                 <p className="text-white font-medium mb-1">Secure your Brand Day</p>
-                <p className="text-zinc-500 text-sm mb-6">
-                  $5,000 AUD. Your calendar opens as soon as this clears.
+                <p className="text-zinc-400 text-sm">Investment: $5,000 AUD</p>
+                <p className="text-zinc-500 text-sm mt-1 mb-6">
+                  Your calendar opens as soon as payment clears and you'll choose your Day
+                  immediately.
                 </p>
 
                 <div id="stripe-checkout" className="w-full" />
@@ -680,20 +750,23 @@ export default function LockIn() {
                     a dispute, and Stripe sides with the cardholder.
                   */}
                   <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    Your card is stored securely with Stripe. If you decide to go ahead with the
-                    90 Day Install, I'll charge that same card for it, only after you have said
-                    yes. Nothing is charged without your go ahead.
+                    Your card is stored securely with Stripe.
                   </p>
                   <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    If after your application is reviewed and we do a prep call either of us
-                    decide it's not the right move, you'll be fully refunded.
+                    If you decide to go ahead with the 90 Day Authority Engine Install, I'll
+                    charge that same card for it only after you've said yes. Nothing is charged
+                    without your go ahead.
+                  </p>
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    If, after your application is reviewed and we do a prep call, either of us
+                    decides it's not the right move, you'll be fully refunded.
                   </p>
                   <p className="text-zinc-300 text-[13.5px] leading-relaxed">
-                    All I ask is wholehearted implementation and advocacy.
+                    All I ask is wholehearted implementation and honest feedback.
                   </p>
                   <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    P.s. if we decide we're not a fit right now, I'll direct you to someone who
-                    can help you in your current situation.
+                    P.S. If we decide we're not a fit right now, I'll point you to whoever I
+                    believe is the best next step for where you are.
                   </p>
                 </div>
               </>

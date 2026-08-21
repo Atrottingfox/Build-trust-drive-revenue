@@ -569,3 +569,25 @@ describe("Approve links fire even when the tag is already there", () => {
     expect(src).toContain("Tag not restored");
   });
 });
+
+describe("Paying never re-locks the calendar", () => {
+  /*
+    The GHL read was allowed to override the payment flag. The tag is written by
+    lock-in-paid and verify-payment, both still in flight while the page loads,
+    so asking a second after paying gets "not paid" and the calendar locked
+    itself again in front of someone who had just handed over $5,000.
+  */
+  it("a fresh Stripe return can be upgraded by the server but never undone", () => {
+    const src = page("LockIn.tsx");
+    expect(src).not.toMatch(/setPaid\(Boolean\(d\.brandDayPaid\)\)/);
+    expect(src).toContain("} else if (!justPaid) {");
+  });
+
+  it("only Stripe itself can take a payment back", () => {
+    /* verify-payment asking Stripe directly is the one authority allowed to
+       reverse it. */
+    const src = page("LockIn.tsx");
+    expect(src).toContain("verify-payment");
+    expect(src).toContain("setPaid(false)");
+  });
+});
