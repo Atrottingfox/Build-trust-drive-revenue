@@ -271,6 +271,16 @@ const handler: Handler = async (event) => {
     // exists and the Slack alert still fires, so we degrade instead of erroring.
     let ghlContactId: string | null = null;
     let ghlDegraded = false;
+    /*
+      Why the CRM write ended up how it did, in words, for the Slack alert.
+
+      Every GHL failure so far has been written to a function log nobody reads
+      and returned in an HTTP response nobody sees. Meanwhile the alert said
+      "new application" and looked entirely healthy. Diagnosing the missing
+      `applied` tag took an afternoon of probing the live CRM by hand, purely
+      because the one message a human actually reads never mentioned it.
+    */
+    let ghlOutcome = "not attempted";
 
     const ghlToken = process.env.GHL_TOKEN;
     const ghlLocationId = process.env.GHL_LOCATION_ID;
@@ -432,7 +442,9 @@ const handler: Handler = async (event) => {
 
         if (!ghlRes.ok) {
           ghlDegraded = true;
-          console.error("GHL contact write returned", ghlRes.status, await ghlRes.text());
+          const failText = await ghlRes.text();
+          ghlOutcome = `contact write failed ${ghlRes.status}: ${failText.slice(0, 140)}`;
+          console.error("GHL contact write returned", ghlRes.status, failText);
           /* The details may not have saved, but we know who they are, so the
              tags below still run and the automations still fire. */
           ghlContactId = knownContactId;
@@ -493,15 +505,21 @@ const handler: Handler = async (event) => {
           });
           if (!tagRes.ok) {
             ghlDegraded = true;
-            console.error("GHL tagging failed:", tagRes.status, await tagRes.text(), ghlContactId);
+            const tagText = await tagRes.text();
+            ghlOutcome = `tagging failed ${tagRes.status}: ${tagText.slice(0, 140)}`;
+            console.error("GHL tagging failed:", tagRes.status, tagText, ghlContactId);
+          } else {
+            ghlOutcome = "tagged applied";
           }
         } else {
           ghlDegraded = true;
+          ghlOutcome = "no contact id, so nothing was tagged and no automation fired";
           console.error("No GHL contact id, so nothing was tagged. No automation will fire for", data.email);
         }
 
       } catch (ghlErr) {
         ghlDegraded = true;
+        ghlOutcome = `threw before tagging: ${String(ghlErr).slice(0, 140)}`;
         console.error("GHL upsert failed:", ghlErr);
       }
     } else {
@@ -620,6 +638,9 @@ const handler: Handler = async (event) => {
               /* Repeat applicants used to look like first timers. Their earlier
                  attempt is in Notion; this says it is there and how old. */
               history ? `:repeat: *Applied before:* ${history}` : null,
+              /* The CRM half of the alert. Silence here is what let a missing
+                 `applied` tag survive for eight days. */
+              ghlDegraded ? `:rotating_light: *CRM:* ${ghlOutcome}` : null,
               /* Never assume the applicant was emailed. Say so either way. */
               confirmation === 'triggered'
                 ? null
