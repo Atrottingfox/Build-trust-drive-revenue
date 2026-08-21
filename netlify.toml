@@ -24,6 +24,12 @@
 
 # The morning after a Brand Day, ask whether to invite them into the 90 days.
 # 21:00 UTC is 07:00 Brisbane. One Slack message, one link, no app needed.
+# Flags a paid client who has not booked their prep call, so it can be
+# filtered and chased. Writes one new tag nothing else depends on. 08:00
+# Brisbane, after the Brand Day nudge.
+[functions."prep-call-chase"]
+  schedule = "0 22 * * *"
+
 [functions."brand-day-followup"]
   schedule = "0 21 * * *"
 

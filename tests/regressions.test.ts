@@ -745,3 +745,34 @@ describe("One owner for whether they paid", () => {
     expect(src).toContain("else if (!justPaid) setPaid(false)");
   });
 });
+
+describe("The prep call chase only ever adds its own tag", () => {
+  /*
+    Added while the funnel was freshly working, so it must not be able to
+    disturb it. It writes one tag nothing else reads, and touches no existing
+    path.
+  */
+  it("never writes or deletes any funnel tag", () => {
+    const src = codeOf(fn("prep-call-chase.ts"));
+    for (const tag of ["applied", "application-received", "brand-day-booked", "install-invited", "brand-day-confirmed"]) {
+      expect(src).not.toMatch(new RegExp(`tags:\\s*\\[\\s*["']${tag}["']`));
+    }
+  });
+
+  it("only ever deletes its own flag", () => {
+    const src = fn("prep-call-chase.ts");
+    const deletes = codeOf(src).split(/method:\s*"DELETE"/).slice(1);
+    for (const block of deletes) {
+      expect(block.slice(0, 200)).toContain("NOT_BOOKED");
+    }
+  });
+
+  it("clears the flag once they book, so nothing chases them", () => {
+    const src = fn("prep-call-chase.ts");
+    expect(src).toContain("hasBooked && isFlagged");
+  });
+
+  it("does not chase a Day that has already happened", () => {
+    expect(fn("prep-call-chase.ts")).toContain("day < now");
+  });
+});
