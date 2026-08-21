@@ -688,3 +688,11 @@ describe("A prep call booking can be matched to a person", () => {
     expect(src).toContain('path="/prep/:contactId"');
   });
 });
+
+describe("The prep page ends rather than sitting there", () => {
+  it("swaps to a confirmation once Calendly reports the booking", () => {
+    const src = page("Prep.tsx");
+    expect(src).toContain("calendly.event_scheduled");
+    expect(src).toContain("You can close this page now. Keen to rip in.");
+  });
+});

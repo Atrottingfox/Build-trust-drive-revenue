@@ -34,6 +34,9 @@ export default function Prep() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [prefill, setPrefill] = useState({ name: '', email: '' });
   const [height, setHeight] = useState(700);
+  /* Calendly announces the booking through postMessage. Nothing else on this
+     page needs to happen after it, so the page says so and gets out of the way. */
+  const [booked, setBooked] = useState(false);
 
   useEffect(() => {
     const id = contactIdFrom(window.location.search, window.location.pathname);
@@ -69,6 +72,7 @@ export default function Prep() {
   useEffect(() => {
     const onMsg = (e: MessageEvent) => {
       if (typeof e.data?.event !== 'string' || !e.data.event.startsWith('calendly.')) return;
+      if (e.data.event === 'calendly.event_scheduled') setBooked(true);
       const h = e.data?.payload?.height;
       if (typeof h === 'number' && h > 300) setHeight(h);
     };
@@ -91,6 +95,26 @@ export default function Prep() {
 
       <Container className="pt-28 pb-24">
         <div className="max-w-2xl mx-auto">
+          {booked ? (
+            <div className="text-center py-16">
+              <div className="mx-auto mb-7 h-14 w-14 rounded-full border border-emerald-500/30 bg-emerald-500/10 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#34D399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
+                Booked
+              </h1>
+              <p className="text-zinc-300 text-lg leading-relaxed">
+                You can close this page now. Keen to rip in.
+              </p>
+              <p className="text-zinc-500 text-sm leading-relaxed mt-8 max-w-md mx-auto">
+                The details are in your calendar and your inbox. Bring your operator, or whoever
+                owns content.
+              </p>
+            </div>
+          ) : (
+          <>
           <div className="text-center mb-10">
             <div className="accent-line mx-auto mb-6" />
             <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
@@ -128,6 +152,8 @@ export default function Prep() {
           <p className="text-zinc-500 text-sm leading-relaxed text-center mt-8">
             Bring your operator, or whoever owns content. It works far better with them in the room.
           </p>
+          </>
+          )}
         </div>
       </Container>
 
