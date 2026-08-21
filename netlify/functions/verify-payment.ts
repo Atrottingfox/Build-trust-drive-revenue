@@ -250,6 +250,42 @@ const handler: Handler = async (event) => {
       } else {
         console.warn("Paid session with no client_slug metadata, no prep doc recorded:", sessionId);
       }
+      /*
+        The invoice link, onto the contact.
+
+        Stripe emails its own invoice, but that arrives as a Stripe email in
+        Stripe's wording. Putting the link on the contact means Sean's own
+        confirmation can carry it, in his voice, and his bookkeeper has a URL
+        rather than a hunt through the dashboard.
+
+        Reading the invoice needs "Invoices Read" on the restricted key. Without
+        it this logs and moves on: a missing link is a small problem, and it
+        must never hold up a payment that has already cleared.
+      */
+      const invoiceField = process.env.GHL_FIELD_INVOICE_URL;
+      if (invoiceField && session.invoice) {
+        try {
+          const invRes = await fetch(
+            `https://api.stripe.com/v1/invoices/${encodeURIComponent(String(session.invoice))}`,
+            { headers: { Authorization: `Bearer ${secret}` } }
+          );
+          if (invRes.ok) {
+            const inv = await invRes.json();
+            if (inv?.hosted_invoice_url) {
+              customFields.push({ id: invoiceField, value: String(inv.hosted_invoice_url) });
+            }
+          } else {
+            console.error(
+              "Could not read the invoice to record its link:",
+              invRes.status,
+              "add Invoices Read to the Stripe key"
+            );
+          }
+        } catch (err) {
+          console.error("Invoice lookup failed:", err);
+        }
+      }
+
       if (customerField && session.customer) {
         customFields.push({ id: customerField, value: String(session.customer) });
       }
