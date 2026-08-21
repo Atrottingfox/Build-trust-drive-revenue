@@ -371,7 +371,11 @@ describe("Self healing stays inside its lane", () => {
     /* If the re-fire throws after the tag dance, the contact must still be
        marked, or the next run tries again. */
     const src = fn("self-heal.ts");
-    expect(src.indexOf("RETRIED_TAG]")).toBeLessThan(src.indexOf('tags: ["applied"] }),\n      });\n      const re'));
+    /* The cycled tag is `application-received`, not `applied`: cycling the
+       state tag could strip an applicant out of every filter if the re-add
+       failed. What matters here is unchanged, that the retry is marked spent
+       before the re-fire is attempted. */
+    expect(src.indexOf("RETRIED_TAG]")).toBeLessThan(src.indexOf("const re = await fetch"));
   });
 
   it("gives a slow workflow time before deciding it failed", () => {
@@ -514,4 +518,34 @@ describe("A link works whichever shape it was written in", () => {
     expect(src).toContain("/install/:contactId");
     expect(src).toContain("/lock-in/:contactId");
   });
+});
+
+/*
+  The self-repair job re-fired a stalled application by removing `applied` and
+  adding it back, because GHL only triggers on a tag being added.
+
+  Concurrency was not the danger. The danger was the second call failing: a
+  successful delete followed by a failed add leaves the applicant with no
+  `applied` tag, which drops them out of every filter and smart list, and the
+  retry tag means the job never runs for them again. The repair leaves the
+  record permanently worse than the fault it came to fix.
+
+  `application-received` exists to be cycled. Nothing filters on it.
+*/
+describe("Nothing ever removes the applied tag", () => {
+  const sources = ["self-heal.ts", "builder-application.ts", "application-started.ts"].map(
+    (f) => [f, readFileSync(join(__dirname, "../netlify/functions/", f), "utf8")] as const
+  );
+
+  for (const [name, src] of sources) {
+    it(`${name} never sends a DELETE for applied`, () => {
+      const deleteBodies = src
+        .split(/method:\s*["']DELETE["']/)
+        .slice(1)
+        .map((chunk) => chunk.slice(0, 300));
+      for (const body of deleteBodies) {
+        expect(body).not.toMatch(/tags:\s*\[\s*["']applied["']/);
+      }
+    });
+  }
 });

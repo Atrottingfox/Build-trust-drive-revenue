@@ -149,14 +149,22 @@ async function healMissedDeliveries(repairs: Repair[]) {
       if (sent > 0) continue;
 
       /*
-        Nothing reached them. Re-fire the trigger by taking `applied` off and
-        putting it back, because GHL only fires on a tag being ADDED.
+        Nothing reached them. Re-fire the workflow.
 
-        The request path must never do this: two overlapping submissions can
-        leave the tag removed for good, which is exactly how a real applicant
-        went missing. Here it is safe. This runs hourly, one contact at a time,
-        with nothing else touching the record, and the retry tag guarantees it
-        happens once per person for the life of that contact.
+        This used to take `applied` off and put it back, because GHL only fires
+        on a tag being ADDED. The reasoning was that a scheduled job is safe
+        where the request path is not: one contact at a time, nothing else
+        touching the record.
+
+        The risk is not concurrency though, it is the second call failing. If
+        the delete succeeds and the re-add does not, the applicant is left with
+        no `applied` tag at all, which drops them out of every filter and smart
+        list, and the retry tag means this never runs for them again. The repair
+        makes the record permanently worse than the problem it came to fix.
+
+        `application-received` exists precisely to be cycled. Nothing filters on
+        it, so a half-completed cycle costs nothing, and adding it fires the
+        same confirmation workflow.
       */
       await fetch(`${GHL_API}/contacts/${encodeURIComponent(c.id)}/tags`, {
         method: "POST",
@@ -166,12 +174,14 @@ async function healMissedDeliveries(repairs: Repair[]) {
       await fetch(`${GHL_API}/contacts/${encodeURIComponent(c.id)}/tags`, {
         method: "DELETE",
         headers: auth,
-        body: JSON.stringify({ tags: ["applied"] }),
+        body: JSON.stringify({ tags: ["application-received"] }),
+      }).catch(() => {
+        /* Not there to remove, which is the normal case. */
       });
       const re = await fetch(`${GHL_API}/contacts/${encodeURIComponent(c.id)}/tags`, {
         method: "POST",
         headers: auth,
-        body: JSON.stringify({ tags: ["applied"] }),
+        body: JSON.stringify({ tags: ["application-received"] }),
       });
 
       repairs.push({
