@@ -109,8 +109,21 @@ async function clientMetadata(contactId: string): Promise<Record<string, string>
   }
 }
 
-const RETURN_URL =
-  "https://authorityengine.com.au/lock-in?paid=1&session_id={CHECKOUT_SESSION_ID}";
+/*
+  The contact id travels on the return URL.
+
+  It used to be dropped on the way back from Stripe and read out of
+  localStorage instead, which works right up until it is a different browser,
+  a phone, or a private window. Then a client who has just paid $5,000 lands on
+  a page that has no idea who they are: no confirmation, no calendar, no
+  "You're locked in" email, and nothing anywhere says why.
+
+  Stripe already knows the id, so it goes in the URL it sends them back to.
+  Nothing has to be remembered, and nothing can be forgotten.
+*/
+const returnUrl = (contactId?: string) =>
+  "https://authorityengine.com.au/lock-in?paid=1&session_id={CHECKOUT_SESSION_ID}" +
+  (contactId ? `&c=${encodeURIComponent(contactId)}` : "");
 
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
@@ -137,7 +150,7 @@ const handler: Handler = async (event) => {
       "ui_mode": "embedded",
       "mode": "payment",
       "line_items[0][quantity]": "1",
-      "return_url": RETURN_URL,
+      "return_url": returnUrl(contactId ? String(contactId) : undefined),
       /*
         The two lines that make the 90 Day Install chargeable later without
         asking for the card again. off_session saves the payment method for
@@ -145,6 +158,19 @@ const handler: Handler = async (event) => {
         one is always created rather than only when Stripe decides it is needed.
       */
       "payment_intent_data[setup_future_usage]": "off_session",
+
+      /*
+        A real invoice, not just a receipt.
+
+        Stripe issues a receipt by default. A receipt has no invoice number and
+        is not a tax document, so a bookkeeper has to reconstruct one. With this
+        on, Stripe finalises a numbered invoice against the customer for every
+        payment, which is what flows into Xero and what a client's own
+        accountant expects to be given.
+      */
+      "invoice_creation[enabled]": "true",
+      "invoice_creation[invoice_data][description]":
+        "Brand Builder Day. One full day on site: brand, positioning, content system and shoot.",
       "customer_creation": "always",
     });
 
@@ -178,7 +204,10 @@ const handler: Handler = async (event) => {
     // The date is known by now: they pick it before they pay.
     if (brandDayDate) meta.brand_day_date = String(brandDayDate);
     for (const [k, v] of Object.entries(meta)) form.set(`metadata[${k}]`, v);
-    if (contactId) form.set("metadata[ghl_contact_id]", String(contactId));
+    if (contactId) {
+      form.set("metadata[ghl_contact_id]", String(contactId));
+      form.set("invoice_creation[invoice_data][metadata][ghl_contact_id]", String(contactId));
+    }
 
     const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
       method: "POST",

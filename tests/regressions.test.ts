@@ -615,3 +615,32 @@ describe("Paying shortens the page rather than leaving the pitch up", () => {
     expect(page("LockIn.tsx")).toContain("window.scrollTo({ top: 0, behavior: 'smooth' })");
   });
 });
+
+describe("Nothing depends on the browser remembering who paid", () => {
+  it("the contact id comes back from Stripe on the return URL", () => {
+    /* It used to be dropped and read from localStorage, which fails the moment
+       it is a different browser, a phone, or a private window. */
+    for (const f of ["create-checkout-session.ts", "install-checkout.ts"]) {
+      expect(fn(f)).toContain("returnUrl(contactId");
+      expect(fn(f)).toContain("&c=${encodeURIComponent(contactId)}");
+    }
+  });
+});
+
+describe("A payment that cannot be attributed shouts", () => {
+  it("alerts when the tag fails after money has cleared", () => {
+    /* Contact deleted or merged: Stripe has the money, GHL refuses the tag, and
+       everything downstream quietly does not happen. */
+    const src = fn("verify-payment.ts");
+    expect(src).toContain("PAYMENT RECEIVED THAT WE CANNOT ATTRIBUTE");
+  });
+});
+
+describe("Both payments produce a real invoice", () => {
+  it("invoice creation is on", () => {
+    /* A receipt has no invoice number and is not a tax document. */
+    for (const f of ["create-checkout-session.ts", "install-checkout.ts"]) {
+      expect(fn(f)).toContain('"invoice_creation[enabled]": "true"');
+    }
+  });
+});

@@ -176,7 +176,43 @@ const handler: Handler = async (event) => {
       });
       tagged = tagRes.ok;
       if (!tagRes.ok) {
-        console.error("GHL tag failed after verified payment:", tagRes.status, await tagRes.text(), contactId);
+        const failText = await tagRes.text();
+        console.error("GHL tag failed after verified payment:", tagRes.status, failText, contactId);
+
+        /*
+          Money has cleared and it cannot be attached to anybody.
+
+          This happens when the contact has been deleted or merged since the
+          link was sent: Stripe still carries the old id, the tag write fails,
+          and every single thing downstream quietly does not happen. No
+          confirmation email, no calendar, no prep call, no place in the
+          pipeline. The client has paid and the business has no record of it.
+
+          It happened, and the only reason anyone noticed was Sean wondering
+          why a prep call had not appeared. A payment that cannot be attributed
+          is the loudest thing this system can have to say.
+        */
+        const webhook = process.env.SLACK_WEBHOOK_URL;
+        if (webhook) {
+          await fetch(webhook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: [
+                ":rotating_light: *PAYMENT RECEIVED THAT WE CANNOT ATTRIBUTE*",
+                "",
+                `Stripe took the money. GoHighLevel refused the tag (HTTP ${tagRes.status}).`,
+                `Contact id: \`${contactId}\` — most likely deleted or merged.`,
+                `Stripe session: \`${sessionId}\``,
+                "",
+                "Nothing downstream has fired: no confirmation, no calendar, no prep call.",
+                "Find them in Stripe, recreate or locate the contact, and tag `brand-day-paid` by hand.",
+              ].join("\n"),
+            }),
+          }).catch(() => {
+            /* Already in the logs. */
+          });
+        }
       }
 
       /*

@@ -30,8 +30,11 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const RETURN_URL =
-  "https://authorityengine.com.au/install?paid=1&session_id={CHECKOUT_SESSION_ID}";
+/* The contact id travels back too, so the page never has to remember who
+   they are. See create-checkout-session for why. */
+const returnUrl = (contactId?: string) =>
+  "https://authorityengine.com.au/install?paid=1&session_id={CHECKOUT_SESSION_ID}" +
+  (contactId ? `&c=${encodeURIComponent(contactId)}` : "");
 
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
@@ -89,9 +92,18 @@ const handler: Handler = async (event) => {
       "line_items[0][price_data][currency]": "aud",
       "line_items[0][price_data][unit_amount]": String(amount),
       "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, first payment",
-      "return_url": RETURN_URL,
+      "return_url": returnUrl(contactId ? String(contactId) : undefined),
       // Keeps the card usable for the second payment without asking again.
       "payment_intent_data[setup_future_usage]": "off_session",
+
+      /*
+        The second instalment is already raised as a proper Stripe invoice. The
+        first was only ever a receipt, so the same engagement produced two
+        different kinds of paperwork. Both are invoices now.
+      */
+      "invoice_creation[enabled]": "true",
+      "invoice_creation[invoice_data][description]":
+        "90 Day Authority Engine Install, first instalment of two.",
     });
 
     if (customerId) {
@@ -103,6 +115,7 @@ const handler: Handler = async (event) => {
       form.set("client_reference_id", String(contactId));
       form.set("metadata[ghl_contact_id]", String(contactId));
       form.set("metadata[payment]", "install-1");
+      form.set("invoice_creation[invoice_data][metadata][ghl_contact_id]", String(contactId));
     }
 
     const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
