@@ -471,13 +471,17 @@ describe("Writing a contact never erases their tags", () => {
     "utf8"
   );
 
-  /* The bodies of contact writes, ignoring calls to the /tags endpoint, which
-     appends and is the correct way to add one. */
+  /* The bodies of contact writes, ignoring calls to the tags endpoint, which
+     appends and is the correct way to add one. That endpoint is reached both
+     literally and through a `tagUrl` variable, so both are excluded. */
   const contactWriteBodies = (src: string) =>
     src
       .split(/fetch\(/)
       .slice(1)
-      .filter((chunk) => !chunk.slice(0, 200).includes("/tags"))
+      .filter((chunk) => {
+        const head = chunk.slice(0, 200);
+        return !head.includes("/tags") && !head.trimStart().startsWith("tagUrl");
+      })
       .map((chunk) => chunk.slice(0, 900));
 
   it("never sends tags in the upsert that captures a started application", () => {
