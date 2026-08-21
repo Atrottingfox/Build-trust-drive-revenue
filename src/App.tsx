@@ -147,8 +147,11 @@ export default function App() {
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/lock-in" element={<LockIn />} />
+          <Route path="/lock-in/:contactId" element={<LockIn />} />
           <Route path="/booked" element={<Booked />} />
           <Route path="/install" element={<Install />} />
+          {/* The invitation email uses /install/<id>. Both shapes must work. */}
+          <Route path="/install/:contactId" element={<Install />} />
           <Route path="/health" element={<Health />} />
           <Route path="/clients" element={<Clients />} />
           <Route path="/geronimo" element={<Geronimo />} />

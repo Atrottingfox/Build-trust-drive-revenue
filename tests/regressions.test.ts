@@ -447,3 +447,67 @@ describe("/install does not send a paid client to book a mandatory meeting", () 
     expect(page("Install.tsx")).toMatch(/const WEEKLY_CALL_URL = '';/);
   });
 });
+
+/*
+  21 August 2026. Nobody who applied after 13 August carried the `applied` tag,
+  so no workflow fired and no applicant was emailed.
+
+  The cause was one line in the abandoned-application capture. GHL's upsert
+  REPLACES the tag array rather than merging, and that call sent
+  `tags: ["application-started"]`. It runs on a debounce while somebody types,
+  so it could run after a finished application and reset them to
+  `application-started` alone, deleting the tag that fires everything.
+
+  The function whose only job is to notice unfinished applications was erasing
+  finished ones.
+*/
+describe("Writing a contact never erases their tags", () => {
+  const started = readFileSync(
+    join(__dirname, "../netlify/functions/application-started.ts"),
+    "utf8"
+  );
+  const builder = readFileSync(
+    join(__dirname, "../netlify/functions/builder-application.ts"),
+    "utf8"
+  );
+
+  /* The bodies of contact writes, ignoring calls to the /tags endpoint, which
+     appends and is the correct way to add one. */
+  const contactWriteBodies = (src: string) =>
+    src
+      .split(/fetch\(/)
+      .slice(1)
+      .filter((chunk) => !chunk.slice(0, 200).includes("/tags"))
+      .map((chunk) => chunk.slice(0, 900));
+
+  it("never sends tags in the upsert that captures a started application", () => {
+    for (const body of contactWriteBodies(started)) {
+      expect(body).not.toMatch(/tags:\s*\[/);
+    }
+  });
+
+  it("never sends tags in the contact write on a submitted application", () => {
+    for (const body of contactWriteBodies(builder)) {
+      expect(body).not.toMatch(/tags:\s*\[/);
+    }
+  });
+
+  it("adds the started tag through the appending endpoint instead", () => {
+    expect(started).toMatch(/\/tags`/);
+  });
+});
+
+describe("A link works whichever shape it was written in", () => {
+  /* The invitation email used /install/<id> instead of ?c=<id>. The id was
+     right there and the page refused to sign. */
+  it("both pages read the id from the path as well as the query", () => {
+    expect(page("Install.tsx")).toContain("contactIdFrom");
+    expect(page("LockIn.tsx")).toContain("contactIdFrom");
+  });
+
+  it("the path form has a route to land on", () => {
+    const src = readFileSync(join(__dirname, "..", "src", "App.tsx"), "utf8");
+    expect(src).toContain("/install/:contactId");
+    expect(src).toContain("/lock-in/:contactId");
+  });
+});

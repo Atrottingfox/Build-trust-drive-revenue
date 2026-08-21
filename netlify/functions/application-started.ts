@@ -91,11 +91,22 @@ const handler: Handler = async (event) => {
           ? `builder page, started (${cleanCtaSource(ctaSource)})`
           : "builder page, started",
         /*
-          Only `application-started`. Adding `applied` here would make every
-          abandoned form look like a finished application, which is the exact
-          distinction this endpoint exists to draw.
+          No `tags` here, and it matters more than it looks.
+
+          GHL's upsert REPLACES the tag array rather than merging into it. This
+          used to send ["application-started"], so every call wiped every other
+          tag the contact had. Including `applied`.
+
+          This endpoint fires on a debounce while somebody is still typing, so
+          it can and did run after a finished application: they submitted, got
+          tagged `applied`, then the capture ran once more and reset them to
+          `application-started` alone. The tag that fires every downstream
+          automation was deleted by the function whose only job is to notice
+          people who have not finished yet.
+
+          Nothing since 13 August had `applied` because of this. Tags are added
+          through the tags endpoint below instead, which appends.
         */
-        tags: ["application-started"],
       }),
     });
 
@@ -105,7 +116,29 @@ const handler: Handler = async (event) => {
     }
 
     const json = await res.json();
-    return ok({ captured: true, contactId: json?.contact?.id || json?.id || null });
+    const contactId = json?.contact?.id || json?.id || null;
+
+    /*
+      Added, not set. POST to the tags endpoint appends and leaves everything
+      else alone, which is the whole difference between marking somebody as
+      having started and quietly erasing their history.
+    */
+    if (contactId) {
+      await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Version: GHL_VERSION,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({ tags: ["application-started"] }),
+      }).catch((tagErr) => {
+        console.error("application-started: tagging failed", tagErr);
+      });
+    }
+
+    return ok({ captured: true, contactId });
   } catch (err) {
     console.error("application-started error:", err);
     return ok({ captured: false });

@@ -140,6 +140,24 @@ function StepShell({
   );
 }
 
+/*
+  The contact id, however it arrives.
+
+  The invitation email was built with the id as a path segment,
+  /install/<id>, rather than ?c=<id>. The id was right there and the page
+  refused to sign, because it only looked at the query string.
+
+  A link shape typed one way instead of another should not cost a client their
+  place. Both forms are read, so this cannot happen again on either page.
+*/
+function contactIdFrom(search: string, path: string): string | null {
+  const q = new URLSearchParams(search).get('c');
+  if (q) return q;
+  const idFromPath = path.split('/').filter(Boolean).pop();
+  /* GHL ids are 20-ish url-safe characters. A page name is not. */
+  return idFromPath && /^[A-Za-z0-9_-]{15,40}$/.test(idFromPath) ? idFromPath : null;
+}
+
 export default function Install() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [signed, setSigned] = useState(false);
@@ -157,7 +175,7 @@ export default function Install() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const id = params.get('c') || store.get('ae_contact_id');
+    const id = contactIdFrom(window.location.search, window.location.pathname) || store.get('ae_contact_id');
     if (!id) return;
     setContactId(id);
     store.set('ae_contact_id', id);
