@@ -671,7 +671,7 @@ export default function LockIn() {
   }
 
   return (
-    <div className="min-h-screen bg-base">
+    <div className="min-h-screen bg-base overflow-x-hidden">
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
@@ -756,7 +756,20 @@ export default function LockIn() {
                   immediately.
                 </p>
 
-                <div id="stripe-checkout" className="w-full" />
+                {/*
+                  Full bleed inside the card on a phone.
+
+                  Stripe's embedded checkout will not render below about 320px.
+                  The page padding plus this card's own padding left it under
+                  that on a narrow screen, so the form rendered wider than its
+                  container and was cut off down the right hand side, on the one
+                  screen where somebody is trying to pay.
+
+                  The negative margin cancels the card padding for this element
+                  only, so the checkout gets the full card width while the copy
+                  around it keeps its inset.
+                */}
+                <div id="stripe-checkout" className="-mx-6 w-[calc(100%+3rem)] sm:mx-0 sm:w-full" />
 
                 {!embedded && (
                   <div className="flex justify-center">

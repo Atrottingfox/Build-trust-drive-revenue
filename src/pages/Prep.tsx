@@ -33,7 +33,8 @@ function contactIdFrom(search: string, path: string): string | null {
 export default function Prep() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [prefill, setPrefill] = useState({ name: '', email: '' });
-  const [height, setHeight] = useState(700);
+  /* Tall enough that the picker fits before Calendly says anything. */
+  const [height, setHeight] = useState(860);
   /* Calendly announces the booking through postMessage. Nothing else on this
      page needs to happen after it, so the page says so and gets out of the way. */
   const [booked, setBooked] = useState(false);
@@ -73,15 +74,29 @@ export default function Prep() {
     const onMsg = (e: MessageEvent) => {
       if (typeof e.data?.event !== 'string' || !e.data.event.startsWith('calendly.')) return;
       if (e.data.event === 'calendly.event_scheduled') setBooked(true);
-      const h = e.data?.payload?.height;
-      if (typeof h === 'number' && h > 300) setHeight(h);
+      /*
+        Calendly sends this as a number in some versions and as "1200px" in
+        others. Only the number was accepted, so the container stayed at its
+        initial 700 and the booking scrolled inside its own frame, which reads
+        as broken on a page whose only job is to take a booking.
+      */
+      const h = parseInt(String(e.data?.payload?.height ?? ''), 10);
+      if (h > 300) setHeight(h);
     };
     window.addEventListener('message', onMsg);
     return () => window.removeEventListener('message', onMsg);
   }, []);
 
   const url =
-    `${PREP_CALL_URL}?hide_gdpr_banner=1&hide_landing_page_details=1` +
+    /*
+      `hide_event_type_details` matters more than it looks. Without it Calendly
+      repeats the title, duration and description above its own calendar, which
+      this page has already said, and the extra block pushed the picker past the
+      frame so the booking scrolled inside itself. Calendly does not always
+      broadcast a height, so the container cannot be relied on to follow: the
+      fix is to not make the content taller in the first place.
+    */
+    `${PREP_CALL_URL}?hide_gdpr_banner=1&hide_landing_page_details=1&hide_event_type_details=1` +
     `&background_color=0e0e11&text_color=e4e4e7&primary_color=3b82f6` +
     /* The whole reason this page exists: the booking has to come back
        attached to a person. */
