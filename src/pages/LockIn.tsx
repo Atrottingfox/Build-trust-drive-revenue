@@ -309,19 +309,26 @@ export default function LockIn() {
     */
     const k = (name: string) => (id ? `ae_${name}_${id}` : `ae_${name}`);
 
-    // A booking survives a refresh, so the payment step does not vanish.
-    if (store.get(k('booked')) === '1') {
-      setBooked(true);
-      setBookedAt(store.get(k('booked_at')));
-    }
+    /*
+      The browser is no longer allowed an opinion about whether they paid.
 
+      "Have they paid" used to be stored in four places at once: Stripe, a GHL
+      tag, this browser, and the page's own state. Three of those could
+      disagree with reality, and on one day all three did: a page telling
+      somebody they were locked in when they had paid nothing, a calendar that
+      unlocked and locked itself again.
+
+      Now there is one owner. GoHighLevel holds the answer, read below, and the
+      only thing allowed to override it is arriving straight back from Stripe,
+      because the tag has not been written yet at that exact moment.
+
+      The contact id is still cached, because that is identity rather than
+      state and it cannot be wrong in a way that matters.
+    */
     const justPaid = params.get('paid') === '1';
     const sessionId = params.get('session_id');
 
-    if (justPaid || store.get(k('paid')) === '1') {
-      setPaid(true);
-      store.set(k('paid'), '1');
-    }
+    if (justPaid) setPaid(true);
 
     /* Keep the Stripe session id. It is the only thing that ties this browser
        to the client record the Brand Day webhook just created, and it is how
@@ -360,21 +367,11 @@ export default function LockIn() {
         .then((r) => r.json())
         .then((d) => {
           if (!d?.ok) return;
-          if (d.brandDayPaid) {
-            setPaid(true);
-            store.set(k('paid'), '1');
-          } else if (!justPaid) {
-            setPaid(false);
-            localStorage.removeItem(k('paid'));
-          }
+          if (d.brandDayPaid) setPaid(true);
+          else if (!justPaid) setPaid(false);
 
-          if (d.brandDayBooked) {
-            setBooked(true);
-            store.set(k('booked'), '1');
-          } else if (!justPaid) {
-            setBooked(false);
-            localStorage.removeItem(k('booked'));
-          }
+          if (d.brandDayBooked) setBooked(true);
+          else if (!justPaid) setBooked(false);
 
           if (d.name || d.email) setPrefill({ name: d.name || '', email: d.email || '' });
         })
@@ -406,15 +403,9 @@ export default function LockIn() {
       })
         .then((r) => r.json())
         .then((v) => {
-          if (v?.verified && v.paid === false) {
-            // Stripe says this session was never paid. Lock it back down.
-            setPaid(false);
-            try {
-              localStorage.removeItem(key('paid'));
-            } catch {
-              // Nothing to clear.
-            }
-          }
+          // Stripe says this session was never paid. Lock it back down.
+          // Nothing to clear from the browser: it no longer keeps a copy.
+          if (v?.verified && v.paid === false) setPaid(false);
         })
         .catch(() => {
           // Verification is a bonus, not a gate. They keep the calendar.
@@ -460,13 +451,12 @@ export default function LockIn() {
       if (e.data?.event !== 'calendly.event_scheduled') return;
 
       setBooked(true);
-      store.set(key('booked'), '1');
 
       const startsAt = e.data?.payload?.event?.start_time || '';
-      if (startsAt) {
-        setBookedAt(startsAt);
-        store.set(key('booked_at'), startsAt);
-      }
+      /* The date is kept for this page load only. calendly-booked writes it to
+         GHL, and track-hub reads it back on every future visit, so the browser
+         never needs to remember it. */
+      if (startsAt) setBookedAt(startsAt);
 
       const id = contactId || store.get('ae_contact_id');
       if (!id) return;

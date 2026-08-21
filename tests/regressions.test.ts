@@ -580,7 +580,7 @@ describe("Paying never re-locks the calendar", () => {
   it("a fresh Stripe return can be upgraded by the server but never undone", () => {
     const src = page("LockIn.tsx");
     expect(src).not.toMatch(/setPaid\(Boolean\(d\.brandDayPaid\)\)/);
-    expect(src).toContain("} else if (!justPaid) {");
+    expect(src).toContain("else if (!justPaid) setPaid(false)");
   });
 
   it("only Stripe itself can take a payment back", () => {
@@ -722,5 +722,26 @@ describe("The canary guards the contract with GHL", () => {
     const src = fn("canary.ts");
     expect(src).toContain("cleanUp");
     expect(src).toMatch(/method:\s*"DELETE"/);
+  });
+});
+
+describe("One owner for whether they paid", () => {
+  /*
+    It used to live in four places: Stripe, a GHL tag, the browser, and the
+    page's own state. Three could disagree with reality, and on one day all
+    three did. GoHighLevel is now the only record, and the single thing allowed
+    to override it is arriving straight back from Stripe, because the tag has
+    not been written at that exact moment.
+  */
+  it("the browser keeps no copy of paid or booked", () => {
+    const src = page("LockIn.tsx");
+    expect(src).not.toMatch(/\b(k|key)\('paid'\)/);
+    expect(src).not.toMatch(/\b(k|key)\('booked'\)/);
+  });
+
+  it("the server is still asked, and still wins", () => {
+    const src = page("LockIn.tsx");
+    expect(src).toContain("track-hub");
+    expect(src).toContain("else if (!justPaid) setPaid(false)");
   });
 });
