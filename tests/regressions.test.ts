@@ -644,3 +644,23 @@ describe("Both payments produce a real invoice", () => {
     }
   });
 });
+
+describe("verify-payment reports its own success honestly", () => {
+  it("does not read customFields outside the block it is declared in", () => {
+    /* It threw a ReferenceError on every payment, which the catch turned into
+       verified:false. The work had already happened. The function just lied on
+       its way out, which hides an outage rather than reporting one. */
+    const src = fn("verify-payment.ts");
+    expect(src).not.toContain("customFields.length >= 0");
+    expect(src).toContain("const attached = Boolean(contactId) && tagged;");
+  });
+});
+
+describe("The confirmation asks for nothing more", () => {
+  it("carries no second calendar embed", () => {
+    /* Someone who has just paid and picked a date should not be asked to make
+       a third decision on the same screen. The prep call goes by email. */
+    const src = page("LockIn.tsx");
+    expect(src).not.toContain("prepCallUrl");
+  });
+});

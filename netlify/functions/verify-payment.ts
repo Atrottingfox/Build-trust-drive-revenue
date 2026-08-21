@@ -301,7 +301,22 @@ const handler: Handler = async (event) => {
       Never let it pass quietly. Put it in Slack with everything needed to fix it
       by hand.
     */
-    const attached = Boolean(contactId) && customFields.length >= 0 && tagged;
+    /*
+      `customFields` used to be part of this check. It is declared inside the
+      `if (contactId && token)` block above, so reading it here threw a
+      ReferenceError every single time, which the catch turned into
+      `verified: false`.
+
+      The work had already happened: the tag landed, the fields were written,
+      the payment was real. The function just reported failure on its way out,
+      so every payment looked unverified while being perfectly fine. That is
+      worse than an outage, because it hides one.
+
+      The condition was meaningless anyway. `length >= 0` is true of every array
+      that exists. What actually matters is whether the payment reached a
+      contact and the tag stuck.
+    */
+    const attached = Boolean(contactId) && tagged;
     if (!attached) {
       const slack = process.env.SLACK_WEBHOOK_URL;
       if (slack) {

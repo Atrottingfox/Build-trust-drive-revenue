@@ -44,7 +44,6 @@ declare global {
 }
 
 const CALENDLY_URL = 'https://calendly.com/sean-authorityengine/vip-day';
-const PREP_CALL_URL = 'https://calendly.com/sean-authorityengine/prep-call';
 const STRIPE_BUY_BUTTON_ID = 'buy_btn_1U49VS2niRrgrA5OR7ldFuJQ';
 const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
@@ -611,7 +610,6 @@ export default function LockIn() {
     (prefill.email ? `&email=${encodeURIComponent(prefill.email)}` : '');
 
   const calendlyUrl = `${CALENDLY_URL}?${calendlyParams}`;
-  const prepCallUrl = `${PREP_CALL_URL}?${calendlyParams}`;
 
   /*
     Once both halves are done this stops being a checkout. Leaving the two
@@ -638,26 +636,24 @@ export default function LockIn() {
           </div>
 
           <div className="max-w-2xl mx-auto mt-14">
+            {/*
+              The prep call is booked from an email, not here.
+
+              Putting a second calendar on the confirmation asked someone who
+              had just paid and picked a date to make a third decision on the
+              same screen. It reads as another hurdle rather than a
+              confirmation, and it competed with the thing they had just done.
+            */}
             <div className="rounded-2xl border border-zinc-700 bg-zinc-900/40 p-7 sm:p-8">
               <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-3">
-                One thing left
+                What happens next
               </p>
-              <h2 className="font-display text-2xl text-white mb-3">Book your prep call</h2>
-              <p className="text-zinc-400 leading-relaxed mb-7">
-                Twenty minutes. We go through your prep doc together so I turn up already knowing
-                exactly what we need to attack, and what problems to solve. Bring your operator if
-                you have one.
+              <h2 className="font-display text-2xl text-white mb-3">Check your inbox</h2>
+              <p className="text-zinc-400 leading-relaxed">
+                Your confirmation and invoice are on their way, along with a link to book your
+                twenty minute prep call. We go through your prep doc together so I turn up already
+                knowing exactly what we need to attack.
               </p>
-              {/* Booked here, on this page. Sending them out to a Calendly tab
-                  means the confirmation lands somewhere they have already
-                  closed, and we never see them come back. */}
-              <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
-                <div
-                  className="calendly-inline-widget w-full"
-                  data-url={prepCallUrl}
-                  style={{ minWidth: 280, height: calHeight }}
-                />
-              </div>
             </div>
 
             <p className="text-zinc-500 text-sm leading-relaxed text-center mt-8">
