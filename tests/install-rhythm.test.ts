@@ -16,6 +16,7 @@ import {
   avoidHoliday,
   capacity,
 } from "../netlify/functions/_cadence";
+import { isFree } from "../netlify/functions/_google";
 
 describe("the rhythm", () => {
   it("is seven calls on the weeks Sean confirmed", () => {
@@ -257,5 +258,26 @@ describe("capacity", () => {
     const c = capacity([], [], today);
     expect(c.throughputPerWeek).toBeCloseTo(6 / 11, 5);
     expect(c.throughputPerMonth).toBeCloseTo((6 / 11) * (52 / 12), 5);
+  });
+});
+
+describe("free/busy overlap", () => {
+  /* Google returns "…T02:00:00Z"; Date.toISOString() produces "…T02:00:00.000Z".
+     Compared as strings, "Z" sorts above ".", so a busy block that ends exactly
+     when a slot starts reads as an overlap and the hour vanishes from the
+     picker with nothing to show for it. */
+  const busy = [{ start: "2026-09-16T01:00:00Z", end: "2026-09-16T02:00:00Z" }];
+
+  it("blocks the hour that actually overlaps", () => {
+    expect(isFree(busy, "2026-09-16T01:00:00.000Z", "2026-09-16T02:00:00.000Z")).toBe(false);
+  });
+
+  it("leaves the hour that merely touches it", () => {
+    expect(isFree(busy, "2026-09-16T02:00:00.000Z", "2026-09-16T03:00:00.000Z")).toBe(true);
+    expect(isFree(busy, "2026-09-16T00:00:00.000Z", "2026-09-16T01:00:00.000Z")).toBe(true);
+  });
+
+  it("still catches a partial overlap", () => {
+    expect(isFree(busy, "2026-09-16T01:30:00.000Z", "2026-09-16T02:30:00.000Z")).toBe(false);
   });
 });

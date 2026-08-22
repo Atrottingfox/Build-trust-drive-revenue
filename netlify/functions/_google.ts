@@ -75,9 +75,18 @@ export async function freeBusy(token: string, timeMinIso: string, timeMaxIso: st
 /*
   Whether a given hour is clear. Half an hour of overlap is still a clash, so
   this is an interval test rather than a start time test.
+
+  Compared as instants, not as strings. Google returns "2026-09-16T02:00:00Z"
+  while Date.toISOString() produces "2026-09-16T02:00:00.000Z", and comparing
+  those lexically makes a busy block bleed into the hour after it: "Z" sorts
+  above ".", so an end time that exactly meets a start time reads as an overlap.
+  The symptom was hours quietly missing from the picker, with nothing to show
+  for it. Two instants that are equal do not overlap.
 */
 export function isFree(busy: Busy[], startIso: string, endIso: string): boolean {
-  return !busy.some((b) => b.start < endIso && b.end > startIso);
+  const start = Date.parse(startIso);
+  const end = Date.parse(endIso);
+  return !busy.some((b) => Date.parse(b.start) < end && Date.parse(b.end) > start);
 }
 
 /* ---------------------------------------------------------------- events */
