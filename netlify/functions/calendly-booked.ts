@@ -83,8 +83,22 @@ const handler: Handler = async (event) => {
 
     const isPrepCall = /prep[-\s]?call/.test(haystack);
     const isBrandDay = /vip[-\s]?day|brand[-\s]?builder|brand[-\s]?day/.test(haystack);
+    /*
+      The 90 Day delivery calls.
 
-    if (!isPrepCall && !isBrandDay) {
+      Calendly already does the hard parts here and does them properly: it reads
+      the real calendar so a taken hour cannot be offered twice, creates the
+      event, invites the client, attaches a Zoom conference natively, and sends
+      its own reminders. None of that needed building.
+
+      What it could not do was tell the CRM. An unrecognised event type was
+      logged and dropped, deliberately, because guessing wrong would have marked
+      somebody as having paid. So these are named rather than assumed.
+    */
+    const isInstallWeekly = /90[-\s]?day[-\s]?install[-,\s]*weekly/.test(haystack);
+    const isInstallFortnightly = /90[-\s]?day[-\s]?install[-,\s]*fortnightly/.test(haystack);
+
+    if (!isPrepCall && !isBrandDay && !isInstallWeekly && !isInstallFortnightly) {
       // Guessing here is dangerous: wrongly applying brand-day-paid marks
       // someone as having paid $5,000 and silences the chase sequence.
       console.error(
@@ -100,7 +114,13 @@ const handler: Handler = async (event) => {
       as having paid the moment they picked a date, which is the wrong order and
       would silence the chase sequence for anyone who books without paying.
     */
-    const tags = isPrepCall ? ["prep-call-booked"] : ["brand-day-booked"];
+    const tags = isInstallWeekly
+      ? ["install-weekly-booked"]
+      : isInstallFortnightly
+        ? ["install-fortnightly-booked"]
+        : isPrepCall
+          ? ["prep-call-booked"]
+          : ["brand-day-booked"];
 
     const tagRes = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
       method: "POST",
@@ -161,9 +181,13 @@ const handler: Handler = async (event) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           text: [
-            isPrepCall
-              ? ":telephone_receiver: *Prep call booked*"
-              : ":calendar: *Brand Day locked in*",
+            isInstallWeekly
+              ? ":repeat: *90 Day weekly slot chosen*"
+              : isInstallFortnightly
+                ? ":repeat: *90 Day fortnightly slot chosen*"
+                : isPrepCall
+                  ? ":telephone_receiver: *Prep call booked*"
+                  : ":calendar: *Brand Day locked in*",
             `*Who:* ${payload.name || payload.email || contactId}`,
             payload.email ? `*Email:* ${payload.email}` : null,
             `*When:* ${when}`,
@@ -182,7 +206,17 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ ok: true, contactId, event: isPrepCall ? "prep-call" : "brand-day" }),
+      body: JSON.stringify({
+        ok: true,
+        contactId,
+        event: isInstallWeekly
+          ? "install-weekly"
+          : isInstallFortnightly
+            ? "install-fortnightly"
+            : isPrepCall
+              ? "prep-call"
+              : "brand-day",
+      }),
     };
   } catch (err) {
     // Always 200. Calendly retries on failure and a duplicate tag is harmless,

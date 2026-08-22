@@ -24,10 +24,21 @@ const PREP_CALL_URL = 'https://calendly.com/sean-authorityengine/prep-call';
 /* Shared with /lock-in and /install: the id arrives as ?c= or as a path
    segment, because a link written either way should still work. */
 function contactIdFrom(search: string, path: string): string | null {
-  const q = new URLSearchParams(search).get('c');
-  if (q) return q;
-  const last = path.split('/').filter(Boolean).pop();
-  return last && /^[A-Za-z0-9_-]{15,40}$/.test(last) ? last : null;
+  /*
+    Wherever GHL leaves it. The invitation goes out with click tracking and UTM
+    tagging on, so every link is rewritten before anyone sees it, and a path
+    segment is the most fragile place to carry an id through that.
+  */
+  const params = new URLSearchParams(search);
+  const looksLikeId = (v: string | null) => Boolean(v && /^[A-Za-z0-9_-]{15,40}$/.test(v));
+
+  for (const key of ['c', 'contactId', 'contact_id', 'utm_content']) {
+    const v = params.get(key);
+    if (looksLikeId(v)) return v;
+  }
+
+  const last = path.split('/').filter(Boolean).pop() || null;
+  return looksLikeId(last) ? last : null;
 }
 
 export default function Prep() {

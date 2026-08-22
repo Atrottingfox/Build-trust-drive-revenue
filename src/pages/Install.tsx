@@ -151,11 +151,30 @@ function StepShell({
   place. Both forms are read, so this cannot happen again on either page.
 */
 function contactIdFrom(search: string, path: string): string | null {
-  const q = new URLSearchParams(search).get('c');
-  if (q) return q;
-  const idFromPath = path.split('/').filter(Boolean).pop();
+  /*
+    Wherever GHL leaves it.
+
+    The invitation is sent from GHL with click tracking and UTM tagging both
+    on, so every link is rewritten before it reaches anyone. A path segment is
+    the most fragile place to carry an id through that, and when it was lost the
+    page had nothing to attach a signature to and failed at the moment of
+    signing.
+
+    So every place the id could plausibly survive is read, in order of how much
+    it can be trusted. Costs nothing, and turns a broken link into a working one
+    rather than a support conversation.
+  */
+  const params = new URLSearchParams(search);
+  const looksLikeId = (v: string | null) => Boolean(v && /^[A-Za-z0-9_-]{15,40}$/.test(v));
+
+  for (const key of ['c', 'contactId', 'contact_id', 'utm_content']) {
+    const v = params.get(key);
+    if (looksLikeId(v)) return v;
+  }
+
+  const idFromPath = path.split('/').filter(Boolean).pop() || null;
   /* GHL ids are 20-ish url-safe characters. A page name is not. */
-  return idFromPath && /^[A-Za-z0-9_-]{15,40}$/.test(idFromPath) ? idFromPath : null;
+  return looksLikeId(idFromPath) ? idFromPath : null;
 }
 
 export default function Install() {

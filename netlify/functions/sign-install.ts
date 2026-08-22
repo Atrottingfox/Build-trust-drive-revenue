@@ -38,6 +38,19 @@ const handler: Handler = async (event) => {
   try {
     const { contactId, signatureName, termsVersion } = JSON.parse(event.body || "{}");
 
+    /*
+      A contact id that is not a contact is not a server error.
+
+      The invitation link is built in GHL, and a merge field placed beside the
+      URL rather than inside it sends people to /install/ with nothing attached,
+      or with the raw token. The page then failed at the moment of signing with
+      "something went wrong", which is both untrue and unactionable: retrying
+      cannot fix a link, and the person is staring at a $10,000 agreement being
+      told the system is broken.
+
+      So the reason is named and handed back, and the page says which it was.
+    */
+
     if (!contactId || !signatureName?.trim() || !termsVersion) {
       return {
         statusCode: 400,
