@@ -127,6 +127,17 @@ const handler: Handler = async (event) => {
   try {
     grid = await readGrid();
   } catch (err) {
+    if (String(err).includes("google-not-configured")) {
+      console.log("capacity: Google not configured yet.");
+      if (scheduled) return { statusCode: 200, body: "not-configured" };
+      return {
+        statusCode: 200,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+        body: page(
+          `<h1>Not connected yet</h1><p class="when">Run scripts/google-auth.mjs and this fills itself in.</p>`
+        ),
+      };
+    }
     console.error("capacity:", err);
     if (scheduled) return { statusCode: 200, body: "error" };
     return {

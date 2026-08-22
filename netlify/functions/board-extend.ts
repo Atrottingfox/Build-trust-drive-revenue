@@ -57,6 +57,15 @@ const handler: Handler = async () => {
   try {
     token = await accessToken();
   } catch (err) {
+    /*
+      Not yet configured is not a fault. This runs daily, and alerting on it
+      before the credential exists would put a warning in Slack every morning
+      until somebody muted the channel, which is how a real alert gets missed.
+    */
+    if (String(err).includes("google-not-configured")) {
+      console.log("board-extend: Google not configured yet, nothing to do.");
+      return { statusCode: 200, body: JSON.stringify({ ok: true, skipped: "not-configured" }) };
+    }
     console.error("board-extend: google auth failed:", err);
     await slack(`:warning: Board call top up cannot reach Google Calendar (${String(err)}).`);
     return { statusCode: 200, body: JSON.stringify({ ok: false }) };
