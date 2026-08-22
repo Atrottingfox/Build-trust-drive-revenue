@@ -2,9 +2,14 @@ import type { Handler } from "@netlify/functions";
 import { getContact, addTags, contactUrl } from "./_ghl";
 import {
   SLOT_HOURS,
+  BOARD_TITLE,
   DURATION_MIN,
   TZ,
   callDates,
+  boardCallDates,
+  allBoardSlots,
+  boardSlotKey,
+  boardWeekLabel,
   firstCallDate,
   slotReleaseDate,
   toUtcIso,
@@ -67,9 +72,9 @@ const page = (body: string) => `<!doctype html>
   h1{font-size:22px;letter-spacing:-.02em;margin:0 0 10px}
   p{margin:0 0 20px;color:#A4AAB4;font-size:15px}
   label{display:block;font-size:13px;color:#A4AAB4;margin:0 0 6px}
-  input{width:100%;box-sizing:border-box;padding:12px 14px;margin:0 0 16px;border-radius:10px;
+  input,select{width:100%;box-sizing:border-box;padding:12px 14px;margin:0 0 16px;border-radius:10px;
         background:#0A0B0D;border:1px solid #2A2F38;color:#EAECEF;font-size:16px;font-family:inherit}
-  input:focus{outline:none;border-color:#3B7DFF}
+  input:focus,select:focus{outline:none;border-color:#3B7DFF}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:0 0 16px}
   button{padding:14px;border-radius:10px;border:1px solid #2A2F38;background:#0A0B0D;color:#EAECEF;
          font-size:16px;font-weight:600;cursor:pointer;font-family:inherit}
@@ -235,36 +240,62 @@ const handler: Handler = async (event) => {
 
   const start = firstCallDate(new Date());
   const dates = callDates(start);
-  const last = dates[dates.length - 1].date;
+  const releases = slotReleaseDate(start);
+
+  /* Look far enough ahead to cover the last board call in any week of the
+     month, whichever they end up choosing. */
+  const horizon = addDays(start, 130);
 
   let busy;
   try {
-    busy = await freeBusy(token, toUtcIso(start, 0), toUtcIso(addDays(last, 1), 0));
+    busy = await freeBusy(token, toUtcIso(start, 0), toUtcIso(horizon, 0));
   } catch (err) {
     console.error("install-slot: freebusy failed:", err);
     return html("<h1>Something went wrong</h1><p>Sean has been told. Try again shortly.</p>");
   }
 
-  /* An hour is only offered if it is clear on every one of the seven dates. */
-  const available = SLOT_HOURS.filter((h) =>
-    dates.every((d) => isFree(busy, toUtcIso(d.date, h), toUtcIso(d.date, h, DURATION_MIN)))
-  );
+  const clearOn = (days: string[], h: number) =>
+    days.every((d) => isFree(busy, toUtcIso(d, h), toUtcIso(d, h, DURATION_MIN)));
+
+  /* An hour is only offered if it is clear on every date it would be used. */
+  const available = SLOT_HOURS.filter((h) => clearOn(dates.map((d) => d.date), h));
+
+  /*
+    Board slots are a pair, which Friday of the month and what time, so the pair
+    is what gets checked. Four Fridays by six hours is twenty four, staggered, so
+    the board call is not the thing that caps the business at six.
+  */
+  const boardOptions = allBoardSlots()
+    .map((s) => ({ ...s, dates: boardCallDates(start, s.week) }))
+    .filter((s) => clearOn(s.dates, s.hour));
 
   const picker = (err?: string) => `
-    <h1>Pick your weekly hour, ${esc(name)}</h1>
-    <p>One choice. This hour is then yours for the whole install, and all seven calls go straight into the calendar.</p>
-    <p>Starting <strong>${dayLabel(start)}</strong>, Brisbane time.</p>
+    <h1>Set your rhythm, ${esc(name)}</h1>
+    <p>Two choices and you are done. Both hours are then yours for the whole install, and every call goes straight into the calendar.</p>
     <form method="POST">
       ${operatorFields(err)}
       <hr class="rule">
+      <label>Your monthly board call, on a Friday</label>
+      <select name="boardSlot" required>
+        <option value="">Pick a Friday and a time</option>
+        ${boardOptions
+          .map(
+            (s) =>
+              `<option value="${boardSlotKey(s)}">${boardWeekLabel(s.week)} Friday, ${hourLabel(s.hour)}</option>`
+          )
+          .join("")}
+      </select>
+      <p class="sub">Once a month, and it carries on for as long as we work together.</p>
+      <hr class="rule">
+      <label>Your weekly call, every Wednesday from ${dayLabel(start)}</label>
       <div class="grid">
         ${available.map((h) => `<button type="submit" name="hour" value="${h}">${hourLabel(h)}</button>`).join("")}
       </div>
     </form>
-    <p class="sub">Weeks 1, 2, 3, 4, 5, 7 and 10. Sixty minutes each.</p>`;
+    <p class="sub">Weeks 1, 2, 3, 4, 5, 7 and 10, plus your board call. Sixty minutes each.</p>`;
 
   if (event.httpMethod !== "POST") {
-    if (!available.length) {
+    if (!available.length || !boardOptions.length) {
       await slack(
         `:red_circle: *No Wednesday hours left.* ${esc(name)} opened their slot link and had nothing to pick. <${contactUrl(contactId)}|Open in GHL>`
       );
@@ -279,6 +310,11 @@ const handler: Handler = async (event) => {
   const chosen = Number(params.get("hour"));
   if (!SLOT_HOURS.includes(chosen)) {
     return html("<h1>Pick an hour</h1><p>Go back and choose one.</p>", 400);
+  }
+
+  const board = boardOptions.find((s) => boardSlotKey(s) === params.get("boardSlot"));
+  if (!board) {
+    return html(picker("Pick your board call as well, then choose your Wednesday."), 400);
   }
 
   /* Blank is allowed, wrong is not. Somebody mid-hire should not be blocked,
@@ -309,7 +345,20 @@ const handler: Handler = async (event) => {
     (operatorEmail ? "" : " Invitation currently goes to the founder, and moves to the operator once there is one.") +
     (zoom ? `\n\nZoom: ${zoom}` : "");
 
-  const releases = slotReleaseDate(start);
+  const boards = board.dates;
+  const shared = {
+    client: contactId,
+    clientName: name,
+    releases,
+    hour: String(chosen),
+    boardHour: String(board.hour),
+    boardWeek: String(board.week),
+    founderEmail: email,
+    operatorEmail: operatorEmail || "",
+    operatorName: operatorName || "",
+  };
+
+  const total = dates.length + boards.length;
   const created: string[] = [];
 
   try {
@@ -321,16 +370,25 @@ const handler: Handler = async (event) => {
         endLocal: toLocalIso(d.date, chosen, DURATION_MIN),
         timeZone: TZ,
         attendees: [attendee],
-        privateProps: {
-          client: contactId,
-          clientName: name,
-          week: String(d.week),
-          releases,
-          hour: String(chosen),
-          founderEmail: email,
-          operatorEmail: operatorEmail || "",
-          operatorName: operatorName || "",
-        },
+        privateProps: { ...shared, week: String(d.week) },
+      });
+      created.push(id);
+    }
+
+    /* The board call is the one the founder sits in on, so they are invited
+       alongside the operator rather than instead of them. */
+    for (const d of boards) {
+      const id = await createEvent(token, {
+        summary: `${BOARD_TITLE}, ${name}`,
+        description:
+          "The Content Board. What has actually been published, what performed, and what the next cycle points at. " +
+          "Your operator presents the numbers and the thesis." +
+          (zoom ? `\n\nZoom: ${zoom}` : ""),
+        startLocal: toLocalIso(d, board.hour),
+        endLocal: toLocalIso(d, board.hour, DURATION_MIN),
+        timeZone: TZ,
+        attendees: [...new Set([email, attendee])],
+        privateProps: { ...shared, board: "1" },
       });
       created.push(id);
     }
@@ -342,7 +400,7 @@ const handler: Handler = async (event) => {
     */
     console.error("install-slot: create failed after", created.length, "events:", err);
     await slack(
-      `:red_circle: *Slot booking failed part way.* ${esc(name)} has ${created.length} of ${dates.length} calls on Wednesday ${hourLabel(chosen)}. Needs fixing by hand. <${contactUrl(contactId)}|Open in GHL>`
+      `:red_circle: *Slot booking failed part way.* ${esc(name)} has ${created.length} of ${total} calls created. Needs fixing by hand. <${contactUrl(contactId)}|Open in GHL>`
     );
     return html("<h1>Something went wrong</h1><p>Your booking did not complete. Sean has been told and will sort it today.</p>");
   }
@@ -354,7 +412,8 @@ const handler: Handler = async (event) => {
   );
 
   await slack(
-    `:white_check_mark: *${esc(name)}* took Wednesday ${hourLabel(chosen)}. Seven calls from ${dayLabel(start)}, hour frees ${releases}.\n` +
+    `:white_check_mark: *${esc(name)}* took Wednesday ${hourLabel(chosen)} and the ${boardWeekLabel(board.week)} Friday at ${hourLabel(board.hour)}. ` +
+      `${total} calls from ${dayLabel(start)}, hours free again ${releases}.\n` +
       (operatorEmail
         ? `Operator: ${esc(operatorName || "unnamed")}, ${esc(operatorEmail)}.`
         : ":warning: No operator yet, invitations are going to the founder.") +
@@ -363,8 +422,12 @@ const handler: Handler = async (event) => {
 
   return html(
     `<h1>Done, ${esc(name)}</h1>
-     <p>Wednesday ${hourLabel(chosen)}, Brisbane time. Seven invitations are on their way to ${esc(attendee)}.</p>
-     <ol>${dates.map((d) => `<li>${dayLabel(d.date)}</li>`).join("")}</ol>
+     <p>Wednesdays at ${hourLabel(chosen)} and your board call on the ${boardWeekLabel(board.week)} Friday at ${hourLabel(board.hour)}, Brisbane time.
+        ${total} invitations are on their way to ${esc(attendee)}.</p>
+     <ol>${dates
+       .map((d) => `<li>${dayLabel(d.date)}</li>`)
+       .concat(boards.map((d) => `<li>${dayLabel(d)}, Content Board</li>`))
+       .join("")}</ol>
      ${
        operatorEmail
          ? ""

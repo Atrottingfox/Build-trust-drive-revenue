@@ -135,6 +135,9 @@ export type InstallEvent = {
   operatorEmail: string;
   releases: string;
   week: string;
+  hour: string;
+  boardHour: string;
+  boardWeek: string;
   board: boolean;
   attendeeEmails: string[];
 };
@@ -200,6 +203,9 @@ export async function listInstallEvents(token: string, timeMinIso: string, timeM
       operatorEmail: it.extendedProperties?.private?.operatorEmail ?? "",
       releases: it.extendedProperties?.private?.releases ?? "",
       week: it.extendedProperties?.private?.week ?? "",
+      hour: it.extendedProperties?.private?.hour ?? "",
+      boardHour: it.extendedProperties?.private?.boardHour ?? "",
+      boardWeek: it.extendedProperties?.private?.boardWeek ?? "",
       board: it.extendedProperties?.private?.board === "1",
       attendeeEmails: (it.attendees ?? [])
         .filter((a: any) => !a.self && a.email)

@@ -1,6 +1,10 @@
 import type { Handler } from "@netlify/functions";
 import {
   SLOT_HOURS,
+  BOARD_HOURS,
+  BOARD_WEEKS,
+  boardWeekLabel,
+  boardSlotKey,
   SLOT_RELEASE_WEEK,
   CADENCE,
   capacity,
@@ -54,21 +58,38 @@ async function readGrid() {
 
   for (const ev of events) {
     if (!ev.client) continue;
-    const hour = Number(ev.startLocal.slice(11, 13));
     const date = ev.startLocal.slice(0, 10);
 
-    if (ev.week === firstWeek) starts.push(date);
+    if (!ev.board && ev.week === firstWeek) starts.push(date);
 
+    /*
+      Hours come off the private properties rather than off the start time. Sean
+      moving one call must not read as the client changing slot, and the board
+      hour cannot be inferred from a weekly event at all.
+    */
     const existing = byClient.get(ev.client);
-    if (!existing || date < existing.started) {
-      byClient.set(ev.client, {
-        hour,
-        client: ev.client,
-        name: ev.clientName || ev.client,
-        releases: ev.releases || addDays(date, (SLOT_RELEASE_WEEK - 1) * 7),
-        started: date,
-      });
+    const merged: Holding & { name: string; started: string } = existing ?? {
+      hour: Number(ev.hour || ev.startLocal.slice(11, 13)),
+      boardSlot: ev.boardHour ? { week: Number(ev.boardWeek) || 4, hour: Number(ev.boardHour) } : null,
+      boardActive: false,
+      client: ev.client,
+      name: ev.clientName || ev.client,
+      releases: ev.releases || addDays(date, (SLOT_RELEASE_WEEK - 1) * 7),
+      started: date,
+    };
+
+    if (date < merged.started) {
+      merged.started = date;
+      if (ev.releases) merged.releases = ev.releases;
+      if (ev.hour) merged.hour = Number(ev.hour);
     }
+    if (ev.boardHour) merged.boardSlot = { week: Number(ev.boardWeek) || 4, hour: Number(ev.boardHour) };
+
+    /* A board call still ahead of them is what holds the Friday hour. It has no
+       release date, because the board call runs for as long as they stay. */
+    if (ev.board && date >= today) merged.boardActive = true;
+
+    byClient.set(ev.client, merged);
   }
 
   const holdings = [...byClient.values()];
@@ -134,9 +155,8 @@ const handler: Handler = async (event) => {
     return { statusCode: 200, body: JSON.stringify(report) };
   }
 
-  const held = holdings
-    .filter((h) => h.releases > today)
-    .sort((a, b) => a.hour - b.hour);
+  const held = holdings.filter((h) => h.releases > today).sort((a, b) => a.hour - b.hour);
+  const board = holdings.filter((h) => h.boardActive && h.boardSlot !== null);
 
   return {
     statusCode: 200,
@@ -146,9 +166,9 @@ const handler: Handler = async (event) => {
       <p class="when">Read from the calendar, ${today}</p>
 
       <div class="row">
-        <div class="tile"><span class="n">${report.free}</span><span class="k">Hours free</span></div>
-        <div class="tile"><span class="n">${report.held}</span><span class="k">Clients running</span></div>
-        <div class="tile"><span class="n">${report.throughputPerMonth.toFixed(1)}</span><span class="k">Ceiling per month</span></div>
+        <div class="tile"><span class="n">${report.free}</span><span class="k">Openings</span></div>
+        <div class="tile"><span class="n">${report.held}</span><span class="k">In the install</span></div>
+        <div class="tile"><span class="n">${report.onBoard}</span><span class="k">On the board call</span></div>
         <div class="tile"><span class="n">${report.intakePerWeek.toFixed(1)}</span><span class="k">Signing per week</span></div>
       </div>
 
@@ -164,9 +184,9 @@ const handler: Handler = async (event) => {
             }.</div>`
       }
 
-      <h2>The grid</h2>
+      <h2>Wednesdays, the weekly call</h2>
       <table>
-        <tr><th>Wednesday</th><th>Held by</th><th>Frees</th></tr>
+        <tr><th>Hour</th><th>Held by</th><th>Frees</th></tr>
         ${SLOT_HOURS.map((h) => {
           const who = held.find((x) => x.hour === h);
           return `<tr>
@@ -177,13 +197,31 @@ const handler: Handler = async (event) => {
         }).join("")}
       </table>
 
+      <h2>Fridays, the board call</h2>
+      <table>
+        <tr><th>Friday</th>${BOARD_HOURS.map((h) => `<th>${hourLabel(h)}</th>`).join("")}</tr>
+        ${BOARD_WEEKS.map((w) => `<tr>
+          <td>${boardWeekLabel(w)}</td>
+          ${BOARD_HOURS.map((h) => {
+            const who = board.find((x) => boardSlotKey(x.boardSlot!) === `${w}:${h}`);
+            return `<td>${who ? who.name : '<span class="free">free</span>'}</td>`;
+          }).join("")}
+        </tr>`).join("")}
+      </table>
+
       <h2>The maths</h2>
       <p class="when">
-        ${SLOT_HOURS.length} hours, each held ${SLOT_RELEASE_WEEK} weeks.
-        That is ${report.throughputPerWeek.toFixed(2)} clients a week,
+        Wednesdays recycle. ${SLOT_HOURS.length} hours, each held ${SLOT_RELEASE_WEEK} weeks,
+        is ${report.throughputPerWeek.toFixed(2)} clients a week,
         ${report.throughputPerMonth.toFixed(1)} a month,
-        ${(report.throughputPerWeek * 52).toFixed(0)} a year.
-        Signing faster than that for long does not build a queue, it builds a client with no slot.
+        ${(report.throughputPerWeek * 52).toFixed(0)} a year through the install.
+      </p>
+      <p class="when">
+        Fridays do not. The board call runs every month through the twelve, so a
+        board slot stays with that client until they leave. Staggering across
+        ${BOARD_WEEKS.length} Fridays gives ${report.boardTotal} slots and
+        ${report.boardTotal - report.onBoard} still open, so the board call is not
+        what caps the book. Ending a client is the only thing that returns one.
       </p>
     `),
   };

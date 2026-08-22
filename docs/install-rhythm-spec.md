@@ -1,175 +1,135 @@
 # 90 Day Install rhythm, automated
 
-Status: spec, not built. Written 2026-08-22.
+Built 2026-08-22, branch `feat/install-slot-picker`. Not deployed.
 
-## What it does
-
-Someone signs the 90 Day Install agreement. From that moment nothing needs Sean.
+## The chain, end to end
 
 ```
-sign-install writes install-signed
-  -> GHL sends one email with a slot link
-  -> client picks their weekly hour, once
-  -> the whole call rhythm is created: Google Calendar, Zoom, Notion
-  -> 24h before each call they are nudged if the form is not in
+client signs the agreement
+  |
+  |  sign-install.ts writes install-signed          [already live]
+  v
+GHL workflow emails one link                        [you build this, once]
+  https://authorityengine.com.au/slot?c={{contact.id}}
+  |
+  v
+install-slot.ts
+  reads the calendar for what is genuinely free
+  asks: operator name, operator email, board hour, weekly hour
+  creates 10 events, invites, tags the contact, posts to Slack
+  |
+  v
+Google Calendar is the record
+  |
+  +--> capacity.ts reads it back                    /capacity, gated
+  +--> Monday Slack alert when intake outruns the grid
 ```
 
-The failure state this kills: doing fortnightly date maths at 6pm, and turning
-up to a call where nobody has prepared.
+Nothing else has to be kept in sync, because nothing else holds a copy.
 
-## What already exists, and is therefore not being rebuilt
+## The rhythm
 
-Reading the CRM changed this design more than anything else. Three of the four
-things the first draft wanted to create already exist.
+Seven weekly calls, on one Wednesday hour that belongs to that client for the
+whole install.
 
-| Need | What holds it | Notes |
-|---|---|---|
-| The calls | **Sessions & Replays** | Has Client relation, Date, Type, Recording. Type already has `Weekly check in`, `Monthly board call`, `90 day review`. Calendar view exists. |
-| The prep form | **Weekly Cadence** | Already a published form view, `Weekly Submission (send this link)`. `Last Submission` already rolls up onto Clients. |
-| The client | **Clients** | Stage, Install Start, Day 90, Founder, Operator, Sessions relation. |
-| The slot grid | **nothing yet** | One new property, below. Not a new database. |
+| Month | Weeks |
+|---|---|
+| One | 1, 2, 3, 4 |
+| Two | 5, 7 |
+| Three | 10 |
 
-No tenth database. The slot is a property on Clients, so ownership is visible on
-the board Sean already lives in.
+Plus three board calls, last Friday of the month, on a Friday hour the client
+also picks. The founder sits in on those alongside the operator; the weekly
+calls are the operator and Sean.
 
-## The one Notion change
+First call lands **at least two weeks** after signing.
 
-Add to **Clients**:
+## The two grids
 
-| Property | Type | Why |
-|---|---|---|
-| `Weekly Slot` | select | `Wed 10:00`, `Wed 14:00` and so on. Options are the grid. |
-| `Zoom Link` | url | The client's own recurring meeting, created once. |
+Wednesday 10, 11, 12, 1pm, 4pm, 5pm. Six hours, less 2pm and 3pm which are
+already committed. The board calls use the same six on the last Friday only.
 
-A slot is free when no client with Stage in (`Day Booked`, `Day Delivered`,
-`Install Live`) holds it. That is the entire double booking defence, and it is
-ownership rather than a calendar lookup, so an hour free next Wednesday cannot
-be handed out twice.
+A client needs one of each, held together, released together. Both hours stay
+theirs until a week after their last call, weekly or board, whichever is later.
 
-## Cadence, as config
+**The calendar is the only source of availability.** An hour is offered only if
+it is clear on every date it would be used, so nobody gets a slot that dies in
+week five, and there is no stored grid that could disagree with reality.
+It cannot be handed out twice: the moment the first client books, the events
+exist and the hour stops being offered.
 
-Confirmed by Sean, 2026-08-22. Seven calls. Month one weekly, month two
-biweekly, month three once. It lives in one object so a change is one line and
-never touches logic.
+## Capacity
 
-```ts
-export const CADENCE = [
-  { week: 1,  month: 1, title: "90 Day Install, week 1" },
-  { week: 2,  month: 1, title: "90 Day Install, week 2" },
-  { week: 3,  month: 1, title: "90 Day Install, week 3" },
-  { week: 4,  month: 1, title: "90 Day Install, week 4" },
-  { week: 5,  month: 2, title: "90 Day Install, week 5" },
-  { week: 7,  month: 2, title: "90 Day Install, week 7" },
-  { week: 10, month: 3, title: "90 Day Install, week 10" },
-];
-```
+Six hours held eleven weeks is a hard ceiling on intake.
 
-Note: the last call lands at week 10, so the final stretch to Day 90 has no
-call in it. Deliberate as specified.
+| | |
+|---|---|
+| Concurrent clients | 6 |
+| Ceiling | 0.55 per week, 2.4 per month, ~28 per year |
 
-## Modules
+The book is only as open as the tighter of the two grids. Warnings fire on the
+trend rather than on the last free hour, because by the time one hour is left,
+anybody already signed is already a problem.
 
-Plain files, no Netlify types, so the whole thing can move repo in an afternoon.
+Three conditions: grid full, intake running above the ceiling, or down to one
+opening. Silent otherwise, which is the only way a weekly alert stays read.
+
+## Files
 
 | File | Job |
 |---|---|
-| `_cadence.ts` | The config above, plus the date maths from a chosen first date |
-| `_slots.ts` | Read held slots off Clients, return what is free, write a hold |
-| `_calendar.ts` | Google create, update, incremental sync |
-| `_zoom.ts` | Create one recurring meeting per client |
-| `_sessions.ts` | Write and mirror the Sessions & Replays rows |
+| `_cadence.ts` | The rhythm, the board call dates, the capacity model. Pure. |
+| `_google.ts` | Token refresh, free/busy, create, patch, list, delete |
+| `install-slot.ts` | The picker, and the add-your-operator form |
+| `capacity.ts` | `/capacity` readout, plus the Monday Slack alert |
+| `tests/install-rhythm.test.ts` | 18 tests over the date maths and every warning |
 
-Handlers are thin wrappers:
+No calendar sync job. Capacity reads live, so moving a call is already correct
+everywhere. It was specced, then deleted before it was written.
 
-| Handler | Job |
-|---|---|
-| `install-slot.ts` | GET renders the picker, POST creates everything |
-| `calendar-sync.ts` | Scheduled. Pulls Google changes into Notion |
-| `call-prep-chase.ts` | Scheduled. Nudges when a form is missing |
+## The operator
 
-## Google Calendar
+Nothing in the funnel captured who runs the client's content, so the picker
+asks. They are the attendee on all seven weekly calls.
 
-Events are created server side with `conferenceDataVersion=1` and no
-`conferenceData`, so no Meet link is attached. That was the wall the earlier
-session hit: the MCP calendar tool does not expose conferencing, the API does.
-**Verify with one test event before trusting it**, because the Workspace admin
-setting that force adds Meet may still win.
+Leaving it blank is fine, so somebody mid-hire can still book. A malformed email
+is rejected, because a typo would send every invitation nowhere. With no operator the founder
+holds the invitations, the contact is tagged `install-no-operator`, and Slack
+says so. The same link later becomes an add-your-operator form and patches every
+call still to come. Dates do not move, only the guest list.
 
-Every event carries `extendedProperties.private.sessionId`, pointing at its
-Notion row. That single field is what makes the sync trivial.
+Tags: `install-slot-booked`, then `install-operator-set` or `install-no-operator`.
 
-The client is an attendee, so Google sends the invitations. No email layer.
+## Google Meet
 
-### Direction of truth
+Events are created with `conferenceDataVersion=1` and no `conferenceData`, which
+is what stops a Meet link being attached. The earlier attempt failed because the
+tool in use did not expose conferencing; the API does.
 
-Google is master for dates. Sean works in his calendar, so the calendar wins.
+**Verify with one real event.** A Workspace admin setting that force adds
+conferencing may still win, and if it does the honest fix is to turn that setting
+off rather than fight it in code.
 
-- Move a call in Google -> the Notion Date updates
-- Delete a call -> the Notion row is marked
-- Move a call to a different day or hour -> Slack line, no automatic
-  re-allocation of the slot. Moving one call once does not mean the slot
-  changed hands.
-
-Polling every 15 minutes with a `syncToken`, not push notifications. Channels
-expire roughly every 30 days and need a renewal job; polling needs nothing. A
-lost `syncToken` costs a full resync, not data, so Netlify Blobs is a fine home
-for it.
-
-The one thing flowing the other way: a client set to `Churned` in Notion has
-their remaining events deleted and their slot freed. A deliberate action, not a
-sync, so there is no loop.
-
-## Zoom
-
-One **recurring meeting with no fixed time** per client, created on booking.
-That gives a permanent join link with no schedule attached, which sidesteps the
-fact that Zoom recurrence cannot express weekly-then-fortnightly. Dates live in
-Google. The link is just a constant on the client record.
-
-Server to Server OAuth, scope `meeting:write:admin`.
-
-Better than one link per slot: it survives a client changing slots, keeps
-recordings separated per client, and cannot collide with a Brand Day.
-
-## The nudge
-
-Scheduled function, same pattern as the working `prep-call-chase.ts`. Daily,
-finds calls 24 to 48 hours out, checks Weekly Cadence for a row from that client
-for that week, and only sends if it is missing. Silent when everyone is
-prepared.
-
-## New environment variables
+## Environment
 
 ```
 GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET
-GOOGLE_REFRESH_TOKEN
-GOOGLE_CALENDAR_ID
-ZOOM_ACCOUNT_ID
-ZOOM_CLIENT_ID
-ZOOM_CLIENT_SECRET
-NOTION_CLIENTS_DB      = fe95a7b9-08d5-4548-a58a-9d1fe51dedf4
-NOTION_SESSIONS_DB     = f004ffed-17a8-4867-a397-ec964411cac9
-NOTION_CADENCE_DB      = aa57b1a8-e15a-45b8-87c6-a877ed4f9389
-WEEKLY_FORM_URL
+GOOGLE_REFRESH_TOKEN     <- put on the weekly health check
+GOOGLE_CALENDAR_ID       <- optional, defaults to primary
+ZOOM_LINK                <- plain link for now
 ```
 
-`GOOGLE_REFRESH_TOKEN` goes on the weekly health check, so it shouts before it
-rots rather than after.
+## Still to do
 
-## Prerequisites
+1. Google OAuth credential. Blocks everything.
+2. The one GHL workflow that sends the link on `install-signed`.
+3. Verify no Meet link appears on a real event.
+4. Debriefs: Zoom Server to Server OAuth with recording scopes, plus
+   `ANTHROPIC_API_KEY`. Template at `docs/call-debrief-template.md`.
 
-1. Google OAuth credential, created once. About five minutes.
-2. Zoom Server to Server OAuth app.
-3. The existing Notion integration connected to the CRM page. It currently holds
-   `NOTION_OPERATOR_DB` only, so access to Clients and Sessions is unproven.
-4. The two `Clients` properties added.
+## Open
 
-## Open decisions
-
-1. **Eight calls or six.** Blocks nothing, changes one object.
-2. **The grid.** Which days and hours, and how many concurrent clients it holds.
-   Stated capacity is 4 to 6 concurrent builds.
-3. **Blackouts.** Public holidays and travel. Skip and push a week, or book over
-   and move by hand. Skipping needs a list somewhere.
-4. **Darcy.** Already scheduled by hand. Migrate onto this, or leave alone.
+- Darcy is scheduled by hand. Migrate onto this, or leave alone.
+- Blackouts. Public holidays and travel are handled implicitly, since a busy
+  calendar entry makes an hour unofferable. Nothing explicit.

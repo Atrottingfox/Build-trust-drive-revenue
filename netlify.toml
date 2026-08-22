@@ -40,12 +40,12 @@
 [functions."capacity"]
   schedule = "0 22 * * 0"
 
-# The Content Board, last Friday of the month, everybody in the room. Booked
-# three months ahead rather than the week before, because a monthly call that
-# appears with six days notice is a monthly call people miss. Runs daily and is
-# idempotent, so it also picks up a client who signed mid month without anybody
-# remembering to add them.
-[functions."board-call"]
+# The board call outlives the install: it runs every month through the twelve,
+# so the three created at booking would quietly run out around month three and
+# the first anybody would know is a client asking when the next one is. Tops
+# every active client back up, and clears the future ones for anybody who has
+# left so their Friday hour can be offered again. Daily, and idempotent.
+[functions."board-extend"]
   schedule = "0 23 * * *"
 
 # Internal offer ladder. Gated at the edge so neither the route nor its

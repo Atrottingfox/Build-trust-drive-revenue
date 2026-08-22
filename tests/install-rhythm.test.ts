@@ -2,13 +2,18 @@ import { describe, it, expect } from "vitest";
 import {
   CADENCE,
   SLOT_HOURS,
+  BOARD_HOURS,
   SLOT_RELEASE_WEEK,
   callDates,
+  boardCallDates,
   firstCallDate,
   slotReleaseDate,
+  addDays,
   weekdayOf,
-  lastFridayOf,
-  upcomingBoardCalls,
+  nthFridayOf,
+  BOARD_SLOTS,
+  isPublicHoliday,
+  avoidHoliday,
   capacity,
 } from "../netlify/functions/_cadence";
 
@@ -42,10 +47,11 @@ describe("the rhythm", () => {
 });
 
 describe("the first call date", () => {
-  it("is a Wednesday at least five days out", () => {
-    /* Signing on Monday 2026-08-24 should not offer Wednesday the 26th. */
+  it("is a Wednesday at least two weeks out", () => {
+    /* Signing on Monday 2026-08-24. Two weeks lands on the 7th, so the first
+       Wednesday available is the 9th. */
     const d = firstCallDate(new Date("2026-08-24T00:00:00Z"));
-    expect(d).toBe("2026-09-02");
+    expect(d).toBe("2026-09-09");
     expect(weekdayOf(d)).toBe(3);
   });
 
@@ -55,29 +61,109 @@ describe("the first call date", () => {
       const d = firstCallDate(from);
       expect(weekdayOf(d)).toBe(3);
       expect(new Date(`${d}T00:00:00Z`).getTime() - from.getTime()).toBeGreaterThanOrEqual(
-        5 * 86400000
+        14 * 86400000
       );
     }
   });
 });
 
 describe("the board call", () => {
-  it("is the last Friday of the month", () => {
-    expect(lastFridayOf(2026, 7)).toBe("2026-08-28");
-    expect(lastFridayOf(2026, 8)).toBe("2026-09-25");
-    /* October 2026 ends on a Saturday, so the last Friday is the 30th. */
-    expect(lastFridayOf(2026, 9)).toBe("2026-10-30");
+  it("counts Fridays from the start of the month", () => {
+    /* August 2026 starts on a Saturday, so the first Friday is the 7th. */
+    expect(nthFridayOf(2026, 7, 1)).toBe("2026-08-07");
+    expect(nthFridayOf(2026, 7, 4)).toBe("2026-08-28");
+    expect(nthFridayOf(2026, 8, 2)).toBe("2026-09-11");
   });
 
-  it("only ever looks forward", () => {
-    const next = upcomingBoardCalls(new Date("2026-08-29T00:00:00Z"), 3);
-    expect(next).toEqual(["2026-09-25", "2026-10-30", "2026-11-27"]);
+  it("gives every month a first through fourth Friday", () => {
+    for (let m = 0; m < 12; m += 1) {
+      for (const n of [1, 2, 3, 4]) {
+        const d = nthFridayOf(2026, m, n);
+        expect(weekdayOf(d)).toBe(5);
+        expect(Number(d.slice(5, 7))).toBe(m + 1);
+      }
+    }
+  });
+
+  it("staggers to 24 slots rather than 6", () => {
+    expect(BOARD_SLOTS).toBe(24);
+  });
+});
+
+describe("public holidays", () => {
+  it("knows the Fridays that matter in Queensland", () => {
+    expect(isPublicHoliday("2026-12-25")).toBe(true); /* Christmas */
+    expect(isPublicHoliday("2026-12-26")).toBe(true); /* Boxing Day */
+    expect(isPublicHoliday("2027-01-01")).toBe(true); /* New Year */
+    expect(isPublicHoliday("2027-01-26")).toBe(true); /* Australia Day */
+    expect(isPublicHoliday("2026-04-25")).toBe(true); /* Anzac Day */
+    expect(isPublicHoliday("2026-08-28")).toBe(false);
+  });
+
+  it("computes Good Friday rather than tabulating it", () => {
+    expect(isPublicHoliday("2026-04-03")).toBe(true);
+    expect(isPublicHoliday("2027-03-26")).toBe(true);
+    expect(isPublicHoliday("2028-04-14")).toBe(true);
+  });
+
+  it("moves a call back a week rather than forward, so it stays in its month", () => {
+    expect(avoidHoliday("2026-12-25")).toBe("2026-12-18");
+    expect(avoidHoliday("2026-04-03")).toBe("2026-03-27");
+    expect(avoidHoliday("2026-09-25")).toBe("2026-09-25");
+  });
+
+  it("never schedules a board call on a public holiday", () => {
+    for (const week of [1, 2, 3, 4]) {
+      for (const d of boardCallDates("2026-09-23", week, 12)) {
+        expect(isPublicHoliday(d)).toBe(false);
+      }
+    }
+  });
+});
+
+describe("the board calls inside one install", () => {
+  it("is three, one per month, on the client's own Friday", () => {
+    /* Fourth Friday. The 28th is two days after the start, so it is skipped. */
+    expect(boardCallDates("2026-08-26", 4)).toEqual(["2026-09-25", "2026-10-23", "2026-11-27"]);
+    /* Second Friday, a different client, same start. */
+    expect(boardCallDates("2026-08-26", 2)).toEqual(["2026-09-11", "2026-10-09", "2026-11-13"]);
+  });
+
+  it("never lands in the first week", () => {
+    const dates = boardCallDates("2026-09-23", 4);
+    expect(dates).not.toContain("2026-09-25");
+    expect(dates[0]).toBe("2026-10-23");
+  });
+
+  it("is always three, whatever Friday and whatever day somebody signs", () => {
+    for (let day = 1; day <= 28; day += 1) {
+      const start = `2026-09-${String(day).padStart(2, "0")}`;
+      for (const week of [1, 2, 3, 4]) {
+        const dates = boardCallDates(start, week);
+        expect(dates).toHaveLength(3);
+        for (const d of dates) {
+          expect(weekdayOf(d)).toBe(5);
+          expect(d >= addDays(start, 7)).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("never puts two clients on the same board slot in the same month", () => {
+    const a = boardCallDates("2026-08-26", 2);
+    const b = boardCallDates("2026-08-26", 3);
+    expect(a.filter((d) => b.includes(d))).toEqual([]);
   });
 });
 
 describe("capacity", () => {
   const today = "2026-08-22";
-  const hold = (hour: number, releases: string, client = "x") => ({ hour, client, releases });
+  const hold = (
+    hour: number,
+    releases: string,
+    client = "x",
+    boardSlot: { week: number; hour: number } | null = null
+  ) => ({ hour, boardSlot, boardActive: boardSlot !== null, client, releases });
 
   it("reports an empty grid as fully available", () => {
     const c = capacity([], [], today);
@@ -93,7 +179,7 @@ describe("capacity", () => {
     expect(c.free).toBe(6);
   });
 
-  it("shouts when every hour is held", () => {
+  it("shouts when every Wednesday is held, and says when one frees", () => {
     const c = capacity(
       SLOT_HOURS.map((h, i) => hold(h, `2026-11-0${i + 1}`, `client ${i}`)),
       [],
@@ -101,7 +187,56 @@ describe("capacity", () => {
     );
     expect(c.free).toBe(0);
     expect(c.nextRelease?.date).toBe("2026-11-01");
-    expect(c.warning).toContain("cannot be scheduled");
+    expect(c.warning).toContain("cannot be scheduled until 2026-11-01");
+  });
+
+  it("does not treat the board call as the cap", () => {
+    /* Six ongoing clients, all on 10am, each a different Friday plus overflow.
+       The staggered grid absorbs them where a single Friday would not. */
+    const six = [1, 2, 3, 4].map((w, i) =>
+      hold(SLOT_HOURS[i % SLOT_HOURS.length], "2026-11-04", `client ${i}`, { week: w, hour: 10 })
+    );
+    const c = capacity(six, [], today);
+    expect(c.boardTotal).toBe(24);
+    expect(c.freeBoardSlots.length).toBe(20);
+    expect(c.warning).toBeNull();
+  });
+
+  it("shuts the book only when all twenty four board slots are gone", () => {
+    const all = [];
+    let i = 0;
+    for (const w of [1, 2, 3, 4]) {
+      for (const h of BOARD_HOURS) {
+        all.push(hold(SLOT_HOURS[0], "2026-01-01", `client ${i++}`, { week: w, hour: h }));
+      }
+    }
+    const c = capacity(all, [], today);
+    expect(c.onBoard).toBe(24);
+    expect(c.freeBoardSlots.length).toBe(0);
+    expect(c.free).toBe(0);
+    expect(c.warning).toContain("do not free up on a timer");
+  });
+
+  it("keeps the board slot after the Wednesday has gone back", () => {
+    /* Past their install: the weekly rhythm ended, the board call did not. */
+    const past = [
+      { hour: 10, boardSlot: { week: 2, hour: 10 }, boardActive: true, client: "on", releases: "2026-01-01" },
+    ];
+    const c = capacity(past, [], today);
+    expect(c.held).toBe(0);
+    expect(c.freeHours).toContain(10);
+    expect(c.onBoard).toBe(1);
+    expect(c.freeBoardSlots).not.toContainEqual({ week: 2, hour: 10 });
+  });
+
+  it("frees the board slot once the client has ended", () => {
+    const gone = [
+      { hour: 10, boardSlot: { week: 2, hour: 10 }, boardActive: false, client: "gone", releases: "2026-01-01" },
+    ];
+    const c = capacity(gone, [], today);
+    expect(c.onBoard).toBe(0);
+    expect(c.freeBoardSlots).toContainEqual({ week: 2, hour: 10 });
+    expect(c.free).toBe(6);
   });
 
   it("shouts on the trend, before the last slot goes", () => {
