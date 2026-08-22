@@ -27,8 +27,15 @@ const FORM_URL = "https://authorityengine.notion.site/3b20b2eb6dfb8076879ccb4c51
 const NOTION_API = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
 
-/* The Content review database, under Meetings. */
-const REVIEW_DB = "3b20b2eb-6dfb-8072-ab27-000b2835b813";
+/*
+  The Content review database, under Meetings.
+
+  This is the DATABASE id, not the data source id. Notion's own tooling shows
+  both, and querying with the data source id returns a 404 that reads exactly
+  like a missing integration connection. That cost an hour of connecting a
+  database that was already connected.
+*/
+const REVIEW_DB = "3b20b2eb6dfb8074971ecb58865292d0";
 
 const MISSING_TAG = "prep-not-submitted";
 
