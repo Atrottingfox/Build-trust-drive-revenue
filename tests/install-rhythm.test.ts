@@ -17,6 +17,8 @@ import {
   capacity,
 } from "../netlify/functions/_cadence";
 import { isFree } from "../netlify/functions/_google";
+import { markdownToBlocks } from "../netlify/functions/_notion";
+import { vttToTranscript } from "../netlify/functions/_debrief";
 
 describe("the rhythm", () => {
   it("is seven calls on the weeks Sean confirmed", () => {
@@ -279,5 +281,83 @@ describe("free/busy overlap", () => {
 
   it("still catches a partial overlap", () => {
     expect(isFree(busy, "2026-09-16T01:30:00.000Z", "2026-09-16T02:30:00.000Z")).toBe(false);
+  });
+});
+
+describe("the debrief converter", () => {
+  it("turns the template's shapes into Notion blocks", () => {
+    const blocks = markdownToBlocks([
+      "# Sean & Jacob - Call Summary, 2026-09-09",
+      "",
+      "**Context:** Week 1 of Jacob running content for Darcy.",
+      "",
+      "---",
+      "",
+      "## What We Covered",
+      "",
+      "**Hooks**",
+      "They shipped four Reels.",
+      "",
+      "- [ ] Review the hook list",
+      "- [x] Send the Loom",
+      "- A thing worth noting",
+      "> A quote",
+    ].join("\n"));
+
+    expect(blocks.map((b) => b.type)).toEqual([
+      "heading_1",
+      "paragraph",
+      "divider",
+      "heading_2",
+      "paragraph",
+      "paragraph",
+      "to_do",
+      "to_do",
+      "bulleted_list_item",
+      "quote",
+    ]);
+  });
+
+  it("keeps the bold that carries the template's structure", () => {
+    const [b] = markdownToBlocks("**Hooks** and then some plain text");
+    expect(b.paragraph.rich_text[0].text.content).toBe("Hooks");
+    expect(b.paragraph.rich_text[0].annotations.bold).toBe(true);
+    expect(b.paragraph.rich_text[1].annotations.bold).toBe(false);
+  });
+
+  it("reads a checked box as done", () => {
+    expect(markdownToBlocks("- [x] done")[0].to_do.checked).toBe(true);
+    expect(markdownToBlocks("- [ ] not done")[0].to_do.checked).toBe(false);
+  });
+
+  it("splits past Notion's 2000 character limit rather than truncating", () => {
+    const [b] = markdownToBlocks("x".repeat(4500));
+    const parts = b.paragraph.rich_text;
+    expect(parts).toHaveLength(3);
+    expect(parts.map((p: any) => p.text.content).join("")).toHaveLength(4500);
+  });
+});
+
+describe("the Zoom transcript reader", () => {
+  it("drops the timing and keeps who said what", () => {
+    const vtt = [
+      "WEBVTT",
+      "",
+      "1",
+      "00:00:01.000 --> 00:00:04.000",
+      "Sean Fox: So how did the week go",
+      "",
+      "2",
+      "00:00:04.000 --> 00:00:07.000",
+      "Sean Fox: with the Reels",
+      "",
+      "3",
+      "00:00:07.500 --> 00:00:09.000",
+      "Jacob: Four went out",
+    ].join("\n");
+
+    expect(vttToTranscript(vtt)).toBe(
+      "Sean Fox: So how did the week go with the Reels\n\nJacob: Four went out"
+    );
   });
 });
