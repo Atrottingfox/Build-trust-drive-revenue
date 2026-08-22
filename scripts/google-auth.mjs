@@ -55,15 +55,37 @@ const url =
 console.log("\nOpen this, sign in as sean@authorityengine.com.au, and allow:\n");
 console.log(url);
 console.log(
-  "\nThe browser will fail to load a page. That is expected. Copy the value of" +
-    "\n`code=` out of the address bar and paste it here.\n"
+  "\nThe browser will fail to load a page. That is expected." +
+    "\nCopy the WHOLE address out of the bar and paste it here.\n"
 );
 
-const code = await ask("code= ");
+const pasted = await ask("paste the address: ");
 rl.close();
 
+/*
+  Takes the whole address, or just the code.
+
+  Asking for "the value of code=" was asking somebody to do string surgery on a
+  200 character URL at the one point in the process where getting it wrong burns
+  the code and means starting again. The URL contains the code; pull it out here.
+*/
+function extractCode(input) {
+  const s = input.trim().replace(/^["']|["']$/g, "");
+  if (!s) return "";
+  const m = s.match(/[?&#]code=([^&#\s]+)/);
+  if (m) return decodeURIComponent(m[1]);
+  /* A bare code. Google's are prefixed 4/ and contain no scheme. */
+  if (!/^https?:\/\//i.test(s)) return decodeURIComponent(s);
+  return "";
+}
+
+const code = extractCode(pasted);
+
 if (!code) {
-  console.error("\nNo code. Nothing has been changed.");
+  console.error(
+    "\nCould not find a code in that. Paste the whole address, the one starting" +
+      "\nhttp://localhost:8123/ that failed to load. Nothing has been changed."
+  );
   process.exit(1);
 }
 
@@ -71,7 +93,7 @@ const res = await fetch("https://oauth2.googleapis.com/token", {
   method: "POST",
   headers: { "Content-Type": "application/x-www-form-urlencoded" },
   body: new URLSearchParams({
-    code: decodeURIComponent(code),
+    code,
     client_id: clientId,
     client_secret: clientSecret,
     redirect_uri: REDIRECT,
