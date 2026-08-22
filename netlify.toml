@@ -48,6 +48,14 @@
 [functions."board-extend"]
   schedule = "0 23 * * *"
 
+# Forty eight hours before a call, chase the Content review form if it is not
+# in. Two days rather than one because a nudge the night before arrives after
+# the work could realistically be done, which makes it an apology rather than a
+# prompt. Clears the tag once the form lands, so nobody is chased for something
+# they have already done. 09:00 Brisbane. Silent when everybody is prepared.
+[functions."prep-nudge"]
+  schedule = "0 23 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
