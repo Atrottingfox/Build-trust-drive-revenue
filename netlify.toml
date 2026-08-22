@@ -33,6 +33,21 @@
 [functions."brand-day-followup"]
   schedule = "0 21 * * *"
 
+# Wednesday capacity. Six hours, each held eleven weeks, is a hard ceiling on how
+# fast clients can be signed. Sustained intake above it does not build a queue,
+# it builds a client who has paid and has nowhere to go. Monday 08:00 Brisbane,
+# and it says nothing at all unless something needs saying.
+[functions."capacity"]
+  schedule = "0 22 * * 0"
+
+# The Content Board, last Friday of the month, everybody in the room. Booked
+# three months ahead rather than the week before, because a monthly call that
+# appears with six days notice is a monthly call people miss. Runs daily and is
+# idempotent, so it also picks up a client who signed mid month without anybody
+# remembering to add them.
+[functions."board-call"]
+  schedule = "0 23 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
@@ -65,3 +80,28 @@
 [[edge_functions]]
   function = "ladder-auth"
   path = "/ladder-private/*"
+
+# Capacity names live clients and says how full the book is, so it sits behind
+# the same credentials as the rest of the internal surface. The slot picker
+# itself is deliberately NOT gated: it goes to a client, and is gated instead on
+# their contact carrying install-signed.
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/capacity"
+
+[[edge_functions]]
+  function = "ladder-auth"
+  path = "/.netlify/functions/capacity"
+
+# A link a client receives should be readable. The contact id rides along as ?c=
+[[redirects]]
+  from = "/slot"
+  to = "/.netlify/functions/install-slot"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/capacity"
+  to = "/.netlify/functions/capacity"
+  status = 200
+  force = true
