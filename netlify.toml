@@ -4,6 +4,14 @@
   functions = "netlify/functions"
   edge_functions = "netlify/edge-functions"
 
+# Pinned after the first build carrying @anthropic-ai/sdk failed with a bare
+# "exit code 2" and no log. The same thing bit contentengine-v3: Netlify's
+# default image resolves an older Node than the dependency tree needs, and the
+# failure names nothing. Plain "22" resolved to a sub-22.12 build there, so the
+# exact version is pinned rather than the major.
+[build.environment]
+  NODE_VERSION = "22.20.0"
+
 # Hourly proof that an application can still reach GoHighLevel. Added after a
 # submission produced a Slack alert and no contact at all, with nothing erroring.
 # Alerts to Slack and tags healthcheck-failed in GHL.
