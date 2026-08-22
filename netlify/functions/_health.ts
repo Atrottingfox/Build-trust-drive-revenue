@@ -578,6 +578,89 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     add("Delivery app", "brand.contentengine.live can reach GitHub", false, true, String(err));
   }
 
+  /* ── The 90 Day Install rhythm ──
+     A refresh token is the one credential here that rots on its own. Google
+     expires it after six months unused, and revokes it if the password changes
+     or the consent screen is edited. When it goes, a signed client opens their
+     slot link and is told to contact Sean, and nothing else says a word.
+
+     So this asks Google to exchange it, which is the only way to know it still
+     works. Cheap, and it doubles as the six month keep-alive. */
+  const gid = process.env.GOOGLE_CLIENT_ID;
+  const gsecret = process.env.GOOGLE_CLIENT_SECRET;
+  const grefresh = process.env.GOOGLE_REFRESH_TOKEN;
+
+  if (!gid || !gsecret || !grefresh) {
+    add(
+      "Install rhythm",
+      "Google Calendar is configured",
+      false,
+      true,
+      "Missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET or GOOGLE_REFRESH_TOKEN. Nobody can book a slot."
+    );
+  } else {
+    try {
+      const res = await fetch("https://oauth2.googleapis.com/token", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          client_id: gid,
+          client_secret: gsecret,
+          refresh_token: grefresh,
+          grant_type: "refresh_token",
+        }),
+      });
+      const body = res.ok ? "" : await res.text();
+      add(
+        "Install rhythm",
+        "Google refresh token still works",
+        res.ok,
+        true,
+        res.ok
+          ? undefined
+          : body.includes("invalid_grant")
+            ? "REVOKED. Re-run scripts/google-auth.mjs. Until then no client can book their calls."
+            : `HTTP ${res.status}`
+      );
+    } catch (err) {
+      add("Install rhythm", "Google refresh token still works", false, true, String(err));
+    }
+  }
+
+  /* The picker itself, which fails differently: it can be reachable while the
+     calendar behind it is not. */
+  try {
+    const res = await fetch(`${SITE}/slot`, { method: "GET" });
+    add("Install rhythm", "Slot picker answers", res.ok, true, res.ok ? undefined : `HTTP ${res.status}`);
+  } catch (err) {
+    add("Install rhythm", "Slot picker answers", false, true, String(err));
+  }
+
+  /* The matching endpoint the delivery app depends on. Without it a call
+     recording still gets a breakdown, it just loses the operator, the week and
+     the call type, quietly. */
+  if (process.env.CALL_CONTEXT_SECRET) {
+    try {
+      const res = await fetch(`${SITE}/.netlify/functions/call-context`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-call-context-key": process.env.CALL_CONTEXT_SECRET,
+        },
+        body: JSON.stringify({ startTime: new Date().toISOString() }),
+      });
+      add(
+        "Install rhythm",
+        "Call matching answers contentengine",
+        res.ok,
+        false,
+        res.ok ? undefined : `HTTP ${res.status}. Breakdowns lose operator, week and call type.`
+      );
+    } catch (err) {
+      add("Install rhythm", "Call matching answers contentengine", false, false, String(err));
+    }
+  }
+
   /* ── The approve buttons in the notification email ── */
   try {
     const res = await fetch(`${SITE}/.netlify/functions/decide?c=healthcheck&do=invite`, { redirect: "manual" });
