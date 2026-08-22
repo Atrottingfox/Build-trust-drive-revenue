@@ -548,6 +548,36 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     }
   }
 
+  /* ── The delivery app ──
+
+     brand.contentengine.live had no monitoring at all, and its GitHub token
+     expired unnoticed. While it was dead a Brand Day payment created no client
+     workspace: the person paid, was tagged correctly, received every email, and
+     had nowhere to be delivered into. It failed silently and was found only
+     because GitHub sent Sean a courtesy email.
+
+     Asks the live sync endpoint for a client. Any answer that is not a
+     credentials failure means the token still works, so this survives a client
+     being renamed or deleted and only fails for the reason worth failing on. */
+  try {
+    const res = await fetch(
+      "https://brand.contentengine.live/.netlify/functions/sync?slug=alpha-tradie"
+    );
+    const body = (await res.text()).slice(0, 400);
+    const badCreds = /bad credentials|401/i.test(body);
+    add(
+      "Delivery app",
+      "brand.contentengine.live can reach GitHub",
+      !badCreds,
+      true,
+      badCreds
+        ? "GITHUB_TOKEN is dead or stale. A paid client gets no workspace. Renew it, then REDEPLOY brand-day: Netlify bakes env vars in at deploy time."
+        : `HTTP ${res.status}`
+    );
+  } catch (err) {
+    add("Delivery app", "brand.contentengine.live can reach GitHub", false, true, String(err));
+  }
+
   /* ── The approve buttons in the notification email ── */
   try {
     const res = await fetch(`${SITE}/.netlify/functions/decide?c=healthcheck&do=invite`, { redirect: "manual" });

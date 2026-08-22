@@ -776,3 +776,19 @@ describe("The prep call chase only ever adds its own tag", () => {
     expect(fn("prep-call-chase.ts")).toContain("day < now");
   });
 });
+
+describe("The delivery app is watched too", () => {
+  /*
+    brand.contentengine.live had no monitoring. Its GitHub token expired and
+    nobody knew, so a paid client would have got no workspace at all.
+  */
+  it("checks the delivery app can still reach GitHub", () => {
+    const src = fn("_health.ts");
+    expect(src).toContain("brand.contentengine.live");
+    expect(src).toContain("bad credentials");
+  });
+
+  it("fails only on credentials, so a renamed client does not cry wolf", () => {
+    expect(fn("_health.ts")).toContain("badCreds");
+  });
+});
