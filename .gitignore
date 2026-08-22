@@ -30,3 +30,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Env dumps hold live API keys. The snapshot is the rollback, it lives on disk only.
+db-snapshots/
