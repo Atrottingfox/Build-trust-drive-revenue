@@ -361,3 +361,27 @@ describe("the Zoom transcript reader", () => {
     );
   });
 });
+
+describe("event start times from Google", () => {
+  /* Google returns start.dateTime with the calendar's own offset already on it.
+     Sean's calendar is Australia/Sydney, so the same 10am Brisbane call comes
+     back as +10:00 before October and +11:00 after. Appending an offset of our
+     own produced an Invalid Date and matched nothing, silently. */
+  const beforeDst = "2026-09-09T10:00:00+10:00";
+  const duringDst = "2026-10-07T11:00:00+11:00";
+
+  it("parses what Google actually sends", () => {
+    expect(Number.isNaN(Date.parse(beforeDst))).toBe(false);
+    expect(Number.isNaN(Date.parse(duringDst))).toBe(false);
+  });
+
+  it("is the bug: appending an offset invalidates it", () => {
+    expect(Number.isNaN(Date.parse(`${beforeDst}+10:00`))).toBe(true);
+  });
+
+  it("resolves both sides of daylight saving to the same wall clock", () => {
+    /* 10am Brisbane is 00:00Z all year, Queensland has no daylight saving. */
+    expect(new Date(Date.parse(beforeDst)).toISOString()).toBe("2026-09-09T00:00:00.000Z");
+    expect(new Date(Date.parse(duringDst)).toISOString()).toBe("2026-10-07T00:00:00.000Z");
+  });
+});

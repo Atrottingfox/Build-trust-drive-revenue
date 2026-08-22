@@ -70,14 +70,18 @@ const handler: Handler = async (event) => {
     );
 
     /*
-      Brisbane does not observe daylight saving, so the event's local wall clock
-      converts to an instant without ambiguity. Nearest wins, within the window:
-      a call that starts eight minutes late is still that call.
+      Google returns start.dateTime with the calendar's own UTC offset already
+      on it, e.g. 2026-10-07T10:00:00+11:00 for a Sydney calendar in daylight
+      saving. Appending an offset of our own produced an Invalid Date and
+      matched nothing at all, silently. Parse it as the instant it already is.
+
+      Nearest wins, within the window: a call that starts eight minutes late is
+      still that call.
     */
     const ranked = events
       .map((e) => ({
         e,
-        gap: Math.abs(new Date(`${e.startLocal}+10:00`).getTime() - startedAt.getTime()),
+        gap: Math.abs(Date.parse(e.startLocal) - startedAt.getTime()),
       }))
       .filter((x) => x.gap <= MATCH_WINDOW_MIN * 60_000)
       .sort((a, b) => a.gap - b.gap);
