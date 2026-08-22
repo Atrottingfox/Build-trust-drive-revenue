@@ -125,7 +125,7 @@ const handler: Handler = async (event) => {
     const match = events
       .map((e) => ({
         e,
-        gap: Math.abs(new Date(`${e.startLocal}+10:00`).getTime() - startedAt.getTime()),
+        gap: Math.abs(Date.parse(e.startLocal) - startedAt.getTime()),
       }))
       .filter((x) => x.gap <= MATCH_WINDOW_MIN * 60_000)
       .sort((a, b) => a.gap - b.gap)[0]?.e;

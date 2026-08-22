@@ -61,15 +61,57 @@ export async function accessToken(): Promise<string> {
 
 export type Busy = { start: string; end: string };
 
+/*
+  Google rejects a free/busy query spanning more than about three months with
+  `timeRangeTooLong`, a 400. The picker needs four: the last board call of an
+  install can sit fourteen weeks out.
+
+  So the range is split and the results concatenated. Overlapping busy blocks
+  across a chunk boundary are harmless, isFree only ever asks whether any block
+  overlaps.
+
+  This failed against the real calendar while every stubbed test passed, because
+  a stub does not enforce Google's limits. The picker offered a client nothing
+  at all and told them Sean had been informed.
+*/
+const CHUNK_DAYS = 60;
+
 export async function freeBusy(token: string, timeMinIso: string, timeMaxIso: string): Promise<Busy[]> {
-  const res = await fetch(`${API}/freeBusy`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ timeMin: timeMinIso, timeMax: timeMaxIso, items: [{ id: calendarId() }] }),
-  });
-  if (!res.ok) throw new Error(`google-freebusy-${res.status}`);
-  const json = await res.json();
-  return json.calendars?.[calendarId()]?.busy ?? [];
+  const start = Date.parse(timeMinIso);
+  const end = Date.parse(timeMaxIso);
+  const span = CHUNK_DAYS * 86_400_000;
+  const out: Busy[] = [];
+
+  for (let from = start; from < end; from += span) {
+    const to = Math.min(from + span, end);
+
+    const res = await fetch(`${API}/freeBusy`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({
+        timeMin: new Date(from).toISOString(),
+        timeMax: new Date(to).toISOString(),
+        items: [{ id: calendarId() }],
+      }),
+    });
+
+    if (!res.ok) throw new Error(`google-freebusy-${res.status}-${(await res.text()).slice(0, 200)}`);
+
+    const json = await res.json();
+    const calendars = json.calendars ?? {};
+
+    /*
+      Google keys the response by the id that was asked for, but a calendar can
+      also come back under its resolved address rather than the alias "primary".
+      Taking every calendar in the response avoids depending on which, and there
+      is only ever one because only one was requested.
+    */
+    for (const cal of Object.values<any>(calendars)) {
+      if (Array.isArray(cal?.busy)) out.push(...cal.busy);
+    }
+  }
+
+  return out;
 }
 
 /*
@@ -142,6 +184,7 @@ export type InstallEvent = {
   clientName: string;
   founderEmail: string;
   operatorEmail: string;
+  operatorName: string;
   releases: string;
   week: string;
   hour: string;
@@ -210,6 +253,7 @@ export async function listInstallEvents(token: string, timeMinIso: string, timeM
       clientName: it.extendedProperties?.private?.clientName ?? "",
       founderEmail: it.extendedProperties?.private?.founderEmail ?? "",
       operatorEmail: it.extendedProperties?.private?.operatorEmail ?? "",
+      operatorName: it.extendedProperties?.private?.operatorName ?? "",
       releases: it.extendedProperties?.private?.releases ?? "",
       week: it.extendedProperties?.private?.week ?? "",
       hour: it.extendedProperties?.private?.hour ?? "",
