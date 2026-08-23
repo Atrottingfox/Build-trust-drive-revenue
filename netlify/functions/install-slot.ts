@@ -532,6 +532,14 @@ const handler: Handler = async (event) => {
     operatorEmail ? [BOOKED_TAG, OPERATOR_TAG] : [BOOKED_TAG, NO_OPERATOR_TAG]
   );
 
+  if (!zoom) {
+    await slack(
+      `:rotating_light: *${esc(name)} just booked ${total} calls with no Zoom link.* ` +
+        "ZOOM_LINK is not set, so every one of those events has no way to join. " +
+        "Set it and add the link to the events by hand, or they will find out at week one."
+    );
+  }
+
   await slack(
     `:white_check_mark: *${esc(name)}* took Wednesday ${hourLabel(chosen)} and board calls Friday ${hourLabel(boardHour)}. ` +
       `${total} calls from ${dayLabel(start)}, hours free again ${releases}.\n` +
