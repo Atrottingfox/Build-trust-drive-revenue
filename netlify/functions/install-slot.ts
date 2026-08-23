@@ -84,6 +84,8 @@ const page = (body: string) => `<!doctype html>
   button.wide{width:100%;background:#EAECEF;color:#0A0B0D;border:0;margin-top:8px}
   button.wide:hover{background:#fff}
   button.wide:disabled{background:#1A1D23;color:#6E757F;cursor:not-allowed}
+  button:disabled{opacity:.32;cursor:not-allowed;text-decoration:line-through}
+  button:disabled:hover{background:#0A0B0D;border-color:#2A2F38}
   .rule{border:0;border-top:1px solid #242830;margin:24px 0}
   .err{background:#2A1416;border:1px solid #5C2126;border-radius:10px;padding:12px 14px;margin:0 0 20px;font-size:14px}
   ol{margin:0 0 20px;padding-left:20px;color:#A4AAB4;font-size:14px}
@@ -324,6 +326,35 @@ const handler: Handler = async (event) => {
 
       function label(h) { h = Number(h); return h === 12 ? "12pm" : h < 12 ? h + "am" : (h - 12) + "pm"; }
 
+      /*
+        Somebody else booking while this page is open used to show up only as a
+        rejection at the last click. Now the row updates instead, and a taken
+        hour cannot be chosen at all.
+      */
+      function refresh() {
+        fetch(location.pathname + location.search + "&availability=1", { cache: "no-store" })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (free) {
+            if (!free) return;
+            [["wed", free.weekly], ["fri", free.board]].forEach(function (pair) {
+              var row = document.getElementById(pair[0]);
+              if (!row) return;
+              Array.prototype.forEach.call(row.querySelectorAll("button"), function (b) {
+                var gone = pair[1].indexOf(Number(b.dataset.hour)) === -1;
+                b.disabled = gone;
+                b.title = gone ? "Just taken" : "";
+                if (gone && b.getAttribute("aria-pressed") === "true") {
+                  b.setAttribute("aria-pressed", "false");
+                  fields[pair[0]].value = "";
+                }
+              });
+            });
+            ready();
+          })
+          .catch(function () { /* Offline for a moment is not worth saying. */ });
+      }
+      setInterval(refresh, 45000);
+
       ["wed", "fri"].forEach(function (group) {
         var row = document.getElementById(group);
         if (!row) return;
@@ -341,6 +372,15 @@ const handler: Handler = async (event) => {
         });
       });
     <\/script>`;
+
+  /* A page left open goes stale. This is what it polls. */
+  if ((event.queryStringParameters || {}).availability === "1") {
+    return {
+      statusCode: 200,
+      headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+      body: JSON.stringify({ weekly: available, board: boardHours }),
+    };
+  }
 
   if (event.httpMethod !== "POST") {
     if (!available.length || !boardHours.length) {
@@ -360,9 +400,22 @@ const handler: Handler = async (event) => {
     return html("<h1>Pick an hour</h1><p>Go back and choose one.</p>", 400);
   }
 
+  /*
+    Two different failures, and telling them apart matters. Nothing chosen is
+    the client's to fix. An hour that has gone since the page loaded is not, and
+    being told to "pick your board time as well" when they already did reads as
+    the page being broken.
+  */
   const boardHour = Number(params.get("boardHour"));
   if (!boardHours.includes(boardHour)) {
-    return html(picker("Pick your board call time as well, then choose your Wednesday."), 400);
+    return html(
+      picker(
+        params.get("boardHour")
+          ? "That board call time went while this page was open. These are free now."
+          : "Pick your board call time as well."
+      ),
+      400
+    );
   }
 
   /* Blank is allowed, wrong is not. Somebody mid-hire should not be blocked,
@@ -376,11 +429,14 @@ const handler: Handler = async (event) => {
     submission somebody else may have taken the hour, and two clients on one
     slot is the single thing this whole design exists to prevent.
   */
+  /*
+    Recomputed above from the calendar, so this is the live answer and not the
+    one the page was rendered with. Re-render rather than dead ending: "go back
+    and pick another" makes somebody use the back button onto a stale page and
+    hit the same wall a second time.
+  */
   if (!available.includes(chosen)) {
-    return html(
-      `<h1>That hour just went</h1><p>Somebody took it while this page was open. Go back and pick another.</p>`,
-      409
-    );
+    return html(picker("That hour went while this page was open. These are free now."), 409);
   }
 
   /* The operator is the one on the weekly calls. Until there is one, the
