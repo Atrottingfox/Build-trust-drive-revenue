@@ -32,7 +32,20 @@ import {
 
 
 
-const MISSING_TAG = "prep-not-submitted";
+/*
+  Two tags, two days, one email each.
+
+  The sequence lives here rather than in a GoHighLevel wait step, because a
+  branch on a screen cannot be diffed, tested or reviewed, and the one built
+  last night had its branches inverted and its timeout switched off. Neither
+  was visible until somebody looked.
+
+  So GHL does one thing per tag and nothing else: no waits, no conditions, no
+  branches to point the wrong way. This decides when.
+*/
+const FIRST_TAG = "prep-not-submitted";   // 48 hours out
+const FINAL_TAG = "prep-final-call";      // 24 hours out
+const ALL_TAGS = [FIRST_TAG, FINAL_TAG];
 
 
 async function slack(text: string) {
@@ -75,11 +88,12 @@ const handler: Handler = async () => {
   let events;
   let subs: Submission[];
   try {
-    /* The day after tomorrow. A whole day wide, so a job that runs slightly
-       late or early does not skip a client entirely. */
+    /* Tomorrow and the day after, so one run covers both the 48 hour nudge and
+       the 24 hour one. A single window a day wide would skip a client whenever
+       the job ran slightly late. */
     events = await listInstallEvents(
       token,
-      toUtcIso(addDays(today, 2), 0),
+      toUtcIso(addDays(today, 1), 0),
       toUtcIso(addDays(today, 3), 0)
     );
     subs = await recentSubmissions(addDays(today, -SUBMISSION_WINDOW_DAYS));
@@ -113,28 +127,41 @@ const handler: Handler = async () => {
     */
     const chaseId = ev.operatorContact || ev.client;
     const isReady = submitted(subs, ev.clientName, ev.operatorName);
+    const daysOut = ev.startLocal.slice(0, 10) === addDays(today, 1) ? 1 : 2;
     const when = ev.startLocal.slice(11, 16);
     const who = ev.operatorContact ? ev.operatorName || ev.operatorEmail : `${ev.clientName} (no operator, chasing the founder)`;
     const label = `${who}, ${ev.clientName}${ev.board ? " board call" : ` week ${ev.week}`} at ${when}`;
 
     if (isReady) {
       ready.push(label);
-      /* Clear it whether or not we think it is set. Cheap, and it means a tag
-         left behind by a failed run yesterday does not chase them today. */
-      await removeTags(ghlToken, chaseId, [MISSING_TAG]);
+      /* Clear both, whether or not we think either is set. Cheap, and it means
+         a tag left behind by a failed run yesterday does not chase them
+         today. */
+      await removeTags(ghlToken, chaseId, ALL_TAGS);
       cleared.push(ev.clientName);
       continue;
     }
 
-    await addTags(ghlToken, chaseId, [MISSING_TAG]);
-    chased.push(label);
+    /*
+      Day two gets the first email, day one gets the last call. The earlier tag
+      is removed as the later one is added, so a contact never carries both and
+      a workflow cannot fire twice off the same state.
+    */
+    if (daysOut === 1) {
+      await removeTags(ghlToken, chaseId, [FIRST_TAG]);
+      await addTags(ghlToken, chaseId, [FINAL_TAG]);
+      chased.push(`${label}  [tomorrow, final]`);
+    } else {
+      await addTags(ghlToken, chaseId, [FIRST_TAG]);
+      chased.push(`${label}  [48 hours]`);
+    }
   }
 
   if (chased.length) {
     await slack(
       `:clipboard: *Content review not in, calls in two days.*\n` +
         chased.map((c) => `  • ${c}`).join("\n") +
-        `\n\nTagged \`${MISSING_TAG}\`, so the workflow is sending them ${FORM_URL}` +
+        `\n\n${FORM_URL}` +
         (ready.length ? `\n\n${ready.length} already submitted.` : "")
     );
   }
