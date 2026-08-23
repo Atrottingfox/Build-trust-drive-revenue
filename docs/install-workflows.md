@@ -1,7 +1,7 @@
-# The three GoHighLevel workflows
+# The GoHighLevel workflows
 
-Everything the 90 Day Install needs from GHL. Three workflows, five emails, no
-branches in any of them.
+Everything the 90 Day Install needs from GHL. Four workflows, five emails, and
+one condition between the lot of them.
 
 The sequence lives in code. GHL fires one email per tag and nothing else: no
 waits, no conditions, no timeouts to leave switched off. A branch on a screen
