@@ -91,7 +91,6 @@ const handler: Handler = async () => {
     id: string;
     name: string;
     boardHour: number;
-    boardWeek: number;
     founderEmail: string;
     operatorEmail: string;
     future: { id: string; date: string }[];
@@ -108,7 +107,6 @@ const handler: Handler = async () => {
         id: ev.client,
         name: ev.clientName || ev.client,
         boardHour: Number(ev.boardHour),
-        boardWeek: Number(ev.boardWeek) || 4,
         founderEmail: ev.founderEmail,
         operatorEmail: ev.operatorEmail,
         future: [],
@@ -160,7 +158,7 @@ const handler: Handler = async () => {
     /* Only clients who have actually booked carry a board hour, so anybody in
        here is live unless tagged otherwise. Top them back up. */
     const anchor = c.lastBoard > today ? c.lastBoard : today;
-    const wanted = boardCallDates(anchor, c.boardWeek, BOARD_HORIZON);
+    const wanted = boardCallDates(anchor, BOARD_HORIZON);
     const have = new Set(c.future.map((f) => f.date));
 
     /*
@@ -208,7 +206,6 @@ const handler: Handler = async () => {
             client: c.id,
             clientName: c.name,
             boardHour: String(c.boardHour),
-            boardWeek: String(c.boardWeek),
             board: "1",
           },
         });

@@ -2,14 +2,12 @@ import type { Handler } from "@netlify/functions";
 import { getContact, addTags, contactUrl, findOrCreateByEmail } from "./_ghl";
 import {
   SLOT_HOURS,
+  BOARD_HOURS,
   BOARD_TITLE,
   DURATION_MIN,
   TZ,
   callDates,
   boardCallDates,
-  allBoardSlots,
-  boardSlotKey,
-  boardWeekLabel,
   firstCallDate,
   slotReleaseDate,
   toUtcIso,
@@ -270,14 +268,10 @@ const handler: Handler = async (event) => {
   /* An hour is only offered if it is clear on every date it would be used. */
   const available = SLOT_HOURS.filter((h) => clearOn(dates.map((d) => d.date), h));
 
-  /*
-    Board slots are a pair, which Friday of the month and what time, so the pair
-    is what gets checked. Four Fridays by six hours is twenty four, staggered, so
-    the board call is not the thing that caps the business at six.
-  */
-  const boardOptions = allBoardSlots()
-    .map((s) => ({ ...s, dates: boardCallDates(start, s.week) }))
-    .filter((s) => clearOn(s.dates, s.hour));
+  /* Board calls are every four weeks from the first one, so the dates are
+     fixed the moment the Wednesday is known. Only the hour is a choice. */
+  const boards = boardCallDates(start);
+  const boardHours = BOARD_HOURS.filter((h) => clearOn(boards, h));
 
   const picker = (err?: string) => `
     <h1>Set your rhythm, ${esc(name)}</h1>
@@ -285,17 +279,12 @@ const handler: Handler = async (event) => {
     <form method="POST">
       ${operatorFields(err)}
       <hr class="rule">
-      <label>Your monthly board call, on a Friday</label>
-      <select name="boardSlot" required>
-        <option value="">Pick a Friday and a time</option>
-        ${boardOptions
-          .map(
-            (s) =>
-              `<option value="${boardSlotKey(s)}">${boardWeekLabel(s.week)} Friday, ${hourLabel(s.hour)}</option>`
-          )
-          .join("")}
+      <label>Your board call, every four weeks on a Friday</label>
+      <select name="boardHour" required>
+        <option value="">Pick a time</option>
+        ${boardHours.map((h) => `<option value="${h}">${hourLabel(h)}</option>`).join("")}
       </select>
-      <p class="sub">Once a month, and it carries on for as long as we work together.</p>
+      <p class="sub">First one ${dayLabel(boards[0])}, then every four weeks, for as long as we work together.</p>
       <hr class="rule">
       <label>Your weekly call, every Wednesday from ${dayLabel(start)}</label>
       <div class="grid">
@@ -305,7 +294,7 @@ const handler: Handler = async (event) => {
     <p class="sub">Weeks 1, 2, 3, 4, 5, 7 and 10, plus your board call. Sixty minutes each.</p>`;
 
   if (event.httpMethod !== "POST") {
-    if (!available.length || !boardOptions.length) {
+    if (!available.length || !boardHours.length) {
       await slack(
         `:red_circle: *No Wednesday hours left.* ${esc(name)} opened their slot link and had nothing to pick. <${contactUrl(contactId)}|Open in GHL>`
       );
@@ -322,9 +311,9 @@ const handler: Handler = async (event) => {
     return html("<h1>Pick an hour</h1><p>Go back and choose one.</p>", 400);
   }
 
-  const board = boardOptions.find((s) => boardSlotKey(s) === params.get("boardSlot"));
-  if (!board) {
-    return html(picker("Pick your board call as well, then choose your Wednesday."), 400);
+  const boardHour = Number(params.get("boardHour"));
+  if (!boardHours.includes(boardHour)) {
+    return html(picker("Pick your board call time as well, then choose your Wednesday."), 400);
   }
 
   /* Blank is allowed, wrong is not. Somebody mid-hire should not be blocked,
@@ -373,14 +362,12 @@ const handler: Handler = async (event) => {
     (operatorEmail ? "" : " Invitation currently goes to the founder, and moves to the operator once there is one.") +
     (zoom ? `\n\nZoom: ${zoom}` : "");
 
-  const boards = board.dates;
   const shared = {
     client: contactId,
     clientName: name,
     releases,
     hour: String(chosen),
-    boardHour: String(board.hour),
-    boardWeek: String(board.week),
+    boardHour: String(boardHour),
     founderEmail: email,
     operatorEmail: operatorEmail || "",
     operatorName: operatorName || "",
@@ -413,8 +400,8 @@ const handler: Handler = async (event) => {
           "The Content Board. What has actually been published, what performed, and what the next cycle points at. " +
           "Your operator presents the numbers and the thesis." +
           (zoom ? `\n\nZoom: ${zoom}` : ""),
-        startLocal: toLocalIso(d, board.hour),
-        endLocal: toLocalIso(d, board.hour, DURATION_MIN),
+        startLocal: toLocalIso(d, boardHour),
+        endLocal: toLocalIso(d, boardHour, DURATION_MIN),
         timeZone: TZ,
         attendees: [...new Set([email, attendee])],
         privateProps: { ...shared, board: "1" },
@@ -441,7 +428,7 @@ const handler: Handler = async (event) => {
   );
 
   await slack(
-    `:white_check_mark: *${esc(name)}* took Wednesday ${hourLabel(chosen)} and the ${boardWeekLabel(board.week)} Friday at ${hourLabel(board.hour)}. ` +
+    `:white_check_mark: *${esc(name)}* took Wednesday ${hourLabel(chosen)} and board calls Friday ${hourLabel(boardHour)}. ` +
       `${total} calls from ${dayLabel(start)}, hours free again ${releases}.\n` +
       (operatorEmail
         ? `Operator: ${esc(operatorName || "unnamed")}, ${esc(operatorEmail)}.`
@@ -451,7 +438,7 @@ const handler: Handler = async (event) => {
 
   return html(
     `<h1>Done, ${esc(name)}</h1>
-     <p>Wednesdays at ${hourLabel(chosen)} and your board call on the ${boardWeekLabel(board.week)} Friday at ${hourLabel(board.hour)}, Brisbane time.
+     <p>Wednesdays at ${hourLabel(chosen)} and your board call every four weeks on Friday at ${hourLabel(boardHour)}, Brisbane time.
         ${total} invitations are on their way to ${esc(attendee)}.</p>
      <ol>${dates
        .map((d) => `<li>${dayLabel(d.date)}</li>`)

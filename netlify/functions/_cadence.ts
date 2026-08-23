@@ -116,35 +116,13 @@ export function slotReleaseDate(startDate: string): string {
 /* ----------------------------------------------------------- board call */
 
 /*
-  The Content Board. Monthly, on a Friday, and per client rather than group: the
-  client sits in alongside their operator, so each one needs their own hour.
-
-  Staggered across the month rather than stacked on the last Friday. Every month
-  has at least four Fridays, so a client's board slot is a pair: which Friday of
-  the month, and what time. Four weeks by six hours is twenty four, which is what
-  the grid can actually carry, and it stops the board call being the thing that
-  caps the business at six.
-
-  First to fourth rather than "last", because a five Friday month would otherwise
-  shunt everybody's call a week and land two clients on the same hour.
-*/
-export const BOARD_HOURS = [10, 11, 12, 13, 16, 17];
-export const BOARD_WEEKS = [1, 2, 3, 4];
-export const BOARD_WEEKDAY = 5;
-export const BOARD_TITLE = "Content Board";
-export const BOARD_SLOTS = BOARD_WEEKS.length * BOARD_HOURS.length;
-
-export const boardWeekLabel = (n: number) =>
-  ["first", "second", "third", "fourth"][n - 1] ?? `${n}th`;
-
-/*
   Queensland public holidays that can actually fall on a Friday. The Monday ones
   are left out on purpose: a board call is never on a Monday, so listing them
   would be code nobody can ever exercise.
 
   Good Friday moves every year, so Easter is computed rather than tabulated.
-  Everything else is a fixed date. Observed-day shifts for a holiday landing on a
-  weekend only ever move it to a Monday, so they cannot affect a Friday either.
+  Everything else is a fixed date. Observed-day shifts for a holiday landing on
+  a weekend only ever move it to a Monday, so they cannot affect a Friday.
 */
 function easterSunday(year: number): { month: number; day: number } {
   const a = year % 19;
@@ -179,9 +157,8 @@ export function isPublicHoliday(dateStr: string): boolean {
 /*
   A board call on Christmas Day is a board call that does not happen.
 
-  Moves back a week rather than forward, so it stays inside the month it belongs
-  to and the monthly rhythm holds. Forward would push a late December call into
-  January and land two calls a fortnight apart.
+  Moves back a week rather than forward, so it stays close to its four week
+  slot rather than drifting further from the one before it.
 */
 export function avoidHoliday(dateStr: string): string {
   let d = dateStr;
@@ -193,11 +170,25 @@ export function avoidHoliday(dateStr: string): string {
   return d;
 }
 
-export function nthFridayOf(year: number, monthIndex: number, n: number): string {
-  const first = new Date(Date.UTC(year, monthIndex, 1));
-  const offset = (5 - first.getUTCDay() + 7) % 7;
-  return toDateStr(new Date(Date.UTC(year, monthIndex, 1 + offset + (n - 1) * 7)));
-}
+/*
+  The Content Board. Every four weeks from their first call, on a Friday, at an
+  hour they choose.
+
+  It used to be "the nth Friday of the month", which needed a second grid, a
+  choice between twenty four combinations, and special handling for months with
+  five Fridays. Four weeks from the first call needs none of that: the interval
+  is the same for everybody, the date falls out of when they started, and the
+  only thing left to pick is the hour.
+
+  Friday rather than their own call day so nobody ends up with two calls in one
+  day.
+*/
+export const BOARD_HOURS = [10, 11, 12, 13, 16, 17];
+export const BOARD_WEEKDAY = 5;
+export const BOARD_TITLE = "Content Board";
+
+/* Four weeks, then every four weeks. */
+export const BOARD_INTERVAL_DAYS = 28;
 
 /*
   How many board calls to create at booking. Three covers the 90 days, which is
@@ -222,42 +213,29 @@ export const BOARD_HORIZON = 4;
   same number. Tying it to the install end instead meant a late month signup
   quietly got two, which was nobody's decision.
 */
-export function boardCallDates(
-  startDate: string,
-  weekOfMonth: number,
-  count = BOARD_CALL_COUNT
-): string[] {
-  const notBefore = addDays(startDate, 7);
+export function boardCallDates(startDate: string, count = BOARD_CALL_COUNT): string[] {
   const out: string[] = [];
-  const [y0, m0] = startDate.split("-").map(Number);
-  let y = y0;
-  let m = m0 - 1;
+
+  /* The first Friday four weeks out. Their first call is a Wednesday, so this
+     is two days later in the same week, and every one after is exactly four
+     weeks from the last. */
+  let d = addDays(startDate, BOARD_INTERVAL_DAYS);
+  while (weekdayOf(d) !== BOARD_WEEKDAY) d = addDays(d, 1);
 
   while (out.length < count) {
-    const d = avoidHoliday(nthFridayOf(y, m, weekOfMonth));
-    if (d >= notBefore) out.push(d);
-    m += 1;
-    if (m > 11) { m = 0; y += 1; }
+    out.push(avoidHoliday(d));
+    d = addDays(d, BOARD_INTERVAL_DAYS);
   }
   return out;
 }
 
-/*
-  A board slot is a pair, and the pair is what has to be free.
-*/
-export type BoardSlot = { week: number; hour: number };
 
-export const boardSlotKey = (s: BoardSlot) => `${s.week}:${s.hour}`;
-
-export function allBoardSlots(): BoardSlot[] {
-  return BOARD_WEEKS.flatMap((week) => BOARD_HOURS.map((hour) => ({ week, hour })));
-}
 
 /* -------------------------------------------------------------- capacity */
 
 export type Holding = {
   hour: number;
-  boardSlot: BoardSlot | null;
+  boardHour: number | null;
   /* Whether they still have a board call ahead of them. A client past week ten
      has given their Wednesday back and still holds their board slot. */
   boardActive: boolean;
@@ -270,8 +248,7 @@ export type Capacity = {
   held: number;
   free: number;
   freeHours: number[];
-  freeBoardSlots: BoardSlot[];
-  boardTotal: number;
+  freeBoardHours: number[];
   /* Ongoing relationships, which outlive the install. */
   onBoard: number;
   nextRelease: { hour: number; client: string; date: string } | null;
@@ -306,12 +283,12 @@ export function capacity(
     ahead of them, which is for as long as they stay.
   */
   const live = holdings.filter((h) => h.releases > today);
-  const onBoard = holdings.filter((h) => h.boardActive && h.boardSlot !== null);
+  const onBoard = holdings.filter((h) => h.boardActive && h.boardHour !== null);
 
   const heldHours = new Set(live.map((h) => h.hour));
-  const heldBoard = new Set(onBoard.map((h) => boardSlotKey(h.boardSlot as BoardSlot)));
+  const heldBoard = new Set(onBoard.map((h) => h.boardHour as number));
   const freeHours = SLOT_HOURS.filter((h) => !heldHours.has(h));
-  const freeBoardSlots = allBoardSlots().filter((s) => !heldBoard.has(boardSlotKey(s)));
+  const freeBoardHours = BOARD_HOURS.filter((h) => !heldBoard.has(h));
 
   const next = live
     .slice()
@@ -323,21 +300,15 @@ export function capacity(
   const inWindow = recentStarts.filter((d) => d > windowStart && d <= today);
   const intakePerWeek = inWindow.length / intakeWindowWeeks;
 
-  /* A client needs a Wednesday hour and a board slot, so the book is only as
-     open as the tighter of the two. */
-  const openings = Math.min(freeHours.length, freeBoardSlots.length);
+  /*
+    Board calls are spaced from each client's own start date, so two clients
+    rarely land on the same Friday and the live calendar check catches it when
+    they do. The Wednesday grid is the real constraint on the book.
+  */
+  const openings = freeHours.length;
 
   let warning: string | null = null;
-  if (freeBoardSlots.length === 0) {
-    /*
-      Named separately because it is the one that does not fix itself. A full
-      Wednesday grid clears in weeks. Board slots clear only when somebody
-      leaves, so waiting is not a plan.
-    */
-    warning =
-      `All ${BOARD_SLOTS} board slots are held by ongoing clients, and they do not free up on a timer. ` +
-      "Nobody else can be taken on until a client ends or another Friday hour is opened.";
-  } else if (openings === 0) {
+  if (openings === 0) {
     warning =
       "Every Wednesday hour is held. Anyone who signs now cannot be scheduled until " +
       (next ? next.releases : "a slot frees") +
@@ -359,8 +330,7 @@ export function capacity(
     held: live.length,
     free: openings,
     freeHours,
-    freeBoardSlots,
-    boardTotal: BOARD_SLOTS,
+    freeBoardHours,
     onBoard: onBoard.length,
     nextRelease: next ? { hour: next.hour, client: next.client, date: next.releases } : null,
     throughputPerWeek,
