@@ -102,6 +102,79 @@ export async function removeTags(token: string, contactId: string, tags: string[
 }
 
 /*
+  A contact for somebody who is not the buyer.
+
+  The media operator is on every weekly call and fills in the prep doc, but they
+  never sign anything, so nothing in the funnel creates a record for them. Which
+  means every reminder about their work goes to the founder to pass on.
+
+  Matched on email only, deliberately, for the same reason builder-application
+  avoids /contacts/upsert: GHL's upsert also matches on phone, silently, and an
+  operator sharing an office number with their founder would overwrite them.
+
+  Returns null rather than throwing. An operator who could not be recorded is
+  worth a Slack line, not a failed booking.
+*/
+export async function findOrCreateByEmail(
+  token: string,
+  locationId: string,
+  email: string,
+  fields: { firstName?: string; lastName?: string; tags?: string[] }
+): Promise<string | null> {
+  const h = authHeaders(token);
+  const clean = email.trim().toLowerCase();
+  if (!clean) return null;
+
+  try {
+    const lookup = await fetch(
+      `${GHL_API}/contacts/?locationId=${encodeURIComponent(locationId)}&query=${encodeURIComponent(clean)}`,
+      { headers: h }
+    );
+    if (lookup.ok) {
+      const found = (await lookup.json())?.contacts || [];
+      const match = found.find((c: any) => (c?.email || "").toLowerCase() === clean);
+      if (match?.id) {
+        /* Already known. Tag them and leave every other field alone: this
+           person may be a client in their own right, and an operator record
+           must not overwrite that. */
+        if (fields.tags?.length) await addTags(token, match.id, fields.tags);
+        return match.id;
+      }
+    }
+  } catch (err) {
+    console.error("findOrCreateByEmail lookup failed, will create:", err);
+  }
+
+  try {
+    const res = await fetch(`${GHL_API}/contacts/`, {
+      method: "POST",
+      headers: h,
+      body: JSON.stringify({
+        locationId,
+        email: clean,
+        firstName: fields.firstName,
+        lastName: fields.lastName,
+        tags: fields.tags ?? [],
+      }),
+    });
+
+    if (res.ok) return (await res.json())?.contact?.id ?? null;
+
+    /* GHL names the contact in its duplicate error, which is more useful than
+       the failure. */
+    const meta = JSON.parse(await res.text().catch(() => "{}"))?.meta || {};
+    if (meta.contactId) {
+      if (fields.tags?.length) await addTags(token, meta.contactId, fields.tags);
+      return meta.contactId;
+    }
+  } catch (err) {
+    console.error("findOrCreateByEmail create failed:", err);
+  }
+
+  return null;
+}
+
+/*
   Call after either half lands. Reads the contact back rather than trusting what
   this request thinks it knows, because the other half may have been done in a
   different browser, on a different day.

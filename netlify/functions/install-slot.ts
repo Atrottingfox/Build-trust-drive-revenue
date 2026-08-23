@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { getContact, addTags, contactUrl } from "./_ghl";
+import { getContact, addTags, contactUrl, findOrCreateByEmail } from "./_ghl";
 import {
   SLOT_HOURS,
   BOARD_TITLE,
@@ -49,6 +49,7 @@ const REQUIRED_TAG = "install-signed";
 const BOOKED_TAG = "install-slot-booked";
 const OPERATOR_TAG = "install-operator-set";
 const NO_OPERATOR_TAG = "install-no-operator";
+const OPERATOR_CONTACT_TAG = "media-operator";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -203,6 +204,14 @@ const handler: Handler = async (event) => {
       );
     }
 
+    const [first, ...rest] = (operatorName || "").trim().split(/\s+/);
+    const laterContactId =
+      (await findOrCreateByEmail(ghlToken, process.env.GHL_LOCATION_ID || "", operatorEmail, {
+        firstName: first || undefined,
+        lastName: rest.join(" ") || undefined,
+        tags: [OPERATOR_CONTACT_TAG],
+      })) || "";
+
     const today = toDateStr(new Date());
     let patched = 0;
     try {
@@ -214,6 +223,7 @@ const handler: Handler = async (event) => {
         await patchEventAttendees(token, ev.id, [operatorEmail], {
           operatorEmail,
           operatorName,
+          operatorContact: laterContactId,
         });
         patched += 1;
       }
@@ -339,6 +349,24 @@ const handler: Handler = async (event) => {
      founder holds the invitations so the series is not sitting empty. */
   const attendee = operatorEmail || email;
 
+  /*
+    Give the operator a contact of their own. They do the weekly work and fill
+    in the prep doc, but they sign nothing, so without this every reminder about
+    their work goes to the founder to forward on.
+
+    Best effort. A booking must not fail because a CRM write did.
+  */
+  let operatorContactId = "";
+  if (operatorEmail) {
+    const [first, ...rest] = (operatorName || "").trim().split(/\s+/);
+    operatorContactId =
+      (await findOrCreateByEmail(ghlToken, process.env.GHL_LOCATION_ID || "", operatorEmail, {
+        firstName: first || undefined,
+        lastName: rest.join(" ") || undefined,
+        tags: [OPERATOR_CONTACT_TAG],
+      })) || "";
+  }
+
   const zoom = process.env.ZOOM_LINK || "";
   const body =
     "Sixty minutes on the 90 Day Install." +
@@ -356,6 +384,7 @@ const handler: Handler = async (event) => {
     founderEmail: email,
     operatorEmail: operatorEmail || "",
     operatorName: operatorName || "",
+    operatorContact: operatorContactId,
   };
 
   const total = dates.length + boards.length;
