@@ -185,6 +185,7 @@ export type InstallEvent = {
   founderEmail: string;
   operatorEmail: string;
   operatorName: string;
+  operatorContact: string;
   releases: string;
   week: string;
   hour: string;
@@ -254,6 +255,7 @@ export async function listInstallEvents(token: string, timeMinIso: string, timeM
       founderEmail: it.extendedProperties?.private?.founderEmail ?? "",
       operatorEmail: it.extendedProperties?.private?.operatorEmail ?? "",
       operatorName: it.extendedProperties?.private?.operatorName ?? "",
+      operatorContact: it.extendedProperties?.private?.operatorContact ?? "",
       releases: it.extendedProperties?.private?.releases ?? "",
       week: it.extendedProperties?.private?.week ?? "",
       hour: it.extendedProperties?.private?.hour ?? "",

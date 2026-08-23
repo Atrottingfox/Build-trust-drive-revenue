@@ -2,6 +2,13 @@ import type { Handler } from "@netlify/functions";
 import { addTags, removeTags } from "./_ghl";
 import { accessToken, listInstallEvents } from "./_google";
 import { toUtcIso, toDateStr, addDays } from "./_cadence";
+import {
+  FORM_URL,
+  SUBMISSION_WINDOW_DAYS,
+  recentSubmissions,
+  submitted,
+  type Submission,
+} from "./_prep";
 
 /*
   Nobody should arrive at a call unprepared, and nobody should be chased who
@@ -23,25 +30,10 @@ import { toUtcIso, toDateStr, addDays } from "./_cadence";
   nobody reads, and then the one that matters is missed too.
 */
 
-const FORM_URL = "https://authorityengine.notion.site/3b20b2eb6dfb8076879ccb4c5188494d";
-const NOTION_API = "https://api.notion.com/v1";
-const NOTION_VERSION = "2022-06-28";
 
-/*
-  The Content review database, under Meetings.
-
-  This is the DATABASE id, not the data source id. Notion's own tooling shows
-  both, and querying with the data source id returns a 404 that reads exactly
-  like a missing integration connection. That cost an hour of connecting a
-  database that was already connected.
-*/
-const REVIEW_DB = "3b20b2eb6dfb8074971ecb58865292d0";
 
 const MISSING_TAG = "prep-not-submitted";
 
-/* A submission counts for the call it precedes, not forever. Seven days covers
-   a weekly rhythm without letting last month's form excuse this week's. */
-const SUBMISSION_WINDOW_DAYS = 7;
 
 async function slack(text: string) {
   const url = process.env.SLACK_WEBHOOK_URL;
@@ -57,73 +49,7 @@ async function slack(text: string) {
   }
 }
 
-type Submission = { name: string; at: string };
 
-async function recentSubmissions(): Promise<Submission[]> {
-  const key = process.env.NOTION_API_KEY;
-  if (!key) throw new Error("notion-not-configured");
-
-  const since = addDays(toDateStr(new Date()), -SUBMISSION_WINDOW_DAYS);
-
-  const res = await fetch(`${NOTION_API}/databases/${REVIEW_DB}/query`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Notion-Version": NOTION_VERSION,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      filter: { timestamp: "created_time", created_time: { on_or_after: since } },
-      page_size: 100,
-    }),
-  });
-
-  if (!res.ok) {
-    const body = await res.text();
-    /*
-      404 here almost never means a wrong id. It means the integration has not
-      been connected to the database, which Notion requires per page and which
-      reports identically to the database not existing. Naming the fix saves
-      somebody an hour checking an id that was correct all along.
-    */
-    if (res.status === 404) {
-      throw new Error(
-        "notion-not-shared: open the Content review database in Notion, ... menu, " +
-          "Connections, and connect the Authority Engine integration"
-      );
-    }
-    throw new Error(`notion-query-${res.status}-${body.slice(0, 200)}`);
-  }
-
-  const json = await res.json();
-  return (json.results ?? []).map((p: any) => ({
-    name: (p.properties?.["Name/company"]?.title ?? []).map((t: any) => t.plain_text).join(""),
-    at: p.created_time,
-  }));
-}
-
-/*
-  Name/company is typed by hand into the form, so it will not match a client
-  record exactly. "Darcy Whelan", "Darcy", "Whelan Media" all mean the same
-  person and all get typed.
-
-  So this asks whether any word of the client's or operator's name appears in
-  what they wrote. Loose on purpose: the cost of a false match is a nudge not
-  sent to somebody who probably did submit, and the cost of a false miss is
-  chasing somebody who did the work. The second is worse.
-*/
-function submitted(subs: Submission[], clientName: string, operatorName: string): boolean {
-  const words = `${clientName} ${operatorName}`
-    .toLowerCase()
-    .split(/[^a-z0-9]+/)
-    .filter((w) => w.length >= 3);
-
-  if (!words.length) return false;
-  return subs.some((s) => {
-    const hay = s.name.toLowerCase();
-    return words.some((w) => hay.includes(w));
-  });
-}
 
 const handler: Handler = async () => {
   const ghlToken = process.env.GHL_TOKEN;
@@ -156,11 +82,11 @@ const handler: Handler = async () => {
       toUtcIso(addDays(today, 2), 0),
       toUtcIso(addDays(today, 3), 0)
     );
-    subs = await recentSubmissions();
+    subs = await recentSubmissions(addDays(today, -SUBMISSION_WINDOW_DAYS));
   } catch (err) {
     console.error("prep-nudge:", err);
     await slack(
-      String(err).includes("notion-not-shared")
+      String(err).includes("notion-not-found")
         ? ":warning: *The prep nudge cannot read the Content review form.*\n" +
             "Open it in Notion, ... menu at the top right, Connections, connect the " +
             "Authority Engine integration. Nobody is being chased until then."
@@ -176,20 +102,31 @@ const handler: Handler = async () => {
   for (const ev of events) {
     if (!ev.client) continue;
 
+    /*
+      Chase the person who actually does the work. The operator fills the prep
+      doc; the founder signed the agreement. Tagging the founder meant every
+      reminder went to somebody who then had to forward it, which is a step that
+      quietly stops happening.
+
+      Falls back to the client when there is no operator yet, because somebody
+      has to be told and the founder is the only one there.
+    */
+    const chaseId = ev.operatorContact || ev.client;
     const isReady = submitted(subs, ev.clientName, ev.operatorName);
     const when = ev.startLocal.slice(11, 16);
-    const label = `${ev.clientName}${ev.board ? " (board call)" : ` week ${ev.week}`} at ${when}`;
+    const who = ev.operatorContact ? ev.operatorName || ev.operatorEmail : `${ev.clientName} (no operator, chasing the founder)`;
+    const label = `${who}, ${ev.clientName}${ev.board ? " board call" : ` week ${ev.week}`} at ${when}`;
 
     if (isReady) {
       ready.push(label);
       /* Clear it whether or not we think it is set. Cheap, and it means a tag
          left behind by a failed run yesterday does not chase them today. */
-      await removeTags(ghlToken, ev.client, [MISSING_TAG]);
+      await removeTags(ghlToken, chaseId, [MISSING_TAG]);
       cleared.push(ev.clientName);
       continue;
     }
 
-    await addTags(ghlToken, ev.client, [MISSING_TAG]);
+    await addTags(ghlToken, chaseId, [MISSING_TAG]);
     chased.push(label);
   }
 
