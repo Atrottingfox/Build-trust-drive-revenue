@@ -74,12 +74,16 @@ const page = (body: string) => `<!doctype html>
   input,select{width:100%;box-sizing:border-box;padding:12px 14px;margin:0 0 16px;border-radius:10px;
         background:#0A0B0D;border:1px solid #2A2F38;color:#EAECEF;font-size:16px;font-family:inherit}
   input:focus,select:focus{outline:none;border-color:#3B7DFF}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin:0 0 16px}
-  button{padding:14px;border-radius:10px;border:1px solid #2A2F38;background:#0A0B0D;color:#EAECEF;
-         font-size:16px;font-weight:600;cursor:pointer;font-family:inherit}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;margin:0 0 8px}
+  button{padding:14px 10px;border-radius:10px;border:1px solid #2A2F38;background:#0A0B0D;color:#EAECEF;
+         font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:border-color .12s,background .12s}
   button:hover{background:#1A1D23;border-color:#3B7DFF}
-  button.wide{width:100%;background:#EAECEF;color:#0A0B0D;border:0}
+  button:focus-visible{outline:2px solid #3B7DFF;outline-offset:2px}
+  button[aria-pressed="true"]{background:#3B7DFF;border-color:#3B7DFF;color:#fff}
+  button[aria-pressed="true"]:hover{background:#3B7DFF}
+  button.wide{width:100%;background:#EAECEF;color:#0A0B0D;border:0;margin-top:8px}
   button.wide:hover{background:#fff}
+  button.wide:disabled{background:#1A1D23;color:#6E757F;cursor:not-allowed}
   .rule{border:0;border-top:1px solid #242830;margin:24px 0}
   .err{background:#2A1416;border:1px solid #5C2126;border-radius:10px;padding:12px 14px;margin:0 0 20px;font-size:14px}
   ol{margin:0 0 20px;padding-left:20px;color:#A4AAB4;font-size:14px}
@@ -279,19 +283,64 @@ const handler: Handler = async (event) => {
     <form method="POST">
       ${operatorFields(err)}
       <hr class="rule">
-      <label>Your board call, every four weeks on a Friday</label>
-      <select name="boardHour" required>
-        <option value="">Pick a time</option>
-        ${boardHours.map((h) => `<option value="${h}">${hourLabel(h)}</option>`).join("")}
-      </select>
-      <p class="sub">First one ${dayLabel(boards[0])}, then every four weeks, for as long as we work together.</p>
-      <hr class="rule">
       <label>Your weekly call, every Wednesday from ${dayLabel(start)}</label>
-      <div class="grid">
-        ${available.map((h) => `<button type="submit" name="hour" value="${h}">${hourLabel(h)}</button>`).join("")}
+      <div class="grid" id="wed">
+        ${available.map((h) => `<button type="button" data-hour="${h}" aria-pressed="false">${hourLabel(h)}</button>`).join("")}
       </div>
+      <hr class="rule">
+      <label>Your board call, every four weeks on a Friday</label>
+      <div class="grid" id="fri">
+        ${boardHours.map((h) => `<button type="button" data-hour="${h}" aria-pressed="false">${hourLabel(h)}</button>`).join("")}
+      </div>
+      <p class="sub">First one ${dayLabel(boards[0])}, then every four weeks, for as long as we work together.</p>
+
+      <input type="hidden" name="hour" id="hourField">
+      <input type="hidden" name="boardHour" id="boardField">
+      <button class="wide" type="submit" id="go" disabled>Pick your weekly hour</button>
     </form>
-    <p class="sub">Weeks 1, 2, 3, 4, 5, 7 and 10, plus your board call. Sixty minutes each.</p>`;
+    <p class="sub">Weeks 1, 2, 3, 4, 5, 7 and 10, plus your board call. Sixty minutes each.</p>
+    <script>
+      /* Choosing the Wednesday also chooses the same hour on Friday, when that
+         hour is free. Most people never touch the second row, and the ones who
+         care can still change it. */
+      var go = document.getElementById("go");
+      var fields = { wed: document.getElementById("hourField"), fri: document.getElementById("boardField") };
+
+      function pick(group, hour) {
+        var row = document.getElementById(group);
+        Array.prototype.forEach.call(row.querySelectorAll("button"), function (b) {
+          b.setAttribute("aria-pressed", b.dataset.hour === String(hour) ? "true" : "false");
+        });
+        fields[group].value = hour;
+      }
+
+      function ready() {
+        var both = fields.wed.value && fields.fri.value;
+        go.disabled = !both;
+        go.textContent = both
+          ? "Lock in Wednesdays at " + label(fields.wed.value) + ", board call " + label(fields.fri.value)
+          : fields.wed.value ? "Now pick your board call time" : "Pick your weekly hour";
+      }
+
+      function label(h) { h = Number(h); return h === 12 ? "12pm" : h < 12 ? h + "am" : (h - 12) + "pm"; }
+
+      ["wed", "fri"].forEach(function (group) {
+        var row = document.getElementById(group);
+        if (!row) return;
+        row.addEventListener("click", function (e) {
+          var b = e.target.closest("button");
+          if (!b) return;
+          pick(group, b.dataset.hour);
+          /* Mirror onto Friday, but never overrule a choice already made. */
+          if (group === "wed" && !fields.fri.dataset.touched) {
+            var match = document.querySelector('#fri button[data-hour="' + b.dataset.hour + '"]');
+            if (match) pick("fri", b.dataset.hour);
+          }
+          if (group === "fri") fields.fri.dataset.touched = "1";
+          ready();
+        });
+      });
+    <\/script>`;
 
   if (event.httpMethod !== "POST") {
     if (!available.length || !boardHours.length) {
