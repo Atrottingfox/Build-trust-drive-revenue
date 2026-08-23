@@ -1,12 +1,20 @@
 # The GoHighLevel workflows
 
-Everything the 90 Day Install needs from GHL. Four workflows, five emails, and
-one condition between the lot of them.
+Everything the 90 Day Install needs from GHL.
 
-The sequence lives in code. GHL fires one email per tag and nothing else: no
-waits, no conditions, no timeouts to leave switched off. A branch on a screen
-cannot be diffed or tested, and the one built on 23 August had its branches
-inverted and its timeout off, which was invisible until somebody opened it.
+**Install Signed Follow-Up is built and published.** It runs the whole slot
+booking chase as one flow, which is right: it is a genuine sequence with a real
+exit condition, and splitting it would have made it worse.
+
+Three workflows are still missing, each one trigger and one email.
+
+For the prep chase the sequence lives in code, so GHL fires one email per tag
+and nothing else. No waits, no conditions, no timeouts to leave switched off.
+The cron already knows when the call is and whether the form is in.
+
+The slot chase is different and stays a flow: nothing in code watches for
+somebody who never books, so the waits and the exit condition earn their place
+there.
 
 ## The tags, and what sets them
 
@@ -23,15 +31,24 @@ the moment the form lands. So no workflow needs to check anything.
 
 ---
 
-# 1. Install Signed
+# 1. Install Signed Follow-Up  ·  BUILT
 
-**Trigger:** Contact Tag, tag added, `install-signed`
+Published. Runs the whole slot chase.
 
-| Step | |
-|---|---|
-| Send Email | *Pick your weekly hour*, no delay |
+```
+install-signed
+  Email 1: Pick Your Weekly Hour
+  Wait 2 days for install-slot-booked
+     condition  END
+     time out   Email 2: Still Need Your Weekly Hour
+                Wait 3 days or until install-slot-booked
+                   condition  END
+                   time out   Email 3: Want Me To Just Book This For You?
+                              Add tag install-slot-chase
+                              END
+```
 
-That is the whole workflow. One step.
+Branches the right way round, exits on the tag at both waits.
 
 The link, pasted in **source-code view** so the merge field survives:
 
@@ -42,67 +59,14 @@ https://authorityengine.com.au/slot?c={{contact.id}}
 `{{contact.id}}` must sit inside the URL. A merge field placed beside a link
 rather than in it is how `/install` broke before.
 
-**Subject:** Pick your weekly hour
-**Preview:** Two choices, then it is set for the whole build.
+Nothing to change here.
 
 ---
 
-[First name],
+# 2. Prep Doc Chase  ·  TO BUILD
 
-You're in.
-
-Before anything else, I need your weekly hour. Everything runs off it.
-
-[Set your rhythm](https://authorityengine.com.au/slot?c={{contact.id}})
-
-Two choices on that page. Your weekly call, and your board call every four
-weeks. Both hours are then yours for the whole build, and every session goes
-straight into your calendar. You will not get a booking link again.
-
-One thing to have ready. It asks for your media operator's name and email,
-because they're the one on every weekly call, not you. If you haven't hired
-yet, leave it blank and come back to the same link once you have.
-
-The weekly calls start two weeks out. Four in the first month, then
-fortnightly, then one in month three. Your board call is every four weeks and
-it runs for as long as we work together.
-
-Sean
-
----
-
-# 2. Slot Not Booked
-
-**Trigger:** Contact Tag, tag added, `install-signed`
-**Wait:** 2 days
-**Condition:** does the contact have `install-slot-booked`? If yes, end.
-
-This is the one workflow that needs a check, because nothing in code watches for
-somebody who never books. Keep it to a single condition and no nested branches.
-
-**Subject:** Still need your hour
-**Preview:** About thirty seconds.
-
----
-
-[First name],
-
-Your hour is still open, which means nothing is in the calendar yet.
-
-[Pick it here](https://authorityengine.com.au/slot?c={{contact.id}})
-
-There are six of them and they go on a first come basis. The longer this sits,
-the more likely your preferred time is gone.
-
-Sean
-
----
-
-# 3. Prep Doc Chase
-
-Two separate workflows, one per tag. Neither has a wait or a branch.
-
-## 3a. Trigger: tag added `prep-not-submitted`
+**Trigger:** Contact Tag, tag added, `prep-not-submitted`
+**Action:** Send Email, no delay. Nothing else.
 
 **Subject:** Before Wednesday
 **Preview:** Two minutes, and it changes what the call is worth.
@@ -124,7 +88,12 @@ working out what happened, and that is twenty minutes you paid for.
 
 Sean
 
-## 3b. Trigger: tag added `prep-final-call`
+---
+
+# 3. Prep Final Call  ·  TO BUILD
+
+**Trigger:** Contact Tag, tag added, `prep-final-call`
+**Action:** Send Email, no delay. Nothing else.
 
 **Subject:** Call tomorrow, still no doc
 **Preview:** Send me dot points if that is all you have.
@@ -146,7 +115,7 @@ Sean
 
 ---
 
-# 4. No Operator
+# 4. No Operator  ·  TO BUILD
 
 **Trigger:** Contact Tag, tag added, `install-no-operator`
 
@@ -177,6 +146,17 @@ you are up to.
 Sean
 
 ---
+
+## Two drafts worth deleting
+
+```
+draft   Install Signed Onboarding Email
+draft   Install Slot Reminder
+```
+
+Both look superseded by the published flow. If either is ever published by
+accident, a signed client gets two onboarding emails and cannot tell which link
+is real.
 
 ## Notes
 
