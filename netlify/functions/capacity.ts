@@ -2,9 +2,6 @@ import type { Handler } from "@netlify/functions";
 import {
   SLOT_HOURS,
   BOARD_HOURS,
-  BOARD_WEEKS,
-  boardWeekLabel,
-  boardSlotKey,
   SLOT_RELEASE_WEEK,
   CADENCE,
   capacity,
@@ -70,7 +67,7 @@ async function readGrid() {
     const existing = byClient.get(ev.client);
     const merged: Holding & { name: string; started: string } = existing ?? {
       hour: Number(ev.hour || ev.startLocal.slice(11, 13)),
-      boardSlot: ev.boardHour ? { week: Number(ev.boardWeek) || 4, hour: Number(ev.boardHour) } : null,
+      boardHour: ev.boardHour ? Number(ev.boardHour) : null,
       boardActive: false,
       client: ev.client,
       name: ev.clientName || ev.client,
@@ -83,7 +80,7 @@ async function readGrid() {
       if (ev.releases) merged.releases = ev.releases;
       if (ev.hour) merged.hour = Number(ev.hour);
     }
-    if (ev.boardHour) merged.boardSlot = { week: Number(ev.boardWeek) || 4, hour: Number(ev.boardHour) };
+    if (ev.boardHour) merged.boardHour = Number(ev.boardHour);
 
     /* A board call still ahead of them is what holds the Friday hour. It has no
        release date, because the board call runs for as long as they stay. */
@@ -167,7 +164,7 @@ const handler: Handler = async (event) => {
   }
 
   const held = holdings.filter((h) => h.releases > today).sort((a, b) => a.hour - b.hour);
-  const board = holdings.filter((h) => h.boardActive && h.boardSlot !== null);
+  const board = holdings.filter((h) => h.boardActive && h.boardHour !== null);
 
   return {
     statusCode: 200,
@@ -208,16 +205,16 @@ const handler: Handler = async (event) => {
         }).join("")}
       </table>
 
-      <h2>Fridays, the board call</h2>
+      <h2>Board calls</h2>
       <table>
-        <tr><th>Friday</th>${BOARD_HOURS.map((h) => `<th>${hourLabel(h)}</th>`).join("")}</tr>
-        ${BOARD_WEEKS.map((w) => `<tr>
-          <td>${boardWeekLabel(w)}</td>
-          ${BOARD_HOURS.map((h) => {
-            const who = board.find((x) => boardSlotKey(x.boardSlot!) === `${w}:${h}`);
-            return `<td>${who ? who.name : '<span class="free">free</span>'}</td>`;
-          }).join("")}
-        </tr>`).join("")}
+        <tr><th>Client</th><th>Friday hour</th></tr>
+        ${board.length
+          ? board
+              .map(
+                (b) => `<tr><td>${b.name}</td><td>${hourLabel(b.boardHour as number)}</td></tr>`
+              )
+              .join("")
+          : `<tr><td colspan="2"><span class="free">nobody on a board call yet</span></td></tr>`}
       </table>
 
       <h2>The maths</h2>
@@ -228,11 +225,9 @@ const handler: Handler = async (event) => {
         ${(report.throughputPerWeek * 52).toFixed(0)} a year through the install.
       </p>
       <p class="when">
-        Fridays do not. The board call runs every month through the twelve, so a
-        board slot stays with that client until they leave. Staggering across
-        ${BOARD_WEEKS.length} Fridays gives ${report.boardTotal} slots and
-        ${report.boardTotal - report.onBoard} still open, so the board call is not
-        what caps the book. Ending a client is the only thing that returns one.
+        Board calls are spaced four weeks from each client's own start, so two
+        clients rarely land on the same Friday, and the live calendar check
+        catches it when they do. Wednesdays are the constraint that binds.
       </p>
     `),
   };

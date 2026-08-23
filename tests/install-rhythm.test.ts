@@ -10,8 +10,7 @@ import {
   slotReleaseDate,
   addDays,
   weekdayOf,
-  nthFridayOf,
-  BOARD_SLOTS,
+  BOARD_INTERVAL_DAYS,
   isPublicHoliday,
   avoidHoliday,
   capacity,
@@ -71,25 +70,8 @@ describe("the first call date", () => {
 });
 
 describe("the board call", () => {
-  it("counts Fridays from the start of the month", () => {
-    /* August 2026 starts on a Saturday, so the first Friday is the 7th. */
-    expect(nthFridayOf(2026, 7, 1)).toBe("2026-08-07");
-    expect(nthFridayOf(2026, 7, 4)).toBe("2026-08-28");
-    expect(nthFridayOf(2026, 8, 2)).toBe("2026-09-11");
-  });
-
-  it("gives every month a first through fourth Friday", () => {
-    for (let m = 0; m < 12; m += 1) {
-      for (const n of [1, 2, 3, 4]) {
-        const d = nthFridayOf(2026, m, n);
-        expect(weekdayOf(d)).toBe(5);
-        expect(Number(d.slice(5, 7))).toBe(m + 1);
-      }
-    }
-  });
-
-  it("staggers to 24 slots rather than 6", () => {
-    expect(BOARD_SLOTS).toBe(24);
+  it("is every four weeks", () => {
+    expect(BOARD_INTERVAL_DAYS).toBe(28);
   });
 });
 
@@ -125,48 +107,41 @@ describe("public holidays", () => {
 });
 
 describe("the board calls inside one install", () => {
-  it("is three, one per month, on the client's own Friday", () => {
-    /* Fourth Friday. The 28th is two days after the start, so it is skipped. */
-    expect(boardCallDates("2026-08-26", 4)).toEqual(["2026-09-25", "2026-10-23", "2026-11-27"]);
-    /* Second Friday, a different client, same start. */
-    expect(boardCallDates("2026-08-26", 2)).toEqual(["2026-09-11", "2026-10-09", "2026-11-13"]);
+  it("is three, four weeks apart, on Fridays", () => {
+    /* First call Wednesday 2026-09-09. Four weeks out is the 7th of October,
+       so the first board call is the Friday of that week. */
+    expect(boardCallDates("2026-09-09")).toEqual(["2026-10-09", "2026-11-06", "2026-12-04"]);
   });
 
-  it("never lands in the first week", () => {
-    const dates = boardCallDates("2026-09-23", 4);
-    expect(dates).not.toContain("2026-09-25");
-    expect(dates[0]).toBe("2026-10-23");
-  });
-
-  it("is always three, whatever Friday and whatever day somebody signs", () => {
-    for (let day = 1; day <= 28; day += 1) {
-      const start = `2026-09-${String(day).padStart(2, "0")}`;
-      for (const week of [1, 2, 3, 4]) {
-        const dates = boardCallDates(start, week);
-        expect(dates).toHaveLength(3);
-        for (const d of dates) {
-          expect(weekdayOf(d)).toBe(5);
-          expect(d >= addDays(start, 7)).toBe(true);
-        }
-      }
+  it("keeps the interval exactly four weeks", () => {
+    const d = boardCallDates("2026-09-09");
+    for (let i = 1; i < d.length; i += 1) {
+      expect(Date.parse(d[i]) - Date.parse(d[i - 1])).toBe(28 * 86400000);
     }
   });
 
-  it("never puts two clients on the same board slot in the same month", () => {
-    const a = boardCallDates("2026-08-26", 2);
-    const b = boardCallDates("2026-08-26", 3);
-    expect(a.filter((d) => b.includes(d))).toEqual([]);
+  it("never lands on the client's own call day", () => {
+    for (const start of ["2026-09-09", "2026-09-16", "2026-10-07"]) {
+      for (const d of boardCallDates(start)) expect(weekdayOf(d)).toBe(5);
+    }
+  });
+
+  it("is at least four weeks after the first call", () => {
+    for (const start of ["2026-09-09", "2026-09-16", "2026-10-07", "2027-01-06"]) {
+      expect(boardCallDates(start)[0] >= addDays(start, 28)).toBe(true);
+    }
   });
 });
 
 describe("capacity", () => {
   const today = "2026-08-22";
-  const hold = (
-    hour: number,
-    releases: string,
-    client = "x",
-    boardSlot: { week: number; hour: number } | null = null
-  ) => ({ hour, boardSlot, boardActive: boardSlot !== null, client, releases });
+  const hold = (hour: number, releases: string, client = "x", boardHour: number | null = null) => ({
+    hour,
+    boardHour,
+    boardActive: boardHour !== null,
+    client,
+    releases,
+  });
 
   it("reports an empty grid as fully available", () => {
     const c = capacity([], [], today);
@@ -193,52 +168,26 @@ describe("capacity", () => {
     expect(c.warning).toContain("cannot be scheduled until 2026-11-01");
   });
 
-  it("does not treat the board call as the cap", () => {
-    /* Six ongoing clients, all on 10am, each a different Friday plus overflow.
-       The staggered grid absorbs them where a single Friday would not. */
-    const six = [1, 2, 3, 4].map((w, i) =>
-      hold(SLOT_HOURS[i % SLOT_HOURS.length], "2026-11-04", `client ${i}`, { week: w, hour: 10 })
-    );
-    const c = capacity(six, [], today);
-    expect(c.boardTotal).toBe(24);
-    expect(c.freeBoardSlots.length).toBe(20);
-    expect(c.warning).toBeNull();
-  });
-
-  it("shuts the book only when all twenty four board slots are gone", () => {
-    const all = [];
-    let i = 0;
-    for (const w of [1, 2, 3, 4]) {
-      for (const h of BOARD_HOURS) {
-        all.push(hold(SLOT_HOURS[0], "2026-01-01", `client ${i++}`, { week: w, hour: h }));
-      }
-    }
-    const c = capacity(all, [], today);
-    expect(c.onBoard).toBe(24);
-    expect(c.freeBoardSlots.length).toBe(0);
-    expect(c.free).toBe(0);
-    expect(c.warning).toContain("do not free up on a timer");
-  });
 
   it("keeps the board slot after the Wednesday has gone back", () => {
     /* Past their install: the weekly rhythm ended, the board call did not. */
     const past = [
-      { hour: 10, boardSlot: { week: 2, hour: 10 }, boardActive: true, client: "on", releases: "2026-01-01" },
+      { hour: 10, boardHour: 10, boardActive: true, client: "on", releases: "2026-01-01" },
     ];
     const c = capacity(past, [], today);
     expect(c.held).toBe(0);
     expect(c.freeHours).toContain(10);
     expect(c.onBoard).toBe(1);
-    expect(c.freeBoardSlots).not.toContainEqual({ week: 2, hour: 10 });
+    expect(c.freeBoardHours).not.toContain(10);
   });
 
   it("frees the board slot once the client has ended", () => {
     const gone = [
-      { hour: 10, boardSlot: { week: 2, hour: 10 }, boardActive: false, client: "gone", releases: "2026-01-01" },
+      { hour: 10, boardHour: 10, boardActive: false, client: "gone", releases: "2026-01-01" },
     ];
     const c = capacity(gone, [], today);
     expect(c.onBoard).toBe(0);
-    expect(c.freeBoardSlots).toContainEqual({ week: 2, hour: 10 });
+    expect(c.freeBoardHours).toContain(10);
     expect(c.free).toBe(6);
   });
 
