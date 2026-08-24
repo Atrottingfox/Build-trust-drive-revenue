@@ -52,13 +52,14 @@ Branches the right way round, exits on the tag at both waits.
 
 The link, pasted in **source-code view** so the merge field survives.
 
-It is the full function URL rather than a tidy `/slot`. A redirect from `/slot`
-was serving the marketing homepage instead, and returning 200 while doing it,
-which looks like success to anything checking status codes. The direct URL is
-verified working. Tidying it is cosmetic and can wait.
+`/slot` is served by an edge function, not a redirect. A rewrite rule lost to
+the SPA catch-all in `public/_redirects`, which Netlify processes first, so the
+marketing homepage was served instead and returned 200 while doing it. That
+looks exactly like success to anything checking status codes. Edge functions run
+before redirects, which is why `/capacity` always worked and this did not.
 
 ```
-https://authorityengine.com.au/.netlify/functions/install-slot?c={{contact.id}}
+https://authorityengine.com.au/slot?c={{contact.id}}
 ```
 
 `{{contact.id}}` must sit inside the URL. A merge field placed beside a link
@@ -139,7 +140,7 @@ Your calls are locked in, so that part is done.
 The one thing missing is your media operator. They're on every weekly call, and
 right now the invitations are coming to you instead of them.
 
-[Add them here](https://authorityengine.com.au/.netlify/functions/install-slot?c={{contact.id}})
+[Add them here](https://authorityengine.com.au/slot?c={{contact.id}})
 
 Same link as before. It knows you have already booked, so it only asks for their
 name and email, and it puts them on every call still to come without moving any
