@@ -51,6 +51,36 @@ const OPERATOR_CONTACT_TAG = "media-operator";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/*
+  Whether anybody can actually receive mail at that domain.
+
+  A well formed address at a domain that does not exist passes every check a
+  regex can make, and then ten invitations bounce. Neither the client nor Sean
+  notices until week one, when the operator is not on the call because they were
+  never told about it. gmial.com is a real typo people really make.
+
+  A lookup failure is treated as fine. Refusing a booking because DNS was slow
+  is a worse outcome than accepting an address that might be wrong.
+*/
+async function domainAcceptsMail(email: string): Promise<boolean> {
+  const domain = email.split("@")[1];
+  if (!domain) return false;
+  try {
+    const res = await fetch(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=MX`, {
+      headers: { Accept: "application/dns-json" },
+      signal: AbortSignal.timeout(3000),
+    });
+    if (!res.ok) return true;
+    const json = await res.json();
+    if (Array.isArray(json?.Answer) && json.Answer.length) return true;
+    /* No MX is not proof: some domains take mail on the A record. NXDOMAIN is
+       proof, and that is status 3. */
+    return json?.Status !== 3;
+  } catch {
+    return true;
+  }
+}
+
 const hourLabel = (h: number) => (h === 12 ? "12pm" : h < 12 ? `${h}am` : `${h - 12}pm`);
 
 const dayLabel = (d: string) =>
@@ -156,6 +186,15 @@ const handler: Handler = async (event) => {
   if (!email) {
     return html("<h1>No email on file</h1><p>You cannot be invited without one. Tell Sean.</p>", 400);
   }
+
+  /*
+    A test run must be able to exercise the whole path without emailing a real
+    person. Gated on the shared secret, so a client cannot silently book calls
+    that nobody is told about.
+  */
+  const silent =
+    event.headers["x-install-test"] === process.env.CALL_CONTEXT_SECRET &&
+    Boolean(process.env.CALL_CONTEXT_SECRET);
 
   const params = new URLSearchParams(event.httpMethod === "POST" ? event.body || "" : "");
   const operatorName = (params.get("operatorName") || "").trim();
@@ -424,6 +463,13 @@ const handler: Handler = async (event) => {
     return html(picker("That email does not look right. Check it and pick your hour again."), 400);
   }
 
+  if (operatorEmail && !(await domainAcceptsMail(operatorEmail))) {
+    return html(
+      picker(`Nothing can receive mail at ${esc(operatorEmail.split("@")[1])}. Check the spelling.`),
+      400
+    );
+  }
+
   /*
     Re-check rather than trust the page. Between the picker rendering and this
     submission somebody else may have taken the hour, and two clients on one
@@ -491,6 +537,7 @@ const handler: Handler = async (event) => {
         endLocal: toLocalIso(d.date, chosen, DURATION_MIN),
         timeZone: TZ,
         attendees: [attendee],
+        notify: !silent,
         privateProps: { ...shared, week: String(d.week) },
       });
       created.push(id);
@@ -509,6 +556,7 @@ const handler: Handler = async (event) => {
         endLocal: toLocalIso(d, boardHour, DURATION_MIN),
         timeZone: TZ,
         attendees: [...new Set([email, attendee])],
+        notify: !silent,
         privateProps: { ...shared, board: "1" },
       });
       created.push(id);

@@ -143,6 +143,17 @@ export type NewEvent = {
   timeZone: string;
   attendees?: string[];
   privateProps?: Record<string, string>;
+  /*
+    Whether Google emails the attendees. True for a real booking, false for a
+    test.
+
+    A test run that invites a made up address makes Google try to deliver to it,
+    fail, and bounce every one back. Ten events, three runs, plus a cancellation
+    each on cleanup, is sixty bounces in somebody's inbox for a test that proved
+    nothing about delivery. The attendee is still recorded on the event either
+    way, so everything downstream is exercised exactly as it would be.
+  */
+  notify?: boolean;
 };
 
 export async function createEvent(token: string, ev: NewEvent): Promise<string> {
@@ -157,7 +168,7 @@ export async function createEvent(token: string, ev: NewEvent): Promise<string> 
   */
   const url =
     `${API}/calendars/${encodeURIComponent(calendarId())}/events` +
-    `?conferenceDataVersion=1&sendUpdates=all`;
+    `?conferenceDataVersion=1&sendUpdates=${ev.notify === false ? "none" : "all"}`;
 
   const res = await fetch(url, {
     method: "POST",
@@ -268,9 +279,10 @@ export async function listInstallEvents(token: string, timeMinIso: string, timeM
     }));
 }
 
-export async function deleteEvent(token: string, id: string): Promise<void> {
+export async function deleteEvent(token: string, id: string, notify = true): Promise<void> {
   const res = await fetch(
-    `${API}/calendars/${encodeURIComponent(calendarId())}/events/${encodeURIComponent(id)}?sendUpdates=all`,
+    `${API}/calendars/${encodeURIComponent(calendarId())}/events/${encodeURIComponent(id)}` +
+      `?sendUpdates=${notify ? "all" : "none"}`,
     { method: "DELETE", headers: { Authorization: `Bearer ${token}` } }
   );
   /* 410 means it is already gone, which is the state we wanted. */
