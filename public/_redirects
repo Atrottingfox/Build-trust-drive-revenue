@@ -2,4 +2,11 @@ https://theauthorityengine.live/*       https://authorityengine.com.au/:splat 30
 https://www.theauthorityengine.live/*   https://authorityengine.com.au/:splat 301!
 http://theauthorityengine.live/*        https://authorityengine.com.au/:splat 301!
 http://www.theauthorityengine.live/*    https://authorityengine.com.au/:splat 301!
+# The install slot picker and the capacity readout are functions, not pages.
+# These must sit ABOVE the SPA catch-all: Netlify takes the first rule that
+# matches, so /* was swallowing them and serving the marketing homepage instead.
+# A 200 came back either way, which is how it went unnoticed.
+/slot      /.netlify/functions/install-slot   200!
+/capacity  /.netlify/functions/capacity       200!
+
 /*  /index.html  200

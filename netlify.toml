@@ -109,7 +109,13 @@
   function = "ladder-auth"
   path = "/.netlify/functions/capacity"
 
-# A link a client receives should be readable. The contact id rides along as ?c=
+# The picker and the capacity readout are functions, not pages.
+#
+# netlify.toml redirects are evaluated BEFORE _redirects, which is why these
+# belong here: public/_redirects ends with a SPA catch-all, and anything that
+# reaches it is served index.html. Moving these into that file broke /slot
+# entirely, and the symptom was a 200 with the marketing homepage in it, which
+# looks exactly like success to anything checking status codes.
 [[redirects]]
   from = "/slot"
   to = "/.netlify/functions/install-slot"
