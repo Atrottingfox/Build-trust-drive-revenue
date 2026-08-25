@@ -1,0 +1,57 @@
+{
+  /*
+    The serverless functions were in no tsconfig at all.
+
+    tsconfig.json is a solution file with "files": [] and two references, so
+    `tsc --noEmit -p .` checked nothing and reported success. tsconfig.app
+    includes only src, tsconfig.node only vite.config.ts. Everything under
+    netlify/functions therefore went unchecked from the day it was written,
+    which is the half of this codebase that takes money, writes tags and books
+    calendars.
+
+    It cost real money. verify-payment called scheduleSecondInstalment with
+    three arguments where it takes four, so the session id was undefined and
+    every second instalment was raised under the idempotency key
+    "install-2-undefined-invoice". Stripe returns the original object for a
+    repeated key rather than creating a new one, so the first client to pay got
+    an invoice and every client after them silently got nothing. A one line
+    arity error, invisible because nothing was looking.
+  */
+  "compilerOptions": {
+    "target": "ES2022",
+    /* DOM is here for its fetch types, whose json() resolves to any. Node's
+       undici types resolve it to unknown, which turns every handler's
+       res.json().something into an error and buries the real findings. */
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["node"],
+
+    /*
+      Deliberately not strict, and that is a considered trade rather than
+      laziness. Turning strict on here produces about fifty errors, nearly all
+      of one harmless shape: res.json() is typed unknown, and every handler
+      reads a property straight off it. None of those are bugs, the runtime
+      code copes, and a check that reports fifty things nobody will act on is a
+      check nobody runs.
+
+      Arity and argument type errors, which is the class that just cost a
+      $5,000 invoice per client, are reported with strict off. So this catches
+      what matters today and stays green, which means it will actually be run.
+      Tighten it later by fixing the json shapes, not by flipping this and
+      living with a red build.
+    */
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["netlify/functions"]
+}

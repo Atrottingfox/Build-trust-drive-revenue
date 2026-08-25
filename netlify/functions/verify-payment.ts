@@ -306,7 +306,7 @@ const handler: Handler = async (event) => {
         retries and dunning, which nothing here would.
       */
       if (session.metadata?.payment === "install-1" && session.customer) {
-        await scheduleSecondInstalment(secret, String(session.customer), contactId);
+        await scheduleSecondInstalment(secret, String(session.customer), contactId, sessionId);
       }
 
       if (customFields.length) {

@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vitest run && vite build",
+    "build": "npm run typecheck:functions && vitest run && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "typecheck:functions": "tsc --noEmit -p tsconfig.functions.json"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.120.0",
