@@ -1,5 +1,21 @@
 import type { Handler } from "@netlify/functions";
-import { reconcile } from "./_ghl";
+import { reconcile, getContact, sendEmail } from "./_ghl";
+
+/* One place to shout from. A paid client who did not get their booking link is
+   the exact failure this file exists to prevent, so it must not be silent. */
+async function slackAlert(text: string): Promise<void> {
+  const url = process.env.SLACK_WEBHOOK_URL;
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+  } catch {
+    /* Never let alerting break a payment path. */
+  }
+}
 
 /*
   Asks Stripe whether a checkout session was actually paid, then tags GHL.
@@ -361,6 +377,50 @@ const handler: Handler = async (event) => {
       */
       if (session.metadata?.payment === "install-1" && session.customer) {
         await scheduleSecondInstalment(secret, String(session.customer), contactId, sessionId);
+
+        /*
+          The email that has to arrive at this exact moment.
+
+          They have just paid and the page tells them to lock their slot, but a
+          page is closed and forgotten. The booking link has to be somewhere
+          they can find it tomorrow, which means their inbox.
+
+          Sent from here rather than hung off a tag, because the tag route has
+          already failed twice: a published workflow with a satisfied trigger
+          sent nothing, and a draft one cannot send at all. This runs at the
+          moment the money is confirmed, and if it cannot send it says so.
+        */
+        if (token) {
+          const contact = await getContact(token, contactId);
+          const first = contact?.firstName || "there";
+          const slot = `https://authorityengine.com.au/slot?c=${encodeURIComponent(contactId)}`;
+
+          const { sent, reason } = await sendEmail(
+            token,
+            contactId,
+            "Payment received. One thing left.",
+            [
+              `<p>${first},</p>`,
+              `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. Nothing after that.</p>`,
+              `<p>One thing left, and it takes a minute.</p>`,
+              `<p><a href="${slot}">Lock your weekly hour</a></p>`,
+              `<p>Two choices on that page. Your weekly call, and your board call every four weeks. Both hours are then yours for the whole build, and every session goes straight into your calendar. You will not get a booking link again.</p>`,
+              `<p>One call a week for the first four weeks, then fortnightly, then one in month three. Your board call runs every four weeks, for as long as we work together.</p>`,
+              `<p>It also asks for your media operator's name and email, because they are the one on every weekly call, not you. If you haven't hired yet, leave it blank and come back to the same link once you have.</p>`,
+              `<p>Sean</p>`,
+            ].join("")
+          );
+
+          if (!sent) {
+            await slackAlert(
+              [
+                `:warning: *${first} paid and did not get their booking email.*`,
+                `Reason: ${reason}.`,
+                `They have no link to lock their calls. Send them ${slot} by hand.`,
+              ].join("\n")
+            );
+          }
+        }
       }
 
       if (customFields.length) {

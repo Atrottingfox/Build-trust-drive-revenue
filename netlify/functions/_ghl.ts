@@ -209,3 +209,48 @@ export async function reconcile(token: string, contactId: string): Promise<{
 
   return { booked, paid, confirmed: false };
 }
+
+/*
+  Sends one email to a contact, through GoHighLevel's conversations API.
+
+  Deliberately not a GHL workflow. Workflows are the least reliable part of this
+  estate: they can sit unpublished, they can be published and still not fire on
+  a tag that has demonstrably landed, and nothing here can read them, build them
+  or debug them because the API is list-only and the app ignores automation. An
+  email that must arrive at a specific moment in a paid engagement should not
+  depend on that.
+
+  Sent from the code that knows the moment happened, so it either sends or it
+  says why in a log with the reason attached.
+
+  Requires the `conversations/message.write` scope on the private integration
+  token. Without it GHL answers 401 "The token is not authorized for this
+  scope", which is reported rather than swallowed: silence is what this whole
+  function exists to avoid.
+*/
+export async function sendEmail(
+  token: string,
+  contactId: string,
+  subject: string,
+  html: string
+): Promise<{ sent: boolean; reason?: string }> {
+  try {
+    const res = await fetch(`${GHL_API}/conversations/messages`, {
+      method: "POST",
+      headers: authHeaders(token),
+      body: JSON.stringify({ type: "Email", contactId, subject, html }),
+    });
+
+    if (!res.ok) {
+      const body = await res.text();
+      console.error("GHL sendEmail failed:", res.status, body.slice(0, 300), contactId);
+      return { sent: false, reason: `HTTP ${res.status}` };
+    }
+
+    console.log("GHL sendEmail sent:", subject, "->", contactId);
+    return { sent: true };
+  } catch (err) {
+    console.error("GHL sendEmail error:", err, contactId);
+    return { sent: false, reason: String(err) };
+  }
+}
