@@ -138,11 +138,56 @@ describe("The Install actually invoices the second payment", () => {
     expect(src).toContain("session_id");
   });
 
-  it("sends an idempotency key so a refresh cannot double-invoice", () => {
-    /* The page is a Stripe return URL. Return URLs get refreshed, reopened and
-       restored by browsers, and this call raises a real $5,000 invoice. */
+  it("cannot double-invoice on a refresh, and can still recover from a failure", () => {
+    /*
+      The page is a Stripe return URL. Return URLs get refreshed, reopened and
+      restored by browsers, and this call raises a real $5,000 invoice.
+
+      This used to assert an idempotency key, which was the wrong instrument
+      and this test kept it in place. Stripe caches the response for a key
+      whether the call succeeded or FAILED, so the due_date bug poisoned every
+      key it touched: once a session had failed, no corrected code could ever
+      raise that client's instalment. A replayed key also hands back an object
+      that may since have been deleted, which produced an empty invoice.
+
+      The protection is a lookup on the data instead. Same guarantee against a
+      double invoice, without making a failure permanent.
+    */
     const src = fn("verify-payment.ts");
-    expect(src).toContain("Idempotency-Key");
+    expect(src).toContain("install_2_session");
+    expect(src).not.toContain("Idempotency-Key");
+  });
+
+  it("schedules the second instalment instead of charging it immediately", () => {
+    /*
+      Finalising an invoice is what charges the card. The original code
+      finalised straight away, which would have taken the second $5,000 on the
+      same day as the first had it ever got that far.
+    */
+    const src = fn("verify-payment.ts");
+    expect(src).toContain("automatically_finalizes_at");
+    expect(src).not.toContain("/finalize");
+  });
+
+  it("attaches the instalment to the invoice rather than sending an empty one", () => {
+    /*
+      Stripe excludes pending invoice items by default, so without this the
+      client receives an invoice for $0 and the instalment stays orphaned.
+    */
+    const src = fn("verify-payment.ts");
+    expect(src).toContain("pending_invoice_items_behavior");
+  });
+
+  it("does not pass due_date, which Stripe refuses on an auto-charged invoice", () => {
+    /*
+      "You can only specify 'due_date' or 'days_until_due' if invoice
+      collection method is 'send_invoice'". This combination failed on every
+      run from the day it was written, so no second instalment was ever raised
+      for anybody.
+    */
+    const src = fn("verify-payment.ts");
+    expect(src).toContain("charge_automatically");
+    expect(src).not.toContain("due_date:");
   });
 });
 
