@@ -67,6 +67,33 @@ async function scheduleSecondInstalment(
   try {
     const dueDate = Math.floor(Date.now() / 1000) + days * 86400;
 
+    /*
+      Guard on the data, not only on the idempotency key.
+
+      Stripe caches the response for a key whether the call succeeded or
+      failed, so once this call errored for a given session, every retry
+      replayed that same error forever. The invoice bug above meant that had
+      happened for real: the key was poisoned and no amount of correct code
+      could raise that client's instalment afterwards.
+
+      So before creating anything, ask Stripe whether this session already has
+      an instalment. That makes a repeat safe on its own terms and leaves a
+      failure recoverable simply by running again.
+    */
+    const existing = await fetch(
+      `https://api.stripe.com/v1/invoices?customer=${encodeURIComponent(customerId)}&limit=50`,
+      { headers: { Authorization: `Bearer ${stripeKey}` } }
+    );
+    if (existing.ok) {
+      const already = ((await existing.json())?.data || []).find(
+        (i: any) => i?.metadata?.install_2_session === sessionId && i?.status !== "void"
+      );
+      if (already) {
+        console.log("Second instalment already exists for session", sessionId, ":", already.id);
+        return;
+      }
+    }
+
     // The line item has to exist before the invoice that collects it.
     const itemRes = await fetch("https://api.stripe.com/v1/invoiceitems", {
       method: "POST",
@@ -85,7 +112,9 @@ async function scheduleSecondInstalment(
 
     const invRes = await fetch("https://api.stripe.com/v1/invoices", {
       method: "POST",
-      headers: { ...auth, ...idem("invoice") },
+      /* No idempotency key on this one. The check above already makes a repeat
+         safe, and a key here would cache a failure and make it permanent. */
+      headers: auth,
       /*
         due_date is not allowed here and never was. Stripe refuses it outright
         with "You can only specify 'due_date' or 'days_until_due' if invoice
@@ -105,7 +134,17 @@ async function scheduleSecondInstalment(
         collection_method: "charge_automatically",
         auto_advance: "true",
         automatically_finalizes_at: String(dueDate),
+        /*
+          Without this the invoice is created empty. Stripe excludes pending
+          invoice items by default, so the item raised a moment ago stays
+          orphaned and the client gets a $0 invoice. Verified against the live
+          API: the same call without it returns amount_due 0, and with it
+          returns the instalment.
+        */
+        pending_invoice_items_behavior: "include",
         description: `Second instalment, charged ${days} days after signing`,
+        /* The handle the guard above looks for. */
+        "metadata[install_2_session]": sessionId,
         ...(contactId ? { "metadata[ghl_contact_id]": String(contactId) } : {}),
       }).toString(),
     });
