@@ -86,12 +86,26 @@ async function scheduleSecondInstalment(
     const invRes = await fetch("https://api.stripe.com/v1/invoices", {
       method: "POST",
       headers: { ...auth, ...idem("invoice") },
+      /*
+        due_date is not allowed here and never was. Stripe refuses it outright
+        with "You can only specify 'due_date' or 'days_until_due' if invoice
+        collection method is 'send_invoice'", so every attempt to raise a
+        second instalment failed at this call, leaving the invoice item created
+        and orphaned with invoice=None. Silently: the error was logged and the
+        caller carried on, so the page said paid and nobody found out.
+
+        automatically_finalizes_at is the right instrument. The invoice is
+        created as a draft now and Stripe finalises it on that date, which is
+        what triggers the charge against the saved card. Nothing is collected
+        before then, and the schedule lives in Stripe rather than in a cron
+        here that could quietly stop running.
+      */
       body: new URLSearchParams({
         customer: customerId,
         collection_method: "charge_automatically",
         auto_advance: "true",
-        due_date: String(dueDate),
-        description: `Second instalment, due ${days} days after signing`,
+        automatically_finalizes_at: String(dueDate),
+        description: `Second instalment, charged ${days} days after signing`,
         ...(contactId ? { "metadata[ghl_contact_id]": String(contactId) } : {}),
       }).toString(),
     });
@@ -102,15 +116,13 @@ async function scheduleSecondInstalment(
       return;
     }
 
-    // Finalising is what puts it on Stripe's schedule. Left as a draft it never charges.
-    const finalRes = await fetch(
-      `https://api.stripe.com/v1/invoices/${encodeURIComponent(invoice.id)}/finalize`,
-      { method: "POST", headers: auth, body: "auto_advance=true" }
-    );
-    if (!finalRes.ok) {
-      console.error("Second instalment invoice created but NOT finalised:", invoice.id, await finalRes.text());
-      return;
-    }
+    /*
+      Deliberately NOT finalised here. Finalising is what charges the card, and
+      the whole point is that this one charges in thirty days rather than now.
+      automatically_finalizes_at above hands that job to Stripe, so the invoice
+      sits as a draft until then. Calling finalize at this moment would take
+      the second $5,000 on the same day as the first.
+    */
 
     console.log("Second instalment scheduled:", invoice.id, "customer:", customerId, "due in", days, "days");
   } catch (err) {
