@@ -62,7 +62,6 @@ async function scheduleSecondInstalment(
     Suffixed per call because Stripe scopes a key to one endpoint, and reusing
     the same string for the item and the invoice would collide.
   */
-  const idem = (suffix: string) => ({ "Idempotency-Key": `install-2-${sessionId}-${suffix}` });
 
   try {
     const dueDate = Math.floor(Date.now() / 1000) + days * 86400;
@@ -97,7 +96,11 @@ async function scheduleSecondInstalment(
     // The line item has to exist before the invoice that collects it.
     const itemRes = await fetch("https://api.stripe.com/v1/invoiceitems", {
       method: "POST",
-      headers: { ...auth, ...idem("item") },
+      /* No key here either, for the same reason as the invoice below, and one
+         more: a replayed key returns the original item even after that item has
+         been deleted, which produces an invoice with nothing on it. The guard
+         above is what prevents a duplicate. */
+      headers: auth,
       body: new URLSearchParams({
         customer: customerId,
         amount: String(amount),
