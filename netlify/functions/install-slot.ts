@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { getContact, addTags, contactUrl, findOrCreateByEmail } from "./_ghl";
+import { getContact, addTags, contactUrl, findOrCreateByEmail, sendEmail } from "./_ghl";
 import {
   SLOT_HOURS,
   BOARD_HOURS,
@@ -537,7 +537,12 @@ const handler: Handler = async (event) => {
         endLocal: toLocalIso(d.date, chosen, DURATION_MIN),
         timeZone: TZ,
         attendees: [attendee],
-        notify: !silent,
+        /* Never true. Ten events with sendUpdates=all is ten invitation
+           emails landing at once, which is what a client's first impression
+           of the engagement used to be. The attendee is still on the event,
+           so it appears in their calendar; the one confirmation email below
+           is what tells them. */
+        notify: false,
         privateProps: { ...shared, week: String(d.week) },
       });
       created.push(id);
@@ -556,7 +561,7 @@ const handler: Handler = async (event) => {
         endLocal: toLocalIso(d, boardHour, DURATION_MIN),
         timeZone: TZ,
         attendees: [...new Set([email, attendee])],
-        notify: !silent,
+        notify: false,
         privateProps: { ...shared, board: "1" },
       });
       created.push(id);
@@ -580,6 +585,51 @@ const handler: Handler = async (event) => {
     operatorEmail ? [BOOKED_TAG, OPERATOR_TAG] : [BOOKED_TAG, NO_OPERATOR_TAG]
   );
 
+  /*
+    One email, not ten.
+
+    Google sends an invitation per event, so creating the series with
+    notifications on meant the operator's inbox took ten or twelve at once the
+    moment somebody picked an hour. That is the first thing a new client's
+    operator ever sees from us.
+
+    The events still carry them as an attendee, so the calls appear in their
+    calendar exactly as before. This is the single message that tells them what
+    just landed, with every date and the join link in one place. Sent to the
+    operator when there is one, since they are the one on every weekly call.
+  */
+  if (!silent) {
+    const list = dates
+      .map((d) => `<li>${dayLabel(d.date)}</li>`)
+      .concat(boards.map((d) => `<li>${dayLabel(d)}, Content Board</li>`))
+      .join("");
+
+    const target = operatorEmail ? operatorContactId : contactId;
+    if (target) {
+      const { sent, reason } = await sendEmail(
+        ghlToken,
+        target,
+        `Your ${total} calls are booked`,
+        [
+          `<p>${esc(operatorName || name)},</p>`,
+          `<p>The calls are in your calendar. Wednesdays at ${hourLabel(chosen)}, and the Content Board every four weeks on Friday at ${hourLabel(boardHour)}, Brisbane time.</p>`,
+          `<ol>${list}</ol>`,
+          zoom ? `<p>Same link every time: <a href="${zoom}">${zoom}</a></p>` : "",
+          `<p>Need to move one? Move it in the calendar and it stays in sync.</p>`,
+          `<p>Sean</p>`,
+        ].join("")
+      );
+
+      if (!sent) {
+        await slack(
+          `:warning: *${esc(name)} booked ${total} calls and nobody got the confirmation email.* ` +
+            `Reason: ${reason}. The calls are in the calendar, but ${esc(attendee)} has not been told. ` +
+            `<${contactUrl(contactId)}|Open in GHL>`
+        );
+      }
+    }
+  }
+
   if (!zoom) {
     await slack(
       `:rotating_light: *${esc(name)} just booked ${total} calls with no Zoom link.* ` +
@@ -600,7 +650,7 @@ const handler: Handler = async (event) => {
   return html(
     `<h1>Done, ${esc(name)}</h1>
      <p>Wednesdays at ${hourLabel(chosen)} and your board call every four weeks on Friday at ${hourLabel(boardHour)}, Brisbane time.
-        ${total} invitations are on their way to ${esc(attendee)}.</p>
+        All ${total} are in ${esc(attendee)}'s calendar, and one confirmation email is on its way.</p>
      <ol>${dates
        .map((d) => `<li>${dayLabel(d.date)}</li>`)
        .concat(boards.map((d) => `<li>${dayLabel(d)}, Content Board</li>`))
