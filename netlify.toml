@@ -64,6 +64,15 @@
 [functions."prep-nudge"]
   schedule = "0 23 * * *"
 
+# The second $5,000 is raised and finalised on day one, set to take the saved
+# card by itself. That is the agreement, and it is right that doing nothing
+# collects. But the day 30 checkpoint is meant to be a conversation, and a
+# conversation held after the card is debited is an apology instead. So: three
+# days notice, in Slack, with the one link that stops it. Reports only, moves
+# nothing. 09:00 Brisbane, silent when nobody is due.
+[functions."instalment-checkpoint"]
+  schedule = "0 23 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]

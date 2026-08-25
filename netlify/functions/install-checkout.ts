@@ -46,6 +46,17 @@ const handler: Handler = async (event) => {
   const amount = process.env.INSTALL_PAYMENT_1_CENTS;
   const token = process.env.GHL_TOKEN;
 
+  /*
+    Stated on the Stripe page, so read from the same variables that actually
+    raise the second invoice in verify-payment rather than typed as a literal.
+    A hardcoded "$5,000 in 30 days" would keep saying that after somebody
+    changed the figure, which is the worst kind of wrong: confident and stale.
+  */
+  const secondAmount = Number(process.env.INSTALL_PAYMENT_2_CENTS) || 0;
+  const secondDays = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
+  const money = (cents: number) =>
+    (cents / 100).toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 2 });
+
   if (!stripeKey || !amount) {
     return {
       statusCode: 200,
@@ -91,7 +102,16 @@ const handler: Handler = async (event) => {
       "line_items[0][quantity]": "1",
       "line_items[0][price_data][currency]": "aud",
       "line_items[0][price_data][unit_amount]": String(amount),
-      "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, first payment",
+      /*
+        Named and described so the two part structure is on the Stripe page
+        itself, not only in the terms they signed a moment earlier. Somebody
+        entering card details should not have to remember what they agreed to:
+        the commitment, the amount still to come, its timing, and the fact that
+        nothing follows it are all readable at the moment of paying.
+      */
+      "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, payment 1 of 2",
+      "line_items[0][price_data][product_data][description]":
+        `${money(Number(amount))} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
       "return_url": returnUrl(contactId ? String(contactId) : undefined),
       // Keeps the card usable for the second payment without asking again.
       "payment_intent_data[setup_future_usage]": "off_session",
