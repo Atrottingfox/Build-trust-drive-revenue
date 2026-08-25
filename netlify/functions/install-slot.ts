@@ -1,5 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { getContact, addTags, contactUrl, findOrCreateByEmail, sendEmail } from "./_ghl";
+import { FORM_URL } from "./_prep";
 import {
   SLOT_HOURS,
   BOARD_HOURS,
@@ -47,6 +48,9 @@ const REQUIRED_TAG = "install-signed";
 const BOOKED_TAG = "install-slot-booked";
 const OPERATOR_TAG = "install-operator-set";
 const NO_OPERATOR_TAG = "install-no-operator";
+
+/* Whose calendar these live on, and who is in the room. */
+const FOUNDER_EMAIL = process.env.FOUNDER_EMAIL || "sean@authorityengine.com.au";
 const OPERATOR_CONTACT_TAG = "media-operator";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -508,10 +512,19 @@ const handler: Handler = async (event) => {
   }
 
   const zoom = process.env.ZOOM_LINK || "";
+  /*
+    Everything needed to turn up, on the invitation itself.
+
+    The prep form is here for the same reason it is on Sean's hand made calls:
+    the call is worth more when it has been filled in, and the only moment
+    somebody reliably looks is when the reminder pops. A chase email two days
+    out is a second chance, not the first one.
+  */
   const body =
     "Sixty minutes on the 90 Day Install." +
     (operatorEmail ? "" : " Invitation currently goes to the founder, and moves to the operator once there is one.") +
-    (zoom ? `\n\nZoom: ${zoom}` : "");
+    (zoom ? `\n\nZoom: ${zoom}` : "") +
+    `\n\nFill this in before the call: ${FORM_URL}`;
 
   const shared = {
     client: contactId,
@@ -536,7 +549,10 @@ const handler: Handler = async (event) => {
         startLocal: toLocalIso(d.date, chosen),
         endLocal: toLocalIso(d.date, chosen, DURATION_MIN),
         timeZone: TZ,
-        attendees: [attendee],
+        /* Sean is the organiser, but being an explicit attendee is what puts
+           it in his own list and keeps the invitation honest about who is
+           actually in the room. */
+        attendees: [...new Set([FOUNDER_EMAIL, attendee])],
         /* Never true. Ten events with sendUpdates=all is ten invitation
            emails landing at once, which is what a client's first impression
            of the engagement used to be. The attendee is still on the event,
@@ -560,7 +576,7 @@ const handler: Handler = async (event) => {
         startLocal: toLocalIso(d, boardHour),
         endLocal: toLocalIso(d, boardHour, DURATION_MIN),
         timeZone: TZ,
-        attendees: [...new Set([email, attendee])],
+        attendees: [...new Set([FOUNDER_EMAIL, email, attendee])],
         notify: false,
         privateProps: { ...shared, board: "1" },
       });
