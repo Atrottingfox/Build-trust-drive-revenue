@@ -33,3 +33,17 @@ Newest entries at the top.
 ---
 
 
+
+## 2026-08-25T04:55Z · Stripe amounts dropped to $1 for testing
+**What:** CHECKOUT_AMOUNT_CENTS, INSTALL_PAYMENT_1_CENTS, INSTALL_PAYMENT_2_CENTS,
+INSTALL_AMOUNT_CENTS set 500000 -> 100 on authority-site, then redeployed.
+Verified live: Brand Day checkout and 90 Day Install first payment both return
+amount_total 100 aud.
+**Why:** End to end payment test of the 90 Day Install flow. Requested by Sean.
+**Audience:** authorityengine.com.au, CLIENT-FACING, live Stripe key (rk_live_).
+Any real buyer reaching these pages pays $1 until reverted.
+**Snapshot:** db-snapshots/stripe-amounts-20260825T1452.txt
+**Rollback:** netlify env:set <VAR> 500000 for all four, then
+`netlify deploy --prod --build`. Note: the env change does NOT take effect
+without a redeploy, confirmed during this change.
+**STATUS: NOT YET REVERTED.**

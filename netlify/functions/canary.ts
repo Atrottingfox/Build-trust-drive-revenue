@@ -92,6 +92,13 @@ const handler: Handler = async () => {
 
   const cleanUp = async () => {
     if (!contactId) return;
+    /* Confirm the record is ours before destroying it. Belt and braces next to
+       the `made.ok` guard: a canary must not be able to delete a real contact
+       even if the id it is holding turns out not to be the one it created. */
+    const check = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, { headers: h }).catch(() => null);
+    const owner = ((await check?.json().catch(() => ({})))?.contact?.email || "").toLowerCase();
+    if (owner !== CANARY_EMAIL) return;
+
     await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
       method: "DELETE",
       headers: h,
@@ -127,7 +134,9 @@ const handler: Handler = async () => {
       }),
     });
     const madeJson = await made.json().catch(() => ({}));
-    contactId = madeJson?.contact?.id || madeJson?.id || null;
+    /* Same reason as _health: a refused create can answer with the id of the
+       contact it collided with, and everything below tags then deletes it. */
+    contactId = made.ok ? (madeJson?.contact?.id || madeJson?.id || null) : null;
 
     if (!contactId) {
       await alarm("A contact could not be created", `GHL returned HTTP ${made.status}`);

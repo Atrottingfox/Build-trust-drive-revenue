@@ -148,7 +148,16 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
           body: JSON.stringify({ locationId, firstName: "ZZ", lastName: "Healthcheck", email: TEST_EMAIL, source: "health check" }),
         });
         const json = await res.json().catch(() => ({}));
-        createdId = json?.contact?.id || json?.id || null;
+        /*
+          Only trust an id from a create that actually succeeded.
+
+          A refused create still answers with a body, and when the refusal is a
+          duplicate that body carries the id of the contact it collided with.
+          Reading the id regardless meant the teardown below could tag and then
+          delete a real person, in the same minute, which is exactly what the
+          GHL audit log shows happening on 21 and 24 August.
+        */
+        createdId = res.ok ? (json?.contact?.id || json?.id || null) : null;
         add("Applications", "A contact can be created", res.ok && Boolean(createdId), true, res.ok ? undefined : `HTTP ${res.status}`);
       } catch (err) {
         add("Applications", "A contact can be created", false, true, String(err));
@@ -169,8 +178,28 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
         add("Applications", "A tag can be written (fires every workflow)", false, true, String(err));
       }
       try {
-        const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(createdId)}`, { method: "DELETE", headers: auth });
-        add("Applications", "Test contact cleaned up", res.ok, false, res.ok ? undefined : `HTTP ${res.status}`);
+        /*
+          Read the contact back and refuse to delete anything that is not the
+          test address. The id came from our own create a moment ago, so this
+          should always pass. It exists because when it does not, the cost is
+          somebody's real record, and a health check must never be the thing
+          that destroys the estate it is watching.
+        */
+        const check = await fetch(`${GHL_API}/contacts/${encodeURIComponent(createdId)}`, { headers: auth });
+        const owner = ((await check.json().catch(() => ({})))?.contact?.email || "").toLowerCase();
+
+        if (owner !== TEST_EMAIL) {
+          add(
+            "Applications",
+            "Test contact cleaned up",
+            false,
+            true,
+            `REFUSED: ${createdId} belongs to ${owner || "an unknown address"}, not the test contact. Nothing deleted.`
+          );
+        } else {
+          const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(createdId)}`, { method: "DELETE", headers: auth });
+          add("Applications", "Test contact cleaned up", res.ok, false, res.ok ? undefined : `HTTP ${res.status}`);
+        }
       } catch (err) {
         add("Applications", "Test contact cleaned up", false, false, String(err));
       }
@@ -630,8 +659,26 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
   /* The picker itself, which fails differently: it can be reachable while the
      calendar behind it is not. */
   try {
+    /*
+      Called with no contact id, so the correct answer is a refusal, not a 200.
+      Asserting res.ok here reported the picker as critically broken every hour
+      while it was working perfectly, which is worse than not checking at all:
+      an alarm that is always on is an alarm nobody reads.
+
+      A 400 carrying the guard's own words proves the function is reachable AND
+      that its validation still runs. A 5xx, a timeout, or a 200 to a request
+      that supplied no contact are the real failures.
+    */
     const res = await fetch(`${SITE}/slot`, { method: "GET" });
-    add("Install rhythm", "Slot picker answers", res.ok, true, res.ok ? undefined : `HTTP ${res.status}`);
+    const body = await res.text().catch(() => "");
+    const guardHeld = res.status === 400 && /Link not valid/i.test(body);
+    add(
+      "Install rhythm",
+      "Slot picker answers",
+      guardHeld,
+      true,
+      guardHeld ? undefined : `expected 400 "Link not valid", got HTTP ${res.status}`
+    );
   } catch (err) {
     add("Install rhythm", "Slot picker answers", false, true, String(err));
   }
