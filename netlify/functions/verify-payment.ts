@@ -54,13 +54,13 @@ async function scheduleSecondInstalment(
     Stripe return URL. Return URLs get refreshed, opened twice, and restored by
     browsers reopening tabs, so "called once" is not something to rely on.
 
-    The checkout session id is unique to one payment and never changes, so it
-    makes a stable idempotency key. Stripe returns the ORIGINAL object for a
-    repeated key rather than creating another, which means a refresh cannot
-    produce a second invoice item or a second invoice.
+    That protection used to be idempotency keys built from the session id. It
+    was the wrong instrument: Stripe caches the response for a key whether the
+    call succeeded or failed, so a single failure made every future attempt
+    replay that failure, and a replayed key returns an object that may since
+    have been deleted. Both happened here.
 
-    Suffixed per call because Stripe scopes a key to one endpoint, and reusing
-    the same string for the item and the invoice would collide.
+    The guard is on the data instead, below.
   */
 
   try {
