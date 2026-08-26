@@ -20,7 +20,7 @@ import { GHL_API, GHL_VERSION } from "./_ghl";
   Env:
     INSTALL_PAYMENT_1_CENTS   first payment, in cents
     INSTALL_PAYMENT_2_CENTS   second payment, used only to state the total here
-    INSTALL_PAYMENT_2_DAYS    days until the second falls due (default 31)
+    INSTALL_PAYMENT_2_DAYS    days until the second is charged (default 30)
 */
 
 const headers = {

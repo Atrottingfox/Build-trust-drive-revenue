@@ -30,7 +30,7 @@ const money = (cents: number, currency: string) =>
   (cents / 100).toLocaleString("en-AU", { style: "currency", currency: (currency || "aud").toUpperCase() });
 
 async function slack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     await fetch(url, {

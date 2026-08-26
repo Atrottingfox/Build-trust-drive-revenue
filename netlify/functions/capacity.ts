@@ -149,8 +149,8 @@ const handler: Handler = async (event) => {
   if (scheduled) {
     /* Silence unless something needs saying. A weekly alert that always fires
        stops being read by about the fourth week. */
-    if (report.warning && process.env.SLACK_WEBHOOK_URL) {
-      await fetch(process.env.SLACK_WEBHOOK_URL, {
+    if (report.warning && process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL) {
+      await fetch(process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

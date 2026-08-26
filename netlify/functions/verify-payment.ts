@@ -4,7 +4,7 @@ import { reconcile, getContact, sendEmail } from "./_ghl";
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
 async function slackAlert(text: string): Promise<void> {
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     await fetch(url, {
@@ -262,7 +262,7 @@ const handler: Handler = async (event) => {
           why a prep call had not appeared. A payment that cannot be attributed
           is the loudest thing this system can have to say.
         */
-        const webhook = process.env.SLACK_WEBHOOK_URL;
+        const webhook = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
         if (webhook) {
           await fetch(webhook, {
             method: "POST",
@@ -468,7 +468,7 @@ const handler: Handler = async (event) => {
     */
     const attached = Boolean(contactId) && tagged;
     if (!attached) {
-      const slack = process.env.SLACK_WEBHOOK_URL;
+      const slack = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
       if (slack) {
         const amount = ((session.amount_total || 0) / 100).toFixed(2);
         await fetch(slack, {

@@ -18,7 +18,7 @@ async function alert(checks: Check[]) {
   const failed = checks.filter((c) => !c.ok);
   const critical = failed.filter((c) => c.critical);
 
-  const webhook = process.env.SLACK_WEBHOOK_URL;
+  const webhook = process.env.SLACK_WEBHOOK_BROKEN || process.env.SLACK_WEBHOOK_URL;
   if (webhook) {
     const lines = [
       critical.length

@@ -49,7 +49,7 @@ const ALL_TAGS = [FIRST_TAG, FINAL_TAG];
 
 
 async function slack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url = process.env.SLACK_WEBHOOK_PREP || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     await fetch(url, {

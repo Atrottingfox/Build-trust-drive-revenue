@@ -167,7 +167,7 @@ const handler: Handler = async (event) => {
       Deliberately after the tagging and the date write: the alert reports what
       was actually recorded, not what was about to be attempted.
     */
-    const slack = process.env.SLACK_WEBHOOK_URL;
+    const slack = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
     if (slack) {
       const when = startTime
         ? new Date(startTime).toLocaleString("en-AU", {

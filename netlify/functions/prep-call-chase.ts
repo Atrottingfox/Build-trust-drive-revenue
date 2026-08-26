@@ -117,7 +117,7 @@ const handler: Handler = async () => {
     }
 
     if (flagged.length) {
-      const webhook = process.env.SLACK_WEBHOOK_URL;
+      const webhook = process.env.SLACK_WEBHOOK_PREP || process.env.SLACK_WEBHOOK_URL;
       if (webhook) {
         await fetch(webhook, {
           method: "POST",

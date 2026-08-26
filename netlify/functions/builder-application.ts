@@ -583,7 +583,7 @@ const handler: Handler = async (event) => {
     }
 
     // Send Slack notification
-    const slackWebhook = process.env.SLACK_WEBHOOK_URL;
+    const slackWebhook = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
     if (slackWebhook) {
       try {
         await fetch(slackWebhook, {

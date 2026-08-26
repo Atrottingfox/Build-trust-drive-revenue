@@ -33,7 +33,7 @@ import { accessToken, listInstallEvents, createEvent, deleteEvent, freeBusy, isF
 const ENDED_TAGS = ["client-ended", "churned", "install-complete"];
 
 async function slack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     await fetch(url, {

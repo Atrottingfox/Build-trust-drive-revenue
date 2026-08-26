@@ -12,10 +12,9 @@ import { GHL_API, GHL_VERSION, getContact, addTags, contactUrl } from "./_ghl";
 
   Without this the money moves on its own. verify-payment raises that invoice at
   the moment the first payment clears, with collection_method
-  charge_automatically and auto_advance true, and finalises it. Finalising is
-  what puts it on Stripe's schedule, so from day one it is a live receivable
-  that will debit the saved card on its due date whether anybody looks or not.
-  The only way to stop it is to void it before then.
+  charge_automatically and automatically_finalizes_at set to day 30. It sits as
+  a draft until then, and Stripe finalising it is what debits the saved card,
+  whether anybody looks or not. The only way to stop it is to void it first.
 
   Voiding is irreversible. A voided invoice cannot be reopened, only replaced by
   a new one, so this is deliberately a two step link: the GET shows who and how
@@ -56,7 +55,7 @@ const money = (cents: number, currency: string) =>
   `${(cents / 100).toLocaleString("en-AU", { style: "currency", currency: (currency || "aud").toUpperCase() })}`;
 
 async function slack(text: string) {
-  const url = process.env.SLACK_WEBHOOK_URL;
+  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
   try {
     await fetch(url, {

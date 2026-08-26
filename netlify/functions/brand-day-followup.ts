@@ -30,7 +30,7 @@ const handler: Handler = async () => {
   const locationId = process.env.GHL_LOCATION_ID;
   const dateFieldId = process.env.GHL_FIELD_BRAND_DAY_DATE;
   const secret = process.env.DECIDE_SECRET;
-  const webhook = process.env.SLACK_WEBHOOK_URL;
+  const webhook = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
 
   if (!token || !locationId || !dateFieldId || !secret || !webhook) {
     console.error(
