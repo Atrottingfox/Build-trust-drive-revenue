@@ -64,6 +64,7 @@ const Health = React.lazy(() => import('./pages/Health'));
 const Clients = React.lazy(() => import('./pages/Clients'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
+const Operations = React.lazy(() => import('./pages/Operations'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -147,6 +148,7 @@ export default function App() {
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
+          <Route path="/operations" element={<Operations />} />
           <Route path="/lock-in" element={<LockIn />} />
           <Route path="/lock-in/:contactId" element={<LockIn />} />
           <Route path="/booked" element={<Booked />} />
