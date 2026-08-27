@@ -145,8 +145,8 @@ describe("capacity", () => {
 
   it("reports an empty grid as fully available", () => {
     const c = capacity([], [], today);
-    expect(c.total).toBe(6);
-    expect(c.free).toBe(6);
+    expect(c.total).toBe(SLOT_HOURS.length);
+    expect(c.free).toBe(SLOT_HOURS.length);
     expect(c.freeHours).toEqual(SLOT_HOURS);
     expect(c.warning).toBeNull();
   });
@@ -154,7 +154,7 @@ describe("capacity", () => {
   it("ignores holdings that have already released", () => {
     const c = capacity([hold(10, "2026-01-01")], [], today);
     expect(c.held).toBe(0);
-    expect(c.free).toBe(6);
+    expect(c.free).toBe(SLOT_HOURS.length);
   });
 
   it("shouts when every Wednesday is held, and says when one frees", () => {
@@ -188,12 +188,18 @@ describe("capacity", () => {
     const c = capacity(gone, [], today);
     expect(c.onBoard).toBe(0);
     expect(c.freeBoardHours).toContain(10);
-    expect(c.free).toBe(6);
+    expect(c.free).toBe(SLOT_HOURS.length);
   });
 
   it("shouts on the trend, before the last slot goes", () => {
-    /* Four signings in the last eight weeks is 0.5 a week, under the ceiling. */
-    const steady = capacity([hold(10, "2026-11-04")], ["2026-07-01", "2026-07-15", "2026-08-01", "2026-08-15"], today);
+    /*
+      Two signings in eight weeks is 0.25 a week, comfortably under the
+      ceiling. It used to be four, which is 0.5, and that was under a six
+      hour ceiling of 0.545. Dropping 1pm for Billy's standing call took the
+      ceiling to 0.454, so the old figure now sits ABOVE it and the test was
+      asserting silence from a grid that should be shouting.
+    */
+    const steady = capacity([hold(10, "2026-11-04")], ["2026-07-01", "2026-08-01"], today);
     expect(steady.warning).toBeNull();
 
     /* Eight in eight weeks is 1.0 a week, well over it. */
@@ -205,10 +211,10 @@ describe("capacity", () => {
     expect(hot.warning).toContain("against a ceiling");
   });
 
-  it("puts the ceiling at six hours over eleven weeks", () => {
+  it("puts the ceiling at the offered hours over eleven weeks", () => {
     const c = capacity([], [], today);
-    expect(c.throughputPerWeek).toBeCloseTo(6 / 11, 5);
-    expect(c.throughputPerMonth).toBeCloseTo((6 / 11) * (52 / 12), 5);
+    expect(c.throughputPerWeek).toBeCloseTo(SLOT_HOURS.length / 11, 5);
+    expect(c.throughputPerMonth).toBeCloseTo((SLOT_HOURS.length / 11) * (52 / 12), 5);
   });
 });
 

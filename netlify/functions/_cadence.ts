@@ -39,14 +39,25 @@ export const TZ = "Australia/Brisbane";
 export const SLOT_WEEKDAY = 3;
 
 /*
-  Wednesday 10am to 6pm, less 2pm and 3pm which are already committed. Stated
-  as a list rather than a range with exclusions, because a list is what a person
-  can read and correct in five seconds.
+  Wednesday 10am to 6pm, less the three hours already committed to standing
+  client calls. Stated as a list rather than a range with exclusions, because a
+  list is what a person can read and correct in five seconds.
 
-  The picker also checks the real calendar, so an hour that quietly fills up
-  stops being offered without anyone editing this.
+    1pm  Billy, Geronimo
+    2pm  Jacob, Undeniable
+    3pm  Darcy, Alpha
+
+  1pm was offered until 2026-08-27 and should not have been. Only Jacob's call
+  is a recurring event on the calendar, so freeBusy could see his and not the
+  other two, and the picker would have sold Billy's hour to the next client who
+  booked, for eleven weeks.
+
+  This list is the belt. The braces is the calendar check below, which the
+  picker also runs, so an hour that quietly fills stops being offered without
+  anyone editing this. Once all three standing calls exist as recurring events,
+  the calendar alone is enough and these exclusions can go.
 */
-export const SLOT_HOURS = [10, 11, 12, 13, 16, 17];
+export const SLOT_HOURS = [10, 11, 12, 16, 17];
 
 /*
   How long after signing the first call can land. Two weeks, confirmed by Sean:
