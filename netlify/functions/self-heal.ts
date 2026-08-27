@@ -204,7 +204,7 @@ const handler: Handler = async () => {
   await healMissedDeliveries(repairs);
 
   if (repairs.length) {
-    const webhook = process.env.SLACK_WEBHOOK_BROKEN || process.env.SLACK_WEBHOOK_URL;
+    const webhook = process.env.SLACK_WEBHOOK_HEALTH || process.env.SLACK_WEBHOOK_URL;
     if (webhook) {
       const lines = [
         ":wrench: *The funnel repaired itself*",

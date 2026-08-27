@@ -54,7 +54,7 @@ const auth = (token: string) => ({
 });
 
 async function alarm(reason: string, detail: string) {
-  const webhook = process.env.SLACK_WEBHOOK_BROKEN || process.env.SLACK_WEBHOOK_URL;
+  const webhook = process.env.SLACK_WEBHOOK_HEALTH || process.env.SLACK_WEBHOOK_URL;
   if (webhook) {
     await fetch(webhook, {
       method: "POST",

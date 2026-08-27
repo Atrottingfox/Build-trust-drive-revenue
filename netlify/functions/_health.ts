@@ -110,8 +110,31 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
     );
   }
 
-  for (const name of ["GHL_TOKEN", "GHL_LOCATION_ID", "SLACK_WEBHOOK_URL", "NOTION_API_KEY", "DECIDE_SECRET"]) {
+  for (const name of ["GHL_TOKEN", "GHL_LOCATION_ID", "SLACK_WEBHOOK_URL", "NOTION_API_KEY", "DECIDE_SECRET", "STRIPE_EVENTS_SECRET"]) {
     add("Config", name, Boolean(process.env[name]), name !== "DECIDE_SECRET", process.env[name] ? "set" : "missing");
+  }
+
+  /*
+    Which alert lane each kind of message actually lands in.
+
+    Everything used to share one webhook, so a client booking, a health check
+    and a payment that created nothing all arrived in the same stream. A stream
+    like that gets muted, and then the message that mattered was delivered and
+    invisible at the same time.
+
+    Not critical: an unset lane falls back to the shared webhook, so nothing is
+    lost, it is just in with everything else. Reported so it is obvious which
+    ones are still sharing.
+  */
+  for (const lane of ["MONEY", "APPLICATIONS", "HEALTH", "BOOKINGS", "PREP"]) {
+    const own = Boolean(process.env[`SLACK_WEBHOOK_${lane}`]);
+    add(
+      "Alert routing",
+      lane.charAt(0) + lane.slice(1).toLowerCase(),
+      true,
+      false,
+      own ? "own channel" : process.env.SLACK_WEBHOOK_URL ? "sharing the default channel" : "nowhere to send"
+    );
   }
 
   /* ── The application path: the thing that actually broke ── */

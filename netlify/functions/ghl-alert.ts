@@ -87,7 +87,7 @@ const handler: Handler = async (event) => {
   }
 
   const secret = process.env.GHL_WEBHOOK_SECRET;
-  const slack = process.env.SLACK_WEBHOOK_BROKEN || process.env.SLACK_WEBHOOK_URL;
+  const slack = process.env.SLACK_WEBHOOK_APPLICATIONS || process.env.SLACK_WEBHOOK_URL;
   const token = process.env.GHL_TOKEN;
 
   if (!secret || !slack || !token) {
