@@ -73,6 +73,15 @@
 [functions."instalment-checkpoint"]
   schedule = "0 23 * * *"
 
+# Somebody could sign, pay $5,000, close the tab and never book a call, and
+# nothing anywhere noticed. The GHL workflow meant to chase them has a contact
+# parked in it rather than moving through it, so in practice nobody was chased.
+# Reports rather than emails: they already have the link twice over, and anyone
+# who has not used it in two days is stuck on something a person can fix.
+# 09:00 Brisbane, silent when everybody has booked.
+[functions."slot-chase"]
+  schedule = "0 23 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
