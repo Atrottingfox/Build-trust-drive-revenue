@@ -1320,9 +1320,9 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+        )}
 
-        {/* ─── 13 · NEXT MOVES ─── */}
+        {sec === 'next' && (
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">13 · Next moves</p>
           <H2>Where the four weeks start.</H2>
@@ -1338,7 +1338,6 @@ export default function GeronimoThePlan() {
                 { name: 'Billy', status: 'Test', detail: 'Sit in on the calls. Capture the Sophie weekly container. Flag good moments live rather than after the fact.' },
                 { name: 'Nate', status: 'Test', detail: 'Watch the pipeline for gaps as volume triples. Own the production standard on the new lanes.' },
                 { name: 'AC', status: 'Test', detail: 'Own podcast topics, episode frameworks, hooks and growth. Set editing guidelines. Bring micro niche topic sourcing into the ideation loop.' },
-                { name: 'Pete', status: 'Test', detail: 'Rework the testimonial and ad structure around association. Doza plus coach in frame before the client.' },
               ]}
             />
           </div>
@@ -1351,6 +1350,36 @@ export default function GeronimoThePlan() {
                 </p>
               </div>
             </Section>
+          </div>
+        </Wrap>
+        )}
+
+        {/* ═══════════════ INDEX ═══════════════ */}
+        <Divider />
+        <Wrap>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Index</p>
+          <H2>Everything in here.</H2>
+          <Note>Six tabs. Click anything to jump straight to it.</Note>
+          <div className="mt-8 grid gap-3 md:grid-cols-2">
+            {TABS.map((t) => (
+              <div key={t.id} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+                <p className="font-display text-[15px] font-extrabold text-white mb-3">{t.label}</p>
+                <div className="flex flex-col items-start gap-1.5">
+                  {t.sections.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => changeSec(s.id)}
+                      className={`text-left text-[14px] transition-colors ${
+                        sec === s.id ? 'text-blue-400 font-medium' : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </Wrap>
 
