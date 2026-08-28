@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { GHL_API, GHL_VERSION, addTags, getContact } from "./_ghl";
+import { GHL_API, GHL_VERSION, addTags, getContact, contactUrl } from "./_ghl";
 
 /*
   Records that a client opened their hub, and how far they have got.
@@ -57,8 +57,52 @@ const handler: Handler = async (event) => {
         contact?.name || ""
       : "";
 
+    /*
+      The first time somebody opens their link.
+
+      This was already recorded and nobody was told, so in practice it was not
+      recorded at all: it sat in a custom field that had to be gone looking for.
+      A $5,000 link being opened is the clearest buying signal in the funnel and
+      the best moment to say something, so it goes to Slack the once.
+
+      First open only. Every visit would turn the most useful message here into
+      the most ignored one, and the tag already makes that easy: it is added
+      once and checked before adding, so this branch runs a single time per
+      person no matter how often they come back.
+    */
     if (!tags.includes("hub-opened")) {
       await addTags(token, contactId, ["hub-opened"]);
+
+      const who =
+        [contact?.firstName, contact?.lastName].filter(Boolean).join(" ").trim() ||
+        contact?.email ||
+        contactId;
+
+      /* Where they are matters as much as that they looked. Someone opening it
+         a second week running having never paid is a different conversation
+         from someone opening it an hour after you sent it. */
+      const state = tags.includes("brand-day-paid")
+        ? "They have already paid, so this is them coming back."
+        : "They have not paid yet.";
+
+      const url = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
+      if (url) {
+        try {
+          await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: [
+                `:eyes: *${who} opened their link.*`,
+                state,
+                `<${contactUrl(contactId)}|Open them in GoHighLevel>`,
+              ].join("\n"),
+            }),
+          });
+        } catch {
+          /* An alert must never cost somebody their page. */
+        }
+      }
     }
 
     const lastSeenField = process.env.GHL_FIELD_HUB_LAST_SEEN;
