@@ -94,15 +94,11 @@ const BEFORE_WE_MEET = [
 const LEAVE_WITH_DETAIL = [
   {
     name: 'Demand Bottleneck Snapshot',
-    body: 'We score you out of five on the four levers that move a stranger to a sale, Clarity, Visibility, Authority, Quality. Then we name the one everything else sits downstream of, and what it takes to move it two points in a day.',
-  },
-  {
-    name: 'Positioning, perspective and personality',
-    body: 'We start big and dial all three tight into one message, so somebody landing on your profile can see the outcome you deliver and whether it is for them.',
+    body: 'We score your business on the four levers that move a stranger to a sale, Clarity, Visibility, Authority, Quality, and surface the single biggest demand bottleneck stealing the most revenue.',
   },
   {
     name: 'Buying Belief Map',
-    body: 'Engineer the key beliefs your ICP must hold about their problem, your solution, and you before they buy, and where these are installed into your content. Content is engineering beliefs.',
+    body: 'Engineer the key beliefs your ICP must hold about their problem, your solution, and you before they buy, and where these are installed into your content.',
   },
   {
     name: 'Your Brand Demand Workbook',
@@ -111,14 +107,6 @@ const LEAVE_WITH_DETAIL = [
   {
     name: 'Core Trust Assets',
     body: 'We map the highest leverage assets required for ideal prospects to turn into buyers.',
-  },
-  {
-    name: 'The formats that suit how you actually work',
-    body: 'Most founders try to create when they should be capturing. The good stuff is already in your head and it comes out when a camera is on. We pick the formats that get it out of you, and the environments that manufacture them.',
-  },
-  {
-    name: 'Your production line',
-    body: 'Every step from idea to published, who owns it, and what good looks like at each one. Written down, so one person leaving does not stall the whole thing and approval is a decision rather than a feeling.',
   },
   {
     name: 'A concrete 30 day demand plan',
@@ -251,8 +239,6 @@ export default function LockIn() {
   const [paid, setPaid] = useState(false);
   const [checkoutSession, setCheckoutSession] = useState<string | null>(null);
   const [booked, setBooked] = useState(false);
-  /* Already had their prep call, so the confirmation must not ask again. */
-  const [prepBooked, setPrepBooked] = useState(false);
   const [bookedAt, setBookedAt] = useState<string | null>(null);
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
@@ -405,8 +391,6 @@ export default function LockIn() {
 
           if (d.brandDayBooked) setBooked(true);
           else if (!justPaid) setBooked(false);
-
-          setPrepBooked(Boolean(d.prepBooked));
 
           if (d.name || d.email) setPrefill({ name: d.name || '', email: d.email || '' });
         })
@@ -675,11 +659,11 @@ export default function LockIn() {
               </p>
               <h2 className="font-display text-2xl text-white mb-3">Check your inbox</h2>
               <p className="text-zinc-400 leading-relaxed">
-                {prepBooked
-                  ? 'Your confirmation and invoice are on their way. We have already had the conversation, so there is nothing else to book. I will come back to you with the prep doc before the Day.'
-                  : 'Your confirmation and invoice are on their way. There is one thing left after that: a twenty minute prep call, so I turn up already knowing exactly what we need to attack.'}
+                Your confirmation and invoice are on their way. There is one thing left after
+                that: a twenty minute prep call, so I turn up already knowing exactly what we
+                need to attack.
               </p>
-              {contactId && !prepBooked && (
+              {contactId && (
                 <a
                   href={`/prep?c=${encodeURIComponent(contactId)}`}
                   className="inline-flex items-center gap-2 mt-6 bg-white text-black px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
@@ -732,7 +716,7 @@ export default function LockIn() {
                   */}
                   {paid && !booked ? Math.max(0, days.remaining - 1) : days.remaining}
                 </span>
-                Days left at $5,000 AUD
+                of {days.total} Days left at $5,000 AUD
               </p>
               <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
             </div>

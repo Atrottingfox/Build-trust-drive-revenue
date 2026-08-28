@@ -100,13 +100,6 @@ const handler: Handler = async (event) => {
         */
         brandDayPaid: tags.includes("brand-day-paid"),
         brandDayBooked: tags.includes("brand-day-booked"),
-        /*
-          Somebody closed on a call has already had the conversation the prep
-          call exists to have. Asking them to book it reads as though nobody
-          was listening, so the confirmation page checks this and drops the
-          step rather than showing it to everyone.
-        */
-        prepBooked: tags.includes("prep-call-booked"),
         name: fullName,
         email: hasPaid ? contact?.email || "" : "",
       }),
