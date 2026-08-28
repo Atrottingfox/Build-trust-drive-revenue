@@ -128,7 +128,7 @@ const LANES: Lane[] = [
     who: 'Ryan',
     count: '3',
     lane: 'Show and tell with the tool. Mystery shop. Coaching call Q&A.',
-    note: 'Expertise is tool set and skill set. Clients love his passion. Better with someone directing than alone. Gold Coast based, so a monthly two hour shoot plus office hours capture on Fridays.',
+    note: 'Expertise is tool set and skill set. Clients love his passion. Better with someone directing than alone. A monthly two hour shoot plus office hours capture on Fridays.',
   },
   {
     who: 'Sophie',
@@ -145,7 +145,7 @@ const LANES: Lane[] = [
   {
     who: 'Freelance shooter',
     count: '-',
-    lane: 'Two hours, once or twice a month, Gold Coast.',
+    lane: 'Two hours, once or twice a month.',
     note: 'Turns up for the Ryan call block, captures the Q&A, picks the good questions live, then shoots two mystery shops in the same visit. Produces, exports, sends back.',
   },
 ];
@@ -334,7 +334,7 @@ const WEEKS: Week[] = [
       { who: 'Ryan', job: 'Bring three things you are excited about to Tuesday, for show and tell. Flag your monthly office visit dates.' },
       { who: 'Sophie', job: 'Nominate one weekly office hours block as your capture container. You are doing the call anyway.' },
       { who: 'Billy', job: 'Sit in on the calls. Flag the good moments live, at the source, rather than hunting for them afterwards.' },
-      { who: 'Strategist', job: 'Turn the board into stencils, one per format. Source a freelance shooter on the Gold Coast.' },
+      { who: 'Strategist', job: 'Turn the board into stencils, one per format. Source a freelance shooter.' },
     ],
     close: 'Thursday shoots for week 2. Never for Monday.',
   },
@@ -360,7 +360,7 @@ const WEEKS: Week[] = [
     headline: 'Hold ten. Re-cut to strengths.',
     frame: 'Two weeks in it is obvious who is better at what. Reallocate slots, then start testing the things we deliberately left open.',
     jobs: [
-      { who: 'Head of content', job: 'Reallocate the ten to strengths. Set dress the two Gold Coast office rooms.' },
+      { who: 'Head of content', job: 'Reallocate the ten to strengths.' },
       { who: 'Strategist + Doza', job: 'Hook test. Five trial reels on Under Management before a single episode gets built.' },
       { who: 'Ryan', job: 'Freelance shooter visit. Two hours. Q&A capture plus two mystery shops in the same trip.' },
       { who: 'Sophie', job: 'Run the pop quiz against the mystery shop. Are they different enough to run both.' },
@@ -1301,7 +1301,7 @@ export default function GeronimoThePlan() {
                 items={[
                   <><b className="text-white font-semibold">The diagnosis.</b> Clips underperform. Unfiltered got treated as unedited and un engineered. We shoot a whole 45 to 60 minute episode in one run assuming everything said is usable. When Doza is interviewing, the value comes from the guest and the usable content drops.</>,
                   <><b className="text-white font-semibold">The Dane podcast reference.</b> A collaborative pre call with the producer. If you were giving a TED talk, what would it be about. A live document with must have questions per section, model answers, and follow up prompts. Live directing during the record. Deliberate alley oops, because a guest who feels great posts the episode themselves.</>,
-                  <><b className="text-white font-semibold">The Gold Coast sessions reference.</b> We stopped, named the topic, and went again. Close to the best thing that has happened to the format. Hooks were built in advance rather than hunted for afterwards, and the clips worked because the questions were already in demand.</>,
+                  <><b className="text-white font-semibold">The stop and retake sessions.</b> We stopped, named the topic, and went again. Close to the best thing that has happened to the format. Hooks were built in advance rather than hunted for afterwards, and the clips worked because the questions were already in demand.</>,
                   <><b className="text-white font-semibold">Guest categories.</b> Pure value, which builds our authority directly, against audience leverage, someone our people already follow. Also industry experts with a report or trend data, adjacent service providers where studio owners already spend money, and internal episodes on our own frameworks.</>,
                   <><b className="text-white font-semibold">Brokers especially.</b> Nobody talks about it and everyone is interested. Can be 20 to 30 minutes. Sample hook: you have sold over $100 million in businesses, what are the mistakes every gym owner makes.</>,
                   <><b className="text-white font-semibold">Nobody owns the central podcast seat for this industry.</b> That is the opening. Build the ideal guest list and let one person own the growth of it the way a media buyer owns spend.</>,
@@ -1339,9 +1339,9 @@ export default function GeronimoThePlan() {
                 items={[
                   'Decide what every set must contain so a viewer immediately clocks it as ours. A specific artist, a wallpaper, a repeated object.',
                   'Depth is what separates a good set from a bad one. Shelving, something behind the screens, never a blank wall. Elevated, not grand.',
-                  'Emulate the current room in the two spare offices at the Gold Coast site rather than hunting for a new space. Two set rooms means two people can run calls at once.',
+                  'Two set rooms means two people can run calls at once.',
                   'Two cameras wherever possible for Q&A and coaching calls. One close, one wide, cut between them.',
-                  'A small media wall or screen. Hard to source at a size that fits the offices, still on the list.',
+                  'A small media wall or screen. Still on the list.',
                   'Desk clamp with a basic light. That plus a screen is most of what anyone needs.',
                   'A teleprompter unit to fix eyeline. Right now coaches look off to the side and lose the viewer.',
                   'A standard travel kit for coaches at home. No visible bedrooms, no virtual backgrounds. Warm, consistent colour so footage cuts together.',
@@ -1420,7 +1420,6 @@ export default function GeronimoThePlan() {
                 'Carousels get outsourced with strict guidelines, not made in house.',
                 'Proof content starts fresh rather than continuing the inconsistent text format.',
                 'Podcast episodes get engineered. Prep, live document, live directing, stop and retake.',
-                'Two office rooms at the Gold Coast site get set dressed to match the current room.',
                 'A freelance shooter comes in for Ryan. Roughly two hours, once or twice a month.',
                 'The 30 day KPI is consistency of output, not a viral hit.',
               ]}
@@ -1487,7 +1486,7 @@ export default function GeronimoThePlan() {
                     { who: 'Ryan', role: 'Coach', wk: '3', owns: 'Show and tell ×1, coaching ×1, mystery shop ×1. Brings three things he is excited about to Tuesday. Flags his monthly office visit dates.' },
                     { who: 'Sophie', role: 'Coach', wk: '3', owns: 'Coaching ×1, direct to cam ×1, pop quiz ×1. Brings three beliefs to break. Nominates one office hours block as the capture container.' },
                     { who: 'Operator', role: 'Shooter', wk: '-', owns: 'Turns up, shoots, exports and sends back. Two cameras where possible. Nothing lands on the team.' },
-                    { who: 'Strategist', role: 'External', wk: '-', owns: 'Stencils per format. Weekly session with Doza on hooks and formats for the first month. Sources the Gold Coast shooter.' },
+                    { who: 'Strategist', role: 'External', wk: '-', owns: 'Stencils per format. Weekly session with Doza on hooks and formats for the first month. Sources the freelance shooter.' },
                   ].map((r) => (
                     <tr key={r.who} className="border-t border-zinc-800/70 align-top">
                       <td className="px-4 py-4 font-display text-[15px] font-extrabold text-white whitespace-nowrap">{r.who}</td>
