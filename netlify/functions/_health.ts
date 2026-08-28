@@ -59,22 +59,15 @@ const RETIRED: Record<string, string> = {
   "Install Slot Reminder": "slot-chase",
 };
 
-/*
-  The other half of the ones that are not retired.
 
-  The architecture is deliberate: code writes a tag, GoHighLevel sends the
-  email. That keeps the copy somewhere Sean can edit without a deploy. It also
-  means a draft workflow is not an idle workflow: the tagging half is already
-  running against real contacts, and every one of them is landing on a tag that
-  nothing reads.
-
-  So the alert names the function that is already doing its half, because "this
-  never runs" reads like something nobody needs.
-*/
-const WAITING_ON: Record<string, string> = {
-  "Prep Doc Chase": "prep-nudge",
-  "Prep Final Call": "prep-call-chase",
-  "No Operator": "install-slot",
+/* What each unbuilt workflow is for, so the dashboard is worth reading when
+   somebody does go looking. Two chases and one upsell: a client who books their
+   install naming nobody to run their content is the qualified lead for the
+   Operator Intensive, and install-slot has already tagged them. */
+const DRAFT_PURPOSE: Record<string, string> = {
+  "Prep Doc Chase": "would send the Content review form to prep-not-submitted",
+  "Prep Final Call": "would chase no-prep-call-booked to book",
+  "No Operator": "would offer the Operator Intensive to install-no-operator",
 };
 
 const ghlAuth = (token: string) => ({
@@ -521,31 +514,37 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
           /* An abandoned "New Workflow : 1786…" is clutter, not an outage. */
           const junk = /^New Workflow\s*:/i.test(name);
           const published = String(f?.status || "").toLowerCase() === "published";
-          const replacedBy = RETIRED[name];
-
           /*
-            A workflow whose job moved into code is not a failure, and reporting
-            it as one buries the ones that are. It is still worth a line: an
-            unpublished workflow sitting in the account is a thing somebody will
-            eventually try to fix, and the useful answer is what replaced it.
+            A draft is not a failure.
+
+            This check was born from four workflows sitting in Draft for a week
+            while everybody assumed they were sending. That was worth an alarm
+            once. It is not worth one every hour forever: a draft somebody has
+            seen and not published is a decision, not an outage, and an alert
+            that fires on a known decision teaches people to skim the section
+            the real failures live in.
+
+            So drafts report as a line on the dashboard and never as a failure.
+            Nothing here can page anybody. What CAN still fail is the list being
+            unreadable, which means the token or the account is wrong, and that
+            is a real outage kept above.
           */
-          if (replacedBy && !published) {
-            add("Workflows", name, true, false, `retired, ${replacedBy} does this now. Safe to delete.`);
+          if (published) {
+            add("Workflows", name, true, false, "published");
             continue;
           }
 
+          const replacedBy = RETIRED[name];
           add(
             "Workflows",
             name,
-            published || junk,
-            !junk,
-            published
-              ? "published"
-              : junk
-                ? "draft, but it is an empty stub. Delete it."
-                : WAITING_ON[name]
-                  ? `DRAFT — ${WAITING_ON[name]} is tagging contacts for this and nothing is picking them up`
-                  : "DRAFT — this never runs"
+            true,
+            false,
+            junk
+              ? "empty stub, safe to delete"
+              : replacedBy
+                ? `retired, ${replacedBy} does this now. Safe to delete.`
+                : `draft, not built yet${DRAFT_PURPOSE[name] ? `. ${DRAFT_PURPOSE[name]}` : ""}`
           );
         }
       } else {

@@ -155,12 +155,6 @@ const LANES: Lane[] = [
     note: 'Sits in on the calls with Doza. The stuff between calls is where the content ideas come from. Joins the weekly media meeting.',
   },
   {
-    who: 'Pete',
-    count: '-',
-    lane: 'Ads and testimonial structure.',
-    note: 'Co owns the ad and testimonial thinking with the head of content. Recent launch performed strongly with no pitch. Replay running three days at $600 a day, tracking toward roughly $10k profit before the charity contribution.',
-  },
-  {
     who: 'AC',
     count: '-',
     lane: 'Podcast ownership. Creative connector.',
@@ -232,11 +226,31 @@ type TabDef = { id: string; label: string; blurb: string; sections: Array<{ id: 
 
 const TABS: TabDef[] = [
   {
+    id: 'start',
+    label: 'Start here',
+    blurb: 'Four weeks, one job each. Find your name, do your line, come back. The ramp from five to ten is deliberate.',
+    sections: [
+      { id: 'w1', label: 'Week 1' },
+      { id: 'w2', label: 'Week 2' },
+      { id: 'w3', label: 'Week 3' },
+      { id: 'w4', label: 'Week 4' },
+    ],
+  },
+  {
+    id: 'diagnosis',
+    label: 'Diagnosis',
+    blurb: 'Self rated in the room, out of five. The first four run in sequence, each one downstream of the last. This is the frame for everything else.',
+    sections: [
+      { id: 'scores', label: 'The scores' },
+      { id: 'order', label: 'Why the order' },
+      { id: 'today', label: 'Today' },
+    ],
+  },
+  {
     id: 'brand',
     label: 'Brand',
     blurb: 'The two brands and the job each one does. What is working, what is hard, and the principles underneath every format decision.',
     sections: [
-      { id: 'today', label: 'Today' },
       { id: 'brands', label: 'The Brands' },
       { id: 'workhard', label: 'Work / Hard' },
       { id: 'principles', label: 'Principles' },
@@ -255,12 +269,24 @@ const TABS: TabDef[] = [
   {
     id: 'production',
     label: 'Production',
-    blurb: 'Ten a week across three people. The lanes, the weekly rhythm, and the four assets that sit outside the ten and need their own decisions.',
+    blurb: 'Ten a week across three people. The schedule off the board, the lanes, the weekly rhythm, and the assets that sit outside the ten.',
     sections: [
+      { id: 'schedule', label: 'The schedule' },
       { id: 'cadence', label: 'Ten a week' },
       { id: 'lanes', label: 'Lanes' },
       { id: 'rhythm', label: 'Rhythm' },
       { id: 'assets', label: 'Assets' },
+    ],
+  },
+  {
+    id: 'commit',
+    label: 'Commit',
+    blurb: 'What is locked for four weeks, what is deliberately still open, what could quietly kill it, and who owns what from Monday.',
+    sections: [
+      { id: 'locked', label: 'Locked' },
+      { id: 'open', label: 'Open' },
+      { id: 'risks', label: 'Risks' },
+      { id: 'next', label: 'Next moves' },
     ],
   },
 ];
@@ -278,15 +304,15 @@ function scrollToNav() {
 
 function usePlanNav() {
   const [sec, setSec] = React.useState<string>(() => {
-    if (typeof window === 'undefined') return 'today';
+    if (typeof window === 'undefined') return 'w1';
     const s = new URLSearchParams(window.location.search).get('s');
     if (s && SECTION_TAB[s]) return s;
     const t = new URLSearchParams(window.location.search).get('t');
     const found = TABS.find((x) => x.id === t);
-    return found ? found.sections[0].id : 'today';
+    return found ? found.sections[0].id : 'w1';
   });
 
-  const tab = SECTION_TAB[sec] ?? 'brand';
+  const tab = SECTION_TAB[sec] ?? 'start';
 
   const write = React.useCallback((nextSec: string) => {
     setSec(nextSec);
@@ -350,9 +376,8 @@ const WEEKS: Week[] = [
       { who: 'Doza', job: 'Four pieces. Two direct to camera, one with a visual behind and one without. Plus a series episode.' },
       { who: 'Ryan', job: 'Three pieces. Show and tell with the tool, a mystery shop, and a coaching call Q&A.' },
       { who: 'Sophie', job: 'Three pieces. Direct to camera on belief and reframes, a pop quiz, and a coaching call Q&A.' },
-      { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Get AC contracted and onboarded with real context.' },
+      { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Get AC contracted and onboarded with real context. Rework the testimonial and ad structure around association, Doza plus coach in frame before the client.' },
       { who: 'Strategist', job: 'Weekly session with Doza on formats and hooks, so live directing moves in house.' },
-      { who: 'Pete', job: 'Rework the testimonial and ad structure around association. Doza plus coach in frame before the client.' },
     ],
     close: 'A one week buffer now exists between shoot and publish. Target two.',
   },
@@ -389,8 +414,7 @@ const WEEKS: Week[] = [
   },
 ];
 
-function FourWeeks({ onJump }: { onJump: (sec: string) => void }) {
-  const [wk, setWk] = React.useState('w1');
+function FourWeeks({ wk, onWeek, onJump }: { wk: string; onWeek: (id: string) => void; onJump: (sec: string) => void }) {
   const week = WEEKS.find((w) => w.id === wk) ?? WEEKS[0];
 
   return (
@@ -414,7 +438,7 @@ function FourWeeks({ onJump }: { onJump: (sec: string) => void }) {
                   <button
                     key={w.id}
                     type="button"
-                    onClick={() => setWk(w.id)}
+                    onClick={() => onWeek(w.id)}
                     className={`rounded-xl border px-3 py-3 text-left transition-colors ${
                       on ? 'border-blue-500/50 bg-blue-500/10' : 'border-zinc-800 bg-base/50 hover:border-zinc-700'
                     }`}
@@ -460,6 +484,122 @@ function FourWeeks({ onJump }: { onJump: (sec: string) => void }) {
         </Section>
       </div>
     </section>
+  );
+}
+
+// ─── The weekly schedule, off the board ──────────────────────────────────
+
+type Kind = 'directcam' | 'mystery' | 'popquiz' | 'show' | 'series' | 'coaching';
+
+const KIND: Record<Kind, { label: string; dot: string; text: string; count: number; note: string }> = {
+  directcam: {
+    label: 'Direct to camera',
+    dot: 'bg-orange-400',
+    text: 'text-orange-300',
+    count: 3,
+    note: 'Handheld with a little motion, three sentences at a time. One with a visual behind the head, one without.',
+  },
+  mystery: {
+    label: 'Mystery shop',
+    dot: 'bg-yellow-300',
+    text: 'text-yellow-200',
+    count: 2,
+    note: 'Call a studio and shop them live. Zero setup, anyone can run it, batch it into whatever shoot is already happening.',
+  },
+  popquiz: {
+    label: 'Pop quiz',
+    dot: 'bg-sky-400',
+    text: 'text-sky-300',
+    count: 1,
+    note: 'Call our own clients and their managers and quiz them on KPIs and standards. What it signals is standards.',
+  },
+  show: {
+    label: 'Show',
+    dot: 'bg-rose-400',
+    text: 'text-rose-300',
+    count: 1,
+    note: 'Walk through a tool live. Light and something genuinely happening on screen. What it is, what it does for you, how to use it, why it is different.',
+  },
+  series: {
+    label: 'Series',
+    dot: 'bg-emerald-400',
+    text: 'text-emerald-300',
+    count: 1,
+    note: 'The flagship episode. 20 studios to a million dollars, fed by the new 12 week room. Doza fronts it.',
+  },
+  coaching: {
+    label: 'Coaching',
+    dot: 'bg-zinc-300',
+    text: 'text-zinc-200',
+    count: 2,
+    note: 'Captured off a call that is happening anyway. Repeat the question, set the frame, then answer. Two cameras where possible.',
+  },
+};
+
+const WHO: Record<string, { mark: string; total: number }> = {
+  Doza: { mark: '✕', total: 4 },
+  Ryan: { mark: '△', total: 3 },
+  Sophie: { mark: '○', total: 3 },
+};
+
+type Slot = { who: keyof typeof WHO; kind: Kind };
+
+const SCHEDULE: Array<{ day: string; slots: Slot[] }> = [
+  { day: 'Mon', slots: [{ who: 'Doza', kind: 'directcam' }, { who: 'Sophie', kind: 'coaching' }] },
+  { day: 'Tue', slots: [{ who: 'Ryan', kind: 'mystery' }, { who: 'Doza', kind: 'directcam' }] },
+  { day: 'Wed', slots: [{ who: 'Sophie', kind: 'directcam' }, { who: 'Ryan', kind: 'coaching' }] },
+  { day: 'Thu', slots: [{ who: 'Doza', kind: 'series' }, { who: 'Sophie', kind: 'popquiz' }] },
+  { day: 'Fri', slots: [{ who: 'Doza', kind: 'mystery' }, { who: 'Ryan', kind: 'show' }] },
+];
+
+function ScheduleGrid() {
+  return (
+    <div className="overflow-x-auto -mx-1 px-1">
+      <div className="grid grid-cols-5 gap-2 min-w-[34rem]">
+        {SCHEDULE.map((d) => (
+          <div key={d.day} className="rounded-xl border border-zinc-800 bg-elevated/40 overflow-hidden">
+            <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 px-3 py-2.5 border-b border-zinc-800 bg-base/40">
+              {d.day}
+            </p>
+            <div className="p-2.5 space-y-2">
+              {d.slots.map((s, i) => {
+                const k = KIND[s.kind];
+                return (
+                  <div key={i} className="rounded-lg bg-base/60 px-3 py-2.5">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${k.dot}`} />
+                      <span className="font-display text-[13px] font-extrabold text-white">{s.who}</span>
+                      <span className="text-zinc-600 text-[12px] ml-auto">{WHO[s.who].mark}</span>
+                    </div>
+                    <p className={`text-[12px] leading-snug font-medium ${k.text}`}>{k.label}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ScheduleLegend() {
+  return (
+    <div className="grid gap-2.5 md:grid-cols-2">
+      {(Object.keys(KIND) as Kind[]).map((id) => {
+        const k = KIND[id];
+        return (
+          <div key={id} className="rounded-xl border border-zinc-800 bg-elevated/40 p-4">
+            <div className="flex items-center gap-2.5 mb-2">
+              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${k.dot}`} />
+              <p className="font-display text-[14px] font-extrabold text-white">{k.label}</p>
+              <span className="ml-auto text-zinc-500 text-[12px] tabular-nums">×{k.count}</span>
+            </div>
+            <p className="text-zinc-400 text-[13px] leading-relaxed">{k.note}</p>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -509,44 +649,8 @@ export default function GeronimoThePlan() {
           backHref="/geronimo"
           backLabel="Geronimo"
         />
-        <Divider />
-
-        {/* ─── PINNED · START HERE ─── */}
-        <FourWeeks onJump={changeSec} />
-        <Divider />
-
-        {/* ─── PINNED · THE DIAGNOSIS ─── */}
-        <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The diagnosis</p>
-          <H2>The bottleneck scores.</H2>
-          <Note>Self rated in the room, out of five. The first four run in sequence, each one downstream of the last. This is the frame for everything in the three tabs below.</Note>
-          <div className="mt-8">
-            <Scores items={SCORES} />
-          </div>
-          <div className="mt-10">
-            <Block label="Why the order matters">
-              <BulletList
-                items={[
-                  <><b className="text-white font-semibold">Clarity is first contact.</b> If they cannot tell who it is for and what it is against, they bounce, and everything downstream is damaged.</>,
-                  <><b className="text-white font-semibold">Visibility only pays off once clarity is up.</b> Ramp reach on an unclear profile and you show more people something confusing.</>,
-                  <><b className="text-white font-semibold">Authority answers "is this guy legit and different".</b> That is frameworks, principles, named mechanisms.</>,
-                  <><b className="text-white font-semibold">Quality is the last mile.</b> With clarity, visibility and authority in place, the right assets compress trust and the lead converts.</>,
-                ]}
-              />
-            </Block>
-            <Block label="The honest read from the room">
-              <BulletList
-                items={[
-                  'Audience reaction to TGA today: excited and curious when things are in motion. Underwhelmed and confused the rest of the time.',
-                  'Clients are not paying us to be as good as they are. They are paying us to be bigger.',
-                ]}
-              />
-            </Block>
-          </div>
-        </Wrap>
-
-        {/* ─── STICKY NAV · TWO LEVELS ─── */}
-        <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/90 backdrop-blur-md">
+        {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
+        <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/95 backdrop-blur-md">
           <div className="max-w-4xl mx-auto px-6 lg:px-8 py-4 space-y-3">
             <div className="-mb-10">
               <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
@@ -562,7 +666,49 @@ export default function GeronimoThePlan() {
         </Wrap>
         <Divider />
 
-        {/* ═══════════════ BRAND ═══════════════ */}
+        {/* ═══════════════ START HERE ═══════════════ */}
+        {tab === 'start' && <FourWeeks wk={sec} onWeek={changeSec} onJump={changeSec} />}
+
+        {/* ═══════════════ DIAGNOSIS ═══════════════ */}
+        {sec === 'scores' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The scores</p>
+            <H2>The bottleneck scores.</H2>
+            <Note>Self rated in the room, out of five.</Note>
+            <div className="mt-8">
+              <Scores items={SCORES} />
+            </div>
+            <div className="mt-10">
+              <Block label="The honest read from the room">
+                <BulletList
+                  items={[
+                    'Audience reaction to TGA today: excited and curious when things are in motion. Underwhelmed and confused the rest of the time.',
+                    'Clients are not paying us to be as good as they are. They are paying us to be bigger.',
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'order' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Why the order</p>
+            <H2>Each one is downstream of the last.</H2>
+            <Note>This is why clarity gets fixed before anyone spends a dollar on reach.</Note>
+            <div className="mt-8">
+              <BulletList
+                items={[
+                  <><b className="text-white font-semibold">Clarity is first contact.</b> If they cannot tell who it is for and what it is against, they bounce, and everything downstream is damaged.</>,
+                  <><b className="text-white font-semibold">Visibility only pays off once clarity is up.</b> Ramp reach on an unclear profile and you show more people something confusing.</>,
+                  <><b className="text-white font-semibold">Authority answers "is this guy legit and different".</b> That is frameworks, principles, named mechanisms.</>,
+                  <><b className="text-white font-semibold">Quality is the last mile.</b> With clarity, visibility and authority in place, the right assets compress trust and the lead converts.</>,
+                ]}
+              />
+            </div>
+          </Wrap>
+        )}
+
         {sec === 'today' && (
           <>
         {/* ─── 1 · THE NUMBERS TODAY ─── */}
@@ -901,6 +1047,31 @@ export default function GeronimoThePlan() {
         )}
 
         {/* ═══════════════ PRODUCTION ═══════════════ */}
+        {sec === 'schedule' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The schedule</p>
+            <H2>The week, off the board.</H2>
+            <Note>Two slots a day, Monday to Friday. Ten pieces. Colour is the content type, and the name is who fronts it.</Note>
+            <div className="mt-8">
+              <ScheduleGrid />
+            </div>
+            <div className="mt-10">
+              <Block label="The six types">
+                <ScheduleLegend />
+              </Block>
+              <Block label="What each person carries">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Doza · 4.</b> Direct to cam ×2, bringing ideas from calls. Mystery ×1. Series ×1.</>,
+                    <><b className="text-white font-semibold">Ryan · 3.</b> Show and tell ×1, bringing three per week. Coaching ×1, batched. Mystery shop ×1.</>,
+                    <><b className="text-white font-semibold">Sophie · 3.</b> Coaching ×1. Direct to cam ×1, bringing three ideas for beliefs to break. Pop quiz ×1, with Billy.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
         {sec === 'cadence' && (
           <>
         {/* ─── 7 · CADENCE ─── */}
@@ -1063,18 +1234,8 @@ export default function GeronimoThePlan() {
           </>
         )}
 
-        {/* ═══════════════ PINNED · THE COMMITMENTS ═══════════════ */}
-        <div className="border-t-2 border-blue-500/30">
-          <Wrap>
-            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Always on</p>
-            <H2>What we committed to.</H2>
-            <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed max-w-2xl">
-              This part sits under every tab. What is locked for four weeks, what is deliberately still open, what could quietly kill it, and who owns what from Monday.
-            </p>
-          </Wrap>
-        </div>
-
-        {/* ─── 10 · RISKS ─── */}
+        {/* ═══════════════ COMMIT ═══════════════ */}
+        {sec === 'risks' && (
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">10 · Risks</p>
           <H2>What to keep visible.</H2>
@@ -1095,9 +1256,9 @@ export default function GeronimoThePlan() {
             />
           </div>
         </Wrap>
-        <Divider />
+        )}
 
-        {/* ─── 11 · LOCKED ─── */}
+        {sec === 'locked' && (
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">11 · Locked</p>
           <H2>What we agreed.</H2>
@@ -1125,9 +1286,9 @@ export default function GeronimoThePlan() {
             />
           </div>
         </Wrap>
-        <Divider />
+        )}
 
-        {/* ─── 12 · OPEN ─── */}
+        {sec === 'open' && (
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">12 · Open</p>
           <H2>Decide with data, not in the room.</H2>
