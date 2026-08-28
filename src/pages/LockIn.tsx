@@ -716,7 +716,7 @@ export default function LockIn() {
                   */}
                   {paid && !booked ? Math.max(0, days.remaining - 1) : days.remaining}
                 </span>
-                of {days.total} Days left at $5,000 AUD
+                Days left at $5,000 AUD
               </p>
               <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
             </div>
