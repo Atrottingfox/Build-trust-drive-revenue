@@ -837,3 +837,47 @@ describe("The delivery app is watched too", () => {
     expect(fn("_health.ts")).toContain("badCreds");
   });
 });
+
+describe("A Brand Day payment cannot arrive silently", () => {
+  /*
+    The second $5,000 was never invoiced for anybody because nothing watched
+    it. The Brand Day had the same shape of hole: lock-in-paid tagged the
+    contact and told nobody, and the Stripe webhook ignored the event because
+    the session carried nothing saying what it was. Somebody could pay $5,000,
+    close the tab, and no system anywhere would notice.
+  */
+  it("tells Sean the moment the money lands", () => {
+    const src = codeOf(fn("lock-in-paid.ts"));
+    expect(src).toMatch(/SLACK_WEBHOOK_MONEY/);
+    expect(src).toMatch(/paid for a Brand Day/);
+  });
+
+  it("never fails the payment path over a failed alert", () => {
+    /* They have paid. The page must let them reach the calendar even if
+       Slack is down. */
+    const src = fn("lock-in-paid.ts");
+    const slackFn = src.slice(src.indexOf("async function slack"), src.indexOf("const money"));
+    expect(slackFn).toMatch(/try\s*\{/);
+    expect(slackFn).toMatch(/catch/);
+  });
+
+  it("stamps the session so Stripe can tell what was bought", () => {
+    expect(codeOf(fn("create-checkout-session.ts"))).toMatch(
+      /metadata\[payment\]".*"brand-day"|"metadata\[payment\]",\s*"brand-day"/
+    );
+  });
+
+  it("the webhook acts on a Brand Day, not just the install", () => {
+    const src = codeOf(fn("stripe-events.ts"));
+    expect(src).toMatch(/"brand-day"/);
+    expect(src).toMatch(/brand-day-paid/);
+  });
+
+  it("stays quiet when the normal path already worked", () => {
+    /* Both routes fire on a healthy payment. Without this check Sean gets two
+       alerts for one payment, and duplicate alerts train people to ignore
+       them. */
+    const src = codeOf(fn("stripe-events.ts"));
+    expect(src).toMatch(/tagged\s*\)\s*\{[\s\S]{0,160}alreadyHandled/);
+  });
+});

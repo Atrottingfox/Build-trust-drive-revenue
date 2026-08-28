@@ -190,9 +190,49 @@ const handler: Handler = async (event) => {
       tag never lands and nothing downstream happens. This notices.
     */
     case "checkout.session.completed": {
-      if (obj?.metadata?.payment !== "install-1") {
-        return { statusCode: 200, body: JSON.stringify({ received: true, ignored: "not an install payment" }) };
+      const kind = obj?.metadata?.payment;
+      if (kind !== "install-1" && kind !== "brand-day") {
+        return { statusCode: 200, body: JSON.stringify({ received: true, ignored: "not a payment we track" }) };
       }
+
+      /*
+        The Brand Day. lock-in-paid does this properly when the browser returns
+        from checkout, and it also raises the alert, so this only speaks when it
+        did not: a closed tab, a dropped connection, a phone that slept. Silence
+        here means the normal path worked.
+      */
+      if (kind === "brand-day") {
+        const token = process.env.GHL_TOKEN;
+        let tagged = false;
+        if (token && contactId) {
+          try {
+            const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+              headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, Accept: "application/json" },
+            });
+            if (res.ok) {
+              tagged = ((await res.json())?.contact?.tags || []).includes("brand-day-paid");
+            }
+          } catch {
+            /* Assume not handled. A duplicate alert costs nothing, a missed
+               payment costs five thousand dollars. */
+          }
+        }
+
+        if (tagged) {
+          return { statusCode: 200, body: JSON.stringify({ received: true, alreadyHandled: true }) };
+        }
+
+        await tag(contactId, ["brand-day-paid"]);
+        await slack(
+          [
+            `:moneybag: *${who} paid for a Brand Day, and the page never confirmed it.*`,
+            `${money(obj?.amount_total ?? 0, obj?.currency)} received. They almost certainly closed the tab before it came back, so they have not picked a date and have had no confirmation.`,
+            `I have tagged them paid. They need their date.${link}`,
+          ].join("\n")
+        );
+        break;
+      }
+
       const token = process.env.GHL_TOKEN;
       let alreadyHandled = false;
       if (token && contactId) {

@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { reconcile } from "./_ghl";
+import { reconcile, getContact, contactUrl } from "./_ghl";
 
 /*
   Tags the GHL contact `brand-day-paid` after Stripe succeeds.
@@ -25,6 +25,37 @@ const headers = {
 
 const GHL_API = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
+
+/*
+  Tell Sean the money landed.
+
+  Until this existed, a Brand Day payment tagged a contact and told nobody. The
+  confirmation email goes to the client, so the one person who needed to know a
+  five thousand dollar payment had cleared found out by checking Stripe, or by
+  noticing later. Every other money event on this site shouts. This one did not.
+*/
+async function slack(text: string): Promise<void> {
+  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
+  if (!url) return;
+  try {
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+    });
+  } catch {
+    /* An alert that fails must never fail the payment path. They have paid. */
+  }
+}
+
+const money = () => {
+  const cents = Number(process.env.CHECKOUT_AMOUNT_CENTS) || 500000;
+  return (cents / 100).toLocaleString("en-AU", {
+    style: "currency",
+    currency: "AUD",
+    maximumFractionDigits: 0,
+  });
+};
 
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
@@ -65,6 +96,27 @@ const handler: Handler = async (event) => {
     }
 
     await reconcile(token, contactId);
+
+    /*
+      Named rather than an id, because an alert nobody can read at a glance is
+      an alert nobody reads. Best effort: a failed lookup still gets a message
+      out, since knowing somebody paid matters more than knowing who.
+    */
+    let who = "";
+    try {
+      const c = await getContact(token, contactId);
+      who = [c?.firstName, c?.lastName].filter(Boolean).join(" ").trim() || c?.email || "";
+    } catch {
+      /* Reported without a name. */
+    }
+
+    await slack(
+      [
+        `:moneybag: *${who || "Somebody"} paid for a Brand Day.*`,
+        `${money()} cleared. They are on the calendar step now.`,
+        `<${contactUrl(contactId)}|Open them in GoHighLevel>`,
+      ].join("\n")
+    );
 
     return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
   } catch (err) {

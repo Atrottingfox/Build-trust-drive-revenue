@@ -204,6 +204,18 @@ const handler: Handler = async (event) => {
     // The date is known by now: they pick it before they pay.
     if (brandDayDate) meta.brand_day_date = String(brandDayDate);
     for (const [k, v] of Object.entries(meta)) form.set(`metadata[${k}]`, v);
+
+    /*
+      What this payment is, so the Stripe webhook can recognise it.
+
+      Without it, a Brand Day payment is indistinguishable from anything else on
+      the account, and stripe-events ignored it. That mattered: lock-in-paid only
+      runs if the browser comes back from checkout, so somebody who paid and
+      closed the tab was never tagged, never got a confirmation, and nothing
+      anywhere noticed a five thousand dollar payment had arrived.
+    */
+    form.set("metadata[payment]", "brand-day");
+
     if (contactId) {
       form.set("metadata[ghl_contact_id]", String(contactId));
       form.set("invoice_creation[invoice_data][metadata][ghl_contact_id]", String(contactId));
