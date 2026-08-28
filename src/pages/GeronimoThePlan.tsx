@@ -234,7 +234,7 @@ const TABS: TabDef[] = [
   {
     id: 'content',
     label: 'Content',
-    blurb: 'The buffet, not the order. Capture and Create, the format library, the series, and the week they get slotted into.',
+    blurb: 'Capture and Create, the format library, the series, and the week they get slotted into.',
     sections: [
       { id: 'capture', label: 'Capture / Create' },
       { id: 'formats', label: 'Formats' },
@@ -327,7 +327,7 @@ const WEEKS: Week[] = [
     chip: 'Week 1',
     output: 'Five',
     headline: 'Five pieces. One a day.',
-    frame: 'Five is the whole target. The week is about clearing the backlog and getting the rhythm in, not output. Who fills the five gets decided at Tuesday.',
+    frame: 'Five is the whole target. The week is about clearing the backlog and getting the rhythm in. Who fills the five gets decided at Tuesday.',
     jobs: [
       { who: 'Doza', job: 'Batch direct to cameras in one sitting. Graphics get layered on afterwards.' },
       { who: 'Head of content', job: 'Book the Tuesday media meeting and the Thursday shoot. Build the idea submission form so ideas arrive by Monday. Allocate the five.' },
@@ -465,15 +465,15 @@ type Kind = 'directcam' | 'mystery' | 'popquiz' | 'show' | 'series' | 'coaching'
 const KIND: Record<Kind, { label: string; dot: string; text: string; count: number; note: string }> = {
   directcam: {
     label: 'Direct to camera',
-    dot: 'bg-orange-400',
-    text: 'text-orange-300',
+    dot: 'bg-violet-400',
+    text: 'text-violet-300',
     count: 3,
     note: 'Handheld with a little motion, three sentences at a time. One with a visual behind the head, one without.',
   },
   mystery: {
     label: 'Mystery shop',
-    dot: 'bg-yellow-300',
-    text: 'text-yellow-200',
+    dot: 'bg-teal-400',
+    text: 'text-teal-300',
     count: 2,
     note: 'Call a studio and shop them live. Zero setup, anyone can run it, batch it into whatever shoot is already happening.',
   },
@@ -493,15 +493,15 @@ const KIND: Record<Kind, { label: string; dot: string; text: string; count: numb
   },
   series: {
     label: 'Series',
-    dot: 'bg-emerald-400',
-    text: 'text-emerald-300',
+    dot: 'bg-amber-400',
+    text: 'text-amber-300',
     count: 1,
     note: 'The flagship episode. 20 studios to a million dollars, fed by the new 12 week room. Doza fronts it.',
   },
   coaching: {
     label: 'Coaching',
-    dot: 'bg-zinc-300',
-    text: 'text-zinc-200',
+    dot: 'bg-zinc-400',
+    text: 'text-zinc-300',
     count: 2,
     note: 'Captured off a call that is happening anyway. Repeat the question, set the frame, then answer. Two cameras where possible.',
   },
@@ -730,7 +730,7 @@ export default function GeronimoThePlan() {
     <PasswordGate storageKey="geronimo-unlocked">
       <div className="min-h-screen bg-base">
         <SEO
-          title="The Plan · Geronimo"
+          title="The Plan, Geronimo"
           description="The Strategy Day, bucketed by core function. Diagnosis, decisions, principles, formats, cadence, and who does what from Monday."
           path="/geronimo-theplan"
           noIndex
@@ -738,7 +738,7 @@ export default function GeronimoThePlan() {
         <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
         <PageHead
-          eyebrow="Operational · Strategy reference"
+          eyebrow="Strategy reference"
           title="The"
           accent="Plan."
           blurb="The whole Strategy Day, bucketed by core function. Where the bottlenecks are. What we decided. What gets built first. Reference back to this. The four week run sheet lives separately."
@@ -813,7 +813,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 1 · THE NUMBERS TODAY ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">01 · Today</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Today</p>
           <H2>The numbers on the table.</H2>
           <Note>Where the account actually sits before anything changes.</Note>
           <div className="mt-8">
@@ -834,12 +834,12 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 2 · DECIDE ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">02 · Decide</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Decide</p>
           <H2>TGA first. Hey Doza parked.</H2>
           <Note>Two brands, two jobs. Separating them is what keeps the right buyer wanting to buy.</Note>
           <div className="mt-8 grid md:grid-cols-2 gap-4">
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 01 · TGA</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">TGA</p>
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">The moneymaker.</b> When TGA posts properly, sales follow. The summit weekend was the clearest proof.</>,
@@ -851,7 +851,7 @@ export default function GeronimoThePlan() {
               />
             </div>
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 02 · Hey Doza</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Hey Doza</p>
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">The founder brand.</b> Life by design, business by design. The founder version of the story.</>,
@@ -881,12 +881,12 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 3 · WORKING ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">03 · Working</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Working</p>
           <H2>What works. What is hard.</H2>
           <Note>Split by brand, because the answer is different for each. Do more of the working column before inventing anything.</Note>
 
           <div className="mt-8">
-            <Block label="Working · TGA">
+            <Block label="Working, TGA">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Volume.</b> Money comes from volume. The summit weekend, an obnoxious amount of undeniable content, was the best sales weekend on record.</>,
@@ -899,7 +899,7 @@ export default function GeronimoThePlan() {
               />
             </Block>
 
-            <Block label="Working · Doza">
+            <Block label="Working, Doza">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Energy.</b> Named as the biggest single differentiator. It is the brand.</>,
@@ -911,7 +911,7 @@ export default function GeronimoThePlan() {
               />
             </Block>
 
-            <Block label="Hard · TGA">
+            <Block label="Hard, TGA">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Ideation.</b> No cracked process, so it never feels good. The number one hard thing.</>,
@@ -923,7 +923,7 @@ export default function GeronimoThePlan() {
               />
             </Block>
 
-            <Block label="Hard · Doza">
+            <Block label="Hard, Doza">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Backlog.</b> Always chasing the tail. The next thing has to go out this week, so there is never a buffer.</>,
@@ -943,7 +943,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 4 · PRINCIPLES ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">04 · Principles</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Principles</p>
           <H2>The rules underneath every format.</H2>
           <Note>This is the reusable part. Every format decision below sits on top of these.</Note>
           <div className="mt-8">
@@ -965,7 +965,7 @@ export default function GeronimoThePlan() {
                 { title: 'Format wins', body: 'A good format works every time regardless of who is in it. Everyone wants to be a fly on the wall.' },
                 { title: 'Lanes over ideas', body: 'Fixed weekly lanes remove reliance on inspiration. Extra ideas layer on top, so nothing breaks when the ideas dry up.' },
                 { title: 'Calibrate, then pour', body: 'Less is more first. Get four to six core types working, then layer everything else on a foundation that holds.' },
-                { title: 'Visuals as reinforcement', body: 'Draw and show only when it reinforces the point. Take the viewer on a journey rather than drawing for the sake of it.' },
+                { title: 'Visuals as reinforcement', body: 'Draw and show only when it reinforces the point. Show the viewer where you are going. Do not draw for the sake of drawing.' },
                 { title: 'Know how they actually watch', body: 'Our owner is distractible and half the time the phone is in a car cradle or in their hand in the queue at Bunnings. A talking head with nothing on screen loses them.' },
               ]}
             />
@@ -1001,12 +1001,12 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 5 · CONTENT ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Content</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Content</p>
           <H2>Capture and Create.</H2>
           <Note>This is a buffet. It is not everything. It is simply showing what options we came up with on the day. There are two types.</Note>
           <div className="mt-8 grid md:grid-cols-2 gap-4">
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Bucket 01 · Capture</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Capture</p>
               <p className="text-zinc-400 text-[14px] leading-relaxed mb-4">Things already happening in the business that only need a camera pointed at them. Low thinking cost, high authenticity.</p>
               <BulletList
                 items={[
@@ -1022,7 +1022,7 @@ export default function GeronimoThePlan() {
               />
             </div>
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Bucket 02 · Create</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Create</p>
               <p className="text-zinc-400 text-[14px] leading-relaxed mb-4">Things that require a decision, a frame and a shoot. Higher effort, so it needs a repeatable structure to stay cheap.</p>
               <BulletList
                 items={[
@@ -1045,14 +1045,14 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 5b · FORMATS ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Formats</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Formats</p>
           <H2>The format library.</H2>
           <Note>These are all the formats. These are not the formats we need to do all at once.</Note>
           <div className="mt-8 mb-10 rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-6 md:p-7">
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-4">How to read this</p>
             <BulletList
               items={[
-                <><b className="text-white font-semibold">This is the buffet.</b> Everything on the table, not everything on the plate.</>,
+                <><b className="text-white font-semibold">This is the buffet.</b> Every option we came up with on the day.</>,
                 <><b className="text-white font-semibold">We do not do these all at once.</b> Four to six working beats twelve half running.</>,
                 <><b className="text-white font-semibold">They will shift as soon as we have data.</b> Nothing here is permanent.</>,
                 <><b className="text-white font-semibold">Every decision is backed by what is working,</b> and we keep testing.</>,
@@ -1065,55 +1065,68 @@ export default function GeronimoThePlan() {
               <div className="grid gap-3 md:grid-cols-2">
                 {[
                   {
-                    title: 'Green screen · Create',
+                    title: 'Green screen',
+                    tag: 'Create',
                     body: 'A favourite format because it is supposed to look rough. Decent lighting is enough. Do not be a static head in one spot, move the graphic or move yourself. You can hijack anything: an article, a logo wall, a P&L, a membership dashboard, a Stripe screen, a beautiful Pilates studio, handwritten notes behind your head. Numbered checklists behind the head work because they signal a track the viewer can follow.',
                   },
                   {
-                    title: 'React to news · Create',
+                    title: 'React to news',
+                    tag: 'Create',
                     body: 'Respond to an article, a gym acquisition, a chain selling for billions, and borrow its authority. React to what is happening around you in the industry. Workshopped in the room: the Pilates manager who resigned over a promotion misunderstanding. Hook: imagine quitting your job for the ultimate opportunity and it blows up.',
                   },
                   {
-                    title: 'React to wins · Create',
+                    title: 'React to wins',
+                    tag: 'Create',
                     body: 'Clients post wins in the community every Tuesday, hundreds of them. A free, weekly, renewable input. Frame as a lesson, not a gloat. Hook shapes: if I wanted to add $120k in the next 90 days, these are the only three things I would focus on. Raise the stakes, then point at someone who has already done it. Show a real screen where you can.',
                   },
                   {
-                    title: 'This vs that · Create',
+                    title: 'This vs that',
+                    tag: 'Create',
                     body: 'Anonymised client numbers. Red against green. Where they started, what changed, where they are now. A spreadsheet reads as more identifiable to a studio owner than a polished graphic. Getting permission is a simple conversation and almost everyone says yes.',
                   },
                   {
-                    title: 'Direct to camera · Create',
+                    title: 'Direct to camera',
+                    tag: 'Create',
                     body: 'Handheld with a little motion. Static is where the drop off lives. Three sentences at a time, then reset. It is hard at first, you get into the rhythm. Two variants to run, one with a visual behind the head and one without. Doza can rip five in a sitting and layer graphics afterwards.',
                   },
                   {
-                    title: 'Show and tell · Create',
+                    title: 'Show and tell',
+                    tag: 'Create',
                     body: 'The Ryan lane. Check out this tool, live, interactive, showing the thing working. Needs light and something genuinely happening on screen. Simple frame to hand him: what it is, what it does for you, how to use it, why it is different. The AI tool he built is the unique mechanism.',
                   },
                   {
-                    title: 'Coaching call Q&A · Capture',
+                    title: 'Coaching call Q&A',
+                    tag: 'Capture',
                     body: 'The highest volume renewable source in the business. Doza, Sophie and Ryan all run them. Two cameras wherever possible, one close and one wider. Zoom clips will never look great, so set up properly for the calls we intend to use. Requires training the habit: repeat the question, set the frame, then answer.',
                   },
                   {
-                    title: 'Interview style capture · Capture',
-                    body: 'The unlock for Ryan and Doza both. Someone off camera asks the question and they answer a person rather than a lens. Kills the preach energy that shows up in face to camera. Side cam plus operator. Same setup as the Jay Q&A: half an hour, two cameras, 30 reels.',
+                    title: 'Interview style capture',
+                    tag: 'Capture',
+                    body: 'This is what works for Ryan and Doza both. Someone off camera asks the question and they answer a person rather than a lens. Kills the preach energy that shows up in face to camera. Side cam plus operator. Same setup as the Jay Q&A: half an hour, two cameras, 30 reels.',
                   },
                   {
-                    title: 'Mystery shop · Capture',
+                    title: 'Mystery shop',
+                    tag: 'Capture',
                     body: 'Already proven, already loved, zero setup. Can be done anywhere within the hour and anyone can run it, so it is not dependent on Doza. Call ahead so they are expecting it, then shoot. Batch it into whatever shoot is already happening. Sibling format worth trying: hand someone 60 seconds to fix one specific thing in a real business.',
                   },
                   {
-                    title: 'Pop quiz · Capture',
+                    title: 'Pop quiz',
+                    tag: 'Capture',
                     body: 'New series. Call our own clients and their managers and quiz them on KPIs and standards. What it signals is standards, and people love the standards. Best version to test: call the manager while the owner listens in and capture the owner reaction. Suspense and stakes. Test it against mystery shop.',
                   },
                   {
-                    title: 'Makeovers · Create',
+                    title: 'Makeovers',
+                    tag: 'Create',
                     body: 'Before and after for the industry. Print the ad, mark it up, show what it became and what it produced. Satisfying the way chiropractic videos are. Works at every level of the customer base: ads, org structure, role structure, the calendar.',
                   },
                   {
-                    title: 'Mission content · Create',
+                    title: 'Mission content',
+                    tag: 'Create',
                     body: 'Documenting the mission to end burnout in the industry, day 273 and counting. Members get behind it hard, so it is a retention and validation play as much as acquisition. Needs reframing to matter to strangers: stakes, relatability, relevance. Doubles as an internal comms channel, because clients do not read hundreds of Slack channels but they do open Instagram.',
                   },
                 ].map((c) => (
                   <div key={c.title} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+                    <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">{c.tag}</p>
                     <p className="font-display text-[15px] font-extrabold text-white mb-2">{c.title}</p>
                     <p className="text-zinc-400 text-[14px] leading-relaxed">{c.body}</p>
                   </div>
@@ -1129,7 +1142,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 6 · SERIES ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">06 · Series</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Series</p>
           <H2>The series.</H2>
           <Note>A series is repeatable for us and recognisable for the viewer. Anchor points, a storyline, and a hook they know like a theme tune.</Note>
           <div className="mt-8">
@@ -1138,7 +1151,7 @@ export default function GeronimoThePlan() {
                 { name: 'Mystery Shop', status: 'Proven', detail: 'Call a studio cold and shop them live. Proven, loved, zero setup. Scale it.' },
                 { name: 'Pop Quiz', status: 'Test', detail: 'Quiz our own clients and managers on KPIs and standards. New. Test it against mystery shop to confirm they are different enough to run both.' },
                 { name: '20 Studios to $1M by Christmas', status: 'Flagship', detail: 'Behind the scenes on taking 20 studios to a million dollars. Weekly update, what changed, what they did. Fed by the new 12 week coaching room. Doza fronts it.' },
-                { name: 'Under Management', status: 'Test', detail: 'Total revenue under management as the headline number and the storyline. Highest leverage of the lot. Hook test before building it.' },
+                { name: 'Under Management', status: 'Test', detail: 'Total revenue under management as the headline number and the storyline. The biggest of the lot. Hook test before building it.' },
                 { name: 'Separation Sunday', status: 'Proven', detail: 'The owned, trademarkable weekly format. Best performing carousel line by a distance. Unlock the repeatability.' },
                 { name: 'Ending Burnout, Day N', status: 'Revive', detail: 'Sophie led mission series with a fortnightly check in on what we did in the last two weeks. Revive with a sharper frame.' },
                 { name: 'Makeovers', status: 'Batch', detail: 'Ad, calendar and structure before and afters. Ready to batch.' },
@@ -1156,7 +1169,7 @@ export default function GeronimoThePlan() {
                   <><b className="text-white font-semibold">Every tip hyper specific.</b> The outcome has to be visible in the first five seconds.</>,
                   <><b className="text-white font-semibold">Consider a scoreboard</b> for the 20 studios series. Anonymised or self chosen names, fortnightly, who do you think wins.</>,
                   <><b className="text-white font-semibold">Guard against fence sitting.</b> A long running series can make people wait and watch instead of buying. Frame each episode so it stands alone and gives something away now.</>,
-                  <><b className="text-white font-semibold">Separate the two big series.</b> Under Management and 20 Studios stay distinct so each gets its own leverage.</>,
+                  <><b className="text-white font-semibold">Separate the two big series.</b> Under Management and 20 Studios stay distinct so each gets its own run.</>,
                 ]}
               />
             </Block>
@@ -1170,22 +1183,34 @@ export default function GeronimoThePlan() {
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The schedule</p>
             <H2>The week, off the board.</H2>
-            <Note>Two slots a day, Monday to Friday. Ten pieces. Colour is the content type, and the name is who fronts it.</Note>
-            <div className="mt-8">
-              <ScheduleGrid />
+            <Note>Two slots a day, Monday to Friday. Ten pieces.</Note>
+
+            <div className="mt-8 grid gap-3 md:grid-cols-3">
+              {[
+                { who: 'Doza', n: 4, jobs: ['Direct to cam ×2, bringing ideas from calls', 'Mystery ×1', 'Series ×1'] },
+                { who: 'Ryan', n: 3, jobs: ['Show and tell ×1, bringing three per week', 'Coaching ×1, batched', 'Mystery shop ×1'] },
+                { who: 'Sophie', n: 3, jobs: ['Coaching ×1', 'Direct to cam ×1, bringing three beliefs to break', 'Pop quiz ×1, with Billy'] },
+              ].map((p) => (
+                <div key={p.who} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+                  <div className="flex items-baseline justify-between mb-4">
+                    <p className="font-display text-[17px] font-extrabold text-white">{p.who}</p>
+                    <p className="font-display text-[17px] font-extrabold text-blue-400 tabular-nums">{p.n}</p>
+                  </div>
+                  <ul className="space-y-2">
+                    {p.jobs.map((j) => (
+                      <li key={j} className="text-zinc-300 text-[13px] leading-relaxed">{j}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
+
             <div className="mt-10">
+              <Block label="The week">
+                <ScheduleGrid />
+              </Block>
               <Block label="The six types">
                 <ScheduleLegend />
-              </Block>
-              <Block label="What each person carries">
-                <BulletList
-                  items={[
-                    <><b className="text-white font-semibold">Doza · 4.</b> Direct to cam ×2, bringing ideas from calls. Mystery ×1. Series ×1.</>,
-                    <><b className="text-white font-semibold">Ryan · 3.</b> Show and tell ×1, bringing three per week. Coaching ×1, batched. Mystery shop ×1.</>,
-                    <><b className="text-white font-semibold">Sophie · 3.</b> Coaching ×1. Direct to cam ×1, bringing three ideas for beliefs to break. Pop quiz ×1, with Billy.</>,
-                  ]}
-                />
               </Block>
             </div>
           </Wrap>
@@ -1195,7 +1220,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 7 · CADENCE ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">07 · Cadence</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Cadence</p>
           <H2>Ten a week. Three people.</H2>
           <Note>Two a day, Monday to Friday, no weekends for now. Up from around three. Which person fills which slot was not fixed in the room, only the totals were.</Note>
           <div className="mt-8">
@@ -1222,7 +1247,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 7b · LANES ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">07 · Lanes</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Lanes</p>
           <H2>Who does what.</H2>
           <Note>The lane each person runs, and why it suits them. Everyone outside the ten still has a job.</Note>
           <div className="mt-8">
@@ -1247,7 +1272,7 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 8 · RHYTHM ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">08 · Rhythm</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Rhythm</p>
           <H2>The production week.</H2>
           <Note>The workflow that makes ten pieces a week survivable. Tuesday meeting, Thursday shoot, Wednesday left open in between.</Note>
           <div className="mt-8">
@@ -1292,11 +1317,11 @@ export default function GeronimoThePlan() {
           <>
         {/* ─── 9 · ASSETS ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">09 · Assets</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Assets</p>
           <H2>Podcast, carousels, ads, sets.</H2>
           <Note>The four assets that sit outside the weekly ten and need their own decisions.</Note>
           <div className="mt-8">
-            <Block label="Podcast · the asset is right, the engineering is the gap">
+            <Block label="Podcast">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">The diagnosis.</b> Clips underperform. Unfiltered got treated as unedited and un engineered. We shoot a whole 45 to 60 minute episode in one run assuming everything said is usable. When Doza is interviewing, the value comes from the guest and the usable content drops.</>,
@@ -1308,7 +1333,7 @@ export default function GeronimoThePlan() {
                 ]}
               />
             </Block>
-            <Block label="Carousels · high leverage, bad use of internal hours">
+            <Block label="Carousels">
               <BulletList
                 items={[
                   'Nobody in house should be making them. Delegate to a part time offshore person, around 20 hours a week, overseen internally.',
@@ -1379,7 +1404,7 @@ export default function GeronimoThePlan() {
         {/* ═══════════════ COMMIT ═══════════════ */}
         {sec === 'risks' && (
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">10 · Risks</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Risks</p>
           <H2>What to keep visible.</H2>
           <Note>Named in the room. These are the things that quietly kill a four week calibration.</Note>
           <div className="mt-8">
@@ -1402,7 +1427,7 @@ export default function GeronimoThePlan() {
 
         {sec === 'locked' && (
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">11 · Locked</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Locked</p>
           <H2>What we agreed.</H2>
           <Note>Decisions, not discussion. If it is on this list, it is not up for debate for four weeks.</Note>
           <div className="mt-8">
@@ -1430,7 +1455,7 @@ export default function GeronimoThePlan() {
 
         {sec === 'open' && (
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">12 · Open</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Open</p>
           <H2>Decide with data, not in the room.</H2>
           <Note>Deliberately unresolved. The first item is the highest value loose end in the whole document.</Note>
           <div className="mt-8">
