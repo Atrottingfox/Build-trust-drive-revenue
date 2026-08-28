@@ -349,7 +349,7 @@ const WEEKS: Week[] = [
       { who: 'Ryan', job: 'Three pieces. Show and tell with the tool, a mystery shop, and a coaching call Q&A.' },
       { who: 'Sophie', job: 'Three pieces. Direct to camera on belief and reframes, a pop quiz, and a coaching call Q&A.' },
       { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Rework the testimonial and ad structure around association, Doza plus coach in frame before the client.' },
-      { who: 'Strategist', job: 'Weekly session with Doza on formats and hooks, so live directing moves in house.' },
+      { who: 'Strategist', job: 'Weekly jam with Billy. Sits in on the media jam when possible.' },
     ],
     close: 'We want to aim for a two week buffer between shoot & publish.',
   },
@@ -1282,7 +1282,7 @@ export default function TheGeronimoPlan() {
                   <><b className="text-white font-semibold">A 10 minute pre shoot check</b> the day before. Is everyone prepped for tomorrow.</>,
                   <><b className="text-white font-semibold">Structure, not scripts.</b> Each format gets a stencil to fill in.</>,
                   <><b className="text-white font-semibold">Monthly Media Monday</b> is the name for the monthly. The strategist blocks Mondays and Tuesdays for strategy work, so for the first few months it lands between Tuesday and Thursday. Head of content, founder, strategist. Deliberately a room where anything unsaid gets surfaced.</>,
-                  <><b className="text-white font-semibold">Weekly strategy sessions</b> between Doza and the strategist for the first month, on formats and especially hooks, so live directing on set becomes possible in house.</>,
+                  <><b className="text-white font-semibold">The strategist cadence.</b> Monthly session with the crew, sitting in on the media jam when possible, and a weekly jam with Billy for the first four weeks.</>,
                   <><b className="text-white font-semibold">The MDS call can be pre engineered.</b> Call topics are known three months out, so hooks and short teach moments get written into the call in advance with two cameras capturing.</>,
                   <><b className="text-white font-semibold">Sophie container.</b> One of her office hours every week, with Billy present. She is doing the call anyway.</>,
                   <><b className="text-white font-semibold">Ryan container.</b> His Friday office hours plus a monthly shoot when he is at the main office. Flag the dates at the start of each month.</>,
@@ -1434,7 +1434,7 @@ export default function TheGeronimoPlan() {
                 'Media meeting Tuesday, shoot Thursday, Wednesday deliberately left in between.',
                 'A one week buffer between shoot and publish, targeting two.',
                 'A separate monthly content forward meeting. Monthly Media Monday in name, landing mid week for the first few months.',
-                'Weekly Doza and strategist sessions for the first month, focused on hooks and formats.',
+                'Monthly strategist session with the crew, plus a weekly jam with Billy for the first four weeks.',
                 'Carousels get outsourced with strict guidelines, not made in house.',
                 'Proof content starts fresh rather than continuing the inconsistent text format.',
                 'Podcast episodes get engineered. Prep, live document, live directing, stop and retake.',
@@ -1504,7 +1504,7 @@ export default function TheGeronimoPlan() {
                     { who: 'Ryan', role: 'Coach', wk: '3', owns: 'Show and tell ×1, coaching ×1, mystery shop ×1. Brings three things he is excited about to Tuesday. Flags his monthly office visit dates.' },
                     { who: 'Sophie', role: 'Coach', wk: '3', owns: 'Coaching ×1, direct to cam ×1, pop quiz ×1. Brings three beliefs to break. Nominates one office hours block as the capture container.' },
                     { who: 'Operator', role: 'Shooter', wk: '-', owns: 'Turns up, shoots, exports and sends back. Two cameras where possible. Nothing lands on the team.' },
-                    { who: 'Strategist', role: 'External', wk: '-', owns: 'Stencils per format. Weekly session with Doza on hooks and formats for the first month. Sources the freelance shooter.' },
+                    { who: 'Strategist', role: 'External', wk: '-', owns: 'Stencils per format. Monthly session with the crew, and sits in on the media jam when possible. Weekly jam with Billy for the first four weeks.' },
                   ].map((r) => (
                     <tr key={r.who} className="border-t border-zinc-800/70 align-top">
                       <td className="px-4 py-4 font-display text-[15px] font-extrabold text-white whitespace-nowrap">{r.who}</td>
