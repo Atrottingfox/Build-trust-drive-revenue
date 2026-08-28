@@ -759,11 +759,15 @@ export default function TheGeronimoPlan() {
         </div>
 
         {/* ─── TAB INTRO ─── */}
-        <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">{current.label}</p>
-          <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed max-w-2xl">{current.blurb}</p>
-        </Wrap>
-        <Divider />
+        {tab !== 'start' && (
+          <>
+            <Wrap>
+              <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">{current.label}</p>
+              <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed max-w-2xl">{current.blurb}</p>
+            </Wrap>
+            <Divider />
+          </>
+        )}
 
         {/* ═══════════════ START HERE ═══════════════ */}
         {WEEKS.some((w) => w.id === sec) && <FourWeeks wk={sec} onWeek={changeSec} onJump={changeSec} />}
