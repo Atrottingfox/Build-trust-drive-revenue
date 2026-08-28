@@ -2,7 +2,7 @@ import React from 'react';
 import PasswordGate from '../components/PasswordGate';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import { PageHead, Wrap, Divider, Note, H2, Block, BulletList, Section } from '../components/undeniable/Bits';
+import { PageHead, Wrap, Divider, Note, H2, Block, BulletList, Section, Tabs } from '../components/undeniable/Bits';
 
 // ─── Scorecard ───────────────────────────────────────────────────────────
 
@@ -226,9 +226,270 @@ function WeekFlow() {
   );
 }
 
+// ─── Tabs ────────────────────────────────────────────────────────────────
+
+type TabDef = { id: string; label: string; blurb: string; sections: Array<{ id: string; label: string }> };
+
+const TABS: TabDef[] = [
+  {
+    id: 'brand',
+    label: 'Brand',
+    blurb: 'The two brands and the job each one does. What is working, what is hard, and the principles underneath every format decision.',
+    sections: [
+      { id: 'today', label: 'Today' },
+      { id: 'brands', label: 'The Brands' },
+      { id: 'workhard', label: 'Work / Hard' },
+      { id: 'principles', label: 'Principles' },
+    ],
+  },
+  {
+    id: 'content',
+    label: 'Content',
+    blurb: 'Capture and Create is the only split that changes how the work gets made. Then the formats that fill each bucket, and the series that make them recognisable.',
+    sections: [
+      { id: 'capture', label: 'Capture / Create' },
+      { id: 'formats', label: 'Formats' },
+      { id: 'series', label: 'Series' },
+    ],
+  },
+  {
+    id: 'production',
+    label: 'Production',
+    blurb: 'Ten a week across three people. The lanes, the weekly rhythm, and the four assets that sit outside the ten and need their own decisions.',
+    sections: [
+      { id: 'cadence', label: 'Ten a week' },
+      { id: 'lanes', label: 'Lanes' },
+      { id: 'rhythm', label: 'Rhythm' },
+      { id: 'assets', label: 'Assets' },
+    ],
+  },
+];
+
+const SECTION_TAB: Record<string, string> = Object.fromEntries(
+  TABS.flatMap((t) => t.sections.map((s) => [s.id, t.id])),
+);
+
+function scrollToNav() {
+  const anchor = document.getElementById('plan-tabs');
+  if (!anchor) return;
+  const top = anchor.getBoundingClientRect().top + window.scrollY - 8;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+function usePlanNav() {
+  const [sec, setSec] = React.useState<string>(() => {
+    if (typeof window === 'undefined') return 'today';
+    const s = new URLSearchParams(window.location.search).get('s');
+    if (s && SECTION_TAB[s]) return s;
+    const t = new URLSearchParams(window.location.search).get('t');
+    const found = TABS.find((x) => x.id === t);
+    return found ? found.sections[0].id : 'today';
+  });
+
+  const tab = SECTION_TAB[sec] ?? 'brand';
+
+  const write = React.useCallback((nextSec: string) => {
+    setSec(nextSec);
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    url.searchParams.set('t', SECTION_TAB[nextSec]);
+    url.searchParams.set('s', nextSec);
+    window.history.replaceState({}, '', url);
+    scrollToNav();
+  }, []);
+
+  // Clicking a top tab lands on its first section.
+  const changeTab = React.useCallback(
+    (id: string) => {
+      const found = TABS.find((x) => x.id === id);
+      if (found) write(found.sections[0].id);
+    },
+    [write],
+  );
+
+  return { tab, sec, changeTab, changeSec: write };
+}
+
+// ─── Start here ──────────────────────────────────────────────────────────
+
+type Week = {
+  id: string;
+  chip: string;
+  output: string;
+  headline: string;
+  frame: string;
+  jobs: Array<{ who: string; job: string }>;
+  close: string;
+};
+
+const WEEKS: Week[] = [
+  {
+    id: 'w1',
+    chip: 'Week 1',
+    output: 'Five',
+    headline: 'Five pieces. One a day.',
+    frame: 'Five is the whole target. The week is about clearing the backlog and getting the rhythm in, not output. Who fills the five gets decided at Tuesday.',
+    jobs: [
+      { who: 'Doza', job: 'Batch direct to cameras in one sitting. Graphics get layered on afterwards.' },
+      { who: 'Head of content', job: 'Book the Tuesday media meeting and the Thursday shoot. Build the idea submission form so ideas arrive by Monday. Allocate the five.' },
+      { who: 'Ryan', job: 'Bring three things you are excited about to Tuesday, for show and tell. Flag your monthly office visit dates.' },
+      { who: 'Sophie', job: 'Nominate one weekly office hours block as your capture container. You are doing the call anyway.' },
+      { who: 'Billy', job: 'Sit in on the calls. Flag the good moments live, at the source, rather than hunting for them afterwards.' },
+      { who: 'Nate', job: 'Watch the pipeline for gaps. Own the production standard on the new lanes.' },
+      { who: 'Strategist', job: 'Turn the board into stencils, one per format. Source a freelance shooter on the Gold Coast.' },
+    ],
+    close: 'Thursday shoots for week 2. Never for Monday.',
+  },
+  {
+    id: 'w2',
+    chip: 'Week 2',
+    output: 'Ten',
+    headline: 'Step up to ten. Two a day.',
+    frame: 'The full split kicks in. Doza 4, Ryan 3, Sophie 3, Monday to Friday, weekends off.',
+    jobs: [
+      { who: 'Doza', job: 'Four pieces. Two direct to camera, one with a visual behind and one without. Plus a series episode.' },
+      { who: 'Ryan', job: 'Three pieces. Show and tell with the tool, a mystery shop, and a coaching call Q&A.' },
+      { who: 'Sophie', job: 'Three pieces. Direct to camera on belief and reframes, a pop quiz, and a coaching call Q&A.' },
+      { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Get AC contracted and onboarded with real context.' },
+      { who: 'Strategist', job: 'Weekly session with Doza on formats and hooks, so live directing moves in house.' },
+      { who: 'Pete', job: 'Rework the testimonial and ad structure around association. Doza plus coach in frame before the client.' },
+    ],
+    close: 'A one week buffer now exists between shoot and publish. Target two.',
+  },
+  {
+    id: 'w3',
+    chip: 'Week 3',
+    output: 'Ten',
+    headline: 'Hold ten. Re-cut to strengths.',
+    frame: 'Two weeks in it is obvious who is better at what. Reallocate slots, then start testing the things we deliberately left open.',
+    jobs: [
+      { who: 'Head of content', job: 'Reallocate the ten to strengths. Set dress the two Gold Coast office rooms.' },
+      { who: 'Strategist + Doza', job: 'Hook test. Around 15 trial reels on Under Management before a single episode gets built.' },
+      { who: 'Ryan', job: 'Freelance shooter visit. Two hours. Q&A capture plus two mystery shops in the same trip.' },
+      { who: 'Sophie', job: 'Run the pop quiz against the mystery shop. Are they different enough to run both.' },
+      { who: 'Doza', job: 'One direct to camera with a visual behind, one without. Compare them properly.' },
+      { who: 'AC', job: 'Podcast topics, episode framework and hooks. Bring micro niche topic sourcing into the ideation loop.' },
+    ],
+    close: 'Ten should hold without heroics. If it needs heroics, that is the finding.',
+  },
+  {
+    id: 'w4',
+    chip: 'Week 4',
+    output: 'Read it',
+    headline: 'Read the cycle. Then go again.',
+    frame: 'Monthly Media Monday. Three measures, one question, then the next four weeks get set.',
+    jobs: [
+      { who: 'Ease', job: 'How simple was it to run. Where did it feel heavy, and what took more effort than it should have.' },
+      { who: 'Energy', job: 'How the team felt doing it. Drag or momentum. A system nobody wants to run is not a system.' },
+      { who: 'Output', job: 'The data. Did the ten go out. Where were the bottlenecks, and what did we learn.' },
+      { who: 'Decide', job: 'Which formats become the locked rotation and which die. Resist adding a new one until the foundation holds.' },
+      { who: 'Still open', job: 'Clarity is a 2 and it still has no owner, no fix and no date. It is the highest value loose end in the plan.' },
+    ],
+    close: 'Four weeks is the cycle. Change what the data tells you to change, then go again.',
+  },
+];
+
+function FourWeeks({ onJump }: { onJump: (sec: string) => void }) {
+  const [wk, setWk] = React.useState('w1');
+  const week = WEEKS.find((w) => w.id === wk) ?? WEEKS[0];
+
+  return (
+    <section className="py-12 md:py-14">
+      <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        <Section>
+          <div className="rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-7 md:p-9">
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Start here</p>
+            <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Four weeks. One job each.
+            </h2>
+            <p className="text-zinc-400 text-[15px] leading-relaxed mb-7 max-w-2xl">
+              Do not read the rest of this page first. Find your name, do your line, come back. The ramp is deliberate.
+            </p>
+
+            {/* the ramp */}
+            <div className="grid grid-cols-4 gap-1.5 mb-7">
+              {WEEKS.map((w) => {
+                const on = w.id === wk;
+                return (
+                  <button
+                    key={w.id}
+                    type="button"
+                    onClick={() => setWk(w.id)}
+                    className={`rounded-xl border px-3 py-3 text-left transition-colors ${
+                      on ? 'border-blue-500/50 bg-blue-500/10' : 'border-zinc-800 bg-base/50 hover:border-zinc-700'
+                    }`}
+                  >
+                    <span className={`block text-[10px] uppercase tracking-widest font-semibold mb-1 ${on ? 'text-blue-400' : 'text-zinc-500'}`}>
+                      {w.chip}
+                    </span>
+                    <span className={`block font-display text-[15px] md:text-[17px] font-extrabold ${on ? 'text-white' : 'text-zinc-400'}`}>
+                      {w.output}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <h3 className="font-display text-[19px] md:text-[21px] font-extrabold text-white mb-2">{week.headline}</h3>
+            <p className="text-zinc-400 text-[14px] leading-relaxed mb-6 max-w-2xl">{week.frame}</p>
+
+            <div className="grid gap-2.5">
+              {week.jobs.map((j) => (
+                <div key={j.who} className="grid sm:grid-cols-[10.5rem_1fr] gap-1 sm:gap-4 rounded-xl border border-zinc-800 bg-base/60 px-5 py-4">
+                  <p className="font-display text-[13px] font-extrabold text-white uppercase tracking-wide">{j.who}</p>
+                  <p className="text-zinc-300 text-[14px] leading-relaxed">{j.job}</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-zinc-400 text-[14px] leading-relaxed mt-5 italic">{week.close}</p>
+
+            <div className="mt-8 pt-6 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-4">
+              <p className="text-white text-[15px] font-medium">
+                The only KPI for 30 days: <span className="text-blue-400">did the work go out.</span> Not a banger.
+              </p>
+              <button
+                type="button"
+                onClick={() => onJump('cadence')}
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-elevated/60 px-5 py-2.5 text-[13px] font-semibold text-zinc-200 hover:border-blue-500/50 hover:text-white transition-colors"
+              >
+                See the cadence
+              </button>
+            </div>
+          </div>
+        </Section>
+      </div>
+    </section>
+  );
+}
+
+// ─── Sub tab row ─────────────────────────────────────────────────────────
+
+function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string; label: string }>; active: string; onChange: (id: string) => void }) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-1 gap-y-2">
+      {sections.map((s) => (
+        <button
+          key={s.id}
+          type="button"
+          onClick={() => onChange(s.id)}
+          className={`rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors ${
+            active === s.id ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-200'
+          }`}
+        >
+          {s.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────
 
 export default function GeronimoThePlan() {
+  const { tab, sec, changeTab, changeSec } = usePlanNav();
+  const current = TABS.find((t) => t.id === tab) ?? TABS[0];
+
   return (
     <PasswordGate storageKey="geronimo-unlocked">
       <div className="min-h-screen bg-base">
@@ -250,11 +511,15 @@ export default function GeronimoThePlan() {
         />
         <Divider />
 
-        {/* ─── 1 · DIAGNOSE ─── */}
+        {/* ─── PINNED · START HERE ─── */}
+        <FourWeeks onJump={changeSec} />
+        <Divider />
+
+        {/* ─── PINNED · THE DIAGNOSIS ─── */}
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">01 · Diagnose</p>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The diagnosis</p>
           <H2>The bottleneck scores.</H2>
-          <Note>Self rated in the room, out of five. The first four run in sequence. Each one is downstream of the last.</Note>
+          <Note>Self rated in the room, out of five. The first four run in sequence, each one downstream of the last. This is the frame for everything in the three tabs below.</Note>
           <div className="mt-8">
             <Scores items={SCORES} />
           </div>
@@ -277,21 +542,51 @@ export default function GeronimoThePlan() {
                 ]}
               />
             </Block>
-            <Block label="Data points on the table">
-              <BulletList
-                items={[
-                  <>Self book from Instagram accounts for roughly <b className="text-white font-semibold">two to three bookings a month</b> through the profile link.</>,
-                  <>Current output sits at around <b className="text-white font-semibold">three pieces a week</b>.</>,
-                  <>No carousel has gone out on TGA in <b className="text-white font-semibold">six to seven months</b>.</>,
-                  'One clip typically goes out per podcast episode.',
-                  'Separation Sunday is the strongest owned format. One carousel did roughly 26k views with hundreds of comments off a comment CTA. Every carousel Doza has ever posted has been a Separation Sunday.',
-                ]}
-              />
-            </Block>
           </div>
+        </Wrap>
+
+        {/* ─── STICKY NAV · TWO LEVELS ─── */}
+        <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/90 backdrop-blur-md">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8 py-4 space-y-3">
+            <div className="-mb-10">
+              <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
+            </div>
+            <SubTabs sections={current.sections} active={sec} onChange={changeSec} />
+          </div>
+        </div>
+
+        {/* ─── TAB INTRO ─── */}
+        <Wrap>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">{current.label}</p>
+          <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed max-w-2xl">{current.blurb}</p>
         </Wrap>
         <Divider />
 
+        {/* ═══════════════ BRAND ═══════════════ */}
+        {sec === 'today' && (
+          <>
+        {/* ─── 1 · THE NUMBERS TODAY ─── */}
+        <Wrap>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">01 · Today</p>
+          <H2>The numbers on the table.</H2>
+          <Note>Where the account actually sits before anything changes.</Note>
+          <div className="mt-8">
+            <BulletList
+              items={[
+                <>Self book from Instagram accounts for roughly <b className="text-white font-semibold">two to three bookings a month</b> through the profile link.</>,
+                <>Current output sits at around <b className="text-white font-semibold">three pieces a week</b>.</>,
+                <>No carousel has gone out on TGA in <b className="text-white font-semibold">six to seven months</b>.</>,
+                'One clip typically goes out per podcast episode.',
+                'Separation Sunday is the strongest owned format. One carousel did roughly 26k views with hundreds of comments off a comment CTA. Every carousel Doza has ever posted has been a Separation Sunday.',
+              ]}
+            />
+          </div>
+        </Wrap>
+          </>
+        )}
+
+        {sec === 'brands' && (
+          <>
         {/* ─── 2 · DECIDE ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">02 · Decide</p>
@@ -336,8 +631,11 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {sec === 'workhard' && (
+          <>
         {/* ─── 3 · WORKING ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">03 · Working</p>
@@ -385,8 +683,11 @@ export default function GeronimoThePlan() {
             </div>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {sec === 'principles' && (
+          <>
         {/* ─── 4 · PRINCIPLES ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">04 · Principles</p>
@@ -439,8 +740,12 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {/* ═══════════════ CONTENT ═══════════════ */}
+        {sec === 'capture' && (
+          <>
         {/* ─── 5 · CONTENT ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Content</p>
@@ -479,8 +784,19 @@ export default function GeronimoThePlan() {
             </div>
           </div>
 
-          <div className="mt-12">
-            <Block label="The format library">
+        </Wrap>
+          </>
+        )}
+
+        {sec === 'formats' && (
+          <>
+        {/* ─── 5b · FORMATS ─── */}
+        <Wrap>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Formats</p>
+          <H2>The format library.</H2>
+          <Note>Everything discussed, with the note that matters for each. Create needs a decision and a shoot. Capture only needs a camera pointed at something already happening.</Note>
+          <div className="mt-8">
+            <div>
               <div className="grid gap-3 md:grid-cols-2">
                 {[
                   {
@@ -538,11 +854,14 @@ export default function GeronimoThePlan() {
                   </div>
                 ))}
               </div>
-            </Block>
+            </div>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {sec === 'series' && (
+          <>
         {/* ─── 6 · SERIES ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">06 · Series</p>
@@ -578,8 +897,12 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {/* ═══════════════ PRODUCTION ═══════════════ */}
+        {sec === 'cadence' && (
+          <>
         {/* ─── 7 · CADENCE ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">07 · Cadence</p>
@@ -600,6 +923,19 @@ export default function GeronimoThePlan() {
                 ]}
               />
             </Block>
+          </div>
+        </Wrap>
+          </>
+        )}
+
+        {sec === 'lanes' && (
+          <>
+        {/* ─── 7b · LANES ─── */}
+        <Wrap>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">07 · Lanes</p>
+          <H2>Who does what.</H2>
+          <Note>The lane each person runs, and why it suits them. Everyone outside the ten still has a job.</Note>
+          <div className="mt-8">
             <Block label="Lanes by person">
               <LaneTable />
             </Block>
@@ -718,7 +1054,19 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
+
+        {/* ═══════════════ PINNED · THE COMMITMENTS ═══════════════ */}
+        <div className="border-t-2 border-blue-500/30">
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Always on</p>
+            <H2>What we committed to.</H2>
+            <p className="text-zinc-400 text-[15px] md:text-[16px] leading-relaxed max-w-2xl">
+              This part sits under every tab. What is locked for four weeks, what is deliberately still open, what could quietly kill it, and who owns what from Monday.
+            </p>
+          </Wrap>
+        </div>
 
         {/* ─── 10 · RISKS ─── */}
         <Wrap>

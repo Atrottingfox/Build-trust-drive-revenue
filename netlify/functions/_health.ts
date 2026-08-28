@@ -55,8 +55,8 @@ const EXPECTED_CENTS: Record<string, number> = {
   name here without that being true silences a real outage.
 */
 const RETIRED: Record<string, string> = {
-  "Install Signed Onboarding Email": "verify-payment sends this on payment",
-  "Install Slot Reminder": "slot-chase reports to Slack instead",
+  "Install Signed Onboarding Email": "verify-payment",
+  "Install Slot Reminder": "slot-chase",
 };
 
 /*
