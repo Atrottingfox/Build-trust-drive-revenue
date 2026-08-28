@@ -227,7 +227,7 @@ const TABS: TabDef[] = [
     blurb: 'The two brands and the job each one does. What is working, what is hard, and the principles underneath every format decision.',
     sections: [
       { id: 'brands', label: 'The Brands' },
-      { id: 'workhard', label: 'Work / Hard' },
+      { id: 'workhard', label: 'Good vs Bad' },
       { id: 'principles', label: 'Principles' },
     ],
   },
@@ -875,11 +875,11 @@ export default function TheGeronimoPlan() {
         {/* ─── 3 · WORKING ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Working</p>
-          <H2>What works. What is hard.</H2>
-          <Note>Split by brand, because the answer is different for each. Do more of the working column before inventing anything.</Note>
+          <H2>Good vs bad.</H2>
+          <Note>Split by brand, because the answer is different for each. Do more of the good before inventing anything.</Note>
 
           <div className="mt-8">
-            <Block label="Working, TGA">
+            <Block label="Good, TGA">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Volume.</b> Money comes from volume. The summit weekend, an obnoxious amount of undeniable content, was the best sales weekend on record.</>,
@@ -892,7 +892,7 @@ export default function TheGeronimoPlan() {
               />
             </Block>
 
-            <Block label="Working, Doza">
+            <Block label="Good, Doza">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Energy.</b> Named as the biggest single differentiator. It is the brand.</>,
@@ -904,7 +904,7 @@ export default function TheGeronimoPlan() {
               />
             </Block>
 
-            <Block label="Hard, TGA">
+            <Block label="Bad, TGA">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Ideation.</b> No cracked process, so it never feels good. The number one hard thing.</>,
@@ -916,7 +916,7 @@ export default function TheGeronimoPlan() {
               />
             </Block>
 
-            <Block label="Hard, Doza">
+            <Block label="Bad, Doza">
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Backlog.</b> Always chasing the tail. The next thing has to go out this week, so there is never a buffer.</>,
