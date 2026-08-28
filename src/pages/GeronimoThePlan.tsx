@@ -1003,7 +1003,7 @@ export default function GeronimoThePlan() {
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Content</p>
           <H2>Capture and Create.</H2>
-          <Note>The organising split that replaced the pillar debate. Buckets like proof and authority collapsed under scrutiny because every good piece already does both. This is the only division that changes how the work gets made, and therefore who does it and when.</Note>
+          <Note>This is a buffet. It is not everything. It is simply showing what options we came up with on the day. There are two types.</Note>
           <div className="mt-8 grid md:grid-cols-2 gap-4">
             <div className="glow-card p-6">
               <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Bucket 01 · Capture</p>
