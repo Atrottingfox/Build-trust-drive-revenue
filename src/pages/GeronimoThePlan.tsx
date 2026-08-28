@@ -916,7 +916,7 @@ export default function GeronimoThePlan() {
                   <><b className="text-white font-semibold">Only three people for now.</b> Ryan and Sophie already want to and are already building personal brands attached to the mission. Nobody else gets forced onto camera yet.</>,
                   <><b className="text-white font-semibold">They post to TGA.</b> Their own accounts run in parallel because they want to, but TGA is the priority.</>,
                   <><b className="text-white font-semibold">Weekends stay off.</b> Add Saturday and Sunday only once weekdays are boringly reliable.</>,
-                  <><b className="text-white font-semibold">One a day is an acceptable start</b> in a week where the shoot backlog has to be cleared first. Two is the target, not a pass or fail.</>,
+                  <><b className="text-white font-semibold">Start at one a day.</b> Five for the first week while the shoot backlog gets cleared and the rhythm goes in. Second week we push to ten.</>,
                   <><b className="text-white font-semibold">Everything else layers on top.</b> The podcast trailer, event footage, mission content, anything Billy captures. Extra, not load bearing.</>,
                   <><b className="text-white font-semibold">The 30 day KPI is not a banger.</b> It is whether we can reliably get the ten out.</>,
                   <><b className="text-white font-semibold">Expect to re cut the mix.</b> In two weeks it will be obvious who is better at what, then reallocate slots to strengths.</>,
@@ -950,8 +950,11 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {sec === 'rhythm' && (
+          <>
         {/* ─── 8 · RHYTHM ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">08 · Rhythm</p>
@@ -992,8 +995,11 @@ export default function GeronimoThePlan() {
             </Block>
           </div>
         </Wrap>
-        <Divider />
+          </>
+        )}
 
+        {sec === 'assets' && (
+          <>
         {/* ─── 9 · ASSETS ─── */}
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">09 · Assets</p>
