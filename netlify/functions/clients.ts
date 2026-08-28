@@ -37,7 +37,9 @@ function stateOf(tags: string[]): string {
   if (tags.includes("brand-day-paid")) return "Paid, no date yet";
   if (tags.includes("invited")) return "Invited to a Brand Day";
   if (tags.includes("applied")) return "Applied";
-  return "Started an application";
+  /* A contact created by hand for somebody closed on a call carries no tags at
+     all until they do something. "Started an application" was a lie about them. */
+  return "No movement yet";
 }
 
 const handler: Handler = async (event) => {
@@ -99,11 +101,17 @@ const handler: Handler = async (event) => {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
+      /*
+        Everybody, not only people who came through the form.
+
+        Filtering on `applied` meant anybody closed on a call and set up by hand
+        was invisible on the one page meant to answer "where is everyone up to".
+        Sorted by last activity so the people actually moving sit at the top.
+      */
       body: JSON.stringify({
         locationId,
         pageLimit: 100,
-        filters: [{ field: "tags", operator: "contains", value: "applied" }],
-        sort: [{ field: "dateAdded", direction: "desc" }],
+        sort: [{ field: "dateUpdated", direction: "desc" }],
       }),
     });
 
@@ -115,18 +123,31 @@ const handler: Handler = async (event) => {
       };
     }
 
-    const contacts = ((await res.json())?.contacts || []).map((c: Record<string, any>) => {
-      const tags: string[] = c.tags || [];
-      return {
-        id: c.id,
-        name: [c.firstName, c.lastName].filter(Boolean).join(" ").trim() || c.contactName || c.email || "Unnamed",
-        email: c.email || "",
-        company: c.companyName || "",
-        addedAt: c.dateAdded || "",
-        state: stateOf(tags),
-        invited: tags.includes(INVITE_TAG),
-      };
-    });
+    const lastSeenField = process.env.GHL_FIELD_HUB_LAST_SEEN;
+
+    const contacts = ((await res.json())?.contacts || [])
+      /* The hourly health check leaves a contact behind by design. It is not a
+         person and it must not sit at the top of this list. */
+      .filter((c: Record<string, any>) => !(c.tags || []).includes("zz-healthcheck"))
+      .map((c: Record<string, any>) => {
+        const tags: string[] = c.tags || [];
+        const lastSeen = lastSeenField
+          ? (c.customFields || []).find((f: any) => f?.id === lastSeenField)?.value || ""
+          : "";
+        return {
+          id: c.id,
+          name: [c.firstName, c.lastName].filter(Boolean).join(" ").trim() || c.contactName || c.email || "Unnamed",
+          email: c.email || "",
+          company: c.companyName || "",
+          addedAt: c.dateAdded || "",
+          state: stateOf(tags),
+          invited: tags.includes(INVITE_TAG),
+          /* The three questions actually asked about somebody who has a link. */
+          opened: tags.includes("hub-opened"),
+          lastSeen,
+          paid: tags.includes("brand-day-paid") || tags.includes("step-2-paid"),
+        };
+      });
 
     return { statusCode: 200, headers, body: JSON.stringify({ ok: true, contacts }) };
   } catch (err) {

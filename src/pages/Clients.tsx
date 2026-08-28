@@ -29,7 +29,27 @@ type Client = {
   addedAt: string;
   state: string;
   invited: boolean;
+  opened: boolean;
+  lastSeen: string;
+  paid: boolean;
 };
+
+/*
+  Plain English beats a timestamp nobody converts in their head. "Three days
+  ago" is the answer to the question actually being asked, which is whether it
+  is time to chase them.
+*/
+function sinceLabel(iso: string): string {
+  const then = Date.parse(iso);
+  if (!Number.isFinite(then)) return '';
+  const mins = Math.floor((Date.now() - then) / 60000);
+  if (mins < 2) return 'just now';
+  if (mins < 60) return `${mins} minutes ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return hours === 1 ? 'an hour ago' : `${hours} hours ago`;
+  const days = Math.floor(hours / 24);
+  return days === 1 ? 'yesterday' : `${days} days ago`;
+}
 
 export default function Clients() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -112,7 +132,7 @@ export default function Clients() {
           {!error && loading && <p className="text-zinc-500 text-sm">Loading.</p>}
 
           {!error && !loading && clients.length === 0 && (
-            <p className="text-zinc-500 text-sm">Nobody has applied yet.</p>
+            <p className="text-zinc-500 text-sm">Nobody in here yet.</p>
           )}
 
           <div className="space-y-3">
@@ -126,6 +146,24 @@ export default function Clients() {
                       {c.company ? ` · ${c.company}` : ''}
                     </p>
                     <p className="text-zinc-600 text-xs mt-2 uppercase tracking-widest">{c.state}</p>
+
+                    {/*
+                      Whether they have looked, and when they last did.
+
+                      Both were already written on every visit and neither was
+                      shown anywhere, so the only page that answers "where is
+                      everyone up to" could not answer the first thing asked
+                      about anybody holding a link.
+                    */}
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs">
+                      {c.paid && <span className="text-emerald-400">Paid</span>}
+                      <span className={c.opened ? 'text-zinc-400' : 'text-amber-500/80'}>
+                        {c.opened ? 'Opened their link' : 'Never opened their link'}
+                      </span>
+                      {c.lastSeen && (
+                        <span className="text-zinc-600">Last looked {sinceLabel(c.lastSeen)}</span>
+                      )}
+                    </div>
                   </div>
 
                   <div className="shrink-0">
