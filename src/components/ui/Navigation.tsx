@@ -3,8 +3,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
 import { AnimatePresence, motion } from 'framer-motion';
 
+// Client plan pages are private references, not sales pages. No Apply CTA.
+const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan'];
+
 export function Navigation() {
   const location = useLocation();
+  const hideCta = NO_CTA_PATHS.includes(location.pathname.toLowerCase());
   const [scrolled, setScrolled] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
   const lastScrollY = useRef(0);
@@ -49,18 +53,20 @@ export function Navigation() {
               <span className="font-semibold text-[15px]">The Authority Engine</span>
             </Link>
 
-            <a
-              href="/apply"
-              className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
-            >
-              Apply now
-            </a>
+            {!hideCta && (
+              <a
+                href="/apply"
+                className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
+              >
+                Apply now
+              </a>
+            )}
           </div>
         </div>
       </nav>
 
       <AnimatePresence>
-        {showMobile && (
+        {showMobile && !hideCta && (
           <motion.div
             className="fixed bottom-6 left-0 right-0 sm:hidden z-50 px-5 pointer-events-none"
             initial={{ y: 60, opacity: 0 }}

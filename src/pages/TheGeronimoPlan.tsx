@@ -742,8 +742,7 @@ export default function TheGeronimoPlan() {
           title="The"
           accent="Plan."
           blurb="The whole Strategy Day, bucketed by core function. Where the bottlenecks are. What we decided. What gets built first. Reference back to this. The four week run sheet lives separately."
-          backHref="/geronimo"
-          backLabel="Geronimo"
+          backHref={null}
         />
         {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
         <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/95 backdrop-blur-md">
