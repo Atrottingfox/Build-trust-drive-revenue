@@ -767,7 +767,7 @@ export default function GeronimoThePlan() {
         <Divider />
 
         {/* ═══════════════ START HERE ═══════════════ */}
-        {tab === 'start' && <FourWeeks wk={sec} onWeek={changeSec} onJump={changeSec} />}
+        {WEEKS.some((w) => w.id === sec) && <FourWeeks wk={sec} onWeek={changeSec} onJump={changeSec} />}
 
         {/* ═══════════════ DIAGNOSIS ═══════════════ */}
         {sec === 'scores' && (
@@ -1208,7 +1208,7 @@ export default function GeronimoThePlan() {
                   <><b className="text-white font-semibold">Weekends stay off.</b> Add Saturday and Sunday only once weekdays are boringly reliable.</>,
                   <><b className="text-white font-semibold">Start at one a day.</b> Five for the first week while the shoot backlog gets cleared and the rhythm goes in. Second week we push to ten.</>,
                   <><b className="text-white font-semibold">Everything else layers on top.</b> The podcast trailer, event footage, mission content, anything Billy captures. Extra, not load bearing.</>,
-                  <><b className="text-white font-semibold">The 30 day KPI is not a banger.</b> It is whether we can reliably get the ten out.</>,
+                  <><b className="text-white font-semibold">The measure is a minimum of five posts a week.</b> Whether we can reliably get the work out is the thing we are testing.</>,
                   <><b className="text-white font-semibold">Expect to re cut the mix.</b> In two weeks it will be obvious who is better at what, then reallocate slots to strengths.</>,
                 ]}
               />
