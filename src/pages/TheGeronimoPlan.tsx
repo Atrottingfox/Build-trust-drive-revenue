@@ -722,7 +722,7 @@ function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string;
 
 // ─── Page ────────────────────────────────────────────────────────────────
 
-export default function GeronimoThePlan() {
+export default function TheGeronimoPlan() {
   const { tab, sec, changeTab, changeSec } = usePlanNav();
   const current = TABS.find((t) => t.id === tab) ?? TABS[0];
 
@@ -732,7 +732,7 @@ export default function GeronimoThePlan() {
         <SEO
           title="The Plan, Geronimo"
           description="The Strategy Day, bucketed by core function. Diagnosis, decisions, principles, formats, cadence, and who does what from Monday."
-          path="/geronimo-theplan"
+          path="/thegeronimoplan"
           noIndex
         />
         <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
