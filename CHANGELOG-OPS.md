@@ -47,3 +47,28 @@ Any real buyer reaching these pages pays $1 until reverted.
 `netlify deploy --prod --build`. Note: the env change does NOT take effect
 without a redeploy, confirmed during this change.
 **STATUS: NOT YET REVERTED.**
+
+## 2026-08-28 10:15 AEST · GHL contract field ids set, dead var removed
+
+**What:** Set four GoHighLevel custom field ids on authorityengine.com.au
+production: `GHL_FIELD_ANNUAL_REVENUE`, `GHL_FIELD_WHATS_BROKEN`,
+`GHL_FIELD_OPERATOR_STATUS`, `GHL_FIELD_CAN_COMMIT_30_DAYS`. Values pulled
+live from the sub-account via `scripts/ghl-custom-fields.mjs`, not guessed.
+Removed `NOTION_TOKEN`, which nothing read (the code uses `NOTION_API_KEY`).
+Redeployed production.
+
+**Why:** Those four answers were being dropped from the GHL contact record on
+every application. Slack and Notion were unaffected, both read the raw
+submission, so nothing looked wrong. The health report had been saying so
+since 21 August and it read as four failures rather than four checks that
+could not run.
+
+**Result:** Health went from 12 failures to 8. All four contract checks now
+run and pass, no option mismatches. Env at ~3717 bytes of the 4096 Lambda
+ceiling.
+
+**Rollback:** `db-snapshots/authority-site-env-20260828T1009.json` holds every
+variable as it was, including the removed NOTION_TOKEN value.
+`netlify env:unset` the four GHL_FIELD_* vars and redeploy.
+
+**Not touched:** all four price variables stay at 100 for testing.

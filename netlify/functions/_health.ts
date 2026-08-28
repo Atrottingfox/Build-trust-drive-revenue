@@ -46,6 +46,37 @@ const EXPECTED_CENTS: Record<string, number> = {
   INSTALL_PAYMENT_2_CENTS: 500000,
 };
 
+/*
+  Workflows whose job moved into code. These sat in Draft being reported as
+  critical failures for a week, which taught everybody to skim the workflow
+  section, which is the opposite of what a health report is for.
+
+  Retiring one means the email it used to send is sent somewhere else. Adding a
+  name here without that being true silences a real outage.
+*/
+const RETIRED: Record<string, string> = {
+  "Install Signed Onboarding Email": "verify-payment sends this on payment",
+  "Install Slot Reminder": "slot-chase reports to Slack instead",
+};
+
+/*
+  The other half of the ones that are not retired.
+
+  The architecture is deliberate: code writes a tag, GoHighLevel sends the
+  email. That keeps the copy somewhere Sean can edit without a deploy. It also
+  means a draft workflow is not an idle workflow: the tagging half is already
+  running against real contacts, and every one of them is landing on a tag that
+  nothing reads.
+
+  So the alert names the function that is already doing its half, because "this
+  never runs" reads like something nobody needs.
+*/
+const WAITING_ON: Record<string, string> = {
+  "Prep Doc Chase": "prep-nudge",
+  "Prep Final Call": "prep-call-chase",
+  "No Operator": "install-slot",
+};
+
 const ghlAuth = (token: string) => ({
   Authorization: `Bearer ${token}`,
   Version: GHL_VERSION,
@@ -490,12 +521,31 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
           /* An abandoned "New Workflow : 1786…" is clutter, not an outage. */
           const junk = /^New Workflow\s*:/i.test(name);
           const published = String(f?.status || "").toLowerCase() === "published";
+          const replacedBy = RETIRED[name];
+
+          /*
+            A workflow whose job moved into code is not a failure, and reporting
+            it as one buries the ones that are. It is still worth a line: an
+            unpublished workflow sitting in the account is a thing somebody will
+            eventually try to fix, and the useful answer is what replaced it.
+          */
+          if (replacedBy && !published) {
+            add("Workflows", name, true, false, `retired, ${replacedBy} does this now. Safe to delete.`);
+            continue;
+          }
+
           add(
             "Workflows",
             name,
             published || junk,
             !junk,
-            published ? "published" : junk ? "draft, but it is an empty stub. Delete it." : "DRAFT — this never runs"
+            published
+              ? "published"
+              : junk
+                ? "draft, but it is an empty stub. Delete it."
+                : WAITING_ON[name]
+                  ? `DRAFT — ${WAITING_ON[name]} is tagging contacts for this and nothing is picking them up`
+                  : "DRAFT — this never runs"
           );
         }
       } else {
