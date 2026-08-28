@@ -336,7 +336,7 @@ const WEEKS: Week[] = [
       { who: 'Billy', job: 'Sit in on the calls. Flag the good moments live, at the source, rather than hunting for them afterwards.' },
       { who: 'Strategist', job: 'Turn the board into stencils, one per format. Source a freelance shooter.' },
     ],
-    close: 'Thursday shoots for week 2. Never for Monday.',
+    close: '',
   },
   {
     id: 'w2',
@@ -351,7 +351,7 @@ const WEEKS: Week[] = [
       { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Rework the testimonial and ad structure around association, Doza plus coach in frame before the client.' },
       { who: 'Strategist', job: 'Weekly session with Doza on formats and hooks, so live directing moves in house.' },
     ],
-    close: 'A one week buffer now exists between shoot and publish. Target two.',
+    close: 'We want to aim for a two week buffer between shoot & publish.',
   },
   {
     id: 'w3',
@@ -366,7 +366,7 @@ const WEEKS: Week[] = [
       { who: 'Sophie', job: 'Run the pop quiz against the mystery shop. Are they different enough to run both.' },
       { who: 'Doza', job: 'One direct to camera with a visual behind, one without. Compare them properly.' },
     ],
-    close: 'Ten should hold without heroics. If it needs heroics, that is the finding.',
+    close: '',
   },
   {
     id: 'w4',
@@ -437,7 +437,7 @@ function FourWeeks({ wk, onWeek, onJump }: { wk: string; onWeek: (id: string) =>
               ))}
             </div>
 
-            <p className="text-zinc-400 text-[14px] leading-relaxed mt-5 italic">{week.close}</p>
+            {week.close && <p className="text-zinc-400 text-[14px] leading-relaxed mt-5 italic">{week.close}</p>}
 
             <div className="mt-8 pt-6 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-4">
               <p className="text-white text-[15px] font-medium">
