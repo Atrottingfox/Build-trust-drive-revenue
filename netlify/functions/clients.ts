@@ -126,9 +126,20 @@ const handler: Handler = async (event) => {
     const lastSeenField = process.env.GHL_FIELD_HUB_LAST_SEEN;
 
     const contacts = ((await res.json())?.contacts || [])
-      /* The hourly health check leaves a contact behind by design. It is not a
-         person and it must not sit at the top of this list. */
-      .filter((c: Record<string, any>) => !(c.tags || []).includes("zz-healthcheck"))
+      /*
+        The monitoring leaves contacts behind by design. The hourly health check
+        tags its own, and the daily canary sends a real application under a
+        name of its own. Neither is a person, and both would otherwise sit at
+        the top of this list because they are the most recently active records
+        in the account.
+      */
+      .filter((c: Record<string, any>) => {
+        const tags: string[] = c.tags || [];
+        if (tags.includes("zz-healthcheck")) return false;
+        const name = `${c.firstName || ""} ${c.lastName || ""}`.trim().toLowerCase();
+        const email = String(c.email || "").toLowerCase();
+        return !name.startsWith("zz ") && !email.startsWith("zz-");
+      })
       .map((c: Record<string, any>) => {
         const tags: string[] = c.tags || [];
         const lastSeen = lastSeenField
