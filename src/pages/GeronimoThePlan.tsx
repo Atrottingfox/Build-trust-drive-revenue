@@ -279,6 +279,12 @@ const TABS: TabDef[] = [
     ],
   },
   {
+    id: 'pipeline',
+    label: 'Pipeline',
+    blurb: 'Six stages from an idea to a post. Every stage has one owner and a short list of what has to be true before it can run.',
+    sections: [{ id: 'flow', label: 'The flow' }],
+  },
+  {
     id: 'commit',
     label: 'Commit',
     blurb: 'What is locked for four weeks, what is deliberately still open, what could quietly kill it, and who owns what from Monday.',
@@ -603,21 +609,146 @@ function ScheduleLegend() {
   );
 }
 
+// ─── The production pipeline ─────────────────────────────────────────────
+
+type Stage = { n: string; name: string; owner: string; support?: string; reqs: string[] };
+
+const PIPELINE: Stage[] = [
+  {
+    n: '01',
+    name: 'Idea',
+    owner: 'Sophie, Ryan, Doza',
+    support: 'The coach owns the idea for their own lane',
+    reqs: [
+      'Ideas in by Monday through the form, so they can be approved or killed before Tuesday.',
+      'Everyone brings their three. Ryan three things he is excited about, Sophie three beliefs to break, Doza the ideas that came out of calls.',
+      'Ranked at the Tuesday meeting on effort against leverage. Low effort and high leverage ships immediately, everything else is cut or parked.',
+      'Nobody invents a concept the night before a shoot because something has to go out.',
+    ],
+  },
+  {
+    n: '02',
+    name: 'Pre production',
+    owner: 'Doza',
+    support: 'Billy, with Nate on hook, concept and structure',
+    reqs: [
+      'The hook is written before the shoot, not hunted for afterwards.',
+      'The concept and the framework are decided, so the shoot is execution and nothing else.',
+      'A stencil per format. Structure, not scripts.',
+      'A 10 minute pre shoot check the day before. Is everyone prepped for tomorrow.',
+    ],
+  },
+  {
+    n: '03',
+    name: 'Production',
+    owner: 'Operator',
+    support: 'Billy',
+    reqs: [
+      'Thursday, roughly two hours. It shoots what was approved on Tuesday.',
+      'Shoots for the week after. Never for Monday.',
+      'Two cameras wherever possible, one close and one wide.',
+      'The operator turns up, shoots, exports and sends it back. Nothing lands on the team.',
+    ],
+  },
+  {
+    n: '04',
+    name: 'Post production',
+    owner: 'Billy',
+    support: 'Clipper, overseas, for volume',
+    reqs: [
+      'Good moments are flagged live at the source. Nobody watches three full calls to find them.',
+      'A one week buffer between shoot and publish, targeting two.',
+      'Guidelines and oversight on anything outsourced. Without context it comes back as AI slop, and that has already happened once.',
+    ],
+  },
+  {
+    n: '05',
+    name: 'Approval and captions',
+    owner: 'Nate',
+    reqs: [
+      'Captions written before it queues.',
+      'Approved before it queues. Nothing goes out unapproved.',
+      'Held to the production standard on the new lanes.',
+    ],
+  },
+  {
+    n: '06',
+    name: 'Posting',
+    owner: 'Nate',
+    reqs: [
+      'Two slots a day, Monday to Friday. The schedule is the source of truth.',
+      'Weekends stay off until the weekdays are boringly reliable.',
+      'Anything extra, the podcast trailer, event footage, mission content, layers on top. It is not load bearing.',
+    ],
+  },
+];
+
+function PipelineFlow() {
+  return (
+    <div className="overflow-x-auto -mx-1 px-1 mb-10">
+      <div className="flex items-stretch gap-1.5 min-w-[42rem]">
+        {PIPELINE.map((s, i) => (
+          <React.Fragment key={s.n}>
+            <div className="flex-1 rounded-lg border border-zinc-800 border-t-2 border-t-blue-500/60 bg-elevated/40 px-3 py-3">
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">{s.n}</p>
+              <p className="font-display text-[13px] font-extrabold text-white leading-tight">{s.name}</p>
+              <p className="text-blue-400 text-[11px] mt-1.5 leading-tight">{s.owner}</p>
+            </div>
+            {i < PIPELINE.length - 1 && (
+              <div className="flex items-center text-zinc-700 text-[14px] flex-shrink-0" aria-hidden="true">
+                &gt;
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function PipelineStages() {
+  return (
+    <div className="grid gap-3">
+      {PIPELINE.map((s) => (
+        <div key={s.n} className="rounded-xl border border-zinc-800 bg-elevated/40 p-6">
+          <div className="flex items-baseline gap-3 mb-4 flex-wrap">
+            <span className="font-display text-[26px] font-extrabold text-zinc-800 leading-none">{s.n}</span>
+            <h3 className="font-display text-[18px] font-extrabold text-white">{s.name}</h3>
+          </div>
+
+          <div className="rounded-lg border border-zinc-800 bg-base/50 px-4 py-3 mb-5">
+            <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">Owner</p>
+            <p className="text-white text-[14px] font-semibold">{s.owner}</p>
+            {s.support && <p className="text-zinc-400 text-[13px] mt-1 leading-relaxed">{s.support}</p>}
+          </div>
+
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-3">What has to be true</p>
+          <BulletList items={s.reqs} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── Sub tab row ─────────────────────────────────────────────────────────
 
 function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string; label: string }>; active: string; onChange: (id: string) => void }) {
+  if (sections.length < 2) return null;
   return (
-    <div className="flex flex-wrap items-center gap-x-1 gap-y-2">
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-1">
       {sections.map((s) => (
         <button
           key={s.id}
           type="button"
           onClick={() => onChange(s.id)}
-          className={`rounded-lg px-3 py-1.5 text-[13px] font-medium transition-colors ${
-            active === s.id ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-200'
+          className={`relative py-2 text-[13px] font-medium transition-colors ${
+            active === s.id ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'
           }`}
         >
           {s.label}
+          {active === s.id && (
+            <span className="absolute bottom-0 left-0 right-0 h-[2px] rounded-full bg-blue-500" />
+          )}
         </button>
       ))}
     </div>
@@ -651,11 +782,15 @@ export default function GeronimoThePlan() {
         />
         {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
         <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/95 backdrop-blur-md">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8 py-4 space-y-3">
-            <div className="-mb-10">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <div className="pt-5 pb-4 -mb-10">
               <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
             </div>
-            <SubTabs sections={current.sections} active={sec} onChange={changeSec} />
+            {current.sections.length > 1 && (
+              <div className="border-t border-zinc-800/70">
+                <SubTabs sections={current.sections} active={sec} onChange={changeSec} />
+              </div>
+            )}
           </div>
         </div>
 
@@ -737,10 +872,10 @@ export default function GeronimoThePlan() {
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">02 · Decide</p>
           <H2>TGA first. Hey Doza parked.</H2>
-          <Note>Two brands, two jobs. Separating them is what stops content getting confused, and stops the wrong phone calls coming in.</Note>
+          <Note>TGA is The Geronimo Academy. Hey Doza is the founder brand. Two brands, two jobs, and separating them is what stops content getting confused and the wrong phone calls coming in.</Note>
           <div className="mt-8 grid md:grid-cols-2 gap-4">
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 01 · TGA</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 01 · TGA, The Geronimo Academy</p>
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">The moneymaker.</b> When TGA posts properly, sales follow. The summit weekend was the clearest proof.</>,
@@ -1232,6 +1367,29 @@ export default function GeronimoThePlan() {
           </div>
         </Wrap>
           </>
+        )}
+
+        {/* ═══════════════ PIPELINE ═══════════════ */}
+        {sec === 'flow' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The flow</p>
+            <H2>Idea to posted, in six stages.</H2>
+            <Note>One owner per stage. If a stage has no owner it stalls, and the whole line backs up behind it.</Note>
+            <div className="mt-8">
+              <PipelineFlow />
+              <PipelineStages />
+            </div>
+            <div className="mt-10">
+              <Block label="The two things that break it">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Footage handoff.</b> If a coach has to get files to the editor, that is the choke point. The operator exports and sends, so nothing sits on the team.</>,
+                    <><b className="text-white font-semibold">Finding the good moments.</b> Flag them live with a timestamp at the source. Hunting for them afterwards is the single biggest cost in post.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
         )}
 
         {/* ═══════════════ COMMIT ═══════════════ */}
