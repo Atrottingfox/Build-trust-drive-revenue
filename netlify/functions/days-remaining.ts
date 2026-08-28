@@ -9,9 +9,11 @@ import type { Handler } from "@netlify/functions";
   keep the number honest. Nobody remembers to do that, and a stale scarcity
   count is worse than none.
 
-  So it is counted from GHL instead: every contact carrying `brand-day-confirmed`
-  has both paid and picked a date, which is exactly what spends one of the
-  twenty.
+  So it is counted from GHL instead. A Day is spent the moment somebody pays,
+  not when they later pick a date: the money is in and the Day is sold, so the
+  number has to move straight away. Counting the booking instead left the page
+  advertising a Day that was already gone for as long as it took somebody to
+  open their calendar.
 
   DAYS_ALREADY_RUN covers the ones delivered before this system existed, since
   those contacts were never tagged.
@@ -52,7 +54,7 @@ const handler: Handler = async () => {
       },
       body: JSON.stringify({
         locationId,
-        filters: [{ field: "tags", operator: "contains", value: "brand-day-confirmed" }],
+        filters: [{ field: "tags", operator: "contains", value: "brand-day-paid" }],
         pageLimit: 1,
       }),
     });
@@ -62,13 +64,13 @@ const handler: Handler = async () => {
       return { statusCode: 200, headers, body: JSON.stringify(fallback) };
     }
 
-    const confirmed = Number((await res.json())?.total) || 0;
-    const remaining = Math.max(0, total - alreadyRun - confirmed);
+    const sold = Number((await res.json())?.total) || 0;
+    const remaining = Math.max(0, total - alreadyRun - sold);
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ total, remaining, counted: true, confirmed, alreadyRun }),
+      body: JSON.stringify({ total, remaining, counted: true, sold, alreadyRun }),
     };
   } catch (err) {
     console.error("days-remaining error:", err);

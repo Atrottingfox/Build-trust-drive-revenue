@@ -707,14 +707,14 @@ export default function LockIn() {
               <p className="text-white text-[15px]">
                 <span className="font-display text-2xl align-middle mr-1.5">
                   {/*
-                    Counted from GHL, where a Day is only spent once it is both
-                    paid AND booked. Between those two moments the client has
-                    paid and the number has not moved, which reads as though
-                    their payment did not register. So it is taken down by one
-                    locally for exactly that window, and GHL is trusted again
-                    the moment the booking lands.
+                    Counted from GHL, where a Day is spent the moment somebody
+                    pays. The page used to take one off locally for the window
+                    between paying and booking, because the server only counted
+                    confirmed Days and the number sat still while the client
+                    watched. The server counts payments now, so doing it here
+                    as well would take two Days off for one sale.
                   */}
-                  {paid && !booked ? Math.max(0, days.remaining - 1) : days.remaining}
+                  {days.remaining}
                 </span>
                 Days left at $5,000 AUD
               </p>

@@ -650,10 +650,19 @@ describe("Paying shortens the page rather than leaving the pitch up", () => {
     expect(walkthroughs).toHaveLength(1);
   });
 
-  it("the counter moves on payment, before GHL catches up", () => {
-    /* GHL only spends a Day once it is paid AND booked. Between those two
-       moments the number not moving reads as the payment not registering. */
-    expect(page("LockIn.tsx")).toContain("paid && !booked ? Math.max(0, days.remaining - 1)");
+  it("a Day is spent the moment it is paid for", () => {
+    /* It used to be spent only once the client also picked a date, so the page
+       advertised a Day that was already sold for as long as it took them to
+       open their calendar. */
+    const src = codeOf(fn("days-remaining.ts"));
+    expect(src).toContain('value: "brand-day-paid"');
+    expect(src).not.toContain('value: "brand-day-confirmed"');
+  });
+
+  it("one sale takes one Day off the board, not two", () => {
+    /* The page used to subtract one locally to cover the gap above. With the
+       server counting payments, doing it here as well double counts. */
+    expect(page("LockIn.tsx")).not.toContain("days.remaining - 1");
   });
 
   it("completing a step scrolls back to the top", () => {
