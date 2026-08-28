@@ -18,8 +18,8 @@ const SCORES: Score[] = [
   {
     name: 'Visibility',
     score: 4,
-    label: '4 / 5 · 5 on short form',
-    note: 'Not the constraint. Ads can inflate this on demand. Strong on short form, softer across long form and everywhere else.',
+    label: '4 / 5',
+    note: 'Not the constraint. Ads can inflate this on demand. Strong on short form, softer everywhere else.',
   },
   {
     name: 'Authority',
@@ -28,16 +28,10 @@ const SCORES: Score[] = [
     note: 'Named frameworks and unique principles are the gap. Very little "this is the TGA way" content exists. Authority cannot outrun a clarity of 2.',
   },
   {
-    name: 'Lead quality',
+    name: 'Quality',
     score: 4,
     label: '4 / 5',
     note: 'Leads arrive pre sold and ready to buy. Hard to attribute between the podcast, YouTube and the live events, but the assets are doing their job.',
-  },
-  {
-    name: 'Content quality',
-    score: 2,
-    label: '2 / 5 · subjective',
-    note: 'The room rated its own work going out.',
   },
 ];
 
@@ -143,22 +137,10 @@ const LANES: Lane[] = [
     note: 'The only formally qualified coach on the team. Strength is going a level deeper, breaking beliefs and reframing on live calls. Weekly prompt: three things everyone needs to hear right now, or the belief you broke this week.',
   },
   {
-    who: 'Nate',
-    count: '-',
-    lane: 'Production pipeline. Gap spotting.',
-    note: 'Production is not the bottleneck when the team is aligned on the one thing. Flagged ideation as the real constraint.',
-  },
-  {
     who: 'Billy',
     count: '-',
     lane: 'Capture on the ground. Sophie office hours container.',
     note: 'Sits in on the calls with Doza. The stuff between calls is where the content ideas come from. Joins the weekly media meeting.',
-  },
-  {
-    who: 'AC',
-    count: '-',
-    lane: 'Podcast ownership. Creative connector.',
-    note: 'Owns topics, episode framework, hook opportunities, reach and growth. Editing stays in house under her direction and guidelines. Contract not yet signed, needs context and a proper onboarding session.',
   },
   {
     who: 'Freelance shooter',
@@ -228,20 +210,13 @@ const TABS: TabDef[] = [
   {
     id: 'start',
     label: 'Start here',
-    blurb: 'Four weeks, one job each. Find your name, do your line, come back. The ramp from five to ten is deliberate.',
+    blurb: 'Where we sit today, then the four weeks. Every person has one job.',
     sections: [
+      { id: 'scores', label: 'Diagnosis' },
       { id: 'w1', label: 'Week 1' },
       { id: 'w2', label: 'Week 2' },
       { id: 'w3', label: 'Week 3' },
       { id: 'w4', label: 'Week 4' },
-    ],
-  },
-  {
-    id: 'diagnosis',
-    label: 'Diagnosis',
-    blurb: 'Self rated in the room, out of five. The first four run in sequence, each one downstream of the last. This is the frame for everything else.',
-    sections: [
-      { id: 'scores', label: 'The scores' },
       { id: 'order', label: 'Why the order' },
       { id: 'today', label: 'Today' },
     ],
@@ -259,19 +234,20 @@ const TABS: TabDef[] = [
   {
     id: 'content',
     label: 'Content',
-    blurb: 'Capture and Create is the only split that changes how the work gets made. Then the formats that fill each bucket, and the series that make them recognisable.',
+    blurb: 'The buffet, not the order. Capture and Create, the format library, the series, and the week they get slotted into.',
     sections: [
       { id: 'capture', label: 'Capture / Create' },
       { id: 'formats', label: 'Formats' },
       { id: 'series', label: 'Series' },
+      { id: 'schedule', label: 'The schedule' },
     ],
   },
   {
     id: 'production',
     label: 'Production',
-    blurb: 'Ten a week across three people. The schedule off the board, the lanes, the weekly rhythm, and the assets that sit outside the ten.',
+    blurb: 'How it gets made and out the door. The pipeline, the lanes, the weekly rhythm, and the assets that sit outside the ten.',
     sections: [
-      { id: 'schedule', label: 'The schedule' },
+      { id: 'flow', label: 'Pipeline' },
       { id: 'cadence', label: 'Ten a week' },
       { id: 'lanes', label: 'Lanes' },
       { id: 'rhythm', label: 'Rhythm' },
@@ -279,20 +255,14 @@ const TABS: TabDef[] = [
     ],
   },
   {
-    id: 'pipeline',
-    label: 'Pipeline',
-    blurb: 'Six stages from an idea to a post. Every stage has one owner and a short list of what has to be true before it can run.',
-    sections: [{ id: 'flow', label: 'The flow' }],
-  },
-  {
     id: 'commit',
-    label: 'Commit',
-    blurb: 'What is locked for four weeks, what is deliberately still open, what could quietly kill it, and who owns what from Monday.',
+    label: 'Next steps',
+    blurb: 'Who owns what, what is locked for four weeks, what is deliberately still open, and what could quietly kill it.',
     sections: [
+      { id: 'next', label: 'Responsibilities' },
       { id: 'locked', label: 'Locked' },
       { id: 'open', label: 'Open' },
       { id: 'risks', label: 'Risks' },
-      { id: 'next', label: 'Next moves' },
     ],
   },
 ];
@@ -302,20 +272,17 @@ const SECTION_TAB: Record<string, string> = Object.fromEntries(
 );
 
 function scrollToNav() {
-  const anchor = document.getElementById('plan-tabs');
-  if (!anchor) return;
-  const top = anchor.getBoundingClientRect().top + window.scrollY - 8;
-  window.scrollTo({ top, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function usePlanNav() {
   const [sec, setSec] = React.useState<string>(() => {
-    if (typeof window === 'undefined') return 'w1';
+    if (typeof window === 'undefined') return 'scores';
     const s = new URLSearchParams(window.location.search).get('s');
     if (s && SECTION_TAB[s]) return s;
     const t = new URLSearchParams(window.location.search).get('t');
     const found = TABS.find((x) => x.id === t);
-    return found ? found.sections[0].id : 'w1';
+    return found ? found.sections[0].id : 'scores';
   });
 
   const tab = SECTION_TAB[sec] ?? 'start';
@@ -367,7 +334,6 @@ const WEEKS: Week[] = [
       { who: 'Ryan', job: 'Bring three things you are excited about to Tuesday, for show and tell. Flag your monthly office visit dates.' },
       { who: 'Sophie', job: 'Nominate one weekly office hours block as your capture container. You are doing the call anyway.' },
       { who: 'Billy', job: 'Sit in on the calls. Flag the good moments live, at the source, rather than hunting for them afterwards.' },
-      { who: 'Nate', job: 'Watch the pipeline for gaps. Own the production standard on the new lanes.' },
       { who: 'Strategist', job: 'Turn the board into stencils, one per format. Source a freelance shooter on the Gold Coast.' },
     ],
     close: 'Thursday shoots for week 2. Never for Monday.',
@@ -382,7 +348,7 @@ const WEEKS: Week[] = [
       { who: 'Doza', job: 'Four pieces. Two direct to camera, one with a visual behind and one without. Plus a series episode.' },
       { who: 'Ryan', job: 'Three pieces. Show and tell with the tool, a mystery shop, and a coaching call Q&A.' },
       { who: 'Sophie', job: 'Three pieces. Direct to camera on belief and reframes, a pop quiz, and a coaching call Q&A.' },
-      { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Get AC contracted and onboarded with real context. Rework the testimonial and ad structure around association, Doza plus coach in frame before the client.' },
+      { who: 'Head of content', job: 'Hold the Tuesday and Thursday rhythm. Rework the testimonial and ad structure around association, Doza plus coach in frame before the client.' },
       { who: 'Strategist', job: 'Weekly session with Doza on formats and hooks, so live directing moves in house.' },
     ],
     close: 'A one week buffer now exists between shoot and publish. Target two.',
@@ -395,11 +361,10 @@ const WEEKS: Week[] = [
     frame: 'Two weeks in it is obvious who is better at what. Reallocate slots, then start testing the things we deliberately left open.',
     jobs: [
       { who: 'Head of content', job: 'Reallocate the ten to strengths. Set dress the two Gold Coast office rooms.' },
-      { who: 'Strategist + Doza', job: 'Hook test. Around 15 trial reels on Under Management before a single episode gets built.' },
+      { who: 'Strategist + Doza', job: 'Hook test. Five trial reels on Under Management before a single episode gets built.' },
       { who: 'Ryan', job: 'Freelance shooter visit. Two hours. Q&A capture plus two mystery shops in the same trip.' },
       { who: 'Sophie', job: 'Run the pop quiz against the mystery shop. Are they different enough to run both.' },
       { who: 'Doza', job: 'One direct to camera with a visual behind, one without. Compare them properly.' },
-      { who: 'AC', job: 'Podcast topics, episode framework and hooks. Bring micro niche topic sourcing into the ideation loop.' },
     ],
     close: 'Ten should hold without heroics. If it needs heroics, that is the finding.',
   },
@@ -433,10 +398,10 @@ function FourWeeks({ wk, onWeek, onJump }: { wk: string; onWeek: (id: string) =>
               Four weeks. One job each.
             </h2>
             <p className="text-zinc-400 text-[15px] leading-relaxed mb-7 max-w-2xl">
-              Do not read the rest of this page first. Find your name, do your line, come back. The ramp is deliberate.
+              Every person has one job. Billy is head of content.
             </p>
 
-            {/* the ramp */}
+            {/* the four weeks */}
             <div className="grid grid-cols-4 gap-1.5 mb-7">
               {WEEKS.map((w) => {
                 const on = w.id === wk;
@@ -476,7 +441,7 @@ function FourWeeks({ wk, onWeek, onJump }: { wk: string; onWeek: (id: string) =>
 
             <div className="mt-8 pt-6 border-t border-zinc-800 flex flex-wrap items-center justify-between gap-4">
               <p className="text-white text-[15px] font-medium">
-                The only KPI for 30 days: <span className="text-blue-400">did the work go out.</span> Not a banger.
+                The measure: <span className="text-blue-400">a minimum of five posts a week.</span>
               </p>
               <button
                 type="button"
@@ -630,7 +595,7 @@ const PIPELINE: Stage[] = [
     n: '02',
     name: 'Pre production',
     owner: 'Doza',
-    support: 'Billy, with Nate on hook, concept and structure',
+    support: 'Billy on hook, concept and structure',
     reqs: [
       'The hook is written before the shoot, not hunted for afterwards.',
       'The concept and the framework are decided, so the shoot is execution and nothing else.',
@@ -664,7 +629,7 @@ const PIPELINE: Stage[] = [
   {
     n: '05',
     name: 'Approval and captions',
-    owner: 'Nate',
+    owner: 'Billy',
     reqs: [
       'Captions written before it queues.',
       'Approved before it queues. Nothing goes out unapproved.',
@@ -674,7 +639,7 @@ const PIPELINE: Stage[] = [
   {
     n: '06',
     name: 'Posting',
-    owner: 'Nate',
+    owner: 'Billy',
     reqs: [
       'Two slots a day, Monday to Friday. The schedule is the source of truth.',
       'Weekends stay off until the weekdays are boringly reliable.',
@@ -814,10 +779,10 @@ export default function GeronimoThePlan() {
               <Scores items={SCORES} />
             </div>
             <div className="mt-10">
-              <Block label="The honest read from the room">
+              <Block label="Notes">
                 <BulletList
                   items={[
-                    'Audience reaction to TGA today: excited and curious when things are in motion. Underwhelmed and confused the rest of the time.',
+                    'Current state: excited and curious when things are in motion. Underwhelmed and confused the rest of the time.',
                     'Clients are not paying us to be as good as they are. They are paying us to be bigger.',
                   ]}
                 />
@@ -856,9 +821,8 @@ export default function GeronimoThePlan() {
               items={[
                 <>Self book from Instagram accounts for roughly <b className="text-white font-semibold">two to three bookings a month</b> through the profile link.</>,
                 <>Current output sits at around <b className="text-white font-semibold">three pieces a week</b>.</>,
-                <>No carousel has gone out on TGA in <b className="text-white font-semibold">six to seven months</b>.</>,
                 'One clip typically goes out per podcast episode.',
-                'Separation Sunday is the strongest owned format. One carousel did roughly 26k views with hundreds of comments off a comment CTA. Every carousel Doza has ever posted has been a Separation Sunday.',
+                'Separation Sunday is the strongest owned format. One carousel did roughly 26k views with hundreds of comments off a comment CTA.',
               ]}
             />
           </div>
@@ -872,10 +836,10 @@ export default function GeronimoThePlan() {
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">02 · Decide</p>
           <H2>TGA first. Hey Doza parked.</H2>
-          <Note>TGA is The Geronimo Academy. Hey Doza is the founder brand. Two brands, two jobs, and separating them is what stops content getting confused and the wrong phone calls coming in.</Note>
+          <Note>Two brands, two jobs. Separating them is what keeps the right buyer wanting to buy.</Note>
           <div className="mt-8 grid md:grid-cols-2 gap-4">
             <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 01 · TGA, The Geronimo Academy</p>
+              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Brand 01 · TGA</p>
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">The moneymaker.</b> When TGA posts properly, sales follow. The summit weekend was the clearest proof.</>,
@@ -894,19 +858,17 @@ export default function GeronimoThePlan() {
                   'Audience: founders and operators beyond the fitness niche. Speaking, ventures, partnerships.',
                   'Signalling job: attract inbound. Come and talk to my team, industry bodies, other ventures.',
                   'Kept separate so gym owner content does not generate the wrong inbound, and founder content does not confuse studio owners.',
-                  'The M528 vision book already carries both storylines, the TGA version and the founder version.',
-                  'Parked until TGA is running.',
+                  'The MPire 28 vision book already carries both storylines, the TGA version and the founder version.',
+                  'Content for Doza keeps running, and it is capture rather than create.',
                 ]}
               />
             </div>
           </div>
           <div className="mt-10">
-            <Block label="The rule that came out of it">
+            <Block label="The decision">
               <BulletList
                 items={[
-                  'If the category belongs to Hey Doza, it does not go on TGA, and the reverse. Transplanting content across is what blurred both.',
-                  'There is one podcast, not two. A Hey Doza podcast is a later conversation.',
-                  'A third lane exists in the background, AI powered systems and tooling. Not a TGA category.',
+                  <><b className="text-white font-semibold">First we focus on TGA, then we build everything else.</b> We still capture content for Doza, but Doza content is capture rather than create.</>,
                 ]}
               />
             </Block>
@@ -921,47 +883,57 @@ export default function GeronimoThePlan() {
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">03 · Working</p>
           <H2>What works. What is hard.</H2>
-          <Note>Do more of the left column before inventing anything. The right column is what the people doing the work named honestly.</Note>
-          <div className="mt-8 grid md:grid-cols-2 gap-4">
-            <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Working</p>
+          <Note>Split by brand, because the answer is different for each. Do more of the working column before inventing anything.</Note>
+
+          <div className="mt-8">
+            <Block label="Working · TGA">
               <BulletList
                 items={[
-                  <><b className="text-white font-semibold">Volume at the right moment.</b> The summit weekend, an obnoxious amount of undeniable content, was the best sales weekend on record.</>,
-                  <><b className="text-white font-semibold">Documenting.</b> Content that shows what actually happened yesterday. In motion, alive, no friction in making it.</>,
-                  <><b className="text-white font-semibold">Things in motion.</b> Events, workshops, boat days. Audiences respond to momentum and members respond hardest.</>,
-                  <><b className="text-white font-semibold">Signalling.</b> High effort, very high leverage. Drives the inbound that turns into speaking and partnerships.</>,
-                  <><b className="text-white font-semibold">Energy.</b> Named as the biggest single differentiator. It is the brand.</>,
-                  <><b className="text-white font-semibold">Reactions.</b> Doza, Ryan, Sophie, the team reacting to wins and moments. If we are excited, they get excited.</>,
-                  <><b className="text-white font-semibold">Speed and will.</b> Nobody is dragging anyone, and when the team decides they turn things around fast.</>,
+                  <><b className="text-white font-semibold">Volume.</b> Money comes from volume. The summit weekend, an obnoxious amount of undeniable content, was the best sales weekend on record.</>,
+                  <><b className="text-white font-semibold">Ready.</b> The team wants to. Nobody is dragging anyone, and when they decide they turn things around fast.</>,
+                  <><b className="text-white font-semibold">Doing shit.</b> Live and interactive. Nobody is stuck behind a desk, so the business generates real footage constantly.</>,
+                  <><b className="text-white font-semibold">Events.</b> They create the stories, and they are alive and interactive. Members respond hardest of all.</>,
                   <><b className="text-white font-semibold">The formats already invented.</b> Mystery shop especially. No reason it cannot run three times per coach per week.</>,
-                  <><b className="text-white font-semibold">Retention.</b> Content in motion is the most underrated retention mechanism there is.</>,
                   <><b className="text-white font-semibold">It sells in the room.</b> Someone at the workshop saw the playbook on the board and changed her read on the business on the spot.</>,
                 ]}
               />
-            </div>
-            <div className="glow-card p-6">
-              <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Hard</p>
+            </Block>
+
+            <Block label="Working · Doza">
               <BulletList
                 items={[
-                  <><b className="text-white font-semibold">Ideation.</b> No cracked process, so it never feels good. The number one hard thing on both brands.</>,
-                  <><b className="text-white font-semibold">Getting ahead.</b> Always chasing the tail. The next thing has to go out this week, so there is never a buffer.</>,
-                  <><b className="text-white font-semibold">Manpower.</b> No shortage of ideas. A shortage of hands.</>,
-                  <><b className="text-white font-semibold">Strategy.</b> We know what we need to do, but we are not doing it.</>,
-                  <><b className="text-white font-semibold">Organisation.</b> Too many moving parts across coaches, calls, events and edits.</>,
-                  <><b className="text-white font-semibold">Inconsistent energy.</b> Sometimes it is there, sometimes it is not, and that changes the whole output.</>,
-                  <><b className="text-white font-semibold">The mundane.</b> Four days out of five the coaches are on calls, not doing epic things.</>,
-                  <><b className="text-white font-semibold">We made it harder than it needs to be.</b> The stuff that worked was fast and simple. Somewhere the process took over.</>,
-                  <><b className="text-white font-semibold">Doza wants to be the talent.</b> The say something to camera job has been plugged into every meeting and it drags.</>,
-                  <><b className="text-white font-semibold">Too much, none of it dialled.</b> Lots of formats started, nothing taken to repeatable before moving on.</>,
-                  <><b className="text-white font-semibold">Concentration risk.</b> Roughly a quarter of the business rides on Doza personally. With five or six faces it becomes around 15% each.</>,
-                  <><b className="text-white font-semibold">Podcast clips underperform.</b> Low views, not dialled, pushed to people who do not know us.</>,
-                  <><b className="text-white font-semibold">Post production drain.</b> Finding the good moments inside long recordings is a real cost.</>,
-                  <><b className="text-white font-semibold">Carousels take too long</b> and nobody enjoys making them.</>,
-                  <><b className="text-white font-semibold">VA context.</b> Already hit this. Without deep context, outsourced content comes back as AI slop.</>,
+                  <><b className="text-white font-semibold">Energy.</b> Named as the biggest single differentiator. It is the brand.</>,
+                  <><b className="text-white font-semibold">Signalling.</b> High effort, very high leverage. Drives the inbound that turns into speaking and partnerships.</>,
+                  <><b className="text-white font-semibold">Documenting.</b> Content that shows what actually happened yesterday. In motion, alive, no friction in making it.</>,
+                  <><b className="text-white font-semibold">Unique.</b> The founder version of the story is his and nobody else can run it.</>,
+                  <><b className="text-white font-semibold">Reactions.</b> Reacting to wins, workshops and moments. If he is excited, they get excited.</>,
                 ]}
               />
-            </div>
+            </Block>
+
+            <Block label="Hard · TGA">
+              <BulletList
+                items={[
+                  <><b className="text-white font-semibold">Ideation.</b> No cracked process, so it never feels good. The number one hard thing.</>,
+                  <><b className="text-white font-semibold">Organisation.</b> Too many moving parts across coaches, calls, events and edits.</>,
+                  <><b className="text-white font-semibold">We are making it hard.</b> The stuff that worked was fast and simple. Somewhere the process took over.</>,
+                  <><b className="text-white font-semibold">Production.</b> Post production drain, weak podcast clips, and carousels nobody enjoys making.</>,
+                  <><b className="text-white font-semibold">Too much, none of it dialled.</b> Lots of formats started, nothing taken to repeatable before moving on.</>,
+                ]}
+              />
+            </Block>
+
+            <Block label="Hard · Doza">
+              <BulletList
+                items={[
+                  <><b className="text-white font-semibold">Backlog.</b> Always chasing the tail. The next thing has to go out this week, so there is never a buffer.</>,
+                  <><b className="text-white font-semibold">Ideation.</b> Same constraint, and it shows up on both brands.</>,
+                  <><b className="text-white font-semibold">Energy.</b> Sometimes it is there, sometimes it is not, and that changes the whole output.</>,
+                  <><b className="text-white font-semibold">Repurposing and recreating.</b> The piece that worked once rarely gets run again, which is where most of the backlog problem actually lives.</>,
+                  <><b className="text-white font-semibold">He wants to be the talent, not the creator.</b> The say something to camera job has been plugged into every meeting and it drags.</>,
+                ]}
+              />
+            </Block>
           </div>
         </Wrap>
           </>
@@ -983,7 +955,7 @@ export default function GeronimoThePlan() {
                 { title: 'Everything is teaching', body: 'A story teaches through experience. A belief teaches through worldview. Education teaches through steps. A show teaches through demonstration. Same job, different vehicle.' },
                 { title: 'Everything is proof', body: 'Every piece reinforces the positioning. Which is why there is no proof bucket, and why traditional testimonials are not required at all.' },
                 { title: 'One specific person', body: 'Someone has to self identify in the first seconds. Hyper specific beats broad every time. If I owned a Pilates studio and had 365 days to make $500k.' },
-                { title: 'Hooks are the biggest lever', body: 'Dream outcome, minus the thing they do not want to do. Test 15 trial reels on different hooks before committing to a series.' },
+                { title: 'Hooks are the biggest lever', body: 'Dream outcome, minus the thing they do not want to do. Test five trial reels on different hooks before committing to a series.' },
                 { title: 'Niche viral beats viral', body: 'Pull on the things people inside the industry recognise. The software screen, the spreadsheet, the studio layout. That is the best outcome available.' },
                 { title: 'Trojan horse', body: 'Do not make the win the whole video. Wrap the point inside something relevant and visual, so the right person watches for their own reasons.' },
                 { title: 'Lesson, not gloat', body: 'Point at the client. These guys crushed it and this is exactly what they did.' },
@@ -1075,7 +1047,19 @@ export default function GeronimoThePlan() {
         <Wrap>
           <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">05 · Formats</p>
           <H2>The format library.</H2>
-          <Note>Everything discussed, with the note that matters for each. Create needs a decision and a shoot. Capture only needs a camera pointed at something already happening.</Note>
+          <Note>These are all the formats. These are not the formats we need to do all at once.</Note>
+          <div className="mt-8 mb-10 rounded-2xl border border-blue-500/30 bg-blue-500/[0.04] p-6 md:p-7">
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-4">How to read this</p>
+            <BulletList
+              items={[
+                <><b className="text-white font-semibold">This is the buffet.</b> Everything on the table, not everything on the plate.</>,
+                <><b className="text-white font-semibold">We do not do these all at once.</b> Four to six working beats twelve half running.</>,
+                <><b className="text-white font-semibold">They will shift as soon as we have data.</b> Nothing here is permanent.</>,
+                <><b className="text-white font-semibold">Every decision is backed by what is working,</b> and we keep testing.</>,
+                <><b className="text-white font-semibold">The goal is fast feedback, so we can simplify.</b></>,
+              ]}
+            />
+          </div>
           <div className="mt-8">
             <div>
               <div className="grid gap-3 md:grid-cols-2">
@@ -1166,7 +1150,7 @@ export default function GeronimoThePlan() {
             <Block label="Rules for any series">
               <BulletList
                 items={[
-                  <><b className="text-white font-semibold">Nail the hook before you commit.</b> Run around 15 trial reels on different hooks. The hook is the single biggest lever on a signature series.</>,
+                  <><b className="text-white font-semibold">Nail the hook before you commit.</b> Run five trial reels on different hooks. The hook is the single biggest lever on a signature series.</>,
                   <><b className="text-white font-semibold">Recognisability is the point.</b> Anchor points, a consistent storyline, a hook people can hear coming from the other room.</>,
                   <><b className="text-white font-semibold">Stakes and relevance.</b> A story only works if something is on the line and the viewer sees themselves in it.</>,
                   <><b className="text-white font-semibold">Every tip hyper specific.</b> The outcome has to be visible in the first five seconds.</>,
@@ -1285,7 +1269,7 @@ export default function GeronimoThePlan() {
                   <><b className="text-white font-semibold">Sophie container.</b> One of her office hours every week, with Billy present. She is doing the call anyway.</>,
                   <><b className="text-white font-semibold">Ryan container.</b> His Friday office hours plus a monthly shoot when he is at the main office. Flag the dates at the start of each month.</>,
                   <><b className="text-white font-semibold">Batching maths.</b> A coach fields around 15 questions in an hour. If only one or two a week are usable, that still fills a month.</>,
-                  <><b className="text-white font-semibold">A gentler on ramp is allowed.</b> Two or three weeks of the easiest possible content to get the backlog underneath us, then step up.</>,
+                  <><b className="text-white font-semibold">A gentler start is allowed.</b> Two or three weeks of the easiest possible content to get the backlog underneath us, then step up.</>,
                 ]}
               />
             </Block>
@@ -1320,7 +1304,7 @@ export default function GeronimoThePlan() {
                   <><b className="text-white font-semibold">The Gold Coast sessions reference.</b> We stopped, named the topic, and went again. Close to the best thing that has happened to the format. Hooks were built in advance rather than hunted for afterwards, and the clips worked because the questions were already in demand.</>,
                   <><b className="text-white font-semibold">Guest categories.</b> Pure value, which builds our authority directly, against audience leverage, someone our people already follow. Also industry experts with a report or trend data, adjacent service providers where studio owners already spend money, and internal episodes on our own frameworks.</>,
                   <><b className="text-white font-semibold">Brokers especially.</b> Nobody talks about it and everyone is interested. Can be 20 to 30 minutes. Sample hook: you have sold over $100 million in businesses, what are the mistakes every gym owner makes.</>,
-                  <><b className="text-white font-semibold">Nobody owns the central podcast seat for this industry.</b> That is the opening. Build the ideal guest list and let AC own the growth of it the way a media buyer owns spend.</>,
+                  <><b className="text-white font-semibold">Nobody owns the central podcast seat for this industry.</b> That is the opening. Build the ideal guest list and let one person own the growth of it the way a media buyer owns spend.</>,
                 ]}
               />
             </Block>
@@ -1436,7 +1420,6 @@ export default function GeronimoThePlan() {
                 'Carousels get outsourced with strict guidelines, not made in house.',
                 'Proof content starts fresh rather than continuing the inconsistent text format.',
                 'Podcast episodes get engineered. Prep, live document, live directing, stop and retake.',
-                'AC owns podcast topics, framework, hooks and growth, with editing in house under her direction. Subject to the contract being signed and a scoping meeting.',
                 'Two office rooms at the Gold Coast site get set dressed to match the current room.',
                 'A freelance shooter comes in for Ryan. Roughly two hours, once or twice a month.',
                 'The 30 day KPI is consistency of output, not a viral hit.',
@@ -1482,22 +1465,40 @@ export default function GeronimoThePlan() {
 
         {sec === 'next' && (
         <Wrap>
-          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">13 · Next moves</p>
-          <H2>Where the four weeks start.</H2>
-          <Note>Sequenced by owner. Do not start the next thing until the previous is shipped or scheduled.</Note>
+          <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Responsibilities</p>
+          <H2>Who owns what.</H2>
+          <Note>One role each, and the weekly output that goes with it. If a line here has no name against it, it does not happen.</Note>
           <div className="mt-8">
-            <Rows
-              rows={[
-                { name: 'Strategist', status: 'Flagship', detail: 'Turn the board into the finished plan. Formats, hooks, stencils per lane. Run weekly sessions with Doza for the first month. Source a freelance shooter on the Gold Coast.' },
-                { name: 'Doza', status: 'Flagship', detail: 'Batch direct to camera pieces. Front the 20 Studios series. Get comfortable answering questions off camera. Bring ideas to the weekly media meeting.' },
-                { name: 'Head of content', status: 'Flagship', detail: 'Run the weekly media meeting. Build the idea submission and approval flow. Confirm the meeting and shoot days. Get AC contracted and onboarded with real context. Set dress the two Gold Coast office rooms and keep hunting the small media wall, plus prompter units, clamp lights and second cameras.' },
-                { name: 'Ryan', status: 'Test', detail: 'Bring three things I am excited about to each media meeting for show and tell. Flag his monthly office visit dates. Run mystery shops.' },
-                { name: 'Sophie', status: 'Test', detail: 'Bring three things everyone needs to hear right now, or the belief broken that week. Run pop quizzes. Nominate one weekly office hours block as the capture container.' },
-                { name: 'Billy', status: 'Test', detail: 'Sit in on the calls. Capture the Sophie weekly container. Flag good moments live rather than after the fact.' },
-                { name: 'Nate', status: 'Test', detail: 'Watch the pipeline for gaps as volume triples. Own the production standard on the new lanes.' },
-                { name: 'AC', status: 'Test', detail: 'Own podcast topics, episode frameworks, hooks and growth. Set editing guidelines. Bring micro niche topic sourcing into the ideation loop.' },
-              ]}
-            />
+            <div className="overflow-x-auto rounded-xl border border-zinc-800">
+              <table className="w-full min-w-[40rem] text-left">
+                <thead>
+                  <tr className="bg-elevated/60">
+                    {['Person', 'Role', 'Weekly', 'Owns'].map((h) => (
+                      <th key={h} className="px-4 py-3 text-[10px] uppercase tracking-widest font-semibold text-zinc-500 whitespace-nowrap">
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { who: 'Doza', role: 'Talent', wk: '4', owns: 'Direct to cam ×2, mystery ×1, series ×1. Fronts 20 Million Dollar Studios. Brings the ideas that came out of calls.' },
+                    { who: 'Billy', role: 'Head of content', wk: '-', owns: 'Runs the Tuesday meeting and the idea form. Pre production, post production, approval, captions and posting. Flags good moments live on the calls.' },
+                    { who: 'Ryan', role: 'Coach', wk: '3', owns: 'Show and tell ×1, coaching ×1, mystery shop ×1. Brings three things he is excited about to Tuesday. Flags his monthly office visit dates.' },
+                    { who: 'Sophie', role: 'Coach', wk: '3', owns: 'Coaching ×1, direct to cam ×1, pop quiz ×1. Brings three beliefs to break. Nominates one office hours block as the capture container.' },
+                    { who: 'Operator', role: 'Shooter', wk: '-', owns: 'Turns up, shoots, exports and sends back. Two cameras where possible. Nothing lands on the team.' },
+                    { who: 'Strategist', role: 'External', wk: '-', owns: 'Stencils per format. Weekly session with Doza on hooks and formats for the first month. Sources the Gold Coast shooter.' },
+                  ].map((r) => (
+                    <tr key={r.who} className="border-t border-zinc-800/70 align-top">
+                      <td className="px-4 py-4 font-display text-[15px] font-extrabold text-white whitespace-nowrap">{r.who}</td>
+                      <td className="px-4 py-4 text-zinc-300 text-[13px] whitespace-nowrap">{r.role}</td>
+                      <td className="px-4 py-4 text-blue-400 text-[15px] font-semibold tabular-nums">{r.wk}</td>
+                      <td className="px-4 py-4 text-zinc-400 text-[13px] leading-relaxed">{r.owns}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
           <div className="mt-10">
             <Section>
