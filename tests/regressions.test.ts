@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { toE164AU, cleanCtaSource } from "../netlify/functions/builder-application";
+import { isRealApplicant } from "../netlify/functions/_applicants";
 
 /*
   Regression tests for the failures of 20 and 21 August 2026.
@@ -234,11 +235,21 @@ describe("The health check tells the truth", () => {
   });
 
   it("watches real applicants rather than only tagged ones", () => {
-    /* Keying on the `applied` tag hid the exact failure it exists to catch: an
-       applicant who lost the tag also disappeared from the report. */
+    /*
+      Keying on the `applied` tag alone hid the failure this exists to catch: an
+      applicant who lost the tag also disappeared from the report. Keying on the
+      source alone was worse, because the form creates a contact while somebody
+      is still typing, so an abandoned form was reported hourly as having
+      applied and heard nothing.
+
+      isRealApplicant holds both halves, and is shared with self-heal so the
+      report and the repair can never disagree about who applied.
+    */
     const src = fn("_health.ts");
     expect(src).toContain("APPLIED AND RECEIVED NOTHING");
-    expect(src).toMatch(/builder\|apply/);
+    expect(src).toContain("isRealApplicant");
+    expect(isRealApplicant({ source: "builder page, started", tags: [] })).toBe(false);
+    expect(isRealApplicant({ source: "anything", tags: ["applied"] })).toBe(true);
   });
 
   it("guards the live prices", () => {
@@ -1046,5 +1057,41 @@ describe("A booking is recognised by id, not by its name", () => {
     /* "Strategy day prep call" contains "strategy day". Reading it as the Day
        would overwrite the Day's date with the prep call's time. */
     expect(codeOf(fn("calendly-booked.ts"))).toMatch(/const isBrandDay =\s*!isPrepCall/);
+  });
+});
+
+describe("Starting a form is not applying", () => {
+  /*
+    The application form creates a contact on a debounce while somebody is
+    still typing, so opening it and walking away leaves a real record with the
+    source "builder page, started" and no `applied` tag.
+
+    Both the health check and self-heal tested only that the source mentioned
+    builder or apply, so an abandoned form read as a completed application. The
+    check said APPLIED AND RECEIVED NOTHING hourly about somebody who had not
+    applied, and self-heal ACTED on it: it tagged them `application-received`,
+    which fires the confirmation workflow. Half a form was enough to be thanked
+    for applying.
+  */
+  it("someone who only started is not an applicant", () => {
+    expect(isRealApplicant({ source: "builder page, started", tags: ["application-started"] })).toBe(false);
+    expect(isRealApplicant({ source: "builder page, started (offer)", tags: [] })).toBe(false);
+  });
+
+  it("someone who submitted is, however they got there", () => {
+    expect(isRealApplicant({ source: "offer-next-step", tags: ["applied"] })).toBe(true);
+    /* Started, then finished. The started source is still on the record. */
+    expect(isRealApplicant({ source: "builder page, started", tags: ["applied"] })).toBe(true);
+  });
+
+  it("both callers use the same test", () => {
+    for (const f of ["_health.ts", "self-heal.ts"]) {
+      expect(codeOf(fn(f))).toContain("isRealApplicant");
+    }
+  });
+
+  it("self-heal cannot thank somebody for an application they never sent", () => {
+    const src = codeOf(fn("self-heal.ts"));
+    expect(src).not.toMatch(/if \(!\/builder\|apply\/i\.test/);
   });
 });

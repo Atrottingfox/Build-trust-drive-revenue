@@ -1,5 +1,6 @@
 import { GHL_API, GHL_VERSION } from "./_ghl";
 import { ghlOptionContracts } from "../../src/lib/formOptions";
+import { isRealApplicant, isMonitoring } from "./_applicants";
 
 /*
   The whole funnel, checked.
@@ -589,11 +590,16 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
           Source is written once when the contact is created and never changes,
           so it cannot be undone by a later bug.
         */
-        const contacts = ((await res.json())?.contacts || []).filter((c: any) => {
-          const email = String(c?.email || "").toLowerCase();
-          if (email.startsWith("zz-") || email.startsWith("zzcard")) return false;
-          return /builder|apply/i.test(String(c?.source || ""));
-        });
+        /*
+          Somebody who started the form and walked away is not an applicant.
+          Matching on source alone reported them hourly as APPLIED AND RECEIVED
+          NOTHING, for a person who had not applied and was right not to have
+          been emailed. An alert that means money on the floor stops being read
+          the moment it cries wolf.
+        */
+        const contacts = ((await res.json())?.contacts || []).filter(
+          (c: any) => !isMonitoring(c) && isRealApplicant(c)
+        );
 
         /* Two days, so a quiet weekend does not look like an outage. */
         const cutoff = Date.now() - 48 * 3600 * 1000;

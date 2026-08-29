@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { isRealApplicant, isMonitoring } from "./_applicants";
 import { GHL_API, GHL_VERSION } from "./_ghl";
 
 /*
@@ -117,9 +118,14 @@ async function healMissedDeliveries(repairs: Repair[]) {
 
     const now = Date.now();
     const contacts = ((await res.json())?.contacts || []).filter((c: any) => {
-      const email = String(c?.email || "").toLowerCase();
-      if (email.startsWith("zz")) return false;
-      if (!/builder|apply/i.test(String(c?.source || ""))) return false;
+      if (isMonitoring(c)) return false;
+      /*
+        Somebody who opened the form and walked away is not an applicant. The
+        source test alone matched them, and this function ACTS on that: it tags
+        `application-received`, which fires the confirmation workflow. Half a
+        form was enough to be thanked for applying.
+      */
+      if (!isRealApplicant(c)) return false;
       if ((c?.tags || []).includes(RETRIED_TAG)) return false;
 
       const age = now - new Date(c?.dateAdded || 0).getTime();
