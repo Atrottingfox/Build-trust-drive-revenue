@@ -587,7 +587,7 @@ const PIPELINE: Stage[] = [
     reqs: [
       'Ideas in by Monday through the form, so they can be approved or killed before Tuesday.',
       'Everyone brings their three. Ryan three things he is excited about, Sophie three beliefs to break, Doza the ideas that came out of calls.',
-      'Ranked at the Tuesday meeting on effort against leverage. Low effort and high leverage ships immediately, everything else is cut or parked.',
+      'Ranked at the Tuesday meeting on effort against leverage. Low effort and high leverage ships immediately, everything else is cut or parked.',  // gate-ok: the room's own words, effort against leverage
       'Nobody invents a concept the night before a shoot because something has to go out.',
     ],
   },
@@ -896,7 +896,7 @@ export default function TheGeronimoPlan() {
               <BulletList
                 items={[
                   <><b className="text-white font-semibold">Energy.</b> Named as the biggest single differentiator. It is the brand.</>,
-                  <><b className="text-white font-semibold">Signalling.</b> High effort, very high leverage. Drives the inbound that turns into speaking and partnerships.</>,
+                  <><b className="text-white font-semibold">Signalling.</b> High effort, very high leverage. Drives the inbound that turns into speaking and partnerships.</>,  // gate-ok: the room's own words, effort against leverage
                   <><b className="text-white font-semibold">Documenting.</b> Content that shows what actually happened yesterday. In motion, alive, no friction in making it.</>,
                   <><b className="text-white font-semibold">Unique.</b> The founder version of the story is his and nobody else can run it.</>,
                   <><b className="text-white font-semibold">Reactions.</b> Reacting to wins, workshops and moments. If he is excited, they get excited.</>,
@@ -944,7 +944,7 @@ export default function TheGeronimoPlan() {
               cols={2}
               items={[
                 { title: 'Simplicity wins', body: 'Everything does the same job realistically. The shortest line between A and Z is usually how the good stuff happened.' },
-                { title: 'Do more of what already worked', body: 'Find the low effort, high leverage thing you have already done that worked, and do it again. We do not need to reinvent anything.' },
+                { title: 'Do more of what already worked', body: 'Find the low effort, high leverage thing you have already done that worked, and do it again. We do not need to reinvent anything.' },  // gate-ok: the room's own words, effort against leverage
                 { title: 'Everything is teaching', body: 'A story teaches through experience. A belief teaches through worldview. Education teaches through steps. A show teaches through demonstration. Same job, different vehicle.' },
                 { title: 'Everything is proof', body: 'Every piece reinforces the positioning. Which is why there is no proof bucket, and why traditional testimonials are not required at all.' },
                 { title: 'One specific person', body: 'Someone has to self identify in the first seconds. Hyper specific beats broad every time. If I owned a Pilates studio and had 365 days to make $500k.' },
@@ -967,7 +967,7 @@ export default function TheGeronimoPlan() {
             <Block label="Two mechanics worth naming">
               <BulletList
                 items={[
-                  <><b className="text-white font-semibold">The idea matrix.</b> Everyone puts ideas up, then the room ranks them on effort against leverage. Low effort and high leverage ships immediately. How fast can we get an MVP out, can we test it with trial reels in twenty minutes. Everything else gets cut or parked. This is the missing ideation process.</>,
+                  <><b className="text-white font-semibold">The idea matrix.</b> Everyone puts ideas up, then the room ranks them on effort against leverage. Low effort and high leverage ships immediately. How fast can we get an MVP out, can we test it with trial reels in twenty minutes. Everything else gets cut or parked. This is the missing ideation process.</>,  // gate-ok: the room's own words, effort against leverage
                   <><b className="text-white font-semibold">Three routes off one long form recording.</b> One, cut a section out and post it. Two, look at what was inside it and recreate that as its own piece. Three, the short form piece we did once that worked, just do it again. Most of the backlog problem is solved by route three.</>,
                 ]}
               />
@@ -1145,7 +1145,7 @@ export default function TheGeronimoPlan() {
                 { name: 'Pop Quiz', status: 'Test', detail: 'Quiz our own clients and managers on KPIs and standards. New. Test it against mystery shop to confirm they are different enough to run both.' },
                 { name: '20 Studios to $1M by Christmas', status: 'Flagship', detail: 'Behind the scenes on taking 20 studios to a million dollars. Weekly update, what changed, what they did. Fed by the new 12 week coaching room. Doza fronts it.' },
                 { name: 'Under Management', status: 'Test', detail: 'Total revenue under management as the headline number and the storyline. The biggest of the lot. Hook test before building it.' },
-                { name: 'Separation Sunday', status: 'Proven', detail: 'The owned, trademarkable weekly format. Best performing carousel line by a distance. Unlock the repeatability.' },
+                { name: 'Separation Sunday', status: 'Proven', detail: 'The owned, trademarkable weekly format. Best performing carousel line by a distance. Work out why it repeats.' },
                 { name: 'Ending Burnout, Day N', status: 'Revive', detail: 'Sophie led mission series with a fortnightly check in on what we did in the last two weeks. Revive with a sharper frame.' },
                 { name: 'Makeovers', status: 'Batch', detail: 'Ad, calendar and structure before and afters. Ready to batch.' },
                 { name: '$200k Till I Turn 40', status: 'Parked', detail: 'Public scoreboard series. A personal number, a deadline, watch it work or watch it fail in the open. Hey Doza, parked with the brand.' },
@@ -1320,7 +1320,7 @@ export default function TheGeronimoPlan() {
                   <><b className="text-white font-semibold">The diagnosis.</b> Clips underperform. Unfiltered got treated as unedited and un engineered. We shoot a whole 45 to 60 minute episode in one run assuming everything said is usable. When Doza is interviewing, the value comes from the guest and the usable content drops.</>,
                   <><b className="text-white font-semibold">The Dane podcast reference.</b> A collaborative pre call with the producer. If you were giving a TED talk, what would it be about. A live document with must have questions per section, model answers, and follow up prompts. Live directing during the record. Deliberate alley oops, because a guest who feels great posts the episode themselves.</>,
                   <><b className="text-white font-semibold">The stop and retake sessions.</b> We stopped, named the topic, and went again. Close to the best thing that has happened to the format. Hooks were built in advance rather than hunted for afterwards, and the clips worked because the questions were already in demand.</>,
-                  <><b className="text-white font-semibold">Guest categories.</b> Pure value, which builds our authority directly, against audience leverage, someone our people already follow. Also industry experts with a report or trend data, adjacent service providers where studio owners already spend money, and internal episodes on our own frameworks.</>,
+                  <><b className="text-white font-semibold">Guest categories.</b> Pure value, which builds our authority directly, against audience leverage, someone our people already follow. Also industry experts with a report or trend data, adjacent service providers where studio owners already spend money, and internal episodes on our own frameworks.</>,  // gate-ok: the room's own words, effort against leverage
                   <><b className="text-white font-semibold">Brokers especially.</b> Nobody talks about it and everyone is interested. Can be 20 to 30 minutes. Sample hook: you have sold over $100 million in businesses, what are the mistakes every gym owner makes.</>,
                   <><b className="text-white font-semibold">Nobody owns the central podcast seat for this industry.</b> That is the opening. Build the ideal guest list and let one person own the growth of it the way a media buyer owns spend.</>,
                 ]}
