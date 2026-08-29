@@ -1020,3 +1020,31 @@ describe("A booking always records its time", () => {
     expect(src).toMatch(/NO START TIME/);
   });
 });
+
+describe("A booking is recognised by id, not by its name", () => {
+  /*
+    Every Brand Day booking was silently dropped. The calendar event is called
+    "1:1 VIP strategy day"; the pattern looked for "vip day", "brand builder" or
+    "brand day", and none of those match it. Unrecognised events are logged and
+    dropped by design, so there was no tag, no date, nothing for the prep emails
+    to count back from, and no error.
+  */
+  it("matches the Calendly event type id first", () => {
+    const src = codeOf(fn("calendly-booked.ts"));
+    expect(src).toContain("CALENDLY_TYPE_BRAND_DAY");
+    expect(src).toContain("CALENDLY_TYPE_PREP_CALL");
+  });
+
+  it("recognises the name the event actually has", () => {
+    const src = fn("calendly-booked.ts");
+    const brandDay = src.match(/const isBrandDay =[\s\S]*?\);/)?.[0] || "";
+    const pattern = brandDay.match(/\/([^/]+)\/\.test/)?.[1] || "";
+    expect(new RegExp(pattern).test("1:1 vip strategy day")).toBe(true);
+  });
+
+  it("never reads a prep call as the Day itself", () => {
+    /* "Strategy day prep call" contains "strategy day". Reading it as the Day
+       would overwrite the Day's date with the prep call's time. */
+    expect(codeOf(fn("calendly-booked.ts"))).toMatch(/const isBrandDay =\s*!isPrepCall/);
+  });
+});

@@ -130,8 +130,39 @@ const handler: Handler = async (event) => {
     const eventUri = payload.scheduled_event?.event_type || payload.event_type?.uri || "";
     const haystack = `${eventName} ${eventUri}`.toLowerCase();
 
-    const isPrepCall = /prep[-\s]?call/.test(haystack);
-    const isBrandDay = /vip[-\s]?day|brand[-\s]?builder|brand[-\s]?day/.test(haystack);
+    /*
+      Match the event type id first, and only fall back to reading the name.
+
+      The name was the only signal, and it silently stopped matching. The
+      calendar event is called "1:1 VIP strategy day"; the pattern looked for
+      "vip day", "brand builder" or "brand day", and "VIP strategy day" is none
+      of those. Every Brand Day booking went down the "unrecognised, log and
+      drop" branch: no tag, no date, nothing to count the prep emails back from,
+      and no error anywhere, because dropping the unknown was the deliberate
+      behaviour.
+
+      An id cannot be reworded. Renaming the event in Calendly to something
+      friendlier now costs nothing, which is exactly the change that broke this.
+    */
+    const typeId = (uri: string) => String(uri || "").split("/").pop() || "";
+    const bookedTypeId = typeId(payload.scheduled_event?.event_type || payload.event_type?.uri || "");
+    const idIs = (envVar: string) => {
+      const want = process.env[envVar];
+      return Boolean(want && bookedTypeId && bookedTypeId === want);
+    };
+
+    const isPrepCall = idIs("CALENDLY_TYPE_PREP_CALL") || /prep[-\s]?call/.test(haystack);
+    /*
+      Never a prep call. "Strategy day prep call" contains "strategy day", so
+      the widened pattern matches both, and a prep call booking that reads as a
+      Brand Day would overwrite the Day's own date with the wrong time.
+    */
+    const isBrandDay =
+      !isPrepCall &&
+      (idIs("CALENDLY_TYPE_BRAND_DAY") ||
+        /vip[-\s]?day|brand[-\s]?builder|brand[-\s]?day|vip[-\s]?strategy[-\s]?day|strategy[-\s]?day/.test(
+          haystack
+        ));
     /*
       The 90 Day delivery calls.
 
