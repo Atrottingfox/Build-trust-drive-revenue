@@ -263,7 +263,15 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ configured: true, clientSecret: session.client_secret }),
+      /* The amount comes back so what is being charged can be checked without
+         reading the Stripe key, which is the only way anybody could confirm a
+         rehearsal really is a dollar and a real sale really is not. */
+      body: JSON.stringify({
+        configured: true,
+        clientSecret: session.client_secret,
+        amountCents,
+        test: isTest,
+      }),
     };
   } catch (err) {
     // Fall back rather than block. A broken embed must never stop someone paying.

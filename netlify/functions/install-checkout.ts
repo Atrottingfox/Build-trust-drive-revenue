@@ -175,6 +175,11 @@ const handler: Handler = async (event) => {
         configured: true,
         clientSecret: session.client_secret,
         hasSavedCard: Boolean(customerId),
+        /* Same reason as the Brand Day: what is actually being charged has to
+           be checkable by somebody who cannot read the Stripe key. */
+        amountCents: chargeCents,
+        secondAmountCents: secondAmount,
+        test: isTest,
       }),
     };
   } catch (err) {
