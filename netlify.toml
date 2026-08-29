@@ -82,6 +82,14 @@
 [functions."slot-chase"]
   schedule = "0 23 * * *"
 
+# Paid for a Brand Day and never picked the date. The order on /lock-in is pay,
+# then choose, so between those two clicks sits somebody who has handed over
+# $5,000 with nothing in the calendar. Hourly, with an hour of grace, so the
+# reminder lands while the purchase is still the thing they are thinking about.
+# Tags only: the email itself lives in GoHighLevel.
+[functions."day-book-chase"]
+  schedule = "@hourly"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]

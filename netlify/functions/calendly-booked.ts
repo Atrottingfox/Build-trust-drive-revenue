@@ -29,6 +29,17 @@ const handler: Handler = async (event) => {
   const token = process.env.GHL_TOKEN;
   const brandDayDateFieldId = process.env.GHL_FIELD_BRAND_DAY_DATE;
 
+  /*
+    The same two times, written as somebody would read them out loud.
+
+    brand_day_date holds an ISO timestamp, which is right for counting back from
+    but useless in an email: a merge field renders it raw. These hold
+    "Wed 24 Sep, 10:00am" so the confirmation can be written in GoHighLevel
+    without any logic in it at all, which is where the copy belongs.
+  */
+  const prepWhenFieldId = process.env.GHL_FIELD_PREP_CALL_WHEN;
+  const brandDayWhenFieldId = process.env.GHL_FIELD_BRAND_DAY_WHEN;
+
   try {
     const body = JSON.parse(event.body || "{}");
 
@@ -154,6 +165,63 @@ const handler: Handler = async (event) => {
       }
     } else if (isBrandDay && !brandDayDateFieldId) {
       console.error("GHL_FIELD_BRAND_DAY_DATE not set, booking date not recorded.");
+    }
+
+    /*
+      Write the readable version, and say when both are in.
+
+      Sean wanted one email that names both times: "This is your prep call, this
+      is your strategy day, see you soon." That cannot be written in
+      GoHighLevel until both times exist on the contact as text, and it must not
+      fire when only one of them does.
+
+      So the field is written here, the contact is read back, and `all-locked`
+      goes on only when both are actually present. Reading back rather than
+      assuming matters because the two bookings happen on different days, in
+      either order, and this function only ever knows about the one in front of
+      it.
+    */
+    const whenFieldId = isPrepCall ? prepWhenFieldId : isBrandDay ? brandDayWhenFieldId : null;
+    if (whenFieldId && startTime) {
+      const readable = new Date(startTime).toLocaleString("en-AU", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "Australia/Brisbane",
+      });
+      await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+        method: "PUT",
+        headers: ghlHeaders,
+        body: JSON.stringify({ customFields: [{ id: whenFieldId, value: readable }] }),
+      }).catch((err) => console.error("readable time write failed:", err));
+
+      if (prepWhenFieldId && brandDayWhenFieldId) {
+        try {
+          const back = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+            headers: ghlHeaders,
+          });
+          if (back.ok) {
+            const contact = (await back.json())?.contact || {};
+            const fields = contact.customFields || [];
+            const value = (id) => String(fields.find((f) => f?.id === id)?.value || "").trim();
+            const bothIn = Boolean(value(prepWhenFieldId)) && Boolean(value(brandDayWhenFieldId));
+            /* Only on the way in. Re-adding a tag GoHighLevel already has fires
+               nothing, so a second booking cannot send the email twice. */
+            if (bothIn && !(contact.tags || []).includes("all-locked")) {
+              await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
+                method: "POST",
+                headers: ghlHeaders,
+                body: JSON.stringify({ tags: ["all-locked"] }),
+              });
+              console.log("all-locked: both times are in for", contactId);
+            }
+          }
+        } catch (err) {
+          console.error("all-locked check failed:", err);
+        }
+      }
     }
 
     /*

@@ -939,3 +939,63 @@ describe("A rehearsal cannot become a live $1 shopfront", () => {
     expect(codeOf(fn("clients.ts"))).toMatch(/zz-test/);
   });
 });
+
+describe("Nobody pays for a Day and is left holding nothing", () => {
+  /*
+    /lock-in takes the money first and offers the calendar second. Between those
+    two clicks sits somebody who has paid $5,000 and has no date, and nothing
+    anywhere noticed them. prep-call-chase covers the other booking; this covers
+    the expensive one.
+  */
+  it("chases the Day, not the prep call", () => {
+    const src = codeOf(fn("day-book-chase.ts"));
+    expect(src).toContain('const PAID = "brand-day-paid"');
+    expect(src).toContain('const BOOKED = "brand-day-booked"');
+  });
+
+  it("stops chasing the moment they book", () => {
+    /* Chasing somebody for a thing they have already done is the fastest way
+       to make them stop reading. */
+    expect(codeOf(fn("day-book-chase.ts"))).toMatch(/hasBooked && isFlagged/);
+  });
+
+  it("tags rather than emails, so the copy stays editable without a deploy", () => {
+    const src = codeOf(fn("day-book-chase.ts"));
+    expect(src).not.toMatch(/sendEmail/);
+    expect(src).toContain('const FLAG = "no-brand-day-booked"');
+  });
+
+  it("never chases a rehearsal", () => {
+    expect(codeOf(fn("day-book-chase.ts"))).toMatch(/zz-test/);
+  });
+
+  it("says so loudly when the tag will not write", () => {
+    /* A failed tag means nothing chases them at all, which is worse than the
+       problem it came to solve. */
+    expect(fn("day-book-chase.ts")).toMatch(/NOTHING will chase them/);
+  });
+
+  it("runs on a schedule", () => {
+    const toml = readFileSync(join(__dirname, "..", "netlify.toml"), "utf8");
+    expect(toml).toMatch(/\[functions\."day-book-chase"\]/);
+  });
+});
+
+describe("One confirmation naming both times", () => {
+  it("stores each time as something an email can merge", () => {
+    /* brand_day_date holds an ISO timestamp, which renders raw in a merge
+       field and is useless in a sentence. */
+    const src = codeOf(fn("calendly-booked.ts"));
+    expect(src).toContain("GHL_FIELD_PREP_CALL_WHEN");
+    expect(src).toContain("GHL_FIELD_BRAND_DAY_WHEN");
+    expect(src).toMatch(/toLocaleString\("en-AU"/);
+  });
+
+  it("only fires once BOTH times are actually on the contact", () => {
+    /* The two bookings happen on different days in either order, and this
+       function only ever knows about the one in front of it. */
+    const src = codeOf(fn("calendly-booked.ts"));
+    expect(src).toMatch(/const bothIn = Boolean\(value\(prepWhenFieldId\)\) && Boolean\(value\(brandDayWhenFieldId\)\)/);
+    expect(src).toMatch(/bothIn && !\(contact\.tags \|\| \[\]\)\.includes\("all-locked"\)/);
+  });
+});
