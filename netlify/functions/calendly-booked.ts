@@ -146,8 +146,20 @@ const handler: Handler = async (event) => {
     */
     const typeId = (uri: string) => String(uri || "").split("/").pop() || "";
     const bookedTypeId = typeId(payload.scheduled_event?.event_type || payload.event_type?.uri || "");
+    /*
+      In code with an environment override, rather than only in the environment.
+
+      These are Calendly event type ids for Sean's own account, not secrets, and
+      this site sits about a hundred bytes under AWS's 4KB environment ceiling.
+      Two more variables there cost a deploy. The override stays so a new
+      calendar can be pointed at without one.
+    */
+    const KNOWN_TYPES: Record<string, string> = {
+      CALENDLY_TYPE_BRAND_DAY: "67a02dc5-7d2c-4d54-8dcd-2268983ce45e", // 1:1 VIP strategy day
+      CALENDLY_TYPE_PREP_CALL: "8bae55d8-9869-4d69-b649-8cea7436ba99", // Strategy day prep call
+    };
     const idIs = (envVar: string) => {
-      const want = process.env[envVar];
+      const want = process.env[envVar] || KNOWN_TYPES[envVar];
       return Boolean(want && bookedTypeId && bookedTypeId === want);
     };
 
