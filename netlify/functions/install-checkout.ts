@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { isTestContact, priceCents } from "./_pricing";
 import { GHL_API, GHL_VERSION } from "./_ghl";
 
 /*
@@ -52,7 +53,7 @@ const handler: Handler = async (event) => {
     A hardcoded "$5,000 in 30 days" would keep saying that after somebody
     changed the figure, which is the worst kind of wrong: confident and stale.
   */
-  const secondAmount = Number(process.env.INSTALL_PAYMENT_2_CENTS) || 0;
+  let secondAmount = Number(process.env.INSTALL_PAYMENT_2_CENTS) || 0;
   const secondDays = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
   const money = (cents: number) =>
     (cents / 100).toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 2 });
@@ -73,6 +74,15 @@ const handler: Handler = async (event) => {
 
   try {
     const { contactId } = JSON.parse(event.body || "{}");
+
+    /* A test contact walks the whole journey for a dollar, this step included.
+       Everybody else pays the real price, which never moves. */
+    const isTest = await isTestContact(contactId);
+    const chargeCents = isTest ? priceCents("INSTALL_PAYMENT_1_CENTS", true) : Number(amount);
+    /* The page states what the second payment will be. Left alone it would
+       promise $5,000 on a checkout charging a dollar, which makes the rehearsal
+       useless for showing anybody. */
+    if (isTest) secondAmount = priceCents("INSTALL_PAYMENT_2_CENTS", true);
 
     /*
       Look up the Stripe customer from the Brand Day so their card is offered
@@ -101,7 +111,7 @@ const handler: Handler = async (event) => {
       "mode": "payment",
       "line_items[0][quantity]": "1",
       "line_items[0][price_data][currency]": "aud",
-      "line_items[0][price_data][unit_amount]": String(amount),
+      "line_items[0][price_data][unit_amount]": String(chargeCents),
       /*
         Named and described so the two part structure is on the Stripe page
         itself, not only in the terms they signed a moment earlier. Somebody
@@ -111,7 +121,7 @@ const handler: Handler = async (event) => {
       */
       "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, payment 1 of 2",
       "line_items[0][price_data][product_data][description]":
-        `${money(Number(amount))} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
+        `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
       "return_url": returnUrl(contactId ? String(contactId) : undefined),
       // Keeps the card usable for the second payment without asking again.
       "payment_intent_data[setup_future_usage]": "off_session",

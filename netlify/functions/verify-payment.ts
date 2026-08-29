@@ -1,5 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
+import { isTestContact, priceCents } from "./_pricing";
 
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
@@ -56,7 +57,13 @@ async function scheduleSecondInstalment(
   contactId: string | null,
   sessionId: string
 ): Promise<void> {
-  const amount = process.env.INSTALL_PAYMENT_2_CENTS;
+  /* The last step of the journey. A test contact is charged a dollar here too,
+     otherwise the rehearsal ends with a real $5,000 invoice scheduled against
+     a real card. */
+  const isTest = await isTestContact(contactId);
+  const amount = isTest
+    ? String(priceCents("INSTALL_PAYMENT_2_CENTS", true))
+    : process.env.INSTALL_PAYMENT_2_CENTS;
   const days = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
   if (!amount) {
     console.error("INSTALL_PAYMENT_2_CENTS not set, second instalment NOT scheduled for", customerId);

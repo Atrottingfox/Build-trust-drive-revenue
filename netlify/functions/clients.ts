@@ -135,7 +135,7 @@ const handler: Handler = async (event) => {
       */
       .filter((c: Record<string, any>) => {
         const tags: string[] = c.tags || [];
-        if (tags.includes("zz-healthcheck")) return false;
+        if (tags.includes("zz-healthcheck") || tags.includes("zz-test")) return false;
         const name = `${c.firstName || ""} ${c.lastName || ""}`.trim().toLowerCase();
         const email = String(c.email || "").toLowerCase();
         return !name.startsWith("zz ") && !email.startsWith("zz-");

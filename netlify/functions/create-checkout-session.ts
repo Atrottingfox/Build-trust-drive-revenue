@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { isTestContact, priceCents } from "./_pricing";
 
 /*
   Creates a Stripe Checkout Session in embedded mode, so the card fields render
@@ -146,6 +147,12 @@ const handler: Handler = async (event) => {
   try {
     const { contactId, brandDayDate } = JSON.parse(event.body || "{}");
 
+    /* A dollar for a test contact, the real price for everybody else. Asked
+       once and used for both the catalogue decision and the inline amount, so
+       the two can never disagree. */
+    const isTest = await isTestContact(contactId);
+    const amountCents = isTest ? priceCents("CHECKOUT_AMOUNT_CENTS", true) : PRICE_AUD_CENTS;
+
     const form = new URLSearchParams({
       "ui_mode": "embedded",
       "mode": "payment",
@@ -180,11 +187,11 @@ const handler: Handler = async (event) => {
       stops anyone paying.
     */
     // An explicit test amount always wins, even over the catalogue price.
-    if (priceId && !process.env.CHECKOUT_AMOUNT_CENTS) {
+    if (priceId && !process.env.CHECKOUT_AMOUNT_CENTS && !isTest) {
       form.set("line_items[0][price]", priceId);
     } else {
       form.set("line_items[0][price_data][currency]", "aud");
-      form.set("line_items[0][price_data][unit_amount]", String(PRICE_AUD_CENTS));
+      form.set("line_items[0][price_data][unit_amount]", String(amountCents));
       form.set("line_items[0][price_data][product_data][name]", PRODUCT_NAME);
     }
 

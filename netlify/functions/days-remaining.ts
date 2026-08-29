@@ -55,7 +55,7 @@ const handler: Handler = async () => {
       body: JSON.stringify({
         locationId,
         filters: [{ field: "tags", operator: "contains", value: "brand-day-paid" }],
-        pageLimit: 1,
+        pageLimit: 100,
       }),
     });
 
@@ -64,7 +64,15 @@ const handler: Handler = async () => {
       return { statusCode: 200, headers, body: JSON.stringify(fallback) };
     }
 
-    const sold = Number((await res.json())?.total) || 0;
+    /*
+      A test contact walking the funnel must not spend one of the twenty. The
+      search returns them like anybody else, so they are counted out here rather
+      than trusted to be cleaned up afterwards.
+    */
+    const paidContacts = (await res.json())?.contacts || [];
+    const sold = paidContacts.filter(
+      (c: any) => !((c?.tags || []).includes("zz-test"))
+    ).length;
     const remaining = Math.max(0, total - alreadyRun - sold);
 
     return {

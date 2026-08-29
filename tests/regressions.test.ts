@@ -890,3 +890,52 @@ describe("A Brand Day payment cannot arrive silently", () => {
     expect(src).toMatch(/tagged\s*\)\s*\{[\s\S]{0,160}alreadyHandled/);
   });
 });
+
+describe("A rehearsal cannot become a live $1 shopfront", () => {
+  /*
+    Every walkthrough of this funnel was done by setting CHECKOUT_AMOUNT_CENTS
+    to 100, which set it for the entire internet. A real prospect landing on
+    /lock-in during that window could have bought a $5,000 Brand Day for a
+    dollar, and nothing afterwards could tell you whether one did. It happened
+    four times in a single day.
+  */
+  it("the test price belongs to a person, not to the site", () => {
+    const src = codeOf(fn("_pricing.ts"));
+    expect(src).toContain('export const TEST_TAG = "zz-test"');
+    expect(src).toMatch(/contacts\//);
+  });
+
+  it("fails closed, so doubt costs a rerun and never $4,999", () => {
+    const src = fn("_pricing.ts");
+    /* Every path out of the lookup that is not a confirmed tag returns false. */
+    expect(src).toMatch(/if \(!token \|\| !contactId\) return false/);
+    expect(src).toMatch(/if \(!res\.ok\) return false/);
+    expect(src).toMatch(/catch \{[\s\S]{0,220}return false/);
+  });
+
+  it("an unset price is never free", () => {
+    expect(codeOf(fn("_pricing.ts"))).toMatch(/Number\.isFinite\(raw\) && raw > 0 \? raw : fallback/);
+  });
+
+  it("covers all three payments in the journey, not just the first", () => {
+    for (const f of ["create-checkout-session.ts", "install-checkout.ts", "verify-payment.ts"]) {
+      expect(codeOf(fn(f))).toMatch(/isTestContact/);
+    }
+  });
+
+  it("what the page promises matches what the card is charged", () => {
+    /* The install page states the second payment. Promising $5,000 on a
+       checkout taking a dollar makes the recording useless. */
+    const src = codeOf(fn("install-checkout.ts"));
+    expect(src).toMatch(/if \(isTest\) secondAmount = priceCents/);
+    expect(src).toMatch(/money\(chargeCents\)/);
+  });
+
+  it("a rehearsal does not spend one of the twenty Days", () => {
+    expect(codeOf(fn("days-remaining.ts"))).toMatch(/zz-test/);
+  });
+
+  it("test contacts stay out of the people list", () => {
+    expect(codeOf(fn("clients.ts"))).toMatch(/zz-test/);
+  });
+});
