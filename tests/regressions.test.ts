@@ -999,3 +999,24 @@ describe("One confirmation naming both times", () => {
     expect(src).toMatch(/bothIn && !\(contact\.tags \|\| \[\]\)\.includes\("all-locked"\)/);
   });
 });
+
+describe("A booking always records its time", () => {
+  /*
+    Two real bookings landed with their tags written and no time recorded at
+    all. That leaves the D-7 and D-1 emails with nothing to count back from and
+    the confirmation with no times to name, and nothing says so.
+  */
+  it("asks Calendly rather than guessing at payload shapes", () => {
+    const src = codeOf(fn("calendly-booked.ts"));
+    expect(src).toMatch(/if \(!startTime\)/);
+    expect(src).toMatch(/api\\?\.calendly\\?\.com/);
+    expect(src).toMatch(/resource\?\.start_time/);
+  });
+
+  it("still records the booking when Calendly will not answer", () => {
+    /* A missing time must cost the time, never the booking. */
+    const src = fn("calendly-booked.ts");
+    expect(src).toMatch(/AbortController/);
+    expect(src).toMatch(/NO START TIME/);
+  });
+});

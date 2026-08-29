@@ -56,11 +56,49 @@ const handler: Handler = async (event) => {
       null;
 
     // Calendly nests the appointment time differently across payload versions.
-    const startTime =
+    let startTime =
       payload.scheduled_event?.start_time ||
       payload.event?.start_time ||
       payload.start_time ||
       null;
+
+    /*
+      If none of those matched, go and ask.
+
+      Two real bookings landed with their tags written and no time recorded at
+      all, which left the D-7 and D-1 emails with nothing to count back from and
+      the confirmation with no times to name. Guessing at payload shapes is how
+      that happened; the event's own URI is in the payload whichever shape it
+      takes, and Calendly will answer it authoritatively.
+
+      Best effort and short. A booking must still be recorded if Calendly is
+      slow, it just loses the time.
+    */
+    if (!startTime) {
+      const eventUri = payload.scheduled_event?.uri || payload.event || payload.uri;
+      const calendlyToken = process.env.CALENDLY_TOKEN || process.env.CALENDLY_API_KEY;
+      if (typeof eventUri === "string" && /^https:\/\/api\.calendly\.com\//.test(eventUri) && calendlyToken) {
+        const ctrl = new AbortController();
+        const timer = setTimeout(() => ctrl.abort(), 3000);
+        try {
+          const ev = await fetch(eventUri, {
+            headers: { Authorization: `Bearer ${calendlyToken}` },
+            signal: ctrl.signal,
+          });
+          if (ev.ok) {
+            startTime = (await ev.json())?.resource?.start_time || null;
+            console.log("calendly-booked: recovered start time from the API:", startTime);
+          }
+        } catch (err) {
+          console.error("calendly-booked: could not read the event back:", err);
+        } finally {
+          clearTimeout(timer);
+        }
+      }
+      if (!startTime) {
+        console.error("calendly-booked: NO START TIME. Nothing can count back from this booking.", eventUri);
+      }
+    }
 
     if (!contactId) {
       console.error(
