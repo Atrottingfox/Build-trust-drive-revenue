@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { toE164AU, cleanCtaSource } from "../netlify/functions/builder-application";
 import { isRealApplicant } from "../netlify/functions/_applicants";
+import { opsToStored } from "../src/lib/formOptions";
 
 /*
   Regression tests for the failures of 20 and 21 August 2026.
@@ -1125,5 +1126,42 @@ describe("An application never loses answers to an environment budget", () => {
 
   it("still reports rather than silently dropping, if an ID is ever unknown", () => {
     expect(codeOf(fn("builder-application.ts"))).toContain("missingFieldEnv");
+  });
+});
+
+describe("An application from somebody who has an operator is not thrown away", () => {
+  /*
+    The form offers "Yes, full time". Notion refuses any select option
+    containing a comma outright, and the GoHighLevel dropdown only accepts
+    "Yes full-time". The mapping between them had existed in formOptions since
+    the field was built and was never applied on the way in.
+
+    The cost was not a blank field. Notion rejecting the write returns 500 and
+    the whole application is abandoned: no CRM record, no Slack alert, no email,
+    and the applicant sees a failure. Everybody who answered that they have
+    somebody on content lost their application. Only "No" got through.
+  */
+  it("no option the form offers contains a comma once stored", () => {
+    for (const stored of Object.values(opsToStored)) {
+      expect(String(stored)).not.toMatch(/,/);
+    }
+  });
+
+  it("maps before writing, not after", () => {
+    const src = codeOf(fn("builder-application.ts"));
+    expect(src).toMatch(/const opsStored = opsToStored\[data\.contentOpsPerson\]/);
+    /* Both stores get the mapped value. */
+    expect(src).toMatch(/"Content Ops Person": opsStored/);
+    expect(src).toMatch(/key === "contentOpsPerson"\s*\?\s*opsStored/);
+  });
+
+  it("never sends the raw comma value to a store", () => {
+    const src = codeOf(fn("builder-application.ts"));
+    expect(src).not.toMatch(/select: \{ name: data\.contentOpsPerson \}/);
+  });
+
+  it("still shows the human the answer they actually gave", () => {
+    /* Slack is read by a person, so it keeps the form's own wording. */
+    expect(codeOf(fn("builder-application.ts"))).toMatch(/\$\{data\.contentOpsPerson\}/);
   });
 });

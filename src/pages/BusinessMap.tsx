@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Check, X, Crown, Building, Globe, Database, Network, Compass } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Check, X, Crown, Building, Globe, Database, Network, Compass, ArrowRight } from 'lucide-react';
 import Footer from '../components/Footer';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -227,12 +228,27 @@ const seanDoesNot = [
   'Review every single piece',
 ];
 
-const stages = [
+type Stage = {
+  stage: string;
+  year: string;
+  title: string;
+  revenue: string;
+  description: string;
+  model: string;
+  mission: string;
+  metric: string;
+  link?: string;
+  linkLabel?: string;
+};
+
+const stages: Stage[] = [
   {
     stage: 'STAGE 0',
     year: 'Year 1',
     title: 'Advisory',
     revenue: '$0 to $1M',
+    link: '/phase0',
+    linkLabel: 'Open the Phase 0 Operating Plan',
     description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 clients are the validation cohort.',
     model: '5k Day to 15k Install to 24k Advisory. 60 Strategy Days and 48 Installs is $780k. Advisory at the conservative 18% takes it to $996k. Advisory at the intended 40% takes it to about $1.24m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
@@ -898,6 +914,17 @@ export default function BusinessMap() {
                     <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-1">Key Metric</p>
                     <p className="text-zinc-400 text-sm leading-relaxed">{s.metric}</p>
                   </div>
+                  {s.link && (
+                    <div className="border-t border-zinc-800 mt-5 pt-5">
+                      <Link
+                        to={s.link}
+                        className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                      >
+                        {s.linkLabel}
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>

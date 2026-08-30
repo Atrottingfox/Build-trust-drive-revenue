@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { opsToStored } from "../../src/lib/formOptions";
 
 /* The tag the GHL confirmation workflow listens for. Cycled on every
    application so a repeat applicant still gets an email. Nothing else may
@@ -191,6 +192,24 @@ const handler: Handler = async (event) => {
 
     const activeChannels = (data.activeChannels || []).map((ch: string) => ({ name: ch }));
 
+    /*
+      What the form asks and what the two stores accept are not the same string.
+
+      The form offers "Yes, full time". Notion refuses any select option
+      containing a comma outright, and the GoHighLevel dropdown only accepts
+      "Yes full-time". The mapping to bridge them has existed in formOptions
+      since the field was built and was never applied here.
+
+      The cost was not a blank field. Notion rejecting the write returns 500 and
+      the whole application is abandoned: no CRM record, no Slack alert, no
+      email, and the applicant sees a failure. Anybody who answered that they
+      have somebody on content lost their application entirely. Only "No" got
+      through.
+
+      Slack keeps the raw answer, because a human reads that one.
+    */
+    const opsStored = opsToStored[data.contentOpsPerson] || data.contentOpsPerson || "";
+
     const properties: Record<string, any> = {
       Name: { title: [{ text: { content: data.name || "" } }] },
       Company: { rich_text: [{ text: { content: data.company || "" } }] },
@@ -201,7 +220,7 @@ const handler: Handler = async (event) => {
       "Audience Size": { rich_text: [{ text: { content: data.audienceSize || "" } }] },
       "Biggest Problem": data.biggestProblem ? { select: { name: data.biggestProblem } } : undefined,
       "What To Fix": { rich_text: [{ text: { content: data.whatToFix || "" } }] },
-      "Content Ops Person": data.contentOpsPerson ? { select: { name: data.contentOpsPerson } } : undefined,
+      "Content Ops Person": opsStored ? { select: { name: opsStored } } : undefined,
       "Operator Name": { rich_text: [{ text: { content: data.operatorName || "" } }] },
       "Ops Person Role": { rich_text: [{ text: { content: data.opsPersonRole || "" } }] },
       "How Did You Hear": { rich_text: [{ text: { content: data.howDidYouHear || "" } }] },
@@ -327,9 +346,12 @@ const handler: Handler = async (event) => {
 
         for (const [key, envVar] of Object.entries(GHL_FIELD_ENV)) {
           const fieldId = process.env[envVar] || GHL_FIELD_ID_DEFAULTS[envVar];
-          const raw = key === "activeChannels"
-            ? (data.activeChannels || []).join(", ")
-            : data[key];
+          const raw =
+            key === "activeChannels"
+              ? (data.activeChannels || []).join(", ")
+              : key === "contentOpsPerson"
+                ? opsStored
+                : data[key];
           const value = typeof raw === "string" ? raw.trim() : raw ? String(raw) : "";
           if (!value) continue;
           if (!fieldId) {

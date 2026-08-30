@@ -24,6 +24,7 @@ Disallow: /diagnostic-tool
 Disallow: /quiz
 Disallow: /congruence
 Disallow: /map
+Disallow: /phase0
 Disallow: /engine
 Disallow: /content-archetype
 Disallow: /editorapplication
