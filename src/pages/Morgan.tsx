@@ -303,7 +303,6 @@ const nextSteps = [
   'Send me the reels from the Body science hire when they come through, plus whatever context you have on him, ideally resume.',
   'I do a sweep of my network this week and come back with anyone worth putting in front of you.',
   'Put the email blast out after DreamFest and attach a bounty for anyone who sends real talent.',
-  'I message you Monday. You say go, and we lock the date for the Day.',
 ];
 
 /* ---------------------------------------------------------------- */
