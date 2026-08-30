@@ -72,3 +72,21 @@ variable as it was, including the removed NOTION_TOKEN value.
 `netlify env:unset` the four GHL_FIELD_* vars and redeploy.
 
 **Not touched:** all four price variables stay at 100 for testing.
+
+---
+
+## 2026-08-30 14:50 AEST · Margot plan page added at /margot
+
+**What:** New page `src/pages/Margot.tsx` built on the Geronimo Strategy Day
+archetype from the 30 Aug strategy call. Routes `/margot` and `/themargotplan`
+added to `src/App.tsx`. Both added to `NO_CTA_PATHS` in
+`src/components/ui/Navigation.tsx`. Password gated (`margot-unlocked`, password
+`Scale`), noIndex, no back link.
+
+**Audience:** Margot Miller only. Nothing links to it from any public page.
+
+**Rollback:** `git reset --hard pre-margot-page-20260830T1436`, or one click
+deploy rollback in Netlify to `cf96dc8a`.
+
+**Why:** Client facing reference for the call breakdown. Companion Notion page
+lives at "Margot - Call breakdown" under Extra pages.
