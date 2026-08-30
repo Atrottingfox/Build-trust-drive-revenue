@@ -24,6 +24,54 @@ const headers = {
   "Content-Type": "application/json",
 };
 
+/*
+  Which page, and when. Appended rather than overwritten.
+
+  Three pages already reported a visit and this function threw away which one,
+  so the record said "they looked" and "last time" and nothing else. Whether
+  somebody opened their agreement four times without signing, or paid and never
+  came back to pick a date, was invisible.
+
+  A single text field holding a readable trail, rather than a table nobody can
+  see. It is legible in GoHighLevel next to everything else about them, which
+  is the whole point: an operator answering "where are they up to" should not
+  need a second system.
+
+  Capped, because a field is not a log. The oldest entries drop off and the last
+  dozen visits are what anybody actually acts on.
+*/
+const TRAIL_FIELD_DEFAULT = "bT1vSEg37lxUGj641h64";
+const TRAIL_MAX = 12;
+
+/* A reload is not a visit. Anything inside this window folds into the entry
+   already there, so a page that refreshes does not fill the trail with itself. */
+const SAME_VISIT_MINUTES = 30;
+
+function appendTrail(existing: string, page: string, at: Date): string {
+  const stamp = at.toLocaleString("en-AU", {
+    day: "numeric",
+    month: "short",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone: "Australia/Brisbane",
+  });
+  const entries = String(existing || "")
+    .split(" · ")
+    .map((e) => e.trim())
+    .filter(Boolean);
+
+  const last = entries[entries.length - 1] || "";
+  if (last.startsWith(`${page} `)) {
+    const lastAt = Date.parse(last.slice(page.length + 1) + ` ${at.getFullYear()}`);
+    if (Number.isFinite(lastAt) && at.getTime() - lastAt < SAME_VISIT_MINUTES * 60000) {
+      return entries.join(" · ");
+    }
+  }
+
+  entries.push(`${page} ${stamp}`);
+  return entries.slice(-TRAIL_MAX).join(" · ");
+}
+
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
   if (event.httpMethod !== "POST") {
@@ -34,7 +82,7 @@ const handler: Handler = async (event) => {
   if (!token) return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };
 
   try {
-    const { contactId } = JSON.parse(event.body || "{}");
+    const { contactId, page } = JSON.parse(event.body || "{}");
     if (!contactId) return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };
 
     const contact = await getContact(token, contactId);
@@ -102,6 +150,26 @@ const handler: Handler = async (event) => {
         } catch {
           /* An alert must never cost somebody their page. */
         }
+      }
+    }
+
+    /* The trail, and the plain last-seen stamp beside it. One write. */
+    const trailField = process.env.GHL_FIELD_JOURNEY_TRAIL || TRAIL_FIELD_DEFAULT;
+    const pageName = String(page || "").trim().slice(0, 24).replace(/[^a-z0-9 -]/gi, "");
+    if (trailField && pageName) {
+      const current = (contact?.customFields || []).find((f: any) => f?.id === trailField)?.value || "";
+      const next = appendTrail(String(current), pageName, new Date());
+      if (next !== String(current)) {
+        await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Version: GHL_VERSION,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ customFields: [{ id: trailField, value: next }] }),
+        }).catch((err) => console.error("journey trail write failed:", err));
       }
     }
 

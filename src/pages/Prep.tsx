@@ -60,7 +60,7 @@ export default function Prep() {
     fetch('/.netlify/functions/track-hub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId: id }),
+      body: JSON.stringify({ contactId: id, page: 'prep' }),
     })
       .then((r) => r.json())
       .then((d) => {

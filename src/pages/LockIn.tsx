@@ -381,7 +381,7 @@ export default function LockIn() {
       fetch('/.netlify/functions/track-hub', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contactId: id }),
+        body: JSON.stringify({ contactId: id, page: 'lock-in' }),
       })
         .then((r) => r.json())
         .then((d) => {

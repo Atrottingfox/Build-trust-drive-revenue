@@ -243,7 +243,7 @@ export default function Install() {
     fetch('/.netlify/functions/track-hub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId: id }),
+      body: JSON.stringify({ contactId: id, page: 'install' }),
     })
       .then((r) => r.json())
       .then((d) => {

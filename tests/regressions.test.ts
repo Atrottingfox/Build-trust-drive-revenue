@@ -1211,3 +1211,37 @@ describe("A client who has paid is never left waiting in silence", () => {
     expect(toml).toMatch(/\[functions\."assets-chase"\]/);
   });
 });
+
+describe("The record says which page, not just that they looked", () => {
+  /*
+    Three pages reported a visit and track-hub threw away which one, so the
+    record said "they looked" and "last time" and nothing else. Whether somebody
+    opened their agreement four times without signing, or paid and never came
+    back to pick a date, was invisible.
+  */
+  it("every page in the journey names itself", () => {
+    for (const [file, name] of [["LockIn.tsx", "lock-in"], ["Install.tsx", "install"], ["Prep.tsx", "prep"]]) {
+      expect(page(file)).toContain(`page: '${name}'`);
+    }
+  });
+
+  it("appends rather than overwriting", () => {
+    const src = codeOf(fn("track-hub.ts"));
+    expect(src).toMatch(/entries\.push\(/);
+    expect(src).toMatch(/entries\.slice\(-TRAIL_MAX\)/);
+  });
+
+  it("a reload is not a visit", () => {
+    /* Otherwise a page that refreshes fills the trail with itself. */
+    expect(codeOf(fn("track-hub.ts"))).toMatch(/SAME_VISIT_MINUTES/);
+  });
+
+  it("caps itself, because a field is not a log", () => {
+    expect(codeOf(fn("track-hub.ts"))).toMatch(/TRAIL_MAX = \d+/);
+  });
+
+  it("cannot be fed anything but a page name", () => {
+    /* It reaches a CRM field. */
+    expect(codeOf(fn("track-hub.ts"))).toMatch(/replace\(\/\[\^a-z0-9 -\]\/gi, ""\)/);
+  });
+});
