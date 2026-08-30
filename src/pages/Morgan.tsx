@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
   Check, X, Target, Zap, FileText, Megaphone, Settings, ArrowRight,
-  ClipboardCheck, UserPlus, Video, Crosshair, Camera,
+  ClipboardCheck, UserPlus, Video, Crosshair,
 } from 'lucide-react';
 import PasswordGate from '../components/PasswordGate';
 import Footer from '../components/Footer';
@@ -151,32 +151,9 @@ const whoTheyAre = [
   'Scattered business operator, a solopreneur, who has to become a proper founder who can grow a proper company',
 ];
 
-const captureFormats = [
-  'Mock podcast. Sit down, get asked the questions, punch it out.',
-  'The ten questions format. You handed your assistant ten questions, answered them, and that has done millions of views.',
-  'Live Q and A, and the meetup or event floor, where the questions come from the room instead of a list.',
-  'Weekly talk show with a guest, once the virtual studio is live. Raw, bang, go.',
-];
 
-const scriptMechanic = [
-  'Script the hook only, then roughen it up. Write it, say it, change the words to what you actually say.',
-  'Five takes on that hook, no more.',
-  'Dot points for the structure underneath it, never full sentences.',
-];
 
-const productionGaps = [
-  'There are no SOPs, so the standard lives in one person and it leaves when he does',
-  'Good and not good are opinions rather than written conditions',
-  'A miss carries no consequence, so nothing changes after one',
-  'Nothing gets logged, so the same mistake is available again next week',
-];
 
-const deRisk = [
-  'Map the production line as it actually runs today. Every step, and who owns it.',
-  'Write the procedure for each step so it is repeatable by someone who was not there.',
-  'Set the approval matrix. Good, not good, and the conditional logic underneath it. Every rejection gets logged.',
-  'Get it to the point where you can pull any one person out and slot a technician in inside 30 days, and the output still comes.',
-];
 
 const hireYouHave = [
   '80 applied through Seek. You shortlisted half and asked for a three minute video. Six or seven sent one.',
@@ -242,12 +219,6 @@ const contractShape = [
   'Miss them without showing ownership and you have an exit that costs you nothing',
 ];
 
-const handover = [
-  'Jack does a proper handover rather than a verbal one. He has said he would do anything you asked, and he is leaving to focus on the new business. No bad blood.',
-  'A weekly call from Jack into the new person while it beds in, so the context transfers instead of walking out the door.',
-  'The two editors stay. They were hired inside your company, you pay them, and they are not going anywhere with him.',
-  'He is in the room for the Day. He carries context on the production line that you should not have to carry.',
-];
 
 const install = [
   {
@@ -283,7 +254,7 @@ const install = [
 
 const proof = [
   {
-    name: 'Reese Livingstone',
+    name: 'Rhys Livingstone',
     body: 'Creative director was overcompensated and was never going to be the team leader. Hard conversation, out within a week, new person slotted straight into the operation. He moved to Melbourne and inside three weeks he was running it.',
   },
   {
@@ -449,82 +420,6 @@ function MorganPage() {
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-10">
               Get those three straight and the rest of this gets simple.
             </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* CAPTURE */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>How you actually make it</Label>
-            <H2>You are running the wrong process for who you are.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              You spent four months trying to do it properly with scripts and hated every minute, then pulled out
-              your phone, did a yap video, and got more for it. The perfect script
-              is already locked inside your head and you will say it the moment something is happening. The job is a
-              camera being there, because you are the content.
-            </p>
-            <div className="glow-card p-8 mt-10">
-              <div className="flex items-center gap-3 mb-5">
-                <Camera className="w-[18px] h-[18px] text-blue-400" />
-                <p className="text-white text-sm font-semibold">Formats built for capture</p>
-              </div>
-              <Bullets items={captureFormats} tone="blue" />
-            </div>
-            <div className="glow-card p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-4">When something does need structure</p>
-              <Bullets items={scriptMechanic} tone="blue" />
-              <p className="text-zinc-400 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                They stop working when they feel scripted.
-              </p>
-            </div>
-            <div className="glow-card p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-3">The shape of your week</p>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                One day short form, one day long form, ideally collapsed into the same day, plus half a day to sit
-                and be strategic. Your number was one and a half days, and that is the right number. The studio makes
-                it cheaper again, because the setup cost of filming drops to walking in and hitting go.
-              </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* PRODUCTION */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The production line</Label>
-            <H2>How does it get through three people?</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              The Denny Morrell clip. Biggest guest you have had on, and his face is off the screen. Someone edited
-              it, Jack approved it, and it got posted. Three people touched it and none of them stopped it.
-            </p>
-            <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
-              Carrot and stick. There is no incentive for catching it
-              and no consequence for missing it, so everyone still gets paid on Friday and it happens again.
-            </p>
-            <div className="glow-card p-8 mt-10">
-              <p className="text-white text-sm font-semibold mb-4">What is missing right now</p>
-              <Bullets items={productionGaps} />
-            </div>
-            <div className="glow-card border-blue-500/20 p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-4">De risking it</p>
-              <Bullets items={deRisk} tone="blue" />
-              <p className="text-zinc-400 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                Frame.io does this. So does Clipflow. The tool matters less than someone being willing to write down
-                what approved actually means, and Jack has to be the one to write it before he goes.
-              </p>
-            </div>
-            <div className="glow-card p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-4">The handover</p>
-              <Bullets items={handover} tone="blue" />
-            </div>
           </Section>
         </div>
       </section>
