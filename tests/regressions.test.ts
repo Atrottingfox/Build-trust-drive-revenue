@@ -1165,3 +1165,49 @@ describe("An application from somebody who has an operator is not thrown away", 
     expect(codeOf(fn("builder-application.ts"))).toMatch(/\$\{data\.contentOpsPerson\}/);
   });
 });
+
+describe("A client who has paid is never left waiting in silence", () => {
+  /*
+    Six deliverables are promised within 48 hours of a Brand Day and nothing
+    knew whether they went. Not late, not missing: unknown. It is the only
+    promise in the funnel made to somebody who has already handed over $5,000,
+    and it was the only one with nothing watching it.
+  */
+  it("counts from the Brand Day, not from the payment", () => {
+    const src = codeOf(fn("assets-chase.ts"));
+    expect(src).toContain("GHL_FIELD_BRAND_DAY_DATE");
+    expect(src).toMatch(/PROMISE_HOURS = 48/);
+  });
+
+  it("stops for good once somebody says they went", () => {
+    expect(codeOf(fn("assets-chase.ts"))).toMatch(/tags\.includes\(DELIVERED\)\) continue/);
+  });
+
+  it("gets louder rather than repeating itself", () => {
+    /* A line that reads the same on day one and day nine teaches people to
+       skim it. */
+    const src = fn("assets-chase.ts");
+    expect(src).toMatch(/rotating_light/);
+    expect(src).toMatch(/days past the promise/);
+  });
+
+  it("says so rather than going quiet when it cannot offer the buttons", () => {
+    expect(fn("assets-chase.ts")).toMatch(/DECIDE_SECRET is not set/);
+  });
+
+  it("never chases a rehearsal", () => {
+    expect(codeOf(fn("assets-chase.ts"))).toMatch(/zz-test/);
+  });
+
+  it("both answers exist on the one-click endpoint", () => {
+    const src = fn("decide.ts");
+    expect(src).toContain('"assets-sent"');
+    expect(src).toContain('"assets-not-yet"');
+    expect(src).toContain('tag: "assets-delivered"');
+  });
+
+  it("runs on a schedule", () => {
+    const toml = readFileSync(join(__dirname, "..", "netlify.toml"), "utf8");
+    expect(toml).toMatch(/\[functions\."assets-chase"\]/);
+  });
+});

@@ -53,6 +53,29 @@ const ACTIONS: Record<string, { tag: string; label: string; done: string }> = {
     label: "Send the 90 Day link",
     done: "Invited. The 90 Day Install email is on its way to them.",
   },
+
+  /*
+    Did their assets actually go out.
+
+    Six named deliverables are promised within 48 hours of a Brand Day, and
+    nothing anywhere knew whether that happened. Not late, not missing:
+    unknown. A client who has already paid $5,000 could be waiting a fortnight
+    and the first anyone would hear is them asking.
+
+    Deliberately a person answering rather than a system inferring. The assets
+    go out however they go out, by email, by Drive link, by hand, so there is
+    nothing to detect. What can be done is ask, every time, and keep asking.
+  */
+  "assets-sent": {
+    tag: "assets-delivered",
+    label: "Yes, sent",
+    done: "Recorded. Nothing will ask about this client again.",
+  },
+  "assets-not-yet": {
+    tag: "assets-late",
+    label: "Not yet",
+    done: "Recorded as outstanding. You will be asked again tomorrow.",
+  },
 };
 
 const page = (title: string, body: string, tone: "ask" | "ok" | "bad") => `<!doctype html>

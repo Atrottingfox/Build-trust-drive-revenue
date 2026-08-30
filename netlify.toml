@@ -90,6 +90,14 @@
 [functions."day-book-chase"]
   schedule = "@hourly"
 
+# The only promise in this funnel made to somebody who has already paid, and
+# the only one nothing was watching. Six deliverables inside 48 hours of a
+# Brand Day, and no function knew whether they went. Asks once a day and gets
+# louder, because a client waiting on work they have paid for is the most
+# expensive kind of silence. 08:00 Brisbane, before the rest of the morning.
+[functions."assets-chase"]
+  schedule = "0 22 * * *"
+
 # Internal offer ladder. Gated at the edge so neither the route nor its
 # JavaScript chunk is served without credentials.
 [[edge_functions]]
