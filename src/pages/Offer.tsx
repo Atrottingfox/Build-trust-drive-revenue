@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye, Calendar, Workflow } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Map, Layers, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye, Calendar, Workflow } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta, SRC_PARAM } from '../lib/track';
@@ -193,16 +193,14 @@ const diagnostic = [
 const strategyAssets = [
   { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint, and why the other three sit downstream of it.' },
   { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
-  { icon: Magnet, name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
+  { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
   { icon: Video, name: 'Trust Asset Bank', body: 'A bank of trust assets, mapped. The long form videos that carry your trust: the path, personal story and case studies each one needs, so a stranger watches once and thinks this is my person.' },
 ];
 
 const operatingSystem = [
-  { icon: Calendar, name: 'The 30 Day Plan', body: 'Four weeks, week by week, starting the Monday after. One job per person each week, output stepping up as the backlog clears, and a single measure at the foot of it.' },
-  { icon: Users, name: 'Operator Scope', body: 'Exactly what your Operator or Creative Director owns week to week. Person, role, weekly count, and what they are accountable for. If a line has no name against it, it does not happen.' },
-  { icon: Layers, name: 'The Weekly Schedule', body: 'Who shoots what and how many, then the week itself. Monday to Friday, with the content type and the person fronting each slot. Your production week on one screen.' },
+  { icon: Calendar, name: 'One Demand Cycle', body: 'One repeatable cycle your team runs without you. Thirty days, week by week, starting the Monday after. One job per person each week, and a single measure at the foot of it.' },
   { icon: Workflow, name: 'The Production Pipeline', body: 'Every stage from idea to posted, each carrying one named owner and what has to be true before it moves. Closed with the two things that break the line.' },
-  { icon: FileText, name: 'Your Private Plan Page', body: 'All of it lives on a private page your team navigates by tab and works from every week. You can send one person a link straight to their section.' },
+  { icon: Users, name: 'Operator Scope', body: 'Exactly what your Operator or Creative Director owns week to week. Person, role, weekly count, and what they are accountable for. If a line has no name against it, it does not happen.' },
 ];
 
 export default function Offer() {
