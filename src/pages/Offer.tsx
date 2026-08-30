@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Layers, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye, Calendar, LayoutGrid, Workflow, Lock } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta, SRC_PARAM } from '../lib/track';
@@ -168,12 +168,18 @@ const diagnostic = [
 ];
 
 const deliverables = [
-  { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
-  { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
-  { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
-  { icon: Magnet, name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
-  { icon: Video, name: 'Trust Asset Bank', body: 'A bank of trust assets, mapped. The long form videos that carry your trust: the path, personal story and case studies each one needs, so a stranger watches once and thinks this is my person.' },
-  { icon: Repeat, name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
+  { icon: Target, name: 'Bottleneck Scorecard', body: 'Your business scored in the room on the four things that move a stranger to a sale. Clarity, Visibility, Authority, Quality, each out of five. You leave knowing the one constraint and why the other three sit downstream of it.' },
+  { icon: Calendar, name: 'The Four Week Ramp', body: 'Week by week from the Monday after. One job per person per week, output stepping up as the backlog clears, and a single measure at the foot of it. Not a strategy to interpret. A plan to run.' },
+  { icon: Compass, name: 'Brand Decisions', body: 'Every brand you run, the job each one does, and who it is for. Closed with one written decision on which brand leads and what happens to the others. Decided on the day, not sent as options.' },
+  { icon: Eye, name: 'Good vs Bad', body: 'What is genuinely working and what is genuinely hard, split per brand because the answer differs. The honest read, in plain language, that your team can act on.' },
+  { icon: Shield, name: 'Principles', body: 'The reusable rules underneath every format decision you will make from here. So the next call gets made by your team without waiting on you.' },
+  { icon: Layers, name: 'The Format Library', body: 'Every format option that came out of the day, bucketed, split into Capture and Create. It is a buffet, with the five rules for reading it. You do not run them all at once, and they shift as soon as there is data.' },
+  { icon: Video, name: 'The Series Board', body: 'Your named series, each with a status on it. Proven, flagship, test, parked. What gets revived, what gets batched, what quietly goes.' },
+  { icon: LayoutGrid, name: 'The Weekly Schedule', body: 'Who shoots what and how many, then the Monday to Friday grid with two slots a day. Colour is the content type, the name is who fronts it. Your week, on one screen.' },
+  { icon: Workflow, name: 'The Production Pipeline', body: 'Every stage from idea to posted, each carrying one named owner and a list of what has to be true before it moves. Closed with the two things that break the line.' },
+  { icon: Users, name: 'Responsibilities', body: 'Person, role, weekly count, what they own. If a line has no name against it, it does not happen. This is the table that turns a plan into a team that runs it.' },
+  { icon: Lock, name: 'Locked, Open and Risks', body: 'What is fixed for the next four weeks, what is deliberately left open until there is data, and what could quietly kill it. Nothing hidden.' },
+  { icon: FileText, name: 'Your Private Plan Page', body: 'All of it lives on a private page your team navigates by tab and works from every week. You can send one person a link straight to their section. It is not a deck that dies in a drive.' },
 ];
 
 export default function Offer() {
@@ -323,15 +329,21 @@ export default function Offer() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Step 1 &middot; Brand Day &middot; $5,000 AUD</Label>
-            <H2>One focused day to refine your brand and remove the guesswork.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              With you and your key people, we:
+            <H2>One day in the room. Your team leaves knowing exactly what happens on Monday.</H2>
+            <p className="text-zinc-400 leading-relaxed mt-6 mb-4">
+              In person, a full day, with you and every person who touches your content. We diagnose the constraint, make the brand and format decisions on the spot, and build the operating plan your team runs from the following week.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-8">
+              Decisions get made in the room. Nothing gets sent back to you afterwards as a set of options to think about.
             </p>
             <Ticks items={[
-              'Diagnose the biggest constraint from turning strangers into buyers.',
-              'Align your personality, positioning and perspective to key content buckets of demand',
-              'Map your Authority Engine across Instagram, YouTube, podcast, and email',
-              'Assess where your current media operation is leaking opportunity',
+              'Score the business on the four things that move a stranger to a sale, out of five, rated by you in the room.',
+              'Settle the brand questions on the spot. Which brand leads, the job each one does, and what happens to the rest.',
+              'Build the format library and the series board. Every option on the table, bucketed, with a status against each one.',
+              'Set the weekly schedule. Who shoots what, how many pieces, and which day it happens.',
+              'Design the production pipeline end to end, with one named owner and a requirements list on every stage.',
+              'Assign responsibilities person by person, with the weekly count each one carries.',
+              'Lock the first four weeks. Week by week, one job per person, with a single measure.',
             ]} />
 
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
@@ -345,7 +357,11 @@ export default function Offer() {
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-12">What you walk away with</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
+            <H2>Twelve things, all of them decided.</H2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mt-6 mb-12">
+              This is the actual output of a Brand Day, not a summary of one. Every item below is built in the room with your people and lands as something your team opens on Monday and works from.
+            </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {deliverables.map((d, i) => (
                 <motion.div
@@ -579,7 +595,7 @@ export default function Offer() {
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
                 <p className="font-display text-3xl font-extrabold text-white">$15,000 AUD</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Strategy Day. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Brand Day. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
               </div>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
