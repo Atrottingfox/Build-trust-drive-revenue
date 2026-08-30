@@ -65,6 +65,7 @@ const Clients = React.lazy(() => import('./pages/Clients'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 const TheGeronimoPlan = React.lazy(() => import('./pages/TheGeronimoPlan'));
+const Margot = React.lazy(() => import('./pages/Margot'));
 const Operations = React.lazy(() => import('./pages/Operations'));
 
 
@@ -167,6 +168,8 @@ export default function App() {
           <Route path="/thegeronimoplan" element={<TheGeronimoPlan />} />
           <Route path="/geronimo-theplan" element={<TheGeronimoPlan />} />
           <Route path="/geronimotheplan" element={<TheGeronimoPlan />} />
+          <Route path="/margot" element={<Margot />} />
+          <Route path="/themargotplan" element={<Margot />} />
         </Routes>
       </Suspense>
     </Router>
