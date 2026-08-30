@@ -118,7 +118,7 @@ const ladder = [
       'Map your brand, message, and Authority Engine across IG and YouTube',
       'Define what your Operator or Creative Director owns week to week',
       'Set 3 to 5 clear 90 day outcomes for content and pipeline',
-      'Leave with a 30 day plan your team can run immediately, on a private page',
+      'Leave with a 30 day plan your team can run immediately',
     ],
   },
   {
