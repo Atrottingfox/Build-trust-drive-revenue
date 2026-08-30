@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X, Target, Map, Layers, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye, Calendar, Workflow } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Map, Layers, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Calendar, Workflow } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta, SRC_PARAM } from '../lib/track';
@@ -190,17 +190,13 @@ const diagnostic = [
   { icon: Zap, label: 'Opportunities', sub: 'What we build', desc: 'The core elements that turn the strengths and the gaps into one working engine over the next 90 days.' },
 ];
 
-const strategyAssets = [
+const workbook = [
   { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint, and why the other three sit downstream of it.' },
   { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
   { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
   { icon: Video, name: 'Trust Asset Bank', body: 'A bank of trust assets, mapped. The long form videos that carry your trust: the path, personal story and case studies each one needs, so a stranger watches once and thinks this is my person.' },
-];
-
-const operatingSystem = [
   { icon: Calendar, name: 'One Demand Cycle', body: 'One repeatable cycle your team runs without you. Thirty days, week by week, starting the Monday after. One job per person each week, and a single measure at the foot of it.' },
   { icon: Workflow, name: 'The Production Pipeline', body: 'Every stage from idea to posted, each carrying one named owner and what has to be true before it moves. Closed with the two things that break the line.' },
-  { icon: Users, name: 'Operator Scope', body: 'Exactly what your Operator or Creative Director owns week to week. Person, role, weekly count, and what they are accountable for. If a line has no name against it, it does not happen.' },
 ];
 
 export default function Offer() {
@@ -376,16 +372,12 @@ export default function Offer() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
-            <H2>The strategy, and the system that runs it.</H2>
+            <H2>One Brand Demand Workbook.</H2>
             <p className="text-zinc-400 leading-relaxed max-w-3xl mt-6 mb-12">
-              Two halves. The thinking that sets the direction, and the operating detail your team runs from on Monday.
+              Everything decided on the day, in one place. Six parts, built with your people, that your team runs from the following week.
             </p>
 
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">The strategy</p>
-            <DeliverableGrid items={strategyAssets} />
-
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mt-14 mb-6">The operating system</p>
-            <DeliverableGrid items={operatingSystem} />
+            <DeliverableGrid items={workbook} />
           </Section>
         </div>
       </section>
