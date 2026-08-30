@@ -80,12 +80,12 @@ const SCORES: Score[] = [
   {
     name: 'Visibility',
     score: 3,
-    note: 'Organic. You do not run DMs off Instagram and you do not want to. The brand gives, the ads clean up. Same shape as what Hormozi runs. DreamFest brings in a lot of people, and outside of that it is steady rather than climbing.',
+    note: 'Organic. You do not run DMs off Instagram and you do not want to. The brand gives, the ads clean up. Same shape as what Hormozi runs. DreamFest brings in a lot of people, and that is where most of it comes from.',
   },
   {
     name: 'Authority',
     score: 4,
-    note: 'Better than most. You have done a pretty okay job of positioning what it is that you do. Take the four. The problem is it is a little bit murky on how you do it, and that is a methodology gap, not a reputation gap.',
+    note: 'Better than most. You have done a pretty okay job of positioning what it is that you do. Take the four. The problem is it is a little bit murky on how you do it.',
   },
   {
     name: 'Quality',
@@ -170,7 +170,7 @@ const whatIDoOnHiring = [
     title: 'The role and the 90 day scorecard',
     items: [
       'What he owns week to week, and what he does not',
-      'Inputs and outputs, not vibes',
+      'Inputs and outputs, both measured',
       'What dangerous at 90 days means, and what weaponised at 12 months means',
       'Compensation band and the upside',
     ],
@@ -184,7 +184,7 @@ const whatIDoOnHiring = [
       'You send me the JD and I tell you what to cut, what to add, and what not to say',
       'Two comp options. Higher base with no bonus, or lower base plus bonus. Anyone who takes the first one has told you something',
       'The base band for a head of content sits around 110 to 130 so they are actually invested. Head of short form sits nearer 105',
-      'A culture book so he knows what he is walking into on day one, before day one',
+      'A culture book so he knows what he is walking into before he starts',
     ],
     tail: 'What you already run with Jack is the right instinct. 30 percent of YouTube revenue over baseline, and a month where that paid him a 3,000 bonus. That is what makes someone ramp the thing.',
   },
@@ -216,7 +216,7 @@ const whatIDoOnHiring = [
 const contractShape = [
   '90 day contract to hire, with the milestones written before he starts',
   'Hit them and the status changes from contractor to employee, which is the moment you get to raise the bar again',
-  'Miss them without showing ownership and you have an exit that costs you nothing',
+  'If he is not taking ownership by then, you have an exit that costs you nothing',
 ];
 
 
@@ -246,7 +246,7 @@ const install = [
     items: [
       'Weekly engine check in',
       'Operator clinics and Q and A',
-      'Loom reviews on the real assets, not theory',
+      'Loom reviews on the real assets',
       'Three straight weeks hitting agreed targets by day 90',
     ],
   },
@@ -278,7 +278,7 @@ const isNot = [
   },
   {
     title: 'Not weaponised in 90 days',
-    body: 'I will not oversell that. In 90 days we get a media operator to the point where they are dangerous. Weaponised is a longer arc and it is worth being honest about.',
+    body: 'I will not oversell that. In 90 days we get a media operator to the point where they are dangerous. Weaponised takes a lot longer than that.',
   },
   {
     title: 'Not a forever contract',
@@ -321,7 +321,7 @@ function MorganPage() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Morgan Nelson, The Operator Intensive"
-        description="Follow on from the call. The read, the three things to fix, the production de risk, the hire, and how the money works."
+        description="Follow on from the call. The read, the three things to fix, the hire, the 90 days, and how the money works."
         path="/morgan"
         noIndex
       />
