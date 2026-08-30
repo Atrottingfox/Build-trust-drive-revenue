@@ -24,7 +24,7 @@ export default function Home() {
       <Process />
       <PricingPlans />
       <FinalCTA />
-      <Footer />
+      <Footer showApply />
     </div>
   );
 }
