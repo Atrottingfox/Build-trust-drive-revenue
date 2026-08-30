@@ -332,6 +332,9 @@ export default function Offer() {
               'Align your personality, positioning and perspective to key content buckets of demand',
               'Map your Authority Engine across Instagram, YouTube, podcast, and email',
               'Assess where your current media operation is leaking opportunity',
+              'Define exactly what this Operator / Creative Director must own week to week in your business',
+              'Clarify your 12 month vision for you and your media Operator',
+              'Set 3 to 5 clear 90 day outcomes for content and pipeline',
             ]} />
 
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
