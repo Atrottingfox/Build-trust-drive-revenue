@@ -540,7 +540,7 @@ function MorganPage() {
             <H2>Everything starts in the one Day.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
               A day in your office. We start wide on brand, narrow into content, then get right down into the
-              production line. Jack in the room, because he holds context you should not have to hold.
+              production line. You and me in the room for half the day. You me and Jack for the other half.
             </p>
             <Ticks items={dayCovers} />
             <div className="glow-card p-7 mt-10">
