@@ -19,14 +19,10 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
   );
 }
 
-function Source({ children }: { children: React.ReactNode }) {
-  return <p className="text-zinc-700 text-xs mt-4">{children}</p>;
-}
-
 const successConditions = [
   '60 Strategy Days completed or sold',
   '48 Installs completed or sold',
-  '18% to 40% Advisory attach',
+  '40% rollover from the 90 Day Install into the 12 Month Advisory',
   '100% of critical workflows documented',
   'CSM led delivery working',
   'Sean removed from admin and routine implementation',
@@ -169,7 +165,7 @@ const scoreboard = [
   'Strategy Days sold',
   '90 Day Installs sold',
   'Install conversion rate',
-  'Advisory attach rate',
+  'Advisory rollover rate',
   'Active clients',
   'Clients per CSM',
   'Delivery on time percentage',
@@ -315,7 +311,6 @@ export default function Phase0() {
                 <p className="text-zinc-300 text-base leading-relaxed">
                   A business that depends entirely on you is not yet a scalable asset.
                 </p>
-                <Source>$100M Playbook Marketing Machine, page 8</Source>
               </div>
             </div>
           </Section>
@@ -549,7 +544,6 @@ export default function Phase0() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 Build one stage completely before adding the next.
               </p>
-              <Source>$100M Money Models, page 150</Source>
             </div>
           </Section>
         </div>
@@ -680,7 +674,6 @@ export default function Phase0() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 Every activity should create multiple assets.
               </p>
-              <Source>$100M Playbook Marketing Machine, page 9</Source>
             </div>
           </Section>
         </div>
@@ -725,9 +718,9 @@ export default function Phase0() {
                 <p className="text-zinc-600 text-xs">Strategy Day to 90 Day Install</p>
               </div>
               <div className="glow-card border-blue-500/20 p-8 text-center">
-                <p className="font-display text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">18 to 40%</p>
-                <p className="text-zinc-300 font-medium mb-1">Advisory attach</p>
-                <p className="text-zinc-600 text-xs">18% conservative. 40% intended.</p>
+                <p className="font-display text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-2">40%</p>
+                <p className="text-zinc-300 font-medium mb-1">Advisory rollover</p>
+                <p className="text-zinc-600 text-xs">90 Day Install into 12 Month Advisory</p>
               </div>
             </div>
 
@@ -735,7 +728,6 @@ export default function Phase0() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 These prove the offer before you scale the org.
               </p>
-              <Source>$100M Money Models, page 153</Source>
             </div>
           </Section>
         </div>
@@ -853,7 +845,6 @@ export default function Phase0() {
             <p className="text-zinc-400 text-base md:text-lg leading-relaxed mb-4">
               Build the smallest version of the future architecture that lets today's business move faster. One working process beats ten departments. Simple scales when the offer remains easy to sell and easy to fulfil.
             </p>
-            <Source>$100M Offers, page 86</Source>
 
             <div className="mt-12">
               <Link to="/map" className="inline-flex items-center gap-2 text-zinc-500 hover:text-blue-400 text-sm transition-colors">

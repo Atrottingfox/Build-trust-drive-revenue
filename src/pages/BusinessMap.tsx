@@ -124,7 +124,7 @@ const advisoryScenarios = [
     detail: '19.2 Advisory clients × $24k',
     advisory: '$460.8k',
     total: '$1.24m',
-    note: 'The rollover target. What the delivery model is designed to produce.',
+    note: 'The target. 40% rollover from the 90 Day Install into the 12 Month Advisory.',
   },
 ];
 
@@ -252,7 +252,7 @@ const stages: Stage[] = [
     description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 clients are the validation cohort.',
     model: '5k Day to 15k Install to 24k Advisory. 60 Strategy Days and 48 Installs is $780k. Advisory at the conservative 18% takes it to $996k. Advisory at the intended 40% takes it to about $1.24m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
-    metric: 'Install conversion rate (target 60 to 80%). Secondary: Install to Advisory attach (18% conservative, 40% intended).',
+    metric: 'Install conversion rate (target 60 to 80%). Secondary: Advisory rollover, 90 Day Install into 12 Month Advisory (target 40%).',
   },
   {
     stage: 'STAGE 1',
@@ -619,7 +619,7 @@ export default function BusinessMap() {
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">{s.label}</span>
-                    <span className="text-zinc-600 text-xs font-medium uppercase tracking-widest">{s.rate} attach</span>
+                    <span className="text-zinc-600 text-xs font-medium uppercase tracking-widest">{s.rate} rollover</span>
                   </div>
                   <p className="font-display text-4xl font-extrabold text-white tracking-tight mb-2">{s.total}</p>
                   <p className="text-zinc-400 text-sm mb-1">{s.detail} = {s.advisory} advisory</p>
@@ -1031,7 +1031,7 @@ export default function BusinessMap() {
               </h3>
               <div className="space-y-4">
                 {[
-                  { stage: 'Stage 0', metric: 'Install conversion (target 60 to 80%). Secondary: Advisory attach (18% conservative, 40% intended).' },
+                  { stage: 'Stage 0', metric: 'Install conversion (target 60 to 80%). Secondary: Advisory rollover, 90 Day Install into 12 Month Advisory (target 40%).' },
                   { stage: 'Stage 1', metric: 'CSM led client outcomes match Sean led outcomes. Secondary: Sean hours per active client.' },
                   { stage: 'Stage 2', metric: "Licensed operator retention (target 70%+ of Sean's rate)" },
                   { stage: 'Stage 3', metric: 'Certification graduation rate' },
