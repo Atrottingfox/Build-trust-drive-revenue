@@ -179,12 +179,11 @@ const whatIDoOnHiring = [
   {
     num: '2',
     icon: FileText,
-    title: 'The JD, the comp structure and the culture book',
+    title: 'The JD and the comp structure',
     items: [
       'You send me the JD and I tell you what to cut, what to add, and what not to say',
       'Two comp options. Higher base with no bonus, or lower base plus bonus. Anyone who takes the first one has told you something',
       'The base band for a head of content sits around 110 to 130 so they are actually invested. Head of short form sits nearer 105',
-      'A culture book so he knows what he is walking into before he starts',
     ],
     tail: 'What you already run with Jack is the right instinct. 30 percent of YouTube revenue over baseline, and a month where that paid him a 3,000 bonus. That is what makes someone ramp the thing.',
   },
@@ -303,7 +302,7 @@ const dayDeliverables = [
 
 const money = [
   { name: 'The Day', amount: '$5,000 AUD', note: 'Everything starts here. Nothing else gets committed to until it is done.' },
-  { name: 'Hiring support', amount: '$5,000 AUD', note: 'JD, comp structure, culture book, and I take the final interview.' },
+  { name: 'Hiring support', amount: '$5,000 AUD', note: 'JD, comp structure, and I take the final interview.' },
   { name: '90 Day Install', amount: '$10,000 AUD', note: 'Normally 15,000. The 5,000 from the Day rolls in, so it drops to 10.' },
 ];
 
