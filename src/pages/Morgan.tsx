@@ -165,10 +165,10 @@ const scriptMechanic = [
 ];
 
 const productionGaps = [
-  'No SOPs, so the standard lives in one person and leaves when he does',
-  'No approval matrix, so good and not good are opinions rather than conditions',
-  'No consequence attached to a miss, so nothing changes after one',
-  'No feedback log, so the same mistake is available to be made again next week',
+  'There are no SOPs, so the standard lives in one person and it leaves when he does',
+  'Good and not good are opinions rather than written conditions',
+  'A miss carries no consequence, so nothing changes after one',
+  'Nothing gets logged, so the same mistake is available again next week',
 ];
 
 const deRisk = [
@@ -243,7 +243,7 @@ const contractShape = [
 ];
 
 const handover = [
-  'Jack does a proper handover rather than a verbal one. He has said he would do anything you asked, and he is leaving for focus, not friction.',
+  'Jack does a proper handover rather than a verbal one. He has said he would do anything you asked, and he is leaving to focus on the new business. No bad blood.',
   'A weekly call from Jack into the new person while it beds in, so the context transfers instead of walking out the door.',
   'The two editors stay. They were hired inside your company, you pay them, and they are not going anywhere with him.',
   'He is in the room for the Day. He carries context on the production line that you should not have to carry.',
@@ -390,9 +390,9 @@ function MorganPage() {
             </p>
             <Scores items={SCORES} />
             <Pull>
-              Once clarity is dialled you can just crank visibility, because people land and immediately know he is
-              for me. Then the authority reads as expertise instead of noise, and the people walking into DreamFest
-              are already pre sold.
+              Once clarity is dialled you can crank visibility. People will land and immediately know 'he is for
+              me'. Then the authority reads as expertise instead of notoriety. The audience then walk into events
+              pre sold.
             </Pull>
           </Section>
         </div>
@@ -405,15 +405,15 @@ function MorganPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>What they have to see</Label>
-            <H2>He is my guy.</H2>
+            <H2>He is 'the guy'.</H2>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
-              Your words. An entrepreneur lands on the page and thinks he is my guy who is going to hypnotise me,
-              brainwash me, change my identity to be a high performer.
+              An entrepreneur must land on the page and think 'he is the guy who is going to change my identity to
+              be a high performer'.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-5">That entrepreneur, specifically.</p>
             <Ticks items={whoTheyAre} />
             <p className="text-zinc-400 leading-relaxed mt-8">
-              Nothing on the profile currently makes that legible in three seconds. That is the whole job.
+              Nothing on the profile says that right now.
             </p>
           </Section>
         </div>
@@ -463,7 +463,7 @@ function MorganPage() {
             <H2>You are running the wrong process for who you are.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6">
               You spent four months trying to do it properly with scripts and hated every minute, then pulled out
-              your phone, did a yap video, and got more for it. That is not a discipline problem. The perfect script
+              your phone, did a yap video, and got more for it. The perfect script
               is already locked inside your head and you will say it the moment something is happening. The job is a
               camera being there, because you are the content.
             </p>
@@ -478,7 +478,7 @@ function MorganPage() {
               <p className="text-white text-sm font-semibold mb-4">When something does need structure</p>
               <Bullets items={scriptMechanic} tone="blue" />
               <p className="text-zinc-400 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                Scripts do not fail because they are written. They fail when they feel written.
+                They stop working when they feel scripted.
               </p>
             </div>
             <div className="glow-card p-8 mt-6">
@@ -506,7 +506,7 @@ function MorganPage() {
               it, Jack approved it, and it got posted. Three people touched it and none of them stopped it.
             </p>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
-              That is a system result, not a people result. Carrot and stick. There is no incentive for catching it
+              Carrot and stick. There is no incentive for catching it
               and no consequence for missing it, so everyone still gets paid on Friday and it happens again.
             </p>
             <div className="glow-card p-8 mt-10">
@@ -547,7 +547,8 @@ function MorganPage() {
             </div>
             <Pull>
               You do not need to attract the best talent. You need someone hungry and disciplined who can run a
-              camera, be there, and turn things around fast. Skill is trainable. Speed and discipline are not.
+              camera, be there, and turn things around fast. Skill is trainable. Fast and disciplined are the two
+              things.
             </Pull>
           </Section>
         </div>
@@ -583,7 +584,7 @@ function MorganPage() {
               </div>
               <Bullets items={contractShape} tone="blue" />
               <p className="text-zinc-400 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                You keep the decision. You manage the performance. I stack the odds.
+                You make the final decision. You manage performance. I stack the odds in your favour.
               </p>
             </div>
           </Section>
