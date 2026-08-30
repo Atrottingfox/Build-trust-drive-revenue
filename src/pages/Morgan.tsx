@@ -634,14 +634,14 @@ function MorganPage() {
               You said you are keen to kick off with the Day regardless, and I agree. We spend a day together, and
               then so long as we both want it, we go and find the person who is going to own this.
             </p>
-            <div className="glow-card border-blue-500/20 p-7 mt-10">
-              <div className="flex items-center gap-3 mb-3">
-                <ArrowRight className="w-[18px] h-[18px] text-blue-400" />
-                <p className="text-white text-sm font-semibold">Monday</p>
-              </div>
-              <p className="text-zinc-300 text-[15px] leading-relaxed">
-                I message you, you say go, we lock the date.
-              </p>
+            <div className="mt-10">
+              <a
+                href="https://authorityengine.com.au/lock-in?c=dTsxeHNWC5Vv0Q8DUYHF"
+                className="btn-shine inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
+              >
+                Lock in the Day
+                <ArrowRight className="w-4 h-4" />
+              </a>
             </div>
           </Section>
         </div>
