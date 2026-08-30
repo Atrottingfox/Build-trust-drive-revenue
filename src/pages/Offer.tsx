@@ -590,7 +590,7 @@ export default function Offer() {
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
                 <p className="font-display text-3xl font-extrabold text-white">$5,000 AUD</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Founding rate. Increasing towards $10,000 as capacity fills.</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Founding rate. Increasing as capacity fills.</p>
               </div>
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
