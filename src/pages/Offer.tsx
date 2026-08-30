@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye } from 'lucide-react';
+import { ArrowRight, Check, X, Target, Map, Layers, Magnet, Video, Repeat, Compass, Zap, FileText, Megaphone, Settings, Shield, Users, Eye, Calendar, Workflow } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta, SRC_PARAM } from '../lib/track';
@@ -73,6 +73,27 @@ const Crosses = ({ items }: { items: string[] }) => (
       </li>
     ))}
   </ul>
+);
+
+type Deliverable = { icon: React.ComponentType<{ className?: string }>; name: string; body: string };
+
+const DeliverableGrid = ({ items }: { items: Deliverable[] }) => (
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {items.map((d, i) => (
+      <motion.div
+        key={i}
+        className="glow-card p-8"
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: i * 0.08 }}
+      >
+        <d.icon className="w-[18px] h-[18px] text-blue-400 mb-4" />
+        <h3 className="text-white font-semibold mb-2">{d.name}</h3>
+        <p className="text-zinc-500 text-sm leading-relaxed">{d.body}</p>
+      </motion.div>
+    ))}
+  </div>
 );
 
 const outputs = [
@@ -167,13 +188,19 @@ const diagnostic = [
   { icon: Zap, label: 'Opportunities', sub: 'What we build', desc: 'The core elements that turn the strengths and the gaps into one working engine over the next 90 days.' },
 ];
 
-const deliverables = [
-  { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint.' },
+const strategyAssets = [
+  { icon: Target, name: 'Bottleneck Scorecard', body: 'We score your business on the four things that move a stranger to a sale: Clarity, Visibility, Authority, Quality. You leave knowing your single biggest constraint, and why the other three sit downstream of it.' },
   { icon: Map, name: 'Customer Journey Map', body: 'The full path from unaware to advocate, mapped out. Where leads enter, what they see, where they fall out. Your funnel as one ecosystem.' },
-  { icon: Layers, name: 'Content Awareness Ladder', body: 'Your content sorted by how warm the viewer is. What to post to pull cold strangers in, and what to post to close the ones already ready.' },
   { icon: Magnet, name: 'Lead Magnet Suite', body: 'Your best IP turned into named, outcome led assets that qualify and convert. Named for the result they deliver, not what they are.' },
   { icon: Video, name: 'Trust Asset Bank', body: 'A bank of trust assets, mapped. The long form videos that carry your trust: the path, personal story and case studies each one needs, so a stranger watches once and thinks this is my person.' },
-  { icon: Repeat, name: 'One Demand Cycle', body: 'One repeatable content cycle your team runs without you. A rhythm that compounds demand, not a scramble every week.' },
+];
+
+const operatingSystem = [
+  { icon: Calendar, name: 'The 30 Day Plan', body: 'Four weeks, week by week, starting the Monday after. One job per person each week, output stepping up as the backlog clears, and a single measure at the foot of it.' },
+  { icon: Users, name: 'Operator Scope', body: 'Exactly what your Operator or Creative Director owns week to week. Person, role, weekly count, and what they are accountable for. If a line has no name against it, it does not happen.' },
+  { icon: Layers, name: 'The Weekly Schedule', body: 'Who shoots what and how many, then the week itself. Monday to Friday, with the content type and the person fronting each slot. Your production week on one screen.' },
+  { icon: Workflow, name: 'The Production Pipeline', body: 'Every stage from idea to posted, each carrying one named owner and what has to be true before it moves. Closed with the two things that break the line.' },
+  { icon: FileText, name: 'Your Private Plan Page', body: 'All of it lives on a private page your team navigates by tab and works from every week. You can send one person a link straight to their section.' },
 ];
 
 export default function Offer() {
@@ -348,23 +375,17 @@ export default function Offer() {
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-12">What you walk away with</p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {deliverables.map((d, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-8"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <d.icon className="w-[18px] h-[18px] text-blue-400 mb-4" />
-                  <h3 className="text-white font-semibold mb-2">{d.name}</h3>
-                  <p className="text-zinc-500 text-sm leading-relaxed">{d.body}</p>
-                </motion.div>
-              ))}
-            </div>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you walk away with</p>
+            <H2>The strategy, and the system that runs it.</H2>
+            <p className="text-zinc-400 leading-relaxed max-w-3xl mt-6 mb-12">
+              Two halves. The thinking that sets the direction, and the operating detail your team runs from on Monday.
+            </p>
+
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-6">The strategy</p>
+            <DeliverableGrid items={strategyAssets} />
+
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mt-14 mb-6">The operating system</p>
+            <DeliverableGrid items={operatingSystem} />
           </Section>
         </div>
       </section>
