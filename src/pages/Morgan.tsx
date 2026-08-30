@@ -340,7 +340,7 @@ function MorganPage() {
               90 days to make them dangerous.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              Follow on from our call. This is what I would do if I was sitting in your seat, and what it looks
+              Follow on from our call. This is what I would do if I was in your position, and what it looks
               like if we do it together.
             </p>
           </Section>
