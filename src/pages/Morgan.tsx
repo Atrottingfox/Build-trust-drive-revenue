@@ -155,13 +155,6 @@ const whoTheyAre = [
 
 
 
-const hireYouHave = [
-  '80 applied through Seek. You shortlisted half and asked for a three minute video. Six or seven sent one.',
-  'Two worth talking to. Lyle is talented and carries too much anxiety for this seat.',
-  'The Body Science guy is grounded, sharp, disciplined, and wants to be back around hustle after the exit dropped the standards where he is.',
-  'He asked for 100. He is cutting reels for you now.',
-  'You want two or three options rather than one. The email blast after DreamFest, plus a bounty for anyone who sends real talent.',
-];
 
 const whatIDoOnHiring = [
   {
@@ -430,15 +423,7 @@ function MorganPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The hire</Label>
-            <H2>You are close. Do not screw it up here.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              You do not need me to throw up a Seek ad, you already ran that. You need the seat designed properly
-              and the opportunity sold properly, because everything downstream is decided in hiring.
-            </p>
-            <div className="glow-card p-8 mt-10">
-              <p className="text-white text-sm font-semibold mb-4">Where you are up to</p>
-              <Bullets items={hireYouHave} />
-            </div>
+            <H2>You are close.</H2>
             <Pull>
               You do not need to attract the best talent. You need someone hungry and disciplined who can run a
               camera, be there, and turn things around fast. Skill is trainable. Fast and disciplined are the two
