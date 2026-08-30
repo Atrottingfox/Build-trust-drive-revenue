@@ -578,8 +578,8 @@ export default function Offer() {
               </div>
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
-                <p className="font-display text-3xl font-extrabold text-white">$10,000 AUD</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Brand Day. Your $5,000 Brand Day rolls in, so it is $10,000 from here, paid in two instalments of $5,000. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
+                <p className="font-display text-3xl font-extrabold text-white">$15,000 AUD</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Invitation only follow on after a Strategy Day. Founding rate. Future cohorts will be $30,000 once the program is fully built out.</p>
               </div>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">

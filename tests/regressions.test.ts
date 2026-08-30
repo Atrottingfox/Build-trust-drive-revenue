@@ -1095,3 +1095,35 @@ describe("Starting a form is not applying", () => {
     expect(src).not.toMatch(/if \(!\/builder\|apply\/i\.test/);
   });
 });
+
+describe("An application never loses answers to an environment budget", () => {
+  /*
+    The twelve custom field IDs were environment-only. This site sits within a
+    hundred bytes of AWS's 4KB limit on a Lambda's environment, so seven were
+    never set and seven answers were dropped from every application.
+
+    It was invisible: the Slack alert and the Notion row both read the raw
+    submission, so everything looked complete right up until Sean opened an
+    email built from the CRM and found blanks where "the one thing to fix" and
+    the operator's name should be.
+  */
+  it("every field the form collects has an ID that does not need an env var", () => {
+    const src = fn("builder-application.ts");
+    const envNames = [...src.matchAll(/^\s*\w+: "(GHL_FIELD_[A-Z0-9_]+)",$/gm)].map((m) => m[1]);
+    expect(envNames.length).toBeGreaterThanOrEqual(12);
+    const defaults = src.slice(src.indexOf("GHL_FIELD_ID_DEFAULTS"));
+    for (const name of envNames) {
+      expect(defaults).toContain(`${name}: "`);
+    }
+  });
+
+  it("the environment still wins, so another sub-account can override", () => {
+    expect(fn("builder-application.ts")).toContain(
+      "process.env[envVar] || GHL_FIELD_ID_DEFAULTS[envVar]"
+    );
+  });
+
+  it("still reports rather than silently dropping, if an ID is ever unknown", () => {
+    expect(codeOf(fn("builder-application.ts"))).toContain("missingFieldEnv");
+  });
+});

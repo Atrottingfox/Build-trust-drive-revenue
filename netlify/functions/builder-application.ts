@@ -19,9 +19,36 @@ const headers = {
 const GHL_API = "https://services.leadconnectorhq.com";
 const GHL_VERSION = "2021-07-28";
 
-// Custom field IDs are NEVER hardcoded. Each one is read from a Netlify env var
-// populated from the real sub-account via scripts/ghl-custom-fields.mjs.
-// A missing env var means that field is skipped, not guessed.
+/*
+  Custom field IDs, read from the environment and falling back to the real ones.
+
+  These were environment-only, on the reasoning that an ID copied between
+  accounts silently writes to the wrong field. That reasoning is sound and the
+  override below keeps it. What it did not survive was AWS's 4KB limit on a
+  Lambda's environment: this site sits within a hundred bytes of it, so seven of
+  the twelve variables were never set, and seven answers were silently dropped
+  from every application. The Slack alert and the Notion row still showed them,
+  because both read the raw submission, so the loss was invisible until Sean
+  noticed blanks in an email built from the CRM.
+
+  Every value below was pulled live from location B7IFxtiHwcLoDatUHVF6 with
+  scripts/ghl-custom-fields.mjs. Set the matching env var to override any of
+  them; that is what a second sub-account would do.
+*/
+const GHL_FIELD_ID_DEFAULTS: Record<string, string> = {
+  GHL_FIELD_LOCATION_CITY: "nZamcAIeHDGcWusvgwf3",
+  GHL_FIELD_ANNUAL_REVENUE: "xDzl8yGynRbVVGwmTYKo",
+  GHL_FIELD_PRIMARY_OFFER: "2uUJ8lIAMWXdhF7rJTkq",
+  GHL_FIELD_CHANNELS_ACTIVE: "7RKGbWRBVTWJ5ByT4xkg",
+  GHL_FIELD_AUDIENCE_SIZE: "2kup1eowI3xFt83Pdbt8",
+  GHL_FIELD_WHATS_BROKEN: "BG83BLVlfncek6ZBJqBO",
+  GHL_FIELD_ONE_THING_TO_FIX: "tDdbr10Dww070UyDdxej",
+  GHL_FIELD_OPERATOR_STATUS: "EiUmS3vk2VgMWPtCQvN0",
+  GHL_FIELD_CAN_COMMIT_30_DAYS: "iosN8GEcDMHohPIjkIDq",
+  GHL_FIELD_OPERATOR_NAME: "8pa30AIFzowE5hKbaFFm",
+  GHL_FIELD_OPS_PERSON_ROLE: "cPMYg1YYbbjClVVWaCSo",
+  GHL_FIELD_HOW_DID_YOU_HEAR: "JR51sdRfQnxmz5T5whga",
+};
 const GHL_FIELD_ENV: Record<string, string> = {
   location: "GHL_FIELD_LOCATION_CITY",
   revenueBand: "GHL_FIELD_ANNUAL_REVENUE",
@@ -299,7 +326,7 @@ const handler: Handler = async (event) => {
         const missingFieldEnv: string[] = [];
 
         for (const [key, envVar] of Object.entries(GHL_FIELD_ENV)) {
-          const fieldId = process.env[envVar];
+          const fieldId = process.env[envVar] || GHL_FIELD_ID_DEFAULTS[envVar];
           const raw = key === "activeChannels"
             ? (data.activeChannels || []).join(", ")
             : data[key];
