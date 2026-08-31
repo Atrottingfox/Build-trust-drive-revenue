@@ -209,7 +209,10 @@ function WeekFlow() {
 type Walkthrough = { kicker: string; title: string; href: string };
 
 const SHORT_FORM_TRAINING: Walkthrough[] = [
+  { kicker: 'Writing hooks', title: 'Hooks', href: 'https://www.loom.com/share/6aa844f797d24369a1f8aa957b6dabd9' },
   { kicker: 'Hooks and scripting', title: 'Short Form System, Hooks, and Belief Breakers', href: 'https://www.loom.com/share/ed88e84dbdcd452d8f98c6c29395cabc' },
+  { kicker: 'Writing short form stories', title: 'Roughen Your Script For Better Reels', href: 'https://www.loom.com/share/527263a2bea34f729ac7b8a3d3e55690' },
+  { kicker: 'Environments', title: 'How to Rotate Instagram Content Environments', href: 'https://www.loom.com/share/71287d4f2ae64d9b9e9e5b55c4597932' },
   { kicker: 'Running a shoot', title: 'Directing Founder Content, Simplify Shoots', href: 'https://www.loom.com/share/708f78a13a4348798d6d722ee769128e' },
   { kicker: 'Formats and examples of good', title: 'Ideation vs Excavation for Client Content', href: 'https://www.loom.com/share/e062e6cc92f84cc4955901130b9613ba' },
 ];
