@@ -220,6 +220,7 @@ const SHORT_FORM_TRAINING: Walkthrough[] = [
 const LONG_FORM_TRAINING: Walkthrough[] = [
   { kicker: 'The complete overview', title: 'YouTube Long Form Belief Mapping System', href: 'https://www.loom.com/share/482bc4f770dd42eca5b4b0644e8cc489' },
   { kicker: 'Thumbnail building', title: 'How to Craft High Converting Thumbnails', href: 'https://www.loom.com/share/f3e49c20bcfe42b0a00b0145bd4f53e7' },
+  { kicker: 'Designing thumbnails', title: 'How to Design Winning YouTube Thumbnails', href: 'https://www.loom.com/share/fadca4dd435843c2905f5c9c697381f8' },
   { kicker: 'Introduction builder', title: 'Introduction walkthrough', href: 'https://www.loom.com/share/9369cc661294484987a37319030ac5a5' },
 ];
 
