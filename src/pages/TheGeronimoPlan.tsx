@@ -1085,20 +1085,24 @@ export default function TheGeronimoPlan() {
           blurb="The whole Strategy Day, bucketed by core function. Where the bottlenecks are. What we decided. What gets built first."
           backHref={null}
         />
+
+        {/* ─── CAPTURE ─── */}
+        <div className="max-w-4xl mx-auto px-6 lg:px-8 -mt-6 md:-mt-10 pb-12 md:pb-16">
+          <button
+            type="button"
+            onClick={() => setCapture(true)}
+            className="inline-flex items-center gap-2 rounded-full border border-blue-500/50 bg-blue-500/10 px-6 py-3 text-[15px] font-semibold text-white hover:bg-blue-500/20 transition-colors"
+          >
+            Capture an idea
+          </button>
+          <p className="text-zinc-500 text-[13px] mt-3">Ideas in by Monday, so they get approved or killed before Tuesday.</p>
+        </div>
+
         {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
         <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/95 backdrop-blur-md">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <div className="pt-5 pb-4 -mb-10 flex items-start gap-3">
-              <div className="flex-1 min-w-0">
-                <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
-              </div>
-              <button
-                type="button"
-                onClick={() => setCapture(true)}
-                className="flex-shrink-0 rounded-full border border-blue-500/50 bg-blue-500/10 px-5 py-2.5 text-[14px] font-semibold text-white hover:bg-blue-500/20 transition-colors"
-              >
-                Capture
-              </button>
+            <div className="pt-5 pb-4 -mb-10">
+              <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
             </div>
             {current.sections.length > 1 && (
               <div className="border-t border-zinc-800/70">
