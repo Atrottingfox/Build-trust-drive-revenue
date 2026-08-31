@@ -224,7 +224,7 @@ const TYPE_SPEC: Record<string, TypeSpec> = {
     ],
     hooks: [
       { n: 'Vulnerability anchor', p: 'Open on a specific personal moment that signals you are confessing, not performing.' },
-      { n: 'Curiosity object', p: 'Reference something specific but do not reveal it yet.' },
+      { n: 'Curiosity loop', p: 'Reference something specific but do not reveal it yet.' },
       { n: 'Right of passage normaliser', p: 'Name the pain, then normalise it as a stage rather than a failure.' },
     ],
   },
@@ -249,7 +249,7 @@ const TYPE_SPEC: Record<string, TypeSpec> = {
     ],
     hooks: [
       { n: 'Provocative diagnostic question', p: 'Ask a question that forces self identification.' },
-      { n: 'Data and authority pre load', p: 'Lead with a specific number that earns the right to teach.' },
+      { n: 'Data and authority', p: 'Lead with a specific number that earns the right to teach.' },
       { n: 'Nobody told me insider', p: 'Frame the insight as gatekept or hard won.' },
     ],
   },
@@ -261,9 +261,9 @@ const TYPE_SPEC: Record<string, TypeSpec> = {
       'Constraint, ignore, do.',
     ],
     hooks: [
-      { n: 'Let me show you promise', p: 'Skip the setup entirely. Just promise the walkthrough.' },
-      { n: 'Curiosity object', p: 'Reference something specific but do not reveal it yet.' },
-      { n: 'Data and authority pre load', p: 'Lead with a specific number that earns the right to teach.' },
+      { n: 'Show the promise', p: 'Skip the setup entirely. Just promise the walkthrough.' },
+      { n: 'Curiosity loop', p: 'Reference something specific but do not reveal it yet.' },
+      { n: 'Data and authority', p: 'Lead with a specific number that earns the right to teach.' },
     ],
   },
 };
