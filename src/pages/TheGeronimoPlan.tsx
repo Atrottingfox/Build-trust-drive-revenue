@@ -1006,10 +1006,65 @@ function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string;
   );
 }
 
+// ─── Capture ─────────────────────────────────────────────────────────────
+// Idea capture form. Ideas go in Monday so they can be approved or killed
+// before Tuesday. Embed is the Notion form.
+
+const CAPTURE_SRC = 'https://authorityengine.notion.site/ebd//6539a3e4234441e1afc1f59aa8e2ae67';
+
+function CaptureModal({ onClose }: { onClose: () => void }) {
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[80] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Capture an idea"
+    >
+      <div
+        className="w-full max-w-3xl rounded-2xl border border-zinc-800 bg-base overflow-hidden shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between gap-4 px-5 py-4 border-b border-zinc-800">
+          <div>
+            <p className="font-display text-[16px] font-extrabold text-white leading-tight">Capture an idea</p>
+            <p className="text-zinc-500 text-[12px] mt-0.5">Ideas in by Monday, so they get approved or killed before Tuesday.</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-shrink-0 rounded-full border border-zinc-800 px-4 py-1.5 text-[13px] font-medium text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
+          >
+            Close
+          </button>
+        </div>
+        <iframe
+          src={CAPTURE_SRC}
+          title="Capture an idea"
+          className="w-full h-[600px] max-h-[70vh] block bg-white"
+          allowFullScreen
+        />
+      </div>
+    </div>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────
 
 export default function TheGeronimoPlan() {
   const { tab, sec, changeTab, changeSec } = usePlanNav();
+  const [capture, setCapture] = React.useState(false);
   const current = TABS.find((t) => t.id === tab) ?? TABS[0];
 
   return (
@@ -1033,8 +1088,17 @@ export default function TheGeronimoPlan() {
         {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
         <div id="plan-tabs" className="sticky top-0 z-40 border-y border-zinc-800 bg-base/95 backdrop-blur-md">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <div className="pt-5 pb-4 -mb-10">
-              <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
+            <div className="pt-5 pb-4 -mb-10 flex items-start gap-3">
+              <div className="flex-1 min-w-0">
+                <Tabs tabs={TABS.map((t) => ({ id: t.id, label: t.label }))} active={tab} onChange={changeTab} />
+              </div>
+              <button
+                type="button"
+                onClick={() => setCapture(true)}
+                className="flex-shrink-0 rounded-full border border-blue-500/50 bg-blue-500/10 px-5 py-2.5 text-[14px] font-semibold text-white hover:bg-blue-500/20 transition-colors"
+              >
+                Capture
+              </button>
             </div>
             {current.sections.length > 1 && (
               <div className="border-t border-zinc-800/70">
@@ -2050,6 +2114,7 @@ export default function TheGeronimoPlan() {
         </Wrap>
 
         <Footer />
+        {capture && <CaptureModal onClose={() => setCapture(false)} />}
       </div>
     </PasswordGate>
   );
