@@ -1532,7 +1532,7 @@ export default function TheGeronimoPlan() {
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The training</p>
             <H2>Walkthrough videos.</H2>
-            <Note>The training behind the system. Watch these before you build.</Note>
+            <Note>Training for the media crew.</Note>
             <div className="mt-8">
               <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-4">Short form</p>
               <Walkthroughs items={SHORT_FORM_TRAINING} />
