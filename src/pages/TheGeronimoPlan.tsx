@@ -268,58 +268,103 @@ const TYPE_SPEC: Record<string, TypeSpec> = {
   },
 };
 
-type ShootRow = { id: Kind; who: string; types: string[]; note?: string };
+type ShootRow = { id: Kind; who: string; types: string[]; run: string[]; shot: string };
 
 const SHOOT_CARD: ShootRow[] = [
-  { id: 'directcam', who: 'Doza ×2, Sophie ×1', types: ['Belief', 'Teach'], note: 'Sophie runs hers on belief and reframes.' },
-  { id: 'mystery', who: 'Doza ×1, Ryan ×1', types: ['Show'], note: 'The call is the proof, so let it run.' },
-  { id: 'coaching', who: 'Ryan ×1, Sophie ×1', types: ['Teach'], note: 'Repeat the question, set the frame, then answer.' },
-  { id: 'show', who: 'Ryan ×1', types: ['Show'], note: 'What it is, what it does for you, how to use it, why it is different.' },
-  { id: 'popquiz', who: 'Sophie ×1', types: ['Show'] },
-  { id: 'series', who: 'Doza ×1', types: ['Story'] },
+  {
+    id: 'directcam',
+    who: 'Doza ×2, Sophie ×1',
+    types: ['Belief'],
+    shot: 'Handheld with a little motion. Three sentences at a time. One with a visual behind the head, one without.',
+    run: [
+      'Pick one belief a studio owner holds that is costing them money.',
+      'Burn the text hook on screen. Under seven words. Do not give the answer away.',
+      'First line to camera. No bullshit, rip into it.',
+      'Say their belief back to them, and why it exists.',
+      'Flip it, and take the blame off them.',
+      'One proof. A number, a client, something you have watched happen.',
+      'Land it back on the hook.',
+    ],
+  },
+  {
+    id: 'mystery',
+    who: 'Doza ×1, Ryan ×1',
+    types: ['Show'],
+    shot: 'Zero setup. Anyone can run it. Batch it into whatever shoot is already happening.',
+    run: [
+      'Decide the one thing you are testing them on before you dial.',
+      'Text hook on screen while it rings.',
+      'Dial, and let the call run. Do not narrate over the top of it.',
+      'Mark the moment it goes wrong.',
+      'Cut back to camera. What should have happened instead.',
+      'Payoff. What that one moment costs a studio.',
+    ],
+  },
+  {
+    id: 'coaching',
+    who: 'Ryan ×1, Sophie ×1',
+    types: ['Teach'],
+    shot: 'Captured off a call that is happening anyway. Two cameras where possible.',
+    run: [
+      'Flag the question live on the call so it can be found later.',
+      'Repeat the question so it stands on its own without the call around it.',
+      'Set the frame. Who this applies to, and what it is costing them.',
+      'Answer in steps. One step per line.',
+      'Payoff, back to the question that started it.',
+    ],
+  },
+  {
+    id: 'show',
+    who: 'Ryan ×1',
+    types: ['Show'],
+    shot: 'Light, and something genuinely happening on screen.',
+    run: [
+      'Have the tool open and the screen ready before you roll.',
+      'Text hook on screen.',
+      'What it is, in one line.',
+      'What it does for you.',
+      'How to use it, actually doing it on screen.',
+      'Why it is different from how they do it now.',
+    ],
+  },
+  {
+    id: 'popquiz',
+    who: 'Sophie ×1',
+    types: ['Show'],
+    shot: 'The call is the capture. Same setup as a mystery shop.',
+    run: [
+      'Pick the KPI or the standard you are testing.',
+      'Text hook on screen.',
+      'Call our own client or their manager and ask it cold.',
+      'Let the answer land, good or bad. Do not rescue it.',
+      'Say what a good answer sounds like.',
+      'Payoff. What that answer signals about standards.',
+    ],
+  },
+  {
+    id: 'series',
+    who: 'Doza ×1',
+    types: ['Story'],
+    shot: 'Doza fronts it. Fed by the new 12 week room.',
+    run: [
+      'Open on the number. Total revenue under management.',
+      'What changed this week.',
+      'What they actually did to change it.',
+      'What it cost them, or nearly cost them.',
+      'The shift. What they understand now that they did not.',
+      'Payoff, and the number again.',
+    ],
+  },
 ];
-
-function SpecBody({ t }: { t: string }) {
-  const spec = TYPE_SPEC[t];
-  if (!spec) return null;
-  return (
-    <div className="pt-4 border-t border-zinc-800/70">
-      <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-3">{t}</p>
-      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The beats</p>
-      <div className="flex flex-wrap gap-1.5 mb-4">
-        {spec.beats.map((b) => (
-          <span key={b} className="rounded-md border border-zinc-800 bg-elevated/60 px-2 py-1 text-[12px] text-zinc-300">{b}</span>
-        ))}
-      </div>
-      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Pick one structure</p>
-      <ul className="space-y-2 mb-4">
-        {spec.frameworks.map((f) => (
-          <li key={f} className="flex items-start gap-2.5">
-            <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-            <span className="text-zinc-300 text-[13px] leading-relaxed">{f}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Hook types that suit it</p>
-      <ul className="space-y-2">
-        {spec.hooks.map((h) => (
-          <li key={h.n} className="text-[13px] leading-relaxed">
-            <span className="text-white font-semibold">{h.n}.</span>{' '}
-            <span className="text-zinc-400">{h.p}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 function ShootCard() {
   const [open, setOpen] = React.useState<string | null>(null);
   return (
-    <div className="grid gap-3 md:grid-cols-2">
+    <div className="grid gap-3">
       {SHOOT_CARD.map((r) => {
         const k = KIND[r.id];
         const isOpen = open === r.id;
+        const spec = TYPE_SPEC[r.types[0]];
         return (
           <div key={r.id} className="rounded-xl border border-zinc-800 bg-elevated/40 overflow-hidden">
             <button
@@ -337,13 +382,50 @@ function ShootCard() {
               <p className="text-zinc-400 text-[13px] leading-relaxed mb-3">{k.note}</p>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px]">
                 <span className="text-zinc-500">{r.who}</span>
-                <span className="text-blue-400 font-medium">{r.types.join(' and ')}</span>
+                <span className="text-blue-400 font-medium">{r.types[0]}</span>
               </div>
             </button>
+
             {isOpen && (
-              <div className="px-5 pb-5 space-y-5">
-                {r.note && <p className="text-zinc-400 text-[13px] leading-relaxed italic">{r.note}</p>}
-                {r.types.map((t) => <SpecBody key={t} t={t} />)}
+              <div className="px-5 pb-6 pt-1 border-t border-zinc-800/70 grid gap-6 md:grid-cols-2">
+                <div>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-3">How to run it</p>
+                  <ol className="space-y-2.5">
+                    {r.run.map((step, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <span className="text-blue-400 text-[12px] font-semibold tabular-nums pt-0.5 w-4 flex-shrink-0">{i + 1}</span>
+                        <span className="text-zinc-300 text-[13px] leading-relaxed">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mt-5 mb-2">How it is shot</p>
+                  <p className="text-zinc-400 text-[13px] leading-relaxed">{r.shot}</p>
+                </div>
+
+                <div>
+                  {spec && (
+                    <>
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Or pick one of these structures</p>
+                      <ul className="space-y-2 mb-5">
+                        {spec.frameworks.map((f) => (
+                          <li key={f} className="flex items-start gap-2.5">
+                            <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                            <span className="text-zinc-300 text-[13px] leading-relaxed">{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Hook types that suit it</p>
+                      <ul className="space-y-2">
+                        {spec.hooks.map((h) => (
+                          <li key={h.n} className="text-[13px] leading-relaxed">
+                            <span className="text-white font-semibold">{h.n}.</span>{' '}
+                            <span className="text-zinc-400">{h.p}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  )}
+                </div>
               </div>
             )}
           </div>
