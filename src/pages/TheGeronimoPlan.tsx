@@ -208,54 +208,144 @@ function WeekFlow() {
 // empty string renders as a visible gap rather than a guess. Do not fill these
 // from another client's material.
 
-type ShootRow = { id: Kind; who: string; ctype: string; framework: string; hooks: string };
+type TypeSpec = {
+  beats: string[];
+  frameworks: string[];
+  hooks: Array<{ n: string; p: string }>;
+};
+
+const TYPE_SPEC: Record<string, TypeSpec> = {
+  Story: {
+    beats: ['Text hook', 'Spoken hook', 'What happened', 'The cost', 'The shift', 'Payoff'],
+    frameworks: [
+      'Old me vs new me. Who I was, the breaking point, who I became.',
+      'Old self, friction, realisation, new self, invitation.',
+      'Situation, reaction, insight, new perspective, application.',
+    ],
+    hooks: [
+      { n: 'Vulnerability anchor', p: 'Open on a specific personal moment that signals you are confessing, not performing.' },
+      { n: 'Curiosity object', p: 'Reference something specific but do not reveal it yet.' },
+      { n: 'Right of passage normaliser', p: 'Name the pain, then normalise it as a stage rather than a failure.' },
+    ],
+  },
+  Belief: {
+    beats: ['Text hook', 'Spoken hook', 'Common belief and why it exists', 'Your belief, blame removed', 'Proof', 'Payoff'],
+    frameworks: [
+      'Common belief, contradiction, explanation, new conclusion.',
+      'Accepted rule, why it exists, why it fails, better rule.',
+    ],
+    hooks: [
+      { n: 'Contrarian reversal', p: 'State the conventional wisdom, then immediately invert it.' },
+      { n: 'Everybody says dismantle', p: 'Start with what the mainstream repeats, then reveal what they are missing.' },
+      { n: 'Philosophical statement', p: 'A standalone belief, delivered like a thesis.' },
+    ],
+  },
+  Teach: {
+    beats: ['Text hook', 'Spoken hook', 'The core issue', 'The steps', 'Payoff'],
+    frameworks: [
+      'Belief, cost, truth, application.',
+      'Hook, problem, steps, reward.',
+      'Goal, current effort, bottleneck, lever, reallocation.',
+    ],
+    hooks: [
+      { n: 'Provocative diagnostic question', p: 'Ask a question that forces self identification.' },
+      { n: 'Data and authority pre load', p: 'Lead with a specific number that earns the right to teach.' },
+      { n: 'Nobody told me insider', p: 'Frame the insight as gatekept or hard won.' },
+    ],
+  },
+  Show: {
+    beats: ['Text hook', 'Spoken hook', 'The problem in their words', 'Draw it or do the maths', 'What it means', 'Payoff'],
+    frameworks: [
+      'Input, process, output.',
+      'Situation, options, choice.',
+      'Constraint, ignore, do.',
+    ],
+    hooks: [
+      { n: 'Let me show you promise', p: 'Skip the setup entirely. Just promise the walkthrough.' },
+      { n: 'Curiosity object', p: 'Reference something specific but do not reveal it yet.' },
+      { n: 'Data and authority pre load', p: 'Lead with a specific number that earns the right to teach.' },
+    ],
+  },
+};
+
+type ShootRow = { id: Kind; who: string; types: string[]; note?: string };
 
 const SHOOT_CARD: ShootRow[] = [
-  { id: 'directcam', who: 'Doza ×2, Sophie ×1', ctype: 'Belief, and Teach', framework: 'Common belief, contradiction, explanation, new conclusion. Sophie runs hers on belief and reframes.', hooks: '' },
-  { id: 'mystery', who: 'Doza ×1, Ryan ×1', ctype: 'Show', framework: 'Situation, options, choice. The call is the proof, so let it run.', hooks: '' },
-  { id: 'coaching', who: 'Ryan ×1, Sophie ×1', ctype: 'Teach', framework: 'Repeat the question, set the frame, then answer.', hooks: '' },
-  { id: 'show', who: 'Ryan ×1', ctype: 'Show', framework: 'What it is, what it does for you, how to use it, why it is different.', hooks: '' },
-  { id: 'popquiz', who: 'Sophie ×1', ctype: 'Show', framework: 'Input, process, output. The answer on the call is the output.', hooks: '' },
-  { id: 'series', who: 'Doza ×1', ctype: 'Story', framework: 'Situation, reaction, insight, new perspective, application.', hooks: '' },
+  { id: 'directcam', who: 'Doza ×2, Sophie ×1', types: ['Belief', 'Teach'], note: 'Sophie runs hers on belief and reframes.' },
+  { id: 'mystery', who: 'Doza ×1, Ryan ×1', types: ['Show'], note: 'The call is the proof, so let it run.' },
+  { id: 'coaching', who: 'Ryan ×1, Sophie ×1', types: ['Teach'], note: 'Repeat the question, set the frame, then answer.' },
+  { id: 'show', who: 'Ryan ×1', types: ['Show'], note: 'What it is, what it does for you, how to use it, why it is different.' },
+  { id: 'popquiz', who: 'Sophie ×1', types: ['Show'] },
+  { id: 'series', who: 'Doza ×1', types: ['Story'] },
 ];
 
-const ToFill = () => (
-  <span className="inline-flex items-center rounded-md border border-dashed border-zinc-700 px-2 py-0.5 text-[11px] uppercase tracking-widest font-semibold text-zinc-600">
-    To fill
-  </span>
-);
+function SpecBody({ t }: { t: string }) {
+  const spec = TYPE_SPEC[t];
+  if (!spec) return null;
+  return (
+    <div className="pt-4 border-t border-zinc-800/70">
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-3">{t}</p>
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The beats</p>
+      <div className="flex flex-wrap gap-1.5 mb-4">
+        {spec.beats.map((b) => (
+          <span key={b} className="rounded-md border border-zinc-800 bg-elevated/60 px-2 py-1 text-[12px] text-zinc-300">{b}</span>
+        ))}
+      </div>
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Pick one structure</p>
+      <ul className="space-y-2 mb-4">
+        {spec.frameworks.map((f) => (
+          <li key={f} className="flex items-start gap-2.5">
+            <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+            <span className="text-zinc-300 text-[13px] leading-relaxed">{f}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Hook types that suit it</p>
+      <ul className="space-y-2">
+        {spec.hooks.map((h) => (
+          <li key={h.n} className="text-[13px] leading-relaxed">
+            <span className="text-white font-semibold">{h.n}.</span>{' '}
+            <span className="text-zinc-400">{h.p}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function ShootCard() {
+  const [open, setOpen] = React.useState<string | null>(null);
   return (
     <div className="grid gap-3 md:grid-cols-2">
       {SHOOT_CARD.map((r) => {
         const k = KIND[r.id];
+        const isOpen = open === r.id;
         return (
-          <div key={r.id} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
-            <div className="flex items-center gap-2.5 mb-3">
-              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${k.dot}`} />
-              <p className="font-display text-[15px] font-extrabold text-white">{k.label}</p>
-              <span className="ml-auto text-zinc-500 text-[12px] tabular-nums">×{k.count}</span>
-            </div>
-            <p className="text-zinc-400 text-[13px] leading-relaxed mb-4">{k.note}</p>
-            <dl className="space-y-2.5 border-t border-zinc-800/70 pt-4">
-              <div className="flex gap-3">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Who</dt>
-                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.who}</dd>
+          <div key={r.id} className="rounded-xl border border-zinc-800 bg-elevated/40 overflow-hidden">
+            <button
+              type="button"
+              onClick={() => setOpen(isOpen ? null : r.id)}
+              className="w-full text-left p-5 hover:bg-elevated/70 transition-colors"
+              aria-expanded={isOpen}
+            >
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${k.dot}`} />
+                <p className="font-display text-[15px] font-extrabold text-white">{k.label}</p>
+                <span className="ml-auto text-zinc-500 text-[12px] tabular-nums">×{k.count}</span>
+                <span className={`text-zinc-500 text-[20px] leading-none transition-transform ${isOpen ? 'rotate-45' : ''}`}>+</span>
               </div>
-              <div className="flex gap-3">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Type</dt>
-                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.ctype}</dd>
+              <p className="text-zinc-400 text-[13px] leading-relaxed mb-3">{k.note}</p>
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[12px]">
+                <span className="text-zinc-500">{r.who}</span>
+                <span className="text-blue-400 font-medium">{r.types.join(' and ')}</span>
               </div>
-              <div className="flex gap-3">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Framework</dt>
-                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.framework}</dd>
+            </button>
+            {isOpen && (
+              <div className="px-5 pb-5 space-y-5">
+                {r.note && <p className="text-zinc-400 text-[13px] leading-relaxed italic">{r.note}</p>}
+                {r.types.map((t) => <SpecBody key={t} t={t} />)}
               </div>
-              <div className="flex gap-3">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Hooks</dt>
-                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.hooks ? r.hooks : <ToFill />}</dd>
-              </div>
-            </dl>
+            )}
           </div>
         );
       })}
@@ -610,7 +700,7 @@ const KIND: Record<Kind, { label: string; dot: string; text: string; count: numb
     dot: 'bg-amber-400',
     text: 'text-amber-300',
     count: 1,
-    note: 'The flagship episode. 20 studios to a million dollars, fed by the new 12 week room. Doza fronts it.',
+    note: 'The flagship episode. Total revenue under management as the headline number and the storyline. Fed by the new 12 week room. Doza fronts it.',
   },
   coaching: {
     label: 'Coaching',
@@ -1257,8 +1347,7 @@ export default function TheGeronimoPlan() {
               rows={[
                 { name: 'Mystery Shop', status: 'Proven', detail: 'Call a studio cold and shop them live. Proven, loved, zero setup. Scale it.' },
                 { name: 'Pop Quiz', status: 'Test', detail: 'Quiz our own clients and managers on KPIs and standards. New. Test it against mystery shop to confirm they are different enough to run both.' },
-                { name: '20 Studios to $1M by Christmas', status: 'Flagship', detail: 'Behind the scenes on taking 20 studios to a million dollars. Weekly update, what changed, what they did. Fed by the new 12 week coaching room. Doza fronts it.' },
-                { name: 'Under Management', status: 'Test', detail: 'Total revenue under management as the headline number and the storyline. The biggest of the lot. Hook test before building it.' },
+                { name: 'Under Management', status: 'Flagship', detail: 'Total revenue under management as the headline number and the storyline. The biggest of the lot. Weekly update, what changed, what they did. Fed by the new 12 week coaching room. Doza fronts it.' },
                 { name: 'Separation Sunday', status: 'Proven', detail: 'The owned, trademarkable weekly format. Best performing carousel line by a distance. Work out why it repeats.' },
                 { name: 'Ending Burnout, Day N', status: 'Revive', detail: 'Sophie led mission series with a fortnightly check in on what we did in the last two weeks. Revive with a sharper frame.' },
                 { name: 'Makeovers', status: 'Batch', detail: 'Ad, calendar and structure before and afters. Ready to batch.' },
@@ -1274,9 +1363,8 @@ export default function TheGeronimoPlan() {
                   <><b className="text-white font-semibold">Recognisability is the point.</b> Anchor points, a consistent storyline, a hook people can hear coming from the other room.</>,
                   <><b className="text-white font-semibold">Stakes and relevance.</b> A story only works if something is on the line and the viewer sees themselves in it.</>,
                   <><b className="text-white font-semibold">Every tip hyper specific.</b> The outcome has to be visible in the first five seconds.</>,
-                  <><b className="text-white font-semibold">Consider a scoreboard</b> for the 20 studios series. Anonymised or self chosen names, fortnightly, who do you think wins.</>,
+                  <><b className="text-white font-semibold">Consider a scoreboard</b> for Under Management. Anonymised or self chosen names, fortnightly, who do you think wins.</>,
                   <><b className="text-white font-semibold">Guard against fence sitting.</b> A long running series can make people wait and watch instead of buying. Frame each episode so it stands alone and gives something away now.</>,
-                  <><b className="text-white font-semibold">Separate the two big series.</b> Under Management and 20 Studios stay distinct so each gets its own run.</>,
                 ]}
               />
             </Block>
@@ -1598,7 +1686,7 @@ export default function TheGeronimoPlan() {
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The shoot card</p>
             <H2>Ten a week, six types.</H2>
-            <Note>What each type is, who fronts it, and how it gets made. Everything here came out of the room. The gaps are marked rather than guessed.</Note>
+            <Note>What each type is, who fronts it, and the structure it gets built on. Click any card for the beats, the structures to pick from, and the hook types that suit it.</Note>
             <div className="mt-8">
               <ShootCard />
             </div>
