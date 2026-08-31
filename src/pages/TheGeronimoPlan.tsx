@@ -1499,7 +1499,7 @@ export default function TheGeronimoPlan() {
                 </thead>
                 <tbody>
                   {[
-                    { who: 'Doza', role: 'Talent', wk: '4', owns: 'Direct to cam ×2, mystery ×1, series ×1. Fronts 20 Million Dollar Studios. Brings the ideas that came out of calls.' },
+                    { who: 'Doza', role: 'Talent', wk: '4', owns: 'Direct to cam ×2, mystery ×1, series ×1. Under management series ideas. Brings the ideas that came out of calls.' },
                     { who: 'Billy', role: 'Head of content', wk: '-', owns: 'Runs the Tuesday meeting and the idea form. Pre production, post production, approval, captions and posting. Flags good moments live on the calls.' },
                     { who: 'Ryan', role: 'Coach', wk: '3', owns: 'Show and tell ×1, coaching ×1, mystery shop ×1. Brings three things he is excited about to Tuesday. Flags his monthly office visit dates.' },
                     { who: 'Sophie', role: 'Coach', wk: '3', owns: 'Coaching ×1, direct to cam ×1, pop quiz ×1. Brings three beliefs to break. Nominates one office hours block as the capture container.' },
