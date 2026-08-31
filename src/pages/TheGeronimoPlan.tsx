@@ -1733,7 +1733,7 @@ export default function TheGeronimoPlan() {
                     <tbody>
                       {[
                         { s: 'Text hook', j: 'Stop the scroll on mute', r: 'Under 7 words. A curiosity gap. Never gives the answer.' },
-                        { s: 'Spoken hook', j: 'Open the loop in the first sentence', r: 'No preamble. Start at the contradiction or the stakes.' },
+                        { s: 'Spoken hook', j: 'Open the loop in the first sentence', r: 'No bullshit. Rip into it.' },
                         { s: 'Context', j: 'Make it theirs, raise the stakes', r: 'Who this is for, what it costs them, why now.' },
                         { s: 'Body', j: 'Deliver the framework beats', r: 'One beat per line. Re earn attention every few lines.' },
                         { s: 'Payoff', j: 'Close the loop, hand over the reward', r: 'Loop back to the hook. Land it. Do not summarise.' },
