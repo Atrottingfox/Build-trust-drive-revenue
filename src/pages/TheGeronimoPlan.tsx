@@ -268,92 +268,92 @@ const TYPE_SPEC: Record<string, TypeSpec> = {
   },
 };
 
-type ShootRow = { id: Kind; who: string; types: string[]; run: string[]; shot: string };
+type FrameworkStage = { stage: string; what: string };
+type ShootRow = { id: Kind; who: string; types: string[]; fname: string; framework: FrameworkStage[]; shot: string };
 
 const SHOOT_CARD: ShootRow[] = [
   {
     id: 'directcam',
     who: 'Doza ×2, Sophie ×1',
     types: ['Belief'],
-    shot: 'Handheld with a little motion. Three sentences at a time. One with a visual behind the head, one without.',
-    run: [
-      'Pick one belief a studio owner holds that is costing them money.',
-      'Burn the text hook on screen. Under seven words. Do not give the answer away.',
-      'First line to camera. No bullshit, rip into it.',
-      'Say their belief back to them, and why it exists.',
-      'Flip it, and take the blame off them.',
-      'One proof. A number, a client, something you have watched happen.',
-      'Land it back on the hook.',
+    fname: 'Belief, why, flip, proof, rule',
+    framework: [
+      { stage: 'Belief', what: 'The belief they hold, said back to them in their own words.' },
+      { stage: 'Why', what: 'Where it came from, so it is not their fault for holding it.' },
+      { stage: 'Flip', what: 'What is actually true instead.' },
+      { stage: 'Proof', what: 'One number, one client, one thing you have watched happen.' },
+      { stage: 'Rule', what: 'What they do differently from here.' },
     ],
+    shot: 'Handheld with a little motion. Three sentences at a time. One with a visual behind the head, one without. Text hook burned in, under seven words, and it never gives the answer away.',
   },
   {
     id: 'mystery',
     who: 'Doza ×1, Ryan ×1',
     types: ['Show'],
-    shot: 'Zero setup. Anyone can run it. Batch it into whatever shoot is already happening.',
-    run: [
-      'Decide the one thing you are testing them on before you dial.',
-      'Text hook on screen while it rings.',
-      'Dial, and let the call run. Do not narrate over the top of it.',
-      'Mark the moment it goes wrong.',
-      'Cut back to camera. What should have happened instead.',
-      'Payoff. What that one moment costs a studio.',
+    fname: 'Test, call, fail, fix, cost',
+    framework: [
+      { stage: 'Test', what: 'The one thing you are shopping them on, decided before you dial.' },
+      { stage: 'Call', what: 'Run it. Do not narrate over the top of it.' },
+      { stage: 'Fail', what: 'The moment it goes wrong.' },
+      { stage: 'Fix', what: 'Back to camera. What should have happened instead.' },
+      { stage: 'Cost', what: 'What that one moment is worth to a studio.' },
     ],
+    shot: 'Zero setup. Anyone can run it. Batch it into whatever shoot is already happening. Text hook on screen while it rings.',
   },
   {
     id: 'coaching',
     who: 'Ryan ×1, Sophie ×1',
     types: ['Teach'],
-    shot: 'Captured off a call that is happening anyway. Two cameras where possible.',
-    run: [
-      'Flag the question live on the call so it can be found later.',
-      'Repeat the question so it stands on its own without the call around it.',
-      'Set the frame. Who this applies to, and what it is costing them.',
-      'Answer in steps. One step per line.',
-      'Payoff, back to the question that started it.',
+    fname: 'Question, frame, steps, rule',
+    framework: [
+      { stage: 'Question', what: 'Repeated back so it stands on its own without the call around it.' },
+      { stage: 'Frame', what: 'Who this applies to, and what it is costing them.' },
+      { stage: 'Steps', what: 'The answer, one step at a time.' },
+      { stage: 'Rule', what: 'What they take away and use.' },
     ],
+    shot: 'Captured off a call that is happening anyway. Two cameras where possible. Answer the question back in the response, always.',
   },
   {
     id: 'show',
     who: 'Ryan ×1',
     types: ['Show'],
-    shot: 'Light, and something genuinely happening on screen.',
-    run: [
-      'Have the tool open and the screen ready before you roll.',
-      'Text hook on screen.',
-      'What it is, in one line.',
-      'What it does for you.',
-      'How to use it, actually doing it on screen.',
-      'Why it is different from how they do it now.',
+    fname: 'What, does, how, different',
+    framework: [
+      { stage: 'What it is', what: 'One line. No preamble.' },
+      { stage: 'What it does', what: 'The outcome it gives them, not the feature.' },
+      { stage: 'How to use it', what: 'On screen, actually doing it.' },
+      { stage: 'Why different', what: 'Against how they do it now.' },
     ],
+    shot: 'Light, and something genuinely happening on screen. Tool open and ready before you roll.',
   },
   {
     id: 'popquiz',
     who: 'Sophie ×1',
     types: ['Show'],
-    shot: 'The call is the capture. Same setup as a mystery shop.',
-    run: [
-      'Pick the KPI or the standard you are testing.',
-      'Text hook on screen.',
-      'Call our own client or their manager and ask it cold.',
-      'Let the answer land, good or bad. Do not rescue it.',
-      'Say what a good answer sounds like.',
-      'Payoff. What that answer signals about standards.',
+    fname: 'Standard, question, answer, benchmark, signal',
+    framework: [
+      { stage: 'Standard', what: 'The KPI or standard you are testing.' },
+      { stage: 'Question', what: 'Asked cold, no warning.' },
+      { stage: 'Answer', what: 'Let it land, good or bad. Do not rescue it.' },
+      { stage: 'Benchmark', what: 'What a good answer sounds like.' },
+      { stage: 'Signal', what: 'What the answer says about standards.' },
     ],
+    shot: 'The call is the capture. Same setup as a mystery shop. Worth testing with the owner listening in, so you get their reaction too.',
   },
   {
     id: 'series',
     who: 'Doza ×1',
     types: ['Story'],
-    shot: 'Doza fronts it. Fed by the new 12 week room.',
-    run: [
-      'Open on the number. Total revenue under management.',
-      'What changed this week.',
-      'What they actually did to change it.',
-      'What it cost them, or nearly cost them.',
-      'The shift. What they understand now that they did not.',
-      'Payoff, and the number again.',
+    fname: 'Number, change, move, cost, shift, number',
+    framework: [
+      { stage: 'Number', what: 'Total revenue under management. Open on it.' },
+      { stage: 'Change', what: 'What moved this week.' },
+      { stage: 'Move', what: 'What they actually did to move it.' },
+      { stage: 'Cost', what: 'What it cost them, or nearly cost them.' },
+      { stage: 'Shift', what: 'What they understand now that they did not before.' },
+      { stage: 'Number', what: 'Back to it, so the series compounds.' },
     ],
+    shot: 'Doza fronts it. Fed by the new 12 week room.',
   },
 ];
 
@@ -389,16 +389,17 @@ function ShootCard() {
             {isOpen && (
               <div className="px-5 pb-6 pt-1 border-t border-zinc-800/70 grid gap-6 md:grid-cols-2">
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-3">How to run it</p>
-                  <ol className="space-y-2.5">
-                    {r.run.map((step, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <span className="text-blue-400 text-[12px] font-semibold tabular-nums pt-0.5 w-4 flex-shrink-0">{i + 1}</span>
-                        <span className="text-zinc-300 text-[13px] leading-relaxed">{step}</span>
-                      </li>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-1">The framework</p>
+                  <p className="font-display text-[15px] font-extrabold text-white mb-4">{r.fname}</p>
+                  <div className="border-t border-zinc-800/70">
+                    {r.framework.map((f) => (
+                      <div key={f.stage + f.what} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+                        <span className="text-white text-[13px] font-semibold w-[92px] flex-shrink-0">{f.stage}</span>
+                        <span className="text-zinc-400 text-[13px] leading-relaxed">{f.what}</span>
+                      </div>
                     ))}
-                  </ol>
-                  <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mt-5 mb-2">How it is shot</p>
+                  </div>
+                  <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mt-6 mb-2">How it is shot</p>
                   <p className="text-zinc-400 text-[13px] leading-relaxed">{r.shot}</p>
                 </div>
 
