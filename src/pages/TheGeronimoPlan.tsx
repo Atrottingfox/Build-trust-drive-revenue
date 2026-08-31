@@ -202,6 +202,44 @@ function WeekFlow() {
   );
 }
 
+// ─── Training library ────────────────────────────────────────────────────
+// Generic walkthroughs, shared across clients. Same set as the Double Triple
+// portal in ~/brand-day. If a Loom is replaced, update it in both places.
+
+type Walkthrough = { kicker: string; title: string; href: string };
+
+const SHORT_FORM_TRAINING: Walkthrough[] = [
+  { kicker: 'Hooks and scripting', title: 'Short Form System, Hooks, and Belief Breakers', href: 'https://www.loom.com/share/ed88e84dbdcd452d8f98c6c29395cabc' },
+  { kicker: 'Running a shoot', title: 'Directing Founder Content, Simplify Shoots', href: 'https://www.loom.com/share/708f78a13a4348798d6d722ee769128e' },
+  { kicker: 'Formats and examples of good', title: 'Ideation vs Excavation for Client Content', href: 'https://www.loom.com/share/e062e6cc92f84cc4955901130b9613ba' },
+];
+
+const LONG_FORM_TRAINING: Walkthrough[] = [
+  { kicker: 'The complete overview', title: 'YouTube Long Form Belief Mapping System', href: 'https://www.loom.com/share/482bc4f770dd42eca5b4b0644e8cc489' },
+  { kicker: 'Thumbnail building', title: 'How to Craft High Converting Thumbnails', href: 'https://www.loom.com/share/f3e49c20bcfe42b0a00b0145bd4f53e7' },
+  { kicker: 'Introduction builder', title: 'Introduction walkthrough', href: 'https://www.loom.com/share/9369cc661294484987a37319030ac5a5' },
+];
+
+function Walkthroughs({ items }: { items: Walkthrough[] }) {
+  return (
+    <div className="grid gap-3 md:grid-cols-3">
+      {items.map((w) => (
+        <a
+          key={w.href}
+          href={w.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group rounded-xl border border-zinc-800 bg-elevated/40 p-5 transition-colors hover:border-zinc-700 hover:bg-elevated/70"
+        >
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">{w.kicker}</p>
+          <p className="font-display text-[15px] font-extrabold text-white leading-snug mb-3">{w.title}</p>
+          <span className="text-zinc-500 text-[13px] group-hover:text-blue-400 transition-colors">Watch</span>
+        </a>
+      ))}
+    </div>
+  );
+}
+
 // ─── Tabs ────────────────────────────────────────────────────────────────
 
 type TabDef = { id: string; label: string; blurb: string; sections: Array<{ id: string; label: string }> };
@@ -252,6 +290,15 @@ const TABS: TabDef[] = [
       { id: 'lanes', label: 'Lanes' },
       { id: 'rhythm', label: 'Rhythm' },
       { id: 'assets', label: 'Assets' },
+    ],
+  },
+  {
+    id: 'make',
+    label: 'How to make it',
+    blurb: 'The craft behind the plan. The walkthroughs your team learns from, and the system underneath all of it.',
+    sections: [
+      { id: 'training', label: 'The training' },
+      { id: 'system', label: 'The system' },
     ],
   },
   {
@@ -1478,6 +1525,69 @@ export default function TheGeronimoPlan() {
             </Block>
           </div>
         </Wrap>
+        )}
+
+        {/* ═══════════════ HOW TO MAKE IT ═══════════════ */}
+        {sec === 'training' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The training</p>
+            <H2>Walkthrough videos.</H2>
+            <Note>The training behind the system. Watch these before you build.</Note>
+            <div className="mt-8">
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-4">Short form</p>
+              <Walkthroughs items={SHORT_FORM_TRAINING} />
+            </div>
+            <div className="mt-10">
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-4">Long form</p>
+              <Walkthroughs items={LONG_FORM_TRAINING} />
+            </div>
+            <div className="mt-10">
+              <Block label="How to use these">
+                <BulletList
+                  items={[
+                    'Anyone shooting or cutting watches the short form three before their first shoot day.',
+                    'The long form three are for whoever owns the YouTube build, not the whole team.',
+                    'They explain the how. The Content and Production tabs hold the what and the when.',
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'system' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The system</p>
+            <H2>The operating system.</H2>
+            <Note>Four phases, each one built on the last. The belief map is the foundation. Skip it and everything you produce is noise.</Note>
+            <div className="mt-8">
+              <a
+                href="/assets/content-authority-operating-system.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block glow-card border-blue-500/20 p-8 transition-colors hover:border-blue-500/40"
+              >
+                <p className="text-blue-400 font-semibold text-[13px] uppercase tracking-widest mb-3">The reference</p>
+                <p className="font-display text-[20px] font-extrabold text-white mb-2">Content Authority Operating System</p>
+                <p className="text-zinc-400 text-[14px] leading-relaxed mb-4">
+                  PDF, 15 pages. Foundation, Architecture, Execution, Optimise.
+                </p>
+                <span className="text-zinc-500 text-[13px] group-hover:text-blue-400 transition-colors">Open</span>
+              </a>
+            </div>
+            <div className="mt-10">
+              <Block label="The four phases">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Foundation.</b> The belief map. What your audience believes now, and what they have to believe to buy.</>,
+                    <><b className="text-white font-semibold">Architecture.</b> How the buckets, formats and assets get arranged on top of those beliefs.</>,
+                    <><b className="text-white font-semibold">Execution.</b> Making it. This is where the walkthroughs sit.</>,
+                    <><b className="text-white font-semibold">Optimise.</b> Reading the data and recutting to what is working.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
         )}
 
         {sec === 'next' && (
