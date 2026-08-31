@@ -202,6 +202,67 @@ function WeekFlow() {
   );
 }
 
+// ─── The shoot card ──────────────────────────────────────────────────────
+// Built entirely from Geronimo's own six types, lanes and responsibilities.
+// `structure` is verbatim where the room produced one. Everything left as an
+// empty string renders as a visible gap rather than a guess. Do not fill these
+// from another client's material.
+
+type ShootRow = { id: Kind; who: string; ctype: string; framework: string; hooks: string };
+
+const SHOOT_CARD: ShootRow[] = [
+  { id: 'directcam', who: 'Doza ×2, Sophie ×1', ctype: 'Belief, and Teach', framework: 'Common belief, contradiction, explanation, new conclusion. Sophie runs hers on belief and reframes.', hooks: '' },
+  { id: 'mystery', who: 'Doza ×1, Ryan ×1', ctype: 'Show', framework: 'Situation, options, choice. The call is the proof, so let it run.', hooks: '' },
+  { id: 'coaching', who: 'Ryan ×1, Sophie ×1', ctype: 'Teach', framework: 'Repeat the question, set the frame, then answer.', hooks: '' },
+  { id: 'show', who: 'Ryan ×1', ctype: 'Show', framework: 'What it is, what it does for you, how to use it, why it is different.', hooks: '' },
+  { id: 'popquiz', who: 'Sophie ×1', ctype: 'Show', framework: 'Input, process, output. The answer on the call is the output.', hooks: '' },
+  { id: 'series', who: 'Doza ×1', ctype: 'Story', framework: 'Situation, reaction, insight, new perspective, application.', hooks: '' },
+];
+
+const ToFill = () => (
+  <span className="inline-flex items-center rounded-md border border-dashed border-zinc-700 px-2 py-0.5 text-[11px] uppercase tracking-widest font-semibold text-zinc-600">
+    To fill
+  </span>
+);
+
+function ShootCard() {
+  return (
+    <div className="grid gap-3 md:grid-cols-2">
+      {SHOOT_CARD.map((r) => {
+        const k = KIND[r.id];
+        return (
+          <div key={r.id} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+            <div className="flex items-center gap-2.5 mb-3">
+              <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${k.dot}`} />
+              <p className="font-display text-[15px] font-extrabold text-white">{k.label}</p>
+              <span className="ml-auto text-zinc-500 text-[12px] tabular-nums">×{k.count}</span>
+            </div>
+            <p className="text-zinc-400 text-[13px] leading-relaxed mb-4">{k.note}</p>
+            <dl className="space-y-2.5 border-t border-zinc-800/70 pt-4">
+              <div className="flex gap-3">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Who</dt>
+                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.who}</dd>
+              </div>
+              <div className="flex gap-3">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Type</dt>
+                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.ctype}</dd>
+              </div>
+              <div className="flex gap-3">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Framework</dt>
+                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.framework}</dd>
+              </div>
+              <div className="flex gap-3">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[68px] flex-shrink-0 pt-0.5">Hooks</dt>
+                <dd className="text-zinc-300 text-[13px] leading-relaxed">{r.hooks ? r.hooks : <ToFill />}</dd>
+              </div>
+            </dl>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ─── Training library ────────────────────────────────────────────────────
 // Generic walkthroughs, shared across clients. Same set as the Double Triple
 // portal in ~/brand-day. If a Loom is replaced, update it in both places.
@@ -301,6 +362,8 @@ const TABS: TabDef[] = [
     label: 'How to make it',
     blurb: 'The craft behind the plan. The walkthroughs your team learns from, and the system underneath all of it.',
     sections: [
+      { id: 'shootcard', label: 'The shoot card' },
+      { id: 'script', label: 'The script system' },
       { id: 'training', label: 'The training' },
       { id: 'system', label: 'The system' },
     ],
@@ -1531,7 +1594,150 @@ export default function TheGeronimoPlan() {
         </Wrap>
         )}
 
+        {sec === 'shootcard' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The shoot card</p>
+            <H2>Ten a week, six types.</H2>
+            <Note>What each type is, who fronts it, and how it gets made. Everything here came out of the room. The gaps are marked rather than guessed.</Note>
+            <div className="mt-8">
+              <ShootCard />
+            </div>
+          </Wrap>
+        )}
+
         {/* ═══════════════ HOW TO MAKE IT ═══════════════ */}
+        {sec === 'script' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The script system</p>
+            <H2>How a script gets built.</H2>
+            <Note>The skeleton and the rules are the same for everyone. Only the substance is yours. Decide the type and the framework before writing a word.</Note>
+
+            <div className="mt-10">
+              <Block label="Build order">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Core idea.</b> One line. The seed.</>,
+                    <><b className="text-white font-semibold">Content type.</b> Story, Belief, Teach or Show.</>,
+                    <><b className="text-white font-semibold">Framework.</b> One named framework for that type.</>,
+                    <><b className="text-white font-semibold">Production.</b> Environment and camera style.</>,
+                    <><b className="text-white font-semibold">Text hook.</b> The on screen words. The scroll stopper.</>,
+                    <><b className="text-white font-semibold">Spoken hook.</b> The first line out of their mouth.</>,
+                    <><b className="text-white font-semibold">Context.</b> Who it is for, the stakes, why now.</>,
+                    <><b className="text-white font-semibold">Body.</b> The framework beats, one per line.</>,
+                    <><b className="text-white font-semibold">Payoff.</b> The reward, looped back to the hook.</>,
+                    <><b className="text-white font-semibold">CTA.</b> One ask. Comment a keyword, or DM.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="The section skeleton">
+                <div className="overflow-x-auto rounded-xl border border-zinc-800">
+                  <table className="w-full min-w-[40rem] text-left">
+                    <thead>
+                      <tr className="bg-elevated/60">
+                        {['Section', 'Job', 'Rule'].map((h) => (
+                          <th key={h} className="px-4 py-3 text-[10px] uppercase tracking-widest font-semibold text-zinc-500 whitespace-nowrap">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {[
+                        { s: 'Text hook', j: 'Stop the scroll on mute', r: 'Under 7 words. A curiosity gap. Never gives the answer.' },
+                        { s: 'Spoken hook', j: 'Open the loop in the first sentence', r: 'No preamble. Start at the contradiction or the stakes.' },
+                        { s: 'Context', j: 'Make it theirs, raise the stakes', r: 'Who this is for, what it costs them, why now.' },
+                        { s: 'Body', j: 'Deliver the framework beats', r: 'One beat per line. Re earn attention every few lines.' },
+                        { s: 'Payoff', j: 'Close the loop, hand over the reward', r: 'Loop back to the hook. Land it. Do not summarise.' },
+                        { s: 'Analogy', j: 'Collapse the complex into one picture', r: 'Optional. One image a twelve year old gets.' },
+                        { s: 'CTA', j: 'One next step', r: 'Comment a keyword, or DM. Never stack two.' },
+                      ].map((r) => (
+                        <tr key={r.s} className="border-t border-zinc-800/70 align-top">
+                          <td className="px-4 py-3.5 font-display text-[14px] font-extrabold text-white whitespace-nowrap">{r.s}</td>
+                          <td className="px-4 py-3.5 text-zinc-300 text-[13px] leading-relaxed">{r.j}</td>
+                          <td className="px-4 py-3.5 text-zinc-400 text-[13px] leading-relaxed">{r.r}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="The four types and their frameworks">
+                <div className="grid gap-3 md:grid-cols-2">
+                  {[
+                    { n: 'Story', s: 'Teach through experience', f: ['Old me vs new me. Who I was, the breaking point, who I became.', 'Old self, friction, realisation, new self, invitation.', 'Situation, reaction, insight, new perspective, application.'], d: 'Builds trust. The proof is the person, not the tactic. Lead with a specific, slightly vulnerable moment.' },
+                    { n: 'Belief', s: 'Teach through perspective', f: ['Common belief, contradiction, explanation, new conclusion.', 'Accepted rule, why it exists, why it fails, better rule.'], d: 'Shifts a belief. State what they hold, contradict it, remove the blame, prove it with a real number, hand them the new rule. Highest leverage type for authority.' },
+                    { n: 'Teach', s: 'Teach through explanation', f: ['Belief, cost, truth, application.', 'Hook, problem, steps, reward.', 'Goal, current effort, bottleneck, lever, reallocation.'], d: 'Transfers a method. Name the real problem, walk the steps, gate the deep version behind a CTA. Teach how to think, not just what to do.' },
+                    { n: 'Show', s: 'Teach through demonstration', f: ['Input, process, output.', 'Situation, options, choice.', 'Constraint, ignore, do.'], d: 'Proves it on screen. Draw the model, do the maths live, show two things side by side. The visual carries the point.' },
+                  ].map((t) => (
+                    <div key={t.n} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+                      <p className="font-display text-[15px] font-extrabold text-white">{t.n}</p>
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-3">{t.s}</p>
+                      <p className="text-zinc-400 text-[13px] leading-relaxed mb-4">{t.d}</p>
+                      <ul className="space-y-2 border-t border-zinc-800/70 pt-4">
+                        {t.f.map((x) => (
+                          <li key={x} className="flex items-start gap-2.5">
+                            <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                            <span className="text-zinc-300 text-[13px] leading-relaxed">{x}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Production pairing">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Story and Belief go raw and handheld.</b> Phone, outdoor or car, casual indoor. The rough edge is the point.</>,
+                    <><b className="text-white font-semibold">Teach and Show go to the desk.</b> Direct to camera, office or studio, so it reads as authoritative.</>,
+                    <><b className="text-white font-semibold">The text hook is always burned in.</b> Numbers and key lines reinforced on screen.</>,
+                    <><b className="text-white font-semibold">Every comment keyword maps to a real asset.</b> Build the asset before the post goes live.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Do">
+                <BulletList
+                  items={[
+                    'Decide the content type and framework before writing.',
+                    'Separate the on screen text hook from the spoken hook.',
+                    'Open on the contradiction or the number in line one.',
+                    'Use real, specific figures that are yours.',
+                    'Remove the viewer blame early.',
+                    'Give one clear enemy, and coin one memorable line.',
+                    'One beat per line. Loop the payoff back to the hook and land it.',
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Do not">
+                <BulletList
+                  items={[
+                    'Do not preamble or introduce yourself.',
+                    'Do not give the whole answer in the hook. Hold the loop open.',
+                    'Do not chase likes and views as the goal. The quiet post often sells best.',
+                    'Do not add a softener after the point has already landed.',
+                    'Do not teach a generic tactic with no personal proof behind it.',
+                    'Do not invent numbers. Use yours, or mark it to fill.',
+                    'Do not stack competing CTAs.',
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
         {sec === 'training' && (
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The training</p>
