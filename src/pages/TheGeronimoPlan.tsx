@@ -1013,6 +1013,9 @@ function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string;
 
 const CAPTURE_SRC = 'https://authorityengine.notion.site/ebd//6539a3e4234441e1afc1f59aa8e2ae67';
 
+// The outlines built from each media jam. One page per shoot.
+const THIS_SHOOT_URL = 'https://app.notion.com/p/3ce0b2eb6dfb81768c8ad7d0f1afde3c';
+
 function CaptureModal({ onClose }: { onClose: () => void }) {
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -1089,14 +1092,26 @@ export default function TheGeronimoPlan() {
 
         {/* ─── CAPTURE ─── */}
         <div className="max-w-4xl mx-auto px-6 lg:px-8 -mt-6 md:-mt-10 pb-12 md:pb-16">
-          <button
-            type="button"
-            onClick={() => setCapture(true)}
-            className="inline-flex items-center gap-2 rounded-full border border-blue-500/50 bg-blue-500/10 px-6 py-3 text-[15px] font-semibold text-white hover:bg-blue-500/20 transition-colors"
-          >
-            Capture an idea
-          </button>
-          <p className="text-zinc-500 text-[13px] mt-3">Ideas in by Monday, so they get approved or killed before Tuesday.</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setCapture(true)}
+              className="inline-flex items-center gap-2 rounded-full border border-blue-500/50 bg-blue-500/10 px-6 py-3 text-[15px] font-semibold text-white hover:bg-blue-500/20 transition-colors"
+            >
+              Capture an idea
+            </button>
+            <a
+              href={THIS_SHOOT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-elevated/40 px-6 py-3 text-[15px] font-semibold text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
+            >
+              This shoot
+            </a>
+          </div>
+          <p className="text-zinc-500 text-[13px] mt-3">
+            Ideas in by Monday, so they get approved or killed before Tuesday. This shoot holds the outlines that came out of the last media jam.
+          </p>
         </div>
 
         {/* ─── STICKY NAV · TABS AT THE TOP ─── */}
