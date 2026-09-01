@@ -203,139 +203,159 @@ function WeekFlow() {
 }
 
 // ─── This shoot ──────────────────────────────────────────────────────────
-// Outlines from the media jam on 31 August. Outlines, not scripts. Anything
-// marked SLOT was not said on the call and must not be invented.
+// Hooks are lifted verbatim from Sean's notes of 1 September. They are not
+// paraphrased and must not be. Every beat carries the job it does in the
+// structure, so Doza knows what each one is FOR rather than just riffing.
+// Anything marked SLOT was not said and must not be invented.
 
-type SFOutline = { n: string; title: string; format: string; hook: string; body: string; context: string; payoff: string; cta: string; fill?: string };
+type Beat = { role: string; text: string };
+
+type SFOutline = {
+  n: string; title: string; lens: string; format: string;
+  textHook: string; spoken: string[];
+  beats: Beat[];
+  payoff: string; cta?: string; fill?: string;
+};
 
 const SHORT_FORM_SHOOT: SFOutline[] = [
   {
-    n: '01', title: 'Churn, and what Defender season proved',
-    format: 'Direct to camera',
-    hook: 'If you are getting fucked by churn. Or, if you do not even know what churn is.',
-    body: 'Most gyms hit 10 percent plus churn a month through this part of the season. The people who ran Defender went to under 1 percent, on average, across the last three months. Three things they did, bang bang bang.',
-    context: 'We just wrapped Defender season, notoriously the second worst time of the year for churn.',
-    payoff: 'The TLDR of the three things, so they can run it themselves.',
-    cta: 'SLOT. Comment keyword for the Defender breakdown.',
-    fill: 'The three things, and whether the 40 percent figure for gyms in August is real or a placeholder.',
+    n: '01', title: 'Your business, your rules',
+    lens: 'Belief · Contrarian take', format: 'Green screen reaction',
+    textHook: 'Stop apologising',
+    spoken: ["Just a reminder.", "It's your business, it's your rules."],
+    beats: [
+      { role: 'Common belief', text: 'Owners spending all their time catering to member demands.' },
+      { role: 'My belief', text: 'I actually side with the owners on this one.' },
+      { role: 'Proof', text: 'I speak to owners all day long, and I tell them they can build a business how ever they want.' },
+      { role: 'The line', text: 'SLOT. Where it sits for you, between service and being run by your members.' },
+    ],
+    payoff: 'Choose what you want.',
+    cta: 'SLOT.',
+    fill: 'Needs the article on screen, so the reaction is anchored to something real.',
   },
   {
     n: '02', title: 'Standards',
-    format: 'Direct to camera',
-    hook: 'Members are not paying for your presence. They are paying for your standards.',
-    body: 'Part of being a leader is not having followers, it is building leaders. Standards are what make people feel your presence even when you are not there.',
-    context: 'Owners are sending DMs saying you have just shown me how to hold standards. This is the thing landing hardest right now.',
-    payoff: 'What a standard actually looks like when it is held without you in the room.',
+    lens: 'Belief · Contrarian take', format: 'Direct to camera',
+    textHook: 'Walk out and watch',
+    spoken: ["We need to get to a place where members aren't paying for your presence,", "they're paying for your standards."],
+    beats: [
+      { role: 'Common belief', text: 'SLOT. What owners think they are being paid for.' },
+      { role: 'Proof', text: "Owners are sending DMs saying you've just shown me how to hold standards. This is the thing landing hardest right now." },
+      { role: 'The pattern', text: 'Part of being a leader is building leaders, not followers.' },
+      { role: 'What it looks like', text: 'SLOT. A standard actually being held with you not in the room.' },
+    ],
+    payoff: 'SLOT. The line they leave with.',
     cta: 'SLOT. Points at the separation system playbook.',
   },
   {
-    n: '03', title: 'Winning the day',
-    format: 'Direct to camera',
-    hook: 'SLOT. Against the overwhelm. They think they have to do more, more, more.',
-    body: 'Win more days than not and you win the week. Win more weeks than not and you win the month. There are only three of those months. Win those and you win the season. You win Christmas.',
-    context: 'Reverse engineer it instead. Adopt a different standard, plus the five daily non negotiables.',
+    n: '03', title: 'A team full of casuals',
+    lens: 'Belief · Contrarian take', format: 'Direct to camera',
+    textHook: 'Nobody holds the line',
+    spoken: ["I've never built a happy million dollar studio with a team full of casuals."],
+    beats: [
+      { role: 'Common belief', text: 'SLOT. Why owners keep hiring casual.' },
+      { role: 'The diagnosis', text: 'Semi-pro. 60% things done.' },
+      { role: 'The move', text: "Design your dream team, but don't do it with names." },
+      { role: 'Why', text: 'SLOT. Why the names wreck it. The rule is written down, the reason is not.' },
+    ],
+    payoff: 'Gotta go pro.',
+  },
+  {
+    n: '04', title: 'Acts of service',
+    lens: 'Belief · Common mistakes', format: 'Direct to camera',
+    textHook: 'You cover everything',
+    spoken: ['Most people have acts of service.', 'So they will self sacrifice.', "That's why they burn out."],
+    beats: [
+      { role: 'The mistake', text: 'SLOT. How it shows up day to day, in your words.' },
+      { role: 'What to do instead', text: 'Part of being a leader is building leaders, not followers.' },
+      { role: 'Proof', text: 'SLOT.' },
+    ],
+    payoff: 'Otherwise how the fuck are you going to bring your kids to Yo-Chi.',
+    fill: 'Written twice in the notes. Probably the one to shoot first.',
+  },
+  {
+    n: '05', title: 'Winning the day',
+    lens: 'Teach · Framework', format: 'Direct to camera',
+    textHook: 'Win Christmas',
+    spoken: ['Everyone at this time of the year, everyone thinks they gotta do more.', 'But you gotta adopt a different standard.', "It's win the day."],
+    beats: [
+      { role: 'Ideal outcome', text: 'You win the season. You win Christmas.' },
+      { role: 'The maths', text: 'If you win more weeks, you win the season.' },
+      { role: 'The steps', text: 'SLOT. The five daily non negotiables, named, in order.' },
+    ],
     payoff: 'Self confidence is a byproduct of doing the things you said you would do.',
-    cta: 'SLOT.',
-    fill: 'The five daily non negotiables, named.',
+    fill: 'Payoff is from the 31 August call, not these notes.',
   },
   {
-    n: '04', title: 'Your business, your rules',
-    format: 'Green screen reaction',
-    hook: 'SLOT. The news article itself, on screen.',
-    body: 'Owners spending all their time catering to member demands. I actually side with the owners on this one.',
-    context: 'Their terms, not ours. This is where the line sits between service and being run by your members.',
-    payoff: 'SLOT. The rule they leave with.',
-    cta: 'SLOT.',
-    fill: 'The article link, so the reaction is anchored to something real.',
+    n: '06', title: 'Semi-pro',
+    lens: 'Belief · Contrarian take', format: 'Direct to camera',
+    textHook: 'Finish something',
+    spoken: ['Separate yourself from the rest of the market.', 'Semi-pro.', '60% things done.'],
+    beats: [
+      { role: 'The diagnosis', text: 'SLOT. What 60% done looks like inside a studio. Your examples.' },
+      { role: 'The move', text: 'Commit.' },
+    ],
+    payoff: 'Gotta go pro.',
   },
   {
-    n: '05', title: 'Business owner to business owner',
-    format: 'Direct to camera. Two versions, one shot by Billy and one straight on an iPhone.',
-    hook: 'Business owner to business owner. Could we just be honest for a sec?',
-    body: 'Leadership standards, owner to owner. What Doza actually thinks about running the business.',
-    context: 'This is what is resonating hardest on the calls at the moment.',
+    n: '07', title: 'Churn, and what Defender proved',
+    lens: 'Show · Case study', format: 'Direct to camera',
+    textHook: 'Bang bang bang',
+    spoken: ["If you're getting f*cked by churn like 40% of all gyms do during August.", 'This is exactly what you should do.'],
+    beats: [
+      { role: 'The context', text: 'We just wrapped up Defender season, notoriously the second worst time of the year for churn.' },
+      { role: 'The result', text: "Most people would've hit 10%. But our people who ran Defender season went down to 1%." },
+      { role: 'What they did', text: 'And this is the TLDR of what they did. 3 things. One, winning the day.' },
+      { role: 'Thing two', text: 'SLOT.' },
+      { role: 'Thing three', text: 'SLOT.' },
+    ],
     payoff: 'SLOT.',
-    cta: 'SLOT.',
-    fill: 'Two versions on purpose, to test whether the polish or the raw iPhone cut performs better on the same idea.',
+    cta: 'SLOT. Comment keyword for the Defender breakdown.',
+    fill: 'CONFIRM the 40% August figure before this goes to camera. It is a placeholder. The verified numbers are 10% plus a month, and under 1% across the last three months.',
   },
 ];
 
 type LFOutline = {
-  title: string;
-  intro: Array<{ k: string; v: string }>;
-  context: string;
-  points: string[];
-  midroll: string;
-  production: string[];
-  fill?: string;
+  n: string; title: string; lens: string;
+  textHook: string; spoken: string[];
+  beats: Beat[];
+  payoff: string; fill?: string;
 };
 
 const LONG_FORM_SHOOT: LFOutline[] = [
   {
-    title: 'Video 1. The offer',
-    intro: [
-      { k: 'Pain', v: "You keep attracting low quality prospects. Most people think if I cannot get people in, I will do a free trial. So you open it up to everyone, and you get shit people through the door. And if you have got paid ads running, you are paying money for negative cashflow." },
-      { k: 'Data', v: "Every single profitable studio changed their offer to what we are about to teach." },
-      { k: 'Proof', v: "It was 2 dollars for the first time, then I went to 35 for 7 dollars. The 2 dollars became the new free trial. 136 dollars for 28 days. I accidentally said the wrong number once and it went from free to 249 dollars for the same thing." },
-      { k: 'Promise', v: "Every million dollar studio has these 5 elements to their offer. It is the first thing we do with every single one." },
-      { k: 'Plan', v: "Every single studio owner in our academy that is growing faster than you, this is why they are profitable and why they are getting lead flow. It is down below, so let us get into it." },
+    n: '01', title: 'Standards, and the team that holds them',
+    lens: 'Belief · long form',
+    textHook: 'Who holds the line',
+    spoken: ["I've never built a happy million dollar studio with a team full of casuals.", "We need to get to a place where members aren't paying for your presence,", "they're paying for your standards."],
+    beats: [
+      { role: 'The opener', text: 'SLOT. The "If you ..." line that was started in the notes and not finished.' },
+      { role: 'The cause', text: "Most people have acts of service. So they will self sacrifice. That's why they burn out." },
+      { role: 'The diagnosis', text: 'Semi-pro. 60% things done.' },
+      { role: 'The move', text: "Design your dream team, but don't do it with names." },
+      { role: 'The principle', text: 'Part of being a leader is building leaders, not followers.' },
+      { role: 'The cost', text: 'Otherwise how the fuck are you going to bring your kids to Yo-Chi.' },
+      { role: 'The choice', text: 'Choose what you want.' },
     ],
-    context: "And when I was losing money, it was the thing I did. I was chasing everyone else.",
-    points: [
-      'SLOT. Element one',
-      'SLOT. Element two',
-      'SLOT. Element three',
-      'SLOT. Element four',
-      'SLOT. Element five',
-    ],
-    midroll: "SLOT. This is an example of what they have done.",
-    production: [
-      'Split screen, or Doza in front of the screen walking through it.',
-      'Show the inside out. Templates from the playbook, and what is actually inside each one.',
-      'You do not know if there are snakes or skittles in the box, so show what is in the box.',
-    ],
-    fill: 'The five elements themselves are still not named. Everything else is written. Name them and this video is ready to shoot.',
+    payoff: 'Gotta go pro.',
+    fill: 'One story carries this whole video: a standard that held while you were away. Short form 02, 03, 04 and 06 are cutdowns of this, so shoot it first and the shorts come out of the same setup.',
   },
   {
-    title: 'Video 2. Why your ads are not working',
-    intro: [
-      { k: 'Pain', v: "You are lighting money on fire. The last agency told you it was your creative, but every single time you build more ads, the revenue has been the same for months, and it is fucking exhausting. You keep opening up the inbox and there is another cancellation. And it is because you have not worked out how to get predictable lead flow." },
-      { k: 'Data', v: "SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side." },
-      { k: 'Proof', v: "Some of them are teaching it inside our academy. A real client ad account, on screen, before and after, side by side." },
-      { k: 'Promise', v: "Once you figure this out you never have to worry about where your next lead is coming from. Next time you get a cancellation in your inbox you do not have to worry, because you have two more turning up tomorrow, so fuck em. Fix these five things and your next problem becomes how do I close all these sales." },
-      { k: 'Plan', v: "Everybody makes these 5 major ad mistakes. I am about to show you exactly why these ads are not working. We fix the lead flow problem in about a day." },
+    n: '02', title: 'Churn, and what Defender proved',
+    lens: 'Show · Case study',
+    textHook: 'Bang bang bang',
+    spoken: ["If you're getting f*cked by churn like 40% of all gyms do during August.", 'This is exactly what you should do.', 'We just wrapped up Defender season.', "Most people would've hit 10%. But our people who ran Defender season went down to 1%."],
+    beats: [
+      { role: 'The promise', text: 'And this is the TLDR of what they did. 3 things.' },
+      { role: 'Thing one', text: 'Winning the day. Everyone at this time of the year, everyone thinks they gotta do more. But you gotta adopt a different standard.' },
+      { role: 'The maths', text: 'If you win more weeks, you win the season.' },
+      { role: 'Thing two', text: 'SLOT.' },
+      { role: 'Thing three', text: 'SLOT.' },
+      { role: 'The steps', text: 'SLOT. The five daily non negotiables, named.' },
+      { role: 'The standard', text: 'Separate yourself from the rest of the market. Semi-pro. 60% things done. Commit.' },
     ],
-    context: "The point of studios is to build a studio of members that pay full price and are here this time next year, and they refer people. It is not just to fill seats, it is to fill it with people you want to be around, and that is how you build a business that you love.",
-    points: [
-      'Generic copy. Come join us.',
-      'Generic creative. Model shots, AI slop.',
-      'No avatar.',
-      'No offer. No mechanism, no promise pain gap, no bridge from here to there.',
-      'Sell the click, not the membership.',
-    ],
-    midroll: "Book it in for an audit. Or, if you want an example.",
-    production: [
-      'Two videos out of one setup. One reaction, one walkthrough. High leverage, low effort.',
-      'Doza can do this blind. Open an ad library cold, say why it is not getting leads, and name the specific fix.',
-      'Before and afters on every one of the five mistakes.',
-      'Two cuts, one for Pilates studio owners and one for gym owners. Where Pilates studio owners are fucking up.',
-    ],
-    fill: 'Belief shift. Current belief is if I am not happy with the bank, I will take anyone. Required belief is you will enjoy business more if you find more of the right people and ignore everyone else. Analogy is do not raid the pantry when you are hungry, but still get people in the door.',
-  },
-  {
-    title: 'Video 3. The marketing engine',
-    intro: [
-      { k: 'Pain', v: 'SLOT.' },
-      { k: 'Data', v: 'SLOT.' },
-      { k: 'Proof', v: 'SLOT.' },
-      { k: 'Promise', v: 'SLOT.' },
-      { k: 'Plan', v: 'SLOT.' },
-    ],
-    context: 'SLOT.',
-    points: ['SLOT.'],
-    midroll: 'SLOT.',
-    production: ['The marketing engine as part of Geronimo. Title only so far.'],
-    fill: 'Nothing written yet beyond the title.',
+    payoff: 'Gotta go pro.',
+    fill: 'Cannot shoot yet. The notes say 3 things and only give one.',
   },
 ];
 
@@ -350,70 +370,73 @@ const Slotted = ({ text }: { text: string }) => {
   );
 };
 
-function ShortFormShoot() {
+// The hook is the thing being shot, so it is the thing you can read across
+// the room. Everything under it is scaffolding for the riff.
+function ShootOutlineCard({ o }: { o: SFOutline | LFOutline }) {
+  const format = 'format' in o ? o.format : undefined;
+  const cta = 'cta' in o ? o.cta : undefined;
   return (
-    <div className="grid gap-3">
-      {SHORT_FORM_SHOOT.map((o) => (
-        <div key={o.n} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
-          <div className="flex items-baseline gap-3 mb-4">
-            <span className="text-blue-400 text-[12px] font-semibold tabular-nums">{o.n}</span>
-            <p className="font-display text-[16px] font-extrabold text-white">{o.title}</p>
+    <div className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+      <div className="flex items-baseline gap-3 flex-wrap mb-1">
+        <span className="text-blue-400 text-[12px] font-semibold tabular-nums">{o.n}</span>
+        <p className="font-display text-[16px] font-extrabold text-white">{o.title}</p>
+        <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">{o.lens}</span>
+      </div>
+      {format && <p className="text-[12px] text-zinc-500 mb-3">{format}</p>}
+
+      <div className="mt-3 mb-4 flex flex-wrap items-center gap-2">
+        <span className="text-[9px] uppercase tracking-widest font-semibold text-zinc-600">Text</span>
+        <span className="rounded-md border border-zinc-700 bg-zinc-900/60 px-2.5 py-1 text-[11px] font-medium text-white">{o.textHook}</span>
+      </div>
+
+      <div className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3 mb-5">
+        {o.spoken.map((l, i) => (
+          <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+        ))}
+      </div>
+
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The structure</p>
+      <dl className="border-t border-zinc-800/70">
+        {o.beats.map((b, i) => (
+          <div key={i} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+            <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[108px] flex-shrink-0 pt-1">{b.role}</dt>
+            <dd><Slotted text={b.text} /></dd>
           </div>
-          <dl className="border-t border-zinc-800/70">
-            {[['Format', o.format], ['Hook', o.hook], ['Body', o.body], ['Context', o.context], ['Payoff', o.payoff], ['CTA', o.cta]].map(([k, v]) => (
-              <div key={k} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[62px] flex-shrink-0 pt-1">{k}</dt>
-                <dd><Slotted text={v} /></dd>
-              </div>
-            ))}
-          </dl>
-          {o.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{o.fill}</p>}
+        ))}
+        <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+          <dt className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 w-[108px] flex-shrink-0 pt-1">Payoff</dt>
+          <dd><Slotted text={o.payoff} /></dd>
         </div>
-      ))}
+        {cta && (
+          <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+            <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[108px] flex-shrink-0 pt-1">CTA</dt>
+            <dd><Slotted text={cta} /></dd>
+          </div>
+        )}
+      </dl>
+      {o.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{o.fill}</p>}
     </div>
   );
 }
 
-function LongFormShoot() {
+function ThisShoot() {
+  const [lane, setLane] = React.useState<string>('short');
+  const list = lane === 'short' ? SHORT_FORM_SHOOT : LONG_FORM_SHOOT;
   return (
-    <div className="grid gap-3">
-      {LONG_FORM_SHOOT.map((v) => (
-        <div key={v.title} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
-          <p className="font-display text-[16px] font-extrabold text-white mb-4">{v.title}</p>
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">The intro</p>
-          <dl className="border-t border-zinc-800/70 mb-5">
-            {v.intro.map((r) => (
-              <div key={r.k} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
-                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[62px] flex-shrink-0 pt-1">{r.k}</dt>
-                <dd><Slotted text={r.v} /></dd>
-              </div>
-            ))}
-          </dl>
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Context</p>
-          <p className="mb-5"><Slotted text={v.context} /></p>
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The points</p>
-          <ol className="space-y-2 mb-5">
-            {v.points.map((pt, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="text-blue-400 text-[12px] font-semibold tabular-nums pt-0.5 w-4 flex-shrink-0">{i + 1}</span>
-                <Slotted text={pt} />
-              </li>
-            ))}
-          </ol>
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Mid roll CTA</p>
-          <p className="mb-5"><Slotted text={v.midroll} /></p>
-          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Production</p>
-          <ul className="space-y-2">
-            {v.production.map((x) => (
-              <li key={x} className="flex items-start gap-2.5">
-                <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
-                <span className="text-zinc-400 text-[13px] leading-relaxed">{x}</span>
-              </li>
-            ))}
-          </ul>
-          {v.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{v.fill}</p>}
-        </div>
-      ))}
+    <div>
+      <div className="border-b border-zinc-800 mb-5">
+        <SubTabs
+          sections={[
+            { id: 'short', label: `Short form · ${SHORT_FORM_SHOOT.length}` },
+            { id: 'long', label: `Long form · ${LONG_FORM_SHOOT.length}` },
+          ]}
+          active={lane}
+          onChange={setLane}
+        />
+      </div>
+      <div className="grid gap-3">
+        {list.map((o) => <ShootOutlineCard key={o.n} o={o} />)}
+      </div>
     </div>
   );
 }
@@ -2066,18 +2089,10 @@ export default function TheGeronimoPlan() {
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">This shoot</p>
             <H2>First shoot of September.</H2>
-            <Note>Outlines from the media jam on 31 August. Outlines, not scripts. More ideas than slots on purpose, so you can be ruthless to the standard. Anything marked to fill was not said on the call.</Note>
+            <Note>Hooks are lifted from the notes word for word, not paraphrased. Under each one is the structure it follows, so you know what every beat is doing rather than riffing blind. More ideas than slots on purpose, so you can be ruthless to the standard. Anything marked to fill was not said and has not been invented.</Note>
 
             <div className="mt-8">
-              <Block label="Short form">
-                <ShortFormShoot />
-              </Block>
-            </div>
-
-            <div className="mt-2">
-              <Block label="Long form">
-                <LongFormShoot />
-              </Block>
+              <ThisShoot />
             </div>
 
             <div className="mt-2">
