@@ -272,47 +272,70 @@ type LFOutline = {
 
 const LONG_FORM_SHOOT: LFOutline[] = [
   {
-    title: 'The offer price playbook',
+    title: 'Video 1. The offer',
     intro: [
-      { k: 'Pain', v: 'They are running free trials or generic trials. They are not getting anyone, they are not making sales, and their sales are not outrunning their churn. So they are not growing.' },
-      { k: 'Data', v: 'Across 250 plus studios we coach, every single one hitting record revenue has the same five numbers in the green.' },
-      { k: 'Proof', v: 'SLOT. One named studio, the numbers before and after.' },
-      { k: 'Promise', v: 'There are five numbers standing between you and a million dollar studio.' },
-      { k: 'Plan', v: 'Walk the five numbers, one at a time, and show what green looks like on each.' },
+      { k: 'Pain', v: "You keep attracting low quality prospects. Most people think if I cannot get people in, I will do a free trial. So you open it up to everyone, and you get shit people through the door. And if you have got paid ads running, you are paying money for negative cashflow." },
+      { k: 'Data', v: "Every single profitable studio changed their offer to what we are about to teach." },
+      { k: 'Proof', v: "It was 2 dollars for the first time, then I went to 35 for 7 dollars. The 2 dollars became the new free trial. 136 dollars for 28 days. I accidentally said the wrong number once and it went from free to 249 dollars for the same thing." },
+      { k: 'Promise', v: "Every million dollar studio has these 5 elements to their offer. It is the first thing we do with every single one." },
+      { k: 'Plan', v: "Every single studio owner in our academy that is growing faster than you, this is why they are profitable and why they are getting lead flow. It is down below, so let us get into it." },
     ],
-    context: 'SLOT. The story, the reason, and the connector. Why this playbook exists and who it came from.',
-    points: ['SLOT. Number one, and what green looks like', 'SLOT. Number two', 'SLOT. Number three', 'SLOT. Number four', 'SLOT. Number five'],
-    midroll: 'SLOT. Download the offer price playbook.',
+    context: "And when I was losing money, it was the thing I did. I was chasing everyone else.",
+    points: [
+      'SLOT. Element one',
+      'SLOT. Element two',
+      'SLOT. Element three',
+      'SLOT. Element four',
+      'SLOT. Element five',
+    ],
+    midroll: "SLOT. This is an example of what they have done.",
     production: [
       'Split screen, or Doza in front of the screen walking through it.',
-      'Show the inside out. Five templates from the playbook, and what is actually inside each one.',
+      'Show the inside out. Templates from the playbook, and what is actually inside each one.',
       'You do not know if there are snakes or skittles in the box, so show what is in the box.',
     ],
-    fill: 'The five numbers themselves. They exist in the playbook, they were not named on the jam.',
+    fill: 'The five elements themselves are still not named. Everything else is written. Name them and this video is ready to shoot.',
   },
   {
-    title: 'The ad makeover',
+    title: 'Video 2. Why your ads are not working',
     intro: [
-      { k: 'Pain', v: '72 dollar CPLs on a 40 dollar a day budget. How many 72s fit into 40? None. It was never going to work.' },
-      { k: 'Data', v: 'SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side.' },
-      { k: 'Proof', v: 'A real client ad account, on screen, before and after, side by side.' },
-      { k: 'Promise', v: 'Five things every good ad has, and we are going to break down exactly what the most recent client had wrong.' },
-      { k: 'Plan', v: 'Walk the five, then rebuild the ad live against them.' },
+      { k: 'Pain', v: "You are lighting money on fire. The last agency told you it was your creative, but every single time you build more ads, the revenue has been the same for months, and it is fucking exhausting. You keep opening up the inbox and there is another cancellation. And it is because you have not worked out how to get predictable lead flow." },
+      { k: 'Data', v: "SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side." },
+      { k: 'Proof', v: "Some of them are teaching it inside our academy. A real client ad account, on screen, before and after, side by side." },
+      { k: 'Promise', v: "Once you figure this out you never have to worry about where your next lead is coming from. Next time you get a cancellation in your inbox you do not have to worry, because you have two more turning up tomorrow, so fuck em. Fix these five things and your next problem becomes how do I close all these sales." },
+      { k: 'Plan', v: "Everybody makes these 5 major ad mistakes. I am about to show you exactly why these ads are not working. We fix the lead flow problem in about a day." },
     ],
-    context: 'The point of the ad is not to fill the place up with anyone. The point of our studios is to build a community of members we love, who stay, who pay full price, who are here this time next year and the year after, and who refer people in. That is how you build a business you love.',
+    context: "The point of studios is to build a studio of members that pay full price and are here this time next year, and they refer people. It is not just to fill seats, it is to fill it with people you want to be around, and that is how you build a business that you love.",
     points: [
-      'SLOT. The five things every good ad has, named',
-      'SLOT.',
-      'SLOT.',
-      'SLOT.',
-      'The metric trap. Your creative can look like it is working. Heaps of clicks, heaps of leads, a CPL that reads great. And none of them live near you or match the avatar.',
+      'Generic copy. Come join us.',
+      'Generic creative. Model shots, AI slop.',
+      'No avatar.',
+      'No offer. No mechanism, no promise pain gap, no bridge from here to there.',
+      'Sell the click, not the membership.',
     ],
-    midroll: 'SLOT.',
+    midroll: "Book it in for an audit. Or, if you want an example.",
     production: [
       'Two videos out of one setup. One reaction, one walkthrough. High leverage, low effort.',
       'Doza can do this blind. Open an ad library cold, say why it is not getting leads, and name the specific fix.',
-      'Gather distinct before and after examples covering each of the five ad problems.',
+      'Before and afters on every one of the five mistakes.',
+      'Two cuts, one for Pilates studio owners and one for gym owners. Where Pilates studio owners are fucking up.',
     ],
+    fill: 'Belief shift. Current belief is if I am not happy with the bank, I will take anyone. Required belief is you will enjoy business more if you find more of the right people and ignore everyone else. Analogy is do not raid the pantry when you are hungry, but still get people in the door.',
+  },
+  {
+    title: 'Video 3. The marketing engine',
+    intro: [
+      { k: 'Pain', v: 'SLOT.' },
+      { k: 'Data', v: 'SLOT.' },
+      { k: 'Proof', v: 'SLOT.' },
+      { k: 'Promise', v: 'SLOT.' },
+      { k: 'Plan', v: 'SLOT.' },
+    ],
+    context: 'SLOT.',
+    points: ['SLOT.'],
+    midroll: 'SLOT.',
+    production: ['The marketing engine as part of Geronimo. Title only so far.'],
+    fill: 'Nothing written yet beyond the title.',
   },
 ];
 
@@ -2073,9 +2096,12 @@ export default function TheGeronimoPlan() {
               <Block label="Still open">
                 <BulletList
                   items={[
+                    'The five elements of the offer are not named yet. Video 1 is written apart from them.',
+                    'Video 3, the marketing engine, is a title and nothing else.',
                     'Mystery shop. One slot in the schedule, no idea captured on the jam.',
                     'Series. One slot for Under Management, no episode topic captured on the jam.',
-                    'The long form order was stated two ways on the jam. Team handbook, offer, standards in one place. Offer, standards, team playbook in another.',
+                    'Carousel and Twitter were flagged for short form but never worked through.',
+                    'The transcript said five numbers in the green. The notes say five elements to the offer. Same thing, or two different videos.',
                   ]}
                 />
               </Block>
