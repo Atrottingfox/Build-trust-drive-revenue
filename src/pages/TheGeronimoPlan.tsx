@@ -202,6 +202,102 @@ function WeekFlow() {
   );
 }
 
+// ─── The checklist ───────────────────────────────────────────────────────
+// Assembled from the Strategy Day and the media jam on 31 August. Every line
+// has an owner. Nothing here needs a meeting to start. Ticks save to the
+// device only, so they are a personal marker rather than a shared record.
+
+type Task = { id: string; do: string; why: string; owner: string };
+type TaskGroup = { group: string; note: string; tasks: Task[] };
+
+const CHECKLIST: TaskGroup[] = [
+  {
+    group: 'This week',
+    note: 'One off. Set these up and they never need doing again.',
+    tasks: [
+      { id: 'thu', do: 'Lock Thursday as the shoot day.', why: 'Religious, no matter what. It shoots what was approved, for the week after, never for Monday.', owner: 'Whole team' },
+      { id: 'form', do: 'Stand up the idea form.', why: 'Ideas go in Monday so they can be approved or killed before Tuesday. There has to be a chance for somebody to kill an idea.', owner: 'Billy' },
+      { id: 'bank', do: 'Build a dead simple way to bank an idea.', why: 'One place to say this is banked, the moment it lands. If it is hard, it will not get used.', owner: 'Billy' },
+      { id: 'elements', do: 'Name the five elements of the offer.', why: 'Video 1 is written apart from these. Nothing else is blocking it.', owner: 'Doza' },
+      { id: 'ads', do: 'Gather the before and after ad examples.', why: 'One clear pair for each of the five ad mistakes, so the makeover video has real proof on screen.', owner: 'Doza' },
+      { id: 'playbook', do: 'Get the updated offer price playbook out.', why: 'It becomes the downloadable asset behind the mid roll CTA.', owner: 'Sophie' },
+      { id: 'intro', do: 'Build the intro for the offer price video.', why: 'Then run the same process again on the next one without help.', owner: 'Billy' },
+    ],
+  },
+  {
+    group: 'Every week',
+    note: 'The rhythm. Once this is running, it is the whole machine.',
+    tasks: [
+      { id: 'three', do: 'Everyone brings their three.', why: 'Ryan three things he is excited about. Sophie three beliefs she broke this week. Doza the ideas that came out of calls.', owner: 'Doza, Ryan, Sophie' },
+      { id: 'mon', do: 'Ideas in Monday, through the form.', why: 'Approved or killed before Tuesday, so the meeting is a decision not a brainstorm.', owner: 'Everyone' },
+      { id: 'tue', do: 'Tuesday media meeting, straight after the call.', why: 'While the material is still hot. Ideas pulled up one by one.', owner: 'Billy' },
+      { id: 'prep', do: 'Ten minute check the day before the shoot.', why: 'Is everyone prepped for tomorrow. Any questions. That is the whole meeting.', owner: 'Billy' },
+      { id: 'shootweek', do: 'Coaches shoot every single week.', why: 'Deliberately, even when it is not perfect, because that is how the recipe gets found.', owner: 'Ryan, Sophie' },
+      { id: 'review', do: 'Watch last week back and call it.', why: 'This was good, this was bad, do more of this. Without someone looking over your shoulder the frequency never lifts.', owner: 'Strategist' },
+      { id: 'twocam', do: 'Two cameras wherever possible.', why: 'One camera is boring. Two is what makes a captured call watchable.', owner: 'Billy' },
+    ],
+  },
+  {
+    group: 'Before the series gets built',
+    note: 'The hook is the biggest lever on a signature series. Do not skip to the episode.',
+    tasks: [
+      { id: 'hooks', do: 'Run the hook trials on Under Management.', why: 'Trial reels on different hooks before a single episode gets built. Number still to be confirmed.', owner: 'Strategist and Doza' },
+      { id: 'popquiz', do: 'Test both versions of the pop quiz.', why: 'One straight, and one where you call the manager while the owner listens in, so you catch their reaction too.', owner: 'Sophie' },
+    ],
+  },
+];
+
+function Checklist() {
+  const KEY = 'geronimo-checklist';
+  const [done, setDone] = React.useState<Record<string, boolean>>({});
+  React.useEffect(() => {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) setDone(JSON.parse(raw));
+    } catch { /* private mode, ticks just do not persist */ }
+  }, []);
+  const toggle = (id: string) => {
+    setDone((prev) => {
+      const next = { ...prev, [id]: !prev[id] };
+      try { localStorage.setItem(KEY, JSON.stringify(next)); } catch { /* ignore */ }
+      return next;
+    });
+  };
+  return (
+    <div className="space-y-10">
+      {CHECKLIST.map((g) => (
+        <div key={g.group}>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-1">{g.group}</p>
+          <p className="text-zinc-500 text-[13px] leading-relaxed mb-4">{g.note}</p>
+          <div className="border-t border-zinc-800">
+            {g.tasks.map((t) => {
+              const isDone = !!done[t.id];
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  onClick={() => toggle(t.id)}
+                  className="w-full text-left flex items-start gap-3 border-b border-zinc-800/70 py-4 hover:bg-elevated/40 transition-colors px-2 -mx-2"
+                  aria-pressed={isDone}
+                >
+                  <span className={`mt-0.5 flex-shrink-0 w-4 h-4 rounded border flex items-center justify-center text-[10px] ${isDone ? 'border-blue-500 bg-blue-500 text-white' : 'border-zinc-700'}`}>
+                    {isDone ? '✓' : ''}
+                  </span>
+                  <span className="flex-1 min-w-0">
+                    <span className={`block font-display text-[15px] font-extrabold leading-snug ${isDone ? 'text-zinc-600 line-through' : 'text-white'}`}>{t.do}</span>
+                    <span className={`block text-[13px] leading-relaxed mt-1 ${isDone ? 'text-zinc-700' : 'text-zinc-400'}`}>{t.why}</span>
+                  </span>
+                  <span className="flex-shrink-0 text-[11px] uppercase tracking-widest font-semibold text-zinc-500 pt-1 whitespace-nowrap">{t.owner}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── This shoot ──────────────────────────────────────────────────────────
 // Hooks are lifted verbatim from Sean's notes of 1 September. They are not
 // paraphrased and must not be. Every beat carries the job it does in the
@@ -786,6 +882,7 @@ const TABS: TabDef[] = [
     label: 'Next steps',
     blurb: 'Who owns what, what is locked for four weeks, what is deliberately still open, and what could quietly kill it.',
     sections: [
+      { id: 'checklist', label: 'The checklist' },
       { id: 'next', label: 'Responsibilities' },
       { id: 'locked', label: 'Locked' },
       { id: 'open', label: 'Open' },
@@ -2326,6 +2423,17 @@ export default function TheGeronimoPlan() {
                   ]}
                 />
               </Block>
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'checklist' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The checklist</p>
+            <H2>Everything that needs doing.</H2>
+            <Note>Every line has an owner. Nothing here needs a meeting to start. Ticks save to this device, so they are your own marker rather than a shared record.</Note>
+            <div className="mt-8">
+              <Checklist />
             </div>
           </Wrap>
         )}
