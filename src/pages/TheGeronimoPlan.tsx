@@ -202,6 +202,199 @@ function WeekFlow() {
   );
 }
 
+// ─── This shoot ──────────────────────────────────────────────────────────
+// Outlines from the media jam on 31 August. Outlines, not scripts. Anything
+// marked SLOT was not said on the call and must not be invented.
+
+type SFOutline = { n: string; title: string; format: string; hook: string; body: string; context: string; payoff: string; cta: string; fill?: string };
+
+const SHORT_FORM_SHOOT: SFOutline[] = [
+  {
+    n: '01', title: 'Churn, and what Defender season proved',
+    format: 'Direct to camera',
+    hook: 'If you are getting fucked by churn. Or, if you do not even know what churn is.',
+    body: 'Most gyms hit 10 percent plus churn a month through this part of the season. The people who ran Defender went to under 1 percent, on average, across the last three months. Three things they did, bang bang bang.',
+    context: 'We just wrapped Defender season, notoriously the second worst time of the year for churn.',
+    payoff: 'The TLDR of the three things, so they can run it themselves.',
+    cta: 'SLOT. Comment keyword for the Defender breakdown.',
+    fill: 'The three things, and whether the 40 percent figure for gyms in August is real or a placeholder.',
+  },
+  {
+    n: '02', title: 'Standards',
+    format: 'Direct to camera',
+    hook: 'Members are not paying for your presence. They are paying for your standards.',
+    body: 'Part of being a leader is not having followers, it is building leaders. Standards are what make people feel your presence even when you are not there.',
+    context: 'Owners are sending DMs saying you have just shown me how to hold standards. This is the thing landing hardest right now.',
+    payoff: 'What a standard actually looks like when it is held without you in the room.',
+    cta: 'SLOT. Points at the separation system playbook.',
+  },
+  {
+    n: '03', title: 'Winning the day',
+    format: 'Direct to camera',
+    hook: 'SLOT. Against the overwhelm. They think they have to do more, more, more.',
+    body: 'Win more days than not and you win the week. Win more weeks than not and you win the month. There are only three of those months. Win those and you win the season. You win Christmas.',
+    context: 'Reverse engineer it instead. Adopt a different standard, plus the five daily non negotiables.',
+    payoff: 'Self confidence is a byproduct of doing the things you said you would do.',
+    cta: 'SLOT.',
+    fill: 'The five daily non negotiables, named.',
+  },
+  {
+    n: '04', title: 'Your business, your rules',
+    format: 'Green screen reaction',
+    hook: 'SLOT. The news article itself, on screen.',
+    body: 'Owners spending all their time catering to member demands. I actually side with the owners on this one.',
+    context: 'Their terms, not ours. This is where the line sits between service and being run by your members.',
+    payoff: 'SLOT. The rule they leave with.',
+    cta: 'SLOT.',
+    fill: 'The article link, so the reaction is anchored to something real.',
+  },
+  {
+    n: '05', title: 'Business owner to business owner',
+    format: 'Direct to camera. Two versions, one shot by Billy and one straight on an iPhone.',
+    hook: 'Business owner to business owner. Could we just be honest for a sec?',
+    body: 'Leadership standards, owner to owner. What Doza actually thinks about running the business.',
+    context: 'This is what is resonating hardest on the calls at the moment.',
+    payoff: 'SLOT.',
+    cta: 'SLOT.',
+    fill: 'Two versions on purpose, to test whether the polish or the raw iPhone cut performs better on the same idea.',
+  },
+];
+
+type LFOutline = {
+  title: string;
+  intro: Array<{ k: string; v: string }>;
+  context: string;
+  points: string[];
+  midroll: string;
+  production: string[];
+  fill?: string;
+};
+
+const LONG_FORM_SHOOT: LFOutline[] = [
+  {
+    title: 'The offer price playbook',
+    intro: [
+      { k: 'Pain', v: 'They are running free trials or generic trials. They are not getting anyone, they are not making sales, and their sales are not outrunning their churn. So they are not growing.' },
+      { k: 'Data', v: 'Across 250 plus studios we coach, every single one hitting record revenue has the same five numbers in the green.' },
+      { k: 'Proof', v: 'SLOT. One named studio, the numbers before and after.' },
+      { k: 'Promise', v: 'There are five numbers standing between you and a million dollar studio.' },
+      { k: 'Plan', v: 'Walk the five numbers, one at a time, and show what green looks like on each.' },
+    ],
+    context: 'SLOT. The story, the reason, and the connector. Why this playbook exists and who it came from.',
+    points: ['SLOT. Number one, and what green looks like', 'SLOT. Number two', 'SLOT. Number three', 'SLOT. Number four', 'SLOT. Number five'],
+    midroll: 'SLOT. Download the offer price playbook.',
+    production: [
+      'Split screen, or Doza in front of the screen walking through it.',
+      'Show the inside out. Five templates from the playbook, and what is actually inside each one.',
+      'You do not know if there are snakes or skittles in the box, so show what is in the box.',
+    ],
+    fill: 'The five numbers themselves. They exist in the playbook, they were not named on the jam.',
+  },
+  {
+    title: 'The ad makeover',
+    intro: [
+      { k: 'Pain', v: '72 dollar CPLs on a 40 dollar a day budget. How many 72s fit into 40? None. It was never going to work.' },
+      { k: 'Data', v: 'SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side.' },
+      { k: 'Proof', v: 'A real client ad account, on screen, before and after, side by side.' },
+      { k: 'Promise', v: 'Five things every good ad has, and we are going to break down exactly what the most recent client had wrong.' },
+      { k: 'Plan', v: 'Walk the five, then rebuild the ad live against them.' },
+    ],
+    context: 'The point of the ad is not to fill the place up with anyone. The point of our studios is to build a community of members we love, who stay, who pay full price, who are here this time next year and the year after, and who refer people in. That is how you build a business you love.',
+    points: [
+      'SLOT. The five things every good ad has, named',
+      'SLOT.',
+      'SLOT.',
+      'SLOT.',
+      'The metric trap. Your creative can look like it is working. Heaps of clicks, heaps of leads, a CPL that reads great. And none of them live near you or match the avatar.',
+    ],
+    midroll: 'SLOT.',
+    production: [
+      'Two videos out of one setup. One reaction, one walkthrough. High leverage, low effort.',
+      'Doza can do this blind. Open an ad library cold, say why it is not getting leads, and name the specific fix.',
+      'Gather distinct before and after examples covering each of the five ad problems.',
+    ],
+  },
+];
+
+const Slotted = ({ text }: { text: string }) => {
+  if (!text.startsWith('SLOT')) return <span className="text-zinc-300 text-[13px] leading-relaxed">{text}</span>;
+  const rest = text.replace(/^SLOT\.?\s*/, '');
+  return (
+    <span className="text-[13px] leading-relaxed">
+      <span className="inline-flex items-center rounded-md border border-dashed border-zinc-700 px-2 py-0.5 text-[10px] uppercase tracking-widest font-semibold text-zinc-600 mr-2 align-middle">To fill</span>
+      <span className="text-zinc-500">{rest}</span>
+    </span>
+  );
+};
+
+function ShortFormShoot() {
+  return (
+    <div className="grid gap-3">
+      {SHORT_FORM_SHOOT.map((o) => (
+        <div key={o.n} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+          <div className="flex items-baseline gap-3 mb-4">
+            <span className="text-blue-400 text-[12px] font-semibold tabular-nums">{o.n}</span>
+            <p className="font-display text-[16px] font-extrabold text-white">{o.title}</p>
+          </div>
+          <dl className="border-t border-zinc-800/70">
+            {[['Format', o.format], ['Hook', o.hook], ['Body', o.body], ['Context', o.context], ['Payoff', o.payoff], ['CTA', o.cta]].map(([k, v]) => (
+              <div key={k} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[62px] flex-shrink-0 pt-1">{k}</dt>
+                <dd><Slotted text={v} /></dd>
+              </div>
+            ))}
+          </dl>
+          {o.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{o.fill}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LongFormShoot() {
+  return (
+    <div className="grid gap-3">
+      {LONG_FORM_SHOOT.map((v) => (
+        <div key={v.title} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+          <p className="font-display text-[16px] font-extrabold text-white mb-4">{v.title}</p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">The intro</p>
+          <dl className="border-t border-zinc-800/70 mb-5">
+            {v.intro.map((r) => (
+              <div key={r.k} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+                <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[62px] flex-shrink-0 pt-1">{r.k}</dt>
+                <dd><Slotted text={r.v} /></dd>
+              </div>
+            ))}
+          </dl>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Context</p>
+          <p className="mb-5"><Slotted text={v.context} /></p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The points</p>
+          <ol className="space-y-2 mb-5">
+            {v.points.map((pt, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="text-blue-400 text-[12px] font-semibold tabular-nums pt-0.5 w-4 flex-shrink-0">{i + 1}</span>
+                <Slotted text={pt} />
+              </li>
+            ))}
+          </ol>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Mid roll CTA</p>
+          <p className="mb-5"><Slotted text={v.midroll} /></p>
+          <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Production</p>
+          <ul className="space-y-2">
+            {v.production.map((x) => (
+              <li key={x} className="flex items-start gap-2.5">
+                <div className="w-1 h-1 rounded-full bg-blue-400 mt-2 flex-shrink-0" />
+                <span className="text-zinc-400 text-[13px] leading-relaxed">{x}</span>
+              </li>
+            ))}
+          </ul>
+          {v.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{v.fill}</p>}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ─── The shoot card ──────────────────────────────────────────────────────
 // Built entirely from Geronimo's own six types, lanes and responsibilities.
 // `structure` is verbatim where the room produced one. Everything left as an
@@ -535,6 +728,7 @@ const TABS: TabDef[] = [
     label: 'How to make it',
     blurb: 'The craft behind the plan. The walkthroughs your team learns from, and the system underneath all of it.',
     sections: [
+      { id: 'thisshoot', label: 'This shoot' },
       { id: 'shootcard', label: 'The shoot card' },
       { id: 'script', label: 'The script system' },
       { id: 'training', label: 'The training' },
@@ -1013,8 +1207,6 @@ function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string;
 
 const CAPTURE_SRC = 'https://authorityengine.notion.site/ebd//6539a3e4234441e1afc1f59aa8e2ae67';
 
-// The outlines built from each media jam. One page per shoot.
-const THIS_SHOOT_URL = 'https://app.notion.com/p/3ce0b2eb6dfb81768c8ad7d0f1afde3c';
 
 function CaptureModal({ onClose }: { onClose: () => void }) {
   React.useEffect(() => {
@@ -1100,14 +1292,13 @@ export default function TheGeronimoPlan() {
             >
               Capture an idea
             </button>
-            <a
-              href={THIS_SHOOT_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => changeSec('thisshoot')}
               className="inline-flex items-center gap-2 rounded-full border border-zinc-800 bg-elevated/40 px-6 py-3 text-[15px] font-semibold text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
             >
               This shoot
-            </a>
+            </button>
           </div>
           <p className="text-zinc-500 text-[13px] mt-3">
             Ideas in by Monday, so they get approved or killed before Tuesday. This shoot holds the outlines that came out of the last media jam.
@@ -1846,6 +2037,50 @@ export default function TheGeronimoPlan() {
             </Block>
           </div>
         </Wrap>
+        )}
+
+        {sec === 'thisshoot' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">This shoot</p>
+            <H2>First shoot of September.</H2>
+            <Note>Outlines from the media jam on 31 August. Outlines, not scripts. More ideas than slots on purpose, so you can be ruthless to the standard. Anything marked to fill was not said on the call.</Note>
+
+            <div className="mt-8">
+              <Block label="Short form">
+                <ShortFormShoot />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Long form">
+                <LongFormShoot />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Queued behind these">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Million dollar studio standards checklist.</b> Same build process as the offer price video, run by Billy once the first one is done.</>,
+                    <><b className="text-white font-semibold">Team playbook and handbooks.</b> Split screen, or walk through on screen.</>,
+                    <><b className="text-white font-semibold">Private live ad rebuild workshop.</b> Twenty spots, offered only to the warmest list ranked by asset downloads. Small feels private. Drop a few existing members in.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Still open">
+                <BulletList
+                  items={[
+                    'Mystery shop. One slot in the schedule, no idea captured on the jam.',
+                    'Series. One slot for Under Management, no episode topic captured on the jam.',
+                    'The long form order was stated two ways on the jam. Team handbook, offer, standards in one place. Offer, standards, team playbook in another.',
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
         )}
 
         {sec === 'shootcard' && (
