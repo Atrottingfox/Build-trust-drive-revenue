@@ -438,7 +438,8 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     beats: [
       { role: 'The pain', text: 'Keep attracting low quality prospects.' },
       { role: 'The trap', text: "Free trials. Most people think if I can't get people in I'll do a free trial, so you open it up to everyone, and you get shit people through the door." },
-      { role: 'The cost', text: "And if you're getting paid ads running, you're paying money for negative cashflow." },
+      { role: 'The cost', text: "And if you're getting paid ads running, you're paying money for negative cashflow, then your SLOT." },
+      { role: 'Unfinished', text: 'SLOT. If every time you open up your ...' },
       { role: 'Story, personal', text: 'And when I was losing money, it was the thing I did. I was chasing everyone else.' },
       { role: 'The numbers', text: 'It was $2 for the first time each, then I went to 35 for $7. $2 became the new free trial. And $7. $136 dollars for 28 days.' },
       { role: 'The accident', text: 'I accidentally said the wrong number once and it went from free to $249 for the same thing.' },
@@ -463,7 +464,10 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     ],
     plan: "Everybody makes these 5 major ad mistakes. I'm about to show you exactly why these ads aren't working. We fix the lead flow problem in about a day.",
     beats: [
-      { role: 'The pain', text: "You keep opening up the inbox and there's another cancellation. And it's because you haven't worked out how to get predictable lead flow." },
+      { role: 'The pain', text: 'Lighting money on fire.' },
+      { role: 'The blame', text: 'The last agency told you it was your creative, but every single time you build more ads.' },
+      { role: 'The grind', text: "The revenue's been the same for months, and it's fucking exhausting. You keep opening up the inbox and there's another cancellation." },
+      { role: 'The cause', text: "And it's because you haven't worked out how to get predictable lead flow." },
       { role: 'Context, answer', text: 'Do you even know if your ads are performing. What metrics to consider. What are the objections.' },
       { role: 'The point', text: "The point of studios is to build a studio of members that pay full price and are here this time next year, and they refer people. It's not just to fill seats, it's to fill it with people you want to be around, and that's how you build a business that you love." },
       { role: 'Current belief', text: "If not happy with bank is I'll get anyone." },
@@ -479,7 +483,7 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     ],
     payoff: 'Attribute you to a process.',
     cta: 'Book it in for an audit. Mid roll, if you want an example.',
-    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. People resonate with who they want to become.",
+    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. We're going to learn some ... People resonate with who they want to become. Relaxed and has the ... Your creative is working, and ...",
   },
 
 ];
