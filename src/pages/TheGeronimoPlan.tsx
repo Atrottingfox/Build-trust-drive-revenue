@@ -418,10 +418,8 @@ const DOZA_PROOF = "I built two gyms to $1M+ in revenue, sold both, now I coach 
 type LFOutline = {
   n: string; title: string; lens: string;
   textHook: string;
-  hooks: Array<{ k: string; text: string }>;
   promise: string[];
   plan: string;
-  earlyCta: string;
   beats: Beat[];
   payoff: string; cta?: string; fill?: string;
 };
@@ -431,18 +429,12 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     n: '01', title: 'The offer',
     lens: 'Teach \u00b7 long form',
     textHook: 'Free trials',
-    hooks: [
-      { k: 'Fear and resonance', text: 'SLOT.' },
-      { k: 'Data claim', text: 'SLOT.' },
-      { k: 'Vulnerability and resonance', text: 'SLOT.' },
-    ],
     promise: [
       "Every single profitable studio changed their offer to what we're about to teach.",
       'Every million dollar studio has these 5 elements to their offer. First thing we do with every single one.',
       "SLOT. Every single million dollar studio we've worked with has had the ...",
     ],
     plan: "Every single studio owner in our academy that is growing faster than you, and this is why they're profitable, why they're getting lead flow, it's down below so let's get into it.",
-    earlyCta: 'SLOT. Follow along format is the recommended shape.',
     beats: [
       { role: 'The pain', text: 'Keep attracting low quality prospects.' },
       { role: 'The trap', text: "Free trials. Most people think if I can't get people in I'll do a free trial, so you open it up to everyone, and you get shit people through the door." },
@@ -464,18 +456,12 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     n: '02', title: "Why your ads aren't working",
     lens: 'Show \u00b7 long form',
     textHook: 'Lighting money on fire',
-    hooks: [
-      { k: 'Fear and resonance', text: "Lighting money on fire. The last agency told you it was your creative, but every single time you build more ads the revenue's been the same for months, and it's fucking exhausting." },
-      { k: 'Data claim', text: 'SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side.' },
-      { k: 'Vulnerability and resonance', text: 'SLOT.' },
-    ],
     promise: [
       "Every million dollar studio has figured this out, in fact some of them are teaching it inside our academy, and once you figure this out you never have to worry about where your next lead is coming from.",
       "And the next time you get a cancellation in your inbox, you don't have to worry about it because you have two more turning up tomorrow, so fuck em.",
       'An owner fixes these five things, their next problem becomes how do I close all these sales.',
     ],
     plan: "Everybody makes these 5 major ad mistakes. I'm about to show you exactly why these ads aren't working. We fix the lead flow problem in about a day.",
-    earlyCta: 'SLOT.',
     beats: [
       { role: 'The pain', text: "You keep opening up the inbox and there's another cancellation. And it's because you haven't worked out how to get predictable lead flow." },
       { role: 'Context, answer', text: 'Do you even know if your ads are performing. What metrics to consider. What are the objections.' },
@@ -495,24 +481,7 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     cta: 'Book it in for an audit. Mid roll, if you want an example.',
     fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. People resonate with who they want to become.",
   },
-  {
-    n: '03', title: 'The marketing engine',
-    lens: 'Long form',
-    textHook: 'SLOT',
-    hooks: [
-      { k: 'Fear and resonance', text: 'SLOT.' },
-      { k: 'Data claim', text: 'SLOT.' },
-      { k: 'Vulnerability and resonance', text: 'SLOT.' },
-    ],
-    promise: ['SLOT.'],
-    plan: 'SLOT.',
-    earlyCta: 'SLOT.',
-    beats: [
-      { role: 'The idea', text: 'Marketing engine is part of Geronimo.' },
-    ],
-    payoff: 'SLOT.',
-    fill: 'Title only. Nothing else written yet.',
-  },
+
 ];
 
 const Slotted = ({ text }: { text: string }) => {
@@ -587,19 +556,6 @@ function LongFormCard({ o }: { o: LFOutline }) {
         <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">{o.lens}</span>
       </div>
 
-      <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mt-5 mb-1">Hook</p>
-      <p className="text-zinc-500 text-[12px] mb-3">First 10 to 15 seconds. Pick one.</p>
-      <div className="space-y-2">
-        {o.hooks.map((h) => (
-          <div key={h.k} className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3">
-            <p className="text-[9px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">{h.k}</p>
-            <p className="text-white text-[15px] leading-snug font-medium"><Slotted text={h.text} /></p>
-          </div>
-        ))}
-      </div>
-
-      <p className="text-zinc-400 text-[13px] italic mt-4">Before we get into that.</p>
-
       <Head>Proof</Head>
       <p className="text-zinc-300 text-[13px] leading-relaxed">{DOZA_PROOF}</p>
       <p className="text-zinc-600 text-[11px] mt-1">Standard anchor. Same on every long form.</p>
@@ -611,9 +567,6 @@ function LongFormCard({ o }: { o: LFOutline }) {
 
       <Head>Plan</Head>
       <p className="text-zinc-300 text-[13px] leading-relaxed"><Slotted text={o.plan} /></p>
-
-      <Head>Early CTA</Head>
-      <p className="text-zinc-300 text-[13px] leading-relaxed"><Slotted text={o.earlyCta} /></p>
 
       <Head>The body</Head>
       <dl className="border-t border-zinc-800/70">
@@ -2334,7 +2287,6 @@ export default function TheGeronimoPlan() {
                 <BulletList
                   items={[
                     'The five elements of the offer are not named yet. Video 1 is written apart from them.',
-                    'Video 3, the marketing engine, is a title and nothing else.',
                     'Mystery shop. One slot in the schedule, no idea captured on the jam.',
                     'Series. One slot for Under Management, no episode topic captured on the jam.',
                     'Carousel and Twitter were flagged for short form but never worked through.',
