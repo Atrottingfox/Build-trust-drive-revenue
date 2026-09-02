@@ -410,65 +410,83 @@ const SHORT_FORM_SHOOT: SFOutline[] = [
   },
 ];
 
+// Every long form intro runs the same shape. Hook, then the transition, then
+// the proof anchor, promise, plan, early CTA. The proof anchor is identical
+// every time, so it lives here once.
+const DOZA_PROOF = "I built two gyms to $1M+ in revenue, sold both, now I coach 400 gym and studio owners inside Geronimo Academy to make their first million or their next million.";
+
 type LFOutline = {
   n: string; title: string; lens: string;
-  textHook: string; spoken: string[];
+  textHook: string;
+  hooks: Array<{ k: string; text: string }>;
+  promise: string[];
+  plan: string;
+  earlyCta: string;
   beats: Beat[];
   payoff: string; cta?: string; fill?: string;
 };
 
 const LONG_FORM_SHOOT: LFOutline[] = [
   {
-    n: '01', title: 'The offer',
+    n: '01', title: 'The 5 numbers',
     lens: 'Teach \u00b7 long form',
-    textHook: 'Low quality prospects',
-    spoken: [
-      'Keep attracting low quality prospects.',
-      'Free trials.',
-      "Most people think if I can't get people in I'll do a free trial, so you open it up to everyone, and you get shit people through the door.",
-      "And if you're getting paid ads running, you're paying money for negative cashflow.",
+    textHook: '5 numbers',
+    hooks: [
+      { k: 'Fear and resonance', text: "There are 5 numbers standing between you and a million dollar studio. Most owners can't tell you a single one off the top of their head." },
+      { k: 'Data claim', text: "Across 250+ studios we coach, every single one hitting record revenue has the same 5 numbers in the green. Here's what they are, and where yours probably sits." },
+      { k: 'Vulnerability and resonance', text: "I used to say I'm just not a numbers person. That excuse is the reason I stayed stuck at SLOT, DOZA TO FILL the revenue level, for years." },
     ],
+    promise: [
+      "By the end of this video, you'll know the 5 numbers every $1M+ studio tracks.",
+      'Exactly what good looks like for each one.',
+      'And the one number at the bottom of your dashboard that tells you whether all 5 are actually working.',
+    ],
+    plan: "There are 5 numbers that feed into everything. I'll walk you through each one, then show you the single number they all roll up into, and that's the one that tells you if your business is actually working.",
+    earlyCta: "Follow along format. I'm going to show you the actual studio dashboard we use inside the academy. You can grab your own copy below for free and follow along, link's below. Let's get into it.",
     beats: [
-      { role: 'The promise', text: "Every single profitable studio changed their offer to what we're about to teach." },
-      { role: 'The promise', text: 'Every million dollar studio has these 5 elements to their offer. First thing we do with every single one.' },
-      { role: 'Unfinished', text: "SLOT. Every single million dollar studio we've worked with has had the ..." },
+      { role: 'The pain', text: 'Keep attracting low quality prospects.' },
+      { role: 'The trap', text: "Free trials. Most people think if I can't get people in I'll do a free trial, so you open it up to everyone, and you get shit people through the door." },
+      { role: 'The cost', text: "And if you're getting paid ads running, you're paying money for negative cashflow." },
+      { role: 'The claim', text: "Every single profitable studio changed their offer to what we're about to teach. Every million dollar studio has these 5 elements to their offer. First thing we do with every single one." },
       { role: 'Story, personal', text: 'And when I was losing money, it was the thing I did. I was chasing everyone else.' },
       { role: 'The numbers', text: 'It was $2 for the first time each, then I went to 35 for $7. $2 became the new free trial. And $7. $136 dollars for 28 days.' },
       { role: 'The accident', text: 'I accidentally said the wrong number once and it went from free to $249 for the same thing.' },
-      { role: 'Element one', text: 'SLOT.' },
-      { role: 'Element two', text: 'SLOT.' },
-      { role: 'Element three', text: 'SLOT.' },
-      { role: 'Element four', text: 'SLOT.' },
-      { role: 'Element five', text: 'SLOT.' },
+      { role: 'Number one', text: 'SLOT.' },
+      { role: 'Number two', text: 'SLOT.' },
+      { role: 'Number three', text: 'SLOT.' },
+      { role: 'Number four', text: 'SLOT.' },
+      { role: 'Number five', text: 'SLOT.' },
+      { role: 'The roll up', text: 'SLOT. The single number they all roll up into.' },
       { role: 'The turn', text: "Every single studio owner in our academy that is growing faster than you, and this is why they're profitable, why they're getting lead flow, it's down below so let's get into it." },
     ],
     payoff: "This is why they're not getting leads.",
     cta: "This is an example of what they've done.",
-    fill: 'The five elements are the blocker. Everything else on this video is written.',
+    fill: "The five numbers are the blocker. Also unresolved: your notes say 5 elements to their offer, this spec says 5 numbers on a dashboard. Same list, or two videos.",
   },
   {
     n: '02', title: "Why your ads aren't working",
     lens: 'Show \u00b7 long form',
     textHook: 'Lighting money on fire',
-    spoken: [
-      'Lighting money on fire.',
-      'The last agency told you it was your creative,',
-      'But every single time you build more ads,',
-      "The revenue's been the same for months, and it's fucking exhausting. You keep opening up the inbox and there's another cancellation,",
-      "And it's because you haven't worked out how to get predictable lead flow.",
+    hooks: [
+      { k: 'Fear and resonance', text: "Lighting money on fire. The last agency told you it was your creative, but every single time you build more ads the revenue's been the same for months, and it's fucking exhausting." },
+      { k: 'Data claim', text: 'SLOT. The before and after on a real account. Starting CPL, ending CPL, and the CAC either side.' },
+      { k: 'Vulnerability and resonance', text: 'SLOT.' },
     ],
+    promise: [
+      "Every million dollar studio has figured this out, in fact some of them are teaching it inside our academy, and once you figure this out you never have to worry about where your next lead is coming from.",
+      "And the next time you get a cancellation in your inbox, you don't have to worry about it because you have two more turning up tomorrow, so fuck em.",
+      'An owner fixes these five things, their next problem becomes how do I close all these sales.',
+    ],
+    plan: "Everybody makes these 5 major ad mistakes. I'm about to show you exactly why these ads aren't working. We fix the lead flow problem in about a day.",
+    earlyCta: 'SLOT.',
     beats: [
-      { role: 'The promise', text: "Every million dollar studio has figured this out, in fact some of them are teaching it inside our academy, and once you figure this out you never have to worry about where your next lead is coming from." },
-      { role: 'The relief', text: "And the next time you get a cancellation in your inbox, you don't have to worry about it because you have two more turning up tomorrow, so fuck em." },
-      { role: 'The reframe', text: 'An owner fixes these five things, their next problem becomes how do I close all these sales.' },
-      { role: 'The speed', text: 'We fix the lead flow problem in about a day.' },
+      { role: 'The pain', text: "You keep opening up the inbox and there's another cancellation. And it's because you haven't worked out how to get predictable lead flow." },
       { role: 'Context, answer', text: 'Do you even know if your ads are performing. What metrics to consider. What are the objections.' },
       { role: 'The point', text: "The point of studios is to build a studio of members that pay full price and are here this time next year, and they refer people. It's not just to fill seats, it's to fill it with people you want to be around, and that's how you build a business that you love." },
       { role: 'Current belief', text: "If not happy with bank is I'll get anyone." },
       { role: 'Required belief', text: "You're going to enjoy business more if you find more of the right people, and ignore everyone else." },
       { role: 'Analogy', text: "Not raid the pantry when you're hungry but to still get people in the door." },
       { role: 'Story, personal', text: 'SLOT.' },
-      { role: 'The mistakes', text: "Everybody makes these 5 major ad mistakes. I'm about to show you exactly why these ads aren't working." },
       { role: 'Mistake one', text: 'Generic copy. Come join us.' },
       { role: 'Mistake two', text: 'Generic creative. Model shots, AI slop.' },
       { role: 'Mistake three', text: 'No avatar.' },
@@ -478,13 +496,20 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     ],
     payoff: 'Attribute you to a process.',
     cta: 'Book it in for an audit. Mid roll, if you want an example.',
-    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. Your creative is working, and ... They all want to become new leaders. People resonate with who they want to become.",
+    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. People resonate with who they want to become.",
   },
   {
     n: '03', title: 'The marketing engine',
     lens: 'Long form',
     textHook: 'SLOT',
-    spoken: ['SLOT.'],
+    hooks: [
+      { k: 'Fear and resonance', text: 'SLOT.' },
+      { k: 'Data claim', text: 'SLOT.' },
+      { k: 'Vulnerability and resonance', text: 'SLOT.' },
+    ],
+    promise: ['SLOT.'],
+    plan: 'SLOT.',
+    earlyCta: 'SLOT.',
     beats: [
       { role: 'The idea', text: 'Marketing engine is part of Geronimo.' },
     ],
@@ -506,9 +531,9 @@ const Slotted = ({ text }: { text: string }) => {
 
 // The hook is the thing being shot, so it is the thing you can read across
 // the room. Everything under it is scaffolding for the riff.
-function ShootOutlineCard({ o }: { o: SFOutline | LFOutline }) {
-  const format = 'format' in o ? o.format : undefined;
-  const cta = 'cta' in o ? o.cta : undefined;
+function ShootOutlineCard({ o }: { o: SFOutline }) {
+  const format = o.format;
+  const cta = o.cta;
   return (
     <div className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
       <div className="flex items-baseline gap-3 flex-wrap mb-1">
@@ -553,9 +578,72 @@ function ShootOutlineCard({ o }: { o: SFOutline | LFOutline }) {
   );
 }
 
+function LongFormCard({ o }: { o: LFOutline }) {
+  const Head = ({ children }: { children: React.ReactNode }) => (
+    <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mt-6 mb-2">{children}</p>
+  );
+  return (
+    <div className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+      <div className="flex items-baseline gap-3 flex-wrap mb-1">
+        <span className="text-blue-400 text-[12px] font-semibold tabular-nums">{o.n}</span>
+        <p className="font-display text-[16px] font-extrabold text-white">{o.title}</p>
+        <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">{o.lens}</span>
+      </div>
+
+      <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mt-5 mb-1">Hook</p>
+      <p className="text-zinc-500 text-[12px] mb-3">First 10 to 15 seconds. Pick one.</p>
+      <div className="space-y-2">
+        {o.hooks.map((h) => (
+          <div key={h.k} className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3">
+            <p className="text-[9px] uppercase tracking-widest font-semibold text-zinc-500 mb-1">{h.k}</p>
+            <p className="text-white text-[15px] leading-snug font-medium"><Slotted text={h.text} /></p>
+          </div>
+        ))}
+      </div>
+
+      <p className="text-zinc-400 text-[13px] italic mt-4">Before we get into that.</p>
+
+      <Head>Proof</Head>
+      <p className="text-zinc-300 text-[13px] leading-relaxed">{DOZA_PROOF}</p>
+      <p className="text-zinc-600 text-[11px] mt-1">Standard anchor. Same on every long form.</p>
+
+      <Head>Promise</Head>
+      <div className="space-y-1.5">
+        {o.promise.map((x, i) => <p key={i} className="text-zinc-300 text-[13px] leading-relaxed"><Slotted text={x} /></p>)}
+      </div>
+
+      <Head>Plan</Head>
+      <p className="text-zinc-300 text-[13px] leading-relaxed"><Slotted text={o.plan} /></p>
+
+      <Head>Early CTA</Head>
+      <p className="text-zinc-300 text-[13px] leading-relaxed"><Slotted text={o.earlyCta} /></p>
+
+      <Head>The body</Head>
+      <dl className="border-t border-zinc-800/70">
+        {o.beats.map((b, i) => (
+          <div key={i} className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+            <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[108px] flex-shrink-0 pt-1">{b.role}</dt>
+            <dd><Slotted text={b.text} /></dd>
+          </div>
+        ))}
+        <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+          <dt className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 w-[108px] flex-shrink-0 pt-1">Payoff</dt>
+          <dd><Slotted text={o.payoff} /></dd>
+        </div>
+        {o.cta && (
+          <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+            <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[108px] flex-shrink-0 pt-1">CTA</dt>
+            <dd><Slotted text={o.cta} /></dd>
+          </div>
+        )}
+      </dl>
+      {o.fill && <p className="text-zinc-500 text-[13px] leading-relaxed italic mt-4">{o.fill}</p>}
+    </div>
+  );
+}
+
 function ThisShoot() {
   const [lane, setLane] = React.useState<string>('short');
-  const list = lane === 'short' ? SHORT_FORM_SHOOT : LONG_FORM_SHOOT;
   return (
     <div>
       <div className="border-b border-zinc-800 mb-5">
@@ -569,7 +657,9 @@ function ThisShoot() {
         />
       </div>
       <div className="grid gap-3">
-        {list.map((o) => <ShootOutlineCard key={o.n} o={o} />)}
+        {lane === 'short'
+          ? SHORT_FORM_SHOOT.map((o) => <ShootOutlineCard key={o.n} o={o} />)
+          : LONG_FORM_SHOOT.map((o) => <LongFormCard key={o.n} o={o} />)}
       </div>
     </div>
   );
