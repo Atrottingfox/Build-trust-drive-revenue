@@ -59,7 +59,7 @@ const deliverables = [
 ];
 
 const proofStats = [
-  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 6 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
+  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 12 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
   { name: 'Jay Wright', stat: '2x', context: 'following + revenue in 12 months', sub: 'E-commerce brands LSKD, Tiger Lily.' },
   { name: 'Mitch Revs', stat: '19k → 50k', context: 'followers in 2 months', sub: '1.4M organic impressions 3 months straight.' },
 ];

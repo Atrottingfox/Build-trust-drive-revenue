@@ -288,7 +288,7 @@ export default function BeliefShift() {
                 objection="Content marketing doesn't work for my industry."
                 belief="They believe content is for influencers and B2C brands. They have never seen a founder at their level use content to generate serious revenue. The whole category feels irrelevant to them."
                 shift="They need to see proof that founders at their level, in their world, have used content to build authority and drive pipeline. Not theory. Real outcomes."
-                contentRx='Case studies and demonstrations. "Here is how Taki Moore added $5M in revenue from content in 6 months." Show the result. Let the proof dissolve the disbelief.'
+                contentRx='Case studies and demonstrations. "Here is how Taki Moore added $5M in revenue from content in 12 months." Show the result. Let the proof dissolve the disbelief.'
               />
             </div>
 
@@ -407,7 +407,7 @@ export default function BeliefShift() {
               <ObjectionCard
                 objection="Have you worked with someone at my level?"
                 belief="They believe their situation is unique. They need to see you have operated at their level or higher. Without that proof, everything else is theory."
-                shift="They need specific evidence. Names, numbers, outcomes. Not testimonials that say 'great experience.' Proof that says '$5M in 6 months from content.'"
+                shift="They need specific evidence. Names, numbers, outcomes. Not testimonials that say 'great experience.' Proof that says '$5M in 12 months from content.'"
                 contentRx={`Case studies, demonstrations, and behind the scenes content. Show the work. Show the results. Show the guarantee. "If by day 90 you don't have a documented Authority Engine running, we work free until you do."`}
               />
             </div>

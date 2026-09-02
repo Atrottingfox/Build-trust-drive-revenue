@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import CaseStudyModal from './CaseStudyModal';
 
 const results = [
-  { prefix: "+$", end: 5, suffix: "M", decimals: 0, context: "revenue from content", name: "Taki Moore", detail: "6 months" },
+  { prefix: "+$", end: 5, suffix: "M", decimals: 0, context: "revenue from content", name: "Taki Moore", detail: "12 months" },
   { prefix: "", end: 46, suffix: "k", endB: 90, suffixB: "k", decimals: 0, context: "following", name: "Jay Wright", detail: "10 months" },
   { prefix: "", end: 1.2, suffix: "M+", decimals: 1, context: "organic impressions/mo", name: "Mitch Revs", detail: "3 months" },
 ];

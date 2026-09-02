@@ -279,7 +279,7 @@ export const HOOK_TYPES = [
   { name: 'Vulnerability', formula: 'Open with something personal and real.', example: '"I almost quit last Tuesday."' },
   { name: 'Curiosity Gap', formula: 'Tease information without revealing it.', example: '"There\'s one thing every 7 figure founder does that nobody talks about."' },
   { name: 'Direct Challenge', formula: 'Call out a behaviour or belief.', example: '"Stop posting tips. Nobody cares."' },
-  { name: 'Specificity', formula: 'Use a specific number, date, or detail.', example: '"In 6 months, we added $5M in revenue from content alone."' },
+  { name: 'Specificity', formula: 'Use a specific number, date, or detail.', example: '"In 12 months, we added $5M in revenue from content alone."' },
 ];
 
 export const VALUE_LENSES = [

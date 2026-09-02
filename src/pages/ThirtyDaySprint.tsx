@@ -567,7 +567,7 @@ export default function ThirtyDaySprint() {
               <div className="p-6 bg-surface border border-zinc-800/50 rounded-2xl mb-8">
                 <div className="space-y-4 text-zinc-400 text-sm leading-relaxed">
                   <p>
-                    In the last 6 months, I've contributed to over $5M in client revenue.
+                    In the last 12 months, I've contributed to over $5M in client revenue.
                   </p>
                   <p>
                     If one extra client is worth $15K+ to you,
