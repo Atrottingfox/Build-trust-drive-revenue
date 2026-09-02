@@ -451,7 +451,7 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     ],
     payoff: "This is why they're not getting leads.",
     cta: "This is an example of what they've done.",
-    fill: 'The five elements are the blocker. Everything else on this video is written.',
+    fill: 'The five elements are the blocker. Everything else on this video is written. Production: split screen, or Doza in front of the screen walking through it. Show the inside out, the templates from the playbook and what is inside each one. You do not know if there are snakes or skittles in the box, so show what is in the box.',
   },
   {
     n: '02', title: "Why your ads aren't working",
@@ -474,6 +474,8 @@ const LONG_FORM_SHOOT: LFOutline[] = [
       { role: 'Required belief', text: "You're going to enjoy business more if you find more of the right people, and ignore everyone else." },
       { role: 'Analogy', text: "Not raid the pantry when you're hungry but to still get people in the door." },
       { role: 'Story, personal', text: 'SLOT.' },
+      { role: 'The maths', text: "$72 CPLs with a $40 a day budget. How many 72s fit in 40? None. You could be okay with 72 CPLs if you convert one in every two of them, which makes it $140 CAC." },
+      { role: 'The metric trap', text: "Your creative can look like it's working. Heaps of clicks, heaps of leads, a CPL that reads great. And none of them live near you, or match the avatar." },
       { role: 'Mistake one', text: 'Generic copy. Come join us.' },
       { role: 'Mistake two', text: 'Generic creative. Model shots, AI slop.' },
       { role: 'Mistake three', text: 'No avatar.' },
@@ -483,7 +485,7 @@ const LONG_FORM_SHOOT: LFOutline[] = [
     ],
     payoff: 'Attribute you to a process.',
     cta: 'Book it in for an audit. Mid roll, if you want an example.',
-    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. We're going to learn some ... People resonate with who they want to become. Relaxed and has the ... Your creative is working, and ...",
+    fill: "Two cuts. Pilates, this is what we changed. And gym owners. Working title, where Pilates studio owners are fucking up. Lines not placed yet: consistency of leads coming through. Getting leads, but not the ones you want to work with. You're still trying to work out whether you should sell a reformer bed to get an instructor you don't even like at the end of the month. They all want to become new leaders. We're going to learn some ... People resonate with who they want to become. Relaxed and has the ... Your creative is working, and ... Production: two videos out of one setup, one reaction and one walkthrough. Doza can do this blind, open an ad library cold, say why it is not getting leads and name the specific fix. Before and afters on every one of the five mistakes. Starting point on the real account was $78 CPLs.",
   },
 
 ];
