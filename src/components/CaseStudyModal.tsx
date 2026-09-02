@@ -166,10 +166,10 @@ const caseStudies: CaseStudyData[] = [
         ghost: "$5M",
         label: "The outcome",
         headline: <><span className="text-blue-500/80">+$5M</span> revenue from content.</>,
-        body: "In six months. It completely transformed how he sold, how he showed up, and how the market saw him.",
+        body: "In twelve months. It completely transformed how he sold, how he showed up, and how the market saw him.",
         visual: <GrowthLine />,
         stat: "+$5M",
-        statLabel: "6 months",
+        statLabel: "12 months",
       },
       {
         label: "The takeaway",
