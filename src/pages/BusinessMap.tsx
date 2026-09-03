@@ -74,13 +74,13 @@ const revenueMetrics = [
 ];
 
 const sixMonthPlan = [
-  { month: 'Month 1', brandDays: 4,  installs: 3, revenue: '$50k' },
-  { month: 'Month 2', brandDays: 6,  installs: 5, revenue: '$80k' },
-  { month: 'Month 3', brandDays: 8,  installs: 6, revenue: '$100k' },
-  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$150k' },
-  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$260k' },
-  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$290k' },
-  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$290k' },
+  { month: 'Month 1', brandDays: 5, installs: 4, revenue: '$65k' },
+  { month: 'Month 2', brandDays: 5, installs: 4, revenue: '$65k' },
+  { month: 'Month 3', brandDays: 5, installs: 4, revenue: '$65k' },
+  { month: 'Month 4', brandDays: 8, installs: 6, revenue: '$100k' },
+  { month: 'Month 5', brandDays: 8, installs: 6, revenue: '$180k' },
+  { month: 'Month 6', brandDays: 8, installs: 6, revenue: '$200k' },
+  { month: 'Month 7', brandDays: 8, installs: 6, revenue: '$200k' },
 ];
 
 const pillars = [
@@ -105,17 +105,17 @@ const advisoryScenarios = [
   {
     label: 'Conservative',
     rate: '18%',
-    detail: '9 Advisory clients × $24k',
-    advisory: '$216k',
-    total: '$1.44m',
+    detail: '6 Advisory clients × $24k',
+    advisory: '$144k',
+    total: '$1.02m',
     note: 'What the cash plan is built on.',
   },
   {
     label: 'Intended',
     rate: '40%',
-    detail: '19.2 Advisory clients × $24k',
-    advisory: '$460.8k',
-    total: '$1.68m',
+    detail: '14 Advisory clients × $24k',
+    advisory: '$336k',
+    total: '$1.21m',
     note: 'The target. 40% rollover from the 90 Day Install into the 12 Month Advisory.',
   },
 ];
@@ -195,7 +195,7 @@ const stages: Stage[] = [
     link: '/phase0',
     linkLabel: 'Open the Phase 0 Operating Plan',
     description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 installs are the validation cohort, and the price steps up once they are done.',
-    model: '5k Day to 15k Install for the first 20 installs, then 10k Day to 30k Install, plus 24k Advisory. 60 Strategy Days and 48 Installs is $1.22m. Advisory at the conservative 18% takes it to $1.44m. Advisory at the intended 40% takes it to about $1.68m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
+    model: '5k Day to 15k Install for the first 20 installs, then 10k Day to 30k Install, plus 24k Advisory. Capacity caps this at five in person days a month for three months, then eight. 47 Strategy Days and 36 Installs is $875k. Advisory at the conservative 18% takes it to $1.02m. Advisory at the intended 40% takes it to about $1.21m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
     metric: 'Install conversion rate (target 60 to 80%). Secondary: Advisory rollover, 90 Day Install into 12 Month Advisory (target 40%).',
   },
@@ -513,7 +513,7 @@ export default function BusinessMap() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               The Stage 0 ramp.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">Month by month, through the price step at install 20.</p>
+            <p className="text-zinc-500 text-lg mb-12">Built on the days Sean can physically do, not on demand.</p>
 
             <div className="glow-card overflow-hidden mb-8">
               <div className="hidden md:grid md:grid-cols-4 gap-4 px-6 py-4 border-b border-zinc-800 text-zinc-500 text-xs font-semibold uppercase tracking-widest">
@@ -539,14 +539,19 @@ export default function BusinessMap() {
               ))}
             </div>
 
+            <div className="glow-card border-blue-500/20 p-6 mb-6">
+              <p className="text-blue-400 text-xs font-semibold uppercase tracking-widest mb-2">The constraint</p>
+              <p className="text-zinc-400 text-sm leading-relaxed">Five in person days a month for the first three months. Eight after that, and eight only happens with a change in how the day gets delivered, because of the time each one takes. This table is the ceiling, not the ambition.</p>
+            </div>
+
             <div className="grid sm:grid-cols-2 gap-6 mb-10">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Days and Installs</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days and 48 Installs. The first 20 installs and the 28 days that fed them price at $5k and $10k additional, which is $340k. The 28 installs after, and 32 days, price at $10k and $20k additional, which is $880k. The step lands in Month 4.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">47 Strategy Days and 36 Installs. Tier one is 23 days and 20 installs at $5k and $10k additional, which is $315k. Tier two is 24 days and 16 installs at $10k and $20k additional, which is $560k. The step lands in Month 5.</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Base total</p>
-                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.22m</p>
+                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$875k</p>
                 <p className="text-zinc-600 text-xs mt-2">Days and Installs only. Advisory on top.</p>
               </div>
             </div>
