@@ -69,6 +69,7 @@ const TheGeronimoPlan = React.lazy(() => import('./pages/TheGeronimoPlan'));
 const Margot = React.lazy(() => import('./pages/Margot'));
 const Morgan = React.lazy(() => import('./pages/Morgan'));
 const Operations = React.lazy(() => import('./pages/Operations'));
+const Brand = React.lazy(() => import('./pages/Brand'));
 
 
 import { Navigation } from './components/ui/Navigation';
@@ -154,6 +155,7 @@ export default function App() {
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/operations" element={<Operations />} />
+          <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />
           <Route path="/lock-in/:contactId" element={<LockIn />} />
           <Route path="/booked" element={<Booked />} />

@@ -90,3 +90,9 @@ deploy rollback in Netlify to `cf96dc8a`.
 
 **Why:** Client facing reference for the call breakdown. Companion Notion page
 lives at "Margot - Call breakdown" under Extra pages.
+
+## 2026-09-03 · Added /brand public asset page
+- **What:** New route `/brand` (`src/pages/Brand.tsx`) serving downloadable logo, colour, type and header assets from `public/brand/`. Added `Disallow: /brand` to robots.txt and `noIndex` on the page.
+- **Why:** Clients and partners ask for branding. This is the permanent link to hand them instead of emailing files.
+- **Audience:** Public marketing site (authorityengine.com.au). Additive only, no existing page touched.
+- **Rollback:** Netlify dashboard > Deploys > Publish deploy on the previous build. Or `git revert <commit>` and push.
