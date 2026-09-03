@@ -37,6 +37,7 @@ Disallow: /undeniable-notes
 Disallow: /linkninja
 Disallow: /theprofitanalyst
 Disallow: /thenextstage
-Disallow: /brand
+# Anchored: a bare /brand would prefix-match /brand-day, which is Allow-listed above.
+Disallow: /brand$
 
 Sitemap: https://authorityengine.com.au/sitemap.xml
