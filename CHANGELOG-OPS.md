@@ -96,3 +96,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Why:** Clients and partners ask for branding. This is the permanent link to hand them instead of emailing files.
 - **Audience:** Public marketing site (authorityengine.com.au). Additive only, no existing page touched.
 - **Rollback:** Netlify dashboard > Deploys > Publish deploy on the previous build. Or `git revert <commit>` and push.
+
+## 2026-09-03 · Regenerated /brand assets from vector at higher resolution
+- **What:** Replaced the brand pack with vector-rendered PNGs. Logo now 925x1024 and 3699x4096 transparent (tight crop, was a 1024 square with padding). Icon added at 1024 and 2048. Header card rebuilt as live Outfit type and rendered at 2400x1260 and 3600x1890; the original 1200x630 is kept unchanged as the Open Graph size.
+- **How:** The header had no generator in the repo, so its geometry was recovered by pixel-measuring the original and the rebuild was verified landmark by landmark against it (all within 1-2px antialiasing noise). Rendered with headless Chrome.
+- **Audience:** Public marketing site (authorityengine.com.au/brand). Additive plus asset replacement, no existing page touched. `/og-image.png` was NOT modified.
+- **Rollback:** Netlify dashboard > Deploys > Publish deploy on the previous build. Or `git revert <commit>` and push.

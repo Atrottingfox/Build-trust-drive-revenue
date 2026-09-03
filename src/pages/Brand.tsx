@@ -18,6 +18,7 @@ const ZIP = '/brand/authority-engine-brand-assets.zip';
 type Asset = {
   file: string;
   label: string;
+  dim: string;
   note: string;
 };
 
@@ -25,25 +26,62 @@ const LOGO_FILES: Asset[] = [
   {
     file: '/brand/authority-engine-logo.svg',
     label: 'authority-engine-logo.svg',
-    note: 'Master vector. Use wherever SVG is supported.',
+    dim: 'Vector',
+    note: 'Master file. Scales to any size. Use this first.',
+  },
+  {
+    file: '/brand/authority-engine-logo-4096.png',
+    label: 'authority-engine-logo-4096.png',
+    dim: '3699 x 4096',
+    note: 'Transparent. Print, large format, anything that gets scaled.',
   },
   {
     file: '/brand/authority-engine-logo-1024.png',
     label: 'authority-engine-logo-1024.png',
-    note: 'Transparent PNG, 1024px. Decks and documents.',
+    dim: '925 x 1024',
+    note: 'Transparent. Decks, documents, on screen.',
+  },
+];
+
+const ICON_FILES: Asset[] = [
+  {
+    file: '/brand/authority-engine-icon-2048.png',
+    label: 'authority-engine-icon-2048.png',
+    dim: '2048 x 2048',
+    note: 'Largest square tile.',
+  },
+  {
+    file: '/brand/authority-engine-icon-1024.png',
+    label: 'authority-engine-icon-1024.png',
+    dim: '1024 x 1024',
+    note: 'Profile pictures on most platforms.',
   },
   {
     file: '/brand/authority-engine-icon-512.png',
     label: 'authority-engine-icon-512.png',
-    note: 'Square icon on black, 512px. Profiles, favicons, app tiles.',
+    dim: '512 x 512',
+    note: 'Favicons and app tiles.',
   },
 ];
 
 const HEADER_FILES: Asset[] = [
   {
+    file: '/brand/authority-engine-header-3600x1890.png',
+    label: 'authority-engine-header-3600x1890.png',
+    dim: '3600 x 1890',
+    note: 'Retina and print. Type rendered from vector at full size.',
+  },
+  {
+    file: '/brand/authority-engine-header-2400x1260.png',
+    label: 'authority-engine-header-2400x1260.png',
+    dim: '2400 x 1260',
+    note: 'Retina screens, slide decks.',
+  },
+  {
     file: '/brand/authority-engine-header-1200x630.png',
     label: 'authority-engine-header-1200x630.png',
-    note: '1200 x 630 PNG. Standard Open Graph size.',
+    dim: '1200 x 630',
+    note: 'Exact Open Graph size. Use this one for social and email.',
   },
 ];
 
@@ -51,6 +89,7 @@ const GUIDE_FILES: Asset[] = [
   {
     file: '/brand/authority-engine-brand-guide.md',
     label: 'authority-engine-brand-guide.md',
+    dim: 'Text',
     note: 'Everything on this page as a text file.',
   },
 ];
@@ -104,9 +143,12 @@ function FileRow({ asset }: { asset: Asset }) {
     <a
       href={asset.file}
       download
-      className="group grid grid-cols-1 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)_auto] gap-2 sm:gap-4 sm:items-center bg-surface px-4 py-3.5 hover:bg-elevated transition-colors"
+      className="group grid grid-cols-1 sm:grid-cols-[minmax(0,1.05fr)_92px_minmax(0,1fr)_auto] gap-2 sm:gap-4 sm:items-center bg-surface px-4 py-3.5 hover:bg-elevated transition-colors"
     >
       <code className="font-mono text-[12.5px] text-blue-400 break-all">{asset.label}</code>
+      <span className="font-mono text-[11.5px] text-zinc-500 tabular-nums whitespace-nowrap">
+        {asset.dim}
+      </span>
       <span className="text-[13.5px] text-muted">{asset.note}</span>
       <span className="flex items-center gap-1.5 text-[12px] font-medium text-zinc-500 group-hover:text-white transition-colors justify-self-start sm:justify-self-end">
         <Download className="w-3.5 h-3.5" />
@@ -136,7 +178,7 @@ function SwatchGrid({
   copied: string | null;
 }) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
       {set.map((s) => {
         const isCopied = copied === s.hex;
         return (
@@ -225,7 +267,7 @@ export default function Brand() {
               Download everything
             </a>
             <span className="font-mono text-[11.5px] uppercase tracking-[0.1em] text-muted">
-              ZIP · 68 KB
+              ZIP · 388 KB · 11 files
             </span>
           </div>
         </header>
@@ -246,7 +288,8 @@ export default function Brand() {
           <p className="-mt-4 max-w-[62ch] text-[15.5px] text-zinc-400">
             One mark, two blues. The lighter half sits left, the darker half right. The counter
             inside the A is knocked out rather than filled, so the mark carries whatever sits behind
-            it and works on light and dark without a second version.
+            it and works on light and dark without a second version. Every PNG here is rendered from
+            the vector, so nothing has been upscaled.
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
@@ -269,7 +312,19 @@ export default function Brand() {
             ))}
           </div>
 
-          <FileList assets={LOGO_FILES} />
+          <div className="flex flex-col gap-3">
+            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+              The mark
+            </div>
+            <FileList assets={LOGO_FILES} />
+          </div>
+
+          <div className="flex flex-col gap-3">
+            <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
+              Square icon
+            </div>
+            <FileList assets={ICON_FILES} />
+          </div>
         </Rail>
 
         <Rail label="Colour">
@@ -279,15 +334,18 @@ export default function Brand() {
           <p className="-mt-4 max-w-[62ch] text-[15.5px] text-zinc-400">
             The neutrals do the work. Blue is the accent and it stays rare. Across the whole site the
             light blue is the single most used accent, and it appears as type far more often than as
-            fill.{' '}
-            <span
-              className={`font-mono text-[11px] uppercase tracking-[0.08em] ${
-                copied ? 'text-blue-400' : 'text-muted'
-              }`}
-            >
-              {copied ? `${copied} copied` : 'Click any swatch to copy its hex'}
-            </span>
+            fill.
           </p>
+
+          <div
+            className={`-mt-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] transition-colors ${
+              copied ? 'text-blue-400' : 'text-muted'
+            }`}
+            aria-live="polite"
+          >
+            {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            {copied ? `${copied} copied to clipboard` : 'Click any swatch to copy its hex'}
+          </div>
 
           <div className="flex flex-col gap-3">
             <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
@@ -366,13 +424,16 @@ export default function Brand() {
             Share card
           </h2>
           <p className="-mt-4 max-w-[62ch] text-[15.5px] text-zinc-400">
-            The standard header image. It is built at Open Graph size, so it drops into LinkedIn, X,
-            Facebook and email headers without a recrop.
+            The standard header image, rebuilt as live type so it holds up at size. The 1200 x 630
+            version is the exact Open Graph size and drops into LinkedIn, X, Facebook and email
+            headers without a recrop. Go bigger for slides and print.
           </p>
 
           <div className="border border-subtle rounded-2xl overflow-hidden bg-surface">
             <img
               src="/brand/authority-engine-header-1200x630.png"
+              srcSet="/brand/authority-engine-header-1200x630.png 1200w, /brand/authority-engine-header-2400x1260.png 2400w"
+              sizes="(max-width: 720px) 100vw, 860px"
               alt="The Authority Engine header card reading Own your category."
               width={1200}
               height={630}
@@ -396,8 +457,8 @@ export default function Brand() {
               <ul className="flex flex-col gap-3">
                 {[
                   'Put the mark on black or near black wherever you can. That is the ground it was drawn for.',
-                  'Use the SVG at any size above the icon. It stays sharp.',
-                  'Drop to the 512 icon when the mark gets small, or when it needs its own black tile.',
+                  'Use the SVG at any size. It stays sharp.',
+                  'Use the square icon when the mark needs its own black tile.',
                   'Let blue be rare. One accent per screen reads stronger than five.',
                   'Write it as The Authority Engine, or Authority Engine.',
                 ].map((t) => (

@@ -47,16 +47,16 @@ const offers = [
   {
     num: '01',
     title: 'Strategy Day',
-    price: '$5,000',
-    rolled: 'Founding offer · first 20 clients',
-    description: '1:1, in person intensive. Brand, positioning, narrative, customer journey, and Authority Engine blueprint documented inside The Engineroom. This is Phase 1 of the install, not a random workshop. The 5k credits in full toward the 90 Day Install. Hold this shape for the first 20 clients while the method gets validated and the IP gets captured.',
+    price: '$5,000 → $10,000',
+    rolled: 'Steps up after 20 installs',
+    description: '1:1, in person intensive. Brand, positioning, narrative, customer journey, and Authority Engine blueprint documented inside The Engineroom. This is Phase 1 of the install, not a random workshop. The day credits in full toward the 90 Day Install. It holds at $5,000 for the first 20 installs, then goes to $10,000 once the method is proven.',
   },
   {
     num: '02',
     title: '90 Day Install',
-    price: '$15,000 total',
-    rolled: '$5k credit · $10k additional',
-    description: 'Offered at the close of the Strategy Day, by invitation. The 5k day credits in full, so it is 10k more to start. Includes personalised 1:1s and Content Boards through the first 90 days. Over 90 days we build, install, and tune the Engine with the team so it is running by Day 90.',
+    price: '$15,000 → $30,000',
+    rolled: 'The day rolls in at both tiers',
+    description: 'Offered at the close of the Strategy Day, by invitation. The day credits in full, so the first 20 installs are $15,000 with the $5k day rolling in, $10,000 more to start. After 20 installs it is $30,000 with the $10k day rolling in, $20,000 more to start. Includes personalised 1:1s and Content Boards through the first 90 days. Over 90 days we build, install, and tune the Engine with the team so it is running by Day 90.',
   },
   {
     num: '03',
@@ -68,8 +68,8 @@ const offers = [
 ];
 
 const revenueMetrics = [
-  { stat: '$5k', label: 'Strategy Day', sub: 'Entry point. Credits into the install' },
-  { stat: '$15k', label: '90 Day Install', sub: 'By invitation. 5k credits in' },
+  { stat: '$5k → $10k', label: 'Strategy Day', sub: 'Steps up after 20 installs' },
+  { stat: '$15k → $30k', label: '90 Day Install', sub: 'By invitation. The day credits in' },
   { stat: '$24k', label: '12 Month Advisory', sub: 'Additional. Day 30 or Day 90 PIF' },
 ];
 
@@ -77,10 +77,10 @@ const sixMonthPlan = [
   { month: 'Month 1', brandDays: 4,  installs: 3, revenue: '$50k' },
   { month: 'Month 2', brandDays: 6,  installs: 5, revenue: '$80k' },
   { month: 'Month 3', brandDays: 8,  installs: 6, revenue: '$100k' },
-  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$130k' },
-  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$130k' },
-  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$145k' },
-  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$145k' },
+  { month: 'Month 4', brandDays: 10, installs: 8, revenue: '$150k' },
+  { month: 'Month 5', brandDays: 10, installs: 8, revenue: '$260k' },
+  { month: 'Month 6', brandDays: 11, installs: 9, revenue: '$290k' },
+  { month: 'Month 7', brandDays: 11, installs: 9, revenue: '$290k' },
 ];
 
 const pillars = [
@@ -101,47 +101,30 @@ const pillars = [
   },
 ];
 
-const fiveAs = [
-  { week: 'Week 1', name: 'Attention', description: 'Discovery content. Hooks. Pattern interrupts.' },
-  { week: 'Week 2', name: 'Alignment', description: 'Belief shifting. Values. Philosophy.' },
-  { week: 'Week 3', name: 'Authorship', description: 'Proof. Breakdowns. Demonstrations.' },
-  { week: 'Week 4', name: 'Achievability', description: 'How to. Implementation. Quick wins.' },
-  { week: 'End of month', name: 'Access', description: 'Peak demand. Workshop, doors open, direct offer.' },
-];
-
 const advisoryScenarios = [
   {
     label: 'Conservative',
     rate: '18%',
     detail: '9 Advisory clients × $24k',
     advisory: '$216k',
-    total: '$996k',
-    note: 'The Stage 0 target. What the plan is built on.',
+    total: '$1.44m',
+    note: 'What the cash plan is built on.',
   },
   {
     label: 'Intended',
     rate: '40%',
     detail: '19.2 Advisory clients × $24k',
     advisory: '$460.8k',
-    total: '$1.24m',
+    total: '$1.68m',
     note: 'The target. 40% rollover from the 90 Day Install into the 12 Month Advisory.',
   },
 ];
 
-const ninetyDayJourney = [
-  { moment: 'Strategy Day', owner: 'Sean', description: 'Sean led. Brand, positioning, narrative, blueprint.' },
-  { moment: 'Week 1 · 1:1', owner: 'CSM', description: 'CSM led. Sean available for strategic escalation.' },
-  { moment: 'Week 3 · 1:1', owner: 'CSM', description: 'CSM led. Implementation and tuning.' },
-  { moment: 'Week 4 · Content Board', owner: 'Sean', description: 'Sean led initially. Handed to CSM as the pattern gets documented.' },
-  { moment: 'Month 2 onward', owner: 'CSM', description: 'CSM led implementation and group calls.' },
-  { moment: 'Strategic decisions', owner: 'Sean', description: 'Sean joins for boards, escalations and strategic calls only.' },
-];
-
-const acquisitionFirst20 = [
+const acquisitionFirst50 = [
   {
     icon: Users,
     title: 'Strategy Day',
-    description: 'Private, in person, $5,000. Phase 1 of the 90 Day Install.',
+    description: 'Private, in person. $5,000 for the first 20 installs, then $10,000. Phase 1 of the 90 Day Install.',
   },
   {
     icon: Building,
@@ -155,7 +138,7 @@ const acquisitionFirst20 = [
   },
 ];
 
-const acquisitionAfter20 = [
+const acquisitionAfter50 = [
   {
     icon: Users,
     title: 'Group Strategy Day',
@@ -164,37 +147,8 @@ const acquisitionAfter20 = [
   {
     icon: Crown,
     title: 'Private Strategy Day',
-    description: 'Available at roughly 5x the group price. $25,000, 1:1, in person.',
+    description: 'Stays available at $25,000. 1:1, in person, 5x the group seat.',
   },
-];
-
-const roles = [
-  {
-    role: 'Sean',
-    items: ['Sales', 'Strategy Days', 'Strategic Content Boards', 'High level decisions', 'Content and IP'],
-  },
-  {
-    role: 'CSM',
-    items: ['Runs 90 Day implementation', 'Runs group calls', 'Owns client success', 'Manages scorecards', 'Coordinates operators', 'Handles routine escalations', 'Manages delivery quality'],
-  },
-  {
-    role: 'Founder',
-    items: ['Shows up', 'Films', 'Brain dumps', 'Approves inside the window'],
-  },
-  {
-    role: 'Operator',
-    items: ['All implementation', 'Scripts from templates', 'Thumbnails', 'Uploads and publishing'],
-  },
-  {
-    role: 'The Engineroom',
-    items: ['Stores everything', 'Tracks progress', 'Nudges', 'Generates'],
-  },
-];
-
-const csmCapacity = [
-  { rule: 'One CSM per 20 weighted clients.', detail: 'The ceiling. Not a stretch target.' },
-  { rule: 'An Operator Intensive counts as 1.5 to 2 clients.', detail: 'For its first 90 days, while hiring and ramping run alongside delivery.' },
-  { rule: 'Hire the next CSM at 16 to 18 active clients.', detail: 'Not after reaching 20. Hiring at the ceiling means delivery drops before cover arrives.' },
 ];
 
 const operatorBridge = [
@@ -219,15 +173,6 @@ const operatingModel = [
   { stage: 'Stage 3', line: 'The Academy trains and certifies them.' },
 ];
 
-const seanDoesNot = [
-  'Write finished scripts',
-  'Edit video',
-  'Design thumbnails',
-  'Log into accounts',
-  'Manage editors or VAs',
-  'Review every single piece',
-];
-
 type Stage = {
   stage: string;
   year: string;
@@ -246,11 +191,11 @@ const stages: Stage[] = [
     stage: 'STAGE 0',
     year: 'Year 1',
     title: 'Advisory',
-    revenue: '$0 to $1M',
+    revenue: '$0 to $1.2M',
     link: '/phase0',
     linkLabel: 'Open the Phase 0 Operating Plan',
-    description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 clients are the validation cohort.',
-    model: '5k Day to 15k Install to 24k Advisory. 60 Strategy Days and 48 Installs is $780k. Advisory at the conservative 18% takes it to $996k. Advisory at the intended 40% takes it to about $1.24m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
+    description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 installs are the validation cohort, and the price steps up once they are done.',
+    model: '5k Day to 15k Install for the first 20 installs, then 10k Day to 30k Install, plus 24k Advisory. 60 Strategy Days and 48 Installs is $1.22m. Advisory at the conservative 18% takes it to $1.44m. Advisory at the intended 40% takes it to about $1.68m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
     metric: 'Install conversion rate (target 60 to 80%). Secondary: Advisory rollover, 90 Day Install into 12 Month Advisory (target 40%).',
   },
@@ -461,7 +406,7 @@ export default function BusinessMap() {
               <br />
               <span className="text-zinc-500">One system.</span>
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">Founding rates. Held for the first 20 clients.</p>
+            <p className="text-zinc-500 text-lg mb-12">Two tiers. The first 20 installs, then everything after.</p>
             <div className="space-y-6">
               {offers.map((offer, i) => (
                 <motion.div
@@ -568,13 +513,13 @@ export default function BusinessMap() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               The Stage 0 ramp.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">The Stage 0 ramp, month by month.</p>
+            <p className="text-zinc-500 text-lg mb-12">Month by month, through the price step at install 20.</p>
 
             <div className="glow-card overflow-hidden mb-8">
               <div className="hidden md:grid md:grid-cols-4 gap-4 px-6 py-4 border-b border-zinc-800 text-zinc-500 text-xs font-semibold uppercase tracking-widest">
                 <div>Month</div>
-                <div className="text-right">Strategy Days $5k</div>
-                <div className="text-right">Installs +$10k</div>
+                <div className="text-right">Strategy Days</div>
+                <div className="text-right">Installs</div>
                 <div className="text-right">Revenue</div>
               </div>
               {sixMonthPlan.map((row, i) => (
@@ -597,11 +542,11 @@ export default function BusinessMap() {
             <div className="grid sm:grid-cols-2 gap-6 mb-10">
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Days and Installs</p>
-                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days × $5k = $300k. 48 Installs × $10k additional = $480k.</p>
+                <p className="text-zinc-400 text-sm leading-relaxed">60 Strategy Days and 48 Installs. The first 20 installs and the 28 days that fed them price at $5k and $10k additional, which is $340k. The 28 installs after, and 32 days, price at $10k and $20k additional, which is $880k. The step lands in Month 4.</p>
               </div>
               <div className="glow-card p-6">
                 <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-3">Base total</p>
-                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$780k</p>
+                <p className="font-display text-3xl font-extrabold text-white tracking-tight">$1.22m</p>
                 <p className="text-zinc-600 text-xs mt-2">Days and Installs only. Advisory on top.</p>
               </div>
             </div>
@@ -671,40 +616,7 @@ export default function BusinessMap() {
 
       <div className="gradient-line" />
 
-      {/* Section 6: The 5 A's Rhythm */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The belief map</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              The 5 A's.
-            </h2>
-            <p className="text-zinc-500 text-lg mb-12">The content rhythm underneath the system.</p>
-            <div className="space-y-4">
-              {fiveAs.map((a, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-6 md:p-8"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                    <span className="text-zinc-600 text-sm font-medium w-28 flex-shrink-0">{a.week}</span>
-                    <span className="text-white font-semibold w-32 flex-shrink-0">{a.name}</span>
-                    <span className="text-zinc-500 text-sm leading-relaxed">{a.description}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Section 7: Acquisition */}
+      {/* Section 6: Acquisition */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
@@ -712,17 +624,17 @@ export default function BusinessMap() {
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
               The model changes
               <br />
-              <span className="text-zinc-500">at client 20.</span>
+              <span className="text-zinc-500">at client 50.</span>
             </h2>
             <p className="text-zinc-500 text-lg mb-12">One to one until the method is proven. One to many after.</p>
 
             <div className="mb-6">
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">First 20 clients</span>
-                <span className="text-zinc-600 text-xs">Strategy Day is private, in person, $5,000</span>
+                <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">First 50 clients</span>
+                <span className="text-zinc-600 text-xs">Strategy Day is private, in person, $5,000 then $10,000 after 20 installs</span>
               </div>
               <div className="grid md:grid-cols-3 gap-6">
-                {acquisitionFirst20.map((path, i) => (
+                {acquisitionFirst50.map((path, i) => (
                   <motion.div
                     key={i}
                     className="glow-card p-8"
@@ -741,11 +653,11 @@ export default function BusinessMap() {
 
             <div className="mb-10">
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">After the first 20</span>
+                <span className="text-blue-400 text-xs font-semibold uppercase tracking-widest">After the first 50</span>
                 <span className="text-zinc-600 text-xs">Group Strategy Day becomes the default</span>
               </div>
               <div className="grid md:grid-cols-2 gap-6">
-                {acquisitionAfter20.map((path, i) => (
+                {acquisitionAfter50.map((path, i) => (
                   <motion.div
                     key={i}
                     className="glow-card p-8"
@@ -766,106 +678,6 @@ export default function BusinessMap() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 <span className="text-white font-semibold">The transition off founder dependent delivery.</span> Ten founders in a room at $5,000 each is $50k for one day of Sean. The private day survives at $25,000 for the people who will pay 5x to not share the room. Workshops and events qualify. The Strategy Day is direct entry.
               </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* The 90 Day Journey */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Delivery ownership</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              The 90 Day journey.
-            </h2>
-            <p className="text-zinc-500 text-lg mb-12">Who runs each moment, and who does not.</p>
-
-            <div className="space-y-4 mb-8">
-              {ninetyDayJourney.map((m, i) => (
-                <motion.div
-                  key={i}
-                  className="glow-card p-6 md:p-8"
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06 }}
-                >
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                    <span className="text-white font-semibold text-sm w-48 flex-shrink-0">{m.moment}</span>
-                    <span className={`text-xs font-semibold uppercase tracking-widest w-16 flex-shrink-0 ${m.owner === 'Sean' ? 'text-blue-400' : 'text-zinc-500'}`}>{m.owner}</span>
-                    <span className="text-zinc-500 text-sm leading-relaxed">{m.description}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-8">
-              <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
-                The product is not Sean's hours. It is the installed system and the quality of the decisions.
-              </p>
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Section 8: Roles */}
-      <section className="py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Section>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Roles</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Who does what.
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {roles.map((r, i) => (
-                <motion.div
-                  key={i}
-                  className={`glow-card p-8 ${r.role === 'CSM' ? 'border-blue-500/20' : ''}`}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                >
-                  <h3 className="text-white font-semibold text-lg mb-4">{r.role}</h3>
-                  <ul className="space-y-2">
-                    {r.items.map((item, j) => (
-                      <li key={j} className="flex items-start gap-3">
-                        <Check className="w-3.5 h-3.5 text-blue-400 mt-1 flex-shrink-0" />
-                        <span className="text-zinc-500 text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="glow-card border-blue-500/20 p-8 mb-6">
-              <h3 className="text-zinc-400 font-semibold text-sm uppercase tracking-widest mb-6">CSM capacity</h3>
-              <div className="space-y-5">
-                {csmCapacity.map((c, i) => (
-                  <div key={i}>
-                    <p className="text-white font-semibold text-sm mb-1">{c.rule}</p>
-                    <p className="text-zinc-500 text-sm leading-relaxed">{c.detail}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="glow-card p-8">
-              <h3 className="text-zinc-400 font-semibold text-sm uppercase tracking-widest mb-6">Sean does NOT</h3>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {seanDoesNot.map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <X className="w-3.5 h-3.5 text-zinc-600 flex-shrink-0" />
-                    <span className="text-zinc-500 text-sm">{item}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </Section>
         </div>
@@ -940,9 +752,9 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The bridge</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              How Sean gets out
+              How we remove
               <br />
-              <span className="text-zinc-500">of delivery.</span>
+              <span className="text-zinc-500">keyman risk.</span>
             </h2>
             <p className="text-zinc-500 text-lg mb-12">The transition from Stage 0 to licensed operators, client by client.</p>
 
@@ -980,20 +792,20 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The moat</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
-              The moat is the data.
+              The moat.
             </h2>
-            <p className="text-zinc-500 text-lg mb-12">Every client makes it sharper.</p>
+            <p className="text-zinc-500 text-lg mb-12">We train the best operators in the world, and they spread it themselves.</p>
             <div className="grid md:grid-cols-3 gap-6">
               {[
                 {
                   icon: Database,
                   title: 'Data compounds',
-                  description: "Every client generates brand profiles, content performance data, archetype patterns, industry benchmarks. At 50 clients it's proprietary intelligence. At 500 it's unassailable.",
+                  description: 'Every client generates brand profiles, content performance data, archetype patterns, industry benchmarks. Every install makes the next one sharper.',
                 },
                 {
                   icon: TrendingUp,
-                  title: 'Talent multiplier',
-                  description: 'A $80k operator delivers $180k in billable value because the data does the thinking. The gap between cost and value IS the platform. We train them, place them, and keep them sharp. The training, data, and network is what no standalone agency or in house hire can match.',
+                  title: 'The training is the product',
+                  description: 'A $120k operator is worth it because of how they were trained. Nobody else is teaching this. We train them, place them, and keep them sharp, and no standalone agency or in house hire can match what comes out the other side.',
                 },
                 {
                   icon: Network,
@@ -1059,7 +871,7 @@ export default function BusinessMap() {
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">North star · 2 year headline</p>
             <div className="glow-card border-blue-500/20 p-8 md:p-12 mb-12">
               <p className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.2]">
-                "Strategist behind 100+ of the top online experts gives away $10M+ of IP to create a world first Content Director model."
+                "Strategist behind 100+ of the top online experts gives away $10M+ of work and creates a world first Content Director model."
               </p>
             </div>
 
@@ -1087,7 +899,7 @@ export default function BusinessMap() {
               </div>
               <div className="glow-card p-6">
                 <BookOpen className="w-5 h-5 text-blue-400 mb-3" />
-                <p className="text-white font-semibold text-sm mb-1">$10M+ of IP given away</p>
+                <p className="text-white font-semibold text-sm mb-1">$10M+ of work given away</p>
                 <p className="text-zinc-500 text-sm leading-relaxed">Playbooks and training open for the next wave.</p>
               </div>
               <div className="glow-card p-6">

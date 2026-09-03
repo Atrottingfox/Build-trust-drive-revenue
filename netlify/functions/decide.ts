@@ -24,10 +24,20 @@ import { GHL_API, GHL_VERSION, addTags, getTags } from "./_ghl";
 */
 
 const ACTIONS: Record<string, { tag: string; label: string; done: string }> = {
+  /*
+    Tagging `invited` fires the workflow that sends them the invitation, with
+    their lock-in link in it. Verified 3 Sep: the tag landed at 02:37:39 and the
+    email went outbound at 02:37:40.
+
+    This used to say "Send them the invitation with their link", which was left
+    over from before that workflow existed. It read as an instruction, so the
+    button looked like it had done nothing but write a tag and hand the job
+    back. A screen that asks for work already done is worse than a silent one.
+  */
   invite: {
     tag: "invited",
     label: "Invite",
-    done: "Invited. Send them the invitation with their link.",
+    done: "Invited. The invitation is on its way to them, with their link in it.",
   },
   decline: {
     tag: "declined",
@@ -136,17 +146,43 @@ const handler: Handler = async (event) => {
   }
 
   /*
-    GET only asks. This is what makes an email scanner harmless: it renders a
-    question and changes nothing.
+    GET renders, then fires the action itself.
+
+    It used to render a question with a button, and the button was the only way
+    through. That button stopped working, in one browser, with no error: the page
+    appeared, the press did nothing, and the tag never landed. Nothing on this
+    side had changed. The link, the secret and the endpoint were byte for byte
+    what they were when it last worked, and a POST from anywhere else still went
+    through. Something local was swallowing the form submission.
+
+    A gate that depends on one browser honouring one form submit is too narrow.
+    So the page now makes the request itself and the button becomes the fallback
+    rather than the only door.
+
+    An email scanner is still harmless, for a better reason than before. The
+    state change is still a POST, and scanners fetch URLs rather than running
+    JavaScript. The form stays inside <noscript> so a browser with JavaScript
+    off keeps a way through.
   */
   if (event.httpMethod !== "POST") {
     return html(
       page(
         `${action.label}?`,
-        `<h1>${action.label} ${who}?</h1>
-         <p>This applies the <b>${action.tag}</b> tag in GoHighLevel. Nothing is emailed to them.</p>
-         <form method="POST"><button type="submit">${action.label}</button></form>
-         <p class="sub">Close this tab to do nothing.</p>`,
+        `<h1 id="t">${action.label} ${who}</h1>
+         <p id="m">Applying the <b>${action.tag}</b> tag in GoHighLevel.</p>
+         <noscript>
+           <p>JavaScript is off in this browser, so press this instead.</p>
+           <form method="POST"><button type="submit">${action.label}</button></form>
+         </noscript>
+         <script>
+           fetch(location.href, { method: "POST", credentials: "same-origin" })
+             .then(function (r) { return r.text(); })
+             .then(function (t) { document.open(); document.write(t); document.close(); })
+             .catch(function () {
+               document.getElementById("t").textContent = "Could not reach the server";
+               document.getElementById("m").textContent = "Refresh this page to try again.";
+             });
+         </script>`,
         "ask"
       )
     );
