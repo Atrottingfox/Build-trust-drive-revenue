@@ -19,6 +19,36 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
   );
 }
 
+const pricingTiers = [
+  {
+    label: 'Installs 1 to 20',
+    tag: 'Founding',
+    accent: true,
+    lines: [
+      { item: 'Strategy Day', price: '$5,000', note: 'Credits in full toward the Install' },
+      { item: '90 Day Install', price: '$15,000', note: '$5,000 credit plus $10,000 additional' },
+      { item: '12 Month Advisory', price: '$28,000', note: 'Additional. Includes the in person team training day' },
+    ],
+  },
+  {
+    label: 'Install 21 onward',
+    tag: 'Standard',
+    accent: false,
+    lines: [
+      { item: 'Strategy Day', price: '$10,000', note: 'Credits in full toward the Install' },
+      { item: '90 Day Install', price: '$30,000', note: '$10,000 credit plus $20,000 additional' },
+      { item: '12 Month Advisory', price: 'Not set', note: 'Decide before install 21' },
+    ],
+  },
+];
+
+const pricingRules = [
+  'The step is at 20 installs, not 20 clients.',
+  'The Strategy Day credits in full at both tiers. Nobody pays for the day twice.',
+  'The $28,000 Advisory and the in person team training day are for the first 20 who take it up.',
+  'Operator Intensive is $30,000 total, maximum five per quarter.',
+];
+
 const successConditions = [
   '47 Strategy Days completed or sold',
   '36 Installs completed or sold',
@@ -279,6 +309,67 @@ export default function Phase0() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 The mistake would be hiring a Head of Marketing, Creative Director, Long Form Lead and Short Form Lead as separate departments before the volume requires it.
               </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* Founding pricing */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Founding pricing</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Twenty installs at founding rates.
+              <br />
+              <span className="text-zinc-500">Then the price steps.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12">
+              The founding window is the reason to move now, and the reason Phase 0 is measured in installs rather than months.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {pricingTiers.map((tier, i) => (
+                <div key={i} className={`glow-card p-8 ${tier.accent ? 'border-blue-500/20' : ''}`}>
+                  <div className="flex items-center justify-between mb-8">
+                    <p className="text-zinc-300 font-medium">{tier.label}</p>
+                    <span className={`text-xs font-semibold uppercase tracking-widest ${tier.accent ? 'text-blue-400' : 'text-zinc-600'}`}>
+                      {tier.tag}
+                    </span>
+                  </div>
+                  <div className="space-y-6">
+                    {tier.lines.map((line, j) => (
+                      <div key={j} className={j > 0 ? 'border-t border-zinc-800 pt-6' : ''}>
+                        <div className="flex items-baseline justify-between gap-4 mb-1.5">
+                          <span className="text-zinc-400 text-sm">{line.item}</span>
+                          <span className={`font-display text-2xl font-extrabold tracking-[-0.02em] ${tier.accent ? 'text-white' : 'text-zinc-400'}`}>
+                            {line.price}
+                          </span>
+                        </div>
+                        <p className="text-zinc-600 text-xs leading-relaxed">{line.note}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="glow-card p-8 mt-6">
+              <div className="grid sm:grid-cols-2 gap-4">
+                {pricingRules.map((rule, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{rule}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  47 Strategy Days and 36 Installs puts the base at $875,000. Advisory rollover at 40% is 14 clients, another $392,000, and Stage 0 clears $1.27M. At the conservative 18% it is 6 clients and $1.04M. Plan the cash on 18, build the delivery model for 40.
+                </p>
+              </div>
             </div>
           </Section>
         </div>
