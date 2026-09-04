@@ -276,8 +276,15 @@ export default function BusinessMap() {
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 The Authority Engine
               </h1>
-              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-4">
+              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-10">
                 Internal Business Architecture
+              </p>
+              <p className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.2] mb-8">
+                "Business is a vehicle for impact.
+                <br />
+                Revenue is the fuel.
+                <br />
+                And content is the engine."
               </p>
               <p className="text-zinc-600 text-sm">
                 The system. The model. The roadmap.
@@ -921,24 +928,6 @@ export default function BusinessMap() {
                 <p className="text-zinc-500 text-sm leading-relaxed">A Certified Authority Engine Operator badge as the status play for videographers and content directors.</p>
               </div>
             </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Endgame */}
-      <section className="py-32 md:py-40">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
-          <Section>
-            <div className="accent-line mx-auto mb-10" />
-            <p className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.2]">
-              "Business is a vehicle for impact.
-              <br />
-              Revenue is the fuel.
-              <br />
-              And content is the engine."
-            </p>
           </Section>
         </div>
       </section>
