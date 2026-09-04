@@ -66,6 +66,7 @@ const Clients = React.lazy(() => import('./pages/Clients'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 const TheGeronimoPlan = React.lazy(() => import('./pages/TheGeronimoPlan'));
+const ClientPlan = React.lazy(() => import('./pages/ClientPlan'));
 const Margot = React.lazy(() => import('./pages/Margot'));
 const Morgan = React.lazy(() => import('./pages/Morgan'));
 const Operations = React.lazy(() => import('./pages/Operations'));
@@ -175,6 +176,10 @@ export default function App() {
           <Route path="/geronimotheplan" element={<TheGeronimoPlan />} />
           <Route path="/margot" element={<Margot />} />
           <Route path="/themargotplan" element={<Margot />} />
+
+          {/* Every client's plan page, from their own data. Declared LAST so the
+              hand written pages above keep their routes. */}
+          <Route path="/:slug/plan" element={<ClientPlan />} />
           <Route path="/morgan" element={<Morgan />} />
           <Route path="/morgannelson" element={<Morgan />} />
         </Routes>
