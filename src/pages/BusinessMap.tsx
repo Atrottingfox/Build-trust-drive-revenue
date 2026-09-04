@@ -276,8 +276,15 @@ export default function BusinessMap() {
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 The Authority Engine
               </h1>
-              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-4">
+              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-10">
                 Internal Business Architecture
+              </p>
+              <p className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.2] mb-8">
+                "Business is a vehicle for impact.
+                <br />
+                Revenue is the fuel.
+                <br />
+                And content is the engine."
               </p>
               <p className="text-zinc-600 text-sm">
                 The system. The model. The roadmap.
@@ -294,12 +301,10 @@ export default function BusinessMap() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.02em] text-white leading-[1.15] mb-12">
-              "Business is a vehicle for impact.
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
+              Be the Uber of content
               <br />
-              Revenue is the fuel.
-              <br />
-              And content is the engine."
+              <span className="text-zinc-500">for top 1% founders & creative directors.</span>
             </h2>
 
             <div className="glow-card border-blue-500/20 p-8 md:p-10">
