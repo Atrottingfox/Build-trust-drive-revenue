@@ -276,15 +276,8 @@ export default function BusinessMap() {
               <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-6">
                 The Authority Engine
               </h1>
-              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-10">
+              <p className="text-zinc-500 text-xl md:text-2xl font-medium mb-4">
                 Internal Business Architecture
-              </p>
-              <p className="font-display text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.2] mb-8">
-                "Business is a vehicle for impact.
-                <br />
-                Revenue is the fuel.
-                <br />
-                And content is the engine."
               </p>
               <p className="text-zinc-600 text-sm">
                 The system. The model. The roadmap.
@@ -301,21 +294,17 @@ export default function BusinessMap() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
-            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              The Uber of content.
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-[-0.02em] text-white leading-[1.15] mb-12">
+              "Business is a vehicle for impact.
               <br />
-              <span className="text-zinc-500">Trained operators, placed where they are needed.</span>
+              Revenue is the fuel.
+              <br />
+              And content is the engine."
             </h2>
 
-            <div className="glow-card border-blue-500/20 p-8 md:p-10 mb-6">
+            <div className="glow-card border-blue-500/20 p-8 md:p-10">
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
                 <span className="text-white font-semibold">Mission:</span> Build the Media Operating System for 7 & 8 figure founders, and the training & placement ladder for the media operators who run it.
-              </p>
-            </div>
-
-            <div className="glow-card p-8 md:p-10">
-              <p className="text-zinc-400 text-base leading-relaxed">
-                Uber never owned a car. The same shape works here. We train the operators, hold the standard they work to, and put them into the businesses that need them. We keep the training, the IP and the platform, and take a share of what they run. Founders get someone who can actually run their content. The editors and content leads get a path past cutting clips.
               </p>
             </div>
           </Section>
