@@ -295,9 +295,9 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Build the engine.
+              The Uber of content.
               <br />
-              <span className="text-zinc-500">Build the operators who run it.</span>
+              <span className="text-zinc-500">Trained operators, placed where they are needed.</span>
             </h2>
 
             <div className="glow-card border-blue-500/20 p-8 md:p-10 mb-6">
@@ -308,7 +308,7 @@ export default function BusinessMap() {
 
             <div className="glow-card p-8 md:p-10">
               <p className="text-zinc-400 text-base leading-relaxed">
-                Founders with something worth hearing stay unheard, because nobody ever built them the machine to carry it. The editors and content leads who could run that machine have no path past cutting clips. Those are the same problem from two ends, and this is built to close it.
+                Uber never owned a car. The same shape works here. We train the operators, hold the standard they work to, and put them into the businesses that need them. We keep the training, the IP and the platform, and take a share of what they run. Founders get someone who can actually run their content. The editors and content leads get a path past cutting clips.
               </p>
             </div>
           </Section>
