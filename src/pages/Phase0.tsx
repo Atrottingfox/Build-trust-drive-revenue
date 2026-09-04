@@ -20,8 +20,8 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 }
 
 const successConditions = [
-  '60 Strategy Days completed or sold',
-  '48 Installs completed or sold',
+  '47 Strategy Days completed or sold',
+  '36 Installs completed or sold',
   '40% rollover from the 90 Day Install into the 12 Month Advisory',
   '100% of critical workflows documented',
   'CSM led delivery working',
@@ -119,7 +119,7 @@ const hiringTriggers = [
 ];
 
 const capacityModel = [
-  'Sean Strategy Days: maximum 8 private days per month during the founding phase',
+  'Sean Strategy Days: five private days per month for the first three months, then a maximum of eight, and eight only with a change in how the day gets delivered',
   'Standard 90 Day capacity per CSM: 20 weighted clients',
   'An Operator Intensive counts as 1.5 to 2 clients during the first 90 days',
   'Advisory clients count toward CSM capacity',

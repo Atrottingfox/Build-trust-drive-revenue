@@ -42,7 +42,7 @@ const rungs = [
     tag: 'Public',
     notes: [
       'One in person day, 1:1 with the founder and whoever owns their content.',
-      'Founding rate. Goes to $10,000.',
+      'Founding rate. Goes to $10,000 after 20 installs.',
       'The page never mentions the credit. I say it in the room.',
     ],
   },
@@ -53,7 +53,7 @@ const rungs = [
     tag: 'By invitation',
     notes: [
       'The $5,000 Day rolls in, so it is $10,000 additional. $15,000 collected across both.',
-      'Founding rate. Goes to $30,000, where a $10,000 Day rolls in and it is $20,000 additional.',
+      'Founding rate. Goes to $30,000 after 20 installs, where a $10,000 Day rolls in and it is $20,000 additional.',
       'Payable $10,000 on acceptance, or 3 x $5,000. Pick one rule.',
       'Only invited after a Build Day. Never sold off the page.',
     ],
@@ -61,13 +61,13 @@ const rungs = [
   {
     num: '03',
     title: '12 Month Advisory',
-    price: '$48,000 list · $28,000 additional',
-    tag: 'By invitation · Day 28',
+    price: '$24,000 additional',
+    tag: 'By invitation · Day 30 or Day 90 PIF',
     notes: [
-      'Offered at Day 28 to 30, once the Engine is live and there is something to point at.',
-      'Their $15,000 credits in full, plus a $5,000 founding discount. So $28,000 additional.',
-      'Lands at $43,000 for roughly 15 months. About $2,870 per month.',
-      'Monthly founder call, monthly operator or CD call, ongoing cadence, Looms and trainings, plus one in person day to train the media team and shoot a pillar day.',
+      'Two entry points, both $24,000 additional. Day 30 PIF once the Engine is live and there is something to point at. Day 90 PIF once the 90 days are done.',
+      'Day 30 includes one in person day to train the media team and shoot a pillar day. Day 90 does not.',
+      'Lands at $39,000 collected across the whole path, roughly 15 months. About $2,600 per month.',
+      'Monthly founder call, monthly operator or CD call, ongoing cadence, Looms and trainings.',
       'Two options only: finish the 90 days and stop, or roll into the year. The $15,000 3 month bridge stays in the back pocket.',
     ],
   },
@@ -77,8 +77,8 @@ const collected = [
   { stage: 'Strategy day', rev: '$5,000', cost: '$1,730', profit: '$3,270', margin: '65%', bold: false },
   { stage: '90 day install, additional after rollover', rev: '$10,000', cost: '$3,000', profit: '$7,000', margin: '70%', bold: false },
   { stage: '90 day path total', rev: '$15,000', cost: '$4,730', profit: '$10,270', margin: '68%', bold: true },
-  { stage: '12 month advisory, additional', rev: '$28,000', cost: '$5,330', profit: '$22,670', margin: '81%', bold: false },
-  { stage: 'Full 15 month path', rev: '$43,000', cost: '$10,060', profit: '$32,940', margin: '77%', bold: true },
+  { stage: '12 month advisory, additional', rev: '$24,000', cost: '$5,330', profit: '$18,670', margin: '78%', bold: false },
+  { stage: 'Full 15 month path', rev: '$39,000', cost: '$10,060', profit: '$28,940', margin: '74%', bold: true },
 ];
 
 const costLines = [
@@ -168,13 +168,18 @@ const checklist = [
   },
 ];
 
+const nowLocked = [
+  'The 12 month additional is $24,000. Not $28k, not $33k. Two entry points, Day 30 PIF with the in person team training day, or Day 90 PIF without it.',
+  'Price ramp trigger is 20 installs. $5k/$15k holds until 20 installs are done, then $10k/$30k, with the Day crediting in full at both tiers.',
+  'Concurrent client cap is one CSM per 20 weighted clients, and the next CSM gets hired at 16 to 18 active, not at 20. An Operator Intensive counts as 1.5 to 2 clients through its first 90 days.',
+  'The $40,000 Concierge Install and Team Build is off the bench for good. It became the $30,000 Operator Intensive, maximum five per quarter.',
+  'In person capacity is five days a month for the first three months, then eight. Eight only happens with a change in how the day gets delivered.',
+];
+
 const notLocked = [
-  '$28,000 or $33,000 for the 12 month additional. $28k is credit plus founding discount. $33k is credit only.',
   'Install payment split. $10,000 on acceptance, or 3 x $5,000. One rule for everyone.',
-  'Price ramp trigger. How many Days and Installs before $5k/$15k becomes $10k/$30k.',
   'Delivery cost of the 3 month bridge. No model exists.',
-  'Concurrent client cap. How many active Installs before quality drops.',
-  'When the $40,000 Concierge Install and Team Build comes off the bench.',
+  'What the change in delivery is that takes five in person days a month to eight.',
 ];
 
 /* ---------------------------------------------------------------- */
@@ -367,6 +372,20 @@ function LadderPage() {
       <section className="py-16 md:py-24">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <Section>
+            <Label>Locked</Label>
+            <H2>Decided since this page was written.</H2>
+
+            <div className="glow-card border-blue-500/20 p-8 mb-16">
+              <ul className="space-y-4">
+                {nowLocked.map((d, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <ClipboardCheck className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
             <Label>Not locked</Label>
             <H2>Decide before the next Day is sold.</H2>
 
