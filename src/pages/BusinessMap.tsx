@@ -295,12 +295,20 @@ export default function BusinessMap() {
           <Section>
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Why this exists</p>
             <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-12">
-              Build the engine for the top 1%.
+              Build the engine.
+              <br />
+              <span className="text-zinc-500">Build the operators who run it.</span>
             </h2>
 
-            <div className="glow-card p-8 md:p-10">
+            <div className="glow-card border-blue-500/20 p-8 md:p-10 mb-6">
               <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
                 <span className="text-white font-semibold">Mission:</span> Build the Media Operating System for 7 & 8 figure founders, and the training & placement ladder for the media operators who run it.
+              </p>
+            </div>
+
+            <div className="glow-card p-8 md:p-10">
+              <p className="text-zinc-400 text-base leading-relaxed">
+                Founders with something worth hearing stay unheard, because nobody ever built them the machine to carry it. The editors and content leads who could run that machine have no path past cutting clips. Those are the same problem from two ends, and this is built to close it.
               </p>
             </div>
           </Section>
