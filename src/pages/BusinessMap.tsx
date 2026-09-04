@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Check, X, Crown, Building, Globe, Database, Network, Compass, ArrowRight } from 'lucide-react';
+import { Target, Zap, Shield, BookOpen, Users, Layers, TrendingUp, Eye, Check, X, Crown, Building, Globe, Database, Network, Compass, ArrowRight, GraduationCap } from 'lucide-react';
 import Footer from '../components/Footer';
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -302,10 +302,32 @@ export default function BusinessMap() {
               And content is the engine."
             </h2>
 
-            <div className="glow-card border-blue-500/20 p-8 md:p-10">
-              <p className="text-zinc-300 text-base md:text-lg leading-relaxed">
+            <div className="glow-card border-blue-500/20 p-8 md:p-10 mb-8">
+              <p className="text-zinc-300 text-base md:text-lg leading-relaxed mb-6">
                 <span className="text-white font-semibold">Mission:</span> Build the Media Operating System for 7 & 8 figure founders, and the training & placement ladder for the media operators who run it.
               </p>
+              <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
+                <p>I help the best founders in the world turn content into revenue and reputation.</p>
+                <p>Their revenue funds the tools, training, and career paths that make it easier for the next wave of operators and creatives to win.</p>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-6">
+              <div className="glow-card p-6">
+                <Crown className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Founders</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get operator run media engines that print trust and pipeline.</p>
+              </div>
+              <div className="glow-card p-6">
+                <GraduationCap className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Operators and creatives</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Get trained, placed, and paid well.</p>
+              </div>
+              <div className="glow-card p-6">
+                <Database className="w-5 h-5 text-blue-400 mb-3" />
+                <p className="text-white font-semibold text-sm mb-1">Playbooks and software</p>
+                <p className="text-zinc-500 text-sm leading-relaxed">Sit in the middle and create leverage for everyone.</p>
+              </div>
             </div>
           </Section>
         </div>
