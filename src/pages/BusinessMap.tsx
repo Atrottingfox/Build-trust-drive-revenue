@@ -61,16 +61,16 @@ const offers = [
   {
     num: '03',
     title: '12 Month Advisory',
-    price: '$24,000 additional',
+    price: '$28,000 additional',
     rolled: 'Day 30 PIF or Day 90 PIF',
-    description: 'Two entry points. Day 30 PIF is 24k additional and includes one in person team training day. Day 90 PIF is 24k additional with no in person day. Either way it buys Sean and the OS on the business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp.',
+    description: '$28k additional for the first 20 who take it up, and those first 20 get one in person team training day. It buys Sean and the OS on the business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp.',
   },
 ];
 
 const revenueMetrics = [
   { stat: '$5k → $10k', label: 'Strategy Day', sub: 'Steps up after 20 installs' },
   { stat: '$15k → $30k', label: '90 Day Install', sub: 'By invitation. The day credits in' },
-  { stat: '$24k', label: '12 Month Advisory', sub: 'Additional. Day 30 or Day 90 PIF' },
+  { stat: '$28k', label: '12 Month Advisory', sub: 'Additional. First 20 to take it up' },
 ];
 
 const sixMonthPlan = [
@@ -105,17 +105,17 @@ const advisoryScenarios = [
   {
     label: 'Conservative',
     rate: '18%',
-    detail: '6 Advisory clients × $24k',
-    advisory: '$144k',
-    total: '$1.02m',
+    detail: '6 Advisory clients × $28k',
+    advisory: '$168k',
+    total: '$1.04m',
     note: 'What the cash plan is built on.',
   },
   {
     label: 'Intended',
     rate: '40%',
-    detail: '14 Advisory clients × $24k',
-    advisory: '$336k',
-    total: '$1.21m',
+    detail: '14 Advisory clients × $28k',
+    advisory: '$392k',
+    total: '$1.27m',
     note: 'The target. 40% rollover from the 90 Day Install into the 12 Month Advisory.',
   },
 ];
@@ -173,6 +173,123 @@ const operatingModel = [
   { stage: 'Stage 3', line: 'The Academy trains and certifies them.' },
 ];
 
+const flywheel = [
+  'Founders buy the Authority Engine.',
+  'Operators deliver using the system.',
+  'Delivery produces client results and operator training data.',
+  'Strong operators advance into coaches and strategists.',
+  'Strategists serve more clients and train more operators.',
+  'More clients produce better proof, benchmarks and pattern data.',
+  'Better data improves the system, the training and client outcomes.',
+  'Better outcomes increase demand and operator economics.',
+];
+
+const operatorLanes = [
+  {
+    lane: 'Lane A',
+    name: 'Infrastructure',
+    summary: 'They stay inside the company.',
+    accent: true,
+    rungs: [
+      { role: 'CSM', owns: 'Client coordination and implementation.' },
+      { role: 'Coach', owns: 'Operator clinics, work review, implementation problems.' },
+      { role: 'Strategist', owns: 'Diagnosis, strategic direction, multiple client pods.' },
+      { role: 'Consultant', owns: 'A book of clients, possibly a territory or a niche.' },
+    ],
+  },
+  {
+    lane: 'Lane B',
+    name: 'Ecosystem',
+    summary: 'They operate independently on our infrastructure.',
+    accent: false,
+    rungs: [
+      { role: 'Preferred Provider', owns: 'Receives qualified work from the network, meets our standard.' },
+      { role: 'Licensed Operator', owns: 'Runs the full system on their own book under our brand.' },
+      { role: 'Licensed Strategist', owns: 'Licenses the infrastructure. Offer design, sales assets, delivery model, operator training.' },
+    ],
+  },
+];
+
+const laneOpen = [
+  'Who owns the client contract and the relationship',
+  'What happens on churn',
+  'Whether revenue share is gross cash or contribution profit',
+  'Who carries delivery cost',
+  'Whether a departing consultant can take clients',
+  'What quality standard and audit cadence applies',
+];
+
+const orgByStage = [
+  {
+    stage: 'Stage 0',
+    range: '0 to 20 clients',
+    accent: true,
+    roles: [
+      { role: 'Sean', owns: 'Sales, Strategy Days, strategic boards, content and IP, final quality standard' },
+      { role: 'Client Success and Implementation Manager', owns: 'Onboarding, delivery coordination, communication, scorecards, SOPs' },
+      { role: 'Part time VA', owns: 'Scheduling, reminders, forms, uploads, tracker updates' },
+      { role: 'Editor or Producer', owns: 'Editing, captions, file management, publishing handoff' },
+    ],
+    trigger: 'Move on at 16 weighted clients: begin CSM 2. At 20: first delivery system audit.',
+  },
+  {
+    stage: 'Stage 1',
+    range: '20 to 50 clients',
+    accent: false,
+    roles: [
+      { role: 'Head of Client Success', owns: 'CSM team, client outcomes, delivery quality, escalations, capacity planning' },
+      { role: 'CSMs', owns: 'Group calls, implementation, client scorecards, retention. 20 weighted clients each' },
+      { role: 'Creative Director', owns: 'Creative standards, format library, editor management, long form and short form quality' },
+    ],
+    trigger: 'Move on at 40+ clients, two or more CSMs, multiple editors, Sean still reviewing creative detail.',
+  },
+  {
+    stage: 'Stage 2',
+    range: '50 to 100 clients',
+    accent: false,
+    roles: [
+      { role: 'Head of Marketing', owns: 'Distribution, campaigns, workshops, partnerships, attribution' },
+      { role: 'Operator Enablement Lead', owns: '90 day operator training, certification, assessments, replacement tests. Sits under Head of Delivery first' },
+    ],
+    trigger: 'Move on at five or more CSMs and a first operator delivering independently.',
+  },
+  {
+    stage: 'Stage 3',
+    range: '100 to 250 clients',
+    accent: false,
+    roles: [
+      { role: 'Strategists', owns: 'Client diagnosis, quarterly direction, strategic boards, CSM coaching' },
+      { role: 'Coaches and Senior CSMs', owns: 'Operator clinics, implementation quality, client health, escalations' },
+      { role: 'Pods', owns: '1 Strategist, 2 to 3 coaches, 8 to 15 operators, shared admin' },
+    ],
+    trigger: 'Move on with two profitable pods and a 90 day operator ramp that works.',
+  },
+  {
+    stage: 'Stage 4',
+    range: '250 to 500 clients',
+    accent: false,
+    roles: [
+      { role: 'Director of Licensed Operators', owns: 'Licensee performance, audits, retention, revenue share, standards' },
+      { role: 'Talent and Placement Lead', owns: 'Recruiting, operator pipeline, matching, placement, career progression' },
+      { role: 'Academy Lead', owns: 'Curriculum, certification, faculty, graduation rate' },
+    ],
+    trigger: 'Move on when licensee outcomes hold without our supervision.',
+  },
+  {
+    stage: 'Stage 5',
+    range: '500 clients to $10M',
+    accent: false,
+    roles: [
+      { role: 'COO or GM', owns: 'Company wide execution, operating cadence, budget, hiring plan' },
+      { role: 'VP Marketing', owns: 'Multiple acquisition channels, the media department, partnerships, marketing economics' },
+      { role: 'VP Delivery and Academy', owns: 'Strategists, coaches, operators, certification, client quality' },
+      { role: 'Product and Engineroom Lead', owns: 'Platform adoption, data quality, product development' },
+      { role: 'Finance and People Ops', owns: 'Fractional until multi entity, payroll and licensing complexity make it material' },
+    ],
+    trigger: 'Revenue per employee stays above $200k or the structure is wrong.',
+  },
+];
+
 type Stage = {
   stage: string;
   year: string;
@@ -191,11 +308,11 @@ const stages: Stage[] = [
     stage: 'STAGE 0',
     year: 'Year 1',
     title: 'Advisory',
-    revenue: '$0 to $1.2M',
+    revenue: '$0 to $1.3M',
     link: '/phase0',
     linkLabel: 'Open the Phase 0 Operating Plan',
     description: 'Sean proves the method. Strategy Day, 90 Day Install, advisory. Every client generates IP, case studies, and proof. The first 20 installs are the validation cohort, and the price steps up once they are done.',
-    model: '5k Day to 15k Install for the first 20 installs, then 10k Day to 30k Install, plus 24k Advisory. Capacity caps this at five in person days a month for three months, then eight. 47 Strategy Days and 36 Installs is $875k. Advisory at the conservative 18% takes it to $1.02m. Advisory at the intended 40% takes it to about $1.21m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
+    model: '5k Day to 15k Install for the first 20 installs, then 10k Day to 30k Install, plus 28k Advisory for the first 20 who take it up. Capacity caps this at five in person days a month for three months, then eight. 47 Strategy Days and 36 Installs is $875k. Advisory at the conservative 18% takes it to $1.04m. Advisory at the intended 40% takes it to about $1.27m. Conversion targets: Strategy Day to Install 60 to 80%, Install to Advisory 18% conservative and 40% intended.',
     mission: 'The system gets documented and battle tested. Earn the right to say this works.',
     metric: 'Install conversion rate (target 60 to 80%). Secondary: Advisory rollover, 90 Day Install into 12 Month Advisory (target 40%).',
   },
@@ -793,6 +910,159 @@ export default function BusinessMap() {
                   </ul>
                 </motion.div>
               ))}
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* The Architecture */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The architecture</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              The loop that feeds itself.
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Client work trains the operators. Trained operators take more clients. More clients produce better data. Better data improves the training. Eight steps, and every one of them makes the next one cheaper.
+            </p>
+
+            <div className="glow-card border-blue-500/20 p-8 md:p-10">
+              <div className="space-y-6">
+                {flywheel.map((step, i) => (
+                  <div key={i} className={`flex items-start gap-5 ${i > 0 ? 'border-t border-zinc-800 pt-6' : ''}`}>
+                    <span className="font-display text-2xl font-extrabold tracking-[-0.02em] text-blue-400 leading-none w-8 flex-shrink-0">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-zinc-400 text-sm leading-relaxed pt-1">{step}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-300 text-base leading-relaxed">
+                  The business compounds instead of adding employees. Every client engagement produces a client result, media, proof and training material.
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* Operator Lanes */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">Operator lanes</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Two ways out
+              <br />
+              <span className="text-zinc-500">of the incubator.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              A videographer walks in. Five years later they run their own book under our standard, or they run our client pods as a strategist. Both lanes are earned on competency, never on time served.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              {operatorLanes.map((l, i) => (
+                <div key={i} className={`glow-card p-8 ${l.accent ? 'border-blue-500/20' : ''}`}>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white">{l.name}</p>
+                    <span className={`text-xs font-semibold uppercase tracking-widest ${l.accent ? 'text-blue-400' : 'text-zinc-600'}`}>
+                      {l.lane}
+                    </span>
+                  </div>
+                  <p className="text-zinc-500 text-sm mb-8">{l.summary}</p>
+                  <div className="space-y-5">
+                    {l.rungs.map((r, j) => (
+                      <div key={j} className={j > 0 ? 'border-t border-zinc-800 pt-5' : ''}>
+                        <div className="flex items-center gap-3 mb-1.5">
+                          <span className="text-zinc-700 text-xs font-mono">{String(j + 1).padStart(2, '0')}</span>
+                          <span className="text-zinc-300 text-sm font-medium">{r.role}</span>
+                        </div>
+                        <p className="text-zinc-600 text-xs leading-relaxed pl-7">{r.owns}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="glow-card p-8">
+              <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-6">Not decided yet. Settle before anyone is offered a lane.</p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {laneOpen.map((o, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <X className="w-4 h-4 text-zinc-600 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{o}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  Start Lane A as revenue share on cash collected, not as a purchase of client ownership. No starter book of clients gets promised until demand, matching and retention data support it.
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* Org chart by stage */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The org, stage by stage</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Who exists, and what fires the next hire.
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Design it now. Do not carry the payroll for it. Each stage pays for the next, and nobody gets hired before the bottleneck is measured.
+            </p>
+
+            <div className="space-y-6">
+              {orgByStage.map((s, i) => (
+                <motion.div
+                  key={i}
+                  className={`glow-card p-8 md:p-10 ${s.accent ? 'border-blue-500/20' : ''}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+                    <div className="flex items-baseline gap-4">
+                      <span className={`text-xs font-semibold uppercase tracking-widest ${s.accent ? 'text-blue-400' : 'text-zinc-600'}`}>
+                        {s.stage}
+                      </span>
+                      <span className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white">{s.range}</span>
+                    </div>
+                  </div>
+                  <div className="space-y-5 mb-8">
+                    {s.roles.map((r, j) => (
+                      <div key={j} className={`grid md:grid-cols-3 gap-2 md:gap-6 ${j > 0 ? 'border-t border-zinc-800 pt-5' : ''}`}>
+                        <p className="text-zinc-300 text-sm font-medium">{r.role}</p>
+                        <p className="text-zinc-500 text-sm leading-relaxed md:col-span-2">{r.owns}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="border-t border-zinc-800 pt-6 flex items-start gap-3">
+                    <ArrowRight className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <p className="text-zinc-400 text-sm leading-relaxed">{s.trigger}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="glow-card p-8 mt-6">
+              <p className="text-zinc-300 text-base leading-relaxed">
+                Hire when the current owner spends more than 20% of their time on a repeatable function, or quality drops for two consecutive reporting periods. The role needs a scorecard before the hire, and the replacement has to create more gross profit than it costs.
+              </p>
             </div>
           </Section>
         </div>

@@ -49,6 +49,81 @@ const pricingRules = [
   'Operator Intensive is $30,000 total, maximum five per quarter.',
 ];
 
+const fourOutputs = [
+  { icon: Target, label: 'Client result', detail: 'The outcome they paid for.' },
+  { icon: Video, label: 'Media assets', detail: 'Long form, clips, behind the scenes.' },
+  { icon: Database, label: 'Proof and case study data', detail: 'Before state, decisions, movement, result.' },
+  { icon: ClipboardCheck, label: 'Training and IP', detail: 'The material the next operator learns from.' },
+];
+
+const dayTypes = [
+  {
+    type: 'Strategy Day',
+    client: 'Client transformation',
+    capture: ['Long form recording', 'Behind the scenes footage', 'Strategic insight clips', 'Case study inputs', 'Operator training material'],
+  },
+  {
+    type: 'Content Board',
+    client: 'Client diagnosis and direction',
+    capture: ['Board recording', 'Strategic clips', 'Pattern library entries', 'Proof capture'],
+  },
+  {
+    type: 'Operator Clinic',
+    client: 'Client implementation',
+    capture: ['Training content', 'SOP creation', 'Future certification material'],
+  },
+];
+
+const captureBefore = [
+  'Recording confirmed',
+  'Camera and audio tested',
+  'Consent confirmed',
+  'Content angles prepared',
+  'Client context loaded',
+  'Capture owner assigned',
+];
+
+const captureAfter = [
+  'Recording stored',
+  'Transcript generated',
+  'Best moments tagged',
+  'Client sensitive material separated',
+  'Content brief created',
+  'SOP and training moments tagged',
+  'Case study data logged',
+];
+
+const pipelineStages = ['Captured', 'Selected', 'Edited', 'Reviewed', 'Approved', 'Published', 'Repurposed', 'Measured'];
+
+const pipelineFields = [
+  'Asset', 'Source recording', 'Content pillar', 'Format', 'Audience', 'CTA',
+  'Owner', 'Status', 'Publish date', 'Performance', 'Reuse opportunity',
+];
+
+const feedbackLoop = [
+  'Strategy Day frameworks',
+  'Content formats',
+  'Sales messaging',
+  'Operator training',
+  'The Engineroom',
+];
+
+const hiringRule = [
+  'The current owner spends more than 20% of their time on a repeatable function.',
+  'Quality declines for two consecutive reporting periods.',
+  'The role has a measurable scorecard before the hire, not after.',
+  'The replacement creates more gross profit than it costs.',
+];
+
+const competencyGate = [
+  'Runs a client independently',
+  'Diagnoses the constraint without being told',
+  'Produces the required deliverables to standard',
+  'Holds retention on their own accounts',
+  'Trains someone below them',
+  'Passes a quality audit',
+];
+
 const successConditions = [
   '47 Strategy Days completed or sold',
   '36 Installs completed or sold',
@@ -518,6 +593,142 @@ export default function Phase0() {
 
       <div className="gradient-line" />
 
+      {/* The media machine */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The media machine</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Every day pays twice.
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              The client work is the raw material. A Strategy Day that only helps the client got delivered once. The same day captured properly builds four assets, and three of them keep working after the client leaves the room.
+            </p>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+              {fourOutputs.map((o, i) => {
+                const Icon = o.icon;
+                return (
+                  <div key={i} className="glow-card border-blue-500/20 p-6">
+                    <Icon className="w-5 h-5 text-blue-400 mb-4" />
+                    <p className="text-zinc-300 font-medium text-sm mb-2">{o.label}</p>
+                    <p className="text-zinc-600 text-xs leading-relaxed">{o.detail}</p>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="glow-card p-6 mb-16">
+              <p className="text-zinc-400 text-sm leading-relaxed">
+                If an activity cannot produce all four, question why it is on the calendar.
+              </p>
+            </div>
+
+            <h3 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white mb-3">Day types</h3>
+            <p className="text-zinc-500 mb-8">Every day has a primary purpose and a capture plan. The call is never just a call.</p>
+
+            <div className="space-y-6 mb-16">
+              {dayTypes.map((d, i) => (
+                <div key={i} className="glow-card p-8">
+                  <div className="grid md:grid-cols-3 gap-8">
+                    <div>
+                      <p className="text-white font-display text-xl font-extrabold tracking-[-0.02em] mb-3">{d.type}</p>
+                      <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-2">Client gets</p>
+                      <p className="text-zinc-400 text-sm leading-relaxed">{d.client}</p>
+                    </div>
+                    <div className="md:col-span-2">
+                      <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-4">The machine gets</p>
+                      <div className="grid sm:grid-cols-2 gap-3">
+                        {d.capture.map((c, j) => (
+                          <div key={j} className="flex items-start gap-3">
+                            <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                            <span className="text-zinc-400 text-sm leading-relaxed">{c}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white mb-3">The capture checklist</h3>
+            <p className="text-zinc-500 mb-8">A checklist, not memory. The VA owns it once the workflow exists.</p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-16">
+              <div className="glow-card p-8">
+                <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-6">Before every session</p>
+                <div className="space-y-3">
+                  {captureBefore.map((c, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{c}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-6">After every session</p>
+                <div className="space-y-3">
+                  {captureAfter.map((c, i) => (
+                    <div key={i} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{c}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <h3 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white mb-3">One production pipeline</h3>
+            <p className="text-zinc-500 mb-8">One visible board. Content does not live in folders, Slack threads or someone's desktop.</p>
+
+            <div className="glow-card p-8 mb-6">
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-4">
+                {pipelineStages.map((stage, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-zinc-300 text-sm font-medium whitespace-nowrap">{stage}</span>
+                    {i < pipelineStages.length - 1 && <span className="text-zinc-700 text-sm">&gt;</span>}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="glow-card p-8 mb-16">
+              <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-6">Minimum fields on every asset</p>
+              <div className="flex flex-wrap gap-2">
+                {pipelineFields.map((f, i) => (
+                  <span key={i} className="text-zinc-400 text-xs border border-zinc-800 rounded-lg px-3 py-2">{f}</span>
+                ))}
+              </div>
+            </div>
+
+            <h3 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white mb-3">The loop back</h3>
+            <p className="text-zinc-500 mb-8">
+              The weekly scoreboard already measures output. This is what happens to the answer. Every week the best performing beliefs, hooks and proof get fed back into:
+            </p>
+
+            <div className="glow-card border-blue-500/20 p-8">
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                {feedbackLoop.map((f, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{f}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 pt-6">
+                <p className="text-zinc-300 text-base leading-relaxed">
+                  Client data improves the media. The media creates better clients. That loop is the moat, and it only exists if capture is systematic.
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* Required team */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -642,6 +853,43 @@ export default function Phase0() {
 
       <div className="gradient-line" />
 
+      {/* The hiring rule */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The hiring rule</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Hire against a measured bottleneck.
+              <br />
+              <span className="text-zinc-500">Not against the future org chart.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              The triggers above say when. This says how to know the trigger actually fired. All four conditions, not one.
+            </p>
+
+            <div className="glow-card border-blue-500/20 p-8 md:p-10">
+              <div className="space-y-6">
+                {hiringRule.map((r, i) => (
+                  <div key={i} className={`flex items-start gap-5 ${i > 0 ? 'border-t border-zinc-800 pt-6' : ''}`}>
+                    <span className="font-display text-2xl font-extrabold tracking-[-0.02em] text-blue-400 leading-none">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p className="text-zinc-400 text-sm leading-relaxed pt-1">{r}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-300 text-base leading-relaxed">
+                  Do not build a Stage 5 department inside Stage 0.
+                </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* Capacity model */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -695,6 +943,39 @@ export default function Phase0() {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* The competency gate */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The competency gate</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              What the replacement test means.
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Nobody advances on time served. Six things, demonstrated, before anyone moves up a level or gets near a license.
+            </p>
+
+            <div className="glow-card p-8 md:p-10">
+              <div className="grid sm:grid-cols-2 gap-4">
+                {competencyGate.map((c, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Shield className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{c}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-300 text-base leading-relaxed">
+                  Gate 6 asks whether someone outside the company can deliver to standard. This is the answer sheet.
+                </p>
+              </div>
             </div>
           </Section>
         </div>
