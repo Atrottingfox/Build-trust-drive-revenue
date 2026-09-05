@@ -49,6 +49,16 @@ const pricingRules = [
   'Operator Intensive is $30,000 total, maximum five per quarter.',
 ];
 
+const externalStandards = [
+  'Standard inputs',
+  'Standard outputs',
+  'Standard scorecard',
+  'Standard quality bar',
+  'Standard training moments',
+  'Standard handoff',
+  'Standard promotion evidence',
+];
+
 const fourOutputs = [
   { icon: Target, label: 'Client result', detail: 'The outcome they paid for.' },
   { icon: Video, label: 'Media assets', detail: 'Long form, clips, behind the scenes.' },
@@ -306,7 +316,7 @@ const checkpoints = [
   },
   {
     at: 'At $1M run rate',
-    items: ['Sean as strategist, seller and IP source', 'CSM team running implementation', 'VA layer running admin', 'Creative Director controlling content quality', 'Head of Marketing controlling distribution and demand', 'A documented Operator Manual ready for licensing'],
+    items: ['Sean as strategist, seller and IP source', 'CSM team running implementation', 'VA layer running admin', 'Creative Director controlling content quality', 'Head of Marketing decided against the distribution bottleneck, not hired by default', 'A documented Operator Manual ready for licensing'],
   },
 ];
 
@@ -846,6 +856,42 @@ export default function Phase0() {
               <p className="text-zinc-400 text-sm leading-relaxed">
                 Build one stage completely before adding the next.
               </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* Build for the operator who is not here yet */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The design constraint</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Build it for the operator
+              <br />
+              <span className="text-zinc-500">who is not here yet.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Sean leads the first 20 personally. The offer still gets designed as though an external Creative Director will eventually deliver it. Doing that later means rebuilding, and rebuilding is what stalls a business at this size.
+            </p>
+
+            <div className="glow-card border-blue-500/20 p-8 md:p-10">
+              <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-6">Every engagement has</p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {externalStandards.map((s, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <Check className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-zinc-400 text-sm leading-relaxed">{s}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-zinc-800 mt-8 pt-6">
+                <p className="text-zinc-300 text-base leading-relaxed">
+                  Sean stays the source of truth. He stops being the only person capable of producing the result.
+                </p>
+              </div>
             </div>
           </Section>
         </div>

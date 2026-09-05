@@ -62,7 +62,7 @@ const offers = [
     num: '03',
     title: '12 Month Advisory',
     price: '$28,000 additional',
-    rolled: 'Day 30 PIF or Day 90 PIF',
+    rolled: 'First 20 to take it up',
     description: '$28k additional for the first 20 who take it up, and those first 20 get one in person team training day. It buys Sean and the OS on the business for the next 12 months. Monthly founder strategy, monthly operator or CD call, weekly operator clinic, async Loom and WhatsApp.',
   },
 ];
@@ -171,6 +171,104 @@ const operatingModel = [
   { stage: 'Stage 1', line: 'CSMs remove implementation from Sean.' },
   { stage: 'Stage 2', line: 'Licensed Operators run the method.' },
   { stage: 'Stage 3', line: 'The Academy trains and certifies them.' },
+  { stage: 'Stage 4', line: 'Certified Creative Directors get deployed into accounts.' },
+  { stage: 'Stage 5', line: 'Partners distribute the system through their own networks.' },
+  { stage: 'Stage 6', line: 'Full service teams for the biggest brands.' },
+];
+
+const marketSequence = [
+  {
+    num: '01',
+    step: 'Top 1% founders',
+    detail: 'Own the highest value layer first. Diagnosis, positioning, authority, content architecture, strategic direction. They buy a media operating system their team can run, and the outcome is measured in media and pipeline.',
+  },
+  {
+    num: '02',
+    step: 'Their existing teams',
+    detail: 'Install the system into the team the founder already has. No talent supply at this stage. Every engagement produces a better engine, a trained operator, new proof, new SOPs and new pattern data.',
+  },
+  {
+    num: '03',
+    step: 'Licensed operators',
+    detail: 'The trained operators inside those teams become the first licensed layer, running the same model on their own book under our standard.',
+  },
+  {
+    num: '04',
+    step: 'Creative Director training',
+    detail: 'The curriculum is already written by then, because it was built out of real client work rather than invented for a course.',
+  },
+  {
+    num: '05',
+    step: 'Creative Director deployment',
+    detail: 'Certified Creative Directors get placed into founder accounts. Clients buy the system and the person to run it.',
+  },
+  {
+    num: '06',
+    step: 'Business in a box',
+    detail: 'Last, not first. A packaged operation only works once demand, matching, delivery capacity and retention are proven.',
+  },
+];
+
+const internalLadder = [
+  {
+    level: 'Media Operator',
+    trigger: 'Entry',
+    wants: 'Skill, reps, income, status, mentorship.',
+    receives: ['Structured onboarding', 'Real client accounts', 'A clear scorecard', 'Weekly coaching', 'Training library', 'Published promotion criteria'],
+    delivers: ['Content execution', 'Publishing', 'Reporting', 'Client workflow completion'],
+  },
+  {
+    level: 'Senior Operator',
+    trigger: 'Consistent delivery across several accounts.',
+    wants: 'Complexity, specialism, the right to mentor.',
+    receives: ['Higher pay', 'More client complexity', 'Mentors junior operators', 'Specialist ownership in long form, short form or distribution'],
+    delivers: ['Better quality', 'Faster execution', 'Training for junior operators', 'Fewer escalations'],
+  },
+  {
+    level: 'Coach',
+    trigger: 'They can improve other operators, not only do the work.',
+    wants: 'Leadership, visibility, upside.',
+    receives: ['Coaching responsibility', 'Group call leadership', 'Performance upside', 'Visibility with founders', 'A path to strategist'],
+    delivers: ['Operator clinics', 'Quality reviews', 'Implementation support', 'Escalation handling'],
+  },
+  {
+    level: 'Strategist',
+    trigger: 'They diagnose the constraint, set the media strategy and train the team to execute it.',
+    wants: 'Authority, ownership, the choice of what comes next.',
+    receives: ['Higher compensation', 'A larger client book', 'Revenue share', 'Authority and status', 'The choice to stay internal or graduate'],
+    delivers: ['Strategic direction', 'Board calls', 'Client outcomes', 'Coach development', 'Operator standards'],
+  },
+];
+
+const graduateGets = [
+  'Certification',
+  'Engineroom access',
+  'Operating templates',
+  'Sales assets',
+  'Ongoing training',
+  'Peer network',
+  'Qualified client opportunities',
+  'The right to recruit from our talent pool',
+];
+
+const weGet = [
+  'License fees',
+  'Revenue share',
+  'Data',
+  'Quality standards held across the network',
+  'Distribution',
+  'A supply of trained operators expanding the category',
+];
+
+const graduationPrereqs = [
+  { item: 'Competency ladder', detail: 'The exact skills required at every level.' },
+  { item: '90 day training path', detail: 'Someone off the street becomes useful inside 90 days.' },
+  { item: 'Scorecards and promotion gates', detail: 'Advancement on outcomes, never on tenure.' },
+  { item: 'Certification system', detail: 'Proof they deliver without Sean.' },
+  { item: 'Compensation architecture', detail: 'Base, bonus, revenue share, license economics.' },
+  { item: 'Client ownership rules', detail: 'Who owns the contract, the relationship, the data and the renewal.' },
+  { item: 'Alumni agreement', detail: 'IP, quality standards, confidentiality, client conduct, revenue share. Lawyer drafted, not improvised.' },
+  { item: 'Talent marketplace', detail: 'Graduates receive work, hire from the network and reach future opportunities.' },
 ];
 
 const flywheel = [
@@ -221,7 +319,7 @@ const laneOpen = [
 
 const orgByStage = [
   {
-    stage: 'Stage 0',
+    stage: 'The first cohort',
     range: '0 to 20 clients',
     accent: true,
     roles: [
@@ -233,7 +331,7 @@ const orgByStage = [
     trigger: 'Move on at 16 weighted clients: begin CSM 2. At 20: first delivery system audit.',
   },
   {
-    stage: 'Stage 1',
+    stage: 'Delivery leadership',
     range: '20 to 50 clients',
     accent: false,
     roles: [
@@ -244,17 +342,17 @@ const orgByStage = [
     trigger: 'Move on at 40+ clients, two or more CSMs, multiple editors, Sean still reviewing creative detail.',
   },
   {
-    stage: 'Stage 2',
+    stage: 'Demand and enablement',
     range: '50 to 100 clients',
     accent: false,
     roles: [
       { role: 'Head of Marketing', owns: 'Distribution, campaigns, workshops, partnerships, attribution' },
       { role: 'Operator Enablement Lead', owns: '90 day operator training, certification, assessments, replacement tests. Sits under Head of Delivery first' },
     ],
-    trigger: 'Move on at five or more CSMs and a first operator delivering independently.',
+    trigger: 'Move on at five or more CSMs and a first operator delivering unsupervised. The bridge covers the supervised stage before this.',
   },
   {
-    stage: 'Stage 3',
+    stage: 'Pods',
     range: '100 to 250 clients',
     accent: false,
     roles: [
@@ -265,7 +363,7 @@ const orgByStage = [
     trigger: 'Move on with two profitable pods and a 90 day operator ramp that works.',
   },
   {
-    stage: 'Stage 4',
+    stage: 'Network',
     range: '250 to 500 clients',
     accent: false,
     roles: [
@@ -276,7 +374,7 @@ const orgByStage = [
     trigger: 'Move on when licensee outcomes hold without our supervision.',
   },
   {
-    stage: 'Stage 5',
+    stage: 'Company',
     range: '500 clients to $10M',
     accent: false,
     roles: [
@@ -917,6 +1015,46 @@ export default function BusinessMap() {
 
       <div className="gradient-line" />
 
+      {/* The sequence */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The sequence</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Top down,
+              <br />
+              <span className="text-zinc-500">in this order.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Starting at the top attracts everything below it. The seven stages further down are revenue. This is the order we enter the market, and the order matters more than the pace.
+            </p>
+
+            <div className="glow-card border-blue-500/20 p-8 md:p-10 mb-6">
+              <div className="space-y-6">
+                {marketSequence.map((m, i) => (
+                  <div key={i} className={`grid md:grid-cols-4 gap-3 md:gap-8 ${i > 0 ? 'border-t border-zinc-800 pt-6' : ''}`}>
+                    <div className="flex items-baseline gap-4">
+                      <span className="font-display text-xl font-extrabold tracking-[-0.02em] text-blue-400 leading-none">{m.num}</span>
+                      <span className="text-zinc-300 text-sm font-medium">{m.step}</span>
+                    </div>
+                    <p className="text-zinc-500 text-sm leading-relaxed md:col-span-3">{m.detail}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="glow-card p-8">
+              <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-4">Why it feeds itself</p>
+              <p className="text-zinc-300 text-base leading-relaxed">
+                The talent comes from the outside, by design. A founder brings us in to train their team. That team learns our system, sees the career path, and wants in. We recruit by delivering, so we never have to compete for operators on the open market.
+              </p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* The Architecture */}
       <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -965,6 +1103,11 @@ export default function BusinessMap() {
             <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
               A videographer walks in. Five years later they run their own book under our standard, or they run our client pods as a strategist. Both lanes are earned on competency, never on time served.
             </p>
+            <div className="glow-card p-8 mb-12">
+              <p className="text-zinc-300 text-base leading-relaxed">
+                The design goal is to make leaving unnecessary, and to make an alumnus economically valuable if they leave anyway. Graduation upgrades the relationship. Nobody says goodbye, and the hungriest people stay inside the network whether or not we employ them.
+              </p>
+            </div>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               {operatorLanes.map((l, i) => (
@@ -1005,6 +1148,127 @@ export default function BusinessMap() {
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   Start Lane A as revenue share on cash collected, not as a purchase of client ownership. No starter book of clients gets promised until demand, matching and retention data support it.
                 </p>
+              </div>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* The internal ladder */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The internal ladder</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              What they want
+              <br />
+              <span className="text-zinc-500">at every level.</span>
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              A ladder nobody wants to climb is just an org chart. Each rung has to pay the person standing on it, which means naming what they get before naming what they owe.
+            </p>
+
+            <div className="space-y-6">
+              {internalLadder.map((l, i) => (
+                <motion.div
+                  key={i}
+                  className={`glow-card p-8 md:p-10 ${i === 0 ? 'border-blue-500/20' : ''}`}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-2">
+                    <span className="text-zinc-700 text-xs font-mono">{String(i + 1).padStart(2, '0')}</span>
+                    <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white">{l.level}</p>
+                  </div>
+                  <p className="text-zinc-500 text-sm mb-2">{l.trigger}</p>
+                  <p className="text-zinc-400 text-sm mb-8">{l.wants}</p>
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-4">They receive</p>
+                      <ul className="space-y-3">
+                        {l.receives.map((r, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                            <Check className="w-3.5 h-3.5 text-blue-400 mt-1 flex-shrink-0" />
+                            <span className="text-zinc-400 text-sm leading-relaxed">{r}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <p className="text-zinc-500 text-xs font-semibold uppercase tracking-widest mb-4">They deliver</p>
+                      <ul className="space-y-3">
+                        {l.delivers.map((d, j) => (
+                          <li key={j} className="flex items-start gap-3">
+                            <ArrowRight className="w-3.5 h-3.5 text-zinc-600 mt-1 flex-shrink-0" />
+                            <span className="text-zinc-400 text-sm leading-relaxed">{d}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* The graduation trade */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Section>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The graduation trade</p>
+            <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-3">
+              Both sides get paid.
+            </h2>
+            <p className="text-zinc-500 text-lg mb-12 max-w-3xl">
+              Lane B only holds if the exchange is real in both directions. Here is what each side is actually trading.
+            </p>
+
+            <div className="grid md:grid-cols-2 gap-6 mb-16">
+              <div className="glow-card border-blue-500/20 p-8">
+                <p className="text-zinc-300 font-medium mb-1">The graduate receives</p>
+                <p className="text-zinc-600 text-xs mb-8">They leave employment without leaving the ecosystem.</p>
+                <ul className="space-y-3">
+                  {graduateGets.map((g, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-3.5 h-3.5 text-blue-400 mt-1 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-zinc-300 font-medium mb-1">The Authority Engine receives</p>
+                <p className="text-zinc-600 text-xs mb-8">The network grows without carrying the payroll.</p>
+                <ul className="space-y-3">
+                  {weGet.map((g, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-3.5 h-3.5 text-blue-400 mt-1 flex-shrink-0" />
+                      <span className="text-zinc-400 text-sm leading-relaxed">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <h3 className="font-display text-2xl font-extrabold tracking-[-0.02em] text-white mb-3">What must exist before anyone graduates</h3>
+            <p className="text-zinc-500 mb-8 max-w-3xl">Eight pieces. None of them are built yet.</p>
+
+            <div className="glow-card p-8 md:p-10">
+              <div className="space-y-5">
+                {graduationPrereqs.map((p, i) => (
+                  <div key={i} className={`grid md:grid-cols-3 gap-2 md:gap-6 ${i > 0 ? 'border-t border-zinc-800 pt-5' : ''}`}>
+                    <p className="text-zinc-300 text-sm font-medium">{p.item}</p>
+                    <p className="text-zinc-500 text-sm leading-relaxed md:col-span-2">{p.detail}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </Section>
