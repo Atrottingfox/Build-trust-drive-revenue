@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Client plan pages are private references, not sales pages. No Apply CTA.
-const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan', '/margot', '/themargotplan'];
+const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan', '/margot', '/themargotplan', '/thecultivatedplan', '/cultivated-theplan', '/thechloeplan'];
 
 export function Navigation() {
   const location = useLocation();
