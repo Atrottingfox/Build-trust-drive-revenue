@@ -381,6 +381,118 @@ const RISKS = [
   'Structure without follow through. She has said it about founders all day. It applies here too.',
 ];
 
+// ─── The avatar ──────────────────────────────────────────────────────────
+// Built in the room against Rhys as the model. Fears were explained and never
+// answered, so that row is a gap and says so. It does not get filled in from
+// somewhere else.
+
+const AVATAR = [
+  {
+    row: 'Frustrations',
+    when: 'Immediate',
+    said: [
+      'I have to do everything myself.',
+      'There is no consistency. People are not being held to the same standard.',
+      'There is no clarity around what the expectations are.',
+      'They are just not getting what they need from me.',
+    ],
+    unsaid: [
+      'My team is incapable.',
+      'They do not know what they are doing.',
+      'I have hired an idiot.',
+      'They just do not get it.',
+    ],
+  },
+  {
+    row: 'Wants',
+    when: 'Immediate',
+    said: [
+      'A team that understands what they own.',
+      'A team delivering on expectations.',
+      'To buy back their time.',
+      'To focus on the work they actually want to do.',
+    ],
+    unsaid: [
+      'To stop being the bottleneck without admitting they are the bottleneck.',
+    ],
+  },
+  {
+    row: 'Aspirations',
+    when: 'Long term',
+    said: [
+      'A business that people want to be a part of.',
+      'Attracting top talent. "We are not attracting top talent right now because no one knows who we are."',
+      'To be known as a good place to work.',
+    ],
+    unsaid: [
+      'To be the person other people come to.',
+      'To look competent and successful.',
+      'To feel aspirational to the people around them.',
+    ],
+  },
+  {
+    row: 'Fears',
+    when: 'Long term',
+    said: [],
+    unsaid: [],
+    gap: 'Explained in the room and never answered. Sean defined it as the bad thing that happens down the track if this does not get fixed. It is the deeper pass he still owes her, with the template he described as bulletproof.',
+  },
+];
+
+const HOOK_FORMULA = {
+  shape: 'Frustration, then aspiration, in their own words.',
+  worked: 'If every time I walked out of a meeting I was saying to myself, I think I hired an idiot, this is exactly what I would do so I could attract top talent and start building a team people actually want to be a part of.',
+  note: 'Sean built ten of these in the room from one pair of rows. The bank recycles every three months, because the frustrations do not change.',
+};
+
+const FOUR_WAYS = [
+  { t: 'Stories', p: 'Hers. The way she is uniquely different, and what almost everyone leaves out when they try to make something travel.' },
+  { t: 'Data', p: 'Her numbers. A figure from something she actually ran, or a study that backs the point.' },
+  { t: 'Methods', p: 'The mechanism. Something she found in the doing, or simply the way she does it. This is mine.' },
+  { t: 'Case studies', p: 'Theirs. Stories are her, case studies are them. Same job, different subject.' },
+];
+
+const KOMATSU = [
+  'There were three fundamental principles that every single one of my clients always got wrong.',
+  'The way I learned it was leading a team of 100.',
+  'What I have seen since is that the problems all distil into the same buckets.',
+  'There is no difference between a 100 person team and a five person team, because if you get it right at five, you can grow to 100.',
+];
+
+// What she has seen go wrong, and what she has seen work. Pulled straight from
+// the room. This is the post bank: one line here is one piece of content.
+
+const GETS_WRONG = [
+  'Leaders magically develop as the business grows.',
+  'You can throw money at a people problem.',
+  'Structure is not important.',
+  'All the weight goes on revenue because revenue is going well, and the people side gets left.',
+  'The people side is avoided because nobody knows how to address it.',
+  'Assuming people already understand their roles.',
+  'Not holding anyone accountable to anything.',
+  'Avoiding the conversation until it is far bigger than it needed to be.',
+  'No real measure of performance. "If you cannot measure them, what are you holding them accountable to?"',
+  'KPIs that sound right and measure nothing. "If my role is leads, what are you tracking me for?"',
+  'Thinking it is quicker to do it yourself, so nobody ever learns to do it.',
+  'Not doing what you said you would do, which is how a leader stops being trusted.',
+  'Moving or cancelling the one on one, which tells the person exactly what they are worth.',
+  'Generating a job description by pasting a task list into a chatbot, with no idea what the role actually needs.',
+  'Flattening the structure so everyone reports to the CEO, instead of teaching people how to manage.',
+  'No future focus for the people, only for the revenue.',
+  'Not making the role attractive enough to keep anyone good in it.',
+];
+
+const WHAT_WORKS = [
+  'Consistency.',
+  'Follow through.',
+  'Humanising yourself. Being reachable rather than behind a closed door.',
+  'One on ones with a structure, held every time.',
+  'KPIs that get measured, not just written.',
+  'Giving the team a real way to give feedback.',
+  'Shared language across the team. "If you are not actually speaking that way, the culture book is just a book."',
+  'Knowing what drives each person, and what they want in three years and in ten.',
+];
+
 // ─── Nav ─────────────────────────────────────────────────────────────────
 
 type TabDef = { id: string; label: string; sections: Array<{ id: string; label: string }> };
@@ -415,6 +527,9 @@ const TABS: TabDef[] = [
       { id: 'capture', label: 'Capture / Create' },
       { id: 'formats', label: 'Formats' },
       { id: 'pinned', label: 'The three posts' },
+      { id: 'avatar', label: 'The avatar' },
+      { id: 'hooks', label: 'Hooks' },
+      { id: 'bank', label: 'The bank' },
       { id: 'beliefs', label: 'The belief map' },
     ],
   },
@@ -797,6 +912,120 @@ export default function TheCultivatedPlan() {
                   <p className="text-zinc-300 text-[13px] leading-relaxed mt-3 border-l-2 border-blue-500/50 pl-4">{p.note}</p>
                 </div>
               ))}
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'avatar' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The avatar</p>
+            <H2>What they say, and what they would never say.</H2>
+            <Note>Built against one real founder, not a demographic. The unsaid column is where the hooks come from.</Note>
+            <div className="mt-8 grid gap-3">
+              {AVATAR.map((a) => (
+                <div key={a.row} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
+                  <div className="flex items-center gap-3 mb-4 flex-wrap">
+                    <p className="font-display text-[16px] font-extrabold text-white">{a.row}</p>
+                    <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">{a.when}</span>
+                  </div>
+                  {a.gap ? (
+                    <p className="text-zinc-400 text-[14px] leading-relaxed border-l-2 border-amber-500/50 pl-4">{a.gap}</p>
+                  ) : (
+                    <div className="grid gap-5 md:grid-cols-2">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Said out loud</p>
+                        <ul className="space-y-1.5">
+                          {a.said.map((x, i) => (
+                            <li key={i} className="text-zinc-400 text-[14px] leading-relaxed">{x}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">Never said</p>
+                        <ul className="space-y-1.5">
+                          {a.unsaid.map((x, i) => (
+                            <li key={i} className="text-zinc-300 text-[14px] leading-relaxed">{x}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'hooks' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Hooks</p>
+            <H2>Take a frustration. Hand back an aspiration.</H2>
+            <Note>Both columns already exist on the avatar page. The hook is one of each, in their words.</Note>
+
+            <div className="mt-8">
+              <Block label="The shape">
+                <p className="text-zinc-300 text-[15px] leading-relaxed mb-4">{HOOK_FORMULA.shape}</p>
+                <p className="text-zinc-200 text-[15px] leading-relaxed border-l-2 border-blue-500/50 pl-4">
+                  {HOOK_FORMULA.worked}
+                </p>
+                <p className="text-zinc-500 text-[13px] mt-4">{HOOK_FORMULA.note}</p>
+              </Block>
+            </div>
+
+            <div className="mt-10">
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-3">Four ways to teach it</p>
+              <Note>Everyone defaults to teaching. These are the other three, and they are what makes it hers rather than anyone's.</Note>
+              <div className="mt-5 grid gap-3 md:grid-cols-2">
+                {FOUR_WAYS.map((f) => (
+                  <Card key={f.t} title={f.t}>{f.p}</Card>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <Block label="The story, as Sean told it back to her">
+                <p className="text-zinc-500 text-[13px] mb-4">
+                  The Komatsu story on its own is too big to be relatable. Told this way it stays aspirational and becomes transferable, which is the whole point.
+                </p>
+                <div className="space-y-2">
+                  {KOMATSU.map((l, i) => (
+                    <p key={i} className="text-zinc-200 text-[15px] leading-relaxed">{l}</p>
+                  ))}
+                </div>
+              </Block>
+            </div>
+
+            <div className="mt-6">
+              <Block label="Validation, one third of the time">
+                <p className="text-zinc-400 text-[14px] leading-relaxed">
+                  Reflect the reality they are living so they feel seen. Tell them they are not stupid for being in it. Then take them to what they should be doing instead. Sean would run this arc more than any other, because validation is the most valuable thing a piece of content can give someone.
+                </p>
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'bank' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The bank</p>
+            <H2>Twenty five posts, already written down.</H2>
+            <Note>Every line here is a piece of content. This came out of the room, in her words, and none of it has been used yet.</Note>
+            <div className="mt-8">
+              <Block label="What founders get wrong">
+                <BulletList items={GETS_WRONG} />
+              </Block>
+            </div>
+            <div className="mt-6">
+              <Block label="What she has seen work">
+                <BulletList items={WHAT_WORKS} />
+              </Block>
+            </div>
+            <div className="mt-6">
+              <Block label="How to use it">
+                <p className="text-zinc-400 text-[14px] leading-relaxed">
+                  Pair one from each list and it is a belief post. Take one on its own and it is a teach. Attach the founder it happened to and it is a case study. The bank does not run out, because these are the same problems in every business she walks into.
+                </p>
+              </Block>
             </div>
           </Wrap>
         )}
