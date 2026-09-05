@@ -388,55 +388,86 @@ const RISKS = [
 
 const AVATAR = [
   {
+    row: 'Fears',
+    when: 'Long term. The bad thing waiting if none of this gets fixed.',
+    said: [
+      'If I hire again and it goes the same way, that is another year and another salary gone.',
+      'The revenue is growing faster than the team can carry and something is going to break.',
+      'I am going to be doing this exact job in five years because nobody else can do it properly.',
+      'If I take my hands off it for a month the whole thing slides backwards.',
+    ],
+    unsaid: [
+      'I am the reason it is not working, and I think everyone can see it.',
+      'I have built something that cannot run without me, which means I have not built a business.',
+      'I was never any good with people, and that is the only thing left that I have to be good at.',
+      'If I actually let go, I will find out I was not needed.',
+    ],
+  },
+  {
     row: 'Frustrations',
-    when: 'Immediate',
+    when: 'Immediate. What is happening this week.',
     said: [
       'I have to do everything myself.',
-      'There is no consistency. People are not being held to the same standard.',
-      'There is no clarity around what the expectations are.',
-      'They are just not getting what they need from me.',
+      'There is no consistency. Nobody is being held to the same standard.',
+      'I am not getting what I need out of the team and I do not know how to get it.',
+      'Nothing lands when it is supposed to, and I never know in advance whether it will.',
+      'I have explained it. They are still not doing it.',
     ],
     unsaid: [
       'My team is incapable.',
-      'They do not know what they are doing.',
       'I have hired an idiot.',
       'They just do not get it.',
+      'I am the only one here who actually cares about this.',
+      'It is quicker if I just do it, and I know that is the whole problem.',
     ],
   },
   {
     row: 'Wants',
-    when: 'Immediate',
+    when: 'Immediate. What they would take today.',
     said: [
       'A team that understands what they own.',
-      'A team delivering on expectations.',
-      'To buy back their time.',
-      'To focus on the work they actually want to do.',
+      'People delivering on what they said they would deliver.',
+      'My time back.',
+      'To spend the week on the work I am actually good at.',
+      'One place I can look to know whether we are on track.',
     ],
     unsaid: [
-      'To stop being the bottleneck without admitting they are the bottleneck.',
+      'To stop being the bottleneck without having to say out loud that I am the bottleneck.',
+      'To go away for two weeks and have nothing fall over.',
+      'Someone to tell me what good actually looks like, because I have never seen it done properly.',
+      'To stop having the same conversation with the same person every six weeks.',
     ],
   },
   {
     row: 'Aspirations',
-    when: 'Long term',
+    when: 'Long term. What they are actually building toward.',
     said: [
-      'A business that people want to be a part of.',
-      'Attracting top talent. "We are not attracting top talent right now because no one knows who we are."',
-      'To be known as a good place to work.',
+      'A business people want to work at.',
+      'Attracting the kind of talent I currently cannot get near. "We are not attracting top talent right now because no one knows who we are."',
+      'Growth that does not cost me my weekends.',
+      'A leadership team that runs it, so I get to work on it instead of in it.',
     ],
     unsaid: [
-      'To be the person other people come to.',
-      'To look competent and successful.',
-      'To feel aspirational to the people around them.',
+      'To be the one people ring for advice, instead of the one asking.',
+      'To look competent to the people whose opinion I actually care about.',
+      'To be the founder other founders point at.',
+      'To find out I was capable of building something bigger than me.',
     ],
   },
-  {
-    row: 'Fears',
-    when: 'Long term',
-    said: [],
-    unsaid: [],
-    gap: 'Explained in the room and never answered. Sean defined it as the bad thing that happens down the track if this does not get fixed. It is the deeper pass he still owes her, with the template he described as bulletproof.',
-  },
+];
+
+// The rest of the avatar, in the shape the approved builds use.
+const AVATAR_PROFILE = [
+  { k: 'Named', v: 'PROPOSED, needs Sean to tick: "Stretched Sam." A founder who has grown past the point where they can hold every relationship themselves, and has no leadership layer underneath them.' },
+  { k: 'Demographics', v: 'Scaling and high growth founders, roughly 10 to 20 people. Revenue climbing faster than the team can carry it. Sean mapped the stages in the room: zero to three is chaos hiring, three to ten is where it visibly stops working, and ten to twenty is where a founder finally says they need an actual leadership team, having got it wrong the whole way up.' },
+  { k: 'Primary emotions', v: 'Stretched, doing two jobs and neither of them properly. Quietly resentful that nobody else appears to care as much. Embarrassed that the people part is the bit they cannot do.' },
+  { k: 'What they believe now', v: 'I am the most capable person here and I always will be. The team is the constraint.' },
+  { k: 'What they must believe to buy', v: 'The team is equipped. I have not made their roles clear, and I have never told them what good looks like.' },
+  { k: 'What they have tried', v: 'Explained it again, and again. Mandated it, then did it themselves anyway. Hired someone more senior and hoped it would sort itself out. Threw money at it, a pay rise instead of a conversation. Flattened the structure and called it culture, so now everyone reports to them. Generated a job description by pasting a task list into a chatbot. Moved the one on one three times, then cancelled it.' },
+  { k: 'Why they buy now', v: 'The revenue says they have arrived and the team says they have not. The distance between those two is what finally makes them act.' },
+  { k: 'The buy moment', v: 'The week a good person resigns, or something misses in front of a client, and it is unmistakably a people problem rather than a market problem.' },
+  { k: 'How they buy', v: 'Referral and reputation today. The plan is a founder who watches enough to recognise themselves, self identifies against the four checkpoints on the page, and books.' },
+  { k: 'What it actually means', v: 'They think they need better people. They need role clarity and a way to measure, and they need to hear it from someone who has run a team rather than read about one.' },
 ];
 
 const HOOK_FORMULA = {
@@ -920,38 +951,59 @@ export default function TheCultivatedPlan() {
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">The avatar</p>
             <H2>What they say, and what they would never say.</H2>
-            <Note>Built against one real founder, not a demographic. The unsaid column is where the hooks come from.</Note>
+            <Note>
+              Written in the founder's own voice, because that is how it gets used. The right hand column is where
+              the hooks come from: nobody has ever said those words out loud, so hearing them back is the whole effect.
+            </Note>
+
             <div className="mt-8 grid gap-3">
               {AVATAR.map((a) => (
                 <div key={a.row} className="rounded-xl border border-zinc-800 bg-elevated/40 p-5">
-                  <div className="flex items-center gap-3 mb-4 flex-wrap">
-                    <p className="font-display text-[16px] font-extrabold text-white">{a.row}</p>
-                    <span className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500">{a.when}</span>
+                  <div className="mb-4">
+                    <p className="font-display text-[17px] font-extrabold text-white">{a.row}</p>
+                    <p className="text-zinc-500 text-[12px] mt-0.5">{a.when}</p>
                   </div>
-                  {a.gap ? (
-                    <p className="text-zinc-400 text-[14px] leading-relaxed border-l-2 border-amber-500/50 pl-4">{a.gap}</p>
-                  ) : (
-                    <div className="grid gap-5 md:grid-cols-2">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Said out loud</p>
-                        <ul className="space-y-1.5">
-                          {a.said.map((x, i) => (
-                            <li key={i} className="text-zinc-400 text-[14px] leading-relaxed">{x}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">Never said</p>
-                        <ul className="space-y-1.5">
-                          {a.unsaid.map((x, i) => (
-                            <li key={i} className="text-zinc-300 text-[14px] leading-relaxed">{x}</li>
-                          ))}
-                        </ul>
-                      </div>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">Said out loud</p>
+                      <ul className="space-y-2">
+                        {a.said.map((x, i) => (
+                          <li key={i} className="text-zinc-400 text-[14px] leading-relaxed">{x}</li>
+                        ))}
+                      </ul>
                     </div>
-                  )}
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-2">Never said</p>
+                      <ul className="space-y-2">
+                        {a.unsaid.map((x, i) => (
+                          <li key={i} className="text-zinc-300 text-[14px] leading-relaxed">{x}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-10">
+              <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-3">The rest of the picture</p>
+              <dl className="border-t border-zinc-800">
+                {AVATAR_PROFILE.map((f) => (
+                  <div key={f.k} className="border-b border-zinc-800/70 py-4">
+                    <dt className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 mb-1.5">{f.k}</dt>
+                    <dd className="text-zinc-400 text-[14px] leading-relaxed">{f.v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="mt-8">
+              <Block label="How to use this">
+                <p className="text-zinc-400 text-[14px] leading-relaxed">
+                  Every hook is one line from the left column and one from the right, or one frustration handed back
+                  as an aspiration. Ten of them built once will carry a quarter, because the frustrations do not change.
+                </p>
+              </Block>
             </div>
           </Wrap>
         )}
