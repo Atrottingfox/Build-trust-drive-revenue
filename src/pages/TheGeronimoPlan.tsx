@@ -617,21 +617,19 @@ const SOPHIE_SHOOT: SFOutline[] = [
     lens: 'Teach · Framework', format: 'Direct to camera, sitting down. No graphic.',
     spoken: [
       'The hardest decision is knowing whether you should push an employee, or whether you should let them go.',
-      "And right now you want me to give you permission to let them go. I'm not going to. Not yet.",
-      "Because there's a framework we run first, and most owners have never done a single part of it.",
+      "And right now you want me to give you permission to let that person you just thought of  go. But I'm not going to do it.",
+      'Not yet.',
+      "Because there's a framework we run first, and typically, people have never done a single part of it.",
     ],
     beats: [
-      { role: 'Common belief', text: 'They think they have to play boss. So they avoid the conversation, because nobody ever showed them how to have one.' },
-      { role: 'The symptom', text: "You put up with subpar results and behaviour. You normalise it. You stop holding the team accountable. You hold on to people you know you shouldn't. And you hire two people to do one person's job." },
-      { role: 'Why', text: "Most owners are acts of service. You're a people pleaser, you don't want to upset anyone, and you want to be liked. So you bleed for months, procrastinating on the conversation." },
-      { role: 'The reframe', text: "We don't call them tough conversations. We call them necessary conversations." },
-      { role: 'The line', text: "These businesses can make good money. Not if you're hiring two people to do one person's job because you didn't want to have a necessary conversation." },
-      { role: 'Before you decide', text: "Sack or keep. Run the framework first. Because if you haven't done your bit, set the clarity from the start and actually given the feedback, it isn't their fault yet." },
-      { role: 'The framework', text: 'SLOT. C, O, A, C, H, one line each. The five words were never said on the jam.' },
+      { role: 'Common belief', text: 'We think we have to play big boss.  So we avoid the conversation, because nobody ever showed us how to have one.' },
+      { role: 'The symptom', text: 'This is what it looks like.\nWe put up with lacklustre results and questionable behaviour.  Then we normalise it, until we eventually just stop holding the team accountable.' },
+      { role: 'Why', text: "We've found almost all gym owners are givers.  Their value is defined by acts of service.  And when you're a people pleaser, you don't want to upset anyone.  So you bleed for months, procrastinating on the conversation." },
+      { role: 'The reframe', text: "But don't call them tough conversations.  We call them necessary conversations." },
+      { role: 'The line', text: "Because the business can usually make killer money, unless they end up with two people for a one man job because they didn't want to have the necessary conversation." },
     ],
-    payoff: "Sometimes they don't have more in them, and that's fine. But you're delaying the inevitable by avoiding the conversation, and it's your business that pays for it.",
-    cta: 'SLOT. Drafted option: comment COACH and she sends the framework. Confirm the keyword and where it points.',
-    fill: "Verbatim from the jam: the hook Sean tested and the room picked, play boss, every symptom, acts of service, necessary not tough, the two people for one job line, sack or keep, and the payoff. The second and third hook lines and the framework framing are drafted. Chocolate broccoli warning from the room: they want permission to sack someone, so hook line two answers it head on and holds the line. Art direction is decided, say it so it stands without graphics because captions are running anyway. Overlay the letters in post only if it reads cohesive. A chalkboard only if it becomes a visual model, and it is not one.",
+    payoff: "Before you decide to sack or keep.\nRun the framework first.\nIt is called coach, and if comment COACH below, and I'll send through exactly what you need, so you know whether they're worth it. in too",
+    fill: "Sean's rewrite, in his words. The five COACH words are no longer spoken, the framework is the thing they comment for, which closes the framework gap and the CTA in one move. The last line stops at 'in too'. Art direction still stands, say it so it works without graphics because captions are running anyway. A chalkboard only if it becomes a visual model, and it is not one.",
   },
   {
     n: '04', title: '400 members with the ads off',
@@ -666,7 +664,7 @@ const DOZA_SHOOT: SFOutline[] = [
 
 const SHOOT_LANES: ShootLane[] = [
   { id: 'ryan', label: `Ryan · ${RYAN_SHOOT.length}`, who: 'Ryan', note: 'Demonstration. What he built, what it does, who it saves. Batched, because there is no point flying a shooter in for three reels.', outlines: RYAN_SHOOT },
-  { id: 'sophie', label: `Sophie · ${SOPHIE_SHOOT.length}`, who: 'Sophie', note: 'Belief. Three ideas plus a result. Four outlines against three slots, so be ruthless. 01, 02 and 04 are Sean\'s, verbatim. 03 is the only one still drafted, so read it out loud before camera and cut anything that is not how she talks.', outlines: SOPHIE_SHOOT },
+  { id: 'sophie', label: `Sophie · ${SOPHIE_SHOOT.length}`, who: 'Sophie', note: 'Belief. Three ideas plus a result. Four outlines against three slots, so be ruthless. All four are Sean\'s, verbatim.', outlines: SOPHIE_SHOOT },
   { id: 'doza', label: `Doza · ${DOZA_SHOOT.length}`, who: 'Doza', note: 'Nothing was planned for his three. This is the piece the day already gives you.', outlines: DOZA_SHOOT },
 ];
 
@@ -2599,7 +2597,8 @@ export default function TheGeronimoPlan() {
                 <BulletList
                   items={[
                     <><b className="text-white font-semibold">Ryan.</b> Ring the six studios so they are expecting the call. Send the drive link with every idea in it, not just the three.</>,
-                    <><b className="text-white font-semibold">Sophie.</b> Ring her five. Pick the play to win call. Pull the four steps off the hot seat recording. Write out the five COACH words.</>,
+                    <><b className="text-white font-semibold">Sophie.</b> Ring her five.</>,
+                    <><b className="text-white font-semibold">Sophie.</b> Build the COACH deliverable. The script sends it now rather than saying it, so the thing that lands in the DM has to exist before this posts.</>,
                     <><b className="text-white font-semibold">Sophie.</b> Send the ideas doc. All of them. Sean: if there is stuff hidden, I do not want only the three you selected.</>,
                     <><b className="text-white font-semibold">Billy.</b> Walk in with the shot list and the plan for the day. Run the pod recap prompt the second Doza stops filming.</>,
                     <><b className="text-white font-semibold">Billy and Hayley.</b> Thursday in Sydney, the editor handover, and how the assembly line runs in Notion.</>,
@@ -2632,12 +2631,10 @@ export default function TheGeronimoPlan() {
                 <BulletList
                   items={[
                     'Doza has three pieces for TGA. Two come off the pod recap. The third was never planned.',
-                    "Three scripts stop mid line. Ryan's content engine CTA at 'the first', play to win at 'it too', and 400 members at 'to'.",
+                    "Four scripts stop mid line. The content engine CTA at 'the first', play to win at 'it too', 400 members at 'to', and the necessary conversation at 'in too'.",
                     "Ryan's hook 3 needs the real member count in place of X (Number).",
-                    'The five COACH words. Sophie has them, they were never said on the jam.',
-                    "The CTA on the necessary conversation. The other three of Sophie's close inside the last beat by design.",
+                    'The COACH deliverable. The script no longer says the five words, it sends them, so the thing that gets sent has to exist before this posts.',
                     "400 members drops three proof points the jam had: 20k to 120k over three years, the 54 signups from the open week, and the four steps off the hot seat. The hook promises 400 and the body never says he got there, so decide whether one goes back in.",
-                    "The necessary conversation is the last one still drafted. Sophie has not read it out loud, so anything that is not how she talks gets cut on Thursday, not defended.",
                     'Every text hook. Not one was written in the room. They are the on screen words, so they get decided before Thursday, not in the edit.',
                     "Ryan's drive of ideas and Sophie's ideas doc. Both promised on the call, neither sent yet.",
                     'IG Live on Friday has no owner and no time.',
