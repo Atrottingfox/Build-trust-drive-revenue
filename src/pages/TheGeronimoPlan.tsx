@@ -584,36 +584,18 @@ const SOPHIE_SHOOT: SFOutline[] = [
   {
     n: '01', title: 'Bare minimum, outstanding result',
     lens: 'Belief · Reframe', format: 'Direct to camera',
-    spoken: [],
-    hookOptions: [
-      [
-        'Where are you doing the bare minimum, and expecting an outstanding result?',
-        'I ask that on almost every call, and it goes quiet every time.',
-        "Because these people are flat out. They're doing the most, they're burning out, and they're getting nothing back for it.",
-        'So let me give you the question my mentor asked me, because it explains the whole thing.',
-      ],
-      [
-        "A mentor asked me one question years ago and I still can't shake it.",
-        'If I followed you around with a surveillance crew, 24 hours a day, seven days a week.',
-        'Would I believe what you say your ambition is, based on your actions?',
-        "Most people say yes, and then they go quiet, because they know the honest answer.",
-      ],
-      [
-        "If you're working harder than you ever have and the business still isn't moving, this is probably why.",
-        "You're doing ten things at 10%, you're getting 10% back, and you've decided nothing works.",
-      ],
+    spoken: [
+      'If I followed you around with a surveillance crew, 24 hours a day, seven days a week.',
+      'Would you believe what you say your ambition is, based on your actions? A mentor asked that once and it completely threw me',
     ],
     beats: [
-      { role: 'Common belief', text: 'Everyone thinks the answer is more work. So they skim across the top of everything, instead of going deep on any of it.' },
-      { role: 'The example', text: "I had a call yesterday with someone who told me the new way of running ads doesn't work. So we unpacked it. He'd done a scattered version of it, because he had so many balls in the air he just wanted it done." },
-      { role: 'The pattern', text: "That's the trap. You do it at 10% effort, you get 10% of the result, and you decide nothing works. And it burns you out more than doing it properly ever would have." },
-      { role: 'What it actually is', text: 'Business whack a mole. You band aid fix everything, you stay busy, and you never unblock the thing that is actually holding you.' },
-      { role: 'The question', text: 'So here it is. If I followed you around with a surveillance crew, 24 hours a day, seven days a week, would I believe what you say your ambition is, based on your actions?' },
-      { role: 'Why I can ask it', text: "That question was asked of me, by one of my mentors. I'm not sitting here telling you how to run your life. I'm telling you what changed mine, and what I watch happen on calls all day." },
+      { role: 'The example', text: "I had a call yesterday with someone who told me the new way of running ads doesn't work. So we unpacked it, bit by bit. So I could help him get the thing pumping And he did all the right things. Kinda. He did half of the right things, Half the right way, With half the effort. But it wasn't even his fault, because like all of us. he had 28,000 other things to do in in his business, So he just wanted to tick the box and get the job done" },
+      { role: 'Common belief', text: "Issue is, we get so caught in thinking it's about doing more, that we half ass 99% of the things we think we should do," },
+      { role: 'The pattern', text: "And that's kinda the big trap. I've done it myself - as I'm sure you have too. 10% effort, 10% of the result, and the final verdict comes in at \"Nothing works\" We end up playing business whack a mole. Band aid fix everything, staying busy, and unfortunately never having the energy or attention to break through the thing that is actually holding us back." },
+      { role: 'Why I can ask it', text: 'That question was asked of me, by one of my mentors. And it changed my life.' },
     ],
-    payoff: "You don't need to do more work. You need to go deeper on the work you're already doing.",
-    cta: 'Get honest about it. Then change your actions so they match your ambition.',
-    fill: "Verbatim from the jam: the bare minimum line, the surveillance crew question, the ads call, 10% effort for 10% result, whack a mole and band aid fixing, the payoff and the CTA. The hooks and the connective lines are drafted for her to make her own, so read them out loud first and cut anything that isn't how she talks. The anti guru rule Sean gave in the room is what beat six is doing: share your own experience, or share what other people have done, never preach. Keep the mentor attribution in, it is the thing that keeps this out of guru territory.",
+    payoff: "Because sometimes we don't need to do more work. We need to go deeper on the work we're already doing.",
+    fill: "Sean's rewrite, in his words. The hook is now the mentor's question straight up, the example runs before the common belief, and it closes on the payoff with no separate CTA. Keep the mentor attribution in, it is the thing that keeps this out of guru territory.",
   },
   {
     n: '02', title: 'Play to win',
