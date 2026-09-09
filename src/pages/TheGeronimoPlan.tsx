@@ -314,7 +314,9 @@ type SFOutline = {
   // the day. Rendered as numbered options. `spoken` is ignored when this is set.
   hookOptions?: string[][];
   beats: Beat[];
-  payoff: string; cta?: string; fill?: string;
+  // Optional, because some scripts fold the close into the last beat rather
+  // than landing a separate line. Absent means deliberate, not missing.
+  payoff?: string; cta?: string; fill?: string;
 };
 
 const SHORT_FORM_SHOOT: SFOutline[] = [
@@ -537,45 +539,44 @@ const RYAN_SHOOT: SFOutline[] = [
     n: '02', title: "You don't find A players, you build them",
     lens: 'Belief · Reframe', format: 'Direct to camera. The tool stays off screen.',
     spoken: [
-      'Imagine finding your next A player.',
-      "The one that's gonna help you scale your revenue past your goals.",
-      'And you fumble the onboarding.',
+      "Imagine finding your dream employee. The A player that's gonna help you scale your revenue and shoot past your goals.",
+      'Then you go ahead and catastrophically fumble the onboarding.',
       'Not only have you wasted 6 weeks and the money, but you still have to go find someone else.',
-      'You now gotta go back into hiring mode.',
-      'Instead consider this.',
-      "You don't find them, you build them.",
-      "We have a whole tool for this, but in the next 45 seconds, you'll get the exact 30/60/90 framework.",
+      'You now gotta go back into hiring mode, and do it all over again',
+      'But instead - consider this.',
+      'What if in 30 seconds, you knew instead of how to hire one, how to build one from scratch.',
+      "We have a whole tool for this, but here's the TLDR version of our 30/60/90 framework.",
     ],
     beats: [
-      { role: 'Common belief', text: 'Everyone thinks they need to find a unicorn.' },
-      { role: 'The cost', text: 'You just paid for another bucket of stress.' },
-      { role: 'The reframe', text: 'How you build them starts with the first 90 days.' },
-      { role: 'Day 30, I go', text: 'You show them how to do their job.' },
-      { role: 'Day 60, we go', text: 'You do it with them.' },
-      { role: 'Day 90, you go', text: 'They do it on their own.' },
-      { role: 'Two green lights', text: "You give them the green light if you're confident they can do it and they've shown they can. They give you the green light saying they're confident to take that KPI on board and own it." },
+      { role: 'Common belief', text: 'Instead of trying to hunt a unicorn and buying another bucket of stress.' },
+      { role: 'The reframe', text: 'You got an opportunity to build one and it all happens in the first 90 days.' },
+      { role: 'Day 30, I go', text: 'In the first 30 days, show them how to do their job. This is I go.' },
+      { role: 'Day 60, we go', text: 'Next 30 days, you show them.' },
+      { role: 'Day 90, you go', text: "Then the last thirty, they do it on their own. You sign off when you're confident they can do it and they've proven they can." },
     ],
-    payoff: 'SLOT.',
+    payoff: 'You can hunt unicorns and chase rainbows, or you just build one so they are loyal for life.',
     cta: 'SLOT. It points at the framework, never at the tool.',
-    fill: "Don't make it about the tool. Sean in the room: make it about the problem and let the tool be the relief, so you get the right Claude nerds rather than every Claude nerd. Hayley's rule holds too, teach the basics and let the fast lane stay behind the paywall. Ryan said the sequence once as I go, you go, we go. The order he then described is I go, we go, you go, so say it that way. 30/60/90 is named inside the tool but is not in school anywhere, flag that separately. Doza's timer fuse idea, the tool takes 45 seconds so the video runs 45, was parked as too clever.",
+    fill: "Ryan's own words. Don't make it about the tool, make it about the problem and let the tool be the relief, so you get the right Claude nerds rather than every Claude nerd. Hayley's rule holds too, teach the basics and let the fast lane stay behind the paywall. One to look at before camera: day 60 reads as a repeat of day 30. On the call Ryan described we go as doing it with them. 30/60/90 is named inside the tool but is not in school anywhere, flag that separately.",
   },
   {
     n: '03', title: 'The king of Tamworth',
     lens: 'Show · Case study', format: 'Direct to camera or green screen',
-    spoken: ["If I was running a rural gym, this is what I'd do straight away."],
-    beats: [
-      { role: 'Current reality', text: "He didn't think advertising worked. Not enough people in the town, and he didn't believe it worked anyway." },
-      { role: 'The start', text: '29k a month. Rural town. Never ran ads. Came in on a referral and it was a hard sell.' },
-      { role: 'What changed', text: 'Having an avatar, instead of advertising the gym. He went from advertising the gym to advertising the solution.' },
-      { role: 'First', text: 'Get dialled on your avatar. Anyone can do that, you can do it off this video.' },
-      { role: 'Second', text: 'Advertise it properly. That is the missing step.' },
-      { role: 'Third', text: 'Go and have your cake and eat it too.' },
-      { role: 'The result', text: 'Up to 45k. He bought his dream truck inside six months, and did all of it while his wife was pregnant with their first child.' },
-      { role: 'The name', text: 'Now we call him the king of Tamworth.' },
+    spoken: [
+      "If I was running a rural gym, this is the first thing I'd do before I change anything else.",
+      "I wouldn't do ads, I wouldn't post content. Literally, I wouldn't do any marketing. Until I did this one thing",
+      "And it's so painfully obvious, you're gonna hate me when I tell you. Because most of the time, people think they've already done it.",
     ],
-    payoff: 'SLOT.',
-    cta: 'SLOT.',
-    fill: "He is the place for mums in Tamworth to come and get strong. The avatar reads broad on paper and it landed anyway because they know their area. Confirm the numbers and the truck with Ryan before camera. Step two is the mediaverse play, which is the step you fulfil.",
+    beats: [
+      { role: 'Current reality', text: "Or, like a guy I know - they think ads don't work. That there's not enough people in the town to make it worthwhile." },
+      { role: 'The start', text: "He was making 29k, but everyone came in on referral, so it was an easy sell. Until it wasn't, and things slowed down." },
+      { role: 'What changed', text: 'So, he made one simple change. And started having an avatar, instead of advertising a gym. He went from selling the gym to selling the solution.' },
+      { role: 'First', text: "There's only three steps. First - Get dialled on your avatar. One person. One problem. One solution. Anyone can do it, you literally can immediately after this video." },
+      { role: 'Second', text: 'Second, Advertise it properly. Like a real business owner. Which is exactly what you are. This is the critical step.' },
+      { role: 'Third', text: 'And third - Go have your cake, and eat it to.' },
+      { role: 'The result', text: 'Because this guy grew to 45k per month, bought his dream truck within six months, and did it all of it while his wife was pregnant with their first child.' },
+      { role: 'The name', text: 'And now we call him the king of Tamworth. All he did was make a decision. One that you can make right now. Who is your avatar?' },
+    ],
+    fill: "Ryan's own words. The close is folded into the last beat, so there is no separate payoff line. Confirm the numbers and the truck with Ryan before camera. He is the place for mums in Tamworth to come and get strong, and the avatar reads broad on paper and landed anyway because they know their area. Step two is the mediaverse play, which is the step you fulfil.",
   },
 ];
 
@@ -757,10 +758,12 @@ function ShootOutlineCard({ o }: { o: SFOutline }) {
             <dd><Slotted text={b.text} /></dd>
           </div>
         ))}
-        <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
-          <dt className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 w-[108px] flex-shrink-0 pt-1">Payoff</dt>
-          <dd><Slotted text={o.payoff} /></dd>
-        </div>
+        {o.payoff && (
+          <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
+            <dt className="text-[10px] uppercase tracking-widest font-semibold text-blue-400 w-[108px] flex-shrink-0 pt-1">Payoff</dt>
+            <dd><Slotted text={o.payoff} /></dd>
+          </div>
+        )}
         {cta && (
           <div className="flex gap-3 border-b border-zinc-800/70 py-2.5">
             <dt className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 w-[108px] flex-shrink-0 pt-1">CTA</dt>
@@ -2633,7 +2636,7 @@ export default function TheGeronimoPlan() {
                     'The four steps from the hot seat. Everything else on the 400 members video is written.',
                     'The five COACH words. Sophie has them, they were never said on the jam.',
                     'The play to win example. Sean built the shape, the call was never picked.',
-                    "Payoffs and CTAs are missing on three of Ryan and Sophie's outlines. Those are the lines they leave with, so they cannot be improvised at camera.",
+                    "Payoffs and CTAs on Sophie's play to win, necessary conversation and 400 members. Those are the lines she leaves with, so they cannot be improvised at camera. Ryan's three are written.",
                     'Every text hook. Not one was written in the room. They are the on screen words, so they get decided before Thursday, not in the edit.',
                     "Ryan's drive of ideas and Sophie's ideas doc. Both promised on the call, neither sent yet.",
                     'IG Live on Friday has no owner and no time.',
