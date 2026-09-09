@@ -310,6 +310,9 @@ type Beat = { role: string; text: string };
 type SFOutline = {
   n: string; title: string; lens: string; format: string;
   textHook?: string; spoken: string[];
+  // Alternates, when the room wrote more than one hook and the pick happens on
+  // the day. Rendered as numbered options. `spoken` is ignored when this is set.
+  hookOptions?: string[][];
   beats: Beat[];
   payoff: string; cta?: string; fill?: string;
 };
@@ -504,22 +507,31 @@ const RYAN_SHOOT: SFOutline[] = [
   {
     n: '01', title: 'Winning ideas in 30 seconds',
     lens: 'Show · Demonstration', format: 'Phone, filmed over the shoulder',
-    spoken: [
-      "If you're stuck for content ideas and you're wondering every single week, what should I be posting?",
-      "There's actually a simple way, and it's only going to take you 30 seconds.",
-      "This is the Geronimo secret sauce of what we do and how we market in 2026, and I'm going to break it down in the next 30 seconds.",
+    spoken: [],
+    hookOptions: [
+      [
+        "If you're stuck for content ideas and you're wondering every single week, what should I be posting?",
+        "There's a stupid simple way, and it's only going to take you 30 seconds.",
+      ],
+      [
+        "If I hear another gym owner say they're stuck for content ideas, I'm gonna throw a dumbbell at em.",
+      ],
+      [
+        'If coming up with content ideas is ruining your week, this is probably why.',
+        "Every week one of our X (Number) members asks 'Ryan, surely there's a way I can make content for my Gym with AI that isn't going to embarrass my bloodline' so I can spend more time with my family?",
+      ],
     ],
     beats: [
-      { role: 'Common belief', text: "You think you have to come up with the ideas on the fly. That you need a level of depth and insight into social media you just don't have. And that you need a professional camera setup to film it." },
-      { role: 'The flip', text: "You don't need a fancy camera. You don't need a marketing degree. You don't need five hours a week." },
-      { role: 'Why it works', text: "You're not putting generic shit in, so it isn't putting generic ChatGPT content out. It runs on the curriculum." },
-      { role: 'Step one', text: "You've already identified who your million dollar member is." },
+      { role: 'Common belief', text: "Everybody still thinks you gotta buy a pro camera, Come up with the ideas on the fly And dance for the algorithm, Or, the others just leave it up to ChatGPT, throw everything into a melting pot, and post content that screams 'I kinda suck at this' The truth is, you don't need any of that, You don't even need five hours a week." },
+      { role: 'The promise', text: "This is the secret sauce of how we market in 2026, and I'm going to break it down in the next 30 seconds, because it has everything you need to make content that actually brings in qualified leads this week if you do it right. And the best part is, nobody will even know it's AI, and here's why." },
+      { role: 'Why it works', text: "You're not gonna ask chat GPT to work out who it's for. Just like I did for this video, I knew exactly who I was talking to. And that is the secret of why this works. Because step one is, Identifying who your million dollar member is." },
       { role: 'Step two', text: 'Click generate.' },
-      { role: 'Step three', text: 'Pick up your phone and film it.' },
+      { role: 'Step three', text: 'Pick up your phone and film it in the next 30 minutes.' },
+      { role: 'Step four', text: 'Go and do literally anything else with your time,' },
     ],
-    payoff: "It's 2026. If you think you need an expensive camera and four days to come up with content ideas, you don't.",
-    cta: 'If you want a copy of this to see what works for you, comment.',
-    fill: "Shoot it on the phone, over the shoulder, so the ease is visible rather than claimed. Do not explain the member profile step first. Hayley's call, and Ryan agreed his instinct was to over explain the prerequisite. Nobody watched last Friday's post. Both Hayley and Doza flagged this one as a lead magnet.",
+    payoff: "It's 2026. If you think you need an expensive camera and four days to come up with content ideas that actually get you members, you're about to see just how easy it is.",
+    cta: 'Because when you get it by commenting "Content" it\'s gonna blow your mind',
+    fill: "Ryan's own words, three hooks, pick on the day. Two gaps to close before camera. The member count in hook 3, X (Number), needs the real figure. And the CTA trails off in the notes at 'the first', so finish that line. Shoot it on the phone, over the shoulder, so the ease is visible rather than claimed. Do not explain the member profile step first, nobody watched last Friday's post. Both Hayley and Doza flagged this one as a lead magnet.",
   },
   {
     n: '02', title: "You don't find A players, you build them",
@@ -713,15 +725,29 @@ function ShootOutlineCard({ o }: { o: SFOutline }) {
         )}
       </div>
 
-      <div className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3 mb-5">
-        {o.spoken.length > 0 ? (
-          o.spoken.map((l, i) => (
-            <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
-          ))
-        ) : (
-          <p className="text-[17px] leading-snug"><Slotted text="SLOT. The spoken hook. Never landed in the room." /></p>
-        )}
-      </div>
+      {o.hookOptions ? (
+        <div className="space-y-2 mb-5">
+          {o.hookOptions.map((lines, i) => (
+            <div key={i} className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3">
+              <p className="text-[9px] uppercase tracking-widest font-semibold text-blue-400 mb-1.5">Hook {i + 1}</p>
+              {lines.map((l, j) => (
+                <p key={j} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+              ))}
+            </div>
+          ))}
+          <p className="text-zinc-500 text-[12px]">Pick one on the day. Shoot all three if the energy is there.</p>
+        </div>
+      ) : (
+        <div className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3 mb-5">
+          {o.spoken.length > 0 ? (
+            o.spoken.map((l, i) => (
+              <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+            ))
+          ) : (
+            <p className="text-[17px] leading-snug"><Slotted text="SLOT. The spoken hook. Never landed in the room." /></p>
+          )}
+        </div>
+      )}
 
       <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The structure</p>
       <dl className="border-t border-zinc-800/70">
@@ -2603,6 +2629,7 @@ export default function TheGeronimoPlan() {
                 <BulletList
                   items={[
                     'Doza has three pieces for TGA. Two come off the pod recap. The third was never planned.',
+                    "Ryan's hook 3 needs the real member count in place of X (Number), and his CTA trails off at 'the first'.",
                     'The four steps from the hot seat. Everything else on the 400 members video is written.',
                     'The five COACH words. Sophie has them, they were never said on the jam.',
                     'The play to win example. Sean built the shape, the call was never picked.',
