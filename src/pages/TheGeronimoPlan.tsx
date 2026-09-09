@@ -298,17 +298,18 @@ function Checklist() {
   );
 }
 
-// ─── This shoot ──────────────────────────────────────────────────────────
-// Hooks are lifted verbatim from Sean's notes of 1 September. They are not
-// paraphrased and must not be. Every beat carries the job it does in the
-// structure, so Doza knows what each one is FOR rather than just riffing.
+// ─── Past shoot · first of September ─────────────────────────────────────
+// Hooks are lifted verbatim from Sean's notes of 1 September, off the media
+// jam of 31 August. They are not paraphrased and must not be. Every beat
+// carries the job it does in the structure, so Doza knows what each one is
+// FOR rather than just riffing.
 // Anything marked SLOT was not said and must not be invented.
 
 type Beat = { role: string; text: string };
 
 type SFOutline = {
   n: string; title: string; lens: string; format: string;
-  textHook: string; spoken: string[];
+  textHook?: string; spoken: string[];
   beats: Beat[];
   payoff: string; cta?: string; fill?: string;
 };
@@ -490,6 +491,194 @@ const LONG_FORM_SHOOT: LFOutline[] = [
 
 ];
 
+// ─── This shoot · 10 and 11 September ────────────────────────────────────
+// Built live on the media jam of 8 September, cross checked against Sean's
+// own written notes from the same call. Spoken hooks are the words the room
+// actually landed on. Nothing is paraphrased into something nobody said, and
+// anything marked SLOT was never captured. Do not invent it.
+// Three owners, three posts each. More outlines than slots on purpose.
+
+type ShootLane = { id: string; label: string; who: string; note: string; outlines: SFOutline[] };
+
+const RYAN_SHOOT: SFOutline[] = [
+  {
+    n: '01', title: 'Winning ideas in 30 seconds',
+    lens: 'Show · Demonstration', format: 'Phone, filmed over the shoulder',
+    spoken: [
+      "If you're stuck for content ideas and you're wondering every single week, what should I be posting?",
+      "There's actually a simple way, and it's only going to take you 30 seconds.",
+      "This is the Geronimo secret sauce of what we do and how we market in 2026, and I'm going to break it down in the next 30 seconds.",
+    ],
+    beats: [
+      { role: 'Common belief', text: "You think you have to come up with the ideas on the fly. That you need a level of depth and insight into social media you just don't have. And that you need a professional camera setup to film it." },
+      { role: 'The flip', text: "You don't need a fancy camera. You don't need a marketing degree. You don't need five hours a week." },
+      { role: 'Why it works', text: "You're not putting generic shit in, so it isn't putting generic ChatGPT content out. It runs on the curriculum." },
+      { role: 'Step one', text: "You've already identified who your million dollar member is." },
+      { role: 'Step two', text: 'Click generate.' },
+      { role: 'Step three', text: 'Pick up your phone and film it.' },
+    ],
+    payoff: "It's 2026. If you think you need an expensive camera and four days to come up with content ideas, you don't.",
+    cta: 'If you want a copy of this to see what works for you, comment.',
+    fill: "Shoot it on the phone, over the shoulder, so the ease is visible rather than claimed. Do not explain the member profile step first. Hayley's call, and Ryan agreed his instinct was to over explain the prerequisite. Nobody watched last Friday's post. Both Hayley and Doza flagged this one as a lead magnet.",
+  },
+  {
+    n: '02', title: "You don't find A players, you build them",
+    lens: 'Belief · Reframe', format: 'Direct to camera. The tool stays off screen.',
+    spoken: [
+      'Imagine finding your next A player.',
+      "The one that's gonna help you scale your revenue past your goals.",
+      'And you fumble the onboarding.',
+      'Not only have you wasted 6 weeks and the money, but you still have to go find someone else.',
+      'You now gotta go back into hiring mode.',
+      'Instead consider this.',
+      "You don't find them, you build them.",
+      "We have a whole tool for this, but in the next 45 seconds, you'll get the exact 30/60/90 framework.",
+    ],
+    beats: [
+      { role: 'Common belief', text: 'Everyone thinks they need to find a unicorn.' },
+      { role: 'The cost', text: 'You just paid for another bucket of stress.' },
+      { role: 'The reframe', text: 'How you build them starts with the first 90 days.' },
+      { role: 'Day 30, I go', text: 'You show them how to do their job.' },
+      { role: 'Day 60, we go', text: 'You do it with them.' },
+      { role: 'Day 90, you go', text: 'They do it on their own.' },
+      { role: 'Two green lights', text: "You give them the green light if you're confident they can do it and they've shown they can. They give you the green light saying they're confident to take that KPI on board and own it." },
+    ],
+    payoff: 'SLOT.',
+    cta: 'SLOT. It points at the framework, never at the tool.',
+    fill: "Don't make it about the tool. Sean in the room: make it about the problem and let the tool be the relief, so you get the right Claude nerds rather than every Claude nerd. Hayley's rule holds too, teach the basics and let the fast lane stay behind the paywall. Ryan said the sequence once as I go, you go, we go. The order he then described is I go, we go, you go, so say it that way. 30/60/90 is named inside the tool but is not in school anywhere, flag that separately. Doza's timer fuse idea, the tool takes 45 seconds so the video runs 45, was parked as too clever.",
+  },
+  {
+    n: '03', title: 'The king of Tamworth',
+    lens: 'Show · Case study', format: 'Direct to camera or green screen',
+    spoken: ["If I was running a rural gym, this is what I'd do straight away."],
+    beats: [
+      { role: 'Current reality', text: "He didn't think advertising worked. Not enough people in the town, and he didn't believe it worked anyway." },
+      { role: 'The start', text: '29k a month. Rural town. Never ran ads. Came in on a referral and it was a hard sell.' },
+      { role: 'What changed', text: 'Having an avatar, instead of advertising the gym. He went from advertising the gym to advertising the solution.' },
+      { role: 'First', text: 'Get dialled on your avatar. Anyone can do that, you can do it off this video.' },
+      { role: 'Second', text: 'Advertise it properly. That is the missing step.' },
+      { role: 'Third', text: 'Go and have your cake and eat it too.' },
+      { role: 'The result', text: 'Up to 45k. He bought his dream truck inside six months, and did all of it while his wife was pregnant with their first child.' },
+      { role: 'The name', text: 'Now we call him the king of Tamworth.' },
+    ],
+    payoff: 'SLOT.',
+    cta: 'SLOT.',
+    fill: "He is the place for mums in Tamworth to come and get strong. The avatar reads broad on paper and it landed anyway because they know their area. Confirm the numbers and the truck with Ryan before camera. Step two is the mediaverse play, which is the step you fulfil.",
+  },
+];
+
+const SOPHIE_SHOOT: SFOutline[] = [
+  {
+    n: '01', title: 'Bare minimum, outstanding result',
+    lens: 'Belief · Reframe', format: 'Direct to camera',
+    spoken: ['Where are you doing the bare minimum and expecting an outstanding result?'],
+    beats: [
+      { role: 'The pain', text: "They're stuck doing the most with their input, burning out, and not getting the output." },
+      { role: 'The diagnosis', text: 'They skim across the top of their work instead of going deep.' },
+      { role: 'The example', text: "I had a call yesterday with someone who said the new way of doing ads doesn't work. When we unpacked it, he'd done a scattered version of it, because he had so many balls in the air he just wanted it done." },
+      { role: 'The pattern', text: 'They do things at 10% effort, they get 10% of the result, they decide nothing works. It burns them out more than doing it properly would have.' },
+      { role: 'The question', text: 'If I followed you around with a surveillance crew, 24 hours a day, seven days a week, would I believe what you say is your ambition, based on your actions?' },
+      { role: 'Where it came from', text: 'That is the question one of my mentors asked me, and I keep reflecting on it.' },
+    ],
+    payoff: "You don't need to do more work. You need to go deeper on the work you're already doing.",
+    cta: 'Get honest about it, and change your actions so they match your ambition.',
+    fill: "The anti guru rule Sean gave in the room: share your own experience, or share what other people have done. Never preach, because then you are not telling anyone what they should do. Attributing the question to her mentor is what keeps it out of guru territory, so keep that line in.",
+  },
+  {
+    n: '02', title: 'Play to win',
+    lens: 'Belief · Reframe', format: 'Direct to camera',
+    spoken: [
+      'If you were playing to win in your business, what would that actually look like?',
+      'I was on a call last week and,',
+    ],
+    beats: [
+      { role: 'The example', text: 'SLOT. Which call. Sean built the shape and the story was never picked.' },
+      { role: 'The pattern', text: 'People shrink to their constraint, rather than rising to the goal.' },
+      { role: 'Why', text: 'They make decisions through fear, based on not wanting to lose.' },
+      { role: 'Where it shows up', text: 'Staff and standards. Hiring. Having the conversation. Giving someone a proper role and actually delegating the KPI.' },
+      { role: 'The move', text: 'The decision you make playing to win is usually a much braver one. They never even considered it, because the instinct under pressure is to shrink.' },
+    ],
+    payoff: 'SLOT.',
+    cta: 'SLOT.',
+    fill: 'Play to win is the internal theme, so it is language the team already lives in. Pick the call before Thursday. The video opens on it.',
+  },
+  {
+    n: '03', title: 'The necessary conversation',
+    lens: 'Teach · Framework', format: 'Direct to camera, sitting down. No graphic.',
+    spoken: ['The hardest decision is knowing whether you should push an employee, or whether you should let them go.'],
+    beats: [
+      { role: 'Common belief', text: 'They think they need to play boss.' },
+      { role: 'The symptom', text: "They put up with subpar results and behaviour. They normalise it, they don't hold the team accountable, they hold on to people they know they shouldn't, and they hire two people to do one person's job." },
+      { role: 'Why', text: "Acts of service and people pleasing. They don't want to upset anyone, they want to be liked. So they bleed for months procrastinating on the conversation." },
+      { role: 'The reframe', text: "We don't call them tough conversations. We call them necessary conversations." },
+      { role: 'The line', text: "These businesses can make good money. Not if you're hiring two people to do one person's job because you didn't want to have a necessary conversation." },
+      { role: 'Before you decide', text: 'Sack or keep. Here is the framework to try first, before you make that call.' },
+      { role: 'The framework', text: 'SLOT. C, O, A, C, H. The five words were never said on the jam.' },
+    ],
+    payoff: 'SLOT.',
+    cta: 'SLOT.',
+    fill: 'Chocolate broccoli warning from the room. They want to feel like they are getting permission to sack someone, and the answer is not yet, not if you have not done your bit by setting the clarity at the start and giving the feedback. Art direction is decided: say it so it stands without graphics, because captions are running anyway. Overlay the letters in post only if it reads cohesive. A chalkboard only if it becomes a visual model, and it is not one.',
+  },
+  {
+    n: '04', title: '400 members with the ads off',
+    lens: 'Show · Case study', format: 'Green screen, chalkboard, or split screen against the hot seat recording',
+    spoken: ['Imagine hitting 400 members without running paid ads.'],
+    beats: [
+      { role: 'Why members', text: 'Our audience understands members more than they understand revenue. The 300 club. If you have 300 members, you are in the milli.' },
+      { role: 'The start', text: '20k a month. Three years with us. He is at 120k now.' },
+      { role: 'The move', text: 'He turned the ads off and still grew 25% in revenue across 21 weeks.' },
+      { role: 'The number', text: '8.5 sales a week on average, with no ads running.' },
+      { role: 'The pledge', text: "His members gave him feedback. We don't care about sales, we're not here to sell memberships, we sell connection. So he made a pledge. For the next 12 weeks the ads are off, we just want to focus on you. He has kept them off ever since." },
+      { role: 'The open week', text: '54 signups off the back of one open week.' },
+      { role: 'The four steps', text: 'SLOT. Four things he did, unpacked on the hot seat and never captured on the jam. Pull them off the recording.' },
+    ],
+    payoff: 'SLOT.',
+    cta: 'SLOT.',
+    fill: 'Do not justify it. Sean in the room: you do not need to qualify everything, the story carries it. The quadrant was drawn on the iPad during the hot seat, so the drawing already exists on the Zoom if the split screen is the treatment. Kai recapping the same hot seat is queued behind this one.',
+  },
+];
+
+const DOZA_SHOOT: SFOutline[] = [
+  {
+    n: '01', title: 'Straight off the pod',
+    lens: 'Teach · Recap', format: 'Direct to camera, on the pod set, the second filming stops',
+    spoken: [],
+    beats: [
+      { role: 'The prompt', text: 'What did you just do? What did you just teach someone? Walk us through it.' },
+      { role: 'The frame', text: 'This is the problem I just solved for this audience. These were the five things I took them through on the pod. This is the payoff.' },
+      { role: 'Why now', text: 'He is already on the set, already in flow, already in talking mood. He can quick fire it back.' },
+    ],
+    payoff: 'SLOT.',
+    fill: "Doza's three TGA pieces were never planned on the jam. Sean called it himself at the end: we didn't get Dozer's ideas, I don't know how that went straight over my head. This solves one to two of them for nothing, off filming that is happening anyway. Billy runs the prompt the moment the pod stops. The third piece is still open.",
+  },
+];
+
+const SHOOT_LANES: ShootLane[] = [
+  { id: 'ryan', label: `Ryan · ${RYAN_SHOOT.length}`, who: 'Ryan', note: 'Demonstration. What he built, what it does, who it saves. Batched, because there is no point flying a shooter in for three reels.', outlines: RYAN_SHOOT },
+  { id: 'sophie', label: `Sophie · ${SOPHIE_SHOOT.length}`, who: 'Sophie', note: 'Belief. Three ideas plus a result. Four outlines against three slots, so be ruthless.', outlines: SOPHIE_SHOOT },
+  { id: 'doza', label: `Doza · ${DOZA_SHOOT.length}`, who: 'Doza', note: 'Nothing was planned for his three. This is the piece the day already gives you.', outlines: DOZA_SHOOT },
+];
+
+function SecondSeptShoot() {
+  const [lane, setLane] = React.useState<string>('ryan');
+  const current = SHOOT_LANES.find((l) => l.id === lane) ?? SHOOT_LANES[0];
+  return (
+    <div>
+      <div className="border-b border-zinc-800 mb-5">
+        <SubTabs
+          sections={SHOOT_LANES.map((l) => ({ id: l.id, label: l.label }))}
+          active={lane}
+          onChange={setLane}
+        />
+      </div>
+      <p className="text-zinc-500 text-[13px] leading-relaxed mb-5">{current.note}</p>
+      <div className="grid gap-3">
+        {current.outlines.map((o) => <ShootOutlineCard key={o.n} o={o} />)}
+      </div>
+    </div>
+  );
+}
+
 const Slotted = ({ text }: { text: string }) => {
   if (!text.startsWith('SLOT')) return <span className="text-zinc-300 text-[13px] leading-relaxed">{text}</span>;
   const rest = text.replace(/^SLOT\.?\s*/, '');
@@ -517,13 +706,21 @@ function ShootOutlineCard({ o }: { o: SFOutline }) {
 
       <div className="mt-3 mb-4 flex flex-wrap items-center gap-2">
         <span className="text-[9px] uppercase tracking-widest font-semibold text-zinc-600">Text</span>
-        <span className="rounded-md border border-zinc-700 bg-zinc-900/60 px-2.5 py-1 text-[11px] font-medium text-white">{o.textHook}</span>
+        {o.textHook ? (
+          <span className="rounded-md border border-zinc-700 bg-zinc-900/60 px-2.5 py-1 text-[11px] font-medium text-white">{o.textHook}</span>
+        ) : (
+          <span className="rounded-md border border-dashed border-zinc-700 px-2.5 py-1 text-[10px] uppercase tracking-widest font-semibold text-zinc-600">To fill</span>
+        )}
       </div>
 
       <div className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3 mb-5">
-        {o.spoken.map((l, i) => (
-          <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
-        ))}
+        {o.spoken.length > 0 ? (
+          o.spoken.map((l, i) => (
+            <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+          ))
+        ) : (
+          <p className="text-[17px] leading-snug"><Slotted text="SLOT. The spoken hook. Never landed in the room." /></p>
+        )}
       </div>
 
       <p className="text-[10px] uppercase tracking-widest font-semibold text-zinc-500 mb-2">The structure</p>
@@ -598,7 +795,7 @@ function LongFormCard({ o }: { o: LFOutline }) {
   );
 }
 
-function ThisShoot() {
+function FirstSeptShoot() {
   const [lane, setLane] = React.useState<string>('short');
   return (
     <div>
@@ -955,6 +1152,7 @@ const TABS: TabDef[] = [
     blurb: 'The craft behind the plan. The walkthroughs your team learns from, and the system underneath all of it.',
     sections: [
       { id: 'thisshoot', label: 'This shoot' },
+      { id: 'pastshoots', label: 'Past shoots' },
       { id: 'shootcard', label: 'The shoot card' },
       { id: 'script', label: 'The script system' },
       { id: 'training', label: 'The training' },
@@ -2269,11 +2467,165 @@ export default function TheGeronimoPlan() {
         {sec === 'thisshoot' && (
           <Wrap>
             <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">This shoot</p>
-            <H2>First shoot of September.</H2>
-            <Note>Hooks are lifted from the notes word for word, not paraphrased. Under each one is the structure it follows, so you know what every beat is doing rather than riffing blind. More ideas than slots on purpose, so you can be ruthless to the standard. Anything marked to fill was not said and has not been invented.</Note>
+            <H2>Second shoot of September.</H2>
+            <Note>Thursday 10 September, the TGA media block in Sydney plus the podcast. Friday 11 September, the quarter day. Built on the media jam of 8 September. Hooks are the words the room actually landed on, not a tidy version of them. Under each one is the structure it follows, so you know what every beat is doing rather than riffing blind. Anything marked to fill was never captured and has not been invented.</Note>
 
             <div className="mt-8">
-              <ThisShoot />
+              <SecondSeptShoot />
+            </div>
+
+            <div className="mt-2">
+              <Block label="Friday, the quarter day">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">The theme.</b> My job is to build leaders. It is not to do everything. Everything shot on Friday hangs off that line.</>,
+                    <><b className="text-white font-semibold">The unveil.</b> The Pathway to Ownership. A ten year career in five stages, drawn as a DNA strand, because after stage three it twists into two. One strand for people, one for technical mastery. Either way it ends at ownership.</>,
+                    <><b className="text-white font-semibold">The question it answers.</b> How do I get my team so bought in. To what. And to who. The answer is to create a future so big they can fit their future inside it. Why would they want to leave.</>,
+                    <><b className="text-white font-semibold">Two reels, in order.</b> I love my job so much. Then, this is how you build leaders.</>,
+                    <><b className="text-white font-semibold">Vox pops.</b> Biggest takeaway from the day, give me one sentence. Run the room. None of these go viral and that is fine, they are the ambience.</>,
+                    <><b className="text-white font-semibold">Employer branding.</b> Every newbie is in the den for the first time. First impressions, camera on the inside, what it is like being part of Geronimo.</>,
+                    <><b className="text-white font-semibold">The team angle.</b> What it is like working for someone who actually gives a shit about you. Claire's frame: come to a Geronimo leadership day with me, then, you know how many jobs I have had where they organise a day and I am dreading it.</>,
+                    <><b className="text-white font-semibold">Rowan.</b> Capture the keynote for the archive. The cut that works is Doza's take cutting through to what Rowan is teaching, not a clip of Rowan alone. Introduce him as a character first. See this guy, he is our Chief Talent Officer. What, we have a Chief Talent Officer. For Empire 28 we do not want staff, we want partner energy.</>,
+                    <><b className="text-white font-semibold">The ball pop quiz.</b> Quick fire pickleballs at whoever is answering on the mission and the core values. Claire volunteers as the target and the whole team will know it was her idea. This could launch the pop quiz series to the members.</>,
+                    <><b className="text-white font-semibold">IG Live, a test only.</b> Fifteen minutes. Five minutes following Doza around, five minutes of Q&amp;A. Not a priority, and it only runs if the day allows. Sean's one condition: any interaction has to reinforce the next one, so it cannot just be a camera wandering.</>,
+                    <><b className="text-white font-semibold">The number.</b> Four to five pieces, mostly Haydozer. Three of them published on the day, not two weeks later. The whole point is that it feels like right now.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Mystery shops and pop quizzes">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Ryan's six.</b> Resolute Resistance, Stone Throw Yoga, Synergy Method, Method Plus Action, Marlon Coast CrossFit, and Finn at Frontline Fitness.</>,
+                    <><b className="text-white font-semibold">The other five named in the room.</b> Peak Shape, Aura Recovery, Grassroots, Within, Urban Yoga.</>,
+                    <><b className="text-white font-semibold">Five names for every one that lands.</b> That is the ratio. Add a couple of managers to the list as well.</>,
+                    <><b className="text-white font-semibold">Ring ahead.</b> Tell them they are one of the three you are calling this week. Do it in normal office hours. The purity of a genuinely cold call loses to the ROI of a two hour block.</>,
+                    <><b className="text-white font-semibold">The best ones are where they nail the script.</b> If they do not, that is a coaching moment and you take it.</>,
+                    <><b className="text-white font-semibold">Pop quiz is a different test.</b> KPIs, structure, ownership, team wins.</>,
+                    <><b className="text-white font-semibold">Floated, not decided.</b> Swap the lists. You call hers, she calls yours, and nobody is pre warmed.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="How these got built">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Mirror their reality, and make that the hook.</b> If you are stuck for content ideas and you are wondering every single week what I should be posting. That is the pain, said back to them in their own words.</>,
+                    <><b className="text-white font-semibold">Then go deep on what they currently believe.</b> You think you have to do this, and this, and this. Get all three out. That is the cost stacking up.</>,
+                    <><b className="text-white font-semibold">Then flip it and relieve it.</b> Show the easy and simple way. Then walk through what it actually consists of. Ideally it is a few clicks.</>,
+                    <><b className="text-white font-semibold">Ask three questions of anything they bring.</b> What does it do. What is different about it. How does it help people.</>,
+                    <><b className="text-white font-semibold">Name the mechanism, do not call it your curriculum.</b> Same thing, framed properly. This is the Geronimo secret sauce of how we market in 2026.</>,
+                    <><b className="text-white font-semibold">Strip, do not stack.</b> Everyone wants to put everything in. The job is taking as much out as possible. Ryan spotted it himself, he was explaining too much on the first idea.</>,
+                    <><b className="text-white font-semibold">Never explain the prerequisite.</b> If it pops off, they did not watch the one you posted last Friday. Simplify the language and let it stand alone.</>,
+                    <><b className="text-white font-semibold">Make it about the problem, not the tool.</b> The tool is the relief at the end. Lead with the tool and you attract people who like tools.</>,
+                    <><b className="text-white font-semibold">Talk to one person.</b> Billy's takeaway, and the right one. Pick the specific person, then pinpoint their pain and their beliefs and run the structure on them.</>,
+                    <><b className="text-white font-semibold">The anti guru rule.</b> Share your own experience, or share what other people have done. That way you are not preaching, you are not telling anyone what they should do.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Directing the room, for Billy">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Keep the line tight.</b> The line drifts fast. One idea, break it down, finish it, sign it off, next person. Nobody leaves a thought open.</>,
+                    <><b className="text-white font-semibold">Alternate.</b> Ryan, Soph, Ryan, Soph. It stops either of them getting bored and it forces them to land a thought instead of trailing off.</>,
+                    <><b className="text-white font-semibold">Agree a hand signal.</b> Hand up means stop and come back. Set it before you start so it is not a correction in the moment.</>,
+                    <><b className="text-white font-semibold">Reinforce while they talk.</b> Nodding, that was great, awesome. Especially with people who have barely been on camera.</>,
+                    <><b className="text-white font-semibold">And, never but.</b> But shuts the idea down. And builds on it. Small word, completely different room.</>,
+                    <><b className="text-white font-semibold">Rewind in pieces.</b> Say that again, but just the first part. You have to remember what the first part was, and prompt it back to them.</>,
+                    <><b className="text-white font-semibold">Structure over script.</b> Nobody writes a full script and Sean is not writing one either. Dot points and beats, accessible on the day.</>,
+                    <><b className="text-white font-semibold">Walk in with a plan.</b> What you are getting and how you are getting it, so you do not leave with a pile of footage and no idea what it is for.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="What changed">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Ideas get submitted before the jam.</b> The form is already live on this page. Who you are, what the idea is, what it is for, three of them. Sean gets the notification.</>,
+                    <><b className="text-white font-semibold">Friday 5pm, linked off the scorecards.</b> They are already doing their numbers. The ideas go in beside them, so it is a deliverable and not a favour. Doza: lobbing into these meetings with half a thought cannot happen.</>,
+                    <><b className="text-white font-semibold">Sean reviews before the call.</b> Then the jam becomes, that was a great idea, here is why it was a great idea. Educational for everyone rather than Sean building it for one person.</>,
+                    <><b className="text-white font-semibold">Sophie runs weekly. Ryan gets batched fortnightly.</b> Six ideas at a time, a couple of mysteries in the batch. There is no point flying someone to the Gold Coast for half an hour.</>,
+                    <><b className="text-white font-semibold">The weeks alternate.</b> Short form one week, YouTube and ads the next, with Pete in the ads week. Short, long, short, long.</>,
+                    <><b className="text-white font-semibold">The jam gets an agenda.</b> Allocated time per person, so nothing gets missed at the end and everyone knows when they are up.</>,
+                    <><b className="text-white font-semibold">A pre production meeting before any shoot day.</b> The boat got decided the day before it happened. That is what puts scripts on the fly.</>,
+                    <><b className="text-white font-semibold">The bar for September.</b> Two posts a day on TGA, Monday to Friday, and we did it. No results test this month. Four weeks of five times two, and the mission is accomplished.</>,
+                    <><b className="text-white font-semibold">Billy owns the Thursday block.</b> An editor comes in underneath him so he can delegate. Nate stays as support, not as the owner.</>,
+                    <><b className="text-white font-semibold">Sit in on office hours.</b> Six calls, one question asked eighteen different ways. That is where the next month of content comes from.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Before Thursday">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Ryan.</b> Ring the six studios so they are expecting the call. Send the drive link with every idea in it, not just the three.</>,
+                    <><b className="text-white font-semibold">Sophie.</b> Ring her five. Pick the play to win call. Pull the four steps off the hot seat recording. Write out the five COACH words.</>,
+                    <><b className="text-white font-semibold">Sophie.</b> Send the ideas doc. All of them. Sean: if there is stuff hidden, I do not want only the three you selected.</>,
+                    <><b className="text-white font-semibold">Billy.</b> Walk in with the shot list and the plan for the day. Run the pod recap prompt the second Doza stops filming.</>,
+                    <><b className="text-white font-semibold">Billy and Hayley.</b> Thursday in Sydney, the editor handover, and how the assembly line runs in Notion.</>,
+                    <><b className="text-white font-semibold">Hayley.</b> Link the idea form onto the scorecards with the Friday 5pm deadline.</>,
+                    <><b className="text-white font-semibold">Sean.</b> The media jam agenda template. And the email that fires when the ideas have not landed.</>,
+                    <><b className="text-white font-semibold">Friday.</b> Billy brings a list into the Geronimo chat and cross checks it with Nate or Hayley before the day starts.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Queued behind these">
+                <BulletList
+                  items={[
+                    <><b className="text-white font-semibold">Kai recapping the hot seat.</b> Same story as the 400 members video, different mouth. Green screen.</>,
+                    <><b className="text-white font-semibold">The quote bank.</b> Dark B roll with one bold line on top. Same font as the Separation Sunday carousel, so the look becomes his. Either a word with its definition underneath, or a quote with the translation of what it actually means. Requires nobody. Capture rather than create.</>,
+                    <><b className="text-white font-semibold">Lines already confirmed for it.</b> You already know what to do, you are just negotiating with comfort. The curse of standards is that every day looks the same, the curse of comfort is that every year looks the same. Stay around ambitious people, they will never mock you for trying. Surprise, you thought you joined a business growth program, you actually joined a personal growth program, we grow the person to grow the business.</>,
+                    <><b className="text-white font-semibold">The bar for it.</b> Steer away from live laugh love, get as close to ambition as possible. These are fuel and reminders, not teaching. People need to be reminded more than they need to be taught.</>,
+                    <><b className="text-white font-semibold">Separation Sunday as a seven second trial reel.</b> The short video runs, the story of what it is and why he does it sits underneath. Opens the reel up to be played again and reaches past the existing audience.</>,
+                    <><b className="text-white font-semibold">Second angle coaching moments.</b> Wednesdays with Sophie in her office hours, in her natural environment, being trained to repeat the question back before she answers it.</>,
+                    <><b className="text-white font-semibold">Rowan's keynote as an email asset.</b> Half an hour of the juiciest section, sent privately to the warm list. This is what we get up to behind the scenes when we build leaders. Not an Instagram CTA.</>,
+                  ]}
+                />
+              </Block>
+            </div>
+
+            <div className="mt-2">
+              <Block label="Still open">
+                <BulletList
+                  items={[
+                    'Doza has three pieces for TGA. Two come off the pod recap. The third was never planned.',
+                    'The four steps from the hot seat. Everything else on the 400 members video is written.',
+                    'The five COACH words. Sophie has them, they were never said on the jam.',
+                    'The play to win example. Sean built the shape, the call was never picked.',
+                    "Payoffs and CTAs are missing on three of Ryan and Sophie's outlines. Those are the lines they leave with, so they cannot be improvised at camera.",
+                    'Every text hook. Not one was written in the room. They are the on screen words, so they get decided before Thursday, not in the edit.',
+                    "Ryan's drive of ideas and Sophie's ideas doc. Both promised on the call, neither sent yet.",
+                    'IG Live on Friday has no owner and no time.',
+                    '30/60/90 is named inside the tool but is not in school anywhere. Separate job, someone raise it.',
+                  ]}
+                />
+              </Block>
+            </div>
+          </Wrap>
+        )}
+
+        {sec === 'pastshoots' && (
+          <Wrap>
+            <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">Past shoots</p>
+            <H2>First shoot of September.</H2>
+            <Note>Off the media jam of 31 August. Hooks are lifted from the notes word for word, not paraphrased. Under each one is the structure it follows, so you know what every beat is doing rather than riffing blind. More ideas than slots on purpose, so you can be ruthless to the standard. Anything marked to fill was not said and has not been invented.</Note>
+
+            <div className="mt-8">
+              <FirstSeptShoot />
             </div>
 
             <div className="mt-2">
