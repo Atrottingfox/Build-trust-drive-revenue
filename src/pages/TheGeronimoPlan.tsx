@@ -524,15 +524,13 @@ const RYAN_SHOOT: SFOutline[] = [
       ],
     ],
     beats: [
-      { role: 'Common belief', text: "Everybody still thinks you gotta buy a pro camera, Come up with the ideas on the fly And dance for the algorithm, Or, the others just leave it up to ChatGPT, throw everything into a melting pot, and post content that screams 'I kinda suck at this' The truth is, you don't need any of that, You don't even need five hours a week." },
-      { role: 'The promise', text: "This is the secret sauce of how we market in 2026, and I'm going to break it down in the next 30 seconds, because it has everything you need to make content that actually brings in qualified leads this week if you do it right. And the best part is, nobody will even know it's AI, and here's why." },
-      { role: 'Why it works', text: "You're not gonna ask chat GPT to work out who it's for. Just like I did for this video, I knew exactly who I was talking to. And that is the secret of why this works. Because step one is, Identifying who your million dollar member is." },
+      { role: 'Common belief', text: "Everybody still thinks you gotta buy a pro camera,  Come up with the ideas on the fly\nAnd dance for the algorithm, Or, the others just leave it up to ChatGPT, throw everything into a melting pot, and post content that screams 'I kinda suck at this'\nThe truth is, you don't need any of that,  You don't even need five hours a week.\n\nThis is the secret sauce of how we market in 2026, and I'm going to break it down in the next 30 seconds, because it has everything you need to make content that actually brings in qualified leads this week if you do it right.   And the best part is, nobody will even know it's AI, and here's why." },
+      { role: 'Why it works', text: "You're not gonna ask chat GPT to work out work out who it's for. Just like I did for this video, I knew exactly who I was talking to.  And that is the secret of why this works. Because step one is -\nIdentifying who your million dollar member is." },
       { role: 'Step two', text: 'Click generate.' },
-      { role: 'Step three', text: 'Pick up your phone and film it in the next 30 minutes.' },
-      { role: 'Step four', text: 'Go and do literally anything else with your time,' },
+      { role: 'Step three', text: 'Pick up your phone and film it in the next 30 minutes  Step four Go and do literally anything else with your time,' },
     ],
     payoff: "It's 2026. If you think you need an expensive camera and four days to come up with content ideas that actually get you members, you're about to see just how easy it is.",
-    cta: 'Because when you get it by commenting "Content" it\'s gonna blow your mind',
+    cta: 'Because when you get it by commenting "Content" it\'s gonna blow your mind\n the first',
     fill: "Ryan's own words, three hooks, pick on the day. Two gaps to close before camera. The member count in hook 3, X (Number), needs the real figure. And the CTA trails off in the notes at 'the first', so finish that line. Shoot it on the phone, over the shoulder, so the ease is visible rather than claimed. Do not explain the member profile step first, nobody watched last Friday's post. Both Hayley and Doza flagged this one as a lead magnet.",
   },
   {
@@ -552,7 +550,7 @@ const RYAN_SHOOT: SFOutline[] = [
       { role: 'The reframe', text: 'You got an opportunity to build one and it all happens in the first 90 days.' },
       { role: 'Day 30, I go', text: 'In the first 30 days, show them how to do their job. This is I go.' },
       { role: 'Day 60, we go', text: 'Next 30 days, you show them.' },
-      { role: 'Day 90, you go', text: "Then the last thirty, they do it on their own. You sign off when you're confident they can do it and they've proven they can." },
+      { role: 'Day 90, you go', text: "Then the last thirty, they do it on their own.\n\nYou sign off when you're confident they can do it and they've proven  they can." },
     ],
     payoff: 'You can hunt unicorns and chase rainbows, or you just build one so they are loyal for life.',
     cta: 'SLOT. It points at the framework, never at the tool.',
@@ -562,19 +560,17 @@ const RYAN_SHOOT: SFOutline[] = [
     n: '03', title: 'The king of Tamworth',
     lens: 'Show · Case study', format: 'Direct to camera or green screen',
     spoken: [
-      "If I was running a rural gym, this is the first thing I'd do before I change anything else.",
-      "I wouldn't do ads, I wouldn't post content. Literally, I wouldn't do any marketing. Until I did this one thing",
-      "And it's so painfully obvious, you're gonna hate me when I tell you. Because most of the time, people think they've already done it.",
+      "If I was running a rural gym, this is the first thing I'd do before I change anything else. I wouldn't do ads, I wouldn't post content. Literally, I wouldn't do any marketing. Until I did this one thing And it's so painfully obvious, you're gonna hate me when I tell you. Because most of the time, people think they've already done it.",
     ],
     beats: [
-      { role: 'Current reality', text: "Or, like a guy I know - they think ads don't work. That there's not enough people in the town to make it worthwhile." },
+      { role: 'Current reality', text: "Or, like a guy I know - they think ads don't work.  That there's not enough people in the town to make it worthwhile." },
       { role: 'The start', text: "He was making 29k, but everyone came in on referral, so it was an easy sell. Until it wasn't, and things slowed down." },
-      { role: 'What changed', text: 'So, he made one simple change. And started having an avatar, instead of advertising a gym. He went from selling the gym to selling the solution.' },
-      { role: 'First', text: "There's only three steps. First - Get dialled on your avatar. One person. One problem. One solution. Anyone can do it, you literally can immediately after this video." },
-      { role: 'Second', text: 'Second, Advertise it properly. Like a real business owner. Which is exactly what you are. This is the critical step.' },
+      { role: 'What changed', text: 'So, he made one simple change.  And started having an avatar, instead of advertising a gym.  He went from selling the gym to selling the solution.' },
+      { role: 'First', text: "There's only three steps.  First - Get dialled on your avatar.  One person. One problem. One solution. Anyone can do it, you literally can immediately after this video." },
+      { role: 'Second', text: 'Second,  Advertise it properly. Like a real business owner. Which is exactly what you are. This is the critical step.' },
       { role: 'Third', text: 'And third - Go have your cake, and eat it to.' },
       { role: 'The result', text: 'Because this guy grew to 45k per month, bought his dream truck within six months, and did it all of it while his wife was pregnant with their first child.' },
-      { role: 'The name', text: 'And now we call him the king of Tamworth. All he did was make a decision. One that you can make right now. Who is your avatar?' },
+      { role: 'The name', text: 'And now we call him the king of Tamworth. All he did was make a decision. One that you can make right now.  Who is your avatar?' },
     ],
     fill: "Ryan's own words. The close is folded into the last beat, so there is no separate payoff line. Confirm the numbers and the truck with Ryan before camera. He is the place for mums in Tamworth to come and get strong, and the avatar reads broad on paper and landed anyway because they know their area. Step two is the mediaverse play, which is the step you fulfil.",
   },
@@ -589,40 +585,32 @@ const SOPHIE_SHOOT: SFOutline[] = [
       'Would you believe what you say your ambition is, based on your actions? A mentor asked that once and it completely threw me',
     ],
     beats: [
-      { role: 'The example', text: "I had a call yesterday with someone who told me the new way of running ads doesn't work. So we unpacked it, bit by bit. So I could help him get the thing pumping And he did all the right things. Kinda. He did half of the right things, Half the right way, With half the effort. But it wasn't even his fault, because like all of us. he had 28,000 other things to do in in his business, So he just wanted to tick the box and get the job done" },
-      { role: 'Common belief', text: "Issue is, we get so caught in thinking it's about doing more, that we half ass 99% of the things we think we should do," },
-      { role: 'The pattern', text: "And that's kinda the big trap. I've done it myself - as I'm sure you have too. 10% effort, 10% of the result, and the final verdict comes in at \"Nothing works\" We end up playing business whack a mole. Band aid fix everything, staying busy, and unfortunately never having the energy or attention to break through the thing that is actually holding us back." },
-      { role: 'Why I can ask it', text: 'That question was asked of me, by one of my mentors. And it changed my life.' },
+      { role: 'The example', text: "I had a call yesterday with someone who told me the new way of running ads doesn't work.  So we unpacked it, bit by bit. So I could help him get the thing pumping\nAnd he did all the right things.  Kinda.  He did half of the right things,  Half the right way,  With half the effort.  But it wasn't even his fault, because like all of us.  he had 28,000 other things to do in in his business, So he just wanted to tick the box and get the job done" },
+      { role: 'Common belief', text: "Issue is, we get so caught in thinking it's about doing more,  that we half ass 99% of the things we think we should do," },
+      { role: 'The pattern', text: "And that's kinda the big trap. I've done it myself - as I'm sure you have too. 10% effort, 10% of the result, and the final verdict comes in at  \"Nothing works\"\nWe end up playing business whack a mole.  Band aid fix everything, staying busy, and unfortunately never having the energy or attention to break through the thing that is actually holding us back." },
+      { role: 'Why I can ask it', text: 'That question was asked of me, by one of my mentors.  And it changed my life.' },
     ],
-    payoff: "Because sometimes we don't need to do more work. We need to go deeper on the work we're already doing.",
+    payoff: "Because sometimes we don't need to do more work.  We need to go deeper on the work we're already doing.",
     fill: "Sean's rewrite, in his words. The hook is now the mentor's question straight up, the example runs before the common belief, and it closes on the payoff with no separate CTA. Keep the mentor attribution in, it is the thing that keeps this out of guru territory.",
   },
   {
     n: '02', title: 'Play to win',
     lens: 'Belief · Reframe', format: 'Direct to camera',
-    spoken: [],
-    hookOptions: [
-      [
-        'If you were playing to win in your business, what would that actually look like?',
-        "Because the decision you're about to make is probably the one that just avoids losing.",
-        'And there is a much braver one sitting right next to it.',
-      ],
-      [
-        "Most owners make their biggest decisions from the smallest version of themselves, and they don't even notice they're doing it.",
-        'They shrink to their constraint, instead of rising to the goal they set.',
-        "I'll show you exactly what it looks like, and you're going to recognise yourself in it.",
-      ],
+    spoken: [
+      "You're gonna hate me for asking this.",
+      "Because I've noticed a pattern And when I looked at myself in the mirror, I saw it in me too.",
+      "This is a bold question but I'm gonna say it anyway.",
+      'If you were playing to win, what would that actually look like?',
+      'Because I realised in myself, embarrassingly, I used to play to not lose.',
+      "And if I'm honest it kinda sucked.",
     ],
     beats: [
-      { role: 'Common belief', text: 'When it gets tight, the instinct is to protect what you have got. So you make the decision from the fear of losing, rather than from the vision you set.' },
-      { role: 'The example', text: 'SLOT. I was on a call last week and, then the story. Sean built the shape in the room and the call was never picked.' },
-      { role: 'Where it shows up', text: 'Staff and standards. Hiring. The conversation you keep putting off. Giving someone a proper role and actually handing them the KPI.' },
-      { role: 'The move', text: "So ask it properly. If I was playing to win here, in line with the vision I've actually got, what decision would I make?" },
-      { role: 'What happens', text: 'It is usually a much braver decision. And most people never even considered it, because the instinct under pressure is to shrink.' },
+      { role: 'Common belief', text: "When things get tough, we just want to protect what we've got. So we make the decision from a fear of losing, rather than the vision of an alternate outcome." },
+      { role: 'Where it shows up', text: "And when you see it,  You'll see, this shows up in everything.  All areas of life.  I'm a coach inside a killer business.  We help gym owners scale their gyms, And it shows up in staff, in standards, in hiring in the conversation we put off.\nWhen I knew what to look for, I saw a rift in everything." },
+      { role: 'The move', text: "So the question is simple.  If I was playing to win here, in line with the vision I've actually got, and where I want to get to what decision would I make, right now in this second to actually get me there.?" },
     ],
-    payoff: 'Play to win. Then go and make the brave decision today, instead of the safe one you were going to make anyway.',
-    cta: 'SLOT. One ask. A keyword in the comments, or a DM.',
-    fill: "Verbatim from the jam: the hook, shrink to their constraint, decisions through fear, the braver decision they never considered, and where it shows up. The second hook, the connective lines and the payoff are drafted. Play to win is the internal theme, so it is language the team already lives in. The example is the blocker, pick the call before Thursday because the video opens on it.",
+    payoff: 'It is scary to toy with the idea of failure. Of making a bad decision. But from my own experience, after asking this question.  I have realised it is far scarier to live with the thought of never making the hard decisions, because I was too afraid to lose. it too',
+    fill: "Sean's rewrite, in his words. The client call that was the blocker is gone, replaced by his own admission of playing not to lose, which does the anti guru job better than a client story would have. No separate CTA, it closes on the payoff. The last line stops at 'it too'.",
   },
   {
     n: '03', title: 'The necessary conversation',
@@ -654,8 +642,8 @@ const SOPHIE_SHOOT: SFOutline[] = [
       'Because typically the second ads slow down, we throw more money at it.',
     ],
     beats: [
-      { role: 'Why members', text: 'And if you know, you know. When you get to 300 members and you are in the milli. But one day he asked his members for some feedback, and it changed everything. All they wanted was one thing. And so, they stopped caring about sales, and memberships, The only thing they care about, Is selling connection. So he made his members a pledge. For the next 12 weeks the ads are off, So we can just focus on you.' },
-      { role: 'What happened', text: "And he grew 25% in revenue across 21 weeks. 8.5 sales a week on average, with nothing running. And he has kept the ads off ever since. Everyone tells you need to run ads. I'll be honest - me included. But this is evidence. All you really need to do. Is make a killer product, that people want And there a once in a lifetime opportunity for you to sell connection, when everyone else it starved. to" },
+      { role: 'Why members', text: 'And if you know, you know.  When you get to 300 members and you are in the milli.\nBut one day he asked his members for some feedback, and it changed everything.\nAll they wanted was one thing. And so, they stopped caring about sales, and memberships, The only thing they care about,  Is selling connection.  So he made his members a pledge.   For the next 12 weeks the ads are off,  So we can just focus on you.' },
+      { role: 'What happened', text: "And he grew 25% in revenue across 21 weeks.  8.5 sales a week on average, with nothing running.  And he has kept the ads off ever since.  Everyone tells  you need to run ads.  I'll be honest - me included.  But this is evidence. All you really need to do.  Is make a killer product, that people want  And there a once in a lifetime opportunity for you to sell connection, when everyone else it starved.  to" },
     ],
     fill: "Sean's rewrite, in his words. The common belief is folded into the hook, the pledge sits inside Why members, and it closes inside What happened with no separate payoff or CTA. The last line stops at 'to'. Three proof points from the jam are no longer in the script: 20k to 120k over three years, the 54 signups from the open week, and the four steps off the hot seat. Deliberate, or worth putting one back. The quadrant was drawn on the iPad during the hot seat, so the drawing already exists on the Zoom if split screen is the treatment. Kai recapping the same hot seat is queued behind this one.",
   },
@@ -678,7 +666,7 @@ const DOZA_SHOOT: SFOutline[] = [
 
 const SHOOT_LANES: ShootLane[] = [
   { id: 'ryan', label: `Ryan · ${RYAN_SHOOT.length}`, who: 'Ryan', note: 'Demonstration. What he built, what it does, who it saves. Batched, because there is no point flying a shooter in for three reels.', outlines: RYAN_SHOOT },
-  { id: 'sophie', label: `Sophie · ${SOPHIE_SHOOT.length}`, who: 'Sophie', note: 'Belief. Three ideas plus a result. Four outlines against three slots, so be ruthless. Built out to the same depth as Ryan, but in her register rather than his, so read them out loud before camera and cut anything that is not how she talks. Each fill note says which lines are hers from the jam and which are drafted.', outlines: SOPHIE_SHOOT },
+  { id: 'sophie', label: `Sophie · ${SOPHIE_SHOOT.length}`, who: 'Sophie', note: 'Belief. Three ideas plus a result. Four outlines against three slots, so be ruthless. 01, 02 and 04 are Sean\'s, verbatim. 03 is the only one still drafted, so read it out loud before camera and cut anything that is not how she talks.', outlines: SOPHIE_SHOOT },
   { id: 'doza', label: `Doza · ${DOZA_SHOOT.length}`, who: 'Doza', note: 'Nothing was planned for his three. This is the piece the day already gives you.', outlines: DOZA_SHOOT },
 ];
 
@@ -702,8 +690,10 @@ function SecondSeptShoot() {
   );
 }
 
+// whitespace-pre-wrap because the scripts are typed the way they get spoken.
+// The line breaks and the double spaces are breath marks, so they survive.
 const Slotted = ({ text }: { text: string }) => {
-  if (!text.startsWith('SLOT')) return <span className="text-zinc-300 text-[13px] leading-relaxed">{text}</span>;
+  if (!text.startsWith('SLOT')) return <span className="text-zinc-300 text-[13px] leading-relaxed whitespace-pre-wrap">{text}</span>;
   const rest = text.replace(/^SLOT\.?\s*/, '');
   return (
     <span className="text-[13px] leading-relaxed">
@@ -742,7 +732,7 @@ function ShootOutlineCard({ o }: { o: SFOutline }) {
             <div key={i} className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3">
               <p className="text-[9px] uppercase tracking-widest font-semibold text-blue-400 mb-1.5">Hook {i + 1}</p>
               {lines.map((l, j) => (
-                <p key={j} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+                <p key={j} className="text-white text-[17px] leading-snug font-medium whitespace-pre-wrap">{l}</p>
               ))}
             </div>
           ))}
@@ -752,7 +742,7 @@ function ShootOutlineCard({ o }: { o: SFOutline }) {
         <div className="rounded-lg border-l-2 border-blue-500 bg-zinc-950/50 px-4 py-3 mb-5">
           {o.spoken.length > 0 ? (
             o.spoken.map((l, i) => (
-              <p key={i} className="text-white text-[17px] leading-snug font-medium">{l}</p>
+              <p key={i} className="text-white text-[17px] leading-snug font-medium whitespace-pre-wrap">{l}</p>
             ))
           ) : (
             <p className="text-[17px] leading-snug"><Slotted text="SLOT. The spoken hook. Never landed in the room." /></p>
@@ -2642,12 +2632,12 @@ export default function TheGeronimoPlan() {
                 <BulletList
                   items={[
                     'Doza has three pieces for TGA. Two come off the pod recap. The third was never planned.',
-                    "Ryan's hook 3 needs the real member count in place of X (Number), and his CTA trails off at 'the first'.",
+                    "Three scripts stop mid line. Ryan's content engine CTA at 'the first', play to win at 'it too', and 400 members at 'to'.",
+                    "Ryan's hook 3 needs the real member count in place of X (Number).",
                     'The five COACH words. Sophie has them, they were never said on the jam.',
-                    'The play to win example. Sean built the shape, the call was never picked.',
-                    "CTAs on play to win and the necessary conversation. Bare minimum and 400 members close inside the last beat by design.",
-                    "400 members drops three proof points the jam had: 20k to 120k over three years, the 54 signups from the open week, and the four steps off the hot seat. Decide whether one goes back in, and finish the last line, it stops at 'to'.",
-                    "Sophie has not read play to win or the necessary conversation out loud yet. They are drafted in places, so anything that is not how she talks gets cut on Thursday, not defended.",
+                    "The CTA on the necessary conversation. The other three of Sophie's close inside the last beat by design.",
+                    "400 members drops three proof points the jam had: 20k to 120k over three years, the 54 signups from the open week, and the four steps off the hot seat. The hook promises 400 and the body never says he got there, so decide whether one goes back in.",
+                    "The necessary conversation is the last one still drafted. Sophie has not read it out loud, so anything that is not how she talks gets cut on Thursday, not defended.",
                     'Every text hook. Not one was written in the room. They are the on screen words, so they get decided before Thursday, not in the edit.',
                     "Ryan's drive of ideas and Sophie's ideas doc. Both promised on the call, neither sent yet.",
                     'IG Live on Friday has no owner and no time.',
