@@ -24,6 +24,7 @@ const BrandDay = React.lazy(() => import('./pages/BrandDay'));
 const Advisory = React.lazy(() => import('./pages/Advisory'));
 const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 const Phase0 = React.lazy(() => import('./pages/Phase0'));
+const Journey = React.lazy(() => import('./pages/Journey'));
 const OfferLadder = React.lazy(() => import('./pages/OfferLadder'));
 const OperatorIntensive = React.lazy(() => import('./pages/OperatorIntensive'));
 const ApplyOperatorIntensive = React.lazy(() => import('./pages/ApplyOperatorIntensive'));
@@ -119,6 +120,7 @@ export default function App() {
           <Route path="/advisory" element={<Advisory />} />
           <Route path="/map" element={<BusinessMap />} />
           <Route path="/phase0" element={<Phase0 />} />
+          <Route path="/journey" element={<Journey />} />
           <Route path="/ladder" element={<OfferLadder />} />
           <Route path="/operatorintensive" element={<OperatorIntensive />} />
           <Route path="/operator" element={<OperatorIntensive />} />

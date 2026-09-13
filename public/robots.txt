@@ -25,6 +25,7 @@ Disallow: /quiz
 Disallow: /congruence
 Disallow: /map
 Disallow: /phase0
+Disallow: /journey
 Disallow: /engine
 Disallow: /content-archetype
 Disallow: /editorapplication
