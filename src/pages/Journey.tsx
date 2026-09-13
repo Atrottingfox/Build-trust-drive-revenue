@@ -174,6 +174,13 @@ const NOTION = [
   { w: 'Reads only', title: 'The content review form', body: 'Checks whether the client filled it in before their call. Writes nothing back.', when: '48 hours before every call', by: 'prep nudge' },
 ];
 
+const OI_COSTS = [
+  { phase: 'Strategy Day', cost: '$1,730', detail: 'Sean 10 hrs $1,000, flights $400, hotel $130, food $100, Uber $100' },
+  { phase: 'Hiring sprint, weeks 1 to 10', cost: '$1,000', detail: 'Sean 10 hrs: scorecard off the Day, test review, final interviews, fortnightly founder calls' },
+  { phase: 'Install, weeks 1 to 4', cost: '$1,600', detail: 'Calls, WhatsApp, Notion build, brand build' },
+  { phase: 'Install, weeks 5 to 12', cost: '$1,400', detail: 'Calls, direction calls, Notion time' },
+];
+
 const label = (k: string) => k.replace('tag:', '').replace(/-/g, ' ');
 
 const OWNER_STYLE: Record<string, string> = {
@@ -391,8 +398,39 @@ function JourneyPage() {
             </div>
             <div className="max-w-sm">
               <span className="block text-xl font-extrabold text-emerald-400 tabular-nums">$30,000</span>
-              <span className="text-xs text-zinc-500">Invoiced by hand. Cost to deliver not worked out yet.</span>
+              <span className="text-xs text-zinc-500">Invoiced by hand.</span>
             </div>
+          </div>
+
+          <div className="mt-5 rounded-2xl border border-zinc-800 bg-surface overflow-x-auto">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead>
+                <tr className="text-left text-[11px] uppercase tracking-widest text-zinc-600 border-b border-zinc-800">
+                  <th className="font-medium px-5 py-3">Phase</th>
+                  <th className="font-medium px-5 py-3 text-right">Cost</th>
+                  <th className="font-medium px-5 py-3">Detail</th>
+                </tr>
+              </thead>
+              <tbody>
+                {OI_COSTS.map((r) => (
+                  <tr key={r.phase} className="border-t border-zinc-900 first:border-t-0">
+                    <td className="px-5 py-3 text-zinc-200 font-semibold whitespace-nowrap">{r.phase}</td>
+                    <td className="px-5 py-3 text-right text-zinc-200 font-bold tabular-nums whitespace-nowrap">{r.cost}</td>
+                    <td className="px-5 py-3 text-zinc-400">{r.detail}</td>
+                  </tr>
+                ))}
+                <tr className="border-t border-zinc-800 bg-white/[0.02]">
+                  <td className="px-5 py-3 text-white font-bold">Total cost to deliver</td>
+                  <td className="px-5 py-3 text-right text-white font-extrabold tabular-nums">$5,730</td>
+                  <td className="px-5 py-3 text-zinc-400">On $30,000 collected</td>
+                </tr>
+                <tr className="border-t border-zinc-900 bg-blue-500/[0.07]">
+                  <td className="px-5 py-3 text-blue-400 font-bold">Gross profit</td>
+                  <td className="px-5 py-3 text-right text-blue-400 font-extrabold tabular-nums">$24,270</td>
+                  <td className="px-5 py-3 text-zinc-400">81% margin</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
