@@ -30,7 +30,7 @@ type FlowStep = {
 const FLOW: FlowStep[] = [
   { n: 'Step 1', title: 'Applies', when: 'Online form', inAmt: '$0', inNote: 'Nothing paid', cost: '$0', costNote: 'Software sits in overheads', total: '$0', gp: '$0' },
   { n: 'Step 2', title: 'Pays for Strategy Day', when: 'Once accepted', inAmt: '$5,000', inNote: 'Card, via Stripe', cost: '$0', costNote: 'Stripe fee about $85', total: '$5,000', gp: '$5,000', wrong: ['Not a fit on the prep call', '$5,000 refunded same day'] },
-  { n: 'Step 3', title: 'Strategy Day', when: 'Within 30 days', inAmt: '$0', inNote: 'Already paid', cost: '$1,730', costNote: 'Sean 8 hrs $1,000, flights $400, hotel $130, food $100, Uber $100', total: '$5,000', gp: '$3,270' },
+  { n: 'Step 3', title: 'Strategy Day', when: 'Within 30 days', inAmt: '$0', inNote: 'Already paid', cost: '$1,730', costNote: 'Sean 10 hrs $1,000, flights $400, hotel $130, food $100, Uber $100', total: '$5,000', gp: '$3,270' },
   { n: 'Step 4', title: 'Starts the 90 days', when: 'After the day', inAmt: '$5,000', inNote: 'Payment 1 of 2', cost: '$1,600', costNote: 'Weeks 1 to 4: calls, WhatsApp, Notion build, brand build', total: '$10,000', gp: '$6,670' },
   { n: 'Step 5', title: 'Second payment', when: '30 days later', inAmt: '$5,000', inNote: 'Payment 2 of 2, automatic', cost: '$1,400', costNote: 'Weeks 5 to 12: calls, direction calls, Notion time', total: '$15,000', gp: '$10,270', wrong: ['Leaves at day 30', 'This payment is cancelled'] },
   { n: 'Step 6', title: '12 Month Advisory', when: 'Upsell offered at day 30 · $28,000 for the first 20', inAmt: '$28,000', inNote: 'Invoiced by hand. Fast action bonus if taken at day 30: an in person strategy day', cost: '$4,730', costNote: '12 advisory calls $1,800, creative director call every 6 weeks (8 calls) $1,200, fast action bonus in person strategy day $1,730', total: '$43,000', gp: '$33,540', optional: true },
@@ -96,7 +96,7 @@ const STEPS: Step[] = [
     money: [{ amt: '+$5,000', note: 'Stripe invoice, card saved. Fee about $85.30.' }],
     pages: [['Payment page', '/lock-in']],
     chips: ['create-checkout-session', 'lock-in-paid', 'tag:brand-day-paid'],
-    ours: ['The success redirect is the paid signal, which is why the Brand Day needs no Stripe webhook at all.'],
+    ours: ['The success redirect is the paid signal, which is why the Strategy Day needs no Stripe webhook at all.'],
   },
   {
     title: 'Pick the day',
@@ -108,7 +108,7 @@ const STEPS: Step[] = [
   {
     title: 'Receipt, then one last task',
     mail: { subject: "You're all logged in", body: 'Stripe receipt attached. Last thing: book your 20 minute prep call. Seven day window, so it gets done together rather than left as homework.' },
-    client: ['Two events land in their calendar: the Brand Day and the prep call.'],
+    client: ['Two events land in their calendar: the Strategy Day and the prep call.'],
     pages: [['Book prep call', '/prep']],
     chips: ['prep-call-chase'],
     ours: ['Runs 8am daily for anyone who booked the day but never booked the prep call.'],
@@ -124,9 +124,9 @@ const STEPS: Step[] = [
     ours: ['Your actual qualification gate, and refund, proceed or maybe leaves no trace in any system.'],
   },
   {
-    title: 'The Brand Day',
+    title: 'The Strategy Day',
     client: ['One full day, on site at their office.'],
-    money: [{ amt: '$0 in', note: 'Our cost: flights, accommodation, car hire, meals, parking, equipment hire.', zero: true }],
+    money: [{ amt: '$0 in', note: 'Our cost $1,730: Sean 10 hrs $1,000, flights $400, hotel $130, food $100, Uber $100.', zero: true }],
     ours: ['What comes out is a recording, an audio file, iPad notes and whatever went on the wall.'],
   },
   {
@@ -140,7 +140,7 @@ const STEPS: Step[] = [
     client: ['An email carrying their link to the agreement page, with the agreement and checkout on one page.'],
     pages: [['90 day agreement', '/install']],
     chips: ['brand-day-followup', 'decide', 'tag:install-invited'],
-    ours: ['7am the morning after every Brand Day, a job asks Sean one question: invite them or not. One click.'],
+    ours: ['7am the morning after every Strategy Day, a job asks Sean one question: invite them or not. One click.'],
   },
   {
     title: 'Sign, pay, and book the whole 90 days',
@@ -162,8 +162,8 @@ const STEPS: Step[] = [
   },
   {
     title: 'The 12 month advisory',
-    client: ['$28,000 for the first 20 who take it up, including an in person team training day. Raised only if someone remembers.'],
-    money: [{ amt: '+$28,000', note: 'No checkout, no instalment schedule. Invoiced by hand.' }],
+    client: ['$28,000 for the first 20, offered at day 30. Fast action bonus if taken at day 30: an in person strategy day.'],
+    money: [{ amt: '+$28,000', note: 'Invoiced by hand. Our cost $4,730, including the $1,730 in person strategy day.' }],
     ours: ['Nothing says the conversation is due, and nothing records that it happened or how it went.'],
   },
 ];
@@ -543,7 +543,7 @@ function JourneyPage() {
                 <li>What we owe them, and by when</li>
                 <li>What is owed to us</li>
                 <li>Whether any of it is late</li>
-                <li>The six Brand Day assets</li>
+                <li>The six Strategy Day assets</li>
               </ul>
               <p className="text-xs text-zinc-500 border-t border-zinc-900 pt-2.5 mt-3">
                 <b className="text-zinc-300 font-medium">When</b> · only when a person types it in
