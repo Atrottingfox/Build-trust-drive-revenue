@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { Section } from '../components/undeniable/Bits';
@@ -22,6 +22,8 @@ import { trackCta, SRC_PARAM } from '../lib/track';
   Copy is Sean's, verbatim.
 */
 
+type Example = { label: string; href: string };
+
 type Lesson = {
   n: string;
   title: string;
@@ -29,6 +31,7 @@ type Lesson = {
   principle: string[];
   applied: string[];
   detail: string[];
+  examples?: Example[];
 };
 
 const LESSONS: Lesson[] = [
@@ -49,6 +52,14 @@ const LESSONS: Lesson[] = [
       'With Jay, we built demonstrative formats to obliterate his prospects objections.',
       'With Taki there is overwhelming, undeniable proof in every Youtube video.',
     ],
+    examples: [
+      { label: 'Taki Moore on YouTube', href: 'https://www.youtube.com/@TakiMoore' },
+      { label: 'Jay Wright on Instagram', href: 'https://www.instagram.com/jaywrightofficial/' },
+      {
+        label: "Matt Lakajev, 6 Hour Course: How to Make Money on LinkedIn",
+        href: 'https://www.youtube.com/watch?v=MtWbWRJ_Plc&t=2668s',
+      },
+    ],
   },
   {
     n: '02',
@@ -63,6 +74,7 @@ const LESSONS: Lesson[] = [
       'Media teams rebuilt and trained, talent development paths installed, and a videographer developed into a marketer and strategist.',
       "We built out Jay's content system to get a 90/10 with ~5 hours on average available per month.",
     ],
+    examples: [{ label: 'Jay Wright on Instagram', href: 'https://www.instagram.com/jaywrightofficial/' }],
   },
   {
     n: '03',
@@ -90,6 +102,13 @@ const LESSONS: Lesson[] = [
       "Taki's latest series generated 139K views across 9 videos in two weeks from 3 filming days. But we started explicitly with 'what do people need from me in order to make a purchase'",
       'We built Matt Lakajev a 6 hour video which gave his ideal client everything they needed to make a purchase.',
     ],
+    examples: [
+      { label: 'Taki Moore on YouTube', href: 'https://www.youtube.com/@TakiMoore' },
+      {
+        label: "Matt Lakajev, 6 Hour Course: How to Make Money on LinkedIn",
+        href: 'https://www.youtube.com/watch?v=MtWbWRJ_Plc&t=2668s',
+      },
+    ],
   },
   {
     n: '05',
@@ -102,6 +121,12 @@ const LESSONS: Lesson[] = [
     applied: ['Matt Lakajev', 'Hey Doza', 'Rhys Livingstone'],
     detail: [
       'Both a six hour evergreen course and an organic Trojan Horse VSL were built as ongoing demand assets, and we are now looking at existing lead magnets to repackage lead magnets.',
+    ],
+    examples: [
+      {
+        label: "Matt Lakajev, 6 Hour Course: How to Make Money on LinkedIn",
+        href: 'https://www.youtube.com/watch?v=MtWbWRJ_Plc&t=2668s',
+      },
     ],
   },
 ];
@@ -218,6 +243,26 @@ function LessonBlock({ lesson }: { lesson: Lesson }) {
           </React.Fragment>
         ))}
       </p>
+
+      {lesson.examples && (
+        <ul className="mt-5 space-y-2">
+          {lesson.examples.map((ex) => (
+            <li key={ex.href}>
+              <a
+                href={ex.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-start gap-2 text-[14px] text-zinc-400 hover:text-white transition-colors"
+              >
+                <ArrowUpRight className="w-3.5 h-3.5 mt-1 flex-shrink-0 text-zinc-600 group-hover:text-blue-500 transition-colors" />
+                <span className="underline underline-offset-4 decoration-zinc-700 group-hover:decoration-blue-500">
+                  {ex.label}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </article>
   );
 }
@@ -304,7 +349,7 @@ export default function LearnFromThem() {
                   ))}
                 </ul>
                 <p className="text-zinc-500 text-[16px] leading-[1.7] mt-10">
-                  This page shows the four lessons from inside 4 media operations.
+                  This page shows the five principles from inside 6 media operations.
                 </p>
               </Section>
             </section>
@@ -341,7 +386,7 @@ export default function LearnFromThem() {
             <section className="border-t border-zinc-800/80 py-14 md:py-20">
               <Section>
                 <p className="font-display text-[20px] md:text-[26px] tracking-[-0.02em] text-white leading-[1.4] mb-8">
-                  To see the offer, click here
+                  To see the offer
                 </p>
                 <a
                   href={`/offer?${SRC_PARAM}=learnfromthem`}
