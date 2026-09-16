@@ -36,7 +36,7 @@ export default function UndeniableContentShortForm() {
       />
       <Divider />
 
-      {/* HALF 1 — SHOOT */}
+      {/* HALF 1 - SHOOT */}
       <Wrap>
         <HalfHeader n="01" label="Shoot" title="What you open on the day." />
         <a href="/undeniablenextsteps/shoot-card" className="group block rounded-2xl border border-blue-500/40 bg-blue-500/[0.06] hover:bg-blue-500/[0.1] transition-colors p-6 md:p-7">
@@ -53,7 +53,7 @@ export default function UndeniableContentShortForm() {
 
       <Divider />
 
-      {/* HALF 2 — PLAN */}
+      {/* HALF 2 - PLAN */}
       <Wrap>
         <HalfHeader n="02" label="Plan" title="What we shoot, and when." />
 

@@ -127,7 +127,7 @@ export default function ThePlan() {
             { name: 'Bottleneck Buster · Diagnostic', status: 'Active', detail: '63 personalised solution combinations. They answer, get their single problem named, plus a custom solution + video. Re-submission blocked for 30 days. As-close-to-1-on-1 as a static asset gets.' },
             { name: 'Machine Framework', status: 'Active', detail: 'Built on stage during the Gabe video. NEXT-EXPAND acronym for hiring + building a business that runs without you. Already printed. The fast-shipper template.' },
             { name: 'Churn Calculator', status: 'Queued', detail: 'Client capacity calculator. New in vs out over 12 months → grow / flat / shrink. Analogy: filling a bucket with holes. Names a problem coaches feel but can\'t describe.' },
-            { name: 'Hiring Framework', status: 'Queued', detail: 'For coaches at 20K+/mo who need a VA or first hire. Avoid the per-client subcontractor trap. (Don\'t make this content — legal landmine for existing clients. Asset only.)' },
+            { name: 'Hiring Framework', status: 'Queued', detail: 'For coaches at 20K+/mo who need a VA or first hire. Avoid the per-client subcontractor trap. (Don\'t make this content - legal landmine for existing clients. Asset only.)' },
             { name: 'Custom GPT route', status: 'Decide', detail: '78 unfinished frameworks in the book. Each can be a 5-min podcast or a mini-asset. Atlas can spin out 4-8 in a sitting. Decision needed: rotate weekly or pick the 4-8 workhorses and lock them.' },
           ]} />
         </div>
@@ -160,7 +160,7 @@ export default function ThePlan() {
           <Block label="Top of funnel · problem-unaware">
             <BulletList items={[
               <><b className="text-white font-semibold">Status borrow.</b> Alex Hormozi, Brandon, Luke Miller, Gabe Panabal. The "Alex told me to do this workshop" creative was the highest-converting, lowest-CPA ad we\'ve run. Lean into it.</>,
-              'Also: testimonials of recognised people (Australian Alex etc) — for the polluted-audience problem (people coming for Alex who aren\'t ICP).',
+              'Also: testimonials of recognised people (Australian Alex etc) - for the polluted-audience problem (people coming for Alex who aren\'t ICP).',
             ]} />
           </Block>
           <Block label="Mid funnel · solution-aware">
@@ -194,7 +194,7 @@ export default function ThePlan() {
             <BulletList items={[
               <><b className="text-white font-semibold">Dark + light split.</b> Moody black side for hard-hitting / motivational. Lit side for educational.</>,
               <><b className="text-white font-semibold">Everything on wheels.</b> Top-down desk, C-stand, screen on articulating arm. Backdrops pull down for variation.</>,
-              <><b className="text-white font-semibold">Whiteboards + paper + iPad draw-behind.</b> Whiteboards can feel cheap — paper top-down often beats it. Test both.</>,
+              <><b className="text-white font-semibold">Whiteboards + paper + iPad draw-behind.</b> Whiteboards can feel cheap - paper top-down often beats it. Test both.</>,
             ]} />
           </Block>
           <Block label="Production workflow">
@@ -209,7 +209,7 @@ export default function ThePlan() {
               'Stop just shooting. Start sitting in on client calls + workshops. Pattern-recognise the problems they bring.',
               'Monday meeting: bring the bottleneck scores + numbers + the "what worked last week" read. Drive creative direction off the data.',
               'Reduce reactive shoots. Lock the 30-day test plan and execute against it.',
-              'Six months of context-loading will compound. The creative instinct already exists — it just needs the business context to land.',
+              'Six months of context-loading will compound. The creative instinct already exists - it just needs the business context to land.',
             ]} />
           </Block>
         </div>
@@ -220,7 +220,7 @@ export default function ThePlan() {
       <Wrap>
         <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">07 · Test</p>
         <H2>30-day test → 60-day lock.</H2>
-        <Note>Stop guessing. Run a clean test, then commit. The current "throw everything at the wall" is what got us here — but it doesn\'t scale.</Note>
+        <Note>Stop guessing. Run a clean test, then commit. The current "throw everything at the wall" is what got us here - but it doesn\'t scale.</Note>
         <div className="mt-8">
           <Block label="Next 30 days · test phase">
             <BulletList items={[
@@ -233,7 +233,7 @@ export default function ThePlan() {
           <Block label="After 30 days · lock phase">
             <BulletList items={[
               <><b className="text-white font-semibold">Pick the 4 winners.</b> Keep them. Kill the duds. The 4 become the rotation for the next 60 days.</>,
-              <><b className="text-white font-semibold">Test 1-2 new formats per month forever after.</b> The lock isn\'t permanent — it\'s a base rhythm that prevents drift.</>,
+              <><b className="text-white font-semibold">Test 1-2 new formats per month forever after.</b> The lock isn\'t permanent - it\'s a base rhythm that prevents drift.</>,
               <><b className="text-white font-semibold">Measure subjective + objective.</b> Did Rhys love shooting it? Did the right people comment? Both matter.</>,
             ]} />
           </Block>

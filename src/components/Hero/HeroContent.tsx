@@ -13,7 +13,7 @@ export function HeroContent() {
         transition={{ duration: 0.5 }}
       >
         <div className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
-        <span className="text-sm text-blue-300/90 font-medium">For 7–8 figure founders</span>
+        <span className="text-sm text-blue-300/90 font-medium">For 7-8 figure founders</span>
       </motion.div>
 
       <motion.h1

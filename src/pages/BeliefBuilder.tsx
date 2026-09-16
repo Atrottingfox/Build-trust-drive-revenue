@@ -255,27 +255,27 @@ export default function BeliefBuilder() {
 
             <div className="space-y-6 mb-12">
               <PromptCard
-                label="Prompt 1 — The Method"
+                label="Prompt 1 - The Method"
                 prompt={'"Most people in my industry believe the best way to [core outcome] is [common method]. I believe it is actually [your method]."'}
                 helper="This surfaces disagreements about HOW things should be done. Start with the method your competitors default to."
               />
               <PromptCard
-                label="Prompt 2 — The Priority"
+                label="Prompt 2 - The Priority"
                 prompt={'"Most people in my industry prioritise [common priority]. I believe [alternative priority] matters more because [evidence]."'}
                 helper="This reveals what you think the market is getting wrong about what matters most."
               />
               <PromptCard
-                label="Prompt 3 — The Myth"
+                label="Prompt 3 - The Myth"
                 prompt={'"Everyone says you need [common requirement]. I have seen that you actually need [your requirement] instead."'}
                 helper="This challenges a specific piece of conventional wisdom your audience has accepted as fact."
               />
               <PromptCard
-                label="Prompt 4 — The Timing"
+                label="Prompt 4 - The Timing"
                 prompt={'"My industry tells people to [common advice] at [common timing]. I believe the right time is actually [your timing] because [evidence]."'}
                 helper="This disrupts the sequencing or timeline your market takes for granted."
               />
               <PromptCard
-                label="Prompt 5 — The Truth"
+                label="Prompt 5 - The Truth"
                 prompt={'"The thing nobody in my industry wants to admit is [uncomfortable truth]. The reason they avoid it is [reason]. But the data shows [evidence]."'}
                 helper="This is the uncomfortable position. The one that makes people pause and think."
               />

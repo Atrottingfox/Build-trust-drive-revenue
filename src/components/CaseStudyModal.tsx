@@ -446,7 +446,7 @@ export default function CaseStudyModal({ index, onClose }: { index: number; onCl
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/85 backdrop-blur-sm" onClick={onClose} />
 
-      {/* Modal — 4:5 aspect ratio */}
+      {/* Modal - 4:5 aspect ratio */}
       <motion.div
         className="relative w-[85vw] max-w-[400px] bg-[#111113] border border-zinc-800/40 rounded-xl overflow-hidden"
         style={{ aspectRatio: '4/5' }}

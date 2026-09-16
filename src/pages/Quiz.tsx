@@ -213,7 +213,7 @@ const SCORING: Record<string, Record<string, Weights>> = {
     '5k-15k':   { diagnostic: 2, tool: 2, template: 1, education: 0, experience: 3 },
     '15k+':     { diagnostic: 2, tool: 1, template: 0, education: 0, experience: 3 },
   },
-  // Stage is the heaviest weight — it determines the PHASE of trust building
+  // Stage is the heaviest weight - it determines the PHASE of trust building
   stage: {
     attention:     { diagnostic: 0, tool: 1, template: 2, education: 4, experience: 3 },
     alignment:     { diagnostic: 1, tool: 2, template: 3, education: 2, experience: 3 },

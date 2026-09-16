@@ -77,7 +77,7 @@ function ApplyForm() {
   return (
     <section className="min-h-screen bg-base flex items-center justify-center px-6 py-32">
       <SEO
-        title="Apply — Authority Engine"
+        title="Apply - Authority Engine"
         description="Apply to work with Sean Fox. Brand Bible, content systems, and media operators for 7 and 8 figure founders ready to make their authority compound."
         path="/apply"
       />
@@ -88,7 +88,7 @@ function ApplyForm() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {/* Left side — headline */}
+          {/* Left side - headline */}
           <div>
             <motion.div
               className="accent-line mb-8"
@@ -106,7 +106,7 @@ function ApplyForm() {
             </p>
           </div>
 
-          {/* Right side — form or confirmation */}
+          {/* Right side - form or confirmation */}
           <div>
             {submitted ? (
               <motion.div

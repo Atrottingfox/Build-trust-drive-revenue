@@ -63,7 +63,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-base">
-      {/* Faded metrics ghost — mobile only */}
+      {/* Faded metrics ghost - mobile only */}
       <HeroMetricsGhost />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 pt-36 pb-28">

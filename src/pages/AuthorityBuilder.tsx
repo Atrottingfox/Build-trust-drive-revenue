@@ -533,7 +533,7 @@ export default function AuthorityBuilder() {
           <div className="max-w-4xl mx-auto text-sm text-gray-400 space-y-4">
             <p>
               The Authority Engine is a consulting and implementation company that helps high-growth founders 
-              install content systems that scale trust, build reputation, and generate demand — without the founder doing all the work.
+              install content systems that scale trust, build reputation, and generate demand - without the founder doing all the work.
             </p>
             <p>
               We're the team behind the content engines of some of the world's top coaches and consultants. 

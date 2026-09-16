@@ -132,7 +132,7 @@ export default function NinetyDayProgram() {
             <div className="flex items-center gap-3 mb-4">
               <p className="font-display text-5xl md:text-6xl font-extrabold text-zinc-800 tracking-tight">01</p>
               <div>
-                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 1–4</p>
+                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 1-4</p>
                 <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                   Activation
                 </h2>
@@ -263,7 +263,7 @@ export default function NinetyDayProgram() {
             <div className="flex items-center gap-3 mb-4">
               <p className="font-display text-5xl md:text-6xl font-extrabold text-zinc-800 tracking-tight">02</p>
               <div>
-                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 5–8</p>
+                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 5-8</p>
                 <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                   Systemisation
                 </h2>
@@ -351,7 +351,7 @@ export default function NinetyDayProgram() {
             <div className="flex items-center gap-3 mb-4">
               <p className="font-display text-5xl md:text-6xl font-extrabold text-zinc-800 tracking-tight">03</p>
               <div>
-                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 9–12</p>
+                <p className="text-zinc-600 text-xs uppercase tracking-widest">Weeks 9-12</p>
                 <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">
                   Stabilisation
                 </h2>

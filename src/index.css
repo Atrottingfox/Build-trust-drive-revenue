@@ -66,7 +66,7 @@
   left: 120%;
 }
 
-/* Glow card — visible but tasteful */
+/* Glow card - visible but tasteful */
 .glow-card {
   position: relative;
   border: 1px solid rgba(255,255,255,0.06);
@@ -93,7 +93,7 @@
 }
 
 
-/* Animated gradient border — top of page */
+/* Animated gradient border - top of page */
 @keyframes gradient-shift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -107,7 +107,7 @@
   animation: gradient-shift 8s ease-in-out infinite;
 }
 
-/* Accent line — decorative */
+/* Accent line - decorative */
 .accent-line {
   width: 40px;
   height: 3px;

@@ -7,7 +7,7 @@ import SEO from '../SEO';
 import PasswordGate from '../PasswordGate';
 
 // Shared design bits for the Undeniable hub + sub-pages.
-// NOTE: never use `text-base` in this project — `base` is a colour token (#09090b)
+// NOTE: never use `text-base` in this project - `base` is a colour token (#09090b)
 // and it paints text near-black on the dark bg. Use text-[15px] / text-[17px].
 
 export function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {

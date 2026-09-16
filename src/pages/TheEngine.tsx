@@ -22,7 +22,7 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
 const phases = [
   {
     num: '01',
-    label: 'Days 1–30',
+    label: 'Days 1-30',
     name: 'Brand',
     icon: Wrench,
     headline: 'Extract what makes you, you.',
@@ -40,7 +40,7 @@ const phases = [
   },
   {
     num: '02',
-    label: 'Days 31–60',
+    label: 'Days 31-60',
     name: 'Content',
     icon: Settings,
     headline: 'Strategy. Production. Distribution.',
@@ -57,7 +57,7 @@ const phases = [
   },
   {
     num: '03',
-    label: 'Days 61–90',
+    label: 'Days 61-90',
     name: 'Scale',
     icon: Gauge,
     headline: 'Measure. Sharpen. Compound.',
@@ -183,7 +183,7 @@ export default function TheEngine() {
         </React.Fragment>
       ))}
 
-      {/* After 90 Days — Keep Building */}
+      {/* After 90 Days - Keep Building */}
       <section className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>

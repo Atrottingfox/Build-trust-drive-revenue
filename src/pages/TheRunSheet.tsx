@@ -112,7 +112,7 @@ const ASSETS: Asset[] = [
     outcome: 'The exact framework Rhys uses to close 9 out of 10 workshop calls.',
     format: 'PDF + video walk-through',
     copy: 'Headline: "From Cold to Sold." · Sub: "The sales framework I use on every workshop call. Stripped to its bones. Steal it."',
-    notes: 'Currently best-performing asset for lead quality. Doesn\'t need rebuild — just a clean landing page.',
+    notes: 'Currently best-performing asset for lead quality. Doesn\'t need rebuild - just a clean landing page.',
   },
   {
     name: 'Bottleneck Buster · Diagnostic',
@@ -122,7 +122,7 @@ const ASSETS: Asset[] = [
     outcome: 'A personalised solution to the single biggest problem in the user\'s business.',
     format: 'Interactive · 63 personalised combinations · 30-day re-submission lockout',
     copy: 'Headline lift: "Find the one thing capping your business." · Sub: "60-second diagnostic. Personalised blueprint + a video of me walking you through the fix."',
-    notes: 'Highest-value asset on the page. Considered renaming away from "diagnostic" — most don\'t know the word.',
+    notes: 'Highest-value asset on the page. Considered renaming away from "diagnostic" - most don\'t know the word.',
   },
   {
     name: 'Machine Framework',
@@ -484,7 +484,7 @@ export default function TheRunSheet() {
       <Wrap>
         <p className="text-blue-400 text-[11px] uppercase tracking-widest font-semibold mb-2">09 · 30-day test</p>
         <H2>Test the variables. Lock the winners.</H2>
-        <Note>Test format and length, not environment. Environments rotate. The point isn\'t which one wins — the point is variety.</Note>
+        <Note>Test format and length, not environment. Environments rotate. The point isn\'t which one wins - the point is variety.</Note>
         <div className="mt-8 grid md:grid-cols-2 gap-4">
           <div className="glow-card p-6">
             <p className="text-[11px] uppercase tracking-widest font-semibold text-zinc-400 mb-3">Rotate · don\'t test</p>
@@ -513,7 +513,7 @@ export default function TheRunSheet() {
             <><b className="text-white font-semibold">Best Rhys-enjoyed</b> · if he doesn\'t want to shoot it, it won\'t survive</>,
             <><b className="text-white font-semibold">Best Jacob-can-replicate</b> · format that doesn\'t need Rhys\'s presence to ideate</>,
           ]} />
-          <Note>Then test 1-2 new formats per month from week 5 onwards. The lock isn\'t permanent — it\'s a base rhythm.</Note>
+          <Note>Then test 1-2 new formats per month from week 5 onwards. The lock isn\'t permanent - it\'s a base rhythm.</Note>
         </Block>
       </Wrap>
       <Divider />

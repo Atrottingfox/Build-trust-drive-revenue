@@ -897,7 +897,7 @@ export default function TheNextStage() {
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Stories</p>
                 <p className="text-white text-sm leading-relaxed mb-2">Named PT clients, their journeys, their figures.</p>
-                <p className="text-zinc-500 text-xs leading-relaxed italic">[Your named PT operators with their numbers — replace with your actual roster.] Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
+                <p className="text-zinc-500 text-xs leading-relaxed italic">[Your named PT operators with their numbers - replace with your actual roster.] Self trust transfer. The viewer maps themselves onto the operator and pre-feels the outcome.</p>
               </div>
               <div className="glow-card p-5">
                 <p className="text-blue-400 text-xs uppercase tracking-widest font-semibold mb-2">Data</p>
@@ -1277,7 +1277,7 @@ export default function TheNextStage() {
                 <p className="text-blue-300 text-xs uppercase tracking-widest font-semibold mb-4">Your locked narrative</p>
                 <div className="space-y-3">
                   {[
-                    { label: 'I have spent years behind brands like', value: '[Your named PT operators and brands — substitute your actual roster]. The category leaders most PT coaches only see from the outside.' },
+                    { label: 'I have spent years behind brands like', value: '[Your named PT operators and brands - substitute your actual roster]. The category leaders most PT coaches only see from the outside.' },
                     { label: 'But I discovered the opposite is true', value: 'The PT industry assumes authority is claimed. It is not. It is inferred by others through observed truth. The PTs with the biggest audiences are often the least trusted in the room.' },
                     { label: 'I kept seeing the same problem', value: 'Output mistaken for authority. Volume mistaken for visibility. PT founders trapped inside their own marketing.' },
                     { label: 'So I built', value: 'The Authority Engine install. The system that builds deep, system-led trust across a PT founder brand without making the operator the bottleneck.' },
@@ -1659,7 +1659,7 @@ export default function TheNextStage() {
                 {[
                   {
                     week: 'Week 01',
-                    pillar: 'Pillar Video 07 — Counterintuitive Shift',
+                    pillar: 'Pillar Video 07 - Counterintuitive Shift',
                     title: "'Why fitness founders chasing volume are running the wrong playbook'",
                     pieces: [
                       'Mon: Pillar long form (15 min)',
@@ -1673,7 +1673,7 @@ export default function TheNextStage() {
                   },
                   {
                     week: 'Week 02',
-                    pillar: 'Pillar Video 04 — Accessible Masterclass',
+                    pillar: 'Pillar Video 04 - Accessible Masterclass',
                     title: "'The single content move that took [your named PT client] from [X to Y followers] in 60 days'",
                     pieces: [
                       'Mon: Pillar long form (12 min)',
@@ -1687,7 +1687,7 @@ export default function TheNextStage() {
                   },
                   {
                     week: 'Week 03',
-                    pillar: 'Pillar Video 05 — The Signature Framework',
+                    pillar: 'Pillar Video 05 - The Signature Framework',
                     title: "'The 5 As: how authority actually gets built (not bought)'",
                     pieces: [
                       'Mon: Pillar long form (20 min)',
@@ -1701,7 +1701,7 @@ export default function TheNextStage() {
                   },
                   {
                     week: 'Week 04',
-                    pillar: 'Pillar Video 03 — Tactical Niche Operator',
+                    pillar: 'Pillar Video 03 - Tactical Niche Operator',
                     title: "'Three patterns I see in PT operators who scale past \$2M'",
                     pieces: [
                       'Mon: Pillar long form (15 min)',

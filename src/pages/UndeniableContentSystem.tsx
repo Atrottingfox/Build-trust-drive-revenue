@@ -52,9 +52,9 @@ export default function UndeniableContentSystem() {
         <H2>The three modes + the make it land rules.</H2>
         <Block label="Three content modes">
           <BulletList items={[
-            <><b className="text-white font-semibold">Demonstration</b> — whiteboard + top down. Showing, not telling. The best kind.</>,
-            <><b className="text-white font-semibold">Documentation</b> — telling stories and hot takes. The "share" lens.</>,
-            <><b className="text-white font-semibold">Teaching</b> — concise education, one takeaway, implementable now.</>,
+            <><b className="text-white font-semibold">Demonstration</b> - whiteboard + top down. Showing, not telling. The best kind.</>,
+            <><b className="text-white font-semibold">Documentation</b> - telling stories and hot takes. The "share" lens.</>,
+            <><b className="text-white font-semibold">Teaching</b> - concise education, one takeaway, implementable now.</>,
           ]} />
         </Block>
         <Block label="Make it land">
@@ -92,7 +92,7 @@ export default function UndeniableContentSystem() {
           <BulletList items={[
             'First thing each morning: review yesterday. Monday: best stat, highest watch video, the topic.',
             'Drop off at 3-4 seconds? Put a rehook there, or layer the CTA right there.',
-            <><b className="text-white font-semibold">The real optimisation is the ICP check</b> — are the people commenting the avatar, not raw views.</>,
+            <><b className="text-white font-semibold">The real optimisation is the ICP check</b> - are the people commenting the avatar, not raw views.</>,
             'Topic selection is where strategy lives. It gets Jacob off "let me just sit and edit."',
           ]} />
         </Block>

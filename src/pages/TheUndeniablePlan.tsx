@@ -101,7 +101,7 @@ export default function TheUndeniablePlan() {
 
       <Divider />
 
-      {/* PHASE 1 — the only live phase */}
+      {/* PHASE 1 - the only live phase */}
       <section className="py-14 md:py-16">
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
           <div className="flex items-baseline gap-3 mb-2 flex-wrap">
@@ -113,7 +113,7 @@ export default function TheUndeniablePlan() {
             Get what we need live, find out what actually lands, and get Jacob up to speed. Testing, not perfecting. No ad spend yet.
           </p>
 
-          {/* Ship these — the four things you act on */}
+          {/* Ship these - the four things you act on */}
           <GroupLabel>Ship these</GroupLabel>
 
           <Bucket n="1" title="Lead magnets" owners="R">
@@ -166,7 +166,7 @@ export default function TheUndeniablePlan() {
             </Detail>
           </Bucket>
 
-          {/* Running underneath — habits, not tasks */}
+          {/* Running underneath - habits, not tasks */}
           <div className="mt-12 rounded-2xl border border-zinc-800/70 bg-elevated/20 p-6">
             <GroupLabel>Running underneath</GroupLabel>
             <Habit owners="J">Every post into a Google sheet: views, saves, likes, shares, average watch time, skip rate.</Habit>
@@ -179,7 +179,7 @@ export default function TheUndeniablePlan() {
 
       <Divider />
 
-      {/* WHAT'S NEXT — phases 2 + 3, folded away */}
+      {/* WHAT'S NEXT - phases 2 + 3, folded away */}
       <section className="py-14 md:py-16">
         <div className="max-w-2xl mx-auto px-6 lg:px-8">
           <GroupLabel>What's next</GroupLabel>

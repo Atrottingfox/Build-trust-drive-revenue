@@ -108,7 +108,7 @@ const structureSnippets = [
     title: "Pattern Interrupt Cliffhanger",
     purpose: "Regrab attention mid-video",
     usage: "Right before key insight",
-    text: "But before I tell you that — let me show you the mistake 90% of people make here…"
+    text: "But before I tell you that - let me show you the mistake 90% of people make here…"
   }
 ];
 

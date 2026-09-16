@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 
 /**
- * /brand — the public brand asset sheet.
+ * /brand - the public brand asset sheet.
  *
  * Sent to clients, partners, podcast producers and designers who ask for
  * "your logo and colours". Every asset here is a real file under /public/brand,

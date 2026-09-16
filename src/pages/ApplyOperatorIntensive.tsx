@@ -91,7 +91,7 @@ export default function ApplyOperatorIntensive() {
   return (
     <section className="min-h-screen bg-base flex items-center justify-center px-6 py-32">
       <SEO
-        title="Apply — Operator + Authority Engine Intensive"
+        title="Apply - Operator + Authority Engine Intensive"
         description="Apply for the Operator + Authority Engine Intensive. Bring in your media Operator and install the Engine in one focused project."
         path="/applyforoperatorintensive"
       />

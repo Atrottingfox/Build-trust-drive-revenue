@@ -14,7 +14,7 @@ const DEFAULT_IMAGE = 'https://authorityengine.com.au/og-image.png';
 export default function SEO({ title, description, path, image, noIndex }: SEOProps) {
   const url = `${SITE_URL}${path}`;
   const ogImage = image || DEFAULT_IMAGE;
-  const fullTitle = title.includes('Authority Engine') ? title : `${title} — Authority Engine`;
+  const fullTitle = title.includes('Authority Engine') ? title : `${title} - Authority Engine`;
 
   return (
     <Helmet>

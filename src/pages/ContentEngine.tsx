@@ -511,7 +511,7 @@ export default function ContentEngine() {
   // --- Stage 4: Export ---
 
   function generateExportText(): string {
-    let text = 'CONTENT ENGINE — OUTLINES\n';
+    let text = 'CONTENT ENGINE - OUTLINES\n';
     text += `Generated: ${new Date().toLocaleDateString('en-AU')}\n`;
     text += '═'.repeat(50) + '\n\n';
 
@@ -523,7 +523,7 @@ export default function ContentEngine() {
       const variation = type?.variations.find(v => v.id === outline.variation);
 
       text += `${i + 1}. ${angle.title}\n`;
-      text += `   Type: ${type?.name || ''} — ${variation?.name || ''}\n`;
+      text += `   Type: ${type?.name || ''} - ${variation?.name || ''}\n`;
       text += `   Trust Layer: ${outline.trustLayer || 'Not set'}\n`;
       text += `   Hook: ${outline.hook}\n\n`;
 
@@ -728,7 +728,7 @@ export default function ContentEngine() {
                 <div className="flex items-center justify-between mb-6">
                   <p className="text-xs font-semibold tracking-widest uppercase text-blue-400">Daily Capture</p>
                   <p className={`text-sm font-semibold ${filledCount >= 3 ? 'text-emerald-400' : 'text-zinc-500'}`}>
-                    {filledCount} of 5 answered {filledCount >= 3 ? ' — ready' : ' (minimum 3)'}
+                    {filledCount} of 5 answered {filledCount >= 3 ? ' - ready' : ' (minimum 3)'}
                   </p>
                 </div>
 
@@ -1047,7 +1047,7 @@ export default function ContentEngine() {
                                         className="w-full bg-[#18181b] border border-white/[0.06] rounded-xl text-white text-sm p-3 focus:outline-none focus:border-blue-500/30 appearance-none cursor-pointer"
                                       >
                                         {CONTENT_TYPES.map(t => (
-                                          <option key={t.id} value={t.id}>{t.name} — {t.purpose}</option>
+                                          <option key={t.id} value={t.id}>{t.name} - {t.purpose}</option>
                                         ))}
                                       </select>
                                     </div>

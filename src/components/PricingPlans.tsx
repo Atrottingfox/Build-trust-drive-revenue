@@ -84,7 +84,7 @@ export default function PricingPlans() {
     <section ref={ref} id="pricing" className="relative">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20">
-          {/* Left — sticky heading */}
+          {/* Left - sticky heading */}
           <div className="lg:sticky lg:top-32 lg:self-start pt-32 pb-16 lg:pb-32">
             <motion.div
               className="accent-line mb-8"
@@ -117,7 +117,7 @@ export default function PricingPlans() {
             </motion.p>
           </div>
 
-          {/* Right — stacking cards */}
+          {/* Right - stacking cards */}
           <div className="pt-8 lg:pt-32 pb-32 space-y-8">
             {pricingPlans.map((plan, index) => (
               <PricingCard key={index} plan={plan} index={index} />
