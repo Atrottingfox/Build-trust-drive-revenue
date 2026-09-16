@@ -108,6 +108,10 @@ const LESSONS: Lesson[] = [
         label: "Matt Lakajev, 6 Hour Course: How to Make Money on LinkedIn",
         href: 'https://www.youtube.com/watch?v=MtWbWRJ_Plc&t=2668s',
       },
+      {
+        label: "Rhys Livingstone, If I Wanted to Make $1M as a Fitness Coach Again",
+        href: 'https://www.youtube.com/watch?v=LZadyJ0_N9g&t=487s',
+      },
     ],
   },
   {
