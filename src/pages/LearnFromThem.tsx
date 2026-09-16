@@ -74,7 +74,6 @@ const LESSONS: Lesson[] = [
       'Media teams rebuilt and trained, talent development paths installed, and a videographer developed into a marketer and strategist.',
       "We built out Jay's content system to get a 90/10 with ~5 hours on average available per month.",
     ],
-    examples: [{ label: 'Jay Wright on Instagram', href: 'https://www.instagram.com/jaywrightofficial/' }],
   },
   {
     n: '03',
@@ -117,7 +116,7 @@ const LESSONS: Lesson[] = [
   {
     n: '05',
     title: 'Turn expertise into assets.',
-    problem: 'Valuable ideas disappear after the post is published.',
+    problem: 'Your best ideas die in a one time post 30 minutes after it goes live',
     principle: [
       'We must evaluate where we can get additional leverage from existing work.',
       'Convert current expertise into lead magnets, walkthroughs and repeatable trust assets that compound in the background.',
@@ -135,17 +134,37 @@ const LESSONS: Lesson[] = [
   },
 ];
 
-const ISSUES = [
-  'Diluted messaging with no clear differentiation.',
-  'The founder is still the bottleneck.',
-  'Nobody clearly owns the output.',
-  'The team creates posts, but not assets.',
-  'Content is produced without a commercial job. There is no clear path to money.',
+/*
+  Each issue is paired with the principle that answers it, taken from what
+  that principle's own copy addresses. The pairing is not the list order:
+  "posts, but not assets" is answered by 05, and "no clear path to money" by
+  04, which is the one about content having a commercial job.
+*/
+const ISSUES: Array<{ text: string; solvedBy: string }> = [
+  { text: 'Diluted messaging with no clear differentiation.', solvedBy: '01' },
+  { text: 'The founder is still the bottleneck.', solvedBy: '02' },
+  { text: 'Nobody clearly owns the output.', solvedBy: '03' },
+  { text: 'The team creates posts, but not assets.', solvedBy: '05' },
+  {
+    text: 'Content is produced without a commercial job. There is no clear path to money.',
+    solvedBy: '04',
+  },
 ];
 
 const PATH = ['Messaging', 'Ownership', 'Operator', 'Production', 'Assets', 'Demand'];
 
 const sectionId = (n: string) => `principle-${n}`;
+
+/* Smooth jump, page local, with the header height already handled by the
+   scroll-mt on each article. Falls back to the plain anchor if the node is
+   not there. */
+const jumpTo = (n: string) => (e: React.MouseEvent) => {
+  const el = document.getElementById(sectionId(n));
+  if (!el) return;
+  e.preventDefault();
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  history.replaceState(null, '', `#${sectionId(n)}`);
+};
 
 /* Run in head. The label sits inside the paragraph the way print does it,
    instead of floating above the text as its own coloured chip. */
@@ -343,18 +362,24 @@ export default function LearnFromThem() {
             <section className="pb-16 md:pb-20">
               <Section>
                 <ul className="border-t border-zinc-800/80">
-                  {ISSUES.map((issue) => (
-                    <li
-                      key={issue}
-                      className="border-b border-zinc-800/80 py-4 text-zinc-300 text-[16px] leading-[1.7]"
-                    >
-                      {issue}
+                  {ISSUES.map((issue, i) => (
+                    <li key={issue.text} className="border-b border-zinc-800/80">
+                      <a
+                        href={`#${sectionId(issue.solvedBy)}`}
+                        onClick={jumpTo(issue.solvedBy)}
+                        className="group flex items-start gap-5 py-5 transition-colors"
+                      >
+                        <span className="text-[12px] tabular-nums text-zinc-600 group-hover:text-blue-500 transition-colors pt-1.5 flex-shrink-0">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <span className="flex-1 text-zinc-300 group-hover:text-white text-[16px] leading-[1.7] transition-colors">
+                          {issue.text}
+                        </span>
+                        <ArrowRight className="w-4 h-4 mt-1.5 flex-shrink-0 text-zinc-700 group-hover:text-blue-500 group-hover:translate-x-0.5 transition-all" />
+                      </a>
                     </li>
                   ))}
                 </ul>
-                <p className="text-zinc-500 text-[16px] leading-[1.7] mt-10">
-                  This page shows the five principles from inside 6 media operations.
-                </p>
               </Section>
             </section>
 
@@ -389,15 +414,12 @@ export default function LearnFromThem() {
             {/* The way off the page. */}
             <section className="border-t border-zinc-800/80 py-14 md:py-20">
               <Section>
-                <p className="font-display text-[20px] md:text-[26px] tracking-[-0.02em] text-white leading-[1.4] mb-8">
-                  To see the offer
-                </p>
                 <a
                   href={`/offer?${SRC_PARAM}=learnfromthem`}
                   onClick={() => trackCta('learnfromthem-offer')}
                   className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
                 >
-                  See the offer
+                  How we typically work with founders
                   <ArrowRight className="w-4 h-4" />
                 </a>
               </Section>
