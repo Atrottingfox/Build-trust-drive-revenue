@@ -1657,7 +1657,7 @@ function SubTabs({ sections, active, onChange }: { sections: Array<{ id: string;
 // Idea capture form. Ideas go in Monday so they can be approved or killed
 // before Tuesday. Embed is the Notion form.
 
-const CAPTURE_SRC = 'https://authorityengine.notion.site/ebd/6539a3e4234441e1afc1f59aa8e2ae67';
+const CAPTURE_SRC = 'https://authorityengine.notion.site/ebd/a350b2eb6dfb828980d481b697f58b96';
 
 
 function CaptureModal({ onClose }: { onClose: () => void }) {
@@ -2577,7 +2577,7 @@ export default function TheGeronimoPlan() {
               <Block label="What changed">
                 <BulletList
                   items={[
-                    <><b className="text-white font-semibold">Ideas get submitted before the jam.</b> The form is already live on this page. One idea per submission. Your name, the idea in one sentence, who it is for and what they are stuck on, what most people believe about it, one reinforcer, and what they can do with it this week. Sean gets the notification.</>,
+                    <><b className="text-white font-semibold">Ideas get submitted before the jam.</b> The form is already live on this page. One idea per submission. Your name, the idea in one sentence, who it is for and what they are stuck on, what they have tried, what most people believe and why it is wrong, the new belief and the outcome, one reinforcer, and what they can do with it this week. Sean gets the notification.</>,
                     <><b className="text-white font-semibold">Friday 5pm, linked off the scorecards.</b> They are already doing their numbers. The ideas go in beside them, so it is a deliverable and not a favour. Doza: lobbing into these meetings with half a thought cannot happen.</>,
                     <><b className="text-white font-semibold">Sean reviews before the call.</b> Then the jam becomes, that was a great idea, here is why it was a great idea. Educational for everyone rather than Sean building it for one person.</>,
                     <><b className="text-white font-semibold">Sophie runs weekly. Ryan gets batched fortnightly.</b> Six ideas at a time, a couple of mysteries in the batch. There is no point flying someone to the Gold Coast for half an hour.</>,
