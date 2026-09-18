@@ -69,7 +69,7 @@ const LESSONS: Lesson[] = [
     principle: [
       'Develop an operator who can run the rhythm, manage the pipeline, identify problems, and improve the team.',
     ],
-    applied: ['Rhys Livingstone', 'Sam Ackland', 'Hey Doza'],
+    applied: ['Rhys Livingstone', 'Hey Doza'],
     detail: [
       'Media teams rebuilt and trained, talent development paths installed, and a videographer developed into a marketer and strategist.',
       "We built out Jay's content system to get a 90/10 with ~5 hours on average available per month.",
