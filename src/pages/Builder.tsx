@@ -419,7 +419,7 @@ export default function Builder() {
               Content Strategy Day
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mx-auto">
-              A complete brand rebuild to get your content dialled. So you can increase demand and capture intent. Apply below.
+              A complete brand rebuild to get your content dialled. So you can increase demand and make sales easy. Apply below.
             </p>
           </div>
         </Section>
