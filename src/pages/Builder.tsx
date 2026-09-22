@@ -83,21 +83,6 @@ const problemLabels: Record<string, string> = {
   'Message unclear / fragmented': 'Our message is unclear / fragmented',
   'Creates a lot but no pipeline': "We create a lot but it doesn't turn into pipeline",
 };
-/* Capacity ramp. Only months we've actually committed to appear here.
-   Any month not listed renders without a spots count rather than guessing. */
-const spotsByMonth: Record<string, number> = {
-  '2026-08': 5,
-  '2026-09': 6,
-  '2026-10': 8,
-  '2026-11': 8,
-  '2026-12': 10,
-};
-
-function spotsThisMonth(): number | null {
-  const now = new Date();
-  const key = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
-  return spotsByMonth[key] ?? null;
-}
 
 
 
@@ -285,7 +270,6 @@ export default function Builder() {
     (form.contentOpsPerson === 'No' || form.operatorName.trim()) &&
     form.canCommitDay;
 
-  const spots = spotsThisMonth();
 
   /*
     Capture the people who start this and never finish it.
@@ -432,11 +416,10 @@ export default function Builder() {
           <div className="max-w-2xl mx-auto text-center">
             <div className="accent-line mx-auto mb-6" />
             <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
-              Brand Day
+              Content Strategy Day
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed max-w-xl mx-auto">
-              One day. Your office. A complete brand rebuild and content shoot.
-              {spots !== null && ` ${spots} spots this month.`} Apply below.
+              A complete brand rebuild to get your content dialled. So you can increase demand and capture intent. Apply below.
             </p>
           </div>
         </Section>
@@ -557,7 +540,7 @@ export default function Builder() {
                   <RadioGroup options={problems} value={form.biggestProblem} onChange={(v) => update('biggestProblem', v)} labels={problemLabels} />
                 </div>
                 <div>
-                  <Label required>In your own words, what's the #1 thing you want to fix on a Brand Day?</Label>
+                  <Label required>In your own words, what's the #1 thing you want to fix on a Content Strategy Day?</Label>
                   <TextArea
                     value={form.whatToFix}
                     onChange={(v) => update('whatToFix', v)}
