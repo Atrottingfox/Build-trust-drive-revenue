@@ -111,28 +111,30 @@ export default function BrandDayOffer() {
               A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
-              You already have the offer, expertise, proof, and business.
+              You already have the offer, expertise, proof, and attention.
             </p>
             <p className="text-zinc-300 leading-relaxed mb-5">
-              But your brand may not yet be doing enough commercial work.
+              But your content is not consistently turning those assets into qualified sales opportunities.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              The market may know you, but not clearly understand:
+              You may be:
             </p>
-            <div className="mt-6 mb-6">
+            <div className="mt-6 mb-8">
               <Crosses items={[
-                'Who you are for',
-                'What you should be known for',
-                'Why your approach is different',
-                'Why they should trust you',
-                'Why they should buy now',
+                'Attracting attention without creating buying intent',
+                'Generating engagement without enough sales conversations',
+                'Reaching people who are not qualified to buy',
+                'Teaching useful ideas without making your offer the obvious next step',
+                'Producing content without a clear connection to your sales process',
+                'Relying on referrals or founder led selling because content is not doing enough commercial work',
+                'Growing the audience without growing the quality of demand',
               ]} />
             </div>
-            <p className="text-zinc-400 leading-relaxed mb-5">
-              So your content creates attention, but not enough qualified demand.
+            <p className="text-zinc-300 leading-relaxed mb-5">
+              The Brand Day fixes the gap between content and cash.
             </p>
-            <p className="text-zinc-300 leading-relaxed">
-              The Brand Day defines the position you need to own and the content required to turn that position into more trust, stronger buying intent, and a clearer path to revenue.
+            <p className="text-zinc-400 leading-relaxed">
+              We map the exact buyer, the beliefs that drive their purchase, and the content required to move them from attention to trust, buying intent, and revenue.
             </p>
             <Cta label="Apply for a Brand Day" location="brandday-hero" className="mt-10" />
           </Section>
@@ -185,6 +187,38 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
+      {/* STOP MEASURING BY ATTENTION */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The measure</Label>
+            <H2>Stop measuring content by attention alone.</H2>
+            <div className="mt-8 mb-8 space-y-4">
+              <p className="text-zinc-400 leading-relaxed">Views are not the objective.</p>
+              <p className="text-zinc-400 leading-relaxed">Followers are not the objective.</p>
+              <p className="text-zinc-400 leading-relaxed">Posting more is not the objective.</p>
+            </div>
+            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+              The objective is to create more of the right sales opportunities.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-6">That requires content that:</p>
+            <Ticks items={[
+              'Attracts people who can buy',
+              'Makes the cost of their problem clear',
+              'Builds belief in your solution',
+              'Differentiates your approach',
+              'Handles the objections delaying action',
+              'Moves qualified prospects toward your offer',
+            ]} />
+            <div className="glow-card p-7 mt-10">
+              <Flow steps={['Attention', 'Trust', 'Buying Intent', 'Qualified Demand', 'Revenue']} />
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* WHY CATEGORY OWNERSHIP MATTERS */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
@@ -203,19 +237,7 @@ export default function BrandDayOffer() {
             <p className="text-zinc-300 leading-relaxed mt-8 mb-5">
               That changes the commercial conversation.
             </p>
-            <p className="text-zinc-400 leading-relaxed mb-7">
-              Your content stops being a stream of disconnected posts and starts doing the work of:
-            </p>
-            <div className="glow-card p-7">
-              <Flow steps={[
-                'Attracting the right people',
-                'Building authority',
-                'Installing buying beliefs',
-                'Creating qualified demand',
-                'Supporting revenue',
-              ]} />
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
+            <p className="text-zinc-400 leading-relaxed">
               The goal is not to become famous. The goal is to become the obvious choice for the people most likely to buy.
             </p>
           </Section>
@@ -230,9 +252,10 @@ export default function BrandDayOffer() {
           <Section>
             <Label>The day</Label>
             <H2>What the Brand Day fixes.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              In one focused day, we identify:
+            <p className="text-zinc-400 leading-relaxed mt-6 mb-6">
+              In one focused day, we determine what your best buyers need to believe before they buy, which beliefs are currently blocking the sale, and what content must exist to change them.
             </p>
+            <p className="text-zinc-400 leading-relaxed mb-8">We identify:</p>
             <Ticks items={[
               'The exact buyer your brand should attract',
               'The category and position you should own',
@@ -243,7 +266,7 @@ export default function BrandDayOffer() {
               'Where attention is currently leaking before revenue',
             ]} />
             <p className="text-zinc-300 leading-relaxed mt-8">
-              You leave knowing <span className="text-white font-semibold">what to say, who to say it to, why it matters, and how it supports the path to money.</span>
+              You leave with a clear content to revenue strategy: <span className="text-white font-semibold">what to say, who it is for, what belief it changes, and how it supports the path to money.</span>
             </p>
           </Section>
         </div>
