@@ -90,7 +90,7 @@ export default function BrandDayOffer() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Brand Day"
+        title="Strategy Day"
         description="A private one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+. Own your category and build more revenue. $5,000 AUD founding rate."
         path="/brandday"
       />
@@ -101,43 +101,45 @@ export default function BrandDayOffer() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine &middot; Brand Day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine &middot; Strategy Day</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-4">
               Own your category.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
               Build more revenue.
             </p>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+            <p className="text-zinc-300 text-lg leading-relaxed mb-5">
               A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+.
             </p>
-            <p className="text-zinc-400 leading-relaxed mb-5">
-              You already have the offer, expertise, proof, and attention.
-            </p>
             <p className="text-zinc-300 leading-relaxed mb-5">
-              Your content has not caught up to the rest of the business.
+              We work with the top 1% of the industry to bridge the trust gap between content and revenue.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-8">
+              Typically content has not caught up to the rest of the business.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              You may be:
+              This is what is happening:
             </p>
             <div className="mt-6 mb-8">
               <Crosses items={[
-                'Attracting attention without creating buying intent',
-                'Generating engagement that does not turn into sales conversations',
-                'Reaching people who are not qualified to buy',
+                'Scaling attention without equal clients',
+                'Generating engagement that does not turn into sales conversions',
+                'Your team is busy, but not strategic',
+                'You are still the bottleneck',
+                'You are becoming harder to distinguish from competitors',
+                'Your sales team is doing too much persuasion',
                 'Teaching useful ideas without making your offer the obvious next step',
+                'Reaching people not qualified to buy',
                 'Producing content without a clear connection to your sales process',
-                'Growing on referrals and founder led selling, with content playing no real part in it',
-                'Growing the audience without growing the quality of demand',
               ]} />
             </div>
             <p className="text-zinc-300 leading-relaxed mb-5">
-              The Brand Day fixes the gap between content and cash.
+              Our Strategy Day compresses your brand and revenue.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              We map the exact buyer, the beliefs that drive their purchase, and the content required to move them from attention to trust, buying intent, and revenue.
+              We map your brand, your exact ideal buyer, the beliefs that drive their purchase, and the specific content required to take somebody from stranger to advocate.
             </p>
-            <Cta label="Apply for a Brand Day" location="brandday-hero" className="mt-10" />
+            <Cta label="Apply for a Strategy Day" location="brandday-hero" className="mt-10" />
           </Section>
         </div>
       </section>
@@ -151,36 +153,47 @@ export default function BrandDayOffer() {
             <Label>The two games</Label>
             <H2>Attention and authority are two different games.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-5">
-              Most people are still playing for attention.
+              Most people are still playing for attention. On the outside, it looks great.
+            </p>
+            <div className="grid grid-cols-2 gap-4 my-8">
+              <div className="glow-card p-7">
+                <p className="font-display text-3xl md:text-4xl font-extrabold text-white">$1.05M</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Average client, per month</p>
+              </div>
+              <div className="glow-card p-7">
+                <p className="font-display text-3xl md:text-4xl font-extrabold text-white">51.4K</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Their average platform size</p>
+              </div>
+            </div>
+            <p className="text-zinc-300 leading-relaxed mb-8">
+              1,000,000 followers is not needed to scale past $1,000,000 per month.
             </p>
             <p className="text-zinc-300 text-lg leading-relaxed">
               Nobody buys a $20,000 service from attention. They buy the $20 product.
             </p>
             <div className="grid md:grid-cols-2 gap-6 mt-10">
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">The attention game</p>
+                <p className="text-white text-sm font-semibold mb-5">Attention</p>
                 <Ticks items={[
                   'The product does not require trust in you',
-                  'Content is distribution',
-                  'Get seen, retarget, let the ads convert',
+                  'Get seen, retarget, let ads convert',
                   'The decision is cheap enough to make on impulse',
                 ]} />
               </div>
               <div className="glow-card border-blue-500/20 p-8">
-                <p className="text-white text-sm font-semibold mb-5">The authority game</p>
+                <p className="text-white text-sm font-semibold mb-5">Authority</p>
                 <Ticks items={[
-                  'The product requires trust in you',
-                  'Content is the conversion',
+                  'The product requires trust in competency',
                   'The belief has to be built before the call',
                   'The decision is expensive, so it is made slowly',
                 ]} />
               </div>
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-10 mb-5">
-              You do not just need attention. You need the right attention, and you need authority.
+            <p className="text-zinc-300 leading-relaxed mt-10 mb-5">
+              You do not just need attention. You need the right attention, paired with authority.
             </p>
-            <p className="text-zinc-300 leading-relaxed">
-              This is how you get it.
+            <p className="text-zinc-400 leading-relaxed">
+              This is not content alone. It is the right content, in the right sequence, with the exact assets an ideal client requires in order to make a purchase.
             </p>
           </Section>
         </div>
@@ -188,28 +201,31 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
-      {/* STOP MEASURING BY ATTENTION */}
+      {/* THE MEASURE */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The measure</Label>
-            <H2>Stop measuring content by attention alone.</H2>
+            <H2>Stop measuring content by attention and output alone.</H2>
             <div className="mt-8 mb-8 space-y-4">
               <p className="text-zinc-400 leading-relaxed">Views are not the objective.</p>
               <p className="text-zinc-400 leading-relaxed">Followers are not the objective.</p>
               <p className="text-zinc-400 leading-relaxed">Posting more is not the objective.</p>
             </div>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              The objective is to create more of the right sales opportunities.
+            <p className="text-zinc-300 text-lg leading-relaxed mb-5">
+              The objective is to compress your sales cycle, scale the business, and let the right people self identify as a buyer before you ever need to sell.
             </p>
-            <p className="text-zinc-400 leading-relaxed mb-6">That requires content that:</p>
+            <p className="text-zinc-300 leading-relaxed mb-8">
+              How we do that is Brand.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-6">This requires content that:</p>
             <Ticks items={[
               'Attracts people who can buy',
               'Makes the cost of their problem clear',
-              'Builds belief in your solution',
+              'Builds conviction in your solution',
               'Differentiates your approach',
-              'Handles the objections delaying action',
-              'Moves qualified prospects toward your offer',
+              'Handles all objections delaying action',
+              'Bridges qualified prospects toward your offer',
             ]} />
             <div className="glow-card p-7 mt-10">
               <Flow steps={['Attention', 'Trust', 'Buying Intent', 'Qualified Demand', 'Revenue']} />
@@ -220,14 +236,14 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
-      {/* WHY CATEGORY OWNERSHIP MATTERS */}
+      {/* THE BRIDGE */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The bridge</Label>
             <H2>Why category ownership matters.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-6">
-              When you own a category, the right buyers do not see you as one of many options. They understand:
+              When you own your category, the right buyers do not see you as one of many options. They understand:
             </p>
             <Ticks items={[
               'The problem you solve',
@@ -235,11 +251,8 @@ export default function BrandDayOffer() {
               'Why your approach is different',
               'Why you are the person to solve it',
             ]} />
-            <p className="text-zinc-300 leading-relaxed mt-8 mb-5">
-              That changes the commercial conversation.
-            </p>
-            <p className="text-zinc-400 leading-relaxed">
-              The goal is not to become famous. The goal is to become the obvious choice for the people most likely to buy.
+            <p className="text-zinc-400 leading-relaxed mt-8">
+              The goal is not to become famous. The goal is to become the obvious choice for your people, and the ones most likely to buy.
             </p>
           </Section>
         </div>
@@ -247,24 +260,23 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
-      {/* WHAT THE BRAND DAY FIXES */}
+      {/* THE DAY */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The day</Label>
-            <H2>What the Brand Day fixes.</H2>
+            <H2>What the Strategy Day fixes.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-6">
               In one focused day, we determine what your best buyers need to believe before they buy, which beliefs are currently blocking the sale, and what content must exist to change them.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-8">We identify:</p>
             <Ticks items={[
               'The exact buyer your brand should attract',
-              'The category and position you should own',
-              'The beliefs currently blocking the sale',
+              'The category and position you should own, with your exact steps required',
               'The beliefs your prospects need before they buy',
-              'The proof required to make your solution believable',
+              'The proof required to make your solution believable, and how to package it correctly',
               'The content required to move buyers toward your offer',
-              'Where attention is currently leaking before revenue',
+              'Where attention is currently leaking before revenue, plus how to capture it',
             ]} />
             <p className="text-zinc-300 leading-relaxed mt-8">
               You leave with a clear content to revenue strategy: <span className="text-white font-semibold">what to say, who it is for, what belief it changes, and how it supports the path to money.</span>
@@ -275,7 +287,7 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
-      {/* WHAT YOU LEAVE WITH */}
+      {/* THE OUTCOME */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
@@ -285,10 +297,10 @@ export default function BrandDayOffer() {
               One documented <span className="text-white font-semibold">Brand Demand Workbook</span> containing:
             </p>
             <Ticks items={[
+              'Content to revenue client journey',
               'Exact avatar',
               'Positioning and category map',
               'Buying Belief Map',
-              'Content to revenue journey',
               'Authority and proof architecture',
               'Required content pillars and narratives',
               '30 day content direction',
@@ -297,8 +309,18 @@ export default function BrandDayOffer() {
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
               This is not a guarantee of revenue. It is the strategic foundation that makes your content more relevant, your authority more believable, and your demand more qualified.
             </p>
-            <div className="glow-card border-blue-500/20 p-8 mt-10">
-              <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-4">The simple promise</p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* THE SIMPLE PROMISE */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The simple promise</Label>
+            <div className="glow-card border-blue-500/20 p-8 md:p-10">
               <p className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.25]">
                 Own the position, create the beliefs, and produce the content that makes more of the right people want to buy.
               </p>
@@ -320,7 +342,7 @@ export default function BrandDayOffer() {
             <H2>Who this is for.</H2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">The Brand Day is for founders who:</p>
+                <p className="text-white text-sm font-semibold mb-5">The Strategy Day is for founders who:</p>
                 <Ticks items={[
                   'Do $200K/month+',
                   'Have a proven offer and real expertise',
@@ -354,13 +376,13 @@ export default function BrandDayOffer() {
           <Section>
             <Label>Investment</Label>
             <div className="glow-card p-8 md:p-10">
-              <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
+              <p className="text-zinc-400 text-[14px] mb-1">Strategy Day</p>
               <p className="font-display text-5xl font-extrabold text-white">$5,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                There are <span className="text-white font-semibold">14 Brand Days remaining</span> at the founding price. Once those are filled, the price increases to <span className="text-white font-semibold">$10,000 AUD</span>.
+                There are <span className="text-white font-semibold">14 Strategy Days remaining</span> at the founding price. Once those are filled, the price increases to <span className="text-white font-semibold">$10,000 AUD</span>.
               </p>
               <p className="text-zinc-500 text-[15px] leading-relaxed mt-5">
-                The Brand Day stands alone. You leave with the strategy and can implement it with your existing team or partners.
+                The Strategy Day stands alone. You leave with the strategy and can implement it with your existing team or partners.
               </p>
             </div>
           </Section>
@@ -369,7 +391,7 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
-      {/* WHAT HAPPENS NEXT */}
+      {/* PROCESS */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
@@ -400,7 +422,7 @@ export default function BrandDayOffer() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
             <div className="accent-line mx-auto mb-10" />
-            <H2>Apply for a Brand Day.</H2>
+            <H2>Apply for a Strategy Day.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 max-w-xl mx-auto">
               The goal is not more content. The goal is content that makes the right people understand:
             </p>
