@@ -141,6 +141,50 @@ export default function BrandDayOffer() {
 
       <div className="gradient-line" />
 
+      {/* THE TWO GAMES */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The two games</Label>
+            <H2>Attention and authority are two different games.</H2>
+            <p className="text-zinc-400 leading-relaxed mt-6 mb-5">
+              Most people are still playing for attention.
+            </p>
+            <p className="text-zinc-300 text-lg leading-relaxed">
+              Nobody buys a $20,000 service from attention. They buy the $20 product.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 mt-10">
+              <div className="glow-card p-8">
+                <p className="text-white text-sm font-semibold mb-5">The attention game</p>
+                <Ticks items={[
+                  'The product does not require trust in you',
+                  'Content is distribution',
+                  'Get seen, retarget, let the ads convert',
+                  'The decision is cheap enough to make on impulse',
+                ]} />
+              </div>
+              <div className="glow-card border-blue-500/20 p-8">
+                <p className="text-white text-sm font-semibold mb-5">The authority game</p>
+                <Ticks items={[
+                  'The product requires trust in you',
+                  'Content is the conversion',
+                  'The belief has to be built before the call',
+                  'The decision is expensive, so it is made slowly',
+                ]} />
+              </div>
+            </div>
+            <p className="text-zinc-400 leading-relaxed mt-10 mb-5">
+              You do not just need attention. You need the right attention, and you need authority.
+            </p>
+            <p className="text-zinc-300 leading-relaxed">
+              This is how you get it.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* WHY CATEGORY OWNERSHIP MATTERS */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
