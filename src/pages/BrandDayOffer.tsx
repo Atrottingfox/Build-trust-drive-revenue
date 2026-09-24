@@ -157,7 +157,7 @@ export default function BrandDayOffer() {
             </p>
             <div className="grid grid-cols-2 gap-4 my-8">
               <div className="glow-card p-7">
-                <p className="font-display text-3xl md:text-4xl font-extrabold text-white">$1.05M</p>
+                <p className="font-display text-3xl md:text-4xl font-extrabold text-white">$1.06M</p>
                 <p className="text-zinc-500 text-[14px] mt-2">Average client, per month</p>
               </div>
               <div className="glow-card p-7">
