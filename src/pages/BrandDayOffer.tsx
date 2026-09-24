@@ -203,8 +203,11 @@ export default function BrandDayOffer() {
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine &middot; Brand Day</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
-              Turn your content into a clearer path to cash.
+              Own your category.
             </h1>
+            <p className="text-zinc-200 text-xl md:text-2xl leading-[1.35] mb-7">
+              Then turn that position into a clearer path to cash.
+            </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-8">
               A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing at least $200K per month.
             </p>
