@@ -223,7 +223,7 @@ export default function Offer() {
               Engineer how content drives revenue, build a brand that commands attention from the right people, and install the buying beliefs your best clients need so your team can keep scaling without you becoming a full time creator.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              For 7-8 figure coaches, consultants, and B2B founders doing at least $200K/month.
+              For 7-8 figure B2B founders, coaches and consultants doing at least $200K/month.
             </p>
             <div className="mt-8 mb-8">
               <Crosses items={[
@@ -239,7 +239,7 @@ export default function Offer() {
               For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and a scorecard that tracks how well your content is installing those beliefs and converting into pipeline, so the Engine keeps compounding without you ever becoming a full time creator.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              I've spent the last 24 months behind the scenes with 7 & 8 figure consultants, coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue. As of writing, our average client is doing $1.06M per month.
+              I've spent the last 24 months behind the scenes with 7 & 8 figure B2B founders, coaches and consultants doing at least $200K a month, turning content into an engine that consistently drives revenue. As of writing, our average client is doing $1.06M per month.
             </p>
             <Cta label="Apply for a Brand Day" location="offer-hero" className="mt-10" />
           </Section>
