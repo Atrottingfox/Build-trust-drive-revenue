@@ -114,7 +114,7 @@ export default function BrandDayOffer() {
               You already have the offer, expertise, proof, and attention.
             </p>
             <p className="text-zinc-300 leading-relaxed mb-5">
-              But your content is not consistently turning those assets into qualified sales opportunities.
+              Your content has not caught up to the rest of the business.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               You may be:
@@ -122,11 +122,11 @@ export default function BrandDayOffer() {
             <div className="mt-6 mb-8">
               <Crosses items={[
                 'Attracting attention without creating buying intent',
-                'Generating engagement without enough sales conversations',
+                'Generating engagement that does not turn into sales conversations',
                 'Reaching people who are not qualified to buy',
                 'Teaching useful ideas without making your offer the obvious next step',
                 'Producing content without a clear connection to your sales process',
-                'Relying on referrals or founder led selling because content is not doing enough commercial work',
+                'Growing on referrals and founder led selling, with content playing no real part in it',
                 'Growing the audience without growing the quality of demand',
               ]} />
             </div>
@@ -325,7 +325,7 @@ export default function BrandDayOffer() {
                   'Have a proven offer and real expertise',
                   'Already create content or have content partners',
                   'Want content to create qualified sales opportunities',
-                  'Are tired of engagement without enough commercial impact',
+                  'Want their content to do more commercial work',
                   'Want to become the obvious choice in their category',
                   'Are ready to implement the strategy',
                 ]} />
