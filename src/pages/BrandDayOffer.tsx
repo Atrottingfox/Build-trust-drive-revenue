@@ -91,7 +91,7 @@ export default function BrandDayOffer() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Brand Day"
-        description="A private one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+. Own your category and create more qualified revenue. $5,000 AUD founding rate."
+        description="A private one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+. Own your category and build more revenue. $5,000 AUD founding rate."
         path="/brandday"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -102,11 +102,12 @@ export default function BrandDayOffer() {
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine &middot; Brand Day</p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-4">
               Own your category.
-              <br />
-              <span className="text-zinc-500">Create more qualified revenue.</span>
             </h1>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
+              Build more revenue.
+            </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-8">
               A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+.
             </p>
