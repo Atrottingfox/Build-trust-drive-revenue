@@ -91,7 +91,7 @@ export default function BrandDayOffer() {
     <div className="min-h-screen bg-base">
       <SEO
         title="Brand Day"
-        description="A private one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing at least $200K per month. Own your category and create more qualified revenue. $5,000 AUD founding rate."
+        description="A private one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+. Own your category and create more qualified revenue. $5,000 AUD founding rate."
         path="/brandday"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -108,7 +108,7 @@ export default function BrandDayOffer() {
               <span className="text-zinc-500">Create more qualified revenue.</span>
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing at least $200K per month.
+              A private, one day strategic intensive for 7 and 8 figure B2B founders, coaches and consultants doing $200K/month+.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-5">
               You already have the offer, expertise, proof, and business.
@@ -298,7 +298,7 @@ export default function BrandDayOffer() {
               <div className="glow-card p-8">
                 <p className="text-white text-sm font-semibold mb-5">The Brand Day is for founders who:</p>
                 <Ticks items={[
-                  'Do at least $200K per month',
+                  'Do $200K/month+',
                   'Have a proven offer and real expertise',
                   'Already create content or have content partners',
                   'Want content to create qualified sales opportunities',
