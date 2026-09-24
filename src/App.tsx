@@ -20,7 +20,6 @@ const Builder = React.lazy(() => import('./pages/Builder'));
 const DiagnosticTool = React.lazy(() => import('./pages/DiagnosticTool'));
 const Quiz = React.lazy(() => import('./pages/Quiz'));
 const CongruenceAudit = React.lazy(() => import('./pages/CongruenceAudit'));
-const BrandDay = React.lazy(() => import('./pages/BrandDay'));
 const Advisory = React.lazy(() => import('./pages/Advisory'));
 const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 const Phase0 = React.lazy(() => import('./pages/Phase0'));
@@ -58,6 +57,7 @@ const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
+const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const Booked = React.lazy(() => import('./pages/Booked'));
 const Install = React.lazy(() => import('./pages/Install'));
@@ -117,7 +117,7 @@ export default function App() {
           <Route path="/diagnostic-tool" element={<DiagnosticTool />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/congruence" element={<CongruenceAudit />} />
-          <Route path="/brand-day" element={<BrandDay />} />
+          <Route path="/brand-day" element={<BrandDayOffer />} />
           <Route path="/advisory" element={<Advisory />} />
           <Route path="/map" element={<BusinessMap />} />
           <Route path="/phase0" element={<Phase0 />} />
@@ -159,6 +159,7 @@ export default function App() {
           <Route path="/theprofitanalyst" element={<ProfitAnalyst />} />
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
+          <Route path="/brandday" element={<BrandDayOffer />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />
