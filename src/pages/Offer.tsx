@@ -115,6 +115,7 @@ const ladder = [
     intro: '',
     items: [
       'Diagnose what is working and where your content leaks',
+      'Assess your current path to money, to increase demand and scale revenue',
       'Map your brand, message, and Authority Engine across IG and YouTube',
       'Define what your Operator or Creative Director owns week to week',
       'Set 3 to 5 clear 90 day outcomes for content and pipeline',
@@ -238,7 +239,7 @@ export default function Offer() {
               For the right founders it continues into a 90 day Authority Engine Install, where we turn that blueprint into a working demand system: embedding the cadence, testing cycles, and a scorecard that tracks how well your content is installing those beliefs and converting into pipeline, so the Engine keeps compounding without you ever becoming a full time creator.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              I've spent the last 24 months behind the scenes with 7 & 8 figure consultants, coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue, with another client recently crossing $2M a month.
+              I've spent the last 24 months behind the scenes with 7 & 8 figure consultants, coaches and B2B founders doing at least $200K a month, turning content into an engine that consistently drives revenue. As of writing, our average client is doing $1.06M per month.
             </p>
             <Cta label="Apply for a Brand Day" location="offer-hero" className="mt-10" />
           </Section>
@@ -590,7 +591,7 @@ export default function Offer() {
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">Brand Day</p>
                 <p className="font-display text-3xl font-extrabold text-white">$5,000 AUD</p>
-                <p className="text-zinc-500 text-[14px] mt-2">Founding rate. Increasing as capacity fills.</p>
+                <p className="text-zinc-500 text-[14px] mt-2">Founding rate. $5,000 until it goes to $10,000. 14 spots left.</p>
               </div>
               <div className="glow-card p-7">
                 <p className="text-zinc-400 text-[14px] mb-1">90 Day Authority Engine Install (by invitation only)</p>
@@ -605,7 +606,7 @@ export default function Offer() {
               <p className="text-white text-sm font-semibold mb-3">Capacity.</p>
               <ul className="space-y-3">
                 {[
-                  'We are limited to 10 strategy days per month.',
+                  'We are limited to 6 strategy days per month.',
                   'I keep the number of active 90 day Installs low so I can stay close to your team and your data.',
                   'The 90 day Install and any ongoing advisory are by invitation only, offered to founders where I am confident we can hit the outcomes we set on your Brand Day.',
                 ].map((item, i) => (
