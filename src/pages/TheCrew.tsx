@@ -16,25 +16,26 @@ const AFTER = [
   'Training',
 ];
 
-/* Sean's copy, word for word. One string per paragraph, one line per break. */
-const COPY: string[][] = [
-  ["Whether you're inside a media team, running an agency or freelancing, you're here for a reason."],
-  ['Our goal here is to get you access to the best teams and opportunity in the world.'],
-  [
-    "We're getting the best 1% in Australia together.",
-    'In order to do that, we need a community of weapons.',
-    'Because next time somebody asks us, "I need someone for content in Australia who..."',
-    "This is where they'll look.",
-    'If you want to get in a room with other likeminded operators in the content & media industry, this is the place for you.',
-  ],
-  [
-    'P.s. My ambition is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over the next two years by connecting you with the top 0.1% of the industry.',
-  ],
-  [
-    'Our standards are ruthless.',
-    'But you are here for a reason.',
-    'These opportunities are not for the faint of heart.',
-  ],
+/* Sean's copy, word for word. A string array is a paragraph, one line per
+   break; a { list } block is a bullet list. */
+type Block = string[] | { list: string[] };
+const COPY: Block[] = [
+  ['A private network for people building the future of content and media.'],
+  ['Whether you work inside a high performing team, run an agency, freelance independently, or lead creative direction, this is a place to:'],
+  {
+    list: [
+      'Meet the people doing elite work',
+      'Learn from high standard operators',
+      "Share openly what you're seeing",
+      'Access relevant opportunities',
+      'Find collaborators and talent',
+      'Become known by the founders and teams shaping the industry',
+    ],
+  },
+  ['The ambition is to bring together the people capable of operating with the top 1% of the industry, and connect them with the best opportunities in the market.'],
+  ['My personal goal is to distribute $10M in opportunity across the best internal teams, freelancers, agencies and operators by connecting world class talent with exceptional businesses over the next two years.'],
+  ['Because next time somebody says, "I need someone for content in Australia who..."'],
+  ["This is where they'll look."],
 ];
 
 export default function TheCrew() {
@@ -116,16 +117,27 @@ export default function TheCrew() {
         </h1>
 
         <div className="space-y-6 text-zinc-400 text-[17px] leading-relaxed mb-10">
-          {COPY.map((para, i) => (
-            <p key={i}>
-              {para.map((line, j) => (
-                <React.Fragment key={j}>
-                  {j > 0 && <br />}
-                  <span className={line.startsWith('P.s.') ? 'text-white font-semibold' : undefined}>{line}</span>
-                </React.Fragment>
-              ))}
-            </p>
-          ))}
+          {COPY.map((block, i) =>
+            Array.isArray(block) ? (
+              <p key={i} className={i === 0 ? 'text-white text-xl font-semibold' : undefined}>
+                {block.map((line, j) => (
+                  <React.Fragment key={j}>
+                    {j > 0 && <br />}
+                    <span className={line.startsWith('My personal goal') ? 'text-white font-semibold' : undefined}>{line}</span>
+                  </React.Fragment>
+                ))}
+              </p>
+            ) : (
+              <ul key={i} className="space-y-2 pl-1">
+                {block.list.map(item => (
+                  <li key={item} className="flex gap-3">
+                    <span className="text-[#3B7DFF]">&bull;</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            )
+          )}
         </div>
 
         {submitted ? (
@@ -152,7 +164,7 @@ export default function TheCrew() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="text-white font-semibold">
-              Show us what you've got
+              Show us what you can do, where you create the most value, and what opportunity you are ready for next.
             </p>
 
             <input name="name" placeholder="Name" required value={form.name} onChange={set} className={inputClass} />
