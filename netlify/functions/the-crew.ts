@@ -83,6 +83,7 @@ export const handler: Handler = async (event) => {
   }
 
   let notion = "not configured";
+  let notionUrl = "";
   const key = process.env.NOTION_API_KEY;
   if (key) {
     try {
@@ -110,7 +111,8 @@ export const handler: Handler = async (event) => {
         }),
       });
       notion = res.ok ? "saved" : `failed (${res.status})`;
-      if (!res.ok) console.error("Crew Notion write failed:", await res.text());
+      if (res.ok) notionUrl = (await res.json()).url || "";
+      else console.error("Crew Notion write failed:", await res.text());
     } catch (err) {
       notion = "failed (network)";
       console.error("Crew Notion write threw:", err);
@@ -147,6 +149,9 @@ export const handler: Handler = async (event) => {
             d.experience ? `*Experience:* ${d.experience}` : null,
             d.nominated ? `*Deserve an invite:* ${d.nominated}` : null,
             notion === "saved" ? null : `:rotating_light: *Notion:* ${notion}. This alert is the only copy.`,
+            /* Straight to their row in Talentpool, or the database if the row
+               did not save, so acting on this is one click. */
+            `<${notionUrl || `https://www.notion.so/${NOTION_CREW_DB}`}|Open in Notion>`,
           ]
             .filter(Boolean)
             .join("\n"),
