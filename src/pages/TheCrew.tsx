@@ -11,10 +11,10 @@ const ROLES = ['Creative Director', 'Media Operator', 'Director', 'Creator', 'Ed
 const ROOM = 'Just want in the room with the best';
 /* Where they are decides what they can be after, so someone already inside a
    team never reads a form that assumes they are looking for work. */
-const PATHS: Record<string, { after: string[]; team?: string }> = {
-  'Inside a media team': { after: [ROOM, 'Open to the right move', 'Hiring from the crew'], team: 'Which team?' },
+const PATHS: Record<string, { after: string[] }> = {
+  'Inside a media team': { after: [ROOM, 'Open to the right move', 'Hiring from the crew'] },
   Freelance: { after: ['More of the right work', 'A full time seat', ROOM] },
-  Agency: { after: ['Work for our agency', 'Talent for our team', ROOM], team: 'Which agency?' },
+  Agency: { after: ['Work for our agency', 'Talent for our team', ROOM] },
   'Between things': { after: ['A full time seat', 'More of the right work', ROOM] },
 };
 
@@ -31,7 +31,6 @@ export default function TheCrew() {
     roles: [] as string[],
     rightNow: '',
     after: '',
-    team: '',
     work: '',
     nominated: '',
     company: '',
@@ -167,7 +166,7 @@ export default function TheCrew() {
                   <button
                     type="button"
                     key={r}
-                    onClick={() => setForm(prev => ({ ...prev, rightNow: r, after: '', team: '' }))}
+                    onClick={() => setForm(prev => ({ ...prev, rightNow: r, after: '' }))}
                     className={chip(form.rightNow === r)}
                   >
                     {r}
@@ -178,9 +177,6 @@ export default function TheCrew() {
 
             {form.rightNow && (
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                {PATHS[form.rightNow].team && (
-                  <input name="team" placeholder={PATHS[form.rightNow].team} value={form.team} onChange={set} className={inputClass} />
-                )}
                 <div>
                   <p className={label}>What are you after?</p>
                   <div className="grid gap-2">
