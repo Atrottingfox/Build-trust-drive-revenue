@@ -9,7 +9,6 @@ const WHATSAPP_GROUP = 'https://chat.whatsapp.com/LPDk6oSt039HakWnZPUrsd';
 
 const ROLES = ['Creative Director', 'Media Operator', 'Director', 'Creator', 'Editor', 'Shooter'];
 const WANTS = ["Inside a founder's media team", 'Freelance', 'Agency', 'Just want in the room'];
-const EXPECT = ['Training', 'Tools', 'Templates', 'Community', 'Calls'];
 
 export default function TheCrew() {
   const [loading, setLoading] = useState(false);
@@ -100,18 +99,6 @@ export default function TheCrew() {
             freelancers, and agencies.
           </p>
           <p>Taking this kind of a role changed my life, and I want to continue to pay it forward.</p>
-        </div>
-
-        <div className="bg-elevated border border-zinc-800 rounded-xl p-6 mb-10">
-          <p className="text-white font-semibold mb-4">Here's what to expect</p>
-          <ul className="space-y-2 text-zinc-400 text-[15px]">
-            {EXPECT.map(item => (
-              <li key={item}>{item}</li>
-            ))}
-            <li className="text-white font-semibold pt-1">
-              Most of all, first dibs on the best opportunities in Australia and the world.
-            </li>
-          </ul>
         </div>
 
         {submitted ? (
