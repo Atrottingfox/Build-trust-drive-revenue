@@ -19,28 +19,27 @@ const AFTER = [
 /* Sean's copy, word for word. One string per paragraph, one line per break. */
 const COPY: string[][] = [
   [
-    "We're getting the best 1% in Australia together.",
     "Whether you're inside a media team, running an agency or freelancing, you're here for a reason.",
+    "We're getting the best 1% in Australia together.",
   ],
   [
-    'Our goal is to get you access to the best opportunities in the world.',
+    'Our goal here is to get you access to the best teams and opportunity in the world.',
     'In order to do that, we need a community of weapons.',
-  ],
-  [
-    'My selfish goal is simple.',
-    "I'm giving away $10,000,000 in opportunity over 2 years across internal media teams salaries, freelancers, and agencies.",
   ],
   [
     'Because next time somebody says, "I need someone for content in Australia who..."',
     "This is where they'll look.",
   ],
   [
-    '"But Sean - I don\'t need better opportunity"',
-    "Here's the real truth.",
-    'None of us are as smart as all of us, and a rising tide lifts all ships.',
+    'If you want to get in a room with other likeminded operators in the content & media industry, this is for you.',
   ],
   [
-    'If you want to get in a room with other likeminded operators in the content & media industry, this is for you.',
+    'P.s. My selfish goal is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over the next two years by connecting you with the top 0.1% of the industry.',
+  ],
+  [
+    'Our standards are ruthless.',
+    'But you are here for a reason.',
+    'These opportunities are not for the faint of heart.',
   ],
 ];
 
@@ -128,7 +127,7 @@ export default function TheCrew() {
               {para.map((line, j) => (
                 <React.Fragment key={j}>
                   {j > 0 && <br />}
-                  <span className={line.startsWith("I'm giving away") ? 'text-white font-semibold' : undefined}>{line}</span>
+                  <span className={line.startsWith('P.s.') ? 'text-white font-semibold' : undefined}>{line}</span>
                 </React.Fragment>
               ))}
             </p>
