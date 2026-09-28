@@ -125,7 +125,7 @@ export const handler: Handler = async (event) => {
   let slack: string | null = null;
   try {
     connectLambda(event as any);
-    slack = await getStore("config").get("slack-talent");
+    slack = await getStore("config").get("slack-talent", { type: "text" });
   } catch (err) {
     console.error("Crew Slack webhook lookup failed:", err);
   }
