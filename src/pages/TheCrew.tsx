@@ -70,7 +70,7 @@ export default function TheCrew() {
       <SEO
         title="The Crew"
         description="The talent pool of the best 1% of creators, directors and media operators in Australia."
-        path="/the-crew"
+        path="/thecrew"
         noIndex
       />
       <motion.div

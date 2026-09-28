@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
 const DFY = React.lazy(() => import('./pages/DFY'));
 const Accelerator = React.lazy(() => import('./pages/Accelerator'));
@@ -103,7 +103,8 @@ export default function App() {
           <Route path="/accelerator" element={<Accelerator />} />
           <Route path="/content-archetype" element={<ContentArchetypeAssessment />} />
           <Route path="/editorapplication" element={<EditorApplication />} />
-          <Route path="/the-crew" element={<TheCrew />} />
+          <Route path="/thecrew" element={<TheCrew />} />
+          <Route path="/the-crew" element={<Navigate to="/thecrew" replace />} />
           <Route path="/authorityaccelerator" element={<AuthorityAccelerator />} />
           <Route path="/authoritybuilder" element={<AuthorityBuilder />} />
           <Route path="/beliefmap" element={<BeliefMap />} />
