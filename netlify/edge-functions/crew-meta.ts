@@ -6,7 +6,7 @@ import type { Context } from "https://edge.netlify.com";
   crew link as the homepage. This swaps the tags in the HTML on the way out.
 */
 const TITLE = "You have been invited to be a part of the top 1%.";
-const DESC = "The Crew. The talent pool of the best 1% of creators, directors and media operators in Australia.";
+const DESC = "A private network for people building the future of content and media.";
 const IMAGE = "https://authorityengine.com.au/og-thecrew.png";
 const URL_ = "https://authorityengine.com.au/thecrew";
 
