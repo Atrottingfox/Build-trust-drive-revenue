@@ -116,7 +116,10 @@ export const handler: Handler = async (event) => {
     }
   }
 
-  const slack = process.env.SLACK_WEBHOOK_APPLICATIONS || process.env.SLACK_WEBHOOK_URL;
+  /* Talent only. Never falls back to the applications webhook: crew profiles
+     must not land in the Brand Day application channel. Unset means no alert,
+     and the Notion row is the record. */
+  const slack = process.env.SLACK_WEBHOOK_TALENT;
   if (slack) {
     try {
       await fetch(slack, {
