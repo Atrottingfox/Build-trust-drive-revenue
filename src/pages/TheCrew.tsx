@@ -18,23 +18,17 @@ const AFTER = [
 
 /* Sean's copy, word for word. One string per paragraph, one line per break. */
 const COPY: string[][] = [
+  ["Whether you're inside a media team, running an agency or freelancing, you're here for a reason."],
+  ['Our goal here is to get you access to the best teams and opportunity in the world.'],
   [
-    "Whether you're inside a media team, running an agency or freelancing, you're here for a reason.",
     "We're getting the best 1% in Australia together.",
-  ],
-  [
-    'Our goal here is to get you access to the best teams and opportunity in the world.',
     'In order to do that, we need a community of weapons.',
-  ],
-  [
-    'Because next time somebody says, "I need someone for content in Australia who..."',
+    'Because next time somebody asks us, "I need someone for content in Australia who..."',
     "This is where they'll look.",
+    'If you want to get in a room with other likeminded operators in the content & media industry, this is the place for you.',
   ],
   [
-    'If you want to get in a room with other likeminded operators in the content & media industry, this is for you.',
-  ],
-  [
-    'P.s. My ambition is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over two years by connecting the best operators with the top 0.1% of the industry.',
+    'P.s. My ambition is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over the next two years by connecting you with the top 0.1% of the industry.',
   ],
   [
     'Our standards are ruthless.',
@@ -158,7 +152,7 @@ export default function TheCrew() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="text-white font-semibold">
-              Build your profile. Show off your work and who you are.
+              Show us what you've got
             </p>
 
             <input name="name" placeholder="Name" required value={form.name} onChange={set} className={inputClass} />
@@ -223,7 +217,7 @@ export default function TheCrew() {
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Submit <ArrowRight className="w-4 h-4" /></>}
             </button>
-            <p className="text-zinc-600 text-[12px] px-1">Your details stay with The Authority Engine. Never sold.</p>
+            <p className="text-zinc-500 text-[13px] px-1 text-center">This is a ticket to the top 0.1%</p>
           </form>
         )}
       </motion.div>
