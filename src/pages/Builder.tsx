@@ -376,7 +376,7 @@ export default function Builder() {
         Applying and being accepted are two different events. Sean reads the
         application, moves them from `applied` to `accepted`, and the /lock-in
         link is delivered separately in the invitation email. That gap is the
-        product: "this isn't a sales form, it's a filter" is only true if
+        product: "this does not guarantee your place" is only true if
         something actually filters.
 
         It also protects the client. Someone with nobody to own content ops
@@ -645,7 +645,7 @@ export default function Builder() {
                   )}
                 </button>
                 <p className="text-zinc-600 text-xs mt-4">
-                  This isn't a sales form. It's a filter. Not everyone gets in.
+                  This does not guarantee your place. We only take a select number of clients on per month by invitation.
                 </p>
               </div>
             </motion.form>

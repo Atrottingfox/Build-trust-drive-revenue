@@ -33,9 +33,9 @@ const COPY: Block[] = [
     ],
   },
   ['The ambition is to bring together the people capable of operating with the top 1% of the industry, and connect them with the best opportunities in the market.'],
-  ['My personal goal is to distribute $10M in opportunity across the best internal teams, freelancers, agencies and operators by connecting world class talent with exceptional businesses over the next two years.'],
   ['Because next time somebody says, "I need someone for content in Australia who..."'],
   ["This is where they'll look."],
+  ['My personal goal is to distribute $10M in opportunity across the best internal teams, freelancers, agencies and operators by connecting world class talent with exceptional businesses over the next two years.'],
 ];
 
 export default function TheCrew() {
@@ -123,7 +123,7 @@ export default function TheCrew() {
                 {block.map((line, j) => (
                   <React.Fragment key={j}>
                     {j > 0 && <br />}
-                    <span className={line.startsWith('My personal goal') ? 'text-white font-semibold' : undefined}>{line}</span>
+                    <span className={line.startsWith('My personal goal') ? 'text-zinc-500 italic text-[15px]' : undefined}>{line}</span>
                   </React.Fragment>
                 ))}
               </p>
@@ -164,7 +164,7 @@ export default function TheCrew() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="text-white font-semibold">
-              Show us what you can do, where you create the most value, and what opportunity you are ready for next.
+              Show us what you can do, where you create the most value, and what you're after right now.
             </p>
 
             <input name="name" placeholder="Name" required value={form.name} onChange={set} className={inputClass} />
