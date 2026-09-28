@@ -5,6 +5,7 @@ const DFY = React.lazy(() => import('./pages/DFY'));
 const Accelerator = React.lazy(() => import('./pages/Accelerator'));
 const ContentArchetypeAssessment = React.lazy(() => import('./pages/ContentArchetypeAssessment'));
 const EditorApplication = React.lazy(() => import('./pages/EditorApplication'));
+const TheCrew = React.lazy(() => import('./pages/TheCrew'));
 const AuthorityAccelerator = React.lazy(() => import('./pages/AuthorityAccelerator'));
 const AuthorityBuilder = React.lazy(() => import('./pages/AuthorityBuilder'));
 const BeliefMap = React.lazy(() => import('./pages/BeliefMap'));
@@ -102,6 +103,7 @@ export default function App() {
           <Route path="/accelerator" element={<Accelerator />} />
           <Route path="/content-archetype" element={<ContentArchetypeAssessment />} />
           <Route path="/editorapplication" element={<EditorApplication />} />
+          <Route path="/the-crew" element={<TheCrew />} />
           <Route path="/authorityaccelerator" element={<AuthorityAccelerator />} />
           <Route path="/authoritybuilder" element={<AuthorityBuilder />} />
           <Route path="/beliefmap" element={<BeliefMap />} />
