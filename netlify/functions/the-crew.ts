@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { connectLambda, getStore } from "@netlify/blobs";
 
 /*
   /the-crew profiles. One Notion row per submission in Tier 1 applications
@@ -116,10 +117,18 @@ export const handler: Handler = async (event) => {
     }
   }
 
-  /* Talent only. Never falls back to the applications webhook: crew profiles
-     must not land in the Brand Day application channel. Unset means no alert,
-     and the Notion row is the record. */
-  const slack = process.env.SLACK_WEBHOOK_TALENT;
+  /* Talent only, never the applications webhook: crew profiles must not land
+     in the Brand Day channel. The URL lives in the site's "config" blob store,
+     not an env var, because this site is at AWS's 4KB env limit (adding one
+     failed a deploy on 29 Sep) and the repo is public.
+     Set with: netlify blobs:set config slack-talent <url> */
+  let slack: string | null = null;
+  try {
+    connectLambda(event as any);
+    slack = await getStore("config").get("slack-talent");
+  } catch (err) {
+    console.error("Crew Slack webhook lookup failed:", err);
+  }
   if (slack) {
     try {
       await fetch(slack, {
