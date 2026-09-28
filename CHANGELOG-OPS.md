@@ -102,3 +102,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **How:** The header had no generator in the repo, so its geometry was recovered by pixel-measuring the original and the rebuild was verified landmark by landmark against it (all within 1-2px antialiasing noise). Rendered with headless Chrome.
 - **Audience:** Public marketing site (authorityengine.com.au/brand). Additive plus asset replacement, no existing page touched. `/og-image.png` was NOT modified.
 - **Rollback:** Netlify dashboard > Deploys > Publish deploy on the previous build. Or `git revert <commit>` and push.
+
+## 2026-09-29 · /thecrew talent alerts on their own Slack channel, via blob store
+- **What:** /thecrew Slack alerts now go only to #talent ("The Crew" Slack app), never the applications channel. The webhook lives in the site's Netlify Blobs store `config`, key `slack-talent`, read by `netlify/functions/the-crew.ts`.
+- **Why not an env var:** tried `SLACK_WEBHOOK_TALENT` first. It pushed function env over AWS Lambda's 4KB limit and the prod deploy failed ("Your environment variables exceed the 4KB limit"). Unset immediately; the previous deploy stayed live throughout. The site is AT the limit: adding any function env var will fail every deploy. Repo is public, so the webhook cannot go in code.
+- **Audience:** Internal (Sean's Slack). Applicants see nothing different.
+- **Rollback:** `npx netlify blobs:delete config slack-talent` (alerts stop, Notion rows continue). Code: `git revert 9b40093 ddad9cd` and push.
