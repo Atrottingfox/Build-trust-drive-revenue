@@ -136,7 +136,7 @@ export default function TheCrew() {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <p className="text-white font-semibold">
-              You must fill out your profile in order for us to make the right decision about where to place you.
+              Build your profile. Show off your work and who you are.
             </p>
 
             <input name="name" placeholder="Name" required value={form.name} onChange={set} className={inputClass} />
