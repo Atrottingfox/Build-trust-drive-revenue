@@ -34,7 +34,7 @@ const COPY: string[][] = [
     'If you want to get in a room with other likeminded operators in the content & media industry, this is for you.',
   ],
   [
-    'P.s. My selfish goal is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over the next two years by connecting you with the top 0.1% of the industry.',
+    'P.s. My ambition is to give away $10,000,000 in opportunity across internal media teams, freelancers, and agencies over two years by connecting the best operators with the top 0.1% of the industry.',
   ],
   [
     'Our standards are ruthless.',
