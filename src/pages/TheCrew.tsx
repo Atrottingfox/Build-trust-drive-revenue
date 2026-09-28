@@ -8,15 +8,41 @@ import SEO from '../components/SEO';
 const WHATSAPP_GROUP = 'https://chat.whatsapp.com/LPDk6oSt039HakWnZPUrsd';
 
 const ROLES = ['Creative Director', 'Media Operator', 'Director', 'Creator', 'Editor', 'Shooter'];
-const ROOM = 'Just want in the room with the best';
-/* Where they are decides what they can be after, so someone already inside a
-   team never reads a form that assumes they are looking for work. */
-const PATHS: Record<string, { after: string[] }> = {
-  'Inside a media team': { after: [ROOM, 'Open to the right move', 'Hiring from the crew'] },
-  Freelance: { after: ['More of the right work', 'A full time seat', ROOM] },
-  Agency: { after: ['Work for our agency', 'Talent for our team', ROOM] },
-  'Between things': { after: ['A full time seat', 'More of the right work', ROOM] },
-};
+const AFTER = [
+  'Just want in the room with the best',
+  'A chance to learn from the best',
+  'Open to the right move',
+  'Talent for our team',
+  'Training',
+];
+
+/* Sean's copy, word for word. One string per paragraph, one line per break. */
+const COPY: string[][] = [
+  [
+    "We're getting the best 1% in Australia together.",
+    "Whether you're inside a media team, running an agency or freelancing, you're here for a reason.",
+  ],
+  [
+    'Our goal is to get you access to the best opportunities in the world.',
+    'In order to do that, we need a community of weapons.',
+  ],
+  [
+    'My selfish goal is simple.',
+    "I'm giving away $10,000,000 in opportunity over 2 years across internal media teams salaries, freelancers, and agencies.",
+  ],
+  [
+    'Because next time somebody says, "I need someone for content in Australia who..."',
+    "This is where they'll look.",
+  ],
+  [
+    '"But Sean - I don\'t need better opportunity"',
+    "Here's the real truth.",
+    'None of us are as smart as all of us, and a rising tide lifts all ships.',
+  ],
+  [
+    'If you want to get in a room with other likeminded operators in the content & media industry, this is for you.',
+  ],
+];
 
 export default function TheCrew() {
   const [loading, setLoading] = useState(false);
@@ -29,9 +55,8 @@ export default function TheCrew() {
     instagram: '',
     location: '',
     roles: [] as string[],
-    rightNow: '',
-    after: '',
-    work: '',
+    after: [] as string[],
+    experience: '',
     nominated: '',
     company: '',
   });
@@ -39,17 +64,16 @@ export default function TheCrew() {
   const set = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
-  const toggleRole = (role: string) =>
+  const toggle = (key: 'roles' | 'after', value: string) =>
     setForm(prev => ({
       ...prev,
-      roles: prev.roles.includes(role) ? prev.roles.filter(r => r !== role) : [...prev.roles, role],
+      [key]: prev[key].includes(value) ? prev[key].filter(v => v !== value) : [...prev[key], value],
     }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.roles.length) return setError('Tick what you do.');
-    if (!form.rightNow) return setError("Pick where you're at right now.");
-    if (!form.after) return setError("Pick what you're after.");
+    if (!form.after.length) return setError("Pick what you're after.");
     setError('');
     setLoading(true);
     try {
@@ -98,17 +122,17 @@ export default function TheCrew() {
           You have been invited to be a part of the top 1%.
         </h1>
 
-        <div className="space-y-5 text-zinc-400 text-[17px] leading-relaxed mb-10">
-          <p>
-            We are building the talent pool of the best 1% in Australia. Our goal is to give people the best
-            opportunities in the world and get access to the top 0.1%.
-          </p>
-          <p>In order to do that, we need a community of weapons. That's why you're here.</p>
-          <p className="text-white font-semibold">
-            I want to give away $10,000,000 in opportunity over 2 years across both internal media teams,
-            freelancers, and agencies.
-          </p>
-          <p>Taking this kind of a role changed my life, and I want to continue to pay it forward.</p>
+        <div className="space-y-6 text-zinc-400 text-[17px] leading-relaxed mb-10">
+          {COPY.map((para, i) => (
+            <p key={i}>
+              {para.map((line, j) => (
+                <React.Fragment key={j}>
+                  {j > 0 && <br />}
+                  <span className={line.startsWith("I'm giving away") ? 'text-white font-semibold' : undefined}>{line}</span>
+                </React.Fragment>
+              ))}
+            </p>
+          ))}
         </div>
 
         {submitted ? (
@@ -152,7 +176,7 @@ export default function TheCrew() {
               <p className={label}>What do you do? Tick all.</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {ROLES.map(role => (
-                  <button type="button" key={role} onClick={() => toggleRole(role)} className={chip(form.roles.includes(role))}>
+                  <button type="button" key={role} onClick={() => toggle('roles', role)} className={chip(form.roles.includes(role))}>
                     {role}
                   </button>
                 ))}
@@ -160,40 +184,28 @@ export default function TheCrew() {
             </div>
 
             <div>
-              <p className={label}>Where are you at right now?</p>
-              <div className="grid sm:grid-cols-2 gap-2">
-                {Object.keys(PATHS).map(r => (
-                  <button
-                    type="button"
-                    key={r}
-                    onClick={() => setForm(prev => ({ ...prev, rightNow: r, after: '' }))}
-                    className={chip(form.rightNow === r)}
-                  >
-                    {r}
+              <p className={label}>What are you after? Tick all.</p>
+              <div className="grid gap-2">
+                {AFTER.map(a => (
+                  <button type="button" key={a} onClick={() => toggle('after', a)} className={chip(form.after.includes(a))}>
+                    {a}
                   </button>
                 ))}
               </div>
             </div>
 
-            {form.rightNow && (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-                <div>
-                  <p className={label}>What are you after?</p>
-                  <div className="grid gap-2">
-                    {PATHS[form.rightNow].after.map(a => (
-                      <button type="button" key={a} onClick={() => setForm(prev => ({ ...prev, after: a }))} className={chip(form.after === a)}>
-                        {a}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-
-            <input name="work" placeholder="Link to your best work" required value={form.work} onChange={set} className={inputClass} />
+            <textarea
+              name="experience"
+              placeholder="Detail your experience"
+              required
+              rows={4}
+              value={form.experience}
+              onChange={set}
+              className={`${inputClass} resize-none`}
+            />
             <textarea
               name="nominated"
-              placeholder="Who do you think I've missed? Names and handles."
+              placeholder="Who are 3 driven media operators like you who deserve an invite?"
               rows={3}
               value={form.nominated}
               onChange={set}
@@ -212,7 +224,7 @@ export default function TheCrew() {
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Submit <ArrowRight className="w-4 h-4" /></>}
             </button>
-            <p className="text-zinc-600 text-[12px] px-1">Your details stay with The Authority Engine. Used to place you, never sold.</p>
+            <p className="text-zinc-600 text-[12px] px-1">Your details stay with The Authority Engine. Never sold.</p>
           </form>
         )}
       </motion.div>

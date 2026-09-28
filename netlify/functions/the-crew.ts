@@ -19,15 +19,12 @@ const ROLES = [
   "Editor",
   "Shooter",
 ];
-const RIGHT_NOW = ["Inside a media team", "Freelance", "Agency", "Between things"];
 const AFTER = [
   "Just want in the room with the best",
+  "A chance to learn from the best",
   "Open to the right move",
-  "Hiring from the crew",
-  "More of the right work",
-  "A full time seat",
-  "Work for our agency",
   "Talent for our team",
+  "Training",
 ];
 
 const headers = {
@@ -39,19 +36,6 @@ const headers = {
 
 const str = (v: unknown, max = 2000) =>
   typeof v === "string" ? v.trim().slice(0, max) : "";
-
-/* Notion rejects the whole row over one bad URL, so a link typed without a
-   scheme gets one, and anything still unparseable is left out of the column
-   (Slack still shows it as typed). */
-function toUrl(raw: string): string | null {
-  if (!raw) return null;
-  const withScheme = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
-  try {
-    return new URL(withScheme).toString();
-  } catch {
-    return null;
-  }
-}
 
 const text = (content: string) => ({
   rich_text: content ? [{ text: { content } }] : [],
@@ -82,10 +66,10 @@ export const handler: Handler = async (event) => {
     roles: Array.isArray(body.roles)
       ? body.roles.filter((r): r is string => ROLES.includes(r as string))
       : [],
-    rightNow: RIGHT_NOW.includes(str(body.rightNow)) ? str(body.rightNow) : "",
-    after: AFTER.includes(str(body.after)) ? str(body.after) : "",
-    team: str(body.team, 200),
-    work: str(body.work, 500),
+    after: Array.isArray(body.after)
+      ? body.after.filter((a): a is string => AFTER.includes(a as string))
+      : [],
+    experience: str(body.experience),
     nominated: str(body.nominated),
   };
 
@@ -117,10 +101,8 @@ export const handler: Handler = async (event) => {
             Instagram: text(d.instagram),
             Location: text(d.location),
             Role: { multi_select: d.roles.map((name) => ({ name })) },
-            ...(d.rightNow ? { "Right now": { select: { name: d.rightNow } } } : {}),
-            ...(d.after ? { After: { select: { name: d.after } } } : {}),
-            Team: text(d.team),
-            Work: { url: toUrl(d.work) },
+            After: { multi_select: d.after.map((name) => ({ name })) },
+            Experience: text(d.experience),
             Nominated: text(d.nominated),
             Source: { select: { name: "the-crew" } },
           },
@@ -149,10 +131,9 @@ export const handler: Handler = async (event) => {
             d.instagram ? `*Instagram:* ${d.instagram}` : null,
             d.location ? `*Based:* ${d.location}` : null,
             d.roles.length ? `*Does:* ${d.roles.join(", ")}` : null,
-            d.rightNow ? `*Right now:* ${d.rightNow}${d.team ? ` (${d.team})` : ""}` : null,
-            d.after ? `*After:* ${d.after}` : null,
-            d.work ? `*Best work:* ${d.work}` : null,
-            d.nominated ? `*Who I've missed:* ${d.nominated}` : null,
+            d.after.length ? `*After:* ${d.after.join(", ")}` : null,
+            d.experience ? `*Experience:* ${d.experience}` : null,
+            d.nominated ? `*Deserve an invite:* ${d.nominated}` : null,
             notion === "saved" ? null : `:rotating_light: *Notion:* ${notion}. This alert is the only copy.`,
           ]
             .filter(Boolean)
