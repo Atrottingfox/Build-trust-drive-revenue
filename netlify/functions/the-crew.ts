@@ -19,11 +19,15 @@ const ROLES = [
   "Editor",
   "Shooter",
 ];
-const WANTS = [
-  "Inside a founder's media team",
-  "Freelance",
-  "Agency",
-  "Just want in the room",
+const RIGHT_NOW = ["Inside a media team", "Freelance", "Agency", "Between things"];
+const AFTER = [
+  "Just want in the room with the best",
+  "Open to the right move",
+  "Hiring from the crew",
+  "More of the right work",
+  "A full time seat",
+  "Work for our agency",
+  "Talent for our team",
 ];
 
 const headers = {
@@ -78,7 +82,9 @@ export const handler: Handler = async (event) => {
     roles: Array.isArray(body.roles)
       ? body.roles.filter((r): r is string => ROLES.includes(r as string))
       : [],
-    wants: WANTS.includes(str(body.wants)) ? str(body.wants) : "",
+    rightNow: RIGHT_NOW.includes(str(body.rightNow)) ? str(body.rightNow) : "",
+    after: AFTER.includes(str(body.after)) ? str(body.after) : "",
+    team: str(body.team, 200),
     work: str(body.work, 500),
     nominated: str(body.nominated),
   };
@@ -111,7 +117,9 @@ export const handler: Handler = async (event) => {
             Instagram: text(d.instagram),
             Location: text(d.location),
             Role: { multi_select: d.roles.map((name) => ({ name })) },
-            ...(d.wants ? { Wants: { select: { name: d.wants } } } : {}),
+            ...(d.rightNow ? { "Right now": { select: { name: d.rightNow } } } : {}),
+            ...(d.after ? { After: { select: { name: d.after } } } : {}),
+            Team: text(d.team),
             Work: { url: toUrl(d.work) },
             Nominated: text(d.nominated),
             Source: { select: { name: "the-crew" } },
@@ -141,7 +149,8 @@ export const handler: Handler = async (event) => {
             d.instagram ? `*Instagram:* ${d.instagram}` : null,
             d.location ? `*Based:* ${d.location}` : null,
             d.roles.length ? `*Does:* ${d.roles.join(", ")}` : null,
-            d.wants ? `*Wants:* ${d.wants}` : null,
+            d.rightNow ? `*Right now:* ${d.rightNow}${d.team ? ` (${d.team})` : ""}` : null,
+            d.after ? `*After:* ${d.after}` : null,
             d.work ? `*Best work:* ${d.work}` : null,
             d.nominated ? `*Who I've missed:* ${d.nominated}` : null,
             notion === "saved" ? null : `:rotating_light: *Notion:* ${notion}. This alert is the only copy.`,

@@ -8,7 +8,15 @@ import SEO from '../components/SEO';
 const WHATSAPP_GROUP = 'https://chat.whatsapp.com/LPDk6oSt039HakWnZPUrsd';
 
 const ROLES = ['Creative Director', 'Media Operator', 'Director', 'Creator', 'Editor', 'Shooter'];
-const WANTS = ["Inside a founder's media team", 'Freelance', 'Agency', 'Just want in the room'];
+const ROOM = 'Just want in the room with the best';
+/* Where they are decides what they can be after, so someone already inside a
+   team never reads a form that assumes they are looking for work. */
+const PATHS: Record<string, { after: string[]; team?: string }> = {
+  'Inside a media team': { after: [ROOM, 'Open to the right move', 'Hiring from the crew'], team: 'Which team?' },
+  Freelance: { after: ['More of the right work', 'A full time seat', ROOM] },
+  Agency: { after: ['Work for our agency', 'Talent for our team', ROOM], team: 'Which agency?' },
+  'Between things': { after: ['A full time seat', 'More of the right work', ROOM] },
+};
 
 export default function TheCrew() {
   const [loading, setLoading] = useState(false);
@@ -21,7 +29,9 @@ export default function TheCrew() {
     instagram: '',
     location: '',
     roles: [] as string[],
-    wants: '',
+    rightNow: '',
+    after: '',
+    team: '',
     work: '',
     nominated: '',
     company: '',
@@ -39,7 +49,8 @@ export default function TheCrew() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.roles.length) return setError('Tick what you do.');
-    if (!form.wants) return setError('Pick what you want.');
+    if (!form.rightNow) return setError("Pick where you're at right now.");
+    if (!form.after) return setError("Pick what you're after.");
     setError('');
     setLoading(true);
     try {
@@ -150,15 +161,38 @@ export default function TheCrew() {
             </div>
 
             <div>
-              <p className={label}>Where do you want to play?</p>
+              <p className={label}>Where are you at right now?</p>
               <div className="grid sm:grid-cols-2 gap-2">
-                {WANTS.map(w => (
-                  <button type="button" key={w} onClick={() => setForm(prev => ({ ...prev, wants: w }))} className={chip(form.wants === w)}>
-                    {w}
+                {Object.keys(PATHS).map(r => (
+                  <button
+                    type="button"
+                    key={r}
+                    onClick={() => setForm(prev => ({ ...prev, rightNow: r, after: '', team: '' }))}
+                    className={chip(form.rightNow === r)}
+                  >
+                    {r}
                   </button>
                 ))}
               </div>
             </div>
+
+            {form.rightNow && (
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                {PATHS[form.rightNow].team && (
+                  <input name="team" placeholder={PATHS[form.rightNow].team} value={form.team} onChange={set} className={inputClass} />
+                )}
+                <div>
+                  <p className={label}>What are you after?</p>
+                  <div className="grid gap-2">
+                    {PATHS[form.rightNow].after.map(a => (
+                      <button type="button" key={a} onClick={() => setForm(prev => ({ ...prev, after: a }))} className={chip(form.after === a)}>
+                        {a}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
 
             <input name="work" placeholder="Link to your best work" required value={form.work} onChange={set} className={inputClass} />
             <textarea
