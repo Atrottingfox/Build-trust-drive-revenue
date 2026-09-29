@@ -46,7 +46,7 @@ Any real buyer reaching these pages pays $1 until reverted.
 **Rollback:** netlify env:set <VAR> 500000 for all four, then
 `netlify deploy --prod --build`. Note: the env change does NOT take effect
 without a redeploy, confirmed during this change.
-**STATUS: NOT YET REVERTED.**
+**STATUS: fully reverted 2026-09-29 (INSTALL_AMOUNT_CENTS was the last).**
 
 ## 2026-08-28 10:15 AEST · GHL contract field ids set, dead var removed
 
@@ -115,3 +115,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Open, not touched:** `INSTALL_AMOUNT_CENTS` is 100 ($1) in ALL contexts including production. It feeds `charge-install` (GHL workflow charges the saved card at install). Needs the real amount if that workflow is live.
 - **Audience:** community members, noindex, no WhatsApp link on the page. No checkout, booking, Stripe or env changes.
 - **Rollback:** `git revert a086233` and push, or publish the previous deploy in Netlify.
+
+## 2026-09-29 · INSTALL_AMOUNT_CENTS restored to $5,000
+- **What:** `INSTALL_AMOUNT_CENTS` 100 -> 500000, redeployed (`netlify deploy --build --prod`, live). Closes the last open item from the 2026-08-25 $1 test: the other three prices were restored 28 Aug, this one was missed.
+- **Checked:** GHL shows 0 contacts tagged `install-charged` or `install-payment-failed`, so `charge-install` never charged anyone $1.
+- **Snapshot:** db-snapshots/install-amount-20260929.txt
+- **Rollback:** `npx netlify env:set INSTALL_AMOUNT_CENTS 100 && npx netlify deploy --build --prod`
