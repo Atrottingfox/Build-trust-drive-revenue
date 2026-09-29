@@ -99,13 +99,13 @@ export function sydneyNow(date = new Date()) {
 
 /*
   Which call a click belongs to. First Wednesday is Open Q&A, second is Member
-  Spotlight, both 7:30 to 8:15 Sydney. A click from 7:00 to 8:45 counts, so
-  someone early or late is still in the room. Anything else is null.
+  Spotlight, both 7:30 to 8:30 Sydney. A click from 7:15 counts, so someone a
+  few minutes early is still in the room. After 8:30 nothing counts. Anything else is null.
 */
 export function currentCall(date = new Date()): string | null {
   const now = sydneyNow(date);
   if (now.weekday !== "Wed") return null;
-  if (now.minutes < 7 * 60 || now.minutes > 8 * 60 + 45) return null;
+  if (now.minutes < 7 * 60 + 15 || now.minutes > 8 * 60 + 30) return null;
   if (now.day <= 7) return "Open Q&A";
   if (now.day <= 14) return "Member Spotlight";
   return null;

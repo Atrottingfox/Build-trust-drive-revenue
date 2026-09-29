@@ -13,11 +13,11 @@ describe("currentCall", () => {
   it("second Wednesday is Member Spotlight", () => {
     expect(currentCall(syd("2026-10-14T07:45:00", 11))).toBe("Member Spotlight");
   });
-  it("counts early and late joiners, not the rest of the day", () => {
-    expect(currentCall(syd("2026-10-07T07:00:00", 11))).toBe("Open Q&A");
-    expect(currentCall(syd("2026-10-07T08:45:00", 11))).toBe("Open Q&A");
-    expect(currentCall(syd("2026-10-07T06:59:00", 11))).toBeNull();
-    expect(currentCall(syd("2026-10-07T09:00:00", 11))).toBeNull();
+  it("counts from 7:15 to 8:30, not the rest of the day", () => {
+    expect(currentCall(syd("2026-10-07T07:15:00", 11))).toBe("Open Q&A");
+    expect(currentCall(syd("2026-10-07T08:30:00", 11))).toBe("Open Q&A");
+    expect(currentCall(syd("2026-10-07T07:14:00", 11))).toBeNull();
+    expect(currentCall(syd("2026-10-07T08:31:00", 11))).toBeNull();
   });
   it("third Wednesday and other days are not calls", () => {
     expect(currentCall(syd("2026-10-21T07:45:00", 11))).toBeNull();

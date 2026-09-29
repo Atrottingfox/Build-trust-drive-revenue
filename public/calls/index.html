@@ -51,7 +51,7 @@
 
   <section class="call" data-nth="1" data-first="2026-10-07" data-title="The Top 1%: Open Q&amp;A" data-ics="/calls/open-qa.ics">
     <h2>Open Q&amp;A</h2>
-    <p class="when">First Wednesday of every month, 7:30 to 8:15am Sydney</p>
+    <p class="when">First Wednesday of every month, 7:30 to 8:30am Sydney</p>
     <div class="next"><div class="label">Next call</div><div class="date"></div><div class="times"></div></div>
     <div class="buttons">
       <a class="btn primary" href="/zoom">Join on Zoom</a>
@@ -62,7 +62,7 @@
 
   <section class="call" data-nth="2" data-first="2026-10-14" data-title="The Top 1%: Member Spotlight" data-ics="/calls/spotlight.ics">
     <h2>Member Spotlight</h2>
-    <p class="when">Second Wednesday of every month, 7:30 to 8:15am Sydney</p>
+    <p class="when">Second Wednesday of every month, 7:30 to 8:30am Sydney</p>
     <div class="next"><div class="label">Next call</div><div class="date"></div><div class="times"></div></div>
     <div class="buttons">
       <a class="btn primary" href="/zoom">Join on Zoom</a>
@@ -106,7 +106,7 @@
     var y = f[0], m = f[1];
     for (var i = 0; i < 36; i++) {
       var d = nthWednesday(y, m, nth);
-      var end = sydneyInstant(y, m, d, 8, 15);
+      var end = sydneyInstant(y, m, d, 8, 30);
       var onOrAfterFirst = y > f[0] || (y === f[0] && (m > f[1] || (m === f[1] && d >= f[2])));
       if (onOrAfterFirst && end > now) return { y: y, m: m, d: d, start: sydneyInstant(y, m, d, 7, 30) };
       m++; if (m > 12) { m = 1; y++; }
@@ -149,7 +149,7 @@
     var ymd = c.y + pad(c.m) + pad(c.d);
     el.querySelector('.gcal').href = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent(el.dataset.title)
-      + '&dates=' + ymd + 'T073000/' + ymd + 'T081500'
+      + '&dates=' + ymd + 'T073000/' + ymd + 'T083000'
       + '&ctz=' + encodeURIComponent(SYD)
       + '&details=' + encodeURIComponent('Join on Zoom: https://authorityengine.com.au/zoom')
       + '&location=' + encodeURIComponent('https://authorityengine.com.au/zoom');
