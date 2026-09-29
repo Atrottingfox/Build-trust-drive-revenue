@@ -108,3 +108,10 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Why not an env var:** tried `SLACK_WEBHOOK_TALENT` first. It pushed function env over AWS Lambda's 4KB limit and the prod deploy failed ("Your environment variables exceed the 4KB limit"). Unset immediately; the previous deploy stayed live throughout. The site is AT the limit: adding any function env var will fail every deploy. Repo is public, so the webhook cannot go in code.
 - **Audience:** Internal (Sean's Slack). Applicants see nothing different.
 - **Rollback:** `npx netlify blobs:delete config slack-talent` (alerts stop, Notion rows continue). Code: `git revert 9b40093 ddad9cd` and push.
+
+## 2026-09-29 · /zoom and /calls for The Top 1% community calls
+- **What:** `/zoom` 302s to the Zoom room (target is one line at the top of `public/_redirects`). `/calls` is a standalone page in `public/calls/` with next dates computed in Australia/Sydney, plus monthly `.ics` invites served as text/calendar (header in netlify.toml).
+- **Checked before and after deploy:** live checkout still charges 500000 cents ($5,000), live mode, for both Brand Day and Install.
+- **Open, not touched:** `INSTALL_AMOUNT_CENTS` is 100 ($1) in ALL contexts including production. It feeds `charge-install` (GHL workflow charges the saved card at install). Needs the real amount if that workflow is live.
+- **Audience:** community members, noindex, no WhatsApp link on the page. No checkout, booking, Stripe or env changes.
+- **Rollback:** `git revert a086233` and push, or publish the previous deploy in Netlify.
