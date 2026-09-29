@@ -127,6 +127,19 @@
     document.getElementById('add-both').href = 'webcal://authorityengine.com.au/calls/top1.ics';
   }
 
+  /* A member's personal link carries ?m=<their row id>. It rides along to
+     /zoom so their Join is counted, and a calendar add is reported once. */
+  var m = (new URLSearchParams(location.search).get('m') || '').replace(/-/g, '');
+  if (!/^[0-9a-f]{32}$/i.test(m)) m = '';
+  function added() {
+    if (!m) return;
+    var body = JSON.stringify({ m: m });
+    if (!(navigator.sendBeacon && navigator.sendBeacon('/.netlify/functions/calls-track', new Blob([body], { type: 'application/json' })))) {
+      fetch('/.netlify/functions/calls-track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true });
+    }
+  }
+  if (m) document.querySelectorAll('a[href="/zoom"]').forEach(function (a) { a.href = '/zoom?m=' + m; });
+
   document.querySelectorAll('.call').forEach(function (el) {
     var c = nextCall(+el.dataset.nth, el.dataset.first);
     if (!c) return;
@@ -140,6 +153,10 @@
       + '&ctz=' + encodeURIComponent(SYD)
       + '&details=' + encodeURIComponent('Join on Zoom: https://authorityengine.com.au/zoom')
       + '&location=' + encodeURIComponent('https://authorityengine.com.au/zoom');
+  });
+
+  document.querySelectorAll('#add-both, .alt a, .gcal, a[href$=".ics"]').forEach(function (a) {
+    a.addEventListener('click', added);
   });
 })();
 </script>
