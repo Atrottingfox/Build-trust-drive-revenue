@@ -32,6 +32,9 @@
   a.btn { display: block; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line); color: var(--text); }
   a.btn:hover { border-color: #33406a; }
   a.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .both { margin-bottom: 28px; }
+  .both .alt { color: var(--muted); font-size: 13px; text-align: center; margin-top: 10px; }
+  .both .alt a { color: var(--text); }
   @media (min-width: 520px) { .buttons { grid-template-columns: 1fr 1fr; } a.btn.primary { grid-column: 1 / -1; } }
 </style>
 </head>
@@ -40,6 +43,11 @@
   <img class="mark" src="/calls/mark.svg" alt="The Top 1%">
   <h1>The Top 1%</h1>
   <p class="sub">Community calls</p>
+
+  <div class="both">
+    <a class="btn primary" id="add-both" href="https://calendar.google.com/calendar/render?cid=webcal%3A%2F%2Fauthorityengine.com.au%2Fcalls%2Ftop1.ics">Add both</a>
+    <p class="alt">Using Outlook? <a href="/calls/top1.ics">Download both</a></p>
+  </div>
 
   <section class="call" data-nth="1" data-first="2026-10-07" data-title="The Top 1%: Open Q&amp;A" data-ics="/calls/open-qa.ics">
     <h2>Open Q&amp;A</h2>
@@ -108,6 +116,15 @@
   function time(date, tz) {
     return new Intl.DateTimeFormat('en-AU', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true })
       .format(date).replace(/\s/g, '').toLowerCase();
+  }
+
+  /* Add both is a subscription to one feed holding both calls. iPhone, iPad and
+     Safari on Mac take webcal:// straight into Apple Calendar; everything else,
+     including Chrome on a Mac, goes to Google. */
+  var ua = navigator.userAgent;
+  var appleCalendar = /iPhone|iPad/.test(ua) || (/Macintosh/.test(ua) && /Safari/.test(ua) && !/Chrome|Chromium|Firefox|Edg/.test(ua));
+  if (appleCalendar) {
+    document.getElementById('add-both').href = 'webcal://authorityengine.com.au/calls/top1.ics';
   }
 
   document.querySelectorAll('.call').forEach(function (el) {
