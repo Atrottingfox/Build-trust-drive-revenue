@@ -138,7 +138,7 @@
       fetch('/.netlify/functions/calls-track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true });
     }
   }
-  if (m) document.querySelectorAll('a[href="/zoom"]').forEach(function (a) { a.href = '/zoom?m=' + m; });
+  if (m) document.querySelectorAll('a[href="/zoom"]').forEach(function (a) { a.href = '/zoom/' + m; });
 
   document.querySelectorAll('.call').forEach(function (el) {
     var c = nextCall(+el.dataset.nth, el.dataset.first);

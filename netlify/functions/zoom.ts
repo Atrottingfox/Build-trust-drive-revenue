@@ -6,7 +6,8 @@ import { currentCall, getMember, memberId, sydneyNow, talentSlack, updateMember 
 
   To change the room, change ZOOM_URL. public/_redirects points /zoom here.
 
-  A member's personal link (/calls?m=<row id>) passes ?m= through to /zoom.
+  A member's personal link (/calls?m=<row id>) sends Join to /zoom/<row id>,
+  which public/_redirects hands to this function as ?m=.
   During a call that click bumps "Calls joined" and sets "Last joined" on their
   row in Applications, once per day, and pings #talent so Sean sees turnout as
   the call starts. Outside a call, or with no member id, it just forwards.

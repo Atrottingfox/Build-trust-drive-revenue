@@ -4,6 +4,9 @@ http://theauthorityengine.live/*        https://authorityengine.com.au/:splat 30
 http://www.theauthorityengine.live/*    https://authorityengine.com.au/:splat 301!
 # Zoom room for The Top 1% community calls. The function forwards to Zoom and
 # records who joined. To change the room, edit ZOOM_URL in netlify/functions/zoom.ts.
+# The member id rides in the path, not a query string: Netlify copies an
+# incoming query string onto the Zoom URL it redirects to.
+/zoom/*    /.netlify/functions/zoom?m=:splat   200!
 /zoom      /.netlify/functions/zoom   200!
 
 # The install slot picker and the capacity readout are functions, not pages.
