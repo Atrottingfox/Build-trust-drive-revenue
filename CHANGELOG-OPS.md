@@ -121,3 +121,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Checked:** GHL shows 0 contacts tagged `install-charged` or `install-payment-failed`, so `charge-install` never charged anyone $1.
 - **Snapshot:** db-snapshots/install-amount-20260929.txt
 - **Rollback:** `npx netlify env:set INSTALL_AMOUNT_CENTS 100 && npx netlify deploy --build --prod`
+
+## 2026-09-30 · Who joins the Top 1% calls
+- **What:** `/zoom` now runs through `netlify/functions/zoom.ts` (Zoom room is `ZOOM_URL` there). Personal links `/calls?m=<Applications row id>` (Notion "Calls link" column) send Join to `/zoom/<id>`. During a call window (Wed 7:00 to 8:45 Sydney, first Wed = Open Q&A, second = Spotlight) it bumps "Calls joined", sets "Last joined" (once a day) and pings #talent. Calendar clicks on /calls tick "Added to calendar" via `calls-track`. New Notion columns: Calls joined, Last joined, Added to calendar, Calls link.
+- **Gotcha:** Netlify copies an incoming query string onto a function's redirect Location, and does not pass a query built in the rewrite rule to the function. Hence the id rides in the path and is parsed from `event.rawUrl`. `X-Member: yes|no` on the /zoom response verifies wiring outside call times.
+- **Audience:** members (tracking), Sean (#talent). No env, checkout or booking changes. Checkout verified at 500000 after deploy.
+- **Rollback:** `git revert 6de03db 2dad331 ace914d b5c1af2` and push. Plain redirect: put `/zoom https://us06web.zoom.us/j/4255667465 302!` back in `public/_redirects`.
