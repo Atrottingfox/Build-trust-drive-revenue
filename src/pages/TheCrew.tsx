@@ -12,7 +12,7 @@ const AFTER = [
   'Just want in the room with the best',
   'A chance to learn from the best',
   'Open to the right move',
-  'Talent for our team',
+  'Talent for team',
   'Training',
 ];
 
