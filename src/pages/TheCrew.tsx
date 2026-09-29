@@ -20,7 +20,7 @@ const AFTER = [
    break; a { list } block is a bullet list. */
 type Block = string[] | { list: string[] };
 const COPY: Block[] = [
-  ['A private network for people building the future of content and media.'],
+  ['A private network for operators building the future of content and media.'],
   ['Whether you work inside a high performing team, run an agency, freelance independently, or lead creative direction, this is a place to:'],
   {
     list: [
