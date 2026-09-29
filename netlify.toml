@@ -150,3 +150,9 @@
   to = "/.netlify/functions/capacity"
   status = 200
   force = true
+
+# Community call invites. Served as calendar files so phones offer to add them.
+[[headers]]
+  for = "/calls/*.ics"
+  [headers.values]
+    Content-Type = "text/calendar; charset=utf-8"

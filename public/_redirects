@@ -2,6 +2,10 @@ https://theauthorityengine.live/*       https://authorityengine.com.au/:splat 30
 https://www.theauthorityengine.live/*   https://authorityengine.com.au/:splat 301!
 http://theauthorityengine.live/*        https://authorityengine.com.au/:splat 301!
 http://www.theauthorityengine.live/*    https://authorityengine.com.au/:splat 301!
+# Zoom room for The Top 1% community calls. To change where /zoom goes, edit
+# the target on the next line. 302 so browsers never cache the old room.
+/zoom      https://us06web.zoom.us/j/4255667465   302!
+
 # The install slot picker and the capacity readout are functions, not pages.
 # These must sit ABOVE the SPA catch-all: Netlify takes the first rule that
 # matches, so /* was swallowing them and serving the marketing homepage instead.
