@@ -229,7 +229,7 @@ export default function TheCrew() {
             >
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Submit <ArrowRight className="w-4 h-4" /></>}
             </button>
-            <p className="text-zinc-500 text-[13px] px-1 text-center">This is a ticket to the top 0.1%</p>
+            <p className="text-zinc-500 text-[13px] px-1 text-center">This is a ticket to the top 1%</p>
           </form>
         )}
       </motion.div>
