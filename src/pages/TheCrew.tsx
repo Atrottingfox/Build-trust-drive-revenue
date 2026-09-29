@@ -7,7 +7,7 @@ import SEO from '../components/SEO';
    group link is shown here only after a profile is submitted. */
 const WHATSAPP_GROUP = 'https://chat.whatsapp.com/LPDk6oSt039HakWnZPUrsd';
 
-const ROLES = ['Creative Director', 'Media Operator', 'Director', 'Creator', 'Editor', 'Shooter'];
+const ROLES = ['Strategist', 'Creative Director', 'Shooter', 'Editor', 'Media Operator', 'Creator'];
 const AFTER = [
   'Just want in the room with the best',
   'A chance to learn from the best',

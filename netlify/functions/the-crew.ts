@@ -13,12 +13,12 @@ import { connectLambda, getStore } from "@netlify/blobs";
 const NOTION_CREW_DB = "2460b2eb6dfb80a88f2cd5e35f5f420b";
 
 const ROLES = [
+  "Strategist",
   "Creative Director",
-  "Media Operator",
-  "Director",
-  "Creator",
-  "Editor",
   "Shooter",
+  "Editor",
+  "Media Operator",
+  "Creator",
 ];
 const AFTER = [
   "Just want in the room with the best",
