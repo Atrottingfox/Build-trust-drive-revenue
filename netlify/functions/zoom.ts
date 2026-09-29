@@ -22,16 +22,18 @@ const within = <T>(ms: number, work: Promise<T>) =>
   Promise.race([work, new Promise<null>((r) => setTimeout(() => r(null), ms))]);
 
 export const handler: Handler = async (event) => {
+  const id = memberId(event.queryStringParameters?.m);
+  /* X-Member says whether a member link was recognised, so the path wiring
+     can be checked outside call times. It carries no identity. */
   const redirect = {
     statusCode: 302,
-    headers: { Location: ZOOM_URL, "Cache-Control": "no-store" },
+    headers: { Location: ZOOM_URL, "Cache-Control": "no-store", "X-Member": id ? "yes" : "no" },
     body: "",
   };
 
   const call = currentCall();
   if (!call) return redirect;
 
-  const id = memberId(event.queryStringParameters?.m);
   try {
     await within(
       3000,
