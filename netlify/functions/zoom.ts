@@ -7,7 +7,7 @@ import { currentCall, getMember, memberId, sydneyNow, talentSlack, updateMember 
   To change the room, change ZOOM_URL. public/_redirects points /zoom here.
 
   A member's personal link (/calls?m=<row id>) sends Join to /zoom/<row id>,
-  which public/_redirects hands to this function as ?m=.
+  which public/_redirects hands to this function.
   During a call that click bumps "Calls joined" and sets "Last joined" on their
   row in Applications, once per day, and pings #talent so Sean sees turnout as
   the call starts. Outside a call, or with no member id, it just forwards.
@@ -22,7 +22,11 @@ const within = <T>(ms: number, work: Promise<T>) =>
   Promise.race([work, new Promise<null>((r) => setTimeout(() => r(null), ms))]);
 
 export const handler: Handler = async (event) => {
-  const id = memberId(event.queryStringParameters?.m);
+  /* The member id is the last path segment of /zoom/<id>. Netlify hands the
+     function the original URL; a query built in the redirect rule never
+     arrives, which is why it is read from the path. */
+  const fromPath = `${event.rawUrl || ""} ${event.path || ""}`.match(/\/zoom\/([0-9a-fA-F-]{32,36})/)?.[1];
+  const id = memberId(fromPath || event.queryStringParameters?.m);
   /* X-Member says whether a member link was recognised, so the path wiring
      can be checked outside call times. It carries no identity. */
   const redirect = {
