@@ -84,7 +84,7 @@
   document.getElementById('f').addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = document.getElementById('go'), err = document.getElementById('err'), name = document.getElementById('name').value;
-    btn.disabled = true; err.textContent = '';
+    btn.disabled = true; btn.textContent = 'Sending...'; err.textContent = '';
     try { if (name) localStorage.setItem('top1-name', name); } catch (e2) {}
     fetch('/.netlify/functions/answer', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
@@ -92,10 +92,10 @@
     }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (x) {
         if (!x.ok) throw new Error(x.j.error || 'That did not send.');
-        document.getElementById('text').value = ''; btn.disabled = false;
+        document.getElementById('text').value = ''; btn.disabled = false; btn.textContent = 'Send answer';
         return load().then(function () { err.style.color = '#9AA3B8'; err.textContent = 'Sent. Thanks for giving back.'; });
       })
-      .catch(function (e3) { err.style.color = ''; err.textContent = e3.message || 'That did not send. Try again in a sec.'; btn.disabled = false; });
+      .catch(function (e3) { err.style.color = ''; err.textContent = e3.message || 'That did not send. Try again in a sec.'; btn.disabled = false; btn.textContent = 'Send answer'; });
   });
 })();
 </script>

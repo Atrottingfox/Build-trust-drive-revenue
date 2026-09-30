@@ -68,7 +68,7 @@
   document.getElementById('f').addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = document.getElementById('go'), err = document.getElementById('err');
-    btn.disabled = true; err.textContent = '';
+    btn.disabled = true; btn.textContent = 'Sending...'; err.textContent = '';
     fetch('/.netlify/functions/ask', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -81,7 +81,7 @@
         if (!x.ok) throw new Error(x.j.error || 'That did not send.');
         document.getElementById('f').hidden = true; document.getElementById('done').hidden = false;
       })
-      .catch(function (e2) { err.textContent = e2.message || 'That did not send. Try again in a sec.'; btn.disabled = false; });
+      .catch(function (e2) { err.textContent = e2.message || 'That did not send. Try again in a sec.'; btn.disabled = false; btn.textContent = 'Send to the network'; });
   });
 })();
 </script>
