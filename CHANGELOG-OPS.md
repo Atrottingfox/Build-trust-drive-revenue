@@ -127,3 +127,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Gotcha:** Netlify copies an incoming query string onto a function's redirect Location, and does not pass a query built in the rewrite rule to the function. Hence the id rides in the path and is parsed from `event.rawUrl`. `X-Member: yes|no` on the /zoom response verifies wiring outside call times.
 - **Audience:** members (tracking), Sean (#talent). No env, checkout or booking changes. Checkout verified at 500000 after deploy.
 - **Rollback:** `git revert 6de03db 2dad331 ace914d b5c1af2` and push. Plain redirect: put `/zoom https://us06web.zoom.us/j/4255667465 302!` back in `public/_redirects`.
+
+## 2026-09-30 · Top 1%: ask the network, answer without login
+- **What:** `/ask` (static `public/ask/`) creates a row in Notion "Requests" (Talentpool, db 3eb0b2eb6dfb8125848bc8c2a529d75f) and pings #talent with the WhatsApp message written. `/answer/<id>` (static `public/answer/`, rewrite in `_redirects`) shows the question and answers and takes a new one, appended as blocks to the request page. The asker is emailed from sean@authorityengine.com.au via Gmail (`_gmail.ts`, gmail.send refresh token in blob `config/gmail-refresh`, separate from the calendar token). Email wording is the Notion page "Email: someone answered your question" in Talentpool.
+- **Identity:** personal link `?m=` is remembered in the browser (`top1-m`), so a member who opened /calls from their link is known on /ask and /answer. Otherwise they type a name (and email when asking).
+- **Audience:** members, no login. No env, checkout or GHL changes. Emails bend the "GHL sends emails" rule by Sean's choice (30 Sep), wording kept editable in Notion.
+- **Rollback:** `git revert 4db9f7a d0d1cf9` and push. Stop emails only: `npx netlify blobs:delete config gmail-refresh`.
