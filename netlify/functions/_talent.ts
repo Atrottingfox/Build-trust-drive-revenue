@@ -9,6 +9,7 @@ import { connectLambda, getStore } from "@netlify/blobs";
 */
 
 export const NOTION_CREW_DB = "2460b2eb6dfb80a88f2cd5e35f5f420b";
+export const NOTION_REQUESTS_DB = "3eb0b2eb6dfb8125848bc8c2a529d75f";
 
 const NOTION = "https://api.notion.com/v1";
 const notionHeaders = () => ({
@@ -27,6 +28,7 @@ export function memberId(raw: unknown): string | null {
 export type Member = {
   id: string;
   name: string;
+  email: string;
   callsJoined: number;
   lastJoined: string | null;
   addedToCalendar: boolean;
@@ -43,11 +45,23 @@ export async function getMember(id: string): Promise<Member | null> {
   return {
     id,
     name: props.Name?.title?.[0]?.plain_text || "A member",
+    email: props.Email?.email || "",
     callsJoined: props["Calls joined"]?.number || 0,
     lastJoined: props["Last joined"]?.date?.start || null,
     addedToCalendar: Boolean(props["Added to calendar"]?.checkbox),
     url: p.url,
   };
+}
+
+export async function notion(path: string, init: { method?: string; body?: unknown } = {}) {
+  const res = await fetch(`${NOTION}${path}`, {
+    method: init.method || "GET",
+    headers: notionHeaders(),
+    body: init.body ? JSON.stringify(init.body) : undefined,
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) console.error("Notion", path, res.status, JSON.stringify(json).slice(0, 300));
+  return { ok: res.ok, json };
 }
 
 export async function updateMember(id: string, properties: Record<string, unknown>) {

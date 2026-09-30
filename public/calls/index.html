@@ -32,7 +32,8 @@
   a.btn { display: block; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px; padding: 13px 16px; border-radius: 12px; border: 1px solid var(--line); color: var(--text); }
   a.btn:hover { border-color: #33406a; }
   a.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-  .both { margin-bottom: 28px; }
+  .both { margin-bottom: 16px; }
+  a.btn.ask { margin-bottom: 28px; }
   .both .alt { color: var(--muted); font-size: 13px; text-align: center; margin-top: 10px; }
   .both .alt a { color: var(--text); }
   @media (min-width: 520px) { .buttons { grid-template-columns: 1fr 1fr; } a.btn.primary { grid-column: 1 / -1; } }
@@ -48,6 +49,8 @@
     <a class="btn primary" id="add-both" href="https://calendar.google.com/calendar/render?cid=webcal%3A%2F%2Fauthorityengine.com.au%2Fcalls%2Ftop1.ics">Add both events to calendar</a>
     <p class="alt">Using Outlook? <a href="/calls/top1.ics">Download both</a></p>
   </div>
+
+  <a class="btn ask" href="/ask">Ask the network a question</a>
 
   <section class="call" data-nth="1" data-first="2026-10-07" data-title="The Top 1%: Open Q&amp;A" data-ics="/calls/open-qa.ics">
     <h2>Open Q&amp;A</h2>
@@ -131,6 +134,8 @@
      /zoom so their Join is counted, and a calendar add is reported once. */
   var m = (new URLSearchParams(location.search).get('m') || '').replace(/-/g, '');
   if (!/^[0-9a-f]{32}$/i.test(m)) m = '';
+  /* Remembered so /ask and /answer know who this is without a login. */
+  if (m) { try { localStorage.setItem('top1-m', m); } catch (e) {} }
   function added() {
     if (!m) return;
     var body = JSON.stringify({ m: m });
@@ -138,6 +143,7 @@
       fetch('/.netlify/functions/calls-track', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true });
     }
   }
+  if (m) document.querySelector('a.ask').href = '/ask?m=' + m;
   if (m) document.querySelectorAll('a[href="/zoom"]').forEach(function (a) { a.href = '/zoom/' + m; });
 
   document.querySelectorAll('.call').forEach(function (el) {

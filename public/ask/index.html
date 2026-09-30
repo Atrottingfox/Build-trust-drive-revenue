@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Ask the network · The Top 1%</title>
+<link rel="icon" type="image/svg+xml" href="/calls/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;800&display=swap" rel="stylesheet">
+<!-- Standalone like /calls. A personal link (?m=) means we know who is asking. -->
+<style>
+  :root { --bg:#0A0F1E; --card:#111831; --line:#1E2742; --blue:#3B82F6; --text:#F7F8FB; --muted:#9AA3B8; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--text); font-family:Outfit,-apple-system,sans-serif; min-height:100vh; display:flex; justify-content:center; padding:56px 16px; }
+  main { width:100%; max-width:560px; }
+  .mark { width:48px; height:48px; margin-bottom:24px; }
+  h1 { font-weight:800; font-size:36px; letter-spacing:-0.03em; line-height:1.05; }
+  .sub { color:var(--muted); font-size:16px; margin:10px 0 28px; }
+  label { display:block; color:var(--muted); font-size:13px; margin:0 0 6px 2px; }
+  input, textarea { width:100%; background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--text); font:inherit; font-size:16px; padding:14px 16px; margin-bottom:16px; }
+  textarea { min-height:140px; resize:vertical; }
+  input:focus, textarea:focus { outline:none; border-color:#33406a; }
+  button { width:100%; background:var(--blue); color:#fff; border:0; border-radius:12px; font:inherit; font-weight:600; font-size:16px; padding:15px; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  .err { color:#F87171; font-size:14px; margin:-4px 0 12px 2px; min-height:1em; }
+  .hp { display:none; }
+  .done { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; }
+  .done h2 { font-size:24px; margin-bottom:8px; }
+  .done p { color:var(--muted); }
+  .who { display:none; }
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="/calls/mark.svg" alt="The Top 1%">
+  <h1>Ask the network</h1>
+  <p class="sub">Your question goes to the group. Answers come back to your inbox.</p>
+
+  <form id="f">
+    <label for="question">Your question</label>
+    <textarea id="question" required placeholder="What do you want a second opinion on?"></textarea>
+    <label for="link">Link to the work (optional)</label>
+    <input id="link" placeholder="instagram.com/reel/...">
+    <div class="who" id="who">
+      <label for="name">Your name</label>
+      <input id="name">
+      <label for="email">Your email, so we can tell you when someone answers</label>
+      <input id="email" type="email">
+    </div>
+    <input class="hp" id="company" tabindex="-1" autocomplete="off">
+    <p class="err" id="err"></p>
+    <button id="go">Send to the network</button>
+  </form>
+  <div class="done" id="done" hidden>
+    <h2>Sent.</h2>
+    <p>It's going to the group now. You'll get an email every time someone answers.</p>
+  </div>
+</main>
+<script>
+(function () {
+  function remembered() { try { return localStorage.getItem('top1-m') || ''; } catch (e) { return ''; } }
+  var m = (new URLSearchParams(location.search).get('m') || remembered()).replace(/-/g, '');
+  if (!/^[0-9a-f]{32}$/i.test(m)) m = '';
+  else { try { localStorage.setItem('top1-m', m); } catch (e) {} }
+  var who = document.getElementById('who');
+  if (!m) { who.style.display = 'block'; document.getElementById('name').required = true; document.getElementById('email').required = true; }
+
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('go'), err = document.getElementById('err');
+    btn.disabled = true; err.textContent = '';
+    fetch('/.netlify/functions/ask', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        m: m, question: document.getElementById('question').value, link: document.getElementById('link').value,
+        name: document.getElementById('name').value, email: document.getElementById('email').value,
+        company: document.getElementById('company').value
+      })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error(x.j.error || 'That did not send.');
+        document.getElementById('f').hidden = true; document.getElementById('done').hidden = false;
+      })
+      .catch(function (e2) { err.textContent = e2.message || 'That did not send. Try again in a sec.'; btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

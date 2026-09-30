@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Answer · The Top 1%</title>
+<link rel="icon" type="image/svg+xml" href="/calls/favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;800&display=swap" rel="stylesheet">
+<!-- Served for every /answer/<request id> (public/_redirects). Reads the
+     question and answers from the answer function; no login. -->
+<style>
+  :root { --bg:#0A0F1E; --card:#111831; --line:#1E2742; --blue:#3B82F6; --text:#F7F8FB; --muted:#9AA3B8; }
+  * { box-sizing:border-box; margin:0; }
+  body { background:var(--bg); color:var(--text); font-family:Outfit,-apple-system,sans-serif; min-height:100vh; display:flex; justify-content:center; padding:56px 16px; }
+  main { width:100%; max-width:560px; }
+  .mark { width:48px; height:48px; margin-bottom:24px; }
+  .from { color:var(--blue); font-size:12px; font-weight:600; letter-spacing:.14em; text-transform:uppercase; }
+  h1 { font-weight:800; font-size:30px; letter-spacing:-0.02em; line-height:1.15; margin:8px 0 14px; white-space:pre-wrap; }
+  .work { display:inline-block; color:var(--text); font-size:15px; margin-bottom:28px; }
+  .answers h2 { font-size:15px; color:var(--muted); font-weight:500; margin-bottom:10px; }
+  .a { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px 20px; margin-bottom:12px; }
+  .a b { display:block; margin-bottom:6px; }
+  .a p { color:#D6DAE4; white-space:pre-wrap; line-height:1.5; }
+  form { margin-top:28px; }
+  label { display:block; color:var(--muted); font-size:13px; margin:0 0 6px 2px; }
+  input, textarea { width:100%; background:var(--card); border:1px solid var(--line); border-radius:12px; color:var(--text); font:inherit; font-size:16px; padding:14px 16px; margin-bottom:16px; }
+  textarea { min-height:180px; resize:vertical; line-height:1.5; }
+  textarea::placeholder { color:#5B6480; }
+  input:focus, textarea:focus { outline:none; border-color:#33406a; }
+  button { width:100%; background:var(--blue); color:#fff; border:0; border-radius:12px; font:inherit; font-weight:600; font-size:16px; padding:15px; cursor:pointer; }
+  button:disabled { opacity:.5; }
+  .err { color:#F87171; font-size:14px; margin:-4px 0 12px 2px; min-height:1em; }
+  .hp { display:none; }
+  .note { color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <img class="mark" src="/calls/mark.svg" alt="The Top 1%">
+  <div id="q"><p class="note">Loading...</p></div>
+  <div class="answers" id="answers"></div>
+  <form id="f" hidden>
+    <label for="text">Your answer</label>
+    <textarea id="text" required placeholder="What works:&#10;What's unclear:&#10;What I'd change:&#10;Why:&#10;Suggested version:"></textarea>
+    <div id="nameWrap">
+      <label for="name">Your name</label>
+      <input id="name">
+    </div>
+    <input class="hp" id="company" tabindex="-1" autocomplete="off">
+    <p class="err" id="err"></p>
+    <button id="go">Send answer</button>
+  </form>
+</main>
+<script>
+(function () {
+  var id = (location.pathname.split('/answer/')[1] || '').replace(/[^0-9a-fA-F]/g, '');
+  var m = ''; try { m = localStorage.getItem('top1-m') || ''; } catch (e) {}
+  if (!/^[0-9a-f]{32}$/i.test(m)) m = '';
+  var savedName = ''; try { savedName = localStorage.getItem('top1-name') || ''; } catch (e) {}
+  if (m) document.getElementById('nameWrap').style.display = 'none';
+  else { document.getElementById('name').required = true; document.getElementById('name').value = savedName; }
+
+  function el(tag, cls, text) { var x = document.createElement(tag); if (cls) x.className = cls; if (text != null) x.textContent = text; return x; }
+
+  function load() {
+    return fetch('/.netlify/functions/answer?id=' + id).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (d) {
+      var q = document.getElementById('q'); q.innerHTML = '';
+      q.appendChild(el('div', 'from', d.from + ' asks'));
+      q.appendChild(el('h1', '', d.question));
+      if (d.link) { var a = el('a', 'work', 'View the work'); a.href = d.link; a.target = '_blank'; a.rel = 'noopener'; q.appendChild(a); }
+      var list = document.getElementById('answers'); list.innerHTML = '';
+      if (d.answers.length) {
+        list.appendChild(el('h2', '', d.answers.length === 1 ? '1 answer' : d.answers.length + ' answers'));
+        d.answers.forEach(function (x) { var c = el('div', 'a'); c.appendChild(el('b', '', x.name)); c.appendChild(el('p', '', x.text)); list.appendChild(c); });
+      }
+      document.getElementById('f').hidden = false;
+    }).catch(function () {
+      document.getElementById('q').innerHTML = '<p class="note">That question could not be found.</p>';
+    });
+  }
+  load();
+
+  document.getElementById('f').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = document.getElementById('go'), err = document.getElementById('err'), name = document.getElementById('name').value;
+    btn.disabled = true; err.textContent = '';
+    try { if (name) localStorage.setItem('top1-name', name); } catch (e2) {}
+    fetch('/.netlify/functions/answer', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: id, m: m, name: name, text: document.getElementById('text').value, company: document.getElementById('company').value })
+    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (x) {
+        if (!x.ok) throw new Error(x.j.error || 'That did not send.');
+        document.getElementById('text').value = ''; btn.disabled = false;
+        return load().then(function () { err.style.color = '#9AA3B8'; err.textContent = 'Sent. Thanks for giving back.'; });
+      })
+      .catch(function (e3) { err.style.color = ''; err.textContent = e3.message || 'That did not send. Try again in a sec.'; btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>
