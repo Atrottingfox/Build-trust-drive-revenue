@@ -142,5 +142,6 @@ export const handler: Handler = async (event) => {
       ` <${req.url}|Open in Notion>`
   );
 
-  return { statusCode: 200, headers, body: JSON.stringify({ ok: true }) };
+  /* emailed is true, false, or null when there was nobody to email. */
+  return { statusCode: 200, headers, body: JSON.stringify({ ok: true, emailed: to ? emailed : null }) };
 };
