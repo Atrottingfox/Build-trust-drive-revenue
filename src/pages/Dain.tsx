@@ -19,7 +19,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
 );
 
 const Quote = ({ children }: { children: React.ReactNode }) => (
-  <blockquote className="border-l-2 border-blue-500 pl-5 my-8 text-white text-[17px] leading-relaxed">{children}</blockquote>
+  <p className="my-6 text-white text-[17px] font-semibold leading-relaxed">{children}</p>
 );
 
 function Ticks({ items, tone = 'in' }: { items: string[]; tone?: 'in' | 'out' }) {
@@ -37,7 +37,7 @@ function Ticks({ items, tone = 'in' }: { items: string[]; tone?: 'in' | 'out' })
 }
 
 const Card = ({ children, accent = false }: { children: React.ReactNode; accent?: boolean }) => (
-  <div className={`rounded-xl border ${accent ? 'border-blue-500/20' : 'border-zinc-800'} bg-elevated/40 p-6 md:p-7`}>{children}</div>
+  <div className={accent ? '' : 'py-8 border-b border-zinc-800 last:border-0'}>{children}</div>
 );
 
 // ─── Copy ────────────────────────────────────────────────────────────────
@@ -299,7 +299,7 @@ export default function Dain() {
 
         <Wrap>
           <H2>How it works</H2>
-          <div className="space-y-4">
+          <div>
             {STEPS.map((s) => <StepCard key={s.num} s={s} />)}
           </div>
         </Wrap>
@@ -318,7 +318,7 @@ export default function Dain() {
         <Divider />
 
         <Wrap>
-          <div className="grid md:grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-x-10">
             <Card>
               <p className="font-display text-[19px] font-extrabold text-white mb-5">What is included</p>
               <Ticks items={INCLUDED} />
