@@ -71,6 +71,7 @@ const TheGeronimoPlan = React.lazy(() => import('./pages/TheGeronimoPlan'));
 const TheCultivatedPlan = React.lazy(() => import('./pages/TheCultivatedPlan'));
 const ClientPlan = React.lazy(() => import('./pages/ClientPlan'));
 const Margot = React.lazy(() => import('./pages/Margot'));
+const Dain = React.lazy(() => import('./pages/Dain'));
 const Morgan = React.lazy(() => import('./pages/Morgan'));
 const LearnFromThem = React.lazy(() => import('./pages/LearnFromThem'));
 const Operations = React.lazy(() => import('./pages/Operations'));
@@ -186,6 +187,7 @@ export default function App() {
           <Route path="/cultivated-theplan" element={<TheCultivatedPlan />} />
           <Route path="/thechloeplan" element={<TheCultivatedPlan />} />
           <Route path="/margot" element={<Margot />} />
+          <Route path="/dain" element={<Dain />} />
           <Route path="/themargotplan" element={<Margot />} />
           <Route path="/learnfromthem" element={<LearnFromThem />} />
           <Route path="/learn-from-them" element={<LearnFromThem />} />
