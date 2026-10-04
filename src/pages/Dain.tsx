@@ -19,7 +19,7 @@ const STEPS: Step[] = [
     num: '01',
     title: 'Brand Day, scoped to operations',
     when: 'Week 1 · one day',
-    body: 'One day with Dain. Get hyper specific on what he actually wants from media in the next 90 days, then work backwards to the operation required to make it happen. The brand stays as it is. We build what the operation needs.',
+    body: 'One day with Sean. Get hyper specific on what Dain actually wants from media in the next 90 days, then work backwards to the operation required to make it happen. The brand stays as it is. We build what the operation needs.',
     get: 'The 90 day target, the operator role, and the MVP spec.',
     gate: 'Dain and the CEO sign off the target and the MVP. Nothing moves until they do.',
   },
