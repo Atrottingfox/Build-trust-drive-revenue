@@ -231,6 +231,85 @@ const ADVISORY = [
   'Access to the private Authority Engine founder network',
 ];
 
+// ─── Timeline ────────────────────────────────────────────────────────────
+// Positions are in days across the 90. Phase spans come straight from the step
+// timings above: Brief week 1, Selection weeks 1 to 5, Enablement from the hire
+// to Day 90. Milestones are the capability reviews and the two payments.
+
+const DAYS = 90;
+const pct = (d: number) => `${((d - 1) / (DAYS - 1)) * 100}%`;
+
+const PHASES = [
+  { num: '01', name: 'Media Operating Brief', from: 1, to: 7, note: 'Week 1' },
+  { num: '02', name: 'Operator Selection', from: 1, to: 35, note: 'Weeks 1 to 5' },
+  { num: '03', name: 'Operator Enablement', from: 36, to: 90, note: 'Once the Operator is selected, through to Day 90' },
+];
+
+const MILESTONES = [
+  { day: 1, label: 'Day 1', detail: 'Commencement, $15,000 AUD, Media Operating Brief day' },
+  { day: 30, label: 'Day 30', detail: 'Capability review. Day 31, $15,000 AUD' },
+  { day: 60, label: 'Day 60', detail: 'Capability review' },
+  { day: 90, label: 'Day 90', detail: 'Capability review and completion standard' },
+];
+
+
+function Timeline() {
+  return (
+    <div className="mb-14">
+      <div className="relative">
+        <div className="relative space-y-6 pb-4">
+          {/* milestone guide lines, bars area only */}
+          {MILESTONES.map((m) => (
+            <div key={m.day} className="absolute top-0 bottom-0 w-px bg-zinc-800" style={{ left: pct(m.day) }} />
+          ))}
+          {PHASES.map((p) => (
+            <div key={p.num} className="relative">
+              <p className="text-[13px] mb-2" style={{ paddingLeft: pct(p.from) }}>
+                <span className="text-zinc-600 font-mono mr-2">{p.num}</span>
+                <span className="text-white font-semibold">{p.name}</span>
+              </p>
+              <div className="relative h-3">
+                <div
+                  className="absolute top-0 h-3 rounded-full bg-blue-500"
+                  style={{ left: pct(p.from), width: `calc(${pct(p.to)} - ${pct(p.from)})`, minWidth: '12px' }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* milestone markers on the axis. End labels align inward so they never clip. */}
+        <div className="relative h-8 border-t border-zinc-700">
+          {MILESTONES.map((m, i) => {
+            const edge = i === 0 ? 'left' : i === MILESTONES.length - 1 ? 'right' : 'mid';
+            return (
+              <div key={m.day} className="absolute top-0 w-0" style={{ left: pct(m.day) }}>
+                <div className={`absolute w-2.5 h-2.5 rounded-full bg-white -top-[5px] ${edge === 'right' ? 'right-0' : edge === 'left' ? 'left-0' : '-left-[5px]'}`} />
+                <p
+                  className={`absolute top-3 text-white text-[11px] font-semibold whitespace-nowrap ${
+                    edge === 'left' ? 'left-0' : edge === 'right' ? 'right-0' : 'left-0 -translate-x-1/2'
+                  }`}
+                >
+                  {m.label}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <ul className="mt-8 space-y-2">
+        {MILESTONES.map((m) => (
+          <li key={m.day} className="flex gap-4 text-[14px] leading-relaxed">
+            <span className="text-white font-semibold w-16 flex-shrink-0">{m.label}</span>
+            <span className="text-zinc-400">{m.detail}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 // ─── Page ────────────────────────────────────────────────────────────────
 
 function StepCard({ s }: { s: Step }) {
@@ -299,6 +378,7 @@ export default function Dain() {
 
         <Wrap>
           <H2>How it works</H2>
+          <Timeline />
           <div>
             {STEPS.map((s) => <StepCard key={s.num} s={s} />)}
           </div>
