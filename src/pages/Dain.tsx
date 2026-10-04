@@ -68,7 +68,7 @@ const STEPS: Step[] = [
     when: 'Week 1',
     intro: [
       'We begin with one focused working day with Dain and the CEO.',
-      'This is not a traditional brand day. It is a working session to clarify what Rivyl actually needs from media.',
+      'The day is a working session to clarify what Rivyl actually needs from media.',
     ],
     lists: [
       {
@@ -130,7 +130,7 @@ const STEPS: Step[] = [
     ],
     outro: [
       'Rivyl makes the final hiring decision and employs the Operator.',
-      'We do not guarantee a perfect hire by a specific date. We reduce the risk by testing judgment before relying on a résumé or portfolio.',
+      'We can\'t promise a perfect hire by a specific date. Every candidate is tested on real work before anyone relies on their résumé or portfolio.',
     ],
   },
   {
@@ -265,7 +265,7 @@ export default function Dain() {
       <div className="min-h-screen bg-base">
         <SEO
           title="Operator Intensive, Rivyl"
-          description="One capable Operator. One clear media operation. Ninety days to install the capability."
+          description="One Operator who owns Rivyl's media operation, trained and installed over 90 days."
           path="/dain"
           noIndex
         />
@@ -275,16 +275,13 @@ export default function Dain() {
           eyebrow="The Authority Engine"
           title="Operator"
           accent="Intensive"
-          blurb="One capable Operator. One clear media operation. Ninety days to install the capability."
+          blurb="One Operator who owns Rivyl's media operation, trained and installed over 90 days."
           backHref={null}
         />
 
         <Wrap>
-          <P>Rivyl does not need more content for the sake of content.</P>
-          <P>It needs one person who can understand the brand, make good decisions, own projects from beginning to end, and keep the media operation moving without Dain becoming the bottleneck.</P>
-          <P>The Operator Intensive is a 90 day enablement engagement designed to help Rivyl define, select, and equip that person.</P>
-          <P>This is not a content agency, a brand rebuild, or a promise of guaranteed leads.</P>
-          <P>It is the installation of the person, standards, and operating system required for Rivyl to run media properly.</P>
+          <P>Rivyl needs one person who can understand the brand, make good decisions, own projects from beginning to end, and keep the media operation moving without Dain becoming the bottleneck.</P>
+          <P>The Operator Intensive is a 90 day engagement to help Rivyl define, select, and equip that person, and to put the standards and operating system around them so Rivyl can run media properly.</P>
         </Wrap>
 
         <Divider />
@@ -293,9 +290,9 @@ export default function Dain() {
           <H2>The outcome</H2>
           <P>By the end of the engagement, Rivyl will have:</P>
           <BulletList items={OUTCOME} />
-          <p className="text-zinc-400 text-[15px] mt-8">The standard is simple:</p>
+          <p className="text-zinc-400 text-[15px] mt-8">The standard we are working to:</p>
           <Quote>The Operator understands what needs to happen, makes normal operating decisions, owns projects end to end, and keeps the system moving without daily direction from Sean or Dain.</Quote>
-          <P>The goal is capability, not dependency. If Sean disappeared tomorrow, the Operator should still know what to do.</P>
+          <P>If Sean disappeared tomorrow, the Operator should still know what to do.</P>
         </Wrap>
 
         <Divider />
@@ -314,7 +311,7 @@ export default function Dain() {
           <P>The engagement is complete when the Operator can:</P>
           <Ticks items={COMPLETION} />
           <div className="mt-8">
-            <P>The minimum operation must be stable before additional platforms, formats, or volume are added. Simple scales. Complexity comes later, after the core system works.</P>
+            <P>The minimum operation must be stable before additional platforms, formats, or volume are added.</P>
           </div>
         </Wrap>
 
@@ -382,15 +379,14 @@ export default function Dain() {
           <P>Selected clients may also be invited to participate in the Founding Partner referral partnership.</P>
           <P>This is separate from the Operator Intensive.</P>
           <P>If Rivyl introduces qualified founders who become paying Authority Engine clients, Rivyl may earn additional private media strategy, training, or implementation privileges under a separate partner agreement.</P>
-          <P>The partnership is not a sales obligation. It exists for trusted introductions where Rivyl genuinely believes The Authority Engine can help.</P>
+          <P>It is for trusted introductions only, where Rivyl genuinely believes The Authority Engine can help, and there is no obligation to sell.</P>
         </Wrap>
 
         <Divider />
 
         <Wrap>
           <H2>The decision</H2>
-          <P>The question is not whether Rivyl needs more content.</P>
-          <P>The question is:</P>
+          <P>It comes down to one question:</P>
           <Quote>Does Rivyl want one capable person who can own the media operation, make better decisions, and keep the system moving without Dain carrying it?</Quote>
           <P>If yes, the Operator Intensive is the process for installing that capability.</P>
         </Wrap>
