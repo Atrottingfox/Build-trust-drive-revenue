@@ -43,7 +43,7 @@ const Card = ({ children, accent = false }: { children: React.ReactNode; accent?
 // ─── Copy ────────────────────────────────────────────────────────────────
 
 const OUTCOME = [
-  'A clear Media Operating Brief',
+  'A written plan for what media has to do for Rivyl over the next 90 days, signed off by Dain and the CEO',
   'A defined Operator role and decision framework',
   'A tested hiring and selection process',
   'One accountable person responsible for the media operation',
