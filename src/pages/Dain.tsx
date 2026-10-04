@@ -139,15 +139,19 @@ const STEPS: Step[] = [
       {
         paras: [
           'Rivyl makes the final hiring decision and employs the Operator.',
-          'If an Operator has not been selected by approximately Week 6, Rivyl and The Authority Engine will agree in writing to one of two paths:',
+          'If the Operator search takes longer than expected, Rivyl will not be left without progress. By approximately Week 6, Rivyl and The Authority Engine will agree in writing to one of three paths:',
         ],
         numbered: [
-          'Pause the enablement period for a defined, mutually agreed period; or',
-          'Begin the agreed MVP using interim freelancers while the search continues.',
+          'Proceed with the selected Operator and begin enablement',
+          'Use an interim contractor to run the MVP while the search continues',
+          'Pause the enablement period for a defined period while the search continues',
         ],
       },
     ],
-    outro: ['Interim freelancers, production costs, and contractor fees are paid separately by Rivyl.'],
+    outro: [
+      'The search includes one defined search period, candidate assessment, and final interview support. Continuing the search beyond that period is agreed separately.',
+      'Interim freelancers, production costs, and contractor fees are paid separately by Rivyl.',
+    ],
   },
   {
     num: '03',
@@ -182,6 +186,15 @@ const STEPS: Step[] = [
         ],
       },
       {
+        label: 'The Operator ramp, from their start date',
+        items: [
+          'First 2 weeks: understand the brand, build the calendar, run the first workflow',
+          'Day 30: make content decisions and explain why',
+          'Day 60: own the pipeline from brief to publication',
+          'Day 90: run the agreed MVP and recommend improvements',
+        ],
+      },
+      {
         label: 'The Authority Engine provides',
         half: true,
         items: [
@@ -196,7 +209,10 @@ const STEPS: Step[] = [
         ],
       },
     ],
-    outro: ['Rivyl remains responsible for managing the Operator and the day to day execution.'],
+    outro: [
+      'Rivyl manages the Operator. The Authority Engine trains, reviews, and assesses them.',
+      'If the Operator leaves within 60 days for reasons unrelated to Rivyl changing the role, The Authority Engine will run one replacement search.',
+    ],
   },
 ];
 
@@ -233,6 +249,7 @@ const INCLUDED = [
   'Operating playbook',
   'Capability reviews at 30 and 60 days from the Operator\'s start date, and a final review at Day 90',
   'Strategic media advice directly related to the installation',
+  'One replacement search if the Operator leaves within 60 days, unless the role has changed',
 ];
 
 const NOT_INCLUDED = [
@@ -259,7 +276,21 @@ const RESPONSIBILITIES = [
   'Management and accountability for the Operator',
 ];
 
-const PAYMENTS = ['$15,000 AUD on commencement', '$15,000 AUD on Day 31'];
+const CORE = [
+  'Media Operating Brief',
+  'MVP media specification',
+  'Operator role and scorecard',
+  'Hiring process and candidate assessment',
+  'Search support and interview support',
+  'Operator enablement plan',
+  'Standards, playbook, and capability review',
+];
+
+const PAYMENTS = [
+  '$10,000 AUD on commencement',
+  '$10,000 AUD when the search process is built and the candidate process is active',
+  '$10,000 AUD when the Operator starts and enablement begins',
+];
 
 const ADVISORY = [
   'Ongoing strategic media support',
@@ -287,9 +318,8 @@ const PHASES: Array<{ num: string; name: string; from: number; to: number; early
 ];
 
 const MILESTONES = [
-  { day: 1, label: 'Day 1', detail: 'Commencement. $15,000 AUD. Media Operating Brief day.' },
-  { day: 31, label: 'Day 31', detail: '$15,000 AUD.' },
-  { day: 42, label: 'Wk 6', detail: 'If no Operator is selected, agree in writing to pause or start the MVP with interim freelancers.' },
+  { day: 1, label: 'Day 1', detail: 'Commencement. Media Operating Brief day.' },
+  { day: 42, label: 'Wk 6', detail: 'Agree the path in writing: proceed with the selected Operator, use an interim contractor to run the MVP, or pause enablement while the search continues.' },
   { day: 90, label: 'Day 90', detail: 'Fixed end date. Final capability review.' },
 ];
 
@@ -494,11 +524,25 @@ export default function Dain() {
         <Wrap>
           <H2>Investment</H2>
           <p className="font-display text-4xl font-extrabold text-white mb-1">$30,000 AUD</p>
-          <p className="text-zinc-400 text-[14px] mb-6">across 90 days</p>
+          <p className="text-zinc-400 text-[14px] mb-8">total investment, structured as a $20,000 retained install fee plus a $10,000 placement and enablement fee</p>
+
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
+            <div>
+              <p className="text-white text-[15px] font-semibold mb-1">$20,000 AUD core install</p>
+              <p className="text-zinc-500 text-[14px] mb-4">Paid for the work The Authority Engine controls</p>
+              <BulletList items={CORE} />
+            </div>
+            <div>
+              <p className="text-white text-[15px] font-semibold mb-1">$10,000 AUD placement and enablement</p>
+              <p className="text-zinc-500 text-[14px] mb-4">Due when</p>
+              <BulletList items={['Rivyl hires an Operator', 'The Operator starts', 'The agreed enablement work with them begins']} />
+            </div>
+          </div>
+
+          <Label>Payments</Label>
           <BulletList items={PAYMENTS} />
-          <div className="mt-6">
-            <P>The initial payment secures the engagement and begins the Media Operating Brief.</P>
-            <P>The continuation payment covers the remaining enablement and installation period.</P>
+          <div className="mt-8">
+            <P>If no hire is made, Rivyl still owns the completed brief, search process, and operating system, and the placement and enablement fee is not due.</P>
           </div>
         </Wrap>
 
