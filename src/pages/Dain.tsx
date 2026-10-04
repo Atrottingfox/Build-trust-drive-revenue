@@ -6,9 +6,11 @@ import SEO from '../components/SEO';
 import { PageHead, Wrap, Divider, H2, BulletList } from '../components/undeniable/Bits';
 
 /* Dain Walker / Rivyl. Operator Intensive proposal for the CEO.
-   Copy is Sean's, verbatim (5 Oct 2026). Only mechanical changes: straight
-   apostrophes, no hyphens in compound adjectives, source citations removed.
-   Do not rephrase. */
+   Copy is Sean's (5 Oct 2026, second pass). Mechanical changes only: straight
+   apostrophes, no hyphens in compound adjectives, citations removed, and the
+   ban list lines rewritten. Do not rephrase.
+   Sell the outcome on this page. Liability mechanics live in the agreement.
+   No insets: flat sections, no boxed cards, no quote callouts. */
 
 const P = ({ children }: { children: React.ReactNode }) => (
   <p className="text-zinc-300 text-[16px] leading-relaxed mb-5 last:mb-0">{children}</p>
@@ -18,7 +20,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
   <p className="text-white text-[14px] font-semibold mt-8 mb-4">{children}</p>
 );
 
-const Quote = ({ children }: { children: React.ReactNode }) => (
+const Strong = ({ children }: { children: React.ReactNode }) => (
   <p className="my-6 text-white text-[17px] font-semibold leading-relaxed">{children}</p>
 );
 
@@ -36,30 +38,34 @@ function Ticks({ items, tone = 'in' }: { items: string[]; tone?: 'in' | 'out' })
   );
 }
 
-const Card = ({ children, accent = false }: { children: React.ReactNode; accent?: boolean }) => (
-  <div className={accent ? '' : 'py-8 border-b border-zinc-800 last:border-0'}>{children}</div>
-);
+function Numbered({ items }: { items: string[] }) {
+  return (
+    <ol className="space-y-3">
+      {items.map((t, i) => (
+        <li key={t} className="flex items-start gap-3">
+          <span className="text-blue-400 font-semibold text-[15px] w-4 flex-shrink-0">{i + 1}.</span>
+          <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 // ─── Copy ────────────────────────────────────────────────────────────────
 
 const OUTCOME = [
-  'A written plan for what media has to do for Rivyl over the next 90 days, signed off by Dain and the CEO',
+  'A written 90 day media plan signed off by Dain and the CEO',
   'A defined Operator role and decision framework',
-  'A tested hiring and selection process',
-  'One accountable person responsible for the media operation',
-  'A minimum viable media cadence',
+  'A structured hiring and selection process',
+  'A selected Operator or agreed interim operating solution',
+  'A minimum viable media operation running on a defined weekly cadence',
   'Documented standards, workflows, and scorecards',
-  'An Operator capable of owning the agreed operation with Rivyl managing them and The Authority Engine advising them',
+  'A final capability review against the agreed Operator scorecard',
 ];
 
-type Step = {
-  num: string;
-  title: string;
-  when: string;
-  intro: string[];
-  lists: Array<{ label: string; items: string[] }>;
-  outro: string[];
-};
+type Block = { label?: string; items?: string[]; numbered?: string[]; paras?: string[]; half?: boolean };
+
+type Step = { num: string; title: string; when: string; intro: string[]; blocks: Block[]; outro: string[] };
 
 const STEPS: Step[] = [
   {
@@ -67,85 +73,107 @@ const STEPS: Step[] = [
     title: 'Media Operating Brief',
     when: 'Week 1',
     intro: [
-      'We begin with one focused working day with Dain and the CEO.',
-      'The day is a working session to clarify what Rivyl actually needs from media.',
+      'We begin with one focused working day with Dain and the CEO to clarify what Rivyl actually needs from media over the next 90 days.',
     ],
-    lists: [
+    blocks: [
       {
-        label: 'We will define',
+        label: 'We define',
+        half: true,
         items: [
-          'What media needs to accomplish for the business',
-          'Which audience, offer, and business priority matter most',
+          'The primary business objective',
+          'The priority audience and offer',
           'What the Operator must own',
           'What decisions the Operator can make independently',
           'What requires founder approval',
           'The minimum weekly media operation',
-          'The scorecard for the first 90 days',
+          'The 90 day scorecard',
         ],
       },
       {
         label: 'You receive',
+        half: true,
         items: [
           'Media Operating Brief',
           'Operator role definition',
           'Decision rights',
           'Minimum viable media operation',
-          '30, 60, and 90 day scorecard',
+          'Operator scorecard',
           'Hiring or capability recommendation',
         ],
       },
+      {
+        label: 'MVP boundary',
+        paras: ['The initial operation is deliberately limited to:'],
+        items: [
+          'One priority audience',
+          'One primary business objective',
+          'One core media workflow',
+          'One agreed weekly cadence',
+          'One scorecard for measuring progress',
+        ],
+      },
     ],
-    outro: ['Nothing expands until the brief is agreed.'],
+    outro: [
+      'Nothing expands until this baseline is operating consistently.',
+      'Nothing expands until the brief is agreed.',
+    ],
   },
   {
     num: '02',
     title: 'Operator Selection',
-    when: 'Weeks 1 to 5',
-    intro: ['We identify the capability required, then assess people against the actual work.'],
-    lists: [
+    when: 'Weeks 1 to 6',
+    intro: ['We help Rivyl assess candidates against the capability required for the role.'],
+    blocks: [
       {
-        label: 'The Authority Engine will support Rivyl with',
+        label: 'The Authority Engine provides',
         items: [
           'Role and hiring scorecard',
           'Candidate application filter',
           'Practical work assessment',
-          'Review of candidate thinking and judgment',
           'Interview structure',
+          'Candidate review',
           'Final interview support',
           'Hiring recommendation',
         ],
       },
       {
-        label: 'Candidates will be assessed on their ability to',
-        items: [
-          'Understand the brand quickly',
-          'Turn unclear direction into a plan',
-          'Make sensible tradeoffs',
-          'Own a project from idea to completion',
-          'Coordinate people and deadlines',
-          'Explain why a piece of media should exist',
-          'Learn from performance data',
+        paras: [
+          'Rivyl makes the final hiring decision and employs the Operator.',
+          'If an Operator has not been selected by approximately Week 6, Rivyl and The Authority Engine will agree in writing to one of two paths:',
+        ],
+        numbered: [
+          'Pause the enablement period for a defined, mutually agreed period; or',
+          'Begin the agreed MVP using interim freelancers while the search continues.',
         ],
       },
     ],
-    outro: [
-      'Rivyl makes the final hiring decision and employs the Operator.',
-      'We can\'t promise a perfect hire by a specific date. Every candidate is tested on real work before anyone relies on their résumé or portfolio.',
-    ],
+    outro: ['Interim freelancers, production costs, and contractor fees are paid separately by Rivyl.'],
   },
   {
     num: '03',
+    title: 'MVP Operation',
+    when: 'Begins during the search where practical',
+    intro: [
+      'The minimum media operation should not wait unnecessarily for the final Operator.',
+      'Where appropriate, Rivyl may use existing team members or interim contractors to establish the agreed MVP workflow. That way the Operator inherits a working operation when they start.',
+    ],
+    blocks: [],
+    outro: ['The MVP remains limited to the agreed audience, objective, workflow, and cadence.'],
+  },
+  {
+    num: '04',
     title: 'Operator Enablement',
-    when: 'Up to 90 days from commencement',
-    intro: ['Once the Operator is selected, The Authority Engine trains and enables them through real Rivyl work.'],
-    lists: [
+    when: 'From the Operator\'s start date through Day 90',
+    intro: ['Once the Operator begins, The Authority Engine trains and enables them through real Rivyl work.'],
+    blocks: [
       {
         label: 'The Operator progressively takes ownership of',
+        half: true,
         items: [
           'Media planning',
           'Content calendars',
           'Project briefs',
-          'Shoot and production coordination',
+          'Production coordination',
           'Quality standards',
           'Publishing workflow',
           'Performance reporting',
@@ -155,15 +183,16 @@ const STEPS: Step[] = [
       },
       {
         label: 'The Authority Engine provides',
+        half: true,
         items: [
-          'Weekly Operator training',
+          'Weekly Operator enablement',
           'Review of real work',
           'Decision making feedback',
           'Media standards and checklists',
           'Scorecard reviews',
           'Operating playbook development',
-          'Strategic guidance where required',
-          'Day 30, 60, and 90 capability reviews',
+          'Strategic advice directly related to the agreed Media Operating Brief and Operator enablement',
+          'Capability reviews 30 and 60 days from the Operator\'s start date, and a final review at Day 90',
         ],
       },
     ],
@@ -171,14 +200,24 @@ const STEPS: Step[] = [
   },
 ];
 
-const COMPLETION = [
+const DELIVERED = [
+  'The Media Operating Brief is complete and approved',
+  'The Operator role and scorecard are complete',
+  'The agreed hiring process has been run',
+  'The MVP workflow is documented',
+  'The media standards and approval process are documented',
+  'The operating playbook is complete',
+  'The Operator has been reviewed against the agreed capability scorecard',
+  'The final recommendations have been delivered',
+];
+
+const FINAL_REVIEW = [
   'Explain what should be made and why',
-  'Make normal media decisions without constant approval',
+  'Make normal media decisions',
   'Move projects from brief to completion',
   'Maintain the agreed weekly cadence',
   'Coordinate the required people and resources',
   'Report performance clearly',
-  'Use the playbook, standards, and scorecard',
   'Identify what should improve next',
 ];
 
@@ -192,7 +231,7 @@ const INCLUDED = [
   'Media standards and approval checklists',
   'KPI scorecard',
   'Operating playbook',
-  'Capability reviews at Days 30, 60, and 90',
+  'Capability reviews at 30 and 60 days from the Operator\'s start date, and a final review at Day 90',
   'Strategic media advice directly related to the installation',
 ];
 
@@ -232,53 +271,61 @@ const ADVISORY = [
 ];
 
 // ─── Timeline ────────────────────────────────────────────────────────────
-// Positions are in days across the 90. Phase spans come straight from the step
-// timings above: Brief week 1, Selection weeks 1 to 5, Enablement from the hire
-// to Day 90. Milestones are the capability reviews and the two payments.
+// Days across the fixed 90 day engagement. Spans come from the step timings:
+// Brief week 1, Selection weeks 1 to 6, MVP from week 2 where practical,
+// Enablement from the Operator's start. The faded part of the Enablement bar
+// is the window the start date can land in; the solid part is the latest case.
 
 const DAYS = 90;
 const pct = (d: number) => `${((d - 1) / (DAYS - 1)) * 100}%`;
 
-const PHASES = [
-  { num: '01', name: 'Media Operating Brief', from: 1, to: 7, note: 'Week 1' },
-  { num: '02', name: 'Operator Selection', from: 1, to: 35, note: 'Weeks 1 to 5' },
-  { num: '03', name: 'Operator Enablement', from: 36, to: 90, note: 'Once the Operator is selected, through to Day 90' },
+const PHASES: Array<{ num: string; name: string; from: number; to: number; early?: number }> = [
+  { num: '01', name: 'Media Operating Brief', from: 1, to: 7 },
+  { num: '02', name: 'Operator Selection', from: 1, to: 42 },
+  { num: '03', name: 'MVP Operation', from: 8, to: 90 },
+  { num: '04', name: 'Operator Enablement', from: 43, to: 90, early: 15 },
 ];
 
 const MILESTONES = [
-  { day: 1, label: 'Day 1', detail: 'Commencement, $15,000 AUD, Media Operating Brief day' },
-  { day: 30, label: 'Day 30', detail: 'Capability review. Day 31, $15,000 AUD' },
-  { day: 60, label: 'Day 60', detail: 'Capability review' },
-  { day: 90, label: 'Day 90', detail: 'Capability review and completion standard' },
+  { day: 1, label: 'Day 1', detail: 'Commencement. $15,000 AUD. Media Operating Brief day.' },
+  { day: 31, label: 'Day 31', detail: '$15,000 AUD.' },
+  { day: 42, label: 'Wk 6', detail: 'If no Operator is selected, agree in writing to pause or start the MVP with interim freelancers.' },
+  { day: 90, label: 'Day 90', detail: 'Fixed end date. Final capability review.' },
 ];
-
 
 function Timeline() {
   return (
-    <div className="mb-14">
+    <div className="mb-6">
       <div className="relative">
         <div className="relative space-y-6 pb-4">
-          {/* milestone guide lines, bars area only */}
           {MILESTONES.map((m) => (
             <div key={m.day} className="absolute top-0 bottom-0 w-px bg-zinc-800" style={{ left: pct(m.day) }} />
           ))}
-          {PHASES.map((p) => (
-            <div key={p.num} className="relative">
-              <p className="text-[13px] mb-2" style={{ paddingLeft: pct(p.from) }}>
-                <span className="text-zinc-600 font-mono mr-2">{p.num}</span>
-                <span className="text-white font-semibold">{p.name}</span>
-              </p>
-              <div className="relative h-3">
-                <div
-                  className="absolute top-0 h-3 rounded-full bg-blue-500"
-                  style={{ left: pct(p.from), width: `calc(${pct(p.to)} - ${pct(p.from)})`, minWidth: '12px' }}
-                />
+          {PHASES.map((p) => {
+            const start = p.early ?? p.from;
+            return (
+              <div key={p.num} className="relative">
+                <p className="text-[13px] mb-2" style={{ paddingLeft: pct(start) }}>
+                  <span className="text-zinc-600 font-mono mr-2">{p.num}</span>
+                  <span className="text-white font-semibold">{p.name}</span>
+                </p>
+                <div className="relative h-3">
+                  {p.early && (
+                    <div
+                      className="absolute top-0 h-3 rounded-l-full bg-blue-500/25"
+                      style={{ left: pct(p.early), width: `calc(${pct(p.from)} - ${pct(p.early)})` }}
+                    />
+                  )}
+                  <div
+                    className={`absolute top-0 h-3 bg-blue-500 ${p.early ? 'rounded-r-full' : 'rounded-full'}`}
+                    style={{ left: pct(p.from), width: `calc(${pct(p.to)} - ${pct(p.from)})`, minWidth: '12px' }}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* milestone markers on the axis. End labels align inward so they never clip. */}
         <div className="relative h-8 border-t border-zinc-700">
           {MILESTONES.map((m, i) => {
             const edge = i === 0 ? 'left' : i === MILESTONES.length - 1 ? 'right' : 'mid';
@@ -298,6 +345,11 @@ function Timeline() {
         </div>
       </div>
 
+      <p className="text-zinc-500 text-[13px] mt-4">
+        <span className="inline-block w-6 h-2 rounded-full bg-blue-500/25 align-middle mr-2" />
+        Enablement starts on the Operator's start date, anywhere in this window.
+      </p>
+
       <ul className="mt-8 space-y-2">
         {MILESTONES.map((m) => (
           <li key={m.day} className="flex gap-4 text-[14px] leading-relaxed">
@@ -306,15 +358,32 @@ function Timeline() {
           </li>
         ))}
       </ul>
+
+      <p className="text-zinc-400 text-[14px] leading-relaxed mt-8">
+        The engagement has a fixed end date 90 days after the agreed commencement date. Operator capability
+        milestones are measured from the Operator's start date. If hiring, access, approvals, or internal
+        availability are delayed by Rivyl, the relevant enablement milestones may be affected. Any pause,
+        extension, or interim operating arrangement must be agreed in writing.
+      </p>
     </div>
   );
 }
 
 // ─── Page ────────────────────────────────────────────────────────────────
 
-function StepCard({ s }: { s: Step }) {
+function StepSection({ s }: { s: Step }) {
+  const half = s.blocks.filter((b) => b.half);
+  const full = s.blocks.filter((b) => !b.half);
+  const renderBlock = (b: Block, i: number) => (
+    <div key={b.label ?? i}>
+      {b.label && <Label>{b.label}</Label>}
+      {b.paras?.map((t) => <div key={t} className={b.label ? '' : 'mt-8'}><P>{t}</P></div>)}
+      {b.items && <BulletList items={b.items} />}
+      {b.numbered && <div className="mt-2"><Numbered items={b.numbered} /></div>}
+    </div>
+  );
   return (
-    <Card>
+    <div className="py-10 border-b border-zinc-800 last:border-0">
       <div className="flex items-baseline gap-4 mb-5">
         <span className="font-display text-4xl font-extrabold text-zinc-800">{s.num}</span>
         <div>
@@ -323,18 +392,14 @@ function StepCard({ s }: { s: Step }) {
         </div>
       </div>
       {s.intro.map((t) => <P key={t}>{t}</P>)}
-      <div className="grid md:grid-cols-2 gap-x-8">
-        {s.lists.map((l) => (
-          <div key={l.label}>
-            <Label>{l.label}</Label>
-            <BulletList items={l.items} />
-          </div>
-        ))}
-      </div>
-      <div className="mt-8 pt-5 border-t border-zinc-800">
-        {s.outro.map((t) => <P key={t}>{t}</P>)}
-      </div>
-    </Card>
+      {half.length > 0 && <div className="grid md:grid-cols-2 gap-x-8">{half.map(renderBlock)}</div>}
+      {full.map(renderBlock)}
+      {s.outro.length > 0 && (
+        <div className="mt-8 pt-5 border-t border-zinc-800">
+          {s.outro.map((t) => <P key={t}>{t}</P>)}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -344,7 +409,7 @@ export default function Dain() {
       <div className="min-h-screen bg-base">
         <SEO
           title="Operator Intensive, Rivyl"
-          description="One Operator who owns Rivyl's media operation, trained and installed over 90 days."
+          description="One Operator owning Rivyl's media operation, enabled over 90 days."
           path="/dain"
           noIndex
         />
@@ -354,13 +419,13 @@ export default function Dain() {
           eyebrow="The Authority Engine"
           title="Operator"
           accent="Intensive"
-          blurb="One Operator who owns Rivyl's media operation, trained and installed over 90 days."
+          blurb="One Operator owning Rivyl's media operation, enabled over 90 days."
           backHref={null}
         />
 
         <Wrap>
-          <P>Rivyl needs one person who can understand the brand, make good decisions, own projects from beginning to end, and keep the media operation moving without Dain becoming the bottleneck.</P>
-          <P>The Operator Intensive is a 90 day engagement to help Rivyl define, select, and equip that person, and to put the standards and operating system around them so Rivyl can run media properly.</P>
+          <P>Rivyl needs one person who can understand the brand, make sound decisions, own projects end to end, and keep the media operation moving without Dain becoming the bottleneck.</P>
+          <P>The Operator Intensive helps Rivyl clarify the media capability it needs, select the right person, and equip them with the standards, systems, and judgment required to own the agreed operation.</P>
         </Wrap>
 
         <Divider />
@@ -369,9 +434,9 @@ export default function Dain() {
           <H2>The outcome</H2>
           <P>By the end of the engagement, Rivyl will have:</P>
           <BulletList items={OUTCOME} />
-          <p className="text-zinc-400 text-[15px] mt-8">The standard we are working to:</p>
-          <Quote>The Operator understands what needs to happen, makes normal operating decisions, owns projects end to end, and keeps the system moving without daily direction from Sean or Dain.</Quote>
-          <P>If Sean disappeared tomorrow, the Operator should still know what to do.</P>
+          <div className="mt-8">
+            <P>The aim is the minimum operation Rivyl needs to run media consistently, and then developing the person responsible for owning it. More channels and more volume come after that.</P>
+          </div>
         </Wrap>
 
         <Divider />
@@ -380,7 +445,7 @@ export default function Dain() {
           <H2>How it works</H2>
           <Timeline />
           <div>
-            {STEPS.map((s) => <StepCard key={s.num} s={s} />)}
+            {STEPS.map((s) => <StepSection key={s.num} s={s} />)}
           </div>
         </Wrap>
 
@@ -388,28 +453,27 @@ export default function Dain() {
 
         <Wrap>
           <H2>Completion standard</H2>
-          <P>The engagement is complete when the Operator can:</P>
-          <Ticks items={COMPLETION} />
-          <div className="mt-8">
-            <P>The minimum operation must be stable before additional platforms, formats, or volume are added.</P>
-          </div>
+          <P>The engagement is delivered when:</P>
+          <Ticks items={DELIVERED} />
+          <Label>The final review assesses whether the Operator can</Label>
+          <BulletList items={FINAL_REVIEW} />
         </Wrap>
 
         <Divider />
 
         <Wrap>
-          <div className="grid md:grid-cols-2 gap-x-10">
-            <Card>
+          <div className="grid md:grid-cols-2 gap-x-10 gap-y-10">
+            <div>
               <p className="font-display text-[19px] font-extrabold text-white mb-5">What is included</p>
               <Ticks items={INCLUDED} />
-            </Card>
-            <Card>
+            </div>
+            <div>
               <p className="font-display text-[19px] font-extrabold text-white mb-2">What is not included</p>
               <p className="text-zinc-500 text-[14px] mb-5">This is not:</p>
               <Ticks items={NOT_INCLUDED} tone="out" />
-            </Card>
+            </div>
           </div>
-          <p className="text-zinc-400 text-[14px] leading-relaxed mt-6">
+          <p className="text-zinc-400 text-[14px] leading-relaxed mt-8">
             Operator wages, contractors, production costs, software, travel, and other third party expenses are separate.
           </p>
         </Wrap>
@@ -429,15 +493,13 @@ export default function Dain() {
 
         <Wrap>
           <H2>Investment</H2>
-          <Card accent>
-            <p className="font-display text-4xl font-extrabold text-white mb-1">$30,000 AUD</p>
-            <p className="text-zinc-400 text-[14px] mb-6">across 90 days</p>
-            <BulletList items={PAYMENTS} />
-            <div className="mt-6 pt-5 border-t border-zinc-800">
-              <P>The initial payment secures the engagement and begins the Media Operating Brief.</P>
-              <P>The continuation payment covers the remaining enablement and installation period.</P>
-            </div>
-          </Card>
+          <p className="font-display text-4xl font-extrabold text-white mb-1">$30,000 AUD</p>
+          <p className="text-zinc-400 text-[14px] mb-6">across 90 days</p>
+          <BulletList items={PAYMENTS} />
+          <div className="mt-6">
+            <P>The initial payment secures the engagement and begins the Media Operating Brief.</P>
+            <P>The continuation payment covers the remaining enablement and installation period.</P>
+          </div>
         </Wrap>
 
         <Divider />
@@ -467,7 +529,7 @@ export default function Dain() {
         <Wrap>
           <H2>The decision</H2>
           <P>It comes down to one question:</P>
-          <Quote>Does Rivyl want one capable person who can own the media operation, make better decisions, and keep the system moving without Dain carrying it?</Quote>
+          <Strong>Does Rivyl want one capable person who can own the media operation, make better decisions, and keep the system moving without Dain carrying it?</Strong>
           <P>If yes, the Operator Intensive is the process for installing that capability.</P>
         </Wrap>
 
