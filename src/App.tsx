@@ -27,6 +27,7 @@ const Phase0 = React.lazy(() => import('./pages/Phase0'));
 const Journey = React.lazy(() => import('./pages/Journey'));
 const OfferLadder = React.lazy(() => import('./pages/OfferLadder'));
 const OperatorIntensive = React.lazy(() => import('./pages/OperatorIntensive'));
+const OperatorSprint = React.lazy(() => import('./pages/OperatorSprint'));
 const ApplyOperatorIntensive = React.lazy(() => import('./pages/ApplyOperatorIntensive'));
 const TheEngine = React.lazy(() => import('./pages/TheEngine'));
 const NinetyDayProgram = React.lazy(() => import('./pages/NinetyDayProgram'));
@@ -128,6 +129,7 @@ export default function App() {
           <Route path="/journey" element={<Journey />} />
           <Route path="/ladder" element={<OfferLadder />} />
           <Route path="/operatorintensive" element={<OperatorIntensive />} />
+          <Route path="/operatorsprint" element={<OperatorSprint />} />
           <Route path="/operator" element={<OperatorIntensive />} />
           <Route path="/applyforoperatorintensive" element={<ApplyOperatorIntensive />} />
           <Route path="/engine" element={<TheEngine />} />
