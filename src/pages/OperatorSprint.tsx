@@ -3,21 +3,27 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import {
-  Check, X, Target, Zap, FileText, Settings, ArrowRight,
-  ClipboardCheck, Crosshair,
+  Check, X, Target, Zap, FileText, Megaphone, Settings, ArrowRight,
+  ClipboardCheck, UserPlus, Video, Crosshair,
 } from 'lucide-react';
 import PasswordGate from '../components/PasswordGate';
 import Footer from '../components/Footer';
 
-/* /operatorsprint. The Operator Intensive restructured (5 Oct 2026): a Media
-   Operating Brief, a defined six week search, an MVP operation, then a 90 day
-   Operator Install from the day the person starts. Same framework and design as
-   /operatorintensive, which stays live unchanged. Copy is Sean's, with the ban
-   list lines rewritten. */
+/* /operatorsprint (5 Oct 2026). A copy of /operatorintensive with six changes
+   only: when the 90 days begin, no pipeline guarantee, hiring promise reads
+   'assesses', the no hire fallback, the $20k + $10k pricing, and the management
+   boundary. Keep the voice. Do not rewrite anything else. */
 
+/* The next step is the Intensive's own application, not a booking link. It posts
+   with source 'operator-intensive' so it fires a separate Slack alert and carries
+   its own GHL tag rather than landing in the Brand Builder Day queue. */
 const APPLY_URL = '/applyforoperatorintensive';
 
-/* Founding cohort counter, same numbers as /operatorintensive. Bump both. */
+/* Founding cohort counter. Sean runs FOUNDING_TOTAL of these at 30k before the
+   price moves to 50k. Bump FOUNDING_CURRENT as each one is sold; it is the
+   only place the number lives, so the hero and the investment section stay in
+   step. Separate from the per quarter capacity cap, which is about how many can
+   run at once, not how many are left at this price. */
 const FOUNDING_CURRENT = 3;
 const FOUNDING_TOTAL = 5;
 
@@ -90,16 +96,6 @@ const Bullets = ({ items, tone = 'zinc' }: { items: string[]; tone?: 'zinc' | 'b
   </ul>
 );
 
-const PhaseHead = ({ num, title, sub }: { num: string; title: string; sub: string }) => (
-  <div className="flex items-baseline gap-4 mb-3">
-    <span className="font-display text-5xl font-extrabold text-zinc-800">{num}</span>
-    <div>
-      <p className="text-blue-400 font-semibold text-sm">{title}</p>
-      <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">{sub}</p>
-    </div>
-  </div>
-);
-
 /* ---------------------------------------------------------------- */
 
 const seen = [
@@ -109,20 +105,17 @@ const seen = [
 ];
 
 const existsTo = [
-  'Define the media capability your business actually needs',
-  'Design the Operator role, scorecard, and decision rights',
-  'Build and run a structured search and assessment process',
-  'Support the selection of the person responsible for the role',
-  'Install the minimum media operation they will own',
-  'Enable them through 90 days of real work',
+  'Design the right role for your business',
+  'Help you set up and run a hiring process that attracts, tests, and assesses the right person',
+  'Often jump in to personally hunt and sell A players when it makes sense',
+  'Then spend 90 days turning them into a weaponised Operator running your Authority Engine',
 ];
 
 const forYou = [
   'You are doing 200k+/month with clear offers and a working sales process',
-  'You are either replacing your current creative director / media lead or know you want a creative director in that seat',
+  'You are either replacing your current creative director / media lead or know you want a weaponised creative director in that seat',
   'You want an internal media lead, not another agency retainer',
-  'You want one internal person who can take ownership of the agreed media operation and develop with the business over time',
-  'You are willing to participate in the initial working day, interviews, decisions, and Operator management',
+  'You want one person that can own your Authority Engine and scale it alongside you over years',
 ];
 
 const notForYou = [
@@ -133,45 +126,68 @@ const notForYou = [
 ];
 
 const outcome = [
-  'A clear 90 day media plan',
-  'A defined Operator role, scorecard, and decision rights',
-  'A structured hiring and assessment process',
-  'A documented minimum viable media operation',
-  'A defined ownership plan for that operation',
-  'Media standards, workflows, and an operating playbook',
-  'A final capability review and next stage recommendation',
+  {
+    icon: Target,
+    title: 'A clearly defined Operator role',
+    body: 'An Operator / Creative Director role that matches the level of business you are actually running.',
+    sub: [],
+  },
+  {
+    icon: FileText,
+    title: 'A reusable hiring pack and process',
+    body: 'Role, JD, test, scorecard, ramp plan.',
+    sub: [],
+  },
+  {
+    icon: UserPlus,
+    title: 'A media Operator you chose',
+    body: 'With my eyes and conviction behind the decision.',
+    sub: [
+      'You own the hire',
+      'I help you see who is actually an operator, sell them the vision, and onboard them properly from day one',
+    ],
+  },
+  {
+    icon: Settings,
+    title: 'A 90 day installed Authority Engine they run',
+    body: '',
+    sub: [
+      'Short form system with daily data entries',
+      '1 x 6 video Authority Engine trust asset cycle',
+      'Weekly reviews + training + content advisory board',
+      'A simple cadence and review rhythm that links content to pipeline',
+    ],
+  },
 ];
 
 const phase1Items = [
-  'Primary business objective',
-  'Priority audience and offer',
-  'What media must accomplish',
-  'What the Operator owns',
-  'Decision rights',
-  'Minimum weekly operation',
-  '90 day scorecard',
+  'Diagnose the biggest constraint from turning strangers into buyers.',
+  'Align your personality, positioning and perspective to key content buckets of demand',
+  'Map your Authority Engine across Instagram, YouTube, podcast, and email',
+  'Assess where your current media operation is leaking opportunity',
+  'Define exactly what this Operator / Creative Director must own week to week in your business',
+  'Clarify your 12 month vision for you and your media Operator',
+  'Set 3 to 5 clear 90 day outcomes for content and pipeline',
 ];
 
 const phase1Deliverables = [
-  'Media Operating Brief',
-  'Operator role definition',
-  'Decision rights',
-  'MVP media specification',
-  'Operator scorecard',
-  'Hiring recommendation',
+  'Authority Engine Blueprint',
+  '90 day content plan',
+  "Initial Operator role definition and 90 day scorecard with clear KPI's",
 ];
 
-const search = [
+const hiringSprint = [
   {
     num: '1',
     icon: Target,
-    title: 'Design the role and scorecard',
+    title: 'Design the role and 90 day scorecard',
     items: [
       'Responsibilities and ownership',
       'KPIs (inputs and outputs)',
-      'What good looks like at 30, 60, and 90 days',
+      'What "dangerous at 90 days" vs "weaponised at 12 months" actually means',
       'Compensation band and upside options',
     ],
+    tail: null,
   },
   {
     num: '2',
@@ -183,72 +199,67 @@ const search = [
       'Application questions that filter for seriousness and thinking',
       'A test project that shows how they actually work',
     ],
+    tail: null,
   },
   {
     num: '3',
     icon: Crosshair,
-    title: 'Run the search',
+    title: 'Help you hunt and run the pipeline',
     items: [
-      'Your team owns job posts, outbound, scheduling, and candidate communication',
-      'We provide the search structure, assessment process, candidate review, and final interview support',
+      'Your team runs the job posts and outbound under the hiring pack we design',
+      'I review the flow with you and, where it makes sense, I will personally reach out to specific candidates or profiles to sell them on the opportunity',
+      'My leadership partner and I help you screen applications and test work so you are only meeting people with a real shot',
     ],
+    tail: 'You get the benefit of my "I hunt for fun" instinct without me pretending to be a full time recruiter.',
   },
   {
     num: '4',
     icon: ClipboardCheck,
-    title: 'Final interviews and recommendation',
+    title: 'Final interviews, selling the vision and onboarding setup',
     items: [
       'I join final interviews so you are not guessing in a vacuum',
       'I pressure test their experience and thinking',
       'I sell them the vision, the runway, and exactly what winning in this role looks like',
-      'Final hiring recommendation',
     ],
+    tail: null,
   },
 ];
 
-const week6 = [
-  'Proceed with a permanent Operator',
-  'Begin with an agreed interim owner',
-  'Pause or extend the search separately',
+const rampPlan = [
+  'Week by week responsibilities',
+  'Targets and metrics',
+  'How often you meet',
+  'What "great", "fine", and "not acceptable" look like',
 ];
 
-const mvp = [
-  'One priority audience',
-  'One primary business objective',
-  'One core workflow',
-  'One weekly cadence',
-  'One scorecard',
-];
-
-const install = [
+const phase3 = [
   {
     icon: Zap,
-    title: 'Real work enablement',
+    title: 'Short form Engine',
     items: [
-      'Operator onboarding',
-      'Weekly enablement on real assets',
-      'Loom reviews on real work',
-      'Q&A / Operator Clinics',
-    ],
-  },
-  {
-    icon: Settings,
-    title: 'Standards and playbook',
-    items: [
-      'Media standards and checklists',
+      'Weekly Capture Block with you',
+      'Short form OS (pillars, formats, hooks)',
       'Operator Weekly Playbook',
-      'Scorecard and cadence form',
-      'Weekly Engine Check in form',
+      'Short form scorecard and cadence form',
     ],
   },
   {
-    icon: ClipboardCheck,
-    title: 'Capability milestones',
+    icon: Video,
+    title: 'Long form and Trust Assets',
     items: [
-      'First 2 weeks: understand the brand, build the calendar, run the first workflow',
-      'Day 30: make content decisions and explain why',
-      'Day 60: own the pipeline from brief to publication',
-      'Day 90: assessed against the agreed capability scorecard, with a next stage recommendation',
+      '1 x 6-8 video pillar video trust cycle',
+      'Trojan Horse VSL tied directly to your core offer',
+      'Exact lead magnet trust assets mapped to each video',
+    ],
+  },
+  {
+    icon: Megaphone,
+    title: 'Cadence and feedback',
+    items: [
+      'Weekly Engine Check in form',
+      'Q&A / Operator Clinics',
+      'Loom reviews on real assets',
+      'At Day 90, we assess the Operator against the agreed scorecard and recommend the next stage',
     ],
   },
 ];
@@ -260,7 +271,7 @@ const isNot = [
   },
   {
     title: 'Not a full time CMO or creative director',
-    body: 'The Authority Engine provides scheduled enablement and strategic advice directly related to the agreed media operation. It does not manage your team or daily execution.',
+    body: 'I show up for the cadence we agree, not to manage your whole media team. You manage the Operator. I train, review, and assess them.',
   },
   {
     title: 'Not a recruiting guarantee',
@@ -268,33 +279,21 @@ const isNot = [
   },
   {
     title: 'Not a forever contract',
-    body: 'After the 90 Day Operator Install, we both decide whether it makes sense to move into a 12 month advisory relationship.',
+    body: 'After the 90 days, we both decide whether it makes sense to move into a 12 month advisory relationship.',
   },
 ];
 
-const defineSelect = [
-  'Media Operating Brief',
-  'Operator role and scorecard',
-  'MVP media specification',
-  'Search process',
-  'Candidate assessment',
-  'Selection support',
-  'Operating system design',
-];
-
-const installIncludes = [
-  'Operator onboarding',
-  'Real work training',
-  'Weekly enablement',
-  'Operating playbook',
-  'Capability reviews',
-  'Final capability assessment',
-];
-
-const payments = [
-  '$10,000 on commencement',
-  '$10,000 when the search process is built and active',
-  '$10,000 when the permanent Operator or agreed interim owner starts and enablement begins',
+const investmentIncludes = [
+  {
+    name: 'Define and Select',
+    amount: '$20,000 AUD',
+    covers: 'Covers the Brand Day, role design, hiring process, candidate assessment, search support, and onboarding plan.',
+  },
+  {
+    name: '90 Day Operator Install',
+    amount: '$10,000 AUD',
+    covers: 'Covers onboarding, real work training, weekly reviews, playbook completion, capability reviews, and final assessment.',
+  },
 ];
 
 /* ---------------------------------------------------------------- */
@@ -313,10 +312,12 @@ function OperatorSprintPage() {
               Invite only &middot; The Authority Engine
             </p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
-              Operator Intensive.
+              Operator + Authority
+              <br />
+              Engine Intensive.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              Define the role, support the selection, and install the capability to own your Authority Engine through a 90 day Operator Install.
+              One person to own your Authority Engine, 90 days to weaponise them.
             </p>
           </Section>
         </div>
@@ -329,14 +330,12 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Why this exists</Label>
-            <H2>One person who owns media.</H2>
+            <H2>You do not need another "video guy".</H2>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
-              You need one capable person who understands the brand, makes sound decisions, owns projects end to end,
-              and keeps media moving without the founder carrying every decision.
+              You need one person owning media like a profit centre and one Engine they can run every week.
             </p>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-4">
-              The Operator Intensive helps you define that role, support the search and selection process, and equip
-              the person who fills it with the standards, systems, and judgment required to own the agreed media operation.
+              A weaponised creative director.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-5">
               I have been behind the scenes of multiple 7 &amp; 8 figure operators + media teams. I&apos;ve seen exactly:
@@ -345,8 +344,9 @@ function OperatorSprintPage() {
 
             <div className="glow-card border-blue-500/20 p-7 mt-10">
               <p className="text-zinc-300 text-[16px] leading-relaxed">
-                I hunt for fun. Give as much as possible, and help the good guys win. I know what good looks like in
-                this seat because I have worked behind the scenes with high performing founders, Operators, and media teams.
+                My unfair advantage is simple. I hunt for fun. Give as much as possible, and help the good guys
+                win. Nobody sells the position like me because I am the exact product of the next opportunity they
+                are about to walk into. I know exactly what a creative director needs better than they do.
               </p>
             </div>
 
@@ -388,16 +388,33 @@ function OperatorSprintPage() {
 
       {/* THE OUTCOME */}
       <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The outcome</Label>
-            <H2>By the end of the process, you will have.</H2>
-            <div className="mt-10">
-              <Ticks items={outcome} />
+            <H2>By the end of this project, you will have.</H2>
+            <div className="grid md:grid-cols-2 gap-6 mt-12">
+              {outcome.map((o, i) => (
+                <motion.div
+                  key={i}
+                  className="glow-card p-8"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                >
+                  <o.icon className="w-[18px] h-[18px] text-blue-400 mb-4" />
+                  <h3 className="text-white font-semibold mb-2">{o.title}</h3>
+                  {o.body && <p className="text-zinc-500 text-sm leading-relaxed">{o.body}</p>}
+                  {o.sub.length > 0 && (
+                    <div className={o.body ? 'mt-4' : ''}>
+                      <Bullets items={o.sub} tone="blue" />
+                    </div>
+                  )}
+                </motion.div>
+              ))}
             </div>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-10">
-              The initial focus is deliberately narrow: make one media operation work consistently before adding more
-              channels, formats, or volume.
+              You walk away with a person and a system, not just more clips.
             </p>
           </Section>
         </div>
@@ -410,7 +427,7 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>How it works</Label>
-            <H2>Four parts. One defined search period, followed by a 90 day Operator Install.</H2>
+            <H2>Three phases.</H2>
           </Section>
         </div>
       </section>
@@ -419,9 +436,15 @@ function OperatorSprintPage() {
       <section className="py-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <PhaseHead num="01" title="Media Operating Brief" sub="1 day in your office" />
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="font-display text-5xl font-extrabold text-zinc-800">01</span>
+              <div>
+                <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Day and Operator Blueprint</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">1 day in your office &middot; included (normally 5,000 AUD)</p>
+              </div>
+            </div>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-8">
-              We start with one working day together to build the Media Operating Brief. On this day we define:
+              We start with the same Brand Day I use to architect every Authority Engine, then extend it into the Operator blueprint. On this day we:
             </p>
             <Ticks items={phase1Items} />
             <div className="glow-card p-7 mt-10">
@@ -438,7 +461,13 @@ function OperatorSprintPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <PhaseHead num="02" title="Operator Blueprint and Search" sub="Six week defined search period" />
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="font-display text-5xl font-extrabold text-zinc-800">02</span>
+              <div>
+                <p className="text-blue-400 font-semibold text-sm">Phase 2 &middot; Operator Blueprint + Hiring Sprint</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">8 to 10 weeks &middot; advisory + hiring support (with hunting when it matters)</p>
+              </div>
+            </div>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-8">
               I am not going to throw up a seek ad. Do that yourself. This is what I will do.
             </p>
@@ -448,7 +477,7 @@ function OperatorSprintPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <div className="grid md:grid-cols-2 gap-6">
-              {search.map((s) => (
+              {hiringSprint.map((s) => (
                 <div key={s.num} className="glow-card p-8 flex flex-col">
                   <div className="flex items-center gap-3 mb-4">
                     <s.icon className="w-[18px] h-[18px] text-blue-400" />
@@ -456,6 +485,11 @@ function OperatorSprintPage() {
                   </div>
                   <h3 className="text-white font-semibold mb-4">{s.title}</h3>
                   <Bullets items={s.items} />
+                  {s.tail && (
+                    <p className="text-zinc-300 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
+                      {s.tail}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -484,30 +518,45 @@ function OperatorSprintPage() {
                 ))}
               </ul>
               <p className="text-zinc-400 text-[15px] leading-relaxed pt-5 border-t border-zinc-800">
-                We are testing their judgment.
+                We are testing judgment, not just editing tricks.
               </p>
             </div>
           </Section>
         </div>
 
-        {/* THE BOUNDARY + WEEK 6 */}
+        {/* RAMP PLAN */}
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-8">
           <Section>
             <div className="glow-card p-8">
+              <p className="text-white text-sm font-semibold mb-4">
+                We then map a concrete 90 day onboarding and ramp plan
+              </p>
+              <Bullets items={rampPlan} tone="blue" />
+            </div>
+          </Section>
+        </div>
+
+        {/* THE BOUNDARY */}
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-8">
+          <Section>
+            <div className="glow-card p-8">
+              <p className="text-white font-semibold text-[17px] leading-relaxed mb-2">
+                I am not your HR department or a recruiting agency.
+              </p>
               <p className="text-white font-semibold text-[17px] leading-relaxed mb-5">
-                You make the final decision. You manage performance. We do not guarantee a hire by a specific date.
+                I do not promise a unicorn on a specific date.
               </p>
-              <p className="text-zinc-400 leading-relaxed mb-4">
-                At Week 6, we agree one of three options:
+              <p className="text-zinc-400 leading-relaxed mb-5">
+                I design the role, architect the process, help you hunt intelligently, and sit in the decisive
+                conversations so you make a confident hire.
               </p>
-              <ol className="space-y-3">
-                {week6.map((t, i) => (
-                  <li key={t} className="flex items-start gap-3">
-                    <span className="text-blue-400 font-semibold text-[15px] w-4 flex-shrink-0">{i + 1}.</span>
-                    <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
-                  </li>
-                ))}
-              </ol>
+              <p className="text-zinc-300 leading-relaxed pt-5 border-t border-zinc-800">
+                You make the final decision. You manage performance. I stack the odds in your favour.
+              </p>
+              <p className="text-white font-semibold leading-relaxed mt-5">
+                If no person has started by the end of the included search period, we agree whether to begin with an
+                interim owner, pause the Install while the search continues, or extend the search separately.
+              </p>
             </div>
           </Section>
         </div>
@@ -519,30 +568,18 @@ function OperatorSprintPage() {
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <PhaseHead num="03" title="MVP Operation" sub="During the search, where practical" />
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="font-display text-5xl font-extrabold text-zinc-800">03</span>
+              <div>
+                <p className="text-blue-400 font-semibold text-sm">Phase 3 &middot; 90 Day Authority Engine Install</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">90 days from when your new Operator or agreed interim owner starts</p>
+              </div>
+            </div>
             <p className="text-zinc-400 leading-relaxed mt-8">
-              During the search, we define and establish the minimum operation where practical. This gives the Operator
-              a working system to inherit when they start.
+              Once your new Operator is in seat (or an interim is agreed), we install the Engine they will run every week.
             </p>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-5">The MVP is limited to:</p>
-            <Ticks items={mvp} />
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* PHASE 4 */}
-      <section className="py-16 md:py-20">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <PhaseHead
-              num="04"
-              title="90 Day Operator Install"
-              sub="90 days from the start of the permanent Operator or agreed interim owner"
-            />
-            <p className="text-zinc-400 leading-relaxed mt-8">
-              Once your Operator or interim owner is in seat, we install the Engine they will run every week.
+            <p className="text-white font-semibold leading-relaxed mt-4">
+              The search period comes first. The 90 day Install begins when the person enters the seat.
             </p>
           </Section>
         </div>
@@ -550,7 +587,7 @@ function OperatorSprintPage() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <div className="grid md:grid-cols-3 gap-6">
-              {install.map((p, i) => (
+              {phase3.map((p, i) => (
                 <div key={i} className="glow-card p-8">
                   <p.icon className="w-5 h-5 text-blue-400 mb-4" />
                   <h3 className="text-white font-semibold mb-4">{p.title}</h3>
@@ -564,11 +601,8 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <p className="text-zinc-300 text-[17px] leading-relaxed">
-              At Day 90, the Operator is assessed against the agreed capability scorecard and you receive a next stage recommendation.
-            </p>
-            <p className="text-zinc-300 text-[17px] leading-relaxed mt-4">
-              The goal is for the Operator to understand the agreed operation, make normal media decisions, own projects
-              end to end, and recommend what should improve next.
+              By Day 90, your Operator is weaponised and you have one Engine they can keep running without you being
+              dragged into the weeds.
             </p>
           </Section>
         </div>
@@ -595,9 +629,6 @@ function OperatorSprintPage() {
                 </div>
               ))}
             </div>
-            <p className="text-zinc-300 text-[17px] leading-relaxed mt-10">
-              You manage the Operator. The Authority Engine trains, reviews, and assesses them.
-            </p>
           </Section>
         </div>
       </section>
@@ -608,31 +639,42 @@ function OperatorSprintPage() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Founding investment</Label>
+            <Label>Investment, capacity and next step</Label>
             <div className="glow-card border-blue-500/20 p-8">
-              <p className="font-display text-4xl font-extrabold text-white mb-8">$30,000 AUD total</p>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <p className="text-white text-sm font-semibold mb-4">$20,000 Define and Select</p>
-                  <Bullets items={defineSelect} tone="blue" />
-                </div>
-                <div>
-                  <p className="text-white text-sm font-semibold mb-4">$10,000 90 Day Operator Install</p>
-                  <Bullets items={installIncludes} tone="blue" />
-                </div>
-              </div>
+              <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
+              <p className="font-display text-4xl font-extrabold text-white mb-6">$30,000 AUD total</p>
+              <ul className="space-y-5">
+                {investmentIncludes.map((it, i) => (
+                  <li key={i} className="border-b border-zinc-800 pb-5 last:border-0 last:pb-0">
+                    <div className="flex items-baseline justify-between gap-4 mb-2">
+                      <span className="text-white font-semibold text-[15px]">{it.name}</span>
+                      <span className="text-white font-semibold text-[15px] whitespace-nowrap">{it.amount}</span>
+                    </div>
+                    <p className="text-zinc-400 text-[14px] leading-relaxed">{it.covers}</p>
+                  </li>
+                ))}
+              </ul>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at a founding rate. After that it moves to 50k.
             </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-4">Payments</p>
-              <Bullets items={payments} tone="blue" />
-              <p className="text-zinc-400 text-sm leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                If no permanent Operator or interim owner starts, the final $10,000 is not due. The Define and Select
-                work remains complete and retained.
+              <Bullets
+                items={[
+                  '$10,000 on commencement',
+                  '$10,000 when the search process is built and active',
+                  '$10,000 when the Operator or agreed interim owner starts and enablement begins',
+                ]}
+                tone="blue"
+              />
+              <p className="text-white text-sm font-semibold leading-relaxed mt-5 pt-5 border-t border-zinc-800">
+                If no Operator or interim owner starts, the final $10,000 is not due.
               </p>
             </div>
+            <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
+              This is a white glove project exclusively for founders where I am confident we can win together.
+            </p>
             <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-3">Capacity</p>
               <p className="text-zinc-400 text-sm leading-relaxed mb-4">
@@ -641,25 +683,6 @@ function OperatorSprintPage() {
               </p>
               <Bullets items={['Your operator', 'Your content', 'Your data']} tone="blue" />
             </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* AFTER */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>After the 90 Day Operator Install</Label>
-            <p className="text-zinc-300 text-[17px] leading-relaxed">
-              Clients who complete the Operator Install may be invited into the 12 month Authority Engine Advisory,
-              including access to the private Authority Engine founder network.
-            </p>
-            <p className="text-zinc-500 text-[14px] leading-relaxed mt-8">
-              Selected clients may be invited into a separate Founding Partner arrangement for trusted referrals. This
-              sits outside the Operator Intensive and is governed by a separate agreement.
-            </p>
           </Section>
         </div>
       </section>
@@ -676,12 +699,12 @@ function OperatorSprintPage() {
               <Ticks items={[
                 'Send your application using the button below',
                 'We do a short call to confirm fit and logistics',
-                'If we are both in, the commencement payment books your Media Operating Brief day',
+                'If we are both in, the commencement payment secures your Brand Day and we book dates',
               ]} />
             </div>
             <p className="text-zinc-400 leading-relaxed mb-12">
-              From there we spend a day together on the Media Operating Brief, then move into the search and the 90 Day
-              Operator Install with the person who will own your Authority Engine.
+              From there the default is simple. We spend a day together, then so long as we both agree, we move
+              straight into finding and weaponising the person who will own your Authority Engine.
             </p>
             <ApplyButton size="lg" />
           </Section>

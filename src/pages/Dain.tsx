@@ -131,10 +131,12 @@ const STEPS: Step[] = [
       {
         label: 'The Authority Engine provides',
         items: [
-          'Role and hiring scorecard',
-          'Candidate application filter',
+          'Job description',
+          'Application questions',
+          'Candidate scorecard',
           'Practical work assessment',
           'Interview structure',
+          '90 day ramp plan',
           'Candidate review',
           'Final interview support',
           'Hiring recommendation',
@@ -395,7 +397,8 @@ function Timeline() {
 
       <p className="text-zinc-400 text-[14px] leading-relaxed mt-8">
         The engagement begins with the Media Operating Brief and a defined Operator search period. Once a permanent
-        Operator or agreed interim media owner starts, the 90 day enablement period begins.
+        Operator or agreed interim media owner starts, the 90 day enablement period begins. The search period and
+        Operator Install are separate stages.
       </p>
     </div>
   );
@@ -485,6 +488,7 @@ export default function Dain() {
 
         <Wrap>
           <H2>Completion standard</H2>
+          <P>At Day 90 of the Operator Install, the person is assessed against the agreed scorecard and Rivyl receives a final capability review and next stage recommendation.</P>
           <P>The engagement is delivered when:</P>
           <Ticks items={DELIVERED} />
           <Label>The final review assesses whether the Operator can</Label>
@@ -534,6 +538,7 @@ export default function Dain() {
           </div>
           <div className="mt-8">
             <P>The final $10,000 is due when the permanent Operator or interim owner starts.</P>
+            <P>If no permanent Operator or interim owner starts, the $10,000 Operator Install fee is not due. The completed Define and Select work remains delivered and retained.</P>
           </div>
         </Wrap>
 
