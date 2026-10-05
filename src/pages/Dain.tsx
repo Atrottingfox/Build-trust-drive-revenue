@@ -6,10 +6,13 @@ import SEO from '../components/SEO';
 import { PageHead, Wrap, Divider, H2, BulletList } from '../components/undeniable/Bits';
 
 /* Dain Walker / Rivyl. Operator Intensive proposal for the CEO.
-   Copy is Sean's (5 Oct 2026, second pass). Mechanical changes only: straight
-   apostrophes, no hyphens in compound adjectives, citations removed, and the
-   ban list lines rewritten. Do not rephrase.
-   Sell the outcome on this page. Liability mechanics live in the agreement.
+   Copy is Sean's (5 Oct 2026, third pass). Mechanical changes only: straight
+   apostrophes, no hyphens in compound adjectives, citations removed, ban list
+   lines rewritten. Do not rephrase.
+   Shape: a search period of up to 6 weeks, then a 90 day Operator Install that
+   starts on the day the Operator or interim owner starts.
+   This page creates conviction. Payment triggers, pause terms, replacement
+   conditions, third party costs and candidate ownership live in the agreement.
    No insets: flat sections, no boxed cards, no quote callouts. */
 
 const P = ({ children }: { children: React.ReactNode }) => (
@@ -53,14 +56,14 @@ function Numbered({ items }: { items: string[] }) {
 
 // ─── Copy ────────────────────────────────────────────────────────────────
 
-const OUTCOME = [
-  'A written 90 day media plan signed off by Dain and the CEO',
-  'A defined Operator role and decision framework',
-  'A structured hiring and selection process',
-  'A defined person responsible for the MVP operation, either a permanent Operator or an agreed interim owner',
-  'A minimum viable media operation running on a defined weekly cadence',
-  'Documented standards, workflows, and scorecards',
-  'A final capability review against the agreed Operator scorecard',
+const WILL_HAVE = [
+  'A clear 90 day media plan',
+  'A defined Operator role and decision rights',
+  'A structured hiring and assessment process',
+  'A documented MVP workflow',
+  'One permanent Operator or interim owner, where applicable',
+  'Standards, scorecard, and operating playbook',
+  'A final capability review and next stage recommendation',
 ];
 
 type Block = { label?: string; items?: string[]; numbered?: string[]; paras?: string[]; half?: boolean };
@@ -102,14 +105,15 @@ const STEPS: Step[] = [
         ],
       },
       {
-        label: 'MVP boundary',
-        paras: ['The initial operation is deliberately limited to:'],
+        label: 'The MVP, made specific',
+        paras: ['The Media Operating Brief specifies exactly what the weekly operation is:'],
         items: [
-          'One priority audience',
-          'One primary business objective',
-          'One core media workflow',
-          'One agreed weekly cadence',
-          'One scorecard for measuring progress',
+          'The primary channel',
+          'The content format',
+          'The weekly publishing cadence',
+          'Who captures, edits, approves, and publishes',
+          'The approval turnaround',
+          'The one scorecard reviewed weekly',
         ],
       },
     ],
@@ -139,19 +143,16 @@ const STEPS: Step[] = [
       {
         paras: [
           'Rivyl makes the final hiring decision and employs the Operator.',
-          'If the Operator search takes longer than expected, Rivyl will not be left without progress. By approximately Week 6, Rivyl and The Authority Engine will agree in writing to one of three paths:',
+          'The search period is limited to six weeks. If no person has started by that point, Rivyl and The Authority Engine will agree to one of three paths:',
         ],
         numbered: [
-          'Proceed with the selected Operator and begin enablement.',
-          'Begin enablement with an agreed interim media owner while the search continues.',
-          'Pause the enablement component for a defined period while the search continues.',
+          'Proceed with an interim owner.',
+          'Pause enablement while the search continues.',
+          'Extend the search under a separate agreement.',
         ],
       },
     ],
-    outro: [
-      'The search includes one defined search period, candidate assessment, and final interview support. Any continuation beyond that period is agreed separately. The original project end date does not automatically move.',
-      'Interim freelancers, production costs, and contractor fees are paid separately by Rivyl.',
-    ],
+    outro: [],
   },
   {
     num: '03',
@@ -162,13 +163,13 @@ const STEPS: Step[] = [
       'Where appropriate, Rivyl may use existing team members or interim contractors to establish the agreed MVP workflow. That way the Operator inherits a working operation when they start.',
     ],
     blocks: [],
-    outro: ['The MVP remains limited to the agreed audience, objective, workflow, and cadence.'],
+    outro: ['The MVP remains limited to what the Media Operating Brief specifies.'],
   },
   {
     num: '04',
-    title: 'Operator Enablement',
-    when: 'From the Operator\'s start date to the project end date',
-    intro: ['Once the selected Operator or agreed interim media owner begins, The Authority Engine trains and enables them through real Rivyl work.'],
+    title: '90 Day Operator Install',
+    when: '90 days from the Operator\'s start date',
+    intro: ['Once the permanent Operator or agreed interim media owner starts, the 90 day Operator Install begins. The Authority Engine trains and enables them through real Rivyl work.'],
     blocks: [
       {
         label: 'The Operator progressively takes ownership of',
@@ -186,15 +187,6 @@ const STEPS: Step[] = [
         ],
       },
       {
-        label: 'Capability milestones, measured from the Operator\'s start date',
-        items: [
-          'First 2 weeks: understand the brand, build the calendar, run the first workflow',
-          'Day 30: make content decisions and explain why',
-          'Day 60: own the pipeline from brief to publication',
-          'Final project review, Day 90 from commencement: run the agreed MVP and recommend improvements',
-        ],
-      },
-      {
         label: 'The Authority Engine provides',
         half: true,
         items: [
@@ -206,16 +198,20 @@ const STEPS: Step[] = [
           'Scorecard reviews',
           'Operating playbook completion',
           'Strategic advice directly related to the agreed Media Operating Brief and Operator enablement',
-          'Capability reviews measured from the Operator\'s start date',
-          'Final capability assessment at Day 90 from commencement',
+          'Capability reviews at 30, 60, and 90 days',
+        ],
+      },
+      {
+        label: 'Capability milestones, from the Operator\'s start date',
+        items: [
+          'First 2 weeks: understand the brand, build the calendar, run the first workflow',
+          'Day 30: make content decisions and explain why',
+          'Day 60: own the pipeline from brief to publication',
+          'Day 90: run the agreed MVP and recommend improvements',
         ],
       },
     ],
-    outro: [
-      'Rivyl manages the Operator. The Authority Engine trains, reviews, and assesses them.',
-      'Only work completed within the project term is included. Any continuation beyond Day 90 is agreed separately.',
-      'If the Operator leaves within 60 days for reasons unrelated to Rivyl materially changing the role, The Authority Engine will run one replacement search. This applies only if the role, compensation, responsibilities, location, and working conditions remain materially unchanged.',
-    ],
+    outro: ['Rivyl manages the Operator. The Authority Engine trains, reviews, and assesses them.'],
   },
 ];
 
@@ -245,12 +241,12 @@ const INCLUDED = [
   'Operator role and decision framework',
   'Hiring scorecard and practical assessment',
   'Candidate review and interview support',
-  'Weekly Operator enablement',
+  '90 days of weekly Operator enablement',
   'Scheduled media and Operator review',
   'Media standards and approval checklists',
   'KPI scorecard',
   'Operating playbook',
-  'Capability reviews measured from the Operator\'s start date, and a final capability assessment at Day 90 from commencement',
+  'Capability reviews at 30, 60, and 90 days from the Operator\'s start date',
   'Strategic advice directly related to the agreed Media Operating Brief and Operator enablement',
   'One replacement search, if applicable',
 ];
@@ -281,28 +277,17 @@ const RESPONSIBILITIES = [
 
 const CORE = [
   'Media Operating Brief',
-  'MVP media specification',
-  'Operator role and scorecard',
-  'Hiring process and candidate assessment',
-  'Search and interview support',
-  'Enablement plan',
-  'Standards and operating system design',
+  'Role design',
+  'Search process',
+  'Candidate assessment',
+  'Selection support',
 ];
 
-const PLACEMENT = [
-  'Operator onboarding',
-  'Weekly enablement',
-  'Review of real work',
-  'Capability reviews',
-  'Operating playbook completion',
-  'Final capability assessment',
-  'One replacement search, if applicable',
-];
-
-const PAYMENTS = [
-  '$10,000 AUD on commencement',
-  '$10,000 AUD when the search process is built and active',
-  '$10,000 AUD when the selected Operator or agreed interim media owner starts and enablement begins',
+const INSTALL = [
+  '90 day enablement once the person starts',
+  'Onboarding, real work training, and weekly reviews',
+  'Operating playbook',
+  'Capability reviews at 30, 60, and 90 days',
 ];
 
 const ADVISORY = [
@@ -315,30 +300,36 @@ const ADVISORY = [
 ];
 
 // ─── Timeline ────────────────────────────────────────────────────────────
-// Days across the fixed 90 day engagement. Spans come from the step timings:
-// Brief week 1, Selection weeks 1 to 6, MVP from week 2 where practical,
-// Enablement from the Operator's start. The faded part of the Enablement bar
-// is the window the start date can land in; the solid part is the latest case.
+// Drawn for the latest case: the Operator starts at the end of week 6, so the
+// whole journey is 6 weeks of search plus 90 days of install, about 19 weeks.
+// The faded part of the Install bar is the window an earlier start can land in.
+// If the person starts earlier, everything after moves earlier with them.
 
-const DAYS = 90;
-const pct = (d: number) => `${((d - 1) / (DAYS - 1)) * 100}%`;
+const SPAN = 42 + 90; // days, latest case
+const pct = (d: number) => `${((d - 1) / (SPAN - 1)) * 100}%`;
 
 const PHASES: Array<{ num: string; name: string; from: number; to: number; early?: number }> = [
   { num: '01', name: 'Media Operating Brief', from: 1, to: 7 },
   { num: '02', name: 'Operator Selection', from: 1, to: 42 },
-  { num: '03', name: 'MVP Operation', from: 8, to: 90 },
-  { num: '04', name: 'Operator Enablement', from: 43, to: 90, early: 15 },
+  { num: '03', name: 'MVP Operation', from: 8, to: SPAN },
+  { num: '04', name: '90 Day Operator Install', from: 43, to: SPAN, early: 15 },
 ];
 
 const MILESTONES = [
-  { day: 1, label: 'Day 1', detail: 'Media Operating Brief' },
-  { day: 42, label: 'Wk 6', detail: 'Decide the path' },
-  { day: 90, label: 'Day 90', detail: 'Final capability review' },
+  { day: 1, label: 'Wk 1', detail: 'Media Operating Brief' },
+  { day: 42, label: 'Wk 6', detail: 'Search period ends. Operator or interim owner starts, or decide the path.' },
+  { day: 42 + 30, label: 'Day 30', detail: 'Capability review, 30 days after the Operator starts' },
+  { day: 42 + 60, label: 'Day 60', detail: 'Capability review' },
+  { day: SPAN, label: 'Day 90', detail: 'Final capability review and next stage recommendation' },
 ];
 
 function Timeline() {
   return (
     <div className="mb-6">
+      <div className="flex text-[11px] uppercase tracking-widest font-semibold mb-4">
+        <p className="text-zinc-500 flex-shrink-0" style={{ width: pct(42) }}>Define and select</p>
+        <p className="text-blue-400">90 day Operator Install</p>
+      </div>
       <div className="relative">
         <div className="relative space-y-6 pb-4">
           {MILESTONES.map((m) => (
@@ -390,7 +381,7 @@ function Timeline() {
 
       <p className="text-zinc-500 text-[13px] mt-4">
         <span className="inline-block w-6 h-2 rounded-full bg-blue-500/25 align-middle mr-2" />
-        Enablement starts when the Operator or interim media owner starts, anywhere in this window.
+        If the Operator starts earlier, the 90 days start earlier with them.
       </p>
 
       <ul className="mt-8 space-y-2">
@@ -403,9 +394,8 @@ function Timeline() {
       </ul>
 
       <p className="text-zinc-400 text-[14px] leading-relaxed mt-8">
-        The engagement has a fixed end date 90 days after the agreed commencement date. Operator capability
-        milestones are measured from the Operator's start date. Any work required beyond the project end date is
-        agreed separately.
+        The engagement begins with the Media Operating Brief and a defined Operator search period. Once a permanent
+        Operator or agreed interim media owner starts, the 90 day enablement period begins.
       </p>
     </div>
   );
@@ -451,33 +441,34 @@ export default function Dain() {
       <div className="min-h-screen bg-base">
         <SEO
           title="Operator Intensive, Rivyl"
-          description="Define the role, select the person, and install the minimum media operation over 90 days."
+          description="Give Rivyl one person who can own media without Dain carrying every decision."
           path="/dain"
           noIndex
         />
         <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
         <PageHead
-          eyebrow="The Authority Engine"
-          title="Operator"
-          accent="Intensive"
-          blurb="Define the role, select the person, and install the minimum media operation over 90 days."
+          eyebrow="The Authority Engine · Operator Intensive"
+          title="Give Rivyl one person who can own media"
+          accent="without Dain carrying every decision."
+          blurb="A defined search period followed by a 90 day Operator Install. We define the role, support the selection, and install the operating system around them."
           backHref={null}
         />
-
-        <Wrap>
-          <P>Rivyl needs one person who can understand the brand, make sound decisions, own projects end to end, and keep the media operation moving without Dain becoming the bottleneck.</P>
-          <P>The Operator Intensive helps Rivyl clarify the media capability it needs, select the right person, and equip them with the standards, systems, and judgment required to own the agreed operation.</P>
-        </Wrap>
 
         <Divider />
 
         <Wrap>
-          <H2>The outcome</H2>
-          <P>By the end of the engagement, Rivyl will have:</P>
-          <BulletList items={OUTCOME} />
-          <div className="mt-8">
-            <P>The aim is the minimum operation Rivyl needs to run media consistently, and then developing the person responsible for owning it. More channels and more volume come after that.</P>
+          <H2>The problem</H2>
+          <P>Dain is still carrying too much media judgment and project ownership. Rivyl needs one person who can turn the brand's priorities into consistent media without requiring founder level direction on every decision.</P>
+
+          <div className="mt-12">
+            <H2>The solution</H2>
+            <P>Over a defined search period and a 90 day Operator Install, The Authority Engine will help Rivyl define the role, support the selection of the person, and install the minimum media operation that person will own.</P>
+          </div>
+
+          <div className="mt-12">
+            <H2>What Rivyl will have</H2>
+            <BulletList items={WILL_HAVE} />
           </div>
         </Wrap>
 
@@ -515,9 +506,6 @@ export default function Dain() {
               <Ticks items={NOT_INCLUDED} tone="out" />
             </div>
           </div>
-          <p className="text-zinc-400 text-[14px] leading-relaxed mt-8">
-            Operator wages, contractors, production costs, software, travel, and other third party expenses are separate.
-          </p>
         </Wrap>
 
         <Divider />
@@ -526,9 +514,6 @@ export default function Dain() {
           <H2>Rivyl's responsibilities</H2>
           <P>For this to work, Rivyl must provide:</P>
           <BulletList items={RESPONSIBILITIES} />
-          <div className="mt-8">
-            <P>If Rivyl delays access, decisions, hiring, or implementation, the project end date does not automatically move.</P>
-          </div>
         </Wrap>
 
         <Divider />
@@ -536,25 +521,20 @@ export default function Dain() {
         <Wrap>
           <H2>Investment</H2>
           <p className="font-display text-4xl font-extrabold text-white mb-1">$30,000 AUD</p>
-          <p className="text-zinc-400 text-[14px] mb-8">total investment, structured as a $20,000 retained install fee plus a $10,000 placement and enablement fee</p>
+          <p className="text-zinc-400 text-[14px] mb-8">structured as a $20,000 retained install fee plus a $10,000 placement and enablement fee</p>
 
           <div className="grid md:grid-cols-2 gap-x-10 gap-y-8">
             <div>
-              <p className="text-white text-[15px] font-semibold mb-1">$20,000 AUD core install</p>
-              <p className="text-zinc-500 text-[14px] mb-4">Covers</p>
+              <p className="text-white text-[15px] font-semibold mb-4">$20,000 AUD define and select</p>
               <BulletList items={CORE} />
             </div>
             <div>
-              <p className="text-white text-[15px] font-semibold mb-1">$10,000 AUD placement and enablement</p>
-              <p className="text-zinc-500 text-[14px] mb-4">Covers</p>
-              <BulletList items={PLACEMENT} />
+              <p className="text-white text-[15px] font-semibold mb-4">$10,000 AUD 90 day Operator Install</p>
+              <BulletList items={INSTALL} />
             </div>
           </div>
-
-          <Label>Payments</Label>
-          <BulletList items={PAYMENTS} />
           <div className="mt-8">
-            <P>If no Operator or interim media owner starts, the final $10,000 is not due.</P>
+            <P>The final $10,000 is due when the permanent Operator or interim owner starts.</P>
           </div>
         </Wrap>
 
@@ -562,7 +542,7 @@ export default function Dain() {
 
         <Wrap>
           <H2>After the Intensive</H2>
-          <P>At the end of 90 days, Rivyl may be invited to continue into the 12 month Authority Engine Advisory.</P>
+          <P>At the end of the 90 day Operator Install, Rivyl may be invited to continue into the 12 month Authority Engine Advisory.</P>
           <P>That is a separate continuation designed for clients who want:</P>
           <BulletList items={ADVISORY} />
           <div className="mt-8">
@@ -573,20 +553,16 @@ export default function Dain() {
         <Divider />
 
         <Wrap>
-          <H2>Founding Partner Opportunity</H2>
-          <P>Selected clients may also be invited to participate in the Founding Partner referral partnership.</P>
-          <P>This is separate from the Operator Intensive.</P>
-          <P>If Rivyl introduces qualified founders who become paying Authority Engine clients, Rivyl may earn additional private media strategy, training, or implementation privileges under a separate partner agreement.</P>
-          <P>It is for trusted introductions only, where Rivyl genuinely believes The Authority Engine can help, and there is no obligation to sell.</P>
-        </Wrap>
-
-        <Divider />
-
-        <Wrap>
           <H2>The decision</H2>
           <P>It comes down to one question:</P>
           <Strong>Does Rivyl want one capable person who can own the media operation, make better decisions, and keep the system moving without Dain carrying it?</Strong>
           <P>If yes, the Operator Intensive is the process for installing that capability.</P>
+
+          <p className="text-zinc-500 text-[13px] leading-relaxed mt-16 pt-6 border-t border-zinc-800">
+            PS. Selected clients may also be invited into the Founding Partner referral partnership, which sits outside
+            the Operator Intensive under a separate partner agreement. It is for trusted introductions only, and there
+            is no obligation to sell.
+          </p>
         </Wrap>
 
         <Footer />
