@@ -140,12 +140,9 @@ const outcome = [
   },
   {
     icon: UserPlus,
-    title: 'A structured process to identify and select the right Operator',
-    body: 'With my eyes and conviction behind the decision.',
-    sub: [
-      'You own the hire',
-      'I help you see who is actually an operator, sell them the vision, and onboard them properly from day one',
-    ],
+    title: 'A structured process that lets you choose the Operator with clear evidence of their judgment and capability.',
+    body: 'You own the hire. I help you see who is actually an Operator, sell them the vision, and onboard them properly from day one.',
+    sub: [],
   },
   {
     icon: Settings,
@@ -476,7 +473,7 @@ function OperatorSprintPage() {
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">01</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Day and Operator Blueprint</p>
+                <p className="text-blue-400 font-semibold text-sm">Brand Day and Operator Blueprint</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Week 1 &middot; 1 day in your office &middot; valued at 10,000 AUD</p>
               </div>
             </div>
@@ -512,7 +509,7 @@ function OperatorSprintPage() {
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">02</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 2 &middot; Operator Blueprint + Hiring Sprint</p>
+                <p className="text-blue-400 font-semibold text-sm">Operator Blueprint + Hiring Sprint</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Weeks 1 to 6 &middot; included search period &middot; advisory + hiring support (with hunting when it matters)</p>
               </div>
             </div>
@@ -619,7 +616,7 @@ function OperatorSprintPage() {
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">03</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 3 &middot; MVP Operation</p>
+                <p className="text-blue-400 font-semibold text-sm">MVP Operation</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">During the search, where practical</p>
               </div>
             </div>
@@ -640,7 +637,7 @@ function OperatorSprintPage() {
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">04</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 4 &middot; 90 Day Authority Engine Install</p>
+                <p className="text-blue-400 font-semibold text-sm">90 Day Authority Engine Install</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">90 days from when your new Operator or agreed interim owner starts</p>
               </div>
             </div>
@@ -650,8 +647,8 @@ function OperatorSprintPage() {
             <p className="text-white font-semibold leading-relaxed mt-4">
               The search period comes first. The 90 day Install begins when the person enters the seat.
             </p>
-            <p className="text-white font-semibold leading-relaxed mt-8">
-              Possible components, selected according to the MVP
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              What gets installed is scoped to the MVP agreed on the Brand Day.
             </p>
           </Section>
         </div>
@@ -673,8 +670,8 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <p className="text-zinc-300 text-[17px] leading-relaxed">
-              The aim is for your Operator to be weaponised enough to run the agreed MVP without you being dragged into
-              the weeds.
+              By Day 90, your Operator is weaponised and you have one Engine they can keep running without you being
+              dragged into the weeds.
             </p>
           </Section>
         </div>
@@ -754,9 +751,8 @@ function OperatorSprintPage() {
               <p className="text-white text-sm font-semibold mb-3">Capacity</p>
               <p className="text-zinc-400 text-sm leading-relaxed mb-4">
                 This is invite only. There is no public link, no buy now button. I cap these at 5 per quarter so
-                I can stay close to:
+                I can stay close to your Operator, your content, and your data.
               </p>
-              <Bullets items={['Your operator', 'Your content', 'Your data']} tone="blue" />
             </div>
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-6">
               Separately, selected clients may be invited into a Founding Partner referral arrangement. That sits outside
