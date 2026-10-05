@@ -248,7 +248,9 @@ const handler: Handler = async (event) => {
           tags:
             session.metadata?.payment === "install-1"
               ? ["step-2-paid", "install-payment-1-paid"]
-              : ["brand-day-paid"],
+              : session.metadata?.payment === "intensive-1"
+                ? ["intensive-paid"]
+                : ["brand-day-paid"],
         }),
       });
       tagged = tagRes.ok;
@@ -370,7 +372,19 @@ const handler: Handler = async (event) => {
         customFields.push({ id: intentField, value: String(session.payment_intent) });
       }
 
-      await reconcile(token, contactId);
+      /* reconcile is Brand Day bookkeeping (paid-no-date, brand-day-confirmed).
+         An Operator Intensive payment is not a Brand Day, so it is skipped and
+         announced on its own instead. */
+      if (session.metadata?.payment === "intensive-1") {
+        await slackAlert(
+          [
+            `:moneybag: *Operator Intensive payment 1 of 4 received.*`,
+            `$${(Number(session.amount_total || 0) / 100).toLocaleString("en-AU")} ${String(session.currency || "aud").toUpperCase()} from ${session.customer_details?.name || session.customer_details?.email || "the client"}. Tagged intensive-paid. Their calendar is open on /lock-in-intensive.`,
+          ].join("\n")
+        );
+      } else {
+        await reconcile(token, contactId);
+      }
 
       /*
         The 90 Day Install is one commitment paid in two instalments, and

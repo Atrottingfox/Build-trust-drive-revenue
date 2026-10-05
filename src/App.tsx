@@ -61,6 +61,7 @@ const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
+const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
 const Booked = React.lazy(() => import('./pages/Booked'));
 const Install = React.lazy(() => import('./pages/Install'));
 const Prep = React.lazy(() => import('./pages/Prep'));
@@ -170,6 +171,8 @@ export default function App() {
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />
           <Route path="/lock-in/:contactId" element={<LockIn />} />
+          <Route path="/lock-in-intensive" element={<LockInIntensive />} />
+          <Route path="/lock-in-intensive/:contactId" element={<LockInIntensive />} />
           <Route path="/booked" element={<Booked />} />
           <Route path="/install" element={<Install />} />
           {/* The prep call, with the contact id so the booking comes back attached

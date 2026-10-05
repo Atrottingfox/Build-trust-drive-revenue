@@ -122,9 +122,23 @@ async function clientMetadata(contactId: string): Promise<Record<string, string>
   Stripe already knows the id, so it goes in the URL it sends them back to.
   Nothing has to be remembered, and nothing can be forgotten.
 */
-const returnUrl = (contactId?: string) =>
-  "https://authorityengine.com.au/lock-in?paid=1&session_id={CHECKOUT_SESSION_ID}" +
+const returnUrl = (contactId?: string, page = "lock-in") =>
+  `https://authorityengine.com.au/${page}?paid=1&session_id={CHECKOUT_SESSION_ID}` +
   (contactId ? `&c=${encodeURIComponent(contactId)}` : "");
+
+/*
+  The Operator Intensive's first payment. Same $5,000 and the same checkout as a
+  Brand Day, but tagged 'intensive-1' so none of the Brand Day machinery reacts:
+  verify-payment and stripe-events tag `intensive-paid` instead of
+  `brand-day-paid`, which keeps it out of the founding Day counter, the date and
+  prep call chasers, and the Brand Day emails. Billed inline, never against the
+  Brand Day catalogue price, so the invoice says what it actually is.
+*/
+const INTENSIVE = {
+  amountCents: 500000,
+  productName: "Operator Intensive: Media Strategy Day",
+  description: "Operator Intensive. Media Strategy Day and Operator Blueprint, payment 1 of 4.",
+};
 
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
@@ -145,19 +159,24 @@ const handler: Handler = async (event) => {
   }
 
   try {
-    const { contactId, brandDayDate } = JSON.parse(event.body || "{}");
+    const { contactId, brandDayDate, offer } = JSON.parse(event.body || "{}");
+    const intensive = offer === "intensive";
 
     /* A dollar for a test contact, the real price for everybody else. Asked
        once and used for both the catalogue decision and the inline amount, so
        the two can never disagree. */
     const isTest = await isTestContact(contactId);
-    const amountCents = isTest ? priceCents("CHECKOUT_AMOUNT_CENTS", true) : PRICE_AUD_CENTS;
+    const amountCents = isTest
+      ? priceCents("CHECKOUT_AMOUNT_CENTS", true)
+      : intensive
+        ? INTENSIVE.amountCents
+        : PRICE_AUD_CENTS;
 
     const form = new URLSearchParams({
       "ui_mode": "embedded",
       "mode": "payment",
       "line_items[0][quantity]": "1",
-      "return_url": returnUrl(contactId ? String(contactId) : undefined),
+      "return_url": returnUrl(contactId ? String(contactId) : undefined, intensive ? "lock-in-intensive" : "lock-in"),
       /*
         The two lines that make the 90 Day Install chargeable later without
         asking for the card again. off_session saves the payment method for
@@ -176,8 +195,9 @@ const handler: Handler = async (event) => {
         accountant expects to be given.
       */
       "invoice_creation[enabled]": "true",
-      "invoice_creation[invoice_data][description]":
-        "Brand Builder Day. One full day on site: brand, positioning, content system and shoot.",
+      "invoice_creation[invoice_data][description]": intensive
+        ? INTENSIVE.description
+        : "Brand Builder Day. One full day on site: brand, positioning, content system and shoot.",
       "customer_creation": "always",
     });
 
@@ -187,12 +207,12 @@ const handler: Handler = async (event) => {
       stops anyone paying.
     */
     // An explicit test amount always wins, even over the catalogue price.
-    if (priceId && !process.env.CHECKOUT_AMOUNT_CENTS && !isTest) {
+    if (priceId && !process.env.CHECKOUT_AMOUNT_CENTS && !isTest && !intensive) {
       form.set("line_items[0][price]", priceId);
     } else {
       form.set("line_items[0][price_data][currency]", "aud");
       form.set("line_items[0][price_data][unit_amount]", String(amountCents));
-      form.set("line_items[0][price_data][product_data][name]", PRODUCT_NAME);
+      form.set("line_items[0][price_data][product_data][name]", intensive ? INTENSIVE.productName : PRODUCT_NAME);
     }
 
     /*
@@ -221,7 +241,7 @@ const handler: Handler = async (event) => {
       closed the tab was never tagged, never got a confirmation, and nothing
       anywhere noticed a five thousand dollar payment had arrived.
     */
-    form.set("metadata[payment]", "brand-day");
+    form.set("metadata[payment]", intensive ? "intensive-1" : "brand-day");
 
     if (contactId) {
       form.set("metadata[ghl_contact_id]", String(contactId));

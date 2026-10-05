@@ -201,6 +201,50 @@ const handler: Handler = async (event) => {
     }
 
     /*
+      Operator Intensive clients book their Media Strategy Day on the same VIP
+      Day calendar, so the days stay one pool. They are recognised by the
+      `intensive-paid` tag and recorded as `intensive-booked`, with none of the
+      Brand Day tags, fields or reconcile, so no Brand Day email or chaser fires.
+    */
+    if (isBrandDay) {
+      let isIntensive = false;
+      try {
+        const c = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, { headers: ghlHeaders });
+        if (c.ok) isIntensive = ((await c.json())?.contact?.tags || []).includes("intensive-paid");
+      } catch (err) {
+        console.error("intensive check failed, treating as a Brand Day:", err);
+      }
+      if (isIntensive) {
+        const r = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
+          method: "POST",
+          headers: ghlHeaders,
+          body: JSON.stringify({ tags: ["intensive-booked"] }),
+        });
+        if (!r.ok) console.error("GHL intensive-booked tag failed:", r.status, await r.text());
+        const hook = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
+        if (hook) {
+          const when = startTime
+            ? new Date(startTime).toLocaleString("en-AU", { dateStyle: "full", timeStyle: "short", timeZone: "Australia/Brisbane" })
+            : "date not supplied by Calendly";
+          await fetch(hook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: [
+                ":calendar: *Media Strategy Day locked in (Operator Intensive)*",
+                `*Who:* ${payload.name || payload.email || contactId}`,
+                `*When:* ${when}`,
+                !r.ok ? `:rotating_light: *CRM:* tagging failed ${r.status}` : null,
+                `<${contactUrl(contactId)}|Open them in GHL>`,
+              ].filter(Boolean).join("\n"),
+            }),
+          }).catch((e) => console.error("intensive booking Slack failed:", e));
+        }
+        return { statusCode: 200, headers, body: JSON.stringify({ ok: true, contactId, intensive: true }) };
+      }
+    }
+
+    /*
       Booking only. Payment is taken by Stripe on /lock-in, and lock-in-paid.ts
       owns the `brand-day-paid` tag. Tagging paid from here would mark someone
       as having paid the moment they picked a date, which is the wrong order and

@@ -191,6 +191,39 @@ const handler: Handler = async (event) => {
     */
     case "checkout.session.completed": {
       const kind = obj?.metadata?.payment;
+
+      /*
+        Operator Intensive payment 1. Same closed tab problem as the Brand Day,
+        handled the same way but with its own tag, so it never touches the Brand
+        Day counter or chasers. verify-payment owns the normal path and the Slack.
+      */
+      if (kind === "intensive-1") {
+        const token = process.env.GHL_TOKEN;
+        let tagged = false;
+        if (token && contactId) {
+          try {
+            const res = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
+              headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, Accept: "application/json" },
+            });
+            if (res.ok) tagged = ((await res.json())?.contact?.tags || []).includes("intensive-paid");
+          } catch {
+            /* Assume not handled. */
+          }
+        }
+        if (tagged) {
+          return { statusCode: 200, body: JSON.stringify({ received: true, alreadyHandled: true }) };
+        }
+        await tag(contactId, ["intensive-paid"]);
+        await slack(
+          [
+            `:moneybag: *${who} paid Operator Intensive payment 1, and the page never confirmed it.*`,
+            `${money(obj?.amount_total ?? 0, obj?.currency)} received. They probably closed the tab before picking their Media Strategy Day date.`,
+            `Tagged intensive-paid. Send them their /lock-in-intensive link to book.${link}`,
+          ].join("\n")
+        );
+        break;
+      }
+
       if (kind !== "install-1" && kind !== "brand-day") {
         return { statusCode: 200, body: JSON.stringify({ received: true, ignored: "not a payment we track" }) };
       }
