@@ -140,7 +140,7 @@ const outcome = [
   },
   {
     icon: UserPlus,
-    title: 'A media Operator you chose',
+    title: 'A structured process to identify and select the right Operator',
     body: 'With my eyes and conviction behind the decision.',
     sub: [
       'You own the hire',
@@ -150,7 +150,7 @@ const outcome = [
   {
     icon: Settings,
     title: 'A 90 day installed Authority Engine they run',
-    body: 'Scoped to the MVP agreed on the Brand Day. Components can include:',
+    body: 'Possible components, selected according to the MVP:',
     sub: [
       'Short form system with daily data entries',
       '1 x 6 video Authority Engine trust asset cycle',
@@ -643,8 +643,8 @@ function OperatorSprintPage() {
             <p className="text-white font-semibold leading-relaxed mt-4">
               The search period comes first. The 90 day Install begins when the person enters the seat.
             </p>
-            <p className="text-zinc-400 leading-relaxed mt-4">
-              What gets installed is scoped to the MVP agreed on the Brand Day. These are the components we draw from.
+            <p className="text-white font-semibold leading-relaxed mt-8">
+              Possible components, selected according to the MVP
             </p>
           </Section>
         </div>
@@ -666,8 +666,8 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <p className="text-zinc-300 text-[17px] leading-relaxed">
-              By Day 90, your Operator is weaponised and you have one Engine they can keep running without you being
-              dragged into the weeds.
+              The aim is for your Operator to be weaponised enough to run the agreed MVP without you being dragged into
+              the weeds.
             </p>
           </Section>
         </div>
