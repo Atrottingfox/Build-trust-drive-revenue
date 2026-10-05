@@ -150,7 +150,7 @@ const outcome = [
   {
     icon: Settings,
     title: 'A 90 day installed Authority Engine they run',
-    body: '',
+    body: 'Scoped to the MVP agreed on the Brand Day. Components can include:',
     sub: [
       'Short form system with daily data entries',
       '1 x 6 video Authority Engine trust asset cycle',
@@ -168,6 +168,14 @@ const phase1Items = [
   'Define exactly what this Operator / Creative Director must own week to week in your business',
   'Clarify your 12 month vision for you and your media Operator',
   'Set 3 to 5 clear 90 day outcomes for content and pipeline',
+];
+
+const mvpScope = [
+  'One priority audience',
+  'One primary business objective',
+  'One core workflow',
+  'One weekly cadence',
+  'One scorecard',
 ];
 
 const phase1Deliverables = [
@@ -259,6 +267,7 @@ const phase3 = [
       'Weekly Engine Check in form',
       'Q&A / Operator Clinics',
       'Loom reviews on real assets',
+      'Capability reviews at Day 30, 60, and 90, measured from their start date',
       'At Day 90, we assess the Operator against the agreed scorecard and recommend the next stage',
     ],
   },
@@ -287,12 +296,12 @@ const investmentIncludes = [
   {
     name: 'Define and Select',
     amount: '$20,000 AUD',
-    covers: 'Covers the Brand Day, role design, hiring process, candidate assessment, search support, and onboarding plan.',
+    covers: 'Brand Day, role design, hiring pack, candidate test, search process, candidate assessment, interview support, and onboarding plan.',
   },
   {
     name: '90 Day Operator Install',
     amount: '$10,000 AUD',
-    covers: 'Covers onboarding, real work training, weekly reviews, playbook completion, capability reviews, and final assessment.',
+    covers: 'Onboarding, real work training, weekly enablement, playbook completion, capability reviews, final assessment, and one replacement search if a permanent Operator leaves within 60 days, subject to unchanged role conditions.',
   },
 ];
 
@@ -352,6 +361,10 @@ function OperatorSprintPage() {
 
             <p className="text-zinc-400 leading-relaxed mt-10 mb-5">This Intensive exists to:</p>
             <Ticks items={existsTo} />
+            <p className="text-zinc-300 text-[16px] leading-relaxed mt-8">
+              To be clear on how it works: I define, select, and enable. You own the final hire and their performance,
+              and I am not their manager. The 90 days begin when your Operator or agreed interim owner starts.
+            </p>
             <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
               This is a founding cohort rate. I am running {FOUNDING_TOTAL} of these before it moves to 50k.
               This is number {FOUNDING_CURRENT}.
@@ -427,7 +440,24 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>How it works</Label>
-            <H2>Three phases.</H2>
+            <H2>Four stages.</H2>
+            <ul className="mt-10 border-t border-zinc-800">
+              {[
+                ['Week 1', 'Brand Day and Operator Blueprint'],
+                ['Weeks 1 to 6', 'Included search period'],
+                ['Week 6', 'Choose a permanent hire, an interim owner, a pause, or a separately extended search'],
+                ['90 days from start', 'Operator Install, from the day the person starts'],
+                ['Day 30, 60, 90', 'Capability reviews, measured from their start date'],
+              ].map(([when, what]) => (
+                <li key={when} className="grid grid-cols-[130px_1fr] gap-4 border-b border-zinc-800/70 py-3">
+                  <span className="text-white text-[14px] font-semibold">{when}</span>
+                  <span className="text-zinc-400 text-[14px] leading-relaxed">{what}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
+              The search period and the 90 day Install are separate stages.
+            </p>
           </Section>
         </div>
       </section>
@@ -440,7 +470,7 @@ function OperatorSprintPage() {
               <span className="font-display text-5xl font-extrabold text-zinc-800">01</span>
               <div>
                 <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Day and Operator Blueprint</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">1 day in your office &middot; included (normally 5,000 AUD)</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Week 1 &middot; 1 day in your office &middot; included (normally 5,000 AUD)</p>
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-8">
@@ -448,6 +478,17 @@ function OperatorSprintPage() {
             </p>
             <Ticks items={phase1Items} />
             <div className="glow-card p-7 mt-10">
+              <p className="text-white text-sm font-semibold mb-4">The MVP</p>
+              <p className="text-zinc-400 text-sm leading-relaxed mb-4">The initial operation includes:</p>
+              <Bullets items={mvpScope} tone="blue" />
+              <p className="text-zinc-400 text-sm leading-relaxed mt-5">
+                The exact channel, format, publishing frequency, approval process, and ownership are defined on the day.
+              </p>
+              <p className="text-white text-sm font-semibold leading-relaxed mt-5 pt-5 border-t border-zinc-800">
+                Nothing expands until the MVP is stable.
+              </p>
+            </div>
+            <div className="glow-card p-7 mt-6">
               <p className="text-white text-sm font-semibold mb-4">Deliverables</p>
               <Bullets items={phase1Deliverables} tone="blue" />
             </div>
@@ -465,7 +506,7 @@ function OperatorSprintPage() {
               <span className="font-display text-5xl font-extrabold text-zinc-800">02</span>
               <div>
                 <p className="text-blue-400 font-semibold text-sm">Phase 2 &middot; Operator Blueprint + Hiring Sprint</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">8 to 10 weeks &middot; advisory + hiring support (with hunting when it matters)</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Weeks 1 to 6 &middot; included search period &middot; advisory + hiring support (with hunting when it matters)</p>
               </div>
             </div>
             <p className="text-zinc-300 text-[17px] leading-relaxed mt-8">
@@ -554,7 +595,7 @@ function OperatorSprintPage() {
                 You make the final decision. You manage performance. I stack the odds in your favour.
               </p>
               <p className="text-white font-semibold leading-relaxed mt-5">
-                If no person has started by the end of the included search period, we agree whether to begin with an
+                At Week 6, if no person has started, we agree whether to proceed with a permanent hire, begin with an
                 interim owner, pause the Install while the search continues, or extend the search separately.
               </p>
             </div>
@@ -564,14 +605,35 @@ function OperatorSprintPage() {
 
       <div className="gradient-line" />
 
-      {/* PHASE 3 */}
+      {/* PHASE 3 MVP */}
       <section className="py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="flex items-baseline gap-4 mb-3">
               <span className="font-display text-5xl font-extrabold text-zinc-800">03</span>
               <div>
-                <p className="text-blue-400 font-semibold text-sm">Phase 3 &middot; 90 Day Authority Engine Install</p>
+                <p className="text-blue-400 font-semibold text-sm">Phase 3 &middot; MVP Operation</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">During the search, where practical</p>
+              </div>
+            </div>
+            <p className="text-zinc-400 leading-relaxed mt-8">
+              The MVP agreed on the Brand Day does not wait for the hire. Where practical, your existing team or interim
+              contractors start running it during the search, so your Operator inherits a working operation.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* PHASE 4 */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="font-display text-5xl font-extrabold text-zinc-800">04</span>
+              <div>
+                <p className="text-blue-400 font-semibold text-sm">Phase 4 &middot; 90 Day Authority Engine Install</p>
                 <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">90 days from when your new Operator or agreed interim owner starts</p>
               </div>
             </div>
@@ -580,6 +642,9 @@ function OperatorSprintPage() {
             </p>
             <p className="text-white font-semibold leading-relaxed mt-4">
               The search period comes first. The 90 day Install begins when the person enters the seat.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              What gets installed is scoped to the MVP agreed on the Brand Day. These are the components we draw from.
             </p>
           </Section>
         </div>
@@ -663,13 +728,13 @@ function OperatorSprintPage() {
               <Bullets
                 items={[
                   '$10,000 on commencement',
-                  '$10,000 when the search process is built and active',
+                  '$10,000 when the search process is active',
                   '$10,000 when the Operator or agreed interim owner starts and enablement begins',
                 ]}
                 tone="blue"
               />
               <p className="text-white text-sm font-semibold leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                If no Operator or interim owner starts, the final $10,000 is not due.
+                If nobody starts, the final $10,000 is not due.
               </p>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
@@ -683,6 +748,10 @@ function OperatorSprintPage() {
               </p>
               <Bullets items={['Your operator', 'Your content', 'Your data']} tone="blue" />
             </div>
+            <p className="text-zinc-500 text-[13px] leading-relaxed mt-6">
+              Separately, selected clients may be invited into a Founding Partner referral arrangement. That sits outside
+              this Intensive under its own agreement.
+            </p>
           </Section>
         </div>
       </section>
