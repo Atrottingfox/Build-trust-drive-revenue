@@ -266,7 +266,9 @@ const phase3 = [
     items: [
       'Weekly Engine Check in form',
       'Q&A / Operator Clinics',
+      '24 hour async communication',
       'Loom reviews on real assets',
+      'Content board meetings',
       'Capability reviews at Day 30, 60, and 90, measured from their start date',
       'At Day 90, we assess the Operator against the agreed scorecard and recommend the next stage',
     ],
@@ -294,13 +296,18 @@ const isNot = [
 
 const investmentIncludes = [
   {
-    name: 'Define and Select',
-    amount: '$20,000 AUD',
-    covers: 'Brand Day, role design, hiring pack, candidate test, search process, candidate assessment, interview support, and onboarding plan.',
+    name: 'Brand Day and Operator Blueprint',
+    amount: '$10,000 AUD',
+    covers: 'Brand Day, Authority Engine Blueprint, 90 day content plan, and the Operator role and scorecard.',
   },
   {
-    name: '90 Day Operator Install',
-    amount: '$10,000 AUD',
+    name: 'Operator Blueprint + Hiring Sprint',
+    amount: '$20,000 AUD',
+    covers: 'Role design, hiring pack, candidate test, search process, candidate assessment, interview support, and onboarding plan.',
+  },
+  {
+    name: '90 Day Authority Engine Install',
+    amount: '$20,000 AUD',
     covers: 'Onboarding, real work training, weekly enablement, playbook completion, capability reviews, final assessment, and one replacement search if a permanent Operator leaves within 60 days, subject to unchanged role conditions.',
   },
 ];
@@ -470,7 +477,7 @@ function OperatorSprintPage() {
               <span className="font-display text-5xl font-extrabold text-zinc-800">01</span>
               <div>
                 <p className="text-blue-400 font-semibold text-sm">Phase 1 &middot; Brand Day and Operator Blueprint</p>
-                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Week 1 &middot; 1 day in your office &middot; included (normally 5,000 AUD)</p>
+                <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1">Week 1 &middot; 1 day in your office &middot; valued at 10,000 AUD</p>
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-8 mb-8">
@@ -707,7 +714,7 @@ function OperatorSprintPage() {
             <Label>Investment, capacity and next step</Label>
             <div className="glow-card border-blue-500/20 p-8">
               <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
-              <p className="font-display text-4xl font-extrabold text-white mb-6">$30,000 AUD total</p>
+              <p className="text-zinc-300 text-[15px] mb-5">The full Intensive is valued at $50,000 AUD:</p>
               <ul className="space-y-5">
                 {investmentIncludes.map((it, i) => (
                   <li key={i} className="border-b border-zinc-800 pb-5 last:border-0 last:pb-0">
@@ -719,6 +726,8 @@ function OperatorSprintPage() {
                   </li>
                 ))}
               </ul>
+              <p className="font-display text-4xl font-extrabold text-white mt-8 pt-6 border-t border-zinc-800">$30,000 AUD</p>
+              <p className="text-zinc-400 text-[14px] mt-1">founding investment</p>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at a founding rate. After that it moves to 50k.
@@ -727,14 +736,15 @@ function OperatorSprintPage() {
               <p className="text-white text-sm font-semibold mb-4">Payments</p>
               <Bullets
                 items={[
-                  '$10,000 on commencement',
-                  '$10,000 when the search process is active',
-                  '$10,000 when the Operator or agreed interim owner starts and enablement begins',
+                  '$5,000 on commencement to secure the Brand Day',
+                  '$5,000 when the agreed search process is completed and active',
+                  '$10,000 when the permanent Operator or agreed interim owner starts and the 90 Day Install begins',
+                  '$10,000 31 days after the 90 Day Install begins',
                 ]}
                 tone="blue"
               />
               <p className="text-white text-sm font-semibold leading-relaxed mt-5 pt-5 border-t border-zinc-800">
-                If nobody starts, the final $10,000 is not due.
+                If no permanent Operator or agreed interim owner starts, the 90 Day Install does not begin and the remaining $20,000 is not due. The Brand Day, Operator Blueprint, and Hiring Sprint work remains delivered and retained.
               </p>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
