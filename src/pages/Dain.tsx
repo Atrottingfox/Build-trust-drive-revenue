@@ -57,13 +57,13 @@ function Numbered({ items }: { items: string[] }) {
 // ─── Copy ────────────────────────────────────────────────────────────────
 
 const WILL_HAVE = [
-  'A clear 90 day media plan',
-  'A defined Operator role and decision rights',
-  'A structured hiring and assessment process',
-  'A documented MVP workflow',
-  'One permanent Operator or interim owner, where applicable',
-  'Standards, scorecard, and operating playbook',
-  'A final capability review and next stage recommendation',
+  'A clear 90 day media plan signed off by Dain and the CEO',
+  'A defined Operator role, scorecard, and decision rights',
+  'A structured search and assessment process',
+  'A documented minimum viable media operation',
+  'A permanent Operator or interim owner, where applicable',
+  'The standards, workflow, and playbook required to run it',
+  'A final capability review and recommendation for what comes next',
 ];
 
 type Block = { label?: string; items?: string[]; numbered?: string[]; paras?: string[]; half?: boolean };
@@ -451,31 +451,30 @@ export default function Dain() {
           eyebrow="The Authority Engine · Operator Intensive"
           title="Give Rivyl one person who can own media"
           accent="without Dain carrying every decision."
-          blurb="A defined search period followed by a 90 day Operator Install. We define the role, support the selection, and install the operating system around them."
+          blurb="Rivyl has the brand, the offers, and the opportunity."
           backHref={null}
         />
 
         <Divider />
 
         <Wrap>
-          <H2>The problem</H2>
-          <P>Dain is still carrying too much media judgment and project ownership. Rivyl needs one person who can turn the brand's priorities into consistent media without requiring founder level direction on every decision.</P>
+          <P>What it needs now is one capable person who can turn those advantages into consistent media without waiting for Dain to decide every topic or approve every project.</P>
+          <P>The Operator Intensive is a defined search and installation process for that person, and it puts the right ownership around Rivyl's media function.</P>
+          <P>We clarify what Rivyl needs from media, define the role around that requirement, support the search and selection process, then spend 90 days enabling the person to own the agreed operation.</P>
 
           <div className="mt-12">
-            <H2>The solution</H2>
-            <P>Over a defined search period and a 90 day Operator Install, The Authority Engine will help Rivyl define the role, support the selection of the person, and install the minimum media operation that person will own.</P>
-          </div>
-
-          <div className="mt-12">
-            <H2>What Rivyl will have</H2>
+            <H2>At the end of the process, Rivyl has</H2>
             <BulletList items={WILL_HAVE} />
+          </div>
+          <div className="mt-8">
+            <P>The initial focus is deliberately narrow: make one media operation work consistently before adding more channels, formats, or volume.</P>
           </div>
         </Wrap>
 
         <Divider />
 
         <Wrap>
-          <H2>How it works</H2>
+          <H2>The path from founder dependent media to owned media</H2>
           <Timeline />
           <div>
             {STEPS.map((s) => <StepSection key={s.num} s={s} />)}
@@ -553,10 +552,8 @@ export default function Dain() {
         <Divider />
 
         <Wrap>
-          <H2>The decision</H2>
-          <P>It comes down to one question:</P>
-          <Strong>Does Rivyl want one capable person who can own the media operation, make better decisions, and keep the system moving without Dain carrying it?</Strong>
-          <P>If yes, the Operator Intensive is the process for installing that capability.</P>
+          <Strong>What Rivyl needs is one person accountable for turning the brand into a functioning media operation.</Strong>
+          <P>The Operator Intensive is how we define that seat, support the selection process, and enable the person who fills it.</P>
 
           <p className="text-zinc-500 text-[13px] leading-relaxed mt-16 pt-6 border-t border-zinc-800">
             PS. Selected clients may also be invited into the Founding Partner referral partnership, which sits outside
