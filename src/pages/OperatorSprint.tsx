@@ -648,7 +648,8 @@ function OperatorSprintPage() {
               The search period comes first. The 90 day Install begins when the person enters the seat.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-4">
-              What gets installed is scoped to the MVP agreed on the Brand Day.
+              The following components are selected according to the MVP agreed during the Brand Day. Not every
+              component is included in every Install.
             </p>
           </Section>
         </div>
@@ -670,8 +671,8 @@ function OperatorSprintPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8 mt-12">
           <Section>
             <p className="text-zinc-300 text-[17px] leading-relaxed">
-              By Day 90, your Operator is weaponised and you have one Engine they can keep running without you being
-              dragged into the weeds.
+              By Day 90, the Operator has been assessed against the agreed scorecard, with the aim of having them
+              weaponised enough to run the agreed MVP without you being dragged into the weeds.
             </p>
           </Section>
         </div>
@@ -711,7 +712,7 @@ function OperatorSprintPage() {
             <Label>Investment, capacity and next step</Label>
             <div className="glow-card border-blue-500/20 p-8">
               <p className="text-zinc-400 text-[14px] mb-1">Founding rate</p>
-              <p className="text-zinc-300 text-[15px] mb-5">The full Intensive is valued at $50,000 AUD:</p>
+              <p className="text-zinc-300 text-[15px] mb-5">The full Intensive:</p>
               <ul className="space-y-5">
                 {investmentIncludes.map((it, i) => (
                   <li key={i} className="border-b border-zinc-800 pb-5 last:border-0 last:pb-0">
@@ -723,8 +724,16 @@ function OperatorSprintPage() {
                   </li>
                 ))}
               </ul>
-              <p className="font-display text-4xl font-extrabold text-white mt-8 pt-6 border-t border-zinc-800">$30,000 AUD</p>
-              <p className="text-zinc-400 text-[14px] mt-1">founding investment</p>
+              <div className="mt-8 pt-6 border-t border-zinc-700 space-y-3">
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="text-zinc-400 text-[15px]">Total value</span>
+                  <span className="text-zinc-400 text-[18px] font-semibold whitespace-nowrap">$50,000 AUD</span>
+                </div>
+                <div className="flex items-baseline justify-between gap-4">
+                  <span className="text-white text-[15px] font-semibold">Founding investment</span>
+                  <span className="font-display text-3xl md:text-4xl font-extrabold text-white whitespace-nowrap">$30,000 AUD</span>
+                </div>
+              </div>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               This is number {FOUNDING_CURRENT} of {FOUNDING_TOTAL} at a founding rate. After that it moves to 50k.
@@ -734,7 +743,7 @@ function OperatorSprintPage() {
               <Bullets
                 items={[
                   '$5,000 on commencement to secure the Brand Day',
-                  '$5,000 when the agreed search process is completed and active',
+                  '$5,000 when the role, scorecard, hiring pack, candidate assessment, and outreach process are complete and the search is actively being run',
                   '$10,000 when the permanent Operator or agreed interim owner starts and the 90 Day Install begins',
                   '$10,000 31 days after the 90 Day Install begins',
                 ]}
