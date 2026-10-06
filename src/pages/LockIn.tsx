@@ -353,11 +353,21 @@ export default function LockIn() {
       it. The one thing allowed to take payment back is Stripe itself saying the
       session was not paid, further down.
     */
+    /* Sean's own browser. Opening any lock-in link once with ?me=1 marks it,
+       and from then on his visits never count as the client opening it. */
+    let preview = false;
+    try {
+      if (new URLSearchParams(window.location.search).get('me') === '1') localStorage.setItem('ae_operator', '1');
+      preview = localStorage.getItem('ae_operator') === '1';
+    } catch {
+      // Storage blocked. Treated as a normal visitor.
+    }
+
     if (id) {
       fetch('/.netlify/functions/track-hub', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contactId: id, page: 'lock-in' }),
+        body: JSON.stringify({ contactId: id, page: 'lock-in', preview }),
       })
         .then((r) => r.json())
         .then((d) => {

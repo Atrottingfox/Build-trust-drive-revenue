@@ -82,7 +82,11 @@ const handler: Handler = async (event) => {
   if (!token) return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };
 
   try {
-    const { contactId, page } = JSON.parse(event.body || "{}");
+    const { contactId, page, preview } = JSON.parse(event.body || "{}");
+    /* Sean checking a client's link. His browser carries a flag (set once by
+       opening any lock-in link with ?me=1), so his visits read state but never
+       record an open, ping Slack or touch the trail. */
+    const isPreview = preview === true;
     if (!contactId) return { statusCode: 200, headers, body: JSON.stringify({ ok: false }) };
 
     const contact = await getContact(token, contactId);
@@ -118,7 +122,7 @@ const handler: Handler = async (event) => {
       once and checked before adding, so this branch runs a single time per
       person no matter how often they come back.
     */
-    if (!tags.includes("hub-opened")) {
+    if (!isPreview && !tags.includes("hub-opened")) {
       await addTags(token, contactId, ["hub-opened"]);
 
       const who =
@@ -154,7 +158,7 @@ const handler: Handler = async (event) => {
     }
 
     /* The trail, and the plain last-seen stamp beside it. One write. */
-    const trailField = process.env.GHL_FIELD_JOURNEY_TRAIL || TRAIL_FIELD_DEFAULT;
+    const trailField = isPreview ? "" : process.env.GHL_FIELD_JOURNEY_TRAIL || TRAIL_FIELD_DEFAULT;
     const pageName = String(page || "").trim().slice(0, 24).replace(/[^a-z0-9 -]/gi, "");
     if (trailField && pageName) {
       const current = (contact?.customFields || []).find((f: any) => f?.id === trailField)?.value || "";
@@ -173,7 +177,7 @@ const handler: Handler = async (event) => {
       }
     }
 
-    const lastSeenField = process.env.GHL_FIELD_HUB_LAST_SEEN;
+    const lastSeenField = isPreview ? "" : process.env.GHL_FIELD_HUB_LAST_SEEN;
     if (lastSeenField) {
       await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
         method: "PUT",
