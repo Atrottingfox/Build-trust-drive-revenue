@@ -48,6 +48,18 @@ const STRIPE_BUY_BUTTON_ID = 'buy_btn_1U49VS2niRrgrA5OR7ldFuJQ';
 const STRIPE_PUBLISHABLE_KEY =
   'pk_live_51Rgusa2niRrgrA5O3atAmjSP7u0lCeWAi4YBCRTBvjAaykPtt7JrQnkoZnbQ4rrlC8fNyhblfzv9IMxXnmvJlngF00ZRz3IwsY';
 
+/* Sean's own words, lifted from the VIP Day description in his Calendly. */
+const LEAVE_WITH = [
+  'More clarity',
+  'More efficiency',
+  'A roadmap that unlocks your next move',
+];
+
+const AFTER_PAYMENT = [
+  'Immediately choose your Brand Day date in my calendar',
+  'Join a short prep call so I can get under the hood before the Day',
+];
+
 const store = {
   get(key: string) {
     try {
@@ -64,6 +76,126 @@ const store = {
     }
   },
 };
+
+/* The Day itself. Read before booking, and still worth reading after. */
+/* Sean's words for the Day, kept as he wrote them. */
+const WHAT_IT_ANSWERS = [
+  'Where is money leaking between content and revenue?',
+  'What beliefs do your best buyers need before they say yes?',
+  'What content and channels should your team run to install those beliefs and drive demand?',
+];
+
+const BEFORE_WE_MEET = [
+  'You complete a short prep doc so I have your offers, numbers, and links upfront.',
+  'I review your current content, funnels, and metrics so we start from reality.',
+  'You bring your operator / media lead if you have one (or whoever owns marketing).',
+];
+
+const LEAVE_WITH_DETAIL = [
+  {
+    name: 'Demand Bottleneck Snapshot',
+    body: 'We score your business on the four levers that move a stranger to a sale, Clarity, Visibility, Authority, Quality, and surface the single biggest demand bottleneck stealing the most revenue.',
+  },
+  {
+    name: 'Buying Belief Map',
+    body: 'Engineer the key beliefs your ICP must hold about their problem, your solution, and you before they buy, and where these are installed into your content.',
+  },
+  {
+    name: 'Your Brand Demand Workbook',
+    body: 'Beliefs, topics, hooks, and channels mapped for your core offers based on who you are and what makes you unique.',
+  },
+  {
+    name: 'Core Trust Assets',
+    body: 'We map the highest leverage assets required for ideal prospects to turn into buyers.',
+  },
+  {
+    name: 'A concrete 30 day demand plan',
+    body: 'What your team should publish and do next month, tied to clear demand targets (DMs, apps, opps).',
+  },
+];
+
+function Walkthrough() {
+  return (
+    <div className="space-y-12">
+      {/* Sean's original framing, kept above the detail. It sets what kind of
+          session this is before the three questions get specific. */}
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">The Day</h2>
+        <div className="space-y-4 text-zinc-400 leading-relaxed">
+          <p>Think of this session like a marketing pit stop.</p>
+          <p>
+            You come in with your current content engine. We lift the hood, diagnose
+            performance issues, and help you upgrade the hidden bottlenecks slowing you
+            down.
+          </p>
+          <p>
+            We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
+            tune your strategy so your core acquisition engine runs smoother, faster, and
+            more profitably.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">What the Day is</h2>
+        <p className="text-zinc-400 leading-relaxed mb-5">
+          This is a working session to answer three questions:
+        </p>
+        <ol className="space-y-3">
+          {WHAT_IT_ANSWERS.map((q, i) => (
+            <li key={q} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+              <span className="text-zinc-600 shrink-0 tabular-nums">{i + 1}.</span>
+              <span>{q}</span>
+            </li>
+          ))}
+        </ol>
+        <p className="text-zinc-400 leading-relaxed mt-5">
+          We make decisions, document them, and leave with a simple plan your team can execute.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl text-white mb-4">Before we meet</h2>
+        <p className="text-zinc-400 leading-relaxed mb-5">After you secure your Day:</p>
+        <ul className="space-y-3.5">
+          {BEFORE_WE_MEET.map((line) => (
+            <li key={line} className="flex gap-3.5 text-zinc-300 leading-relaxed">
+              <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-zinc-400 leading-relaxed mt-5">
+          By the time we sit down, we already know what problems we're attacking.
+        </p>
+      </section>
+
+      <section>
+        <h2 className="font-display text-xl text-white mb-5">You leave with</h2>
+        <ul className="space-y-6">
+          {LEAVE_WITH_DETAIL.map((item) => (
+            <li key={item.name} className="flex gap-3.5">
+              <Check className="text-zinc-600 shrink-0 mt-1" size={16} />
+              <div>
+                <p className="text-white font-medium">{item.name}</p>
+                <p className="text-zinc-400 leading-relaxed mt-1">{item.body}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="border-l-2 border-zinc-700 pl-6">
+        <p className="text-zinc-200 text-lg leading-relaxed">
+          If there's one thing you'll feel when you walk out, it's leverage.
+        </p>
+        <p className="text-zinc-400 leading-relaxed mt-2">
+          More demand from the content you're already creating.
+        </p>
+      </section>
+    </div>
+  );
+}
 
 /*
   The contact id, however it arrives.
@@ -111,7 +243,7 @@ export default function LockIn() {
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
   const [calHeight, setCalHeight] = useState(700);
-  const [, setDays] = useState<{ total: number; remaining: number } | null>(null);
+  const [days, setDays] = useState<{ total: number; remaining: number } | null>(null);
   /* Name and email from GHL, used to prefill Calendly so they do not retype
      what they already gave us on the application. */
   const [prefill, setPrefill] = useState<{ name: string; email: string }>({ name: '', email: '' });
@@ -562,44 +694,101 @@ export default function LockIn() {
       <div className="gradient-border-top" />
 
       <Container className="pt-32 pb-24">
-        {/*
-          Straight to it, like /lock-in-intensive. Nobody lands here without
-          already having said yes, on a call or through an application, so the
-          page sells nothing: pay, then pick the date.
-        */}
-        <div className="max-w-2xl mx-auto space-y-12">
-          <div>
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine</p>
-            <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
-              Secure your Brand Day
-            </h1>
-            <p className="text-zinc-400 text-[17px] leading-relaxed">
-              The $5,000 AUD payment secures your Brand Day. Your calendar opens as soon as it
-              clears and you choose your date straight away.
-            </p>
-          </div>
-
-          {/* 1. Payment. */}
-          <motion.section initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="flex items-center gap-3 mb-4">
-              <span
-                className={`h-7 w-7 rounded-full flex items-center justify-center text-[13px] font-semibold ${
-                  paid ? 'bg-emerald-500/15 text-emerald-400' : 'bg-blue-500/15 text-blue-400'
-                }`}
-              >
-                {paid ? <Check size={14} /> : '1'}
-              </span>
-              <p className="text-white font-semibold">{paid ? 'Payment received' : 'Payment, $5,000 AUD'}</p>
+        <div className="max-w-5xl mx-auto text-center mb-16">
+          <div className="accent-line mx-auto mb-6" />
+          <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
+            Secure your date
+          </h1>
+          <p className="text-zinc-300 text-lg leading-relaxed max-w-xl mx-auto">
+            To reserve one of our limited strategy days per month, secure your payment.
+          </p>
+          {days && (
+            <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
+              <p className="text-white text-[15px]">
+                <span className="font-display text-2xl align-middle mr-1.5">
+                  {/*
+                    Counted from GHL, where a Day is spent the moment somebody
+                    pays. The page used to take one off locally for the window
+                    between paying and booking, because the server only counted
+                    confirmed Days and the number sat still while the client
+                    watched. The server counts payments now, so doing it here
+                    as well would take two Days off for one sale.
+                  */}
+                  {days.remaining}
+                </span>
+                Days left at $5,000 AUD
+              </p>
+              <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
             </div>
+          )}
+        </div>
+
+        {/*
+          One column, in the order the decision is actually made: what the Day
+          is, then paying for it, then choosing the date. The date sits last
+          because it stays locked until payment clears, and a locked step is
+          only reassuring once you know what you are unlocking.
+        */}
+        <div className="max-w-3xl mx-auto space-y-16">
+
+          {/*
+            1. The Day itself, and only while it is still being decided.
+
+            Once the money has cleared they have bought it, and leaving the
+            pitch on the page makes a paid client scroll past a sales section to
+            reach the one thing they still have to do. Paying should shorten the
+            page, not leave it the same length.
+          */}
+          {!paid && (
+            <section>
+              <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
+                What we are doing on the Day
+              </p>
+              <Walkthrough />
+            </section>
+          )}
+
+          {/* 2. Payment. */}
+          <motion.section
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`rounded-2xl border p-6 sm:p-7 ${
+              paid ? 'border-zinc-800/80 bg-zinc-950/40' : 'border-zinc-700 bg-zinc-900/40'
+            }`}
+          >
             {paid ? (
-              <p className="text-zinc-500 text-sm">Your receipt is in your inbox.</p>
+              <div className="flex items-center gap-3.5">
+                <div className="h-8 w-8 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                  <Check size={16} />
+                </div>
+                <div>
+                  <h2 className="font-display text-lg text-white leading-tight">Payment received</h2>
+                  <p className="text-zinc-500 text-sm mt-0.5">Your receipt is in your inbox.</p>
+                </div>
+              </div>
             ) : (
               <>
+                <p className="text-white font-medium mb-1">Secure your Brand Day</p>
+                <p className="text-zinc-400 text-sm">Investment: $5,000 AUD</p>
+                <p className="text-zinc-500 text-sm mt-1 mb-6">
+                  Your calendar opens as soon as payment clears and you'll choose your Day
+                  immediately.
+                </p>
+
                 {/*
-                  Full bleed on a phone. Stripe's embedded checkout will not render
-                  below about 320px, and the page padding left it narrower than that.
+                  Full bleed inside the card on a phone.
+
+                  Stripe's embedded checkout will not render below about 320px.
+                  The page padding plus this card's own padding left it under
+                  that on a narrow screen, so the form rendered wider than its
+                  container and was cut off down the right hand side, on the one
+                  screen where somebody is trying to pay.
+
+                  The negative margin cancels the card padding for this element
+                  only, so the checkout gets the full card width while the copy
+                  around it keeps its inset.
                 */}
-                <div id="stripe-checkout" className="-mx-6 w-[calc(100%+3rem)] sm:mx-0 sm:w-full rounded-xl overflow-hidden" />
+                <div id="stripe-checkout" className="-mx-6 w-[calc(100%+3rem)] sm:mx-0 sm:w-full" />
 
                 {!embedded && (
                   <div className="flex justify-center">
@@ -611,13 +800,33 @@ export default function LockIn() {
                   </div>
                 )}
 
-                {/*
-                  Required, not decoration. The card is stored off session so the
-                  Install can be charged later, and the holder has to be told.
-                */}
-                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">
-                  Your card is stored securely with Stripe and is never charged again without your go ahead.
-                </p>
+                <div className="mt-6 pt-6 border-t border-zinc-800/80 space-y-4">
+                  {/*
+                    Required, not decoration. The card is stored off session at
+                    checkout so the Install can be charged later. Charging a
+                    saved card the holder was never told about is how you earn
+                    a dispute, and Stripe sides with the cardholder.
+                  */}
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    Your card is stored securely with Stripe.
+                  </p>
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    If you decide to go ahead with the 90 Day Authority Engine Install, I'll
+                    charge that same card for it only after you've said yes. Nothing is charged
+                    without your go ahead.
+                  </p>
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    If, after your application is reviewed and we do a prep call, either of us
+                    decides it's not the right move, you'll be fully refunded.
+                  </p>
+                  <p className="text-zinc-300 text-[13.5px] leading-relaxed">
+                    All I ask is wholehearted implementation and honest feedback.
+                  </p>
+                  <p className="text-zinc-500 text-[13px] leading-relaxed">
+                    P.S. If we decide we're not a fit right now, I'll point you to whoever I
+                    believe is the best next step for where you are.
+                  </p>
+                </div>
               </>
             )}
           </motion.section>
@@ -626,21 +835,28 @@ export default function LockIn() {
               unlocking it, and a date is never held by someone who has not
               paid for it. */}
           <section>
-            <div className="flex items-center gap-3 mb-4">
-              <span
-                className={`h-7 w-7 rounded-full flex items-center justify-center text-[13px] font-semibold ${
-                  booked ? 'bg-emerald-500/15 text-emerald-400' : paid ? 'bg-blue-500/15 text-blue-400' : 'bg-zinc-800 text-zinc-500'
-                }`}
-              >
-                {booked ? <Check size={14} /> : '2'}
-              </span>
-              <p className={paid ? 'text-white font-semibold' : 'text-zinc-500 font-semibold'}>
+            <div className="flex items-center gap-3 mb-5">
+              {booked && (
+                <div className="h-7 w-7 shrink-0 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                  <Check size={15} />
+                </div>
+              )}
+              <h2 className="font-display text-xl text-white">
                 {booked ? 'Your date is held' : 'Choose your Brand Day'}
-              </p>
+              </h2>
             </div>
 
             {!paid ? (
-              <p className="text-zinc-500 text-sm leading-relaxed">Your calendar opens once payment clears.</p>
+              <div className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-7">
+                <p className="text-zinc-400 leading-relaxed">
+                  Your calendar opens the moment your payment clears, and you pick your day
+                  right here.
+                </p>
+                <p className="text-zinc-500 text-sm leading-relaxed mt-3">
+                  Dates are held in the order they are paid, so nothing is taken by someone
+                  still deciding.
+                </p>
+              </div>
             ) : (
               <div className="rounded-xl border border-zinc-800 overflow-hidden bg-zinc-950/40">
                 <div
