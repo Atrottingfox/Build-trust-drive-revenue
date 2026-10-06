@@ -689,8 +689,8 @@ export default function LockIn() {
         {/*
           Before payment, a checkout layout on desktop: what the Day is on the
           left, scrolling as normal, with payment and the date pinned on the
-          right. On a phone it stacks with payment first, since everyone who
-          gets this link has already said yes. After payment it drops to one
+          right. On a phone or narrow window it stacks text first, then
+          payment (Sean, 6 Oct). After payment it drops to one
           wide column so the calendar has room.
         */}
         <div
@@ -710,7 +710,7 @@ export default function LockIn() {
             page, not leave it the same length.
           */}
           {!paid && (
-            <section className="order-2 lg:order-1 min-w-0">
+            <section className="order-1 min-w-0">
               <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
                 What we are doing on the Day
               </p>
@@ -718,7 +718,7 @@ export default function LockIn() {
             </section>
           )}
 
-          <div className={paid ? 'space-y-16' : 'order-1 lg:order-2 lg:sticky lg:top-28 space-y-8 min-w-0'}>
+          <div className={paid ? 'space-y-16' : 'order-2 lg:sticky lg:top-28 space-y-8 min-w-0'}>
           {/* 2. Payment. */}
           <motion.section
             initial={{ opacity: 0, y: 14 }}
