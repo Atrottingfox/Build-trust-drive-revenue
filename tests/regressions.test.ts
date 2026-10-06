@@ -1242,3 +1242,34 @@ describe("The record says which page, not just that they looked", () => {
     expect(codeOf(fn("track-hub.ts"))).toMatch(/replace\(\/\[\^a-z0-9 -\]\/gi, ""\)/);
   });
 });
+
+describe("A client is linked only to their own link", () => {
+  /* Sean, 6 Oct 2026: "jack should explicitly only be linked to HIS page link".
+     A browser that once opened Jack's link used to act and be tracked as Jack
+     on any bare link, and /booked could tag him paid. */
+  it("lock-in and install use a remembered id only on return from payment", () => {
+    for (const f of ["LockIn.tsx", "Install.tsx"]) {
+      const src = page(f);
+      expect(src).toContain("returningFromPayment ? store.get('ae_contact_id') : null");
+      expect(src).not.toContain("contactId || store.get('ae_contact_id')");
+    }
+  });
+
+  it("every tracked page honours Sean's ?me=1 flag", () => {
+    for (const f of ["LockIn.tsx", "Install.tsx", "Prep.tsx"]) {
+      expect(page(f)).toContain("localStorage.getItem('ae_operator') === '1'");
+    }
+  });
+
+  it("/booked never acts on a remembered id without Calendly's evidence", () => {
+    const src = page("Booked.tsx");
+    expect(src).toContain("if (!id && calendlyEvidence) id = localStorage.getItem('ae_contact_id')");
+    expect(src).toContain("localStorage.getItem('ae_operator') === '1'");
+  });
+
+  it("track-hub records nothing for a preview", () => {
+    const src = codeOf(fn("track-hub.ts"));
+    expect(src).toContain('if (!isPreview && !tags.includes("hub-opened"))');
+    expect(src).toContain('const lastSeenField = isPreview ? "" :');
+  });
+});

@@ -57,10 +57,19 @@ export default function Prep() {
 
     /* Name and email come back from GHL so the details step is already filled
        in. They have typed both once already. */
+    /* Sean's own browser (flagged once with ?me=1) never counts as the client. */
+    let preview = false;
+    try {
+      if (new URLSearchParams(window.location.search).get('me') === '1') localStorage.setItem('ae_operator', '1');
+      preview = localStorage.getItem('ae_operator') === '1';
+    } catch {
+      // Storage blocked. Treated as a normal visitor.
+    }
+
     fetch('/.netlify/functions/track-hub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId: id, page: 'prep' }),
+      body: JSON.stringify({ contactId: id, page: 'prep', preview }),
     })
       .then((r) => r.json())
       .then((d) => {

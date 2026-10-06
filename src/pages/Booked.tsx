@@ -50,11 +50,21 @@ export default function Booked() {
     stays off.
   */
   useEffect(() => {
-    let id: string | null = null;
+    /*
+      Only the id in the link, or Calendly's own redirect params as evidence of
+      a real booking, may act for a contact (Sean, 6 Oct: a client is linked only
+      to their own link). A bare visit in a browser that once opened somebody's
+      link used to tag that somebody as paid. Sean's flagged browser never acts.
+    */
+    const q = new URLSearchParams(window.location.search);
+    const urlId = q.get('c') || q.get('utm_content') || null;
+    const calendlyEvidence = q.has('invitee_uuid') || q.has('event_type_name') || q.has('event_start_time');
+    let id: string | null = urlId;
     try {
-      id = localStorage.getItem('ae_contact_id');
+      if (localStorage.getItem('ae_operator') === '1') return;
+      if (!id && calendlyEvidence) id = localStorage.getItem('ae_contact_id');
     } catch {
-      id = null;
+      // Storage blocked: only the link's id counts.
     }
     if (!id) return;
 
