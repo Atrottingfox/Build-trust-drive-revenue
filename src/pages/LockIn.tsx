@@ -113,8 +113,8 @@ const LEAVE_WITH_DETAIL = [
     body: 'What your team should publish and do next month, tied to clear demand targets (DMs, apps, opps).',
   },
   {
-    name: 'Your media setup plan',
-    body: 'A clear plan for the media setup you need in order to achieve these goals.',
+    name: 'Your ideal media team',
+    body: 'The team you need to hit those demand targets, and who owns what.',
   },
 ];
 
@@ -219,7 +219,7 @@ export default function LockIn() {
   const [embedded, setEmbedded] = useState(false);
   const paidSent = useRef(false);
   const [calHeight, setCalHeight] = useState(700);
-  const [days, setDays] = useState<{ total: number; remaining: number } | null>(null);
+  const [, setDays] = useState<{ total: number; remaining: number } | null>(null);
   /* Name and email from GHL, used to prefill Calendly so they do not retype
      what they already gave us on the application. */
   const [prefill, setPrefill] = useState<{ name: string; email: string }>({ name: '', email: '' });
@@ -673,30 +673,11 @@ export default function LockIn() {
         <div className="max-w-5xl mx-auto text-center mb-16">
           <div className="accent-line mx-auto mb-6" />
           <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-5">
-            Secure your date
+            Secure your Brand Day
           </h1>
           <p className="text-zinc-300 text-lg leading-relaxed max-w-xl mx-auto">
-            To reserve one of our limited strategy days per month, secure your payment.
+            Pay below and your calendar opens straight after.
           </p>
-          {days && (
-            <div className="mt-8 inline-flex flex-col rounded-xl border border-zinc-800 bg-zinc-900/50 px-6 py-4">
-              <p className="text-white text-[15px]">
-                <span className="font-display text-2xl align-middle mr-1.5">
-                  {/*
-                    Counted from GHL, where a Day is spent the moment somebody
-                    pays. The page used to take one off locally for the window
-                    between paying and booking, because the server only counted
-                    confirmed Days and the number sat still while the client
-                    watched. The server counts payments now, so doing it here
-                    as well would take two Days off for one sale.
-                  */}
-                  {days.remaining}
-                </span>
-                Days left at $5,000 AUD
-              </p>
-              <p className="text-zinc-500 text-sm mt-1">After that the price goes to $10,000 AUD.</p>
-            </div>
-          )}
         </div>
 
         {/*
@@ -792,15 +773,11 @@ export default function LockIn() {
                     without your go ahead.
                   </p>
                   <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    If, after your application is reviewed and we do a prep call, either of us
-                    decides it's not the right move, you'll be fully refunded.
+                    If, on the prep call, either of us decides it's not a fit, you'll be fully
+                    refunded.
                   </p>
                   <p className="text-zinc-300 text-[13.5px] leading-relaxed">
                     All I ask is wholehearted implementation and honest feedback.
-                  </p>
-                  <p className="text-zinc-500 text-[13px] leading-relaxed">
-                    P.S. If we decide we're not a fit right now, I'll point you to whoever I
-                    believe is the best next step for where you are.
                   </p>
                 </div>
               </>
