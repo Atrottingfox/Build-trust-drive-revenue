@@ -240,10 +240,21 @@ export default function Install() {
       Record the open and read back the real state. GHL is the source of truth
       here, not localStorage, so the link works on any device.
     */
+    /* Sean's own browser, flagged once with ?me=1 on any lock-in or install
+       link, never counts as the client opening it. Matters here because this
+       page falls back to the last contact id the browser saw. */
+    let preview = false;
+    try {
+      if (new URLSearchParams(window.location.search).get('me') === '1') localStorage.setItem('ae_operator', '1');
+      preview = localStorage.getItem('ae_operator') === '1';
+    } catch {
+      // Storage blocked. Treated as a normal visitor.
+    }
+
     fetch('/.netlify/functions/track-hub', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contactId: id, page: 'install' }),
+      body: JSON.stringify({ contactId: id, page: 'install', preview }),
     })
       .then((r) => r.json())
       .then((d) => {
