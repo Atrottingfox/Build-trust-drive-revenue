@@ -112,30 +112,15 @@ const LEAVE_WITH_DETAIL = [
     name: 'A concrete 30 day demand plan',
     body: 'What your team should publish and do next month, tied to clear demand targets (DMs, apps, opps).',
   },
+  {
+    name: 'Your media setup plan',
+    body: 'A clear plan for the media setup you need in order to achieve these goals.',
+  },
 ];
 
 function Walkthrough() {
   return (
     <div className="space-y-12">
-      {/* Sean's original framing, kept above the detail. It sets what kind of
-          session this is before the three questions get specific. */}
-      <section>
-        <h2 className="font-display text-xl text-white mb-4">The Day</h2>
-        <div className="space-y-4 text-zinc-400 leading-relaxed">
-          <p>Think of this session like a marketing pit stop.</p>
-          <p>
-            You come in with your current content engine. We lift the hood, diagnose
-            performance issues, and help you upgrade the hidden bottlenecks slowing you
-            down.
-          </p>
-          <p>
-            We'll connect you to the latest intel, spot the hidden revenue leaks, and fine
-            tune your strategy so your core acquisition engine runs smoother, faster, and
-            more profitably.
-          </p>
-        </div>
-      </section>
-
       <section>
         <h2 className="font-display text-xl text-white mb-4">What the Day is</h2>
         <p className="text-zinc-400 leading-relaxed mb-5">
@@ -183,15 +168,6 @@ function Walkthrough() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section className="border-l-2 border-zinc-700 pl-6">
-        <p className="text-zinc-200 text-lg leading-relaxed">
-          If there's one thing you'll feel when you walk out, it's leverage.
-        </p>
-        <p className="text-zinc-400 leading-relaxed mt-2">
-          More demand from the content you're already creating.
-        </p>
       </section>
     </div>
   );
