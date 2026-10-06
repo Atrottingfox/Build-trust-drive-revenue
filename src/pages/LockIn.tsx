@@ -595,9 +595,11 @@ export default function LockIn() {
               <p className="text-zinc-500 text-sm">Your receipt is in your inbox.</p>
             ) : (
               <>
-                {/* No card around it any more, so it gets the page width as is,
-                    which stays above Stripe's ~320px minimum on a phone. */}
-                <div id="stripe-checkout" className="w-full rounded-xl overflow-hidden" />
+                {/*
+                  Full bleed on a phone. Stripe's embedded checkout will not render
+                  below about 320px, and the page padding left it narrower than that.
+                */}
+                <div id="stripe-checkout" className="-mx-6 w-[calc(100%+3rem)] sm:mx-0 sm:w-full rounded-xl overflow-hidden" />
 
                 {!embedded && (
                   <div className="flex justify-center">
