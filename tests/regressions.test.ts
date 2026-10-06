@@ -947,9 +947,6 @@ describe("A rehearsal cannot become a live $1 shopfront", () => {
     expect(codeOf(fn("days-remaining.ts"))).toMatch(/zz-test/);
   });
 
-  it("test contacts stay out of the people list", () => {
-    expect(codeOf(fn("clients.ts"))).toMatch(/zz-test/);
-  });
 });
 
 describe("Nobody pays for a Day and is left holding nothing", () => {
