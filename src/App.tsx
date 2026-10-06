@@ -66,7 +66,6 @@ const Booked = React.lazy(() => import('./pages/Booked'));
 const Install = React.lazy(() => import('./pages/Install'));
 const Prep = React.lazy(() => import('./pages/Prep'));
 const Health = React.lazy(() => import('./pages/Health'));
-const Clients = React.lazy(() => import('./pages/Clients'));
 const Geronimo = React.lazy(() => import('./pages/Geronimo'));
 const GeronimoNextSteps = React.lazy(() => import('./pages/GeronimoNextSteps'));
 const TheGeronimoPlan = React.lazy(() => import('./pages/TheGeronimoPlan'));
@@ -182,7 +181,6 @@ export default function App() {
           {/* The invitation email uses /install/<id>. Both shapes must work. */}
           <Route path="/install/:contactId" element={<Install />} />
           <Route path="/health" element={<Health />} />
-          <Route path="/clients" element={<Clients />} />
           <Route path="/geronimo" element={<Geronimo />} />
           <Route path="/geronimonextsteps" element={<GeronimoNextSteps />} />
           <Route path="/thegeronimoplan" element={<TheGeronimoPlan />} />
