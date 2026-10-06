@@ -650,16 +650,13 @@ describe("Paying never re-locks the calendar", () => {
 });
 
 describe("Paying shortens the page rather than leaving the pitch up", () => {
-  it("the walkthrough is hidden once payment lands", () => {
-    /* A paid client should not scroll past a sales section to reach the one
-       thing they still have to do. */
-    expect(page("LockIn.tsx")).toContain("{!paid && (");
-  });
-
-  it("the confirmation view carries no sales copy at all", () => {
+  it("the page sells nothing: no walkthrough, no Days left counter", () => {
+    /* Everyone who lands here has already said yes, on a call or through an
+       application (Sean, 6 Oct 2026: "i am not trying to sell anything on this
+       page"). Pay, then pick the date. */
     const src = page("LockIn.tsx");
-    const walkthroughs = src.match(/<Walkthrough \/>/g) || [];
-    expect(walkthroughs).toHaveLength(1);
+    expect(src).not.toContain("<Walkthrough");
+    expect(src).not.toContain("Days left at");
   });
 
   it("a Day is spent the moment it is paid for", () => {
