@@ -686,7 +686,20 @@ export default function LockIn() {
           because it stays locked until payment clears, and a locked step is
           only reassuring once you know what you are unlocking.
         */}
-        <div className="max-w-3xl mx-auto space-y-16">
+        {/*
+          Before payment, a checkout layout on desktop: what the Day is on the
+          left, scrolling as normal, with payment and the date pinned on the
+          right. On a phone it stacks with payment first, since everyone who
+          gets this link has already said yes. After payment it drops to one
+          wide column so the calendar has room.
+        */}
+        <div
+          className={
+            paid
+              ? 'max-w-3xl mx-auto space-y-16'
+              : 'max-w-6xl mx-auto grid gap-14 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-16 items-start'
+          }
+        >
 
           {/*
             1. The Day itself, and only while it is still being decided.
@@ -697,7 +710,7 @@ export default function LockIn() {
             page, not leave it the same length.
           */}
           {!paid && (
-            <section>
+            <section className="order-2 lg:order-1 min-w-0">
               <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-8">
                 What we are doing on the Day
               </p>
@@ -705,6 +718,7 @@ export default function LockIn() {
             </section>
           )}
 
+          <div className={paid ? 'space-y-16' : 'order-1 lg:order-2 lg:sticky lg:top-28 space-y-8 min-w-0'}>
           {/* 2. Payment. */}
           <motion.section
             initial={{ opacity: 0, y: 14 }}
@@ -821,6 +835,8 @@ export default function LockIn() {
             )}
           </section>
 
+          </div>
+
           {/* 4. Where to find them. Deliberately the last step and only once
               the day is actually held: nothing is asked of anyone before they
               have paid, and asking mid-booking would compete with the calendar.
@@ -853,7 +869,7 @@ export default function LockIn() {
             </section>
           )}
 
-          <p className="text-zinc-600 text-xs text-center">
+          <p className="order-3 lg:col-span-2 text-zinc-600 text-xs text-center">
             Trouble with either step? Reply to my email and I will sort it out.
           </p>
         </div>
