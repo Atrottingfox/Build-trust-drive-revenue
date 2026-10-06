@@ -285,7 +285,14 @@ export default function LockIn() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const id = contactIdFrom(window.location.search, window.location.pathname) || store.get('ae_contact_id');
+    /* Only the id in the link counts (Sean, 6 Oct: "jack should explicitly only be
+       linked to HIS page link"). The remembered id is used solely when someone
+       is coming back from paying, which is the one return that can arrive
+       without it. Otherwise a browser that once opened Jack's link would act
+       and be tracked as Jack on any bare link. */
+    const urlId = contactIdFrom(window.location.search, window.location.pathname);
+    const returningFromPayment = new URLSearchParams(window.location.search).get('paid') === '1';
+    const id = urlId || (returningFromPayment ? store.get('ae_contact_id') : null);
     if (id) {
       setContactId(id);
       store.set('ae_contact_id', id);
@@ -463,7 +470,7 @@ export default function LockIn() {
          never needs to remember it. */
       if (startsAt) setBookedAt(startsAt);
 
-      const id = contactId || store.get('ae_contact_id');
+      const id = contactId;
       if (!id) return;
 
       fetch('/.netlify/functions/calendly-booked', {
@@ -525,7 +532,7 @@ export default function LockIn() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            contactId: contactId || store.get('ae_contact_id'),
+            contactId: contactId,
             brandDayDate: bookedAt || store.get(key('booked_at')) || '',
           }),
         });
