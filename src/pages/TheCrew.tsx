@@ -24,7 +24,7 @@ const COPY: Block[] = [
   ['Whether you work inside a high performing team, run an agency, freelance independently, or lead creative direction, this is a place to:'],
   {
     list: [
-      'Meet the top operators doing world class work',
+      'Meet top operators working with the best in the industry',
       'Access relevant world class opportunities',
       'Learn from high standard operators',
       "Share openly what you're finding",
