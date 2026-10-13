@@ -37,7 +37,7 @@ type Lesson = {
 const LESSONS: Lesson[] = [
   {
     n: '01',
-    title: 'Master your messaging to craft a path to money.',
+    title: 'Master your messaging and craft a path to money.',
     problem:
       'More content does not help if the market cannot quickly understand who you help, what you believe, why your approach is different, or why they should buy.',
     principle: [
@@ -150,8 +150,6 @@ const ISSUES: Array<{ text: string; solvedBy: string }> = [
     solvedBy: '04',
   },
 ];
-
-const PATH = ['Messaging', 'Ownership', 'Operator', 'Production', 'Assets', 'Demand'];
 
 const sectionId = (n: string) => `principle-${n}`;
 
@@ -380,25 +378,6 @@ export default function LearnFromThem() {
                     </li>
                   ))}
                 </ul>
-              </Section>
-            </section>
-
-            {/* The path to money. The spine, stated before the lessons that build it. */}
-            <section className="pb-16 md:pb-20">
-              <Section>
-                <div className="border-t border-zinc-800/80 pt-10">
-                  <p className="text-[13px] font-medium text-zinc-500 uppercase tracking-[0.2em] mb-6">
-                    The path to money
-                  </p>
-                  <p className="font-display text-[17px] md:text-[21px] leading-[1.6] tracking-[-0.02em] text-white">
-                    {PATH.map((step, i) => (
-                      <React.Fragment key={step}>
-                        {i > 0 && <span className="text-blue-500/60 font-normal mx-1.5">&gt;</span>}
-                        <span className="whitespace-nowrap">{step}</span>
-                      </React.Fragment>
-                    ))}
-                  </p>
-                </div>
               </Section>
             </section>
 
