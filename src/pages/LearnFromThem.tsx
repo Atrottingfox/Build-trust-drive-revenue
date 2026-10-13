@@ -72,7 +72,7 @@ const LESSONS: Lesson[] = [
     applied: ['Rhys Livingstone', 'Hey Doza'],
     detail: [
       'Media teams rebuilt and trained, talent development paths installed, and a videographer developed into a marketer and strategist.',
-      "We built out Jay's content system to get a 90/10 with ~5 hours on average available per month.",
+      "When I was with Jay Wright, we built out his content system to get a 90/10 with ~5 hours on average available per month.",
     ],
   },
   {
