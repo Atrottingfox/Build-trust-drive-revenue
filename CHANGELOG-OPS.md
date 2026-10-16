@@ -133,3 +133,8 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Identity:** personal link `?m=` is remembered in the browser (`top1-m`), so a member who opened /calls from their link is known on /ask and /answer. Otherwise they type a name (and email when asking).
 - **Audience:** members, no login. No env, checkout or GHL changes. Emails bend the "GHL sends emails" rule by Sean's choice (30 Sep), wording kept editable in Notion.
 - **Rollback:** `git revert 4db9f7a d0d1cf9` and push. Stop emails only: `npx netlify blobs:delete config gmail-refresh`.
+
+## 2026-10-16 · Rhys: Phase 2 build, 12 month advisory, 75 day review
+- **What:** `/undeniability-part2` takes $8,800 ($8,000 + GST) by embedded Checkout and on return raises day 31 and day 61 as draft invoices that Stripe auto finalises against the saved card (`undeniability-part2.ts`). `/advisory` (password Scale) is a Stripe subscription at $4,400 a month with `cancel_at` set 12 months out on return (`advisory.ts`). `/undeniability-review` (password Scale) is Jacob's 75 day review copied from Notion with lock in buttons to both. Signatures go to Slack and ride on the Stripe metadata. `?test=1` on either payment page charges $1.
+- **Audience:** CLIENT-FACING, Rhys Livingstone only. No env, GHL or Concierge changes. `/advisory` previously served the old $3,000 public Advisory page (unlinked, robots blocked). That file is kept, unrouted.
+- **Rollback:** `git revert 752f951 aa985d6 0cfb36e 1f2d083 6d7ca96` and push. Scheduled charges live in Stripe: void the draft invoices / cancel the subscription there.
