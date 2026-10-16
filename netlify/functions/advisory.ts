@@ -14,7 +14,8 @@ import type { Handler } from "@netlify/functions";
   Signing goes through undeniability-part2 (action "sign", offer "advisory"),
   and the signature also rides on the subscription's metadata.
 
-  ?test=1 on the page makes it $1 a month.
+  ?test=1 on the page makes it $1 a DAY for 3 days, then it stops, so the
+  repeat charge and the cap are both proven in two days.
 */
 
 const headers = {
@@ -31,6 +32,9 @@ const PRODUCT = "Authority Engine Advisory";
 const MONTHLY_CENTS = 440000;
 const TEST_CENTS = 100;
 const MONTHS = 12;
+/* Test mode bills daily and stops after this many, so the repeat and the cap
+   can both be watched in two days instead of a year. */
+const TEST_PAYMENTS = 3;
 
 const ok = (body: unknown) => ({ statusCode: 200, headers, body: JSON.stringify(body) });
 
@@ -49,7 +53,9 @@ const money = (cents: number) =>
 
 /* Twelve calendar months after the start, less an hour, so the subscription
    ends just before a thirteenth invoice could ever be raised. */
-function endOfTerm(startSec: number): number {
+function endOfTerm(startSec: number, test: boolean): number {
+  /* Test: daily billing, three charges, then it stops. Same cap mechanism. */
+  if (test) return startSec + TEST_PAYMENTS * 86400 - 3600;
   const d = new Date(startSec * 1000);
   d.setUTCMonth(d.getUTCMonth() + MONTHS);
   return Math.floor(d.getTime() / 1000) - 3600;
@@ -93,7 +99,7 @@ const handler: Handler = async (event) => {
       "line_items[0][quantity]": "1",
       "line_items[0][price_data][currency]": "aud",
       "line_items[0][price_data][unit_amount]": String(amount),
-      "line_items[0][price_data][recurring][interval]": "month",
+      "line_items[0][price_data][recurring][interval]": test ? "day" : "month",
       "line_items[0][price_data][product_data][name]": `${test ? "TEST. " : ""}${PRODUCT}, 12 months`,
       return_url:
         "https://authorityengine.com.au/advisory?paid=1&session_id={CHECKOUT_SESSION_ID}" + (test ? "&test=1" : ""),
@@ -136,7 +142,7 @@ const handler: Handler = async (event) => {
     if (sub.cancel_at) return ok({ verified: true, paid: true, scheduled: true, endsAt: sub.cancel_at });
 
     const start = sub.start_date || sub.created || Math.floor(Date.now() / 1000);
-    const endsAt = endOfTerm(start);
+    const endsAt = endOfTerm(start, isTest);
     const upd = await fetch(`${STRIPE}/subscriptions/${encodeURIComponent(sub.id)}`, {
       method: "POST",
       headers: auth,
@@ -155,7 +161,7 @@ const handler: Handler = async (event) => {
       new Date(s * 1000).toLocaleDateString("en-AU", { timeZone: "Australia/Brisbane", day: "numeric", month: "short", year: "numeric" });
     await slack(
       `:moneybag: ${isTest ? "[TEST] " : ""}*${session.metadata?.signature_name}* started ${PRODUCT}: ${money(amount)} paid, ` +
-        `then ${money(amount)} automatically every month, 12 payments, ending ${when(endsAt)}. Subscription ${sub.id}.`
+        `then ${money(amount)} automatically every ${isTest ? "day, 3 payments (test clock)" : "month, 12 payments"}, ending ${when(endsAt)}. Subscription ${sub.id}.`
     );
     return ok({ verified: true, paid: true, scheduled: true, endsAt });
   }

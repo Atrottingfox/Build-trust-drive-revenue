@@ -29,8 +29,9 @@ import type { Handler } from "@netlify/functions";
   guard on invoice metadata rather than idempotency keys, because a key caches
   failures too.
 
-  Test mode (?test=1 on the page) charges a dollar at every step and labels
-  everything TEST, so the whole path can be walked before Rhys sees it.
+  Test mode (?test=1 on the page) charges a dollar at every step, labels
+  everything TEST, and schedules day 31 and day 61 at 10 and 20 minutes, so
+  the whole path including the automatic charges can be watched end to end.
 */
 
 const headers = {
@@ -97,7 +98,10 @@ async function raiseInstalment(opts: {
   existing: any[];
 }): Promise<{ id: string | null; at: number; error?: string }> {
   const { key, customerId, paymentMethod, sessionId, n, label, days, amount, test, existing } = opts;
-  const at = Math.floor(Date.now() / 1000) + days * 86400;
+  /* Test mode runs the same path on a compressed clock: day 31 becomes 10
+     minutes, day 61 becomes 20, so the automatic charges can be watched
+     actually firing rather than taken on trust. */
+  const at = Math.floor(Date.now() / 1000) + (test ? (days / 30) * 600 : days * 86400);
   const auth = { Authorization: `Bearer ${key}`, "Content-Type": "application/x-www-form-urlencoded" };
 
   const already = existing.find(
