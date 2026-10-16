@@ -12,9 +12,9 @@ import SEO from '../components/SEO';
 */
 
 const LEVELS = [
-  { name: 'Authority', line: 'Change what people believe' },
-  { name: 'Influence', line: 'Change what people want' },
-  { name: 'Power', line: 'Change what happens, regardless of belief or wants.' },
+  { name: 'Authority', line: 'people believe you' },
+  { name: 'Influence', line: 'you change what people want' },
+  { name: 'Power', line: 'you change what happens, regardless of either' },
 ];
 
 const PARTS = [
