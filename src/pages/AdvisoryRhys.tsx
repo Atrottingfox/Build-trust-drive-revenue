@@ -222,7 +222,7 @@ function AdvisoryPage() {
               ))}
             </div>
             <p className="text-zinc-500 text-sm leading-relaxed mt-7 pt-6 border-t border-zinc-800">
-              AUD $4,000 plus GST a month, 12 months, $52,800 in total. Every month goes to the card
+              AUD $4,000 + GST a month, 12 months. $48,000 + GST in total. Every month goes to the card
               you pay with today. It stops by itself after the twelfth payment.
             </p>
           </div>

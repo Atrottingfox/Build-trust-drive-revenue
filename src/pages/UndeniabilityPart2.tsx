@@ -219,7 +219,7 @@ export default function UndeniabilityPart2() {
               ))}
             </div>
             <p className="text-zinc-500 text-sm leading-relaxed mt-7 pt-6 border-t border-zinc-800">
-              AUD $8,000 plus GST each time, $26,400 in total. All three go to the card you pay with
+              AUD $8,000 + GST each time. $24,000 + GST in total. All three go to the card you pay with
               today. Nothing to invoice, nothing to chase, and no fourth payment.
             </p>
           </div>
