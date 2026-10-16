@@ -99,10 +99,6 @@ export default function InPower() {
             <p className={body}>
               Power is also about singling influence over others, so that it becomes assumed.
             </p>
-            <p className={body}>
-              People will pick up an effort to do it unless it's masked well and legit.
-            </p>
-            <p className={body}>Some value status:</p>
           </div>
 
           <hr className="border-zinc-800 my-14" />
