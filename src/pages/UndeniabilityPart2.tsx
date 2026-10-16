@@ -3,7 +3,7 @@ import { Container } from '../components/ui/Container';
 import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
 import {
-  TERMS,
+  AGREEMENT,
   TERMS_TITLE,
   TERMS_VERSION,
   termsAreComplete,
@@ -97,6 +97,69 @@ function StepShell({
       {state === 'locked' && locked && <p className="text-zinc-600 text-sm mt-3 pl-[46px]">{locked}</p>}
       {state !== 'locked' && children && <div className="mt-6">{children}</div>}
     </section>
+  );
+}
+
+/*
+  Sean's agreement is stored exactly as he wrote it, in markdown. This draws
+  the handful of shapes it uses (headings, bullets, numbered lines, bold,
+  rules) so the text itself never has to be reworked to fit the page.
+*/
+function inline(text: string) {
+  return text.split(/(\*\*[^*]*\*\*)/g).map((part, i) =>
+    part.startsWith('**') && part.endsWith('**') && part.length > 4 ? (
+      <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>
+    ) : (
+      part.replace(/\*\*/g, '')
+    )
+  );
+}
+
+function Agreement({ md }: { md: string }) {
+  const blocks = md.split(/\n\s*\n/);
+  return (
+    <div className="space-y-3">
+      {blocks.map((block, i) => {
+        const lines = block.split('\n');
+        const first = lines[0];
+        if (first.trim() === '---') return <hr key={i} className="border-zinc-800 !my-7" />;
+        const h = first.match(/^(#{1,3})\s+(.*)$/);
+        if (h) {
+          const text = h[2].replace(/\*\*/g, '');
+          if (h[1].length === 1)
+            return <h3 key={i} className="font-display text-white text-xl !mt-8 first:!mt-0">{text}</h3>;
+          if (h[1].length === 2)
+            return <h4 key={i} className="text-white text-[16px] font-semibold !mt-6">{text}</h4>;
+          return <h5 key={i} className="text-zinc-200 text-[14.5px] font-medium !mt-5">{text}</h5>;
+        }
+        if (lines.every((l) => /^- /.test(l)))
+          return (
+            <ul key={i} className="list-disc pl-5 space-y-1.5 marker:text-zinc-600">
+              {lines.map((l, j) => (
+                <li key={j} className="text-zinc-400 text-[14.5px] leading-relaxed">{inline(l.slice(2))}</li>
+              ))}
+            </ul>
+          );
+        if (lines.every((l) => /^\d+\. /.test(l)))
+          return (
+            <ol key={i} className="list-decimal pl-5 space-y-1.5 marker:text-zinc-600">
+              {lines.map((l, j) => (
+                <li key={j} className="text-zinc-400 text-[14.5px] leading-relaxed">{inline(l.replace(/^\d+\. /, ''))}</li>
+              ))}
+            </ol>
+          );
+        return (
+          <p key={i} className="text-zinc-400 text-[14.5px] leading-relaxed">
+            {lines.map((l, j) => (
+              <span key={j}>
+                {j > 0 && <br />}
+                {inline(l)}
+              </span>
+            ))}
+          </p>
+        );
+      })}
+    </div>
   );
 }
 
@@ -270,19 +333,8 @@ export default function UndeniabilityPart2() {
             <StepShell n={1} title="Read it and sign" state={signed ? 'done' : 'open'}>
               {signed ? null : (
                 <>
-                  <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5 sm:p-6 max-h-[420px] overflow-y-auto space-y-6">
-                    {TERMS.map((section) => (
-                      <div key={section.heading}>
-                        <h3 className="text-white text-[15px] font-medium mb-2">{section.heading}</h3>
-                        <div className="space-y-2.5">
-                          {section.body.map((para, i) => (
-                            <p key={i} className="text-zinc-400 text-[14.5px] leading-relaxed">
-                              {para}
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                  <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5 sm:p-6 max-h-[520px] overflow-y-auto space-y-6">
+                    <Agreement md={AGREEMENT} />
                     <p className="text-zinc-600 text-xs">Version {TERMS_VERSION}</p>
                   </div>
 
