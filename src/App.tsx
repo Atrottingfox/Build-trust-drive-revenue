@@ -21,7 +21,6 @@ const Builder = React.lazy(() => import('./pages/Builder'));
 const DiagnosticTool = React.lazy(() => import('./pages/DiagnosticTool'));
 const Quiz = React.lazy(() => import('./pages/Quiz'));
 const CongruenceAudit = React.lazy(() => import('./pages/CongruenceAudit'));
-const Advisory = React.lazy(() => import('./pages/Advisory'));
 const BusinessMap = React.lazy(() => import('./pages/BusinessMap'));
 const Phase0 = React.lazy(() => import('./pages/Phase0'));
 const InPower = React.lazy(() => import('./pages/InPower'));
@@ -57,7 +56,7 @@ const UndeniableContentLongForm = React.lazy(() => import('./pages/UndeniableCon
 const UndeniableContentData = React.lazy(() => import('./pages/UndeniableContentData'));
 const UndeniableOps = React.lazy(() => import('./pages/UndeniableOps'));
 const UndeniabilityPart2 = React.lazy(() => import('./pages/UndeniabilityPart2'));
-const UndeniabilityAdvisory = React.lazy(() => import('./pages/UndeniabilityAdvisory'));
+const AdvisoryRhys = React.lazy(() => import('./pages/AdvisoryRhys'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
@@ -126,7 +125,7 @@ export default function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/congruence" element={<CongruenceAudit />} />
           <Route path="/brand-day" element={<BrandDayOffer />} />
-          <Route path="/advisory" element={<Advisory />} />
+          <Route path="/advisory" element={<AdvisoryRhys />} />
           <Route path="/map" element={<BusinessMap />} />
           <Route path="/phase0" element={<Phase0 />} />
           <Route path="/inpower" element={<InPower />} />
@@ -161,7 +160,7 @@ export default function App() {
           <Route path="/undeniablenextsteps/content/data" element={<UndeniableContentData />} />
           <Route path="/undeniablenextsteps/ops" element={<UndeniableOps />} />
           <Route path="/undeniability-part2" element={<UndeniabilityPart2 />} />
-          <Route path="/undeniability-advisory" element={<UndeniabilityAdvisory />} />
+          <Route path="/undeniability-advisory" element={<Navigate to="/advisory" replace />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
           <Route path="/theplan" element={<ThePlan />} />
           <Route path="/Theplan" element={<ThePlan />} />
