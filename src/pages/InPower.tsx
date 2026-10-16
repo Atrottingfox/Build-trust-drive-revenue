@@ -152,7 +152,7 @@ export default function InPower() {
 
           <hr className="border-zinc-800 my-14" />
 
-          <h2 className={h2}>Power only comes through via documentation.</h2>
+          <h2 className={h2}>Power often comes through via documentation.</h2>
           <div className="space-y-3 mb-12">
             <p className={body}>
               These should not be manufactured, but they should be signals to consider.
