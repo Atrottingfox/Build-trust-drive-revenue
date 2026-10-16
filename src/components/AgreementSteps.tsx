@@ -96,7 +96,17 @@ export function Agreement({ md }: { md: string }) {
           const [head, ...body] = rows;
           return (
             <div key={i} className="overflow-x-auto -mx-1 px-1">
-              <table className="w-full text-left text-[13.5px] border-collapse min-w-[520px]">
+              {/* Target / Status tables share one fixed status column, so the
+                  Day 30, 60 and 90 tables line up with each other. */}
+              <table
+                className={`w-full text-left text-[13.5px] border-collapse min-w-[520px] ${head.length === 2 ? 'table-fixed' : ''}`}
+              >
+                {head.length === 2 && (
+                  <colgroup>
+                    <col />
+                    <col className="w-44" />
+                  </colgroup>
+                )}
                 <thead>
                   <tr>
                     {head.map((c, j) => (
