@@ -12,8 +12,8 @@ import SEO from '../components/SEO';
 */
 
 const LEVELS = [
-  { name: 'Authority', line: 'Others believe you\'re legit' },
-  { name: 'Influence', line: 'make others believe you\'re legit' },
+  { name: 'Authority', line: 'Others assume you\'re legit' },
+  { name: 'Influence', line: 'Ability to make others believe you\'re legit' },
   { name: 'Power', line: 'Making shit happen regardless of what people think' },
 ];
 
