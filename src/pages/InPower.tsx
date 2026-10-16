@@ -94,6 +94,7 @@ export default function InPower() {
           </h1>
           <div className="space-y-3">
             <p className="text-white text-xl leading-relaxed">Proxies as signals of power.</p>
+            <p className={body}>Say less, show more.</p>
           </div>
 
           <hr className="border-zinc-800 my-14" />
