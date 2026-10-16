@@ -94,11 +94,6 @@ export default function InPower() {
           </h1>
           <div className="space-y-3">
             <p className="text-white text-xl leading-relaxed">Proxies as signals of power.</p>
-            <p className={body}>Evidence of power.</p>
-            <p className={body}>We never want to say - ONLY show.</p>
-            <p className={body}>
-              Power is also about singling influence over others, so that it becomes assumed.
-            </p>
           </div>
 
           <hr className="border-zinc-800 my-14" />
