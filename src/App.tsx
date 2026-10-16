@@ -162,6 +162,7 @@ export default function App() {
           <Route path="/undeniablenextsteps/ops" element={<UndeniableOps />} />
           <Route path="/undeniability-part2" element={<UndeniabilityPart2 />} />
           <Route path="/undeniability-review" element={<UndeniabilityReview />} />
+          <Route path="/undeniability-review/:tab" element={<UndeniabilityReview />} />
           <Route path="/undeniability-advisory" element={<Navigate to="/advisory" replace />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
           <Route path="/theplan" element={<ThePlan />} />
