@@ -5,6 +5,7 @@ Allow: /apply$
 
 Disallow: /90dayprogram
 Disallow: /undeniability-part2
+Disallow: /undeniability-advisory
 Disallow: /30-day-sprint
 Disallow: /advisory
 Disallow: /dfy

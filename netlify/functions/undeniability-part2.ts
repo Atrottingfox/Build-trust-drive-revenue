@@ -172,8 +172,15 @@ const handler: Handler = async (event) => {
     const version = String(body.termsVersion || "");
     if (!name || !version) return { statusCode: 400, headers, body: JSON.stringify({ error: "signatureName and termsVersion are required" }) };
     const at = new Date().toISOString();
-    console.log("Undeniable part 2 signed:", name, "terms:", version, "at:", at, "ip:", ip, test ? "TEST" : "");
-    await slack(`${test ? "[TEST] " : ""}:writing_hand: *${name}* signed ${PRODUCT} (${version}) at ${at}. Payment is next.`);
+    /* /undeniability-advisory signs through here too. It has no payment, so
+       this log and the Slack message ARE its signature record. */
+    const advisory = body.offer === "advisory";
+    const what = advisory ? "Authority Engine Advisory" : PRODUCT;
+    console.log(`${what} signed:`, name, "terms:", version, "at:", at, "ip:", ip, test ? "TEST" : "");
+    await slack(
+      `${test ? "[TEST] " : ""}:writing_hand: *${name}* signed ${what} (${version}) at ${at} from IP ${ip}.` +
+        (advisory ? " No payment on that page." : " Payment is next.")
+    );
     return ok({ ok: true, signedAt: at });
   }
 

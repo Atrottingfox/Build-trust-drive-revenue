@@ -57,6 +57,7 @@ const UndeniableContentLongForm = React.lazy(() => import('./pages/UndeniableCon
 const UndeniableContentData = React.lazy(() => import('./pages/UndeniableContentData'));
 const UndeniableOps = React.lazy(() => import('./pages/UndeniableOps'));
 const UndeniabilityPart2 = React.lazy(() => import('./pages/UndeniabilityPart2'));
+const UndeniabilityAdvisory = React.lazy(() => import('./pages/UndeniabilityAdvisory'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
@@ -160,6 +161,7 @@ export default function App() {
           <Route path="/undeniablenextsteps/content/data" element={<UndeniableContentData />} />
           <Route path="/undeniablenextsteps/ops" element={<UndeniableOps />} />
           <Route path="/undeniability-part2" element={<UndeniabilityPart2 />} />
+          <Route path="/undeniability-advisory" element={<UndeniabilityAdvisory />} />
           <Route path="/theundeniableplan" element={<TheUndeniablePlan />} />
           <Route path="/theplan" element={<ThePlan />} />
           <Route path="/Theplan" element={<ThePlan />} />
