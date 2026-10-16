@@ -47,17 +47,30 @@ export function StepShell({
 /*
   Sean's agreement is stored exactly as he wrote it, in markdown. This draws
   the handful of shapes it uses (headings, bullets, numbered lines, bold,
-  rules) so the text itself never has to be reworked to fit the page.
+  rules, tables, <br>) so the text itself never has to be reworked to fit the page.
 */
-function inline(text: string) {
+function bold(text: string, k: number) {
   return text.split(/(\*\*[^*]*\*\*)/g).map((part, i) =>
     part.startsWith('**') && part.endsWith('**') && part.length > 4 ? (
-      <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>
+      <strong key={`${k}-${i}`} className="text-white font-semibold">{part.slice(2, -2)}</strong>
     ) : (
       part.replace(/\*\*/g, '')
     )
   );
 }
+
+/* <br> inside a line is a line break, as Notion exports it. */
+function inline(text: string) {
+  return text.split(/<br\s*\/?>/).flatMap((seg, k) => (k ? [<br key={`br${k}`} />, ...bold(seg.trim(), k)] : bold(seg, k)));
+}
+
+/* Status words in review tables carry their colour, as they do in Notion. */
+const STATUS: Record<string, string> = {
+  Complete: 'text-emerald-400',
+  'Partly complete': 'text-amber-300',
+  'Not yet complete': 'text-red-400',
+  Unconfirmed: 'text-zinc-500',
+};
 
 export function Agreement({ md }: { md: string }) {
   const blocks = md.split(/\n\s*\n/);
@@ -76,11 +89,48 @@ export function Agreement({ md }: { md: string }) {
             return <h4 key={i} className="text-white text-[16px] font-semibold !mt-6">{text}</h4>;
           return <h5 key={i} className="text-zinc-200 text-[14.5px] font-medium !mt-5">{text}</h5>;
         }
-        if (lines.every((l) => /^- /.test(l)))
+        if (lines.every((l) => /^\|/.test(l))) {
+          const rows = lines
+            .filter((l) => !/^\|[\s:|-]+\|$/.test(l))
+            .map((l) => l.replace(/^\||\|$/g, '').split('|').map((c) => c.trim()));
+          const [head, ...body] = rows;
+          return (
+            <div key={i} className="overflow-x-auto -mx-1 px-1">
+              <table className="w-full text-left text-[13.5px] border-collapse min-w-[520px]">
+                <thead>
+                  <tr>
+                    {head.map((c, j) => (
+                      <th key={j} className="text-zinc-300 font-medium align-bottom py-2 pr-4 border-b border-zinc-800">{inline(c)}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {body.map((r, j) => (
+                    <tr key={j} className="border-b border-zinc-900">
+                      {r.map((c, m) => (
+                        <td
+                          key={m}
+                          className={`py-2 pr-4 align-top ${
+                            STATUS[c] ? `${STATUS[c]} font-medium` : m === 0 ? 'text-zinc-300' : 'text-zinc-400'
+                          }`}
+                        >
+                          {inline(c)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          );
+        }
+        if (lines.every((l) => /^\s*- /.test(l)))
           return (
             <ul key={i} className="list-disc pl-5 space-y-1.5 marker:text-zinc-600">
               {lines.map((l, j) => (
-                <li key={j} className="text-zinc-400 text-[14.5px] leading-relaxed">{inline(l.slice(2))}</li>
+                <li key={j} className={`text-zinc-400 text-[14.5px] leading-relaxed ${/^\s/.test(l) ? 'ml-5 list-[circle]' : ''}`}>
+                  {inline(l.replace(/^\s*- /, ''))}
+                </li>
               ))}
             </ul>
           );
