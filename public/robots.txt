@@ -29,6 +29,7 @@ Disallow: /congruence
 Disallow: /map
 Disallow: /phase0
 Disallow: /inpower
+Disallow: /upscale
 Disallow: /journey
 Disallow: /engine
 Disallow: /content-archetype
