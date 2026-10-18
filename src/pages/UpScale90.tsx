@@ -16,23 +16,13 @@ import SEO from '../components/SEO';
 
 const AGREEMENT_URL = '/install?c=4h47HYqgK7VD4eaExDAI';
 
-/* The three phases, as /install and /offer state them. */
+/* Sean, 2026-10-19: "i just want to help them getting clear with what to post
+   and how to do it. first we focus on the business page and short form. then
+   we can introduce the personal brands and youtube". No timings given, so none
+   are stated. */
 const PHASES = [
-  {
-    when: 'Weeks 1 to 4',
-    title: 'Install',
-    body: 'Short form, long form, lead magnets, the Trojan Horse VSL and the documented Authority Engine get built and wired up. The first cycle runs live, so we test it on real audience.',
-  },
-  {
-    when: 'Weeks 5 to 12',
-    title: 'Tune',
-    body: 'Your team runs the cycle and I move to advisor. We tighten hooks, lead magnets, long form structure and the VSL on real data, and test the strongest pieces with your warmest audience.',
-  },
-  {
-    when: 'Day 90',
-    title: 'What you have',
-    body: 'One documented Authority Engine, one repeatable monthly demand cycle, and your operator running the rhythm.',
-  },
+  { when: 'First', title: 'The business page and short form' },
+  { when: 'Then', title: 'The personal brands and YouTube' },
 ];
 
 const h2 = 'font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8';
@@ -58,14 +48,12 @@ export default function UpScale90() {
           <hr className="border-zinc-800 my-14" />
 
           <h2 className={h2}>How it runs</h2>
+          <p className={`${body} mb-10`}>Getting clear on what to post and how to do it.</p>
           <div className="space-y-6">
             {PHASES.map((p) => (
               <div key={p.title} className="grid sm:grid-cols-[140px_1fr] gap-1 sm:gap-6">
                 <p className="text-zinc-500 text-[15px] font-medium sm:pt-1">{p.when}</p>
-                <div>
-                  <p className="text-white text-lg font-semibold mb-1">{p.title}</p>
-                  <p className={body}>{p.body}</p>
-                </div>
+                <p className="text-white text-lg font-semibold">{p.title}</p>
               </div>
             ))}
           </div>
