@@ -4,6 +4,7 @@ import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
 import { TERMS_TITLE, termsAreComplete } from '../content/install-terms';
 import { variantFor } from '../content/install-variants';
+import TermsBody from '../components/TermsBody';
 
 /*
   /install - the 90 Day Install hub.
@@ -344,11 +345,11 @@ export default function Install() {
           <div className="text-center mb-12">
             <div className="accent-line mx-auto mb-6" />
             <h1 className="font-display text-4xl sm:text-5xl tracking-tight text-white mb-4">
-              {TERMS_TITLE}
+              {v.title || TERMS_TITLE}
             </h1>
             <p className="text-zinc-400 text-lg leading-relaxed">
-              You have done the Day. Here is what the next 90 look like, and the three
-              things to sort before we start.
+              {v.intro ||
+                'You have done the Day. Here is what the next 90 look like, and the three things to sort before we start.'}
             </p>
           </div>
 
@@ -390,13 +391,7 @@ export default function Install() {
                     {v.terms.map((section) => (
                       <div key={section.heading}>
                         <h3 className="text-white text-[15px] font-medium mb-2">{section.heading}</h3>
-                        <div className="space-y-2.5">
-                          {section.body.map((para, i) => (
-                            <p key={i} className="text-zinc-400 text-[14.5px] leading-relaxed">
-                              {para}
-                            </p>
-                          ))}
-                        </div>
+                        <TermsBody lines={section.body} />
                       </div>
                     ))}
                     <p className="text-zinc-600 text-xs">Version {v.version}</p>

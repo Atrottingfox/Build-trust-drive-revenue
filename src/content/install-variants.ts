@@ -8,11 +8,14 @@
 */
 
 import { TERMS, TERMS_VERSION, type TermsSection } from './install-terms';
-import { UPSCALE_TERMS, UPSCALE_TERMS_VERSION } from './install-terms-upscale';
+import { UPSCALE_TERMS, UPSCALE_TERMS_VERSION, UPSCALE_TITLE, UPSCALE_INTRO } from './install-terms-upscale';
 
 export type InstallVariant = {
   terms: TermsSection[];
   version: string;
+  /* Page heading and the line under it. Standard ones used when absent. */
+  title?: string;
+  intro?: string;
   /* The overview above the agreement. */
   phases: { when: string; title: string; body: string; rhythm: string }[];
   feeLine: string;
@@ -52,30 +55,38 @@ const STANDARD: InstallVariant = {
   payLine: '$5,000 today, $5,000 in 30 days, to the same card. Nothing after that.',
 };
 
-/* Erina Roch, UpScale. Matches /upscale. Sean, 2026-10-19. */
+/* Erina Roch, UpScale. Sean's own text, 2026-10-19. Matches /upscale. */
 const UPSCALE: InstallVariant = {
   terms: UPSCALE_TERMS,
   version: UPSCALE_TERMS_VERSION,
+  title: UPSCALE_TITLE,
+  intro: UPSCALE_INTRO,
   phases: [
     {
-      when: 'First',
-      title: 'The business page and short form',
-      body: 'Getting clear on what to post and how to do it.',
-      rhythm: 'One 60 minute call a week for the first four weeks.',
+      when: 'Weeks 1 to 4',
+      title: 'Install',
+      body: 'During the first four weeks, we will establish the strategy, operating rhythm, core content system, and initial implementation loop.',
+      rhythm: 'At the end of Week 4, both parties will review progress and agree which level of support is appropriate for the remaining eight weeks.',
     },
     {
-      when: 'Then',
-      title: 'The personal brands and YouTube',
-      body: '',
-      rhythm: 'Fortnightly, then one in month three. Or every week for the entire 12 weeks, if we agree at day 30 to keep the high touch.',
+      when: 'Weeks 5 to 12',
+      title: 'Tune',
+      body: 'Path A: High Touch Tune, with one 60 minute call per week. Path B: Standard Authority Engine Tune, for teams that can operate the system with a lower level of direct support.',
+      rhythm: '',
+    },
+    {
+      when: 'Day 90',
+      title: 'What you have',
+      body: 'The intended outcome is that your team can operate the system without requiring constant founder direction.',
+      rhythm: '',
     },
   ],
   feeLine:
-    'I provide the strategy, frameworks and advisory. Your team implements, led by your Media Owner. AUD $10,000 for the 90 days, paid $5,000 today and $5,000 in 30 days. If we agree at day 30 to keep the weekly call for all 12 weeks, a third $5,000 is charged at day 61.',
+    'I provide strategy, frameworks, training, feedback, and advisory. AUD $5,000 on commencement and AUD $5,000 on Day 31. If both parties choose Path A at the Week 5 Review, a further AUD $5,000 on Day 61.',
   checkboxLine:
-    'I have read the agreement, I am authorised to enter into it, and I agree to both instalments of $5,000, and to a third at day 61 if we agree to it at the day 30 checkpoint.',
+    'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if both parties choose Path A at the Week 5 Review.',
   payLine:
-    '$5,000 today, $5,000 in 30 days, to the same card. A third $5,000 at day 61 only if we agree to it at day 30.',
+    '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Path A.',
 };
 
 const BY_CONTACT: Record<string, InstallVariant> = {
