@@ -495,7 +495,7 @@ export default function Install() {
             {/* 3 - weekly call */}
             <StepShell
               n={3}
-              title={callsBooked ? 'Weekly slot locked' : 'Lock your weekly slot'}
+              title={callsBooked ? 'Weekly slot locked' : v.slotTitle || 'Lock your weekly slot'}
               state={callsBooked ? 'done' : paid ? 'open' : 'locked'}
               locked="Unlocks once your first payment is through."
             >
@@ -503,6 +503,8 @@ export default function Install() {
                 <p className="text-zinc-400 leading-relaxed">
                   Booked. See you then. Bring your Media Owner.
                 </p>
+              ) : v.slotLine ? (
+                <p className="text-zinc-400 leading-relaxed">{v.slotLine}</p>
               ) : WEEKLY_CALL_URL ? (
                 <>
                   <p className="text-zinc-400 leading-relaxed mb-6">

@@ -120,7 +120,9 @@ const handler: Handler = async (event) => {
         the commitment, the amount still to come, its timing, and the fact that
         nothing follows it are all readable at the moment of paying.
       */
-      "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, payment 1 of 2",
+      "line_items[0][price_data][product_data][name]": DAY61_OPTION.has(String(contactId || ""))
+        ? "90 Day Authority Engine Install, initial payment"
+        : "90 Day Authority Engine Install, payment 1 of 2",
       "line_items[0][price_data][product_data][description]":
         DAY61_OPTION.has(String(contactId || ""))
           ? `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. A further ${money(secondAmount)} on Day 61 only if Option B is chosen at Day 30.`

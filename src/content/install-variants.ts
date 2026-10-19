@@ -21,6 +21,9 @@ export type InstallVariant = {
   feeLine: string;
   checkboxLine: string;
   payLine: string;
+  /* The call step after payment. Standard copy used when absent. */
+  slotTitle?: string;
+  slotLine?: string;
 };
 
 export const STANDARD_PHASES = [
@@ -81,6 +84,10 @@ const UPSCALE: InstallVariant = {
     'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if we choose Option B at Day 30.',
   payLine:
     '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Option B.',
+  /* Her calls are not the standard weekly rhythm, so she is not sent to /slot. */
+  slotTitle: 'Your calls',
+  slotLine:
+    'I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.',
 };
 
 const BY_CONTACT: Record<string, InstallVariant> = {
