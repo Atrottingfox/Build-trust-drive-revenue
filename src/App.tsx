@@ -58,6 +58,7 @@ const UndeniableContentData = React.lazy(() => import('./pages/UndeniableContent
 const UndeniableOps = React.lazy(() => import('./pages/UndeniableOps'));
 const UndeniabilityPart2 = React.lazy(() => import('./pages/UndeniabilityPart2'));
 const AdvisoryRhys = React.lazy(() => import('./pages/AdvisoryRhys'));
+const FounderPartner = React.lazy(() => import('./pages/FounderPartner'));
 const UndeniabilityReview = React.lazy(() => import('./pages/UndeniabilityReview'));
 const LinkNinja = React.lazy(() => import('./pages/LinkNinja'));
 const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
@@ -128,6 +129,7 @@ export default function App() {
           <Route path="/congruence" element={<CongruenceAudit />} />
           <Route path="/brand-day" element={<BrandDayOffer />} />
           <Route path="/advisory" element={<AdvisoryRhys />} />
+          <Route path="/partner" element={<FounderPartner />} />
           <Route path="/map" element={<BusinessMap />} />
           <Route path="/phase0" element={<Phase0 />} />
           <Route path="/inpower" element={<InPower />} />

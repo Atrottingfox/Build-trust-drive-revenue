@@ -91,7 +91,14 @@ const handler: Handler = async () => {
         ? `\n     Part ways instead: ${SITE}/.netlify/functions/install-part-ways?c=${encodeURIComponent(contactId)}&k=${encodeURIComponent(exitSecret)}`
         : `\n     No contact id on this invoice, so stop it in Stripe by hand: ${inv.hosted_invoice_url || inv.id}`;
 
-    lines.push(`  • *${who}* — ${money(inv.amount_due ?? 0, inv.currency)} charges ${when}${stop}`);
+    /* The day 30 upsell. Tap it, confirm, get a link unique to them
+       (founder-partner.ts). Nothing reaches the client until Sean sends it. */
+    const offer =
+      contactId && exitSecret
+        ? `\n     Offer the 12 month Founder Partner term: ${SITE}/.netlify/functions/founder-partner?c=${encodeURIComponent(contactId)}&k=${encodeURIComponent(exitSecret)}`
+        : "";
+
+    lines.push(`  • *${who}* — ${money(inv.amount_due ?? 0, inv.currency)} charges ${when}${stop}${offer}`);
   }
 
   await slack(
