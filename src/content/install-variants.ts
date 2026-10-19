@@ -58,7 +58,7 @@ const STANDARD: InstallVariant = {
   payLine: '$5,000 today, $5,000 in 30 days, to the same card. Nothing after that.',
 };
 
-/* Erina Roch, UpScale. Aligned to Sean's email to her, 2026-10-19. Matches /upscale. */
+/* Erina Roch, UpScale. Sean's text, 2026-10-19 (Track A / Track B). Matches /upscale. */
 const UPSCALE: InstallVariant = {
   terms: UPSCALE_TERMS,
   version: UPSCALE_TERMS_VERSION,
@@ -67,23 +67,23 @@ const UPSCALE: InstallVariant = {
   phases: [
     {
       when: 'Day 1 to 30',
-      title: 'Install',
-      body: 'One simple loop: post consistently, shoot consistently, review the data, identify what worked, do more of it. The focus is the UpScale business brand.',
-      rhythm: 'At Day 30, we decide together which level of support is appropriate for the remaining 60 days.',
+      title: 'Initial 30 Day Install',
+      body: '$5,000 AUD on commencement. Your previous $5,000 Brand Day payment has already been credited.',
+      rhythm: 'At Day 30, we review the progress of the system and decide which support level is appropriate for the remaining 60 days.',
     },
     {
-      when: 'Day 31 to 90',
-      title: 'Option A or Option B',
-      body: 'Option A: Standard Authority Engine, $15,000 in total including the Brand Day. Option B: Expanded Authority Engine, with one 60 minute call per week, $20,000 in total including the Brand Day.',
+      when: 'Weeks 5 to 12',
+      title: 'Track A or Track B',
+      body: 'Track A: Standard Authority Engine, $5,000 on Day 31, $15,000 AUD in total. Track B: Expanded Authority Engine, $5,000 on Day 31 and $5,000 on Day 61, $20,000 AUD in total.',
       rhythm: '',
     },
   ],
   feeLine:
-    'I provide strategy, frameworks, training, feedback, and advisory. Your $5,000 Brand Day payment is already credited. AUD $5,000 on commencement and AUD $5,000 on Day 31. If we choose Option B at Day 30, a further AUD $5,000 on Day 61.',
+    'I provide strategy, frameworks, training, feedback, and advisory. AUD $5,000 on commencement and AUD $5,000 on Day 31. If we choose Track B at Day 30, a further AUD $5,000 on Day 61.',
   checkboxLine:
-    'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if we choose Option B at Day 30.',
+    'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if we choose Track B at Day 30.',
   payLine:
-    '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Option B.',
+    '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Track B.',
   /* Her calls are not the standard weekly rhythm, so she is not sent to /slot. */
   slotTitle: 'Your calls',
   slotLine:

@@ -423,7 +423,7 @@ const handler: Handler = async (event) => {
           const { sent, reason } = ownRhythm
             ? await sendEmail(token, contactId, "Payment received.", [
                 `<p>${first},</p>`,
-                `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Option B at Day 30.</p>`,
+                `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`,
                 `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.</p>`,
                 `<p>Sean</p>`,
               ].join(""))
@@ -434,7 +434,7 @@ const handler: Handler = async (event) => {
             [
               `<p>${first},</p>`,
               DAY61_OPTION.has(String(contactId))
-                ? `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. A further $5,000 on Day 61 only if we choose Option B at Day 30.</p>`
+                ? `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`
                 : `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. Nothing after that.</p>`,
               `<p>One thing left, and it takes a minute.</p>`,
               `<p><a href="${slot}">Lock your weekly hour</a></p>`,

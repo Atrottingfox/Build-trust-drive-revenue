@@ -125,7 +125,7 @@ const handler: Handler = async (event) => {
         : "90 Day Authority Engine Install, payment 1 of 2",
       "line_items[0][price_data][product_data][description]":
         DAY61_OPTION.has(String(contactId || ""))
-          ? `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. A further ${money(secondAmount)} on Day 61 only if Option B is chosen at Day 30.`
+          ? `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. A further ${money(secondAmount)} on Day 61 only if Track B is chosen at Day 30.`
           : `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
       "return_url": returnUrl(contactId ? String(contactId) : undefined),
       // Keeps the card usable for the second payment without asking again.

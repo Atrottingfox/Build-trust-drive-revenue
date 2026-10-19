@@ -1,23 +1,14 @@
 import { Container } from '../components/ui/Container';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import TermsBody from '../components/TermsBody';
-import {
-  UPSCALE_TITLE,
-  UPSCALE_INTRO,
-  UPSCALE_BEFORE,
-  UPSCALE_AFTER,
-  UPSCALE_OPTIONS,
-  UPSCALE_BOTH,
-  UPSCALE_DAY30_CRITERIA,
-} from '../content/install-terms-upscale';
+import { UPSCALE_TITLE, UPSCALE_INSTALL, UPSCALE_TRACKS } from '../content/install-terms-upscale';
 
 /*
-  /upscale - Erina's 90 days, aligned to Sean's email to her (2026-10-19).
+  /upscale - Erina's 90 days. Sean's text, 2026-10-19: the Initial 30 Day
+  Install, then Track A and Track B side by side.
 
   Rendered from the same source as her agreement (install-terms-upscale.ts),
-  so this page and what she signs cannot say different things. The two options
-  sit side by side: what differs first, then what both include. The button goes
+  so the page and what she signs cannot say different things. The button goes
   to her own /install link, which loads that agreement.
   Unlisted: noindex and disallowed in robots.txt.
   Flat sections and dividers, no boxed cards (client page rule).
@@ -25,19 +16,10 @@ import {
 
 const AGREEMENT_URL = '/install?c=4h47HYqgK7VD4eaExDAI';
 
-const h2 = 'font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1] mb-8';
-const label = 'text-zinc-500 text-xs tracking-[0.14em] uppercase mb-2';
+const h2 = 'font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]';
+const label = 'text-zinc-500 text-xs tracking-[0.14em] uppercase mb-3';
 const text = 'text-zinc-400 text-[16px] leading-relaxed';
-
-function Section({ heading, body }: { heading: string; body: string[] }) {
-  return (
-    <section>
-      <hr className="border-zinc-800 my-14" />
-      <h2 className={h2}>{heading}</h2>
-      <TermsBody lines={body} size="lg" />
-    </section>
-  );
-}
+const list = `${text} list-disc pl-5 space-y-1.5 marker:text-zinc-600`;
 
 export default function UpScale90() {
   return (
@@ -49,78 +31,79 @@ export default function UpScale90() {
         <div className="max-w-3xl mx-auto">
           <div className="accent-line mb-8" />
           <p className="text-zinc-500 text-xs tracking-[0.16em] uppercase mb-4">The Authority Engine</p>
-          <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05] mb-8">
+          <h1 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
             {UPSCALE_TITLE}
           </h1>
-          <p className="text-zinc-400 text-lg leading-relaxed">{UPSCALE_INTRO}</p>
-
-          {UPSCALE_BEFORE.map((s) => (
-            <Section key={s.heading} heading={s.heading} body={s.body} />
-          ))}
-
-          <section>
-            <hr className="border-zinc-800 my-14" />
-            <h2 className={h2}>2. The Day 30 decision</h2>
-            <p className="text-zinc-400 text-lg leading-relaxed mb-4">
-              At Day 30, we will decide together which level of support is appropriate for the remaining 60
-              days, based on:
-            </p>
-            <TermsBody lines={UPSCALE_DAY30_CRITERIA.map((c) => `• ${c}`)} size="lg" />
-
-            {/* Side by side from sm up, stacked on a phone. Divided, not boxed. */}
-            <div className="mt-12 grid sm:grid-cols-2 border-t border-zinc-800 sm:divide-x divide-zinc-800">
-              {UPSCALE_OPTIONS.map((o) => (
-                <div
-                  key={o.letter}
-                  className={`pt-8 pb-8 ${o.letter === 'A' ? 'sm:pr-8' : 'sm:pl-8 border-t sm:border-t-0 border-zinc-800'}`}
-                >
-                  <p className="text-zinc-500 text-sm font-medium mb-1">Option {o.letter}</p>
-                  <p className="text-white text-2xl font-display font-extrabold tracking-tight leading-tight mb-3">
-                    {o.name}
-                  </p>
-                  <p className={`${text} mb-7`}>{o.forWho}</p>
-
-                  <p className={label}>Calls</p>
-                  <p className={`${o.letter === 'B' ? 'text-white' : 'text-zinc-400'} text-[16px] leading-relaxed mb-7`}>
-                    {o.calls}
-                  </p>
-
-                  <p className={label}>Support</p>
-                  <ul className={`${text} list-disc pl-5 space-y-1.5 marker:text-zinc-600 mb-7`}>
-                    {o.differs.map((d) => (
-                      <li key={d}>{d}</li>
-                    ))}
-                  </ul>
-
-                  <p className={label}>Payments after commencement</p>
-                  <ul className={`${text} list-disc pl-5 space-y-1.5 marker:text-zinc-600 mb-7`}>
-                    {o.payments.map((p) => (
-                      <li key={p}>{p}</li>
-                    ))}
-                  </ul>
-
-                  <p className={label}>Total, including the Brand Day</p>
-                  <p className="text-white text-3xl font-display font-extrabold tracking-tight">{o.total}</p>
-                  <p className="text-zinc-500 text-sm mt-1">AUD</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="border-t border-zinc-800 pt-8">
-              <p className={label}>Included under both options, Day 31 to Day 90</p>
-              <ul className={`${text} list-disc pl-5 space-y-1.5 marker:text-zinc-600`}>
-                {UPSCALE_BOTH.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {UPSCALE_AFTER.map((s) => (
-            <Section key={s.heading} heading={s.heading} body={s.body} />
-          ))}
 
           <hr className="border-zinc-800 my-14" />
+
+          {/* Initial 30 Day Install */}
+          <h2 className={`${h2} mb-3`}>{UPSCALE_INSTALL.name}</h2>
+          <p className="text-white text-lg mb-8">Investment: {UPSCALE_INSTALL.investment}</p>
+          <p className={label}>Included</p>
+          <ul className={list}>
+            {UPSCALE_INSTALL.included.map((i) => (
+              <li key={i}>{i}</li>
+            ))}
+          </ul>
+          <div className="space-y-3 mt-8">
+            {UPSCALE_INSTALL.after.map((a) => (
+              <p key={a} className="text-zinc-400 text-lg leading-relaxed">
+                {a}
+              </p>
+            ))}
+          </div>
+
+          <hr className="border-zinc-800 mt-14" />
+
+          {/* The two tracks, side by side from sm up, stacked on a phone. */}
+          <div className="grid sm:grid-cols-2 sm:divide-x divide-zinc-800">
+            {UPSCALE_TRACKS.map((t) => (
+              <div
+                key={t.letter}
+                className={`py-10 ${t.letter === 'A' ? 'sm:pr-8' : 'sm:pl-8 border-t sm:border-t-0 border-zinc-800'}`}
+              >
+                <p className="text-zinc-500 text-sm font-medium mb-1">Track {t.letter}</p>
+                <p className="text-white text-2xl font-display font-extrabold tracking-tight leading-tight mb-3">
+                  {t.name}
+                </p>
+                <p className="text-zinc-300 text-[16px] leading-relaxed mb-2">{t.forWho}</p>
+                <p className={`${text} mb-8`}>{t.rhythm}</p>
+
+                <p className={label}>Weeks 5 to 12, included</p>
+                <ul className={`${list} mb-8`}>
+                  {t.included.map((i) => (
+                    <li key={i}>{i}</li>
+                  ))}
+                </ul>
+
+                <p className={label}>Additional investment</p>
+                <div className="mb-8">
+                  {t.investment.map((i, n) =>
+                    n === 0 && t.investment.length > 1 ? (
+                      <p key={i} className="text-white text-[16px] mb-1">
+                        {i}
+                      </p>
+                    ) : (
+                      <p key={i} className={t.investment.length > 1 ? `${text} pl-5` : 'text-white text-[16px]'}>
+                        {t.investment.length > 1 ? `• ${i}` : i}
+                      </p>
+                    )
+                  )}
+                </div>
+
+                <p className={label}>Total investment</p>
+                <ul className={`${list} mb-4`}>
+                  {t.breakdown.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+                <p className="text-white text-3xl font-display font-extrabold tracking-tight">Total: {t.total}</p>
+              </div>
+            ))}
+          </div>
+
+          <hr className="border-zinc-800 mb-14" />
 
           <a
             href={AGREEMENT_URL}
