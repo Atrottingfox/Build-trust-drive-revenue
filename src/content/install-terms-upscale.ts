@@ -28,7 +28,7 @@
 
 import type { TermsSection } from './install-terms';
 
-export const UPSCALE_TERMS_VERSION = 'upscale-v4-2026-10';
+export const UPSCALE_TERMS_VERSION = 'upscale-v5-2026-10';
 
 export const UPSCALE_TITLE = '90 Day Authority Engine Install';
 
@@ -70,6 +70,10 @@ export type UpscaleTrack = {
   investment: string[];
   breakdown: string[];
   total: string;
+  /* Sean, 2026-10-19: lead with the smaller number, and make it plain the
+     Brand Day is taken off. What is still to pay after the Brand Day. */
+  fromHere: string;
+  fromHereSchedule: string;
 };
 
 export const UPSCALE_TRACKS: UpscaleTrack[] = [
@@ -88,8 +92,10 @@ export const UPSCALE_TRACKS: UpscaleTrack[] = [
       'Continued refinement of the Authority Engine',
     ],
     investment: ['$5,000 AUD on Day 31'],
-    breakdown: ['$5,000 Brand Day', '$5,000 Initial 30 Day Install', '$5,000 Standard Authority Engine'],
+    breakdown: ['$5,000 Brand Day, already paid', '$5,000 Initial 30 Day Install', '$5,000 Standard Authority Engine'],
     total: '$15,000 AUD',
+    fromHere: '$10,000 AUD',
+    fromHereSchedule: '$5,000 on commencement, $5,000 on Day 31',
   },
   {
     letter: 'B',
@@ -108,8 +114,10 @@ export const UPSCALE_TRACKS: UpscaleTrack[] = [
       'Continued development and testing of the Authority Engine',
     ],
     investment: ['$10,000 AUD total:', '$5,000 on Day 31', '$5,000 on Day 61'],
-    breakdown: ['$5,000 Brand Day', '$5,000 Initial 30 Day Install', '$10,000 Expanded Authority Engine'],
+    breakdown: ['$5,000 Brand Day, already paid', '$5,000 Initial 30 Day Install', '$10,000 Expanded Authority Engine'],
     total: '$20,000 AUD',
+    fromHere: '$15,000 AUD',
+    fromHereSchedule: '$5,000 on commencement, $5,000 on Day 31, $5,000 on Day 61',
   },
 ];
 
@@ -172,11 +180,11 @@ const AGREEMENT_HEAD: TermsSection[] = [
       'AUD $5,000 on commencement',
       '## Track A: Standard Authority Engine',
       '• AUD $5,000 on Day 31',
-      'Total investment, including the Brand Day: AUD $15,000.',
+      'Total investment AUD $15,000, less your $5,000 Brand Day already paid: AUD $10,000 from here.',
       '## Track B: Expanded Authority Engine',
       '• AUD $5,000 on Day 31',
       '• AUD $5,000 on Day 61',
-      'Total investment, including the Brand Day: AUD $20,000.',
+      'Total investment AUD $20,000, less your $5,000 Brand Day already paid: AUD $15,000 from here.',
       'All payments are charged automatically to the same card. By signing, you agree to the payments on commencement and on Day 31, and to the Day 61 payment if both parties choose Track B at Day 30.',
       'Fees are non refundable once the engagement starts.',
       'If a payment fails, I will let you know and we will sort it out. Work continues while we do.',

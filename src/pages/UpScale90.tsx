@@ -93,12 +93,17 @@ export default function UpScale90() {
                 </div>
 
                 <p className={label}>Total investment</p>
-                <ul className={`${list} mb-4`}>
+                <ul className={`${list} mb-3`}>
                   {t.breakdown.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
                 </ul>
-                <p className="text-white text-3xl font-display font-extrabold tracking-tight">Total: {t.total}</p>
+                <p className="text-zinc-400 text-[15px]">Total: {t.total}</p>
+                <p className="text-zinc-400 text-[15px] mb-8">Less your $5,000 Brand Day, already paid</p>
+
+                <p className={label}>You pay from here</p>
+                <p className="text-white text-4xl font-display font-extrabold tracking-tight">{t.fromHere}</p>
+                <p className="text-zinc-500 text-sm mt-2">{t.fromHereSchedule}</p>
               </div>
             ))}
           </div>

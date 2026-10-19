@@ -74,7 +74,7 @@ const UPSCALE: InstallVariant = {
     {
       when: 'Weeks 5 to 12',
       title: 'Track A or Track B',
-      body: 'Track A: Standard Authority Engine, $5,000 on Day 31, $15,000 AUD in total. Track B: Expanded Authority Engine, $5,000 on Day 31 and $5,000 on Day 61, $20,000 AUD in total.',
+      body: 'Track A: Standard Authority Engine, $10,000 AUD from here. Track B: Expanded Authority Engine, $15,000 AUD from here. Both after your $5,000 Brand Day, which is already paid and taken off.',
       rhythm: '',
     },
   ],
