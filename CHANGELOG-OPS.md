@@ -138,3 +138,8 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **What:** `/undeniability-part2` takes $8,800 ($8,000 + GST) by embedded Checkout and on return raises day 31 and day 61 as draft invoices that Stripe auto finalises against the saved card (`undeniability-part2.ts`). `/advisory` (password Scale) is a Stripe subscription at $4,400 a month with `cancel_at` set 12 months out on return (`advisory.ts`). `/undeniability-review` (password Scale) is Jacob's 75 day review copied from Notion with lock in buttons to both. Signatures go to Slack and ride on the Stripe metadata. `?test=1` on either payment page charges $1.
 - **Audience:** CLIENT-FACING, Rhys Livingstone only. No env, GHL or Concierge changes. `/advisory` previously served the old $3,000 public Advisory page (unlinked, robots blocked). That file is kept, unrouted.
 - **Rollback:** `git revert 752f951 aa985d6 0cfb36e 1f2d083 6d7ca96` and push. Scheduled charges live in Stripe: void the draft invoices / cancel the subscription there.
+
+## 2026-10-19 · Day 30 Founder Partner upsell (17a9ff5)
+- What: instalment-checkpoint's Slack message now carries "Offer the 12 month Founder Partner term" per client. Tap > confirm page > "Yes, make their link" mints a per client /partner?t= link (HMAC of INSTALL_EXIT_SECRET, stateless) and posts it to Slack. /partner = Notion Founder Partner Rollover Agreement + sign + Stripe subscription 7 x $4,400, cancel_at after the 7th. ?test=1 is $1 a day x3.
+- Tested live: wrong code 403, unknown contact 404, edited token refused, page renders for a valid token, bad link message. Signing and paying NOT tested live.
+- Rollback: `git revert 17a9ff5` and push, or publish the prior deploy in Netlify.
