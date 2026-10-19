@@ -68,7 +68,7 @@ const UPSCALE: InstallVariant = {
     {
       when: 'Day 1 to 30',
       title: 'Initial 30 Day Install',
-      body: '$5,000 AUD on commencement. Your previous $5,000 Brand Day payment has already been credited.',
+      body: '$5,000 AUD on commencement. Your $5,000 Brand Day is already paid and taken off what you pay from here.',
       rhythm: 'At Day 30, we review the progress of the system and decide which support level is appropriate for the remaining 60 days.',
     },
     {

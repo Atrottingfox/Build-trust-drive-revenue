@@ -28,7 +28,7 @@
 
 import type { TermsSection } from './install-terms';
 
-export const UPSCALE_TERMS_VERSION = 'upscale-v5-2026-10';
+export const UPSCALE_TERMS_VERSION = 'upscale-v6-2026-10';
 
 export const UPSCALE_TITLE = '90 Day Authority Engine Install';
 
@@ -57,7 +57,7 @@ export const UPSCALE_INSTALL = {
   ],
   after: [
     'At Day 30, we review the progress of the system and decide which support level is appropriate for the remaining 60 days.',
-    'Your previous $5,000 Brand Day payment has already been credited and is not included in the payment amounts below.',
+    'Your $5,000 Brand Day payment is already paid. It counts toward each total below, and is taken off what you pay from here.',
   ],
 };
 
