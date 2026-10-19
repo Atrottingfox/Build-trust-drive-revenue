@@ -62,7 +62,7 @@ export default function UpScale90() {
 
           <h2 className={h2}>The day 30 choice</h2>
           <p className={`${body} mb-10`}>
-            At the day 30 checkpoint we look at where the team is up to, and pick one.
+            At the day 30 checkpoint we look at where the team is up to, and agree on one.
           </p>
 
           <div className="divide-y divide-zinc-800 border-y border-zinc-800">

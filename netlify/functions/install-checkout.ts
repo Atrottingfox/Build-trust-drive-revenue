@@ -1,6 +1,7 @@
 import type { Handler } from "@netlify/functions";
 import { isTestContact, priceCents } from "./_pricing";
 import { GHL_API, GHL_VERSION } from "./_ghl";
+import { DAY61_OPTION } from "./_variants";
 
 /*
   Takes the first of the two 90 Day Install payments.
@@ -121,7 +122,9 @@ const handler: Handler = async (event) => {
       */
       "line_items[0][price_data][product_data][name]": "90 Day Authority Engine Install, payment 1 of 2",
       "line_items[0][price_data][product_data][description]":
-        `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
+        DAY61_OPTION.has(String(contactId || ""))
+          ? `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. A third ${money(secondAmount)} at day 61 only if agreed at the day 30 checkpoint.`
+          : `${money(chargeCents)} now. The second ${money(secondAmount)} is invoiced automatically to this card, due in ${secondDays} days. There is no third payment.`,
       "return_url": returnUrl(contactId ? String(contactId) : undefined),
       // Keeps the card usable for the second payment without asking again.
       "payment_intent_data[setup_future_usage]": "off_session",

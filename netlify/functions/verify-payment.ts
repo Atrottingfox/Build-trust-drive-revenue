@@ -1,6 +1,7 @@
 import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
 import { isTestContact, priceCents } from "./_pricing";
+import { DAY61_OPTION } from "./_variants";
 
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
@@ -422,7 +423,9 @@ const handler: Handler = async (event) => {
             "Payment received. One thing left.",
             [
               `<p>${first},</p>`,
-              `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. Nothing after that.</p>`,
+              DAY61_OPTION.has(String(contactId))
+                ? `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. A third at day 61 only if we agree to it at the day 30 checkpoint.</p>`
+                : `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. Nothing after that.</p>`,
               `<p>One thing left, and it takes a minute.</p>`,
               `<p><a href="${slot}">Lock your weekly hour</a></p>`,
               `<p>Two choices on that page. Your weekly call, and your board call every four weeks. Both hours are then yours for the whole build, and every session goes straight into your calendar. You will not get a booking link again.</p>`,

@@ -2,7 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Container } from '../components/ui/Container';
 import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
-import { TERMS, TERMS_TITLE, TERMS_VERSION, termsAreComplete } from '../content/install-terms';
+import { TERMS_TITLE, termsAreComplete } from '../content/install-terms';
+import { variantFor } from '../content/install-variants';
 
 /*
   /install - the 90 Day Install hub.
@@ -48,32 +49,6 @@ const STRIPE_PUBLISHABLE_KEY =
   meeting-series turns that one answer into the whole 90 day rhythm.
 */
 const WEEKLY_CALL_URL = '';
-
-/*
-  They have already done the Brand Day, so this overview is about the 90 days
-  specifically. It is the three phases from /offer, in the order they happen, so
-  the page and the sales page and the agreement all say the same thing.
-*/
-const PHASES = [
-  {
-    when: 'Weeks 1 to 4',
-    title: 'Install',
-    body: 'Short form, long form, lead magnets, the Trojan Horse VSL and the documented Authority Engine get built and wired up. The first cycle runs live, so we test it on real audience.',
-    rhythm: 'One 60 minute call a week with you and your key people. One training a week for your team.',
-  },
-  {
-    when: 'Weeks 5 to 12',
-    title: 'Tune',
-    body: 'Your team runs the cycle and I move to advisor. We tighten hooks, lead magnets, long form structure and the VSL on real data, and test the strongest pieces with your warmest audience.',
-    rhythm: 'A 60 minute call a fortnight, a training a week, an Operator Clinic a fortnight, up to one Loom a week, and 24 hour feedback on WhatsApp.',
-  },
-  {
-    when: 'Day 90',
-    title: 'What you have',
-    body: 'One documented Authority Engine, one repeatable monthly demand cycle, and your operator running the rhythm. You spend under two hours a week on it.',
-    rhythm: '',
-  },
-];
 
 const store = {
   get(k: string) {
@@ -188,6 +163,8 @@ export default function Install() {
   const [error, setError] = useState('');
   const [embedded, setEmbedded] = useState(false);
   const complete = termsAreComplete();
+  /* Per client wording, by contact id. Everyone else gets the standard 90 Day. */
+  const v = variantFor(contactId);
   const checkoutRef = useRef<any>(null);
   // Stripe's return can be reloaded. Verifying twice would double-invoice.
   const verifySent = useRef(false);
@@ -286,7 +263,7 @@ export default function Install() {
         body: JSON.stringify({
           contactId: contactId,
           signatureName: name.trim(),
-          termsVersion: TERMS_VERSION,
+          termsVersion: v.version,
         }),
       });
       if (!(await res.json())?.ok) throw new Error('sign failed');
@@ -382,12 +359,14 @@ export default function Install() {
             </p>
 
             <div className="space-y-7">
-              {PHASES.map((phase) => (
+              {v.phases.map((phase) => (
                 <div key={phase.title} className="grid sm:grid-cols-[110px_1fr] gap-2 sm:gap-5">
                   <p className="text-zinc-500 text-[13px] font-medium sm:pt-0.5">{phase.when}</p>
                   <div>
                     <p className="text-white text-[15px] font-medium mb-1.5">{phase.title}</p>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed">{phase.body}</p>
+                    {phase.body && (
+                      <p className="text-zinc-400 text-[15px] leading-relaxed">{phase.body}</p>
+                    )}
                     {phase.rhythm && (
                       <p className="text-zinc-500 text-sm leading-relaxed mt-2">{phase.rhythm}</p>
                     )}
@@ -397,10 +376,7 @@ export default function Install() {
             </div>
 
             <p className="text-zinc-500 text-sm leading-relaxed mt-7 pt-6 border-t border-zinc-800">
-              I provide the strategy, frameworks and advisory. Your team implements, led by your
-              Media Owner. AUD $10,000 for the 90 days, paid $5,000 today and $5,000 in 30 days.
-              There is no third payment: the day 60 instalment is waived because you came through
-              a Brand Day.
+              {v.feeLine}
             </p>
           </div>
 
@@ -411,7 +387,7 @@ export default function Install() {
               {signed ? null : (
                 <>
                   <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5 sm:p-6 max-h-[420px] overflow-y-auto space-y-6">
-                    {TERMS.map((section) => (
+                    {v.terms.map((section) => (
                       <div key={section.heading}>
                         <h3 className="text-white text-[15px] font-medium mb-2">{section.heading}</h3>
                         <div className="space-y-2.5">
@@ -423,7 +399,7 @@ export default function Install() {
                         </div>
                       </div>
                     ))}
-                    <p className="text-zinc-600 text-xs">Version {TERMS_VERSION}</p>
+                    <p className="text-zinc-600 text-xs">Version {v.version}</p>
                   </div>
 
                   {!complete ? (
@@ -471,8 +447,7 @@ export default function Install() {
                           className="mt-1 h-4 w-4 accent-blue-500 shrink-0"
                         />
                         <span className="text-zinc-400 text-sm leading-relaxed">
-                          I have read the agreement, I am authorised to enter into it, and I agree
-                          to both instalments of $5,000.
+                          {v.checkboxLine}
                         </span>
                       </label>
 
@@ -510,7 +485,7 @@ export default function Install() {
               ) : (
                 <>
                   <p className="text-zinc-400 leading-relaxed mb-6">
-                    $5,000 today, $5,000 in 30 days, to the same card. Nothing after that.
+                    {v.payLine}
                   </p>
                   <div id="install-checkout" className="w-full" />
                   {!embedded && (
