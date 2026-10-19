@@ -55,7 +55,7 @@ const STANDARD: InstallVariant = {
   payLine: '$5,000 today, $5,000 in 30 days, to the same card. Nothing after that.',
 };
 
-/* Erina Roch, UpScale. Sean's own text, 2026-10-19. Matches /upscale. */
+/* Erina Roch, UpScale. Aligned to Sean's email to her, 2026-10-19. Matches /upscale. */
 const UPSCALE: InstallVariant = {
   terms: UPSCALE_TERMS,
   version: UPSCALE_TERMS_VERSION,
@@ -63,30 +63,24 @@ const UPSCALE: InstallVariant = {
   intro: UPSCALE_INTRO,
   phases: [
     {
-      when: 'Weeks 1 to 4',
+      when: 'Day 1 to 30',
       title: 'Install',
-      body: 'During the first four weeks, we will establish the strategy, operating rhythm, core content system, and initial implementation loop.',
-      rhythm: 'At the end of Week 4, both parties will review progress and agree which level of support is appropriate for the remaining eight weeks.',
+      body: 'One simple loop: post consistently, shoot consistently, review the data, identify what worked, do more of it. The focus is the UpScale business brand.',
+      rhythm: 'At Day 30, we decide together which level of support is appropriate for the remaining 60 days.',
     },
     {
-      when: 'Weeks 5 to 12',
-      title: 'Tune',
-      body: 'Path A: High Touch Tune, with one 60 minute call per week. Path B: Standard Authority Engine Tune, for teams that can operate the system with a lower level of direct support.',
-      rhythm: '',
-    },
-    {
-      when: 'Day 90',
-      title: 'What you have',
-      body: 'The intended outcome is that your team can operate the system without requiring constant founder direction.',
+      when: 'Day 31 to 90',
+      title: 'Option A or Option B',
+      body: 'Option A: Standard Authority Engine, $15,000 in total including the Brand Day. Option B: Expanded Authority Engine, with one 60 minute call per week, $20,000 in total including the Brand Day.',
       rhythm: '',
     },
   ],
   feeLine:
-    'I provide strategy, frameworks, training, feedback, and advisory. AUD $5,000 on commencement and AUD $5,000 on Day 31. If both parties choose Path A at the Week 5 Review, a further AUD $5,000 on Day 61.',
+    'I provide strategy, frameworks, training, feedback, and advisory. Your $5,000 Brand Day payment is already credited. AUD $5,000 on commencement and AUD $5,000 on Day 31. If we choose Option B at Day 30, a further AUD $5,000 on Day 61.',
   checkboxLine:
-    'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if both parties choose Path A at the Week 5 Review.',
+    'I have read the agreement, I am authorised to enter into it, and I agree to the payments of $5,000 on commencement and on Day 31, and to the further $5,000 on Day 61 if we choose Option B at Day 30.',
   payLine:
-    '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Path A.',
+    '$5,000 today, $5,000 on Day 31, to the same card. A further $5,000 on Day 61 only under Option B.',
 };
 
 const BY_CONTACT: Record<string, InstallVariant> = {

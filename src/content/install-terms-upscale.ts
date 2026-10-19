@@ -1,23 +1,27 @@
 /*
-  Erina Roch / UpScale's 90 Day agreement. Sean's own text, 2026-10-19.
+  Erina Roch / UpScale's 90 Day agreement and the /upscale page, from one
+  source so they cannot drift.
 
-  Sections 1 to 5 are his page, word for word, with four changes he asked for
-  or confirmed:
-  - no hyphenated compounds ("60 minute", "High Touch", "done for you")
-  - no semicolons at the end of list lines
-  - High Touch is "supposed to be a call a week", so Path A carries one
-  - Path A's additional $5,000 is a third payment on Day 61 (his text had it on
-    Day 31 alongside everyone's second payment, which made both paths cost the
-    same; "There is no automatic third payment under Path B" settles it)
+  v3, 2026-10-19. Aligned to Sean's email to Erina, which is what she reads
+  first:
+  - Option A is Standard, Option B is Expanded (his page text had them the
+    other way round as Path A / Path B)
+  - the decision is made together at Day 30
+  - totals stated including the Brand Day: $15,000 and $20,000
+  - the business brand first, personal brands later, and the 30 day loop
+  - the Day 30 criteria are the email's list
 
-  Section 4 also carries the consent line an automatic charge needs, and the
-  standard non refundable and failed payment lines. Sections 6 to 10 are the
-  standard agreement's general clauses, unchanged.
+  From Sean's own page text: the Install inclusions, each option's inclusions,
+  Day 90, Responsibilities. Expanded carries one 60 minute call per week
+  ("high touch is supposed to be a call a week"). No hyphenated compounds, no
+  list semicolons.
 
-  Line markers, read by /install and /upscale:
+  The second payment is Day 31 under both options, the date Stripe actually
+  charges it (the email says Day 30 for Standard).
+
+  Line markers, read by TermsBody:
     "## "  a subheading inside a section
     "• "   a list item
-  Anything else is a paragraph.
 
   Loaded by /install only for her contact id (see install-variants.ts). Bump
   the version on any wording change.
@@ -25,29 +29,90 @@
 
 import type { TermsSection } from './install-terms';
 
-export const UPSCALE_TERMS_VERSION = 'upscale-v2-2026-10';
+export const UPSCALE_TERMS_VERSION = 'upscale-v3-2026-10';
 
 export const UPSCALE_TITLE = '90 Day Authority Engine Install';
 
 export const UPSCALE_INTRO =
   'You have completed the Brand Day. The next 90 days are designed to install the content operating system required for your current business constraint, then tune it against real implementation and data.';
 
-/* Sean's page. Shown on /upscale and as the first part of the agreement. */
-export const UPSCALE_PAGE: TermsSection[] = [
+/* The two options. The /upscale page lays these out side by side; the
+   agreement states them in full. */
+export type UpscaleOption = {
+  letter: 'A' | 'B';
+  name: string;
+  forWho: string;
+  calls: string;
+  differs: string[];
+  payments: string[];
+  total: string;
+};
+
+export const UPSCALE_OPTIONS: UpscaleOption[] = [
   {
-    heading: 'The engagement',
+    letter: 'A',
+    name: 'Standard Authority Engine',
+    forWho: 'A lower support continuation for a team that can run the system with less direct input.',
+    calls: 'No weekly call. One strategic advisory content board per month.',
+    differs: [
+      'Monthly review of the Authority Engine and agreed metrics',
+      'Selected asset and performance review',
+    ],
+    payments: ['$5,000 on Day 31', 'No further payment'],
+    total: '$15,000',
+  },
+  {
+    letter: 'B',
+    name: 'Expanded Authority Engine',
+    forWho:
+      'A higher support continuation if the team needs additional training, calibration, asset review, and implementation support.',
+    calls: 'One 60 minute call per week with you and your key people, plus the monthly content board.',
+    differs: [
+      'Continued review and refinement of the Authority Engine',
+      'Continued operator development and accountability',
+      'Continued review of selected assets, workflows, and performance data',
+    ],
+    payments: ['$5,000 on Day 31', '$5,000 on Day 61'],
+    total: '$20,000',
+  },
+];
+
+/* Included under both options, Day 31 to Day 90. */
+export const UPSCALE_BOTH = [
+  'Two 60 minute team training sessions per month',
+  'One strategic advisory content board per month',
+  'One 90 minute Office Hours group coaching session per week',
+  'Async WhatsApp feedback within 24 hours, Monday to Friday',
+];
+
+export const UPSCALE_DAY30_CRITERIA = [
+  'What has been implemented',
+  'The quality of the content',
+  "The team's capability",
+  'Progress with Sally and all operators',
+  'The amount of support the system actually requires',
+  'The next constraint worth solving',
+];
+
+/* Sections shown on /upscale before and after the options. */
+export const UPSCALE_BEFORE: TermsSection[] = [
+  {
+    heading: 'The first 30 days',
     body: [
-      'The engagement is delivered in two stages:',
-      '• Install: Weeks 1 to 4',
-      '• Tune: Weeks 5 to 12',
-      'At the end of Week 4, both parties will review progress and agree which level of support is appropriate for the remaining eight weeks.',
+      'The first 30 days are about running one simple loop:',
+      '• Post consistently',
+      '• Shoot consistently',
+      '• Review the data',
+      '• Identify what worked',
+      '• Do more of it',
+      'For now, the focus is the UpScale business brand. We can address the personal brands once the core content is stronger and the system is running consistently.',
     ],
   },
   {
     heading: '1. Install',
     body: [
-      '## Weeks 1 to 4',
-      'During the first four weeks, we will establish the strategy, operating rhythm, core content system, and initial implementation loop.',
+      '## Day 1 to Day 30',
+      'During the first 30 days, we will establish the strategy, operating rhythm, core content system, and initial implementation loop.',
       '## Included',
       '• One 60 minute training session per week for your team',
       '• One 60 minute calibration call every fortnight with you and your key people',
@@ -58,49 +123,11 @@ export const UPSCALE_PAGE: TermsSection[] = [
       '• Establishment of the first repeatable content cycle',
       '• Definition of ownership, responsibilities, and success metrics',
       'The exact Authority Engine components will be selected according to the bottleneck and priorities agreed during the Brand Day. Not every business requires the same assets.',
-      'The first 30 days are focused on building and testing the minimum system required to create qualified demand.',
     ],
   },
-  {
-    heading: '2. Week 5 Review',
-    body: [
-      'At the end of Week 4, we will review:',
-      '• Progress against the agreed implementation plan',
-      '• The quality of the content being produced',
-      '• Team participation and execution',
-      '• The effectiveness of the operating rhythm',
-      '• The capability of the appointed operator',
-      '• The next constraint worth solving',
-      '• The level of support required for the remaining eight weeks',
-      'Both parties will then choose one of the following paths.',
-      '## Path A: High Touch Tune, Weeks 5 to 12',
-      'This path continues the higher level of support where the team requires additional training, calibration, and implementation assistance.',
-      '## Included',
-      '• One 60 minute call per week with you and your key people',
-      '• Two 60 minute team training sessions per month',
-      '• One strategic advisory content board per month',
-      '• One 90 minute Office Hours group coaching session per week',
-      '• Async WhatsApp feedback within 24 hours, Monday to Friday',
-      '• Continued review and refinement of the Authority Engine',
-      '• Continued operator development and accountability',
-      '• Continued review of selected assets, workflows, and performance data',
-      '## Additional investment',
-      'AUD $5,000, paid on Day 61.',
-      'This is the continuation payment for the higher touch support path through the end of the 90 day engagement.',
-      '## Path B: Standard Authority Engine Tune, Weeks 5 to 12',
-      'This path is for teams that can operate the system with a lower level of direct support.',
-      '## Included',
-      '• Two 60 minute team training sessions per month',
-      '• One strategic advisory content board per month',
-      '• One 90 minute Office Hours group coaching session per week',
-      '• Async WhatsApp feedback within 24 hours, Monday to Friday',
-      '• Monthly review of the Authority Engine and agreed metrics',
-      '• Selected asset and performance review',
-      '## Additional investment',
-      'No additional payment beyond the initial Install fee.',
-      'The first payment is due on commencement and the second payment is due on Day 31.',
-    ],
-  },
+];
+
+export const UPSCALE_AFTER: TermsSection[] = [
   {
     heading: '3. Day 90: What you have',
     body: [
@@ -119,16 +146,18 @@ export const UPSCALE_PAGE: TermsSection[] = [
   {
     heading: '4. Investment',
     body: [
-      '## Initial Install payment',
+      'Your $5,000 Brand Day payment is credited, and has already been taken off the total for both options.',
+      '## Initial payment',
       'AUD $5,000 on commencement',
-      '## Second payment',
-      'AUD $5,000 on Day 31, under either path',
-      '## Path A payment',
-      '• Path A: High Touch Tune: a further AUD $5,000 on Day 61',
-      '• Path B: Standard Tune: no further payment',
-      'There is no automatic third payment under Path B.',
-      'Under Path A, the additional AUD $5,000 paid on Day 61 covers the increased level of support through Day 90.',
-      'All payments are charged automatically to the same card. By signing, you agree to the payments on commencement and on Day 31, and to the Day 61 payment if both parties choose Path A at the Week 5 Review.',
+      '## Option A: Standard Authority Engine',
+      '• AUD $5,000 on Day 31',
+      '• No further payment',
+      'Total for the full engagement, including the Brand Day: AUD $15,000.',
+      '## Option B: Expanded Authority Engine',
+      '• AUD $5,000 on Day 31',
+      '• AUD $5,000 on Day 61',
+      'Total for the full engagement, including the Brand Day: AUD $20,000.',
+      'All payments are charged automatically to the same card. By signing, you agree to the payments on commencement and on Day 31, and to the Day 61 payment if both parties choose Option B at Day 30.',
       'Fees are non refundable once the engagement starts.',
       'If a payment fails, I will let you know and we will sort it out. Work continues while we do.',
     ],
@@ -148,6 +177,24 @@ export const UPSCALE_PAGE: TermsSection[] = [
     ],
   },
 ];
+
+/* Section 2 in agreement form, generated from the same option data. */
+const DAY30_SECTION: TermsSection = {
+  heading: '2. The Day 30 decision',
+  body: [
+    'At Day 30, we will decide together which level of support is appropriate for the remaining 60 days, based on:',
+    ...UPSCALE_DAY30_CRITERIA.map((c) => `• ${c}`),
+    ...UPSCALE_OPTIONS.flatMap((o) => [
+      `## Option ${o.letter}: ${o.name}, Day 31 to Day 90`,
+      o.forWho,
+      '## Included',
+      ...(o.letter === 'B' ? ['• One 60 minute call per week with you and your key people'] : []),
+      ...UPSCALE_BOTH.map((b) => `• ${b}`),
+      ...o.differs.map((d) => `• ${d}`),
+      `Payment: ${o.payments.join('. ')}.`,
+    ]),
+  ],
+};
 
 /* The standard agreement's general clauses, unchanged apart from numbering. */
 const GENERAL: TermsSection[] = [
@@ -188,4 +235,4 @@ const GENERAL: TermsSection[] = [
   },
 ];
 
-export const UPSCALE_TERMS: TermsSection[] = [...UPSCALE_PAGE, ...GENERAL];
+export const UPSCALE_TERMS: TermsSection[] = [...UPSCALE_BEFORE, DAY30_SECTION, ...UPSCALE_AFTER, ...GENERAL];
