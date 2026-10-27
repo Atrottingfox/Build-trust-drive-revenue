@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { usePageVisits } from '../lib/pageVisits';
 
 type SEOProps = {
   title: string;
@@ -15,6 +16,8 @@ export default function SEO({ title, description, path, image, noIndex }: SEOPro
   const url = `${SITE_URL}${path}`;
   const ogImage = image || DEFAULT_IMAGE;
   const fullTitle = title.includes('Authority Engine') ? title : `${title} - Authority Engine`;
+  /* Every unlisted page is a client page, so every one of them reports visits. */
+  usePageVisits(path, title, !!noIndex);
 
   return (
     <Helmet>
