@@ -2,19 +2,19 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
-  Check, X, Target, Zap, FileText, Megaphone, Settings, ArrowRight,
+  Check, X, Target, Zap, FileText, Megaphone, ArrowRight,
   ClipboardCheck, UserPlus, Video, Crosshair,
 } from 'lucide-react';
 import PasswordGate from '../components/PasswordGate';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 
-/* Morgan Nelson. Private follow on from the call.
-   This is the Operator Intensive outline rewritten in his language and his
-   situation: he already has a candidate, so the hunting phase is scaled back to
-   role design, comp structure and the final interview. Pricing here is the
-   structure Sean quoted him live (5k Day, 5k hiring, 15k install with the Day
-   rolled in), not the 30k founding rate on /operatorintensive. */
+/* Morgan Nelson. Private, after the Brand Day (14 Sep 2026).
+   Sells the 90 Day Install. Everything under "What the Day landed" and in the
+   install cards is a decision from the room (Brand Day transcript + scribe
+   notes), nothing new. Pricing is the structure Sean quoted live: install 15k,
+   the Day's 5k rolls in, so 10k as two 5k instalments, hiring support 5k on top.
+   Never name Jack leaving here, Jack can see this page. */
 
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
@@ -69,92 +69,49 @@ const Pull = ({ children }: { children: React.ReactNode }) => (
 
 /* ---------------------------------------------------------------- */
 
-type Score = { name: string; score: number; note: string };
-
-const SCORES: Score[] = [
-  {
-    name: 'Clarity',
-    score: 2,
-    note: 'Your number on the call. Not good at all anymore, because you went into business coaching at the start of the year when you switched the front end offer, and the last month or two you have gone back. Wishy washy for sure, and it needs refining a lot.',
-  },
-  {
-    name: 'Visibility',
-    score: 3,
-    note: 'Organic. You do not run DMs off Instagram and you do not want to. The brand gives, the ads clean up. Same shape as what Hormozi runs. DreamFest brings in a lot of people, and that is where most of it comes from.',
-  },
-  {
-    name: 'Authority',
-    score: 4,
-    note: 'Better than most. You have done a pretty okay job of positioning what it is that you do. Take the four. The problem is it is a little bit murky on how you do it.',
-  },
-  {
-    name: 'Quality',
-    score: 3,
-    note: 'Could definitely be better. You do not have a problem converting in the room, that is your jam, probably a bit better than industry average. The people arriving are just not as pre sold as they could be.',
-  },
-];
-
-function Scores({ items }: { items: Score[] }) {
-  return (
-    <div className="border-t border-zinc-800">
-      {items.map((s) => (
-        <div key={s.name} className="border-b border-zinc-800/70 py-5">
-          <div className="flex items-center justify-between gap-4 mb-3 flex-wrap">
-            <p className="font-display text-[17px] font-extrabold text-white">{s.name}</p>
-            <div className="flex items-center gap-3">
-              <div className="flex gap-1">
-                {[1, 2, 3, 4, 5].map((n) => (
-                  <span
-                    key={n}
-                    className={`h-2 w-7 rounded-sm ${n <= s.score ? 'bg-blue-500' : 'bg-zinc-800'}`}
-                  />
-                ))}
-              </div>
-              <span className="text-zinc-500 text-[12px] tabular-nums whitespace-nowrap">{s.score} / 5</span>
-            </div>
-          </div>
-          <p className="text-zinc-400 text-[14px] leading-relaxed">{s.note}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* ---------------------------------------------------------------- */
-
-const theThree = [
+const landed = [
   {
     num: '1',
     icon: Target,
-    title: 'What sits on the profile',
-    body: 'The line that makes an entrepreneur see the outcome the second they land. Down the barrel of a gun. Taki has one thing and it is that you are going to become a million dollar person, and you feel it before you have read a second sentence.',
+    title: 'The message',
+    items: [
+      'Four pillars. Behaviour, Identity, Entrepreneurship, Leadership',
+      'Hypnosis, never advertised as NLP',
+      'Not "the business guy"',
+      'Dream Out Loud gets its own page so the ads can run to it',
+    ],
   },
   {
     num: '2',
-    icon: FileText,
-    title: 'The posts they hit first',
-    body: 'The pieces sitting at the top of the profile, and whether they carry what someone has to believe to move from where they are to where you take them.',
+    icon: Video,
+    title: 'The content',
+    items: [
+      'Wednesday is ideas day, film the next day, you do the last 20%',
+      'Two hours recording your 20 to 30 stories',
+      'YouTube built to one specific person, one outcome, the title and the CTA. Your bar is 10K views a video, consistently',
+      'Podcast outsourced for the 90 days. The trailer only, no reels',
+    ],
   },
   {
     num: '3',
     icon: Megaphone,
-    title: 'The theme underneath everything',
-    body: 'The one message you reinforce constantly. Content is engineering beliefs, and that matters more for you because there is no sales team catching people on the other side.',
+    title: 'The rhythm',
+    items: [
+      'Four event campaigns a year, two loud weeks each, comment apply',
+      'A monthly night. Zero pitch, register to be coached, three really good clips out of it',
+    ],
+  },
+  {
+    num: '4',
+    icon: UserPlus,
+    title: 'The team',
+    items: [
+      'A channel manager on short form first',
+      'Path is channel manager > head of short form > head of growth, on KPI gates',
+      '90 day KPI review before the seat is locked',
+    ],
   },
 ];
-
-const whoTheyAre = [
-  'They earn about 300 to 600k a year and they are hustling and grinding',
-  'They think they need to work harder and hustle more to get to the next level',
-  'They are working an old paradigm. Limiting beliefs, fears, blockages about what it means to become a millionaire',
-  'They cannot lead themselves yet, so they cannot lead a team',
-  'Scattered business operator, a solopreneur, who has to become a proper founder who can grow a proper company',
-];
-
-
-
-
-
 
 const whatIDoOnHiring = [
   {
@@ -176,9 +133,9 @@ const whatIDoOnHiring = [
     items: [
       'You send me the JD and I tell you what to cut, what to add, and what not to say',
       'Two comp options. Higher base with no bonus, or lower base plus bonus. Anyone who takes the first one has told you something',
-      'The base band for a head of content sits around 110 to 130 so they are actually invested. Head of short form sits nearer 105',
+      'Budget on the Day was 80. I pushed 90, so they are actually invested',
     ],
-    tail: 'What you already run with Jack is the right instinct. 30 percent of YouTube revenue over baseline, and a month where that paid him a 3,000 bonus. That is what makes someone ramp the thing.',
+    tail: '30 percent of YouTube revenue over baseline is the right instinct. That is what makes someone ramp the thing.',
   },
   {
     num: '3',
@@ -217,8 +174,9 @@ const install = [
     icon: Zap,
     title: 'Short form Engine',
     items: [
-      'Weekly capture block with you, built around the formats that actually suit you',
-      'Pillars, formats and hooks written down so they survive a staff change',
+      'The Wednesday ideas day and next day shoot, run without you in the weeds',
+      'Your 20 to 30 stories captured and cut into the bank',
+      'The four pillars, formats and hooks written down so they survive a staff change',
       'Operator weekly playbook',
       'Short form scorecard and cadence form',
     ],
@@ -227,8 +185,9 @@ const install = [
     icon: Video,
     title: 'Long form and trust assets',
     items: [
-      'One cycle of 6 to 8 pillar videos that carry the message',
+      'One cycle of 6 to 8 pillar videos that carry the message, to the 10K bar',
       'A VSL tied directly to the three day and the Inner Circle',
+      'The Dream Out Loud page the ads run to',
       'Lead magnets mapped to each video',
     ],
   },
@@ -236,7 +195,8 @@ const install = [
     icon: Megaphone,
     title: 'Cadence and feedback',
     items: [
-      'Weekly engine check in',
+      'Seven calls with me across the 90 days, plus three board calls',
+      'The event campaigns and the monthly night built into the calendar',
       'Operator clinics and Q and A',
       'Loom reviews on the real assets',
       'Three straight weeks hitting agreed targets by day 90',
@@ -278,31 +238,15 @@ const isNot = [
   },
 ];
 
-const dayCovers = [
-  'Positioning, perspective and personality, dialled tight into one message',
-  'The line, the pinned posts and the theme that runs underneath everything',
-  'The content buckets that carry it, and the capture formats that suit how you actually work',
-  'What the production line looks like today, step by step, and who owns each part',
-  'What this Operator has to own week to week, and the 90 day scorecard that says whether he is doing it',
-  'Three to five clear 90 day outcomes for content and pipeline',
-];
-
-const dayDeliverables = [
-  'Authority Engine blueprint',
-  '90 day content plan',
-  'Operator role definition and 90 day scorecard with clear KPIs',
-];
-
 const money = [
-  { name: 'The Day', amount: '$5,000 AUD', note: 'Everything starts here. Nothing else gets committed to until it is done.' },
-  { name: 'Hiring support', amount: '$5,000 AUD', note: 'JD, comp structure, and I take the final interview.' },
-  { name: '90 Day Install', amount: '$10,000 AUD', note: 'Normally 15,000. The 5,000 from the Day rolls in, so it drops to 10.' },
+  { name: '90 Day Install', amount: '$10,000 AUD', note: 'Normally 15,000. The 5,000 from the Day rolls in, so it drops to 10. Paid as two 5,000 instalments, the second 30 days after you sign.' },
+  { name: 'Hiring support', amount: '$5,000 AUD', note: 'Optional. JD, comp structure, and I take the final interview.' },
 ];
 
 const nextSteps = [
-  'Send me the reels from the Body science hire when they come through, plus whatever context you have on him, ideally resume.',
-  'I do a sweep of my network this week and come back with anyone worth putting in front of you.',
-  'Put the email blast out after DreamFest and attach a bounty for anyone who sends real talent.',
+  'Read the agreement and sign it.',
+  'Pay the first 5,000. That opens your call calendar.',
+  'Pick your weekly hour with me and the 90 days start.',
 ];
 
 /* ---------------------------------------------------------------- */
@@ -311,8 +255,8 @@ function MorganPage() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Morgan Nelson, The Operator Intensive"
-        description="Follow on from the call. The read, the three things to fix, the hire, the 90 days, and how the money works."
+        title="Morgan Nelson, The 90 Day Install"
+        description="Follow on from the Day. What we landed, the hire, the 90 days, and how the money works."
         path="/morgan"
         noIndex
       />
@@ -327,13 +271,13 @@ function MorganPage() {
               Private &middot; Morgan Nelson &middot; The Authority Engine
             </p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-5">
-              One person to own it.
+              The Day drew the map.
               <br />
-              90 days to make them dangerous.
+              90 days to make it run.
             </h1>
             <p className="text-zinc-300 text-lg leading-relaxed">
-              Follow on from our call. This is what I would do if I was in your position, and what it looks
-              like if we do it together.
+              Follow on from the Day. What we landed in the room, and what it looks like when we install it
+              together.
             </p>
           </Section>
         </div>
@@ -341,56 +285,14 @@ function MorganPage() {
 
       <div className="gradient-line" />
 
-      {/* THE READ */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The read</Label>
-            <H2>Clarity is the constraint.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-10">
-              Four lanes, out of five, from the call. Everything else sits downstream of the first one.
-            </p>
-            <Scores items={SCORES} />
-            <Pull>
-              Once clarity is dialled you can crank visibility. People will land and immediately know 'he is for
-              me'. Then the authority reads as expertise instead of notoriety. The audience then walk into events
-              pre sold.
-            </Pull>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* WHO LANDS ON THE PAGE */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>What they have to see</Label>
-            <H2>He is 'the guy'.</H2>
-            <p className="text-zinc-300 text-[17px] leading-relaxed mt-6">
-              An entrepreneur must land on the page and think 'he is the guy who is going to change my identity to
-              be a high performer'.
-            </p>
-            <p className="text-zinc-400 leading-relaxed mt-8 mb-5">That entrepreneur, specifically.</p>
-            <Ticks items={whoTheyAre} />
-            <p className="text-zinc-400 leading-relaxed mt-8">
-              Nothing on the profile says that right now.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* THE THREE THINGS */}
+      {/* WHAT THE DAY LANDED */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>If I was in your position</Label>
-            <H2>Three things, in this order.</H2>
-            <div className="grid md:grid-cols-3 gap-6 mt-12">
-              {theThree.map((t, i) => (
+            <Label>What the Day landed</Label>
+            <H2>Decided in the room.</H2>
+            <div className="grid md:grid-cols-2 gap-6 mt-12">
+              {landed.map((t, i) => (
                 <motion.div
                   key={t.num}
                   className="glow-card p-8"
@@ -403,13 +305,23 @@ function MorganPage() {
                     <t.icon className="w-[18px] h-[18px] text-blue-400" />
                     <span className="text-zinc-600 text-sm font-mono">{t.num}</span>
                   </div>
-                  <h3 className="text-white font-semibold mb-3">{t.title}</h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed">{t.body}</p>
+                  <h3 className="text-white font-semibold mb-4">{t.title}</h3>
+                  <Bullets items={t.items} />
                 </motion.div>
               ))}
             </div>
-            <p className="text-zinc-300 text-[17px] leading-relaxed mt-10">
-              Get those three straight and the rest of this gets simple.
+          </Section>
+        </div>
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Pull>
+              Once clarity is dialled you can crank visibility. People will land and immediately know 'he is for
+              me'. Then the authority reads as expertise instead of notoriety. The audience then walk into events
+              pre sold.
+            </Pull>
+            <p className="text-zinc-400 leading-relaxed mt-8">
+              The Day did the clarity. Nothing on that list runs itself. The 90 days is what turns it into a
+              machine that ships every week.
             </p>
           </Section>
         </div>
@@ -422,7 +334,7 @@ function MorganPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The hire</Label>
-            <H2>You are close.</H2>
+            <H2>One person to own it.</H2>
             <Pull>
               You do not need to attract the best talent. You need someone hungry and disciplined who can run a
               camera, be there, and turn things around fast. Skill is trainable. Fast and disciplined are the two
@@ -476,10 +388,10 @@ function MorganPage() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The 90 days</Label>
-            <H2>Then we install the Engine he runs.</H2>
+            <H2>Then we install the Engine they run.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6">
-              Once he is in the seat, the 90 days is spent building the thing he operates every week and training him
-              to run it without you being dragged into the weeds.
+              Everything the Day decided, built into the thing your channel manager operates every week, and them
+              trained to run it without you being dragged into the weeds.
             </p>
           </Section>
         </div>
@@ -509,31 +421,6 @@ function MorganPage() {
                 </div>
               ))}
             </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* THE DAY */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Where it starts</Label>
-            <H2>Everything starts in the one Day.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              A day in your office. We start wide on brand, narrow into content, then get right down into the
-              production line. You and me in the room for half the day. You me and Jack for the other half.
-            </p>
-            <Ticks items={dayCovers} />
-            <div className="glow-card p-7 mt-10">
-              <p className="text-white text-sm font-semibold mb-4">You walk out with</p>
-              <Bullets items={dayDeliverables} tone="blue" />
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
-              It also gives me what I need to say honestly whether I can help you. I am not taking 20k off you and
-              then working out whether it was the right call.
-            </p>
           </Section>
         </div>
       </section>
@@ -571,9 +458,9 @@ function MorganPage() {
           <Section>
             <Label>How the money works</Label>
             <div className="glow-card border-blue-500/20 p-8">
-              <p className="text-zinc-400 text-[14px] mb-1">All in, if we run the whole thing</p>
-              <p className="font-display text-4xl font-extrabold text-white mb-2">20,000 AUD</p>
-              <p className="text-zinc-500 text-sm mb-7">Broken into three, and you only commit to the first one now.</p>
+              <p className="text-zinc-400 text-[14px] mb-1">The 90 days, with the Day rolled in</p>
+              <p className="font-display text-4xl font-extrabold text-white mb-2">10,000 AUD</p>
+              <p className="text-zinc-500 text-sm mb-7">Hiring support sits on top if you want me in the hire.</p>
               <ul className="space-y-5">
                 {money.map((it, i) => (
                   <li key={i} className="border-b border-zinc-800 pb-4 last:border-0 last:pb-0">
@@ -585,16 +472,6 @@ function MorganPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-            <div className="glow-card p-7 mt-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Settings className="w-[18px] h-[18px] text-blue-400" />
-                <p className="text-white text-sm font-semibold">The decision gate</p>
-              </div>
-              <p className="text-zinc-400 text-sm leading-relaxed">
-                At the end of the Day we both decide. If either of us thinks it is not the right move, you have paid
-                5,000 for a proper Day and a blueprint you can run yourself, and there is no further obligation.
-              </p>
             </div>
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               Invite only, capped so I can stay close to your operator, your content and your data.
@@ -614,16 +491,12 @@ function MorganPage() {
             <div className="mt-10 mb-12">
               <Ticks items={nextSteps} />
             </div>
-            <p className="text-zinc-400 leading-relaxed">
-              You said you are keen to kick off with the Day regardless, and I agree. We spend a day together, and
-              then so long as we both want it, we go and find the person who is going to own this.
-            </p>
             <div className="mt-10">
               <a
-                href="https://authorityengine.com.au/lock-in?c=dTsxeHNWC5Vv0Q8DUYHF"
+                href="https://authorityengine.com.au/install?c=dTsxeHNWC5Vv0Q8DUYHF"
                 className="btn-shine inline-flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors"
               >
-                Lock in the Day
+                Lock in the 90 days
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>
