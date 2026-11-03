@@ -24,6 +24,11 @@
 [functions."canary"]
   schedule = "0 20 * * *"
 
+# The canary's second half. A scheduled function dies at 30 seconds, so the wait
+# for the email happens between two runs, not inside one.
+[functions."canary-check"]
+  schedule = "15 20 * * *"
+
 # Repairs rather than reports. Recreates the Calendly webhook if it goes
 # missing, and re-fires the workflow for any applicant who received nothing.
 # Runs after the health check has had its say.

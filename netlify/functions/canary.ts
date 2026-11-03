@@ -1,5 +1,13 @@
 import type { Handler } from "@netlify/functions";
-import { GHL_API, GHL_VERSION } from "./_ghl";
+import { GHL_API } from "./_ghl";
+import {
+  CANARY_EMAIL,
+  TRIGGER_TAG,
+  alarmCouldNotRun,
+  deleteCanary,
+  findCanaries,
+  ghlHeaders,
+} from "./_canary";
 
 /*
   Proves, once a day, that an application still produces an email.
@@ -23,61 +31,18 @@ import { GHL_API, GHL_VERSION } from "./_ghl";
   So this walks the whole path a real applicant walks, end to end, and asserts
   the outcome that actually matters: an email came out the other side.
 
-    create a contact  ->  tag application-received  ->  wait  ->  did GHL email?
+    canary:        create a contact  ->  tag application-received
+    canary-check:  15 minutes later  ->  did GHL email?  ->  delete the contact
+
+  Two runs because a scheduled function is killed at 30 seconds. This used to
+  wait 90 seconds in one run, so it died mid wait: the email was never checked,
+  the contact was never deleted, and the leftover could collide with the next
+  morning's create and come back as a 400.
 
   Daily rather than hourly, because it genuinely fires the workflow and sends a
   real email. One synthetic email a day to a throwaway address is a fair price
   for knowing the funnel works. Hourly would be spam.
-
-  The contact is deleted afterwards either way, so nothing accumulates and no
-  invented applicant ever sits in the queue looking real.
 */
-
-const CANARY_EMAIL = "zz-canary@authorityengine.com.au";
-
-/*
-  The tag the site actually cycles. If this ever changes in
-  builder-application, it has to change here, and the canary is what will tell
-  you if a workflow was left listening for the old one.
-*/
-const TRIGGER_TAG = "application-received";
-
-/* GHL usually sends within seconds. Ninety is generous without being a long
-   scheduled run. */
-const WAIT_MS = 90_000;
-
-const auth = (token: string) => ({
-  Authorization: `Bearer ${token}`,
-  Version: GHL_VERSION,
-  "Content-Type": "application/json",
-  Accept: "application/json",
-});
-
-async function alarm(reason: string, detail: string) {
-  const webhook = process.env.SLACK_WEBHOOK_HEALTH || process.env.SLACK_WEBHOOK_URL;
-  if (webhook) {
-    await fetch(webhook, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: [
-          ":rotating_light: *An application would not produce an email right now*",
-          "",
-          `*${reason}*`,
-          detail,
-          "",
-          "A real applicant submitting now would hear nothing back.",
-          "",
-          `Most likely a workflow is listening for the wrong tag. The site cycles \`${TRIGGER_TAG}\` on every submission; \`applied\` is permanent and only ever added, so a workflow triggered on \`applied\` will never fire for anyone who has applied before.`,
-          "https://authorityengine.com.au/health",
-        ].join("\n"),
-      }),
-    }).catch(() => {
-      /* Already logged below. */
-    });
-  }
-  console.error("CANARY FAILED:", reason, detail);
-}
 
 const handler: Handler = async () => {
   const token = process.env.GHL_TOKEN;
@@ -87,42 +52,10 @@ const handler: Handler = async () => {
     return { statusCode: 200, body: JSON.stringify({ ok: false, reason: "not configured" }) };
   }
 
-  const h = auth(token);
-  let contactId: string | null = null;
+  const h = ghlHeaders(token);
 
-  const cleanUp = async () => {
-    if (!contactId) return;
-    /* Confirm the record is ours before destroying it. Belt and braces next to
-       the `made.ok` guard: a canary must not be able to delete a real contact
-       even if the id it is holding turns out not to be the one it created. */
-    const check = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, { headers: h }).catch(() => null);
-    const owner = ((await check?.json().catch(() => ({})))?.contact?.email || "").toLowerCase();
-    if (owner !== CANARY_EMAIL) return;
-
-    await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, {
-      method: "DELETE",
-      headers: h,
-    }).catch(() => {
-      /* Left behind at worst. The next run clears it. */
-    });
-  };
-
-  try {
-    /* Clear anything a previous run left behind, so a stale contact cannot
-       make a broken funnel look healthy. */
-    const found = await fetch(
-      `${GHL_API}/contacts/?locationId=${encodeURIComponent(locationId)}&query=${encodeURIComponent(CANARY_EMAIL)}`,
-      { headers: h }
-    );
-    if (found.ok) {
-      for (const c of (await found.json())?.contacts || []) {
-        if ((c?.email || "").toLowerCase() === CANARY_EMAIL) {
-          await fetch(`${GHL_API}/contacts/${encodeURIComponent(c.id)}`, { method: "DELETE", headers: h });
-        }
-      }
-    }
-
-    const made = await fetch(`${GHL_API}/contacts/`, {
+  const create = async () => {
+    const res = await fetch(`${GHL_API}/contacts/`, {
       method: "POST",
       headers: h,
       body: JSON.stringify({
@@ -133,13 +66,36 @@ const handler: Handler = async () => {
         source: "daily canary",
       }),
     });
-    const madeJson = await made.json().catch(() => ({}));
+    return { res, json: await res.json().catch(() => ({})) };
+  };
+
+  try {
+    /* Clear anything a previous run left behind, so a stale contact cannot
+       make a broken funnel look healthy. */
+    for (const id of (await findCanaries(token, locationId)) || []) {
+      await deleteCanary(token, id);
+    }
+
+    let made = await create();
+
+    /* The search above can miss a contact GHL still knows about, and the create
+       then refuses it as a duplicate, naming the id. deleteCanary only deletes
+       if that id really is the canary, so a collision with anyone else stays a
+       plain failure. */
+    const collidedWith = made.res.status === 400 ? made.json?.meta?.contactId : null;
+    if (collidedWith && (await deleteCanary(token, collidedWith))) {
+      made = await create();
+    }
+
     /* Same reason as _health: a refused create can answer with the id of the
-       contact it collided with, and everything below tags then deletes it. */
-    contactId = made.ok ? (madeJson?.contact?.id || madeJson?.id || null) : null;
+       contact it collided with, so only a successful create's id is trusted. */
+    const contactId = made.res.ok ? (made.json?.contact?.id || made.json?.id || null) : null;
 
     if (!contactId) {
-      await alarm("A contact could not be created", `GHL returned HTTP ${made.status}`);
+      await alarmCouldNotRun(
+        "A contact could not be created",
+        `GHL returned HTTP ${made.res.status}: ${String(made.json?.message || "no message").slice(0, 200)}`
+      );
       return { statusCode: 200, body: JSON.stringify({ ok: false }) };
     }
 
@@ -149,45 +105,15 @@ const handler: Handler = async () => {
       body: JSON.stringify({ tags: [TRIGGER_TAG] }),
     });
     if (!tagged.ok) {
-      await alarm("The trigger tag could not be written", `GHL returned HTTP ${tagged.status}`);
-      await cleanUp();
+      await alarmCouldNotRun("The trigger tag could not be written", `GHL returned HTTP ${tagged.status}`);
+      await deleteCanary(token, contactId);
       return { statusCode: 200, body: JSON.stringify({ ok: false }) };
     }
 
-    await new Promise((r) => setTimeout(r, WAIT_MS));
-
-    /* The only question worth asking: did anything actually go out. */
-    let sent = 0;
-    const conv = await fetch(
-      `${GHL_API}/conversations/search?locationId=${encodeURIComponent(locationId)}&contactId=${encodeURIComponent(contactId)}`,
-      { headers: h }
-    );
-    if (conv.ok) {
-      for (const cv of (await conv.json())?.conversations || []) {
-        const msgs = await fetch(`${GHL_API}/conversations/${encodeURIComponent(cv.id)}/messages`, { headers: h });
-        if (!msgs.ok) continue;
-        const body = await msgs.json();
-        for (const m of body?.messages?.messages || body?.messages || []) {
-          if (m?.messageType === "TYPE_EMAIL" && m?.direction === "outbound") sent += 1;
-        }
-      }
-    }
-
-    await cleanUp();
-
-    if (sent === 0) {
-      await alarm(
-        `Tagging \`${TRIGGER_TAG}\` sent no email`,
-        `Waited ${WAIT_MS / 1000} seconds on a brand new contact. The tag was written and GHL did nothing.`
-      );
-      return { statusCode: 200, body: JSON.stringify({ ok: false, sent }) };
-    }
-
-    console.log(`canary passed: ${sent} email(s) from tagging ${TRIGGER_TAG}`);
-    return { statusCode: 200, body: JSON.stringify({ ok: true, sent }) };
+    console.log(`canary: tagged ${TRIGGER_TAG}, canary-check reads the result.`);
+    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
   } catch (err) {
-    await alarm("The canary itself failed", String(err));
-    await cleanUp();
+    await alarmCouldNotRun("The canary itself failed", String(err));
     return { statusCode: 200, body: JSON.stringify({ ok: false, error: String(err) }) };
   }
 };

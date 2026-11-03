@@ -143,3 +143,9 @@ lives at "Margot - Call breakdown" under Extra pages.
 - What: instalment-checkpoint's Slack message now carries "Offer the 12 month Founder Partner term" per client. Tap > confirm page > "Yes, make their link" mints a per client /partner?t= link (HMAC of INSTALL_EXIT_SECRET, stateless) and posts it to Slack. /partner = Notion Founder Partner Rollover Agreement + sign + Stripe subscription 7 x $4,400, cancel_at after the 7th. ?test=1 is $1 a day x3.
 - Tested live: wrong code 403, unknown contact 404, edited token refused, page renders for a valid token, bad link message. Signing and paying NOT tested live.
 - Rollback: `git revert 17a9ff5` and push, or publish the prior deploy in Netlify.
+
+## 2026-11-03 · Daily canary split in two so it can finish
+- **What:** the canary waited 90 seconds inside a scheduled function capped at 30, so it never checked the email or deleted its contact, and a leftover could collide with the next create (HTTP 400 alert). `canary` (20:00 UTC) now creates and tags, new `canary-check` (20:15 UTC) reads the email and deletes. A create collision clears the canary's own contact and retries once, after confirming the email is the canary's. Alerts now separate "could not run" from "no email came out", and carry GHL's message.
+- **Audience:** internal alerts, Slack health channel only. Real applicant path untouched. No env or GHL changes.
+- **Expect:** the no email alarm can now actually fire. The 3 Nov canary contact got no email in 2h20m, so check the `New application (brand day)` trigger if it does.
+- **Rollback:** `git revert` this commit and push, or publish the prior deploy in Netlify.
