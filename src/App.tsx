@@ -65,6 +65,7 @@ const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
+const Founding = React.lazy(() => import('./pages/Founding'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
 const Booked = React.lazy(() => import('./pages/Booked'));
@@ -178,6 +179,7 @@ export default function App() {
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/brandday" element={<BrandDayOffer />} />
+          <Route path="/founding" element={<Founding />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />
