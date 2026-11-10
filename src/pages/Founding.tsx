@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ArrowRight, Check, Loader2 } from 'lucide-react';
+import { ArrowRight, Check, Loader2, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta } from '../lib/track';
@@ -204,6 +204,30 @@ function Paid() {
   );
 }
 
+const Crosses = ({ items }: { items: React.ReactNode[] }) => (
+  <ul className="space-y-3">
+    {items.map((t, i) => (
+      <li key={i} className="flex items-start gap-3">
+        <X className="w-4 h-4 text-zinc-600 mt-1 flex-shrink-0" />
+        <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+/* A named deliverable with one plain line on what it actually is. Same shape
+   as the deliverable lists on /offer and /morgan. */
+const Item = ({ name, children, soon }: { name: string; children: React.ReactNode; soon?: boolean }) => (
+  <li className="flex items-start gap-3">
+    <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
+    <span className="text-[15px] leading-relaxed">
+      <span className="text-white font-semibold">{name}</span>
+      <span className="text-zinc-400"> {children}</span>
+      {soon && <span className="text-zinc-500"> Coming soon.</span>}
+    </span>
+  </li>
+);
+
 export default function Founding() {
   const paid = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const status = useStatus();
@@ -212,8 +236,8 @@ export default function Founding() {
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="Founding 90 Day"
-        description="In 90 days you'll have the exact playbooks built from every 8 figure company we've worked with, installed. Brand Day plus 90 days of implementation. 10 spots, open until 30 November."
+        title="90 Day Install"
+        description="The playbooks from every 8 figure company I've worked with, installed in your business in 90 days. Brand Day plus 90 days of implementation. 10 spots, open until 30 November."
         path="/founding"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -223,21 +247,18 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine - Founding 90 Day</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine - 90 Day Install</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              In 90 days you'll have the exact playbooks I've built from every 8 figure company I've worked with.
+              The playbooks from every 8 figure company I've worked with, installed in your business in 90 days.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
-              Installed, to help you blitz past them.
+              So your team can blitz past them.
             </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-5">
-              This is an operator enablement program.
-            </p>
-            <p className="text-zinc-300 leading-relaxed mb-5">
-              A simple content system that lets your team analyse, assess and prioritise the formats, angles and hooks to double down on.
+              Your team gets a simple content system, and the training to run it. They learn to read what is working and decide which formats, angles and hooks to double down on.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              While the founder spends less than 5 hours per week on content outside of filming, unless they want to.
+              You spend less than 5 hours a week on content outside of filming. More only if you want to.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
           </Section>
@@ -246,29 +267,29 @@ export default function Founding() {
 
       <div className="gradient-line" />
 
-      {/* THE PROGRAM */}
+      {/* WHAT YOU GET */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>The program</Label>
-            <H2>The entire Brand Day, plus 90 days of implementation.</H2>
+            <Label>What you get</Label>
+            <H2>The full Brand Day, then 90 days of implementation.</H2>
             <div className="glow-card border-blue-500/20 p-8 mt-8">
               <p className="text-white text-sm font-semibold mb-2">The Brand Day</p>
               <p className="text-zinc-400 text-[15px] leading-relaxed">
-                The full in person Brand Day. Your brand, your exact buyer, the beliefs that drive the purchase, and the content required to move them. There are another 10 Brand Days before they double in price to $10,000. One is included here.
+                One full day in person. We map your brand, your exact buyer, what they need to believe before they buy, and the content that gets them there. There are 10 Brand Days left at $5,000 before the price doubles to $10,000. One is included here.
               </p>
             </div>
             <div className="glow-card p-8 mt-6">
               <p className="text-white text-sm font-semibold mb-5">90 days of implementation</p>
-              <Ticks items={[
-                '24 hour async communication via WhatsApp, set up as soon as you click buy',
-                '2 x Loom reviews per week',
-                '4 weeks of 1:1 implementation with an operator. Starts January, after your Brand Day',
-                <>Weekly office hours every Thursday <span className="text-zinc-500">(Monday coming soon)</span></>,
-                'Fortnightly training',
-                <>Fortnightly hotseat <span className="text-zinc-500">(coming soon)</span></>,
-                'Monthly board meetings',
-              ]} />
+              <ul className="space-y-4">
+                <Item name="WhatsApp with us.">Ask anything, any time. Answered within 24 hours. Set up the moment you buy.</Item>
+                <Item name="Two Loom reviews a week.">On your real content, so your team learns from their own work.</Item>
+                <Item name="Four weeks of 1:1 implementation with your operator.">Starts in January, after your Brand Day.</Item>
+                <Item name="Office hours every Thursday.">Bring your team and get answers live. A Monday session is coming soon.</Item>
+                <Item name="Training every fortnight.">For you and your team.</Item>
+                <Item name="Hotseat every fortnight." soon>Your content, pulled apart live.</Item>
+                <Item name="A board meeting every month.">Where the numbers decide what happens next.</Item>
+              </ul>
             </div>
           </Section>
         </div>
@@ -280,19 +301,51 @@ export default function Founding() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Fast action</Label>
-            <H2>Pay in full now and you start before we start.</H2>
+            <Label>Pay in full by 30 November</Label>
+            <H2>Implementation starts in January. Pay in full now and your team starts today.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              The product is built. Take the $10,000 now and you get all of this straight away:
+              Everything we run with our clients is built. Pay the $10,000 in full and you get all of it straight away:
             </p>
-            <Ticks items={[
-              'Access to all the SOPs we run with our clients, across all formats',
-              'Every edit we have worked through, plus the review cadence and posting rules',
-              'Full access to the training videos',
-              'All the complete playbooks for short form and long form',
-              'Early access to office hours before we start, so you can jump in and ask',
-              'Async WhatsApp communication before the end of the year',
-            ]} />
+            <ul className="space-y-4">
+              <Item name="Every SOP.">The ones we run with our clients, across every format.</Item>
+              <Item name="Every edit we have worked through.">Plus the review cadence and the posting rules.</Item>
+              <Item name="The full training video library.">Your team can start on it this week.</Item>
+              <Item name="The complete playbooks.">Short form and long form.</Item>
+              <Item name="Early access to office hours.">Jump in and ask before we officially start.</Item>
+              <Item name="WhatsApp with us before the end of the year.">You do not wait until January to get answers.</Item>
+            </ul>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* WHO DOES WHAT */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Who does what</Label>
+            <H2>I install the system. Your team runs it.</H2>
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <div className="glow-card p-8">
+                <p className="text-white text-sm font-semibold mb-5">What I do</p>
+                <Ticks items={[
+                  'Install the playbooks into your business',
+                  'Train your operator to run the rhythm',
+                  'Review the real work, every week',
+                  'Read the data with you and call the next move',
+                ]} />
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-white text-sm font-semibold mb-5">What your team does</p>
+                <Ticks items={[
+                  'Film, edit and post',
+                  'Turn up to the calls',
+                  'Run the playbooks week to week',
+                  'Bring the numbers, honestly',
+                ]} />
+              </div>
+            </div>
           </Section>
         </div>
       </section>
@@ -306,10 +359,13 @@ export default function Founding() {
             <Label>The guarantee</Label>
             <div className="glow-card border-blue-500/20 p-8 md:p-10">
               <p className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.3]">
-                If you don't have the playbooks installed, we'll work with you until you do, so long as your team turn up to 80% of the meetings.
+                If the playbooks are not installed by day 90, we keep working with you until they are.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                And if by day 30 you can't see a material change in the team, we'll pay you $5,000 for your time.
+                And if by day 30 you can't see a material change in your team, I'll pay you $5,000 for your time.
+              </p>
+              <p className="text-zinc-500 text-[15px] leading-relaxed mt-6">
+                The one condition: your team turns up to 80% of the meetings.
               </p>
             </div>
           </Section>
@@ -324,44 +380,57 @@ export default function Founding() {
           <Section>
             <Label>Fit</Label>
             <H2>Who this is for.</H2>
-            <div className="mt-8">
-              <Ticks items={[
-                '7 and 8 figure founders, coaches and consultants',
-                'A proven offer and real expertise',
-                'Already creating content, with a team or someone on it',
-                'You want the team running the system, not the founder',
-              ]} />
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <div className="glow-card p-8">
+                <p className="text-white text-sm font-semibold mb-5">You are a fit if you:</p>
+                <Ticks items={[
+                  'Already do $200K/month+',
+                  'Have a proven offer and real expertise',
+                  'Already create content, with a team or someone on it',
+                  'Want your team running content, so you are not the bottleneck',
+                ]} />
+              </div>
+              <div className="glow-card p-8">
+                <p className="text-white text-sm font-semibold mb-5">What this is not:</p>
+                <Crosses items={[
+                  'A done for you content agency. Your team films, edits and posts',
+                  'A course you watch on your own',
+                  'A guarantee of revenue. We agree the metrics and the data tells us what worked',
+                  'For founders starting from zero',
+                ]} />
+              </div>
             </div>
-            <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
-              Not for founders starting from zero.
-            </p>
           </Section>
         </div>
       </section>
 
       <div className="gradient-line" />
 
-      {/* INVESTMENT */}
+      {/* PRICE */}
       <section className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Investment</Label>
+            <Label>Price and spots</Label>
             <div className="glow-card p-8 md:p-10">
               <p className="text-zinc-400 text-[14px] mb-1">Brand Day plus 90 days of implementation</p>
               <p className="font-display text-2xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
-              <p className="text-zinc-400 text-[14px] mt-5 mb-1">Fast action, paid in full</p>
+              <p className="text-zinc-400 text-[14px] mt-5 mb-1">Paid in full by 30 November</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                <span className="text-white font-semibold">10 spots.</span> Open until the end of November, then it closes. Everything above, plus every fast action bonus.
+                Normally $15,000. Pay in full by the end of November and it is $10,000, with everything in the pay in full list on top.
               </p>
-              <BuyButton status={status} location="founding-investment" className="mt-8" />
+              <p className="text-zinc-400 leading-relaxed mt-4">
+                There are 10 spots. I keep the number of active installs low so I can stay close to your team and your data.
+              </p>
+              <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
-            <ol className="space-y-4 mt-12">
+            <p className="text-white text-sm font-semibold mt-12 mb-5">What happens when you buy</p>
+            <ol className="space-y-4">
               {[
-                'Click buy and pay on the secure Stripe checkout.',
-                'WhatsApp is set up as soon as you buy.',
-                'You get the SOPs, playbooks, training videos and early office hours straight away.',
-                'We lock in your Brand Day.',
+                'Pay on the secure Stripe checkout.',
+                'We set up your WhatsApp straight away.',
+                'Your team gets the SOPs, playbooks, training videos and early office hours.',
+                'We lock in your Brand Day date.',
                 '1:1 implementation with your operator starts in January.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">
