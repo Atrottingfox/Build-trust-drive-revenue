@@ -237,7 +237,7 @@ export default function Founding() {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="The playbooks from every 8 figure company I've worked with, installed in your business in 90 days. Brand Day plus 90 days of implementation. 10 spots, open until 30 November."
+        description="8 figure playbooks, installed in 90 days. Your team runs them. You film. Brand Day plus 90 days of implementation. 10 spots, open until 30 November."
         path="/founding"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -247,18 +247,18 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine - 90 Day Install</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Install</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              The playbooks from every 8 figure company I've worked with, installed in your business in 90 days.
+              8 figure playbooks. Installed in 90 days.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
-              So your team can blitz past them.
+              Your team runs them. You film.
             </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-5">
-              Your team gets a simple content system, and the training to run it. They learn to read what is working and decide which formats, angles and hooks to double down on.
+              I built these playbooks from every 8 figure company I've worked with. Your team learns which formats, angles and hooks are working, and doubles down on them. So you can blitz past them.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              You spend less than 5 hours a week on content outside of filming. More only if you want to.
+              Under 5 hours a week from you, plus filming. More only if you want to.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
           </Section>
@@ -271,8 +271,11 @@ export default function Founding() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>What you get</Label>
-            <H2>The full Brand Day, then 90 days of implementation.</H2>
+            <Label>The offer</Label>
+            <H2>Plan it in a day. Install it in 90.</H2>
+            <p className="text-zinc-400 leading-relaxed mt-6">
+              Your Brand Day sets the strategy. The next 90 days put it to work with your team.
+            </p>
             <div className="glow-card border-blue-500/20 p-8 mt-8">
               <p className="text-white text-sm font-semibold mb-2">The Brand Day</p>
               <p className="text-zinc-400 text-[15px] leading-relaxed">
@@ -280,15 +283,15 @@ export default function Founding() {
               </p>
             </div>
             <div className="glow-card p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-5">90 days of implementation</p>
+              <p className="text-white text-sm font-semibold mb-5">The 90 days</p>
               <ul className="space-y-4">
-                <Item name="WhatsApp with us.">Ask anything, any time. Answered within 24 hours. Set up the moment you buy.</Item>
+                <Item name="WhatsApp, 24 hour replies.">Set up the moment you buy.</Item>
                 <Item name="Two Loom reviews a week.">On your real content, so your team learns from their own work.</Item>
-                <Item name="Four weeks of 1:1 implementation with your operator.">Starts in January, after your Brand Day.</Item>
-                <Item name="Office hours every Thursday.">Bring your team and get answers live. A Monday session is coming soon.</Item>
+                <Item name="Four weeks of 1:1s with your operator.">Starts in January, after your Brand Day.</Item>
+                <Item name="Office hours every Thursday.">Get answers live. Mondays coming soon.</Item>
                 <Item name="Training every fortnight.">For you and your team.</Item>
-                <Item name="Hotseat every fortnight." soon>Your content, pulled apart live.</Item>
-                <Item name="A board meeting every month.">Where the numbers decide what happens next.</Item>
+                <Item name="Hotseat every fortnight." soon>Your content, reviewed live.</Item>
+                <Item name="Board meeting every month.">We read the numbers and set the next move.</Item>
               </ul>
             </div>
           </Section>
@@ -301,18 +304,18 @@ export default function Founding() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Pay in full by 30 November</Label>
-            <H2>Implementation starts in January. Pay in full now and your team starts today.</H2>
+            <Label>Pay in full</Label>
+            <H2>Pay in full. Start today.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              Everything we run with our clients is built. Pay the $10,000 in full and you get all of it straight away:
+              Implementation starts in January. Pay $10,000 by 30 November and your team gets all of this now.
             </p>
             <ul className="space-y-4">
-              <Item name="Every SOP.">The ones we run with our clients, across every format.</Item>
-              <Item name="Every edit we have worked through.">Plus the review cadence and the posting rules.</Item>
-              <Item name="The full training video library.">Your team can start on it this week.</Item>
-              <Item name="The complete playbooks.">Short form and long form.</Item>
-              <Item name="Early access to office hours.">Jump in and ask before we officially start.</Item>
-              <Item name="WhatsApp with us before the end of the year.">You do not wait until January to get answers.</Item>
+              <Item name="Every SOP.">The ones we run with clients, across every format.</Item>
+              <Item name="Every edit.">Plus the review cadence and posting rules.</Item>
+              <Item name="Every training video.">The full library.</Item>
+              <Item name="Both playbooks.">Short form and long form, complete.</Item>
+              <Item name="Office hours, early.">Jump in and ask before we start.</Item>
+              <Item name="WhatsApp, from today.">Answers before the end of the year.</Item>
             </ul>
           </Section>
         </div>
@@ -324,11 +327,11 @@ export default function Founding() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Who does what</Label>
-            <H2>I install the system. Your team runs it.</H2>
+            <Label>Roles</Label>
+            <H2>I install it. Your team runs it.</H2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">What I do</p>
+                <p className="text-white text-sm font-semibold mb-5">Me</p>
                 <Ticks items={[
                   'Install the playbooks into your business',
                   'Train your operator to run the rhythm',
@@ -337,7 +340,7 @@ export default function Founding() {
                 ]} />
               </div>
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">What your team does</p>
+                <p className="text-white text-sm font-semibold mb-5">Your team</p>
                 <Ticks items={[
                   'Film, edit and post',
                   'Turn up to the calls',
@@ -356,16 +359,17 @@ export default function Founding() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>The guarantee</Label>
-            <div className="glow-card border-blue-500/20 p-8 md:p-10">
-              <p className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-white leading-[1.3]">
-                If the playbooks are not installed by day 90, we keep working with you until they are.
+            <Label>Guarantee</Label>
+            <H2>I pay you $5,000 if nothing changes.</H2>
+            <div className="glow-card border-blue-500/20 p-8 md:p-10 mt-8 space-y-5">
+              <p className="text-zinc-300 leading-relaxed">
+                If you can't see a material change in your team by day 30, I'll pay you $5,000 for your time.
               </p>
-              <p className="text-zinc-300 leading-relaxed mt-6">
-                And if by day 30 you can't see a material change in your team, I'll pay you $5,000 for your time.
+              <p className="text-zinc-300 leading-relaxed">
+                If the playbooks aren't installed by day 90, we keep working with you until they are.
               </p>
-              <p className="text-zinc-500 text-[15px] leading-relaxed mt-6">
-                The one condition: your team turns up to 80% of the meetings.
+              <p className="text-zinc-500 text-[15px] leading-relaxed">
+                One condition. Your team turns up to 80% of the meetings.
               </p>
             </div>
           </Section>
@@ -379,10 +383,10 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Fit</Label>
-            <H2>Who this is for.</H2>
+            <H2>You need a proven offer and a team.</H2>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">You are a fit if you:</p>
+                <p className="text-white text-sm font-semibold mb-5">This is for you if you:</p>
                 <Ticks items={[
                   'Already do $200K/month+',
                   'Have a proven offer and real expertise',
@@ -391,7 +395,7 @@ export default function Founding() {
                 ]} />
               </div>
               <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">What this is not:</p>
+                <p className="text-white text-sm font-semibold mb-5">This is not:</p>
                 <Crosses items={[
                   'A done for you content agency. Your team films, edits and posts',
                   'A course you watch on your own',
@@ -410,21 +414,22 @@ export default function Founding() {
       <section className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Price and spots</Label>
-            <div className="glow-card p-8 md:p-10">
+            <Label>Price</Label>
+            <H2>$10,000. 10 spots. Closes 30 November.</H2>
+            <div className="glow-card p-8 md:p-10 mt-8">
               <p className="text-zinc-400 text-[14px] mb-1">Brand Day plus 90 days of implementation</p>
               <p className="font-display text-2xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Paid in full by 30 November</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                Normally $15,000. Pay in full by the end of November and it is $10,000, with everything in the pay in full list on top.
+                Normally $15,000. Pay in full by 30 November and it's $10,000, plus everything in the pay in full list.
               </p>
               <p className="text-zinc-400 leading-relaxed mt-4">
-                There are 10 spots. I keep the number of active installs low so I can stay close to your team and your data.
+                Only 10 spots. I keep active installs low so I can stay close to your team and your data.
               </p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
-            <p className="text-white text-sm font-semibold mt-12 mb-5">What happens when you buy</p>
+            <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
             <ol className="space-y-4">
               {[
                 'Pay on the secure Stripe checkout.',
