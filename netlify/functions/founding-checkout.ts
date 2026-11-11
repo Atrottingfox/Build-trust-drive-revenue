@@ -16,7 +16,8 @@ import type { Handler } from "@netlify/functions";
   with Apple Pay and Google Pay already in it.
 
   Closes itself on either limit, whichever comes first:
-    - 10 paid spots (counted from Stripe, the source of truth)
+    - 5 paid spots (counted from Stripe, the source of truth). Intro offer,
+      5 founders starting in January (Sean, 11 Nov 2026)
     - the end of 30 November, Brisbane time
 
   The spot count uses Stripe's PaymentIntent search, which needs read on
@@ -36,7 +37,7 @@ const headers = {
 };
 
 const PAYMENT_KIND = "founding-90";
-const TOTAL_SPOTS = 10;
+const TOTAL_SPOTS = 5;
 const PRICE_AUD_CENTS = 1000000;
 const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding Fast Action, paid in full";
 const INVOICE_DESCRIPTION =

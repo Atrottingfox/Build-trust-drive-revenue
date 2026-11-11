@@ -13,7 +13,7 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 
   Same look as /brandday. The difference is the button: it goes to Stripe, not
   to /builder. netlify/functions/founding-checkout.ts creates the session,
-  counts the spots, closes the offer at 10 sales or the end of 30 November, and
+  counts the spots, closes the offer at 5 sales or the end of 30 November, and
   confirms the payment when Stripe sends them back here with ?paid=1.
 */
 
@@ -61,8 +61,8 @@ function useStatus() {
   useEffect(() => {
     fetch(FN)
       .then((r) => r.json())
-      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 10, configured: d.configured }))
-      .catch(() => setStatus({ open: true, remaining: null, total: 10 }));
+      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured }))
+      .catch(() => setStatus({ open: true, remaining: null, total: 5 }));
   }, []);
   return status;
 }
@@ -70,8 +70,8 @@ function useStatus() {
 function SpotsLine({ status }: { status: Status | null }) {
   /* Only scarcity we can honour: the live count from Stripe, and the date. */
   const left = status && status.remaining !== null && status.remaining < status.total
-    ? `${status.remaining} of ${status.total} installs left for this intake.`
-    : '10 installs available for this intake.';
+    ? `${status.remaining} of ${status.total} intro spots left.`
+    : '5 intro spots. Founders start in January.';
   return (
     <p className="text-zinc-500 text-sm mt-4">
       <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
@@ -97,7 +97,7 @@ function StickyBar({ status }: { status: Status | null }) {
   }, []);
   if (status && !status.open) return null;
 
-  const left = status && status.remaining !== null ? `${status.remaining} of ${status.total} left` : '10 installs';
+  const left = status && status.remaining !== null ? `${status.remaining} of ${status.total} spots left` : '5 spots';
   const buy = async () => {
     if (busy) return;
     trackCta('founding-sticky');
@@ -166,7 +166,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
         window.location.href = d.url;
         return;
       }
-      setError(d.open === false ? 'All 10 installs for this intake are taken.' : 'Checkout did not load. Refresh and try again, or message us and we will sort it.');
+      setError(d.open === false ? 'All 5 intro spots are taken.' : 'Checkout did not load. Refresh and try again, or message us and we will sort it.');
     } catch {
       setError('Checkout did not load. Refresh and try again, or message us and we will sort it.');
     }
@@ -308,7 +308,7 @@ export default function Founding() {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="Stop being the content manager. In 90 days your team gets a working media operating system, built from the playbooks I've created alongside the 6 Australian 8 figure+ B2B companies I've worked with over the past 36 months. $10,000 AUD, closes 30 November."
+        description="Stop being the content manager. In 90 days your team gets a working media operating system, built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
         path="/founding"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -318,7 +318,7 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Install</p>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Install - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Stop being the content manager.
             </h1>
@@ -327,7 +327,10 @@ export default function Founding() {
             </p>
             {/* Sean's line, 11 Nov 2026. Sits straight under the promise. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Built from the playbooks I've created alongside the 6 Australian 8 figure+ B2B companies I've worked with over the past 36 months.
+              Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with.
+            </p>
+            <p className="text-blue-400 font-semibold leading-relaxed mb-6">
+              Intro offer for 5 founders, starting in January.
             </p>
             <p className="text-zinc-300 leading-relaxed mb-5">
               In 90 days we install the strategy, formats, hooks, SOPs and review rhythm your team needs to publish consistently and turn attention into qualified demand.
@@ -542,7 +545,7 @@ export default function Founding() {
                 The install is $15,000 AUD. Pay in full by 30 November and it is $10,000 AUD, plus everything in the pay in full list.
               </p>
               <p className="text-zinc-400 leading-relaxed mt-4">
-                I keep active installs low so I can stay close to your team and your data.
+                This is an intro offer for 5 founders, starting in January. Five, so I can stay close to every team and every number.
               </p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
