@@ -13,7 +13,6 @@ import {
   Label,
   PHASES,
   Section,
-  SpotsLine,
   StickyBar,
   Ticks,
   useCountdown,
@@ -36,29 +35,6 @@ import {
     - The closing headline is dropped. The price section ends the page.
 */
 
-/* A list that shows `show` items and opens to the rest. */
-function ShortList({ items, show = 3, cross = false }: { items: React.ReactNode[]; show?: number; cross?: boolean }) {
-  const [open, setOpen] = useState(false);
-  const List = cross ? Crosses : Ticks;
-  const extra = items.length - show;
-  return (
-    <div>
-      <List items={open ? items : items.slice(0, show)} />
-      {extra > 0 && (
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="mt-4 inline-flex items-center gap-1 text-blue-400 text-sm font-semibold"
-          aria-expanded={open}
-        >
-          {open ? 'Show less' : `Show all ${items.length}`}
-          <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
-        </button>
-      )}
-    </div>
-  );
-}
-
 /* A block of content behind one button. */
 function More({ label, children }: { label: string; children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -78,19 +54,6 @@ function More({ label, children }: { label: string; children: React.ReactNode })
   );
 }
 
-const Card = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`glow-card p-6 ${className}`}>{children}</div>
-);
-
-const CardTitle = ({ n, title, sub }: { n?: string; title: string; sub?: string }) => (
-  <>
-    {n && <p className="font-display text-sm font-extrabold text-blue-400 mb-1">{n}</p>}
-    <p className="text-white text-lg font-semibold">{title}</p>
-    {sub && <p className="text-zinc-400 text-sm mt-1 mb-4">{sub}</p>}
-    {!sub && <div className="mb-4" />}
-  </>
-);
-
 /* Wide screens only: price, spots, countdown and the button stay on screen. */
 function BuyCard({ status }: { status: Status | null }) {
   return (
@@ -107,7 +70,7 @@ function BuyCard({ status }: { status: Status | null }) {
 
 
 const CHAPTERS = [
-  { id: 'installs', label: 'What this installs' },
+  { id: 'installs', label: 'How people buy' },
   { id: 'how', label: 'How it works' },
   { id: 'receive', label: 'What you receive' },
   { id: 'payinfull', label: 'Start today' },
@@ -192,7 +155,32 @@ function Rail({ status }: { status: Status | null }) {
   );
 }
 
-const Divider = () => <div className="gradient-line my-16 md:my-20" />;
+/* Same phases as /founding, with Phase 1 told the way /offer tells the Brand Day. */
+const PHASES_V2 = PHASES.map((ph, i) =>
+  i === 0
+    ? { ...ph, lead: 'Your Brand Day analyses your current bottlenecks, maps how content actually drives revenue in your business, and builds your Buying Belief Map. Then we run it straight away on real content.' }
+    : ph
+);
+
+const Divider = () => <div className="gradient-line my-24 md:my-32" />;
+
+/* One big statement with an optional line under it. The building block of
+   this layout: one idea per block, no list on show. */
+const Statement = ({ n, title, children }: { n?: string; title: string; children: React.ReactNode }) => (
+  <div className="py-8 border-t border-white/5 first:border-t-0 first:pt-0">
+    <div className="flex gap-6">
+      {n && <p className="font-display text-sm font-extrabold text-blue-400 pt-2 w-6 flex-shrink-0">{n}</p>}
+      <div>
+        <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.15]">{title}</p>
+        <p className="text-zinc-400 text-lg leading-relaxed mt-3">{children}</p>
+      </div>
+    </div>
+  </div>
+);
+
+const Lead = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mt-6">{children}</p>
+);
 
 export default function FoundingV2() {
   const status = useStatus();
@@ -208,48 +196,59 @@ export default function FoundingV2() {
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
-      <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-32 md:pt-40 pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-14">
-        <main className="min-w-0 max-w-3xl">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-32 md:pt-40 pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_280px] xl:gap-16">
+        <main className="min-w-0 max-w-2xl">
           {/* HERO */}
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Stop being the content manager.
+              Engineer how content drives revenue.
             </h1>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
-              Install the system your team runs.
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-10">
+              Every piece of content has a job.
             </p>
             <div className="mb-10">
               <VslPlayer />
             </div>
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
               Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
-            <p className="text-blue-400 font-semibold leading-relaxed mb-6">5 spots, starting in January.</p>
-            <p className="text-zinc-400 leading-relaxed">
+            {/* Sean's /offer copy, 12 Nov: the premise he wants on this page. */}
+            <Lead>
+              Build a brand that commands attention from the right people, and install the buying beliefs your best clients need, so your team can keep scaling without you becoming a full time creator.
+            </Lead>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              No dancing on camera. No 12am scrolling for content ideas. No more random, inconsistent posts.
+            </p>
+            <p className="text-blue-400 font-semibold text-lg mt-10">5 spots, starting in January.</p>
+            <p className="text-zinc-400 mt-2">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
             <div className="xl:hidden">
               <BuyButton status={status} location="founding-v2-hero" className="mt-10" />
             </div>
-            <div className="hidden xl:block">
-              <SpotsLine status={status} />
-            </div>
           </Section>
 
           <Divider />
 
+          {/* HOW PEOPLE BUY */}
           <div id="installs" className="scroll-mt-28" />
-          {/* WHAT THIS INSTALLS + OUTCOMES */}
           <Section>
-            <Label>What this installs</Label>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+            <Label>How people buy</Label>
+            <H2>Every piece of content has a job.</H2>
+            <Lead>Before anyone buys, they need to believe specific things about their problem, your solution and you.</Lead>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              Your Brand Day maps those beliefs into your Buying Belief Map. From there, every piece of content carries one of them. Nothing goes out for the sake of it.
             </p>
-            <H2>By day 90, your team can answer these.</H2>
-            <div className="grid grid-cols-2 gap-2.5 mt-8">
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              That is how trust gets engineered, piece by piece, from the first time someone sees you to the moment they buy. Polish comes later. What matters first is giving your buyers what they need to make the purchase.
+            </p>
+
+            <p className="text-white text-xl font-semibold mt-16 mb-6">By day 90, your team can answer these.</p>
+            <ol className="divide-y divide-white/5 border-y border-white/5">
               {[
+                'What does our buyer need to believe?',
                 'What should we make?',
                 'Who is it for?',
                 'Which format fits?',
@@ -259,181 +258,196 @@ export default function FoundingV2() {
                 'Did it work?',
                 'What do we do more of next?',
               ].map((q, i) => (
-                <div key={q} className="glow-card px-4 py-3 flex items-center gap-3">
-                  <span className="font-display text-xs font-extrabold text-blue-400 w-4">{`0${i + 1}`}</span>
-                  <span className="text-white text-[14px] font-semibold">{q}</span>
-                </div>
+                <li key={q} className="flex items-baseline gap-5 py-4">
+                  <span className="font-display text-sm font-extrabold text-blue-400 w-6">{`0${i + 1}`}</span>
+                  <span className="text-white text-lg font-semibold">{q}</span>
+                </li>
               ))}
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              A working operating system your team uses to plan, produce, judge, publish and improve content.
+            </ol>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-8">
+              Your team gets up to speed on what your buyers need to see, so every piece they make has a reason to exist.
             </p>
-            <p className="text-zinc-400 leading-relaxed mt-3">
+            <p className="text-zinc-500 leading-relaxed mt-4">
               This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
             </p>
-
-            <div className="grid md:grid-cols-3 gap-4 mt-10">
-              <Card>
-                <CardTitle n="01" title="Strategy installed" sub="Your team knows:" />
-                <ShortList items={['Who the content is for', 'What the brand stands for', 'What the business should be known for', 'Which buyer beliefs content must create', 'Which formats and channels matter', 'What content to make each week']} />
-              </Card>
-              <Card>
-                <CardTitle n="02" title="Team trained" sub="Your operator learns to:" />
-                <ShortList items={['Run the weekly content plan', 'Coordinate capture', 'Brief editors', 'Use the production and editing SOPs', 'Approve content against objective standards', 'Publish and log content', 'Read the scorecard', 'Decide what to repeat, improve or remove']} />
-              </Card>
-              <Card>
-                <CardTitle n="03" title="System operating" sub="Your business has:" />
-                <ShortList items={['A repeatable content rhythm', 'A documented workflow', 'Clear ownership', 'Format cards', 'Production and editing SOPs', 'Universal content standards', 'A publishing process', 'A weekly review loop', 'A scoreboard connected to qualified demand']} />
-              </Card>
-            </div>
           </Section>
 
           <Divider />
 
+          {/* WHAT CHANGES (three outcomes) */}
+          <Section>
+            <Label>What changes</Label>
+            <H2>Three outcomes by day 90.</H2>
+            <div className="mt-10">
+              <Statement n="01" title="Strategy installed.">
+                Your team knows what your buyers need to believe, who the content is for, and what to make each week.
+              </Statement>
+              <Statement n="02" title="Team up to speed.">
+                Your team learns what makes your buyers buy, then runs the plan, the capture and the edits without guessing.
+              </Statement>
+              <Statement n="03" title="System operating.">
+                A repeatable rhythm, clear owners, and a scorecard that tracks how well your content installs those beliefs and converts into pipeline.
+              </Statement>
+            </div>
+            <More label="See the full list">
+              <div className="space-y-8">
+                <div>
+                  <p className="text-white font-semibold mb-3">Strategy installed. Your team knows:</p>
+                  <Ticks items={['What your buyers need to believe before they buy', 'Who the content is for', 'What the brand stands for', 'What the business should be known for', 'Which formats and channels matter', 'What content to make each week']} />
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-3">Team up to speed. Your team learns:</p>
+                  <Ticks items={['What makes your buyers buy', 'Which belief each piece of content builds', 'Run the weekly content plan', 'Coordinate capture', 'Brief editors', 'Use the production and editing SOPs', 'Approve content against objective standards', 'Publish and log content', 'Read the scorecard', 'Decide what to repeat, improve or remove']} />
+                </div>
+                <div>
+                  <p className="text-white font-semibold mb-3">System operating. Your business has:</p>
+                  <Ticks items={['A repeatable content rhythm', 'A documented workflow', 'Clear ownership', 'Format cards', 'Production and editing SOPs', 'Universal content standards', 'A publishing process', 'A weekly review loop', 'A scorecard that tracks how well your content installs those beliefs and converts into pipeline']} />
+                </div>
+              </div>
+            </More>
+          </Section>
+
+          <Divider />
+
+          {/* HOW IT WORKS (timeline) */}
           <div id="how" className="scroll-mt-28" />
-          {/* HOW IT WORKS */}
           <Section>
             <Label>How it works</Label>
             <H2>Install. Transfer. Operate.</H2>
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
-              {PHASES.map((ph) => (
-                <Card key={ph.n}>
-                  <p className="font-display text-sm font-extrabold text-blue-400">{ph.n}</p>
-                  <p className="text-white text-lg font-semibold">{ph.name}</p>
-                  <p className="text-zinc-400 text-sm mb-3">{ph.weeks}</p>
-                  <p className="text-zinc-300 text-[14px] leading-relaxed mb-4">{ph.lead}</p>
-                  <ShortList items={ph.items} />
-                </Card>
+            <Lead>
+              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+            </Lead>
+            <ol className="relative mt-12 ml-2 border-l border-white/10">
+              {PHASES_V2.map((ph) => (
+                <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
+                  <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
+                  <p className="text-zinc-500 text-sm uppercase tracking-widest">{ph.weeks}</p>
+                  <p className="font-display text-2xl font-extrabold text-white mt-1">{ph.name}</p>
+                  <p className="text-zinc-400 text-lg leading-relaxed mt-2">{ph.lead}</p>
+                </li>
               ))}
-            </div>
-            <p className="text-zinc-300 leading-relaxed mt-6">
+            </ol>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-10">
               By the end, your team knows what to do next without asking you every time.
             </p>
+            <More label="See what happens in each phase">
+              <div className="space-y-8">
+                {PHASES_V2.map((ph) => (
+                  <div key={ph.n}>
+                    <p className="text-white font-semibold mb-3">{ph.name}, {ph.weeks.toLowerCase()}</p>
+                    <Ticks items={ph.items} />
+                  </div>
+                ))}
+              </div>
+            </More>
           </Section>
 
           <Divider />
 
+          {/* WHAT YOU RECEIVE */}
           <div id="receive" className="scroll-mt-28" />
-          {/* WHAT YOU RECEIVE + SUPPORT */}
           <Section>
             <Label>What you receive</Label>
             <H2>Everything your team runs from.</H2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-              <Card><CardTitle title="Foundation" /><ShortList items={['Brand Bible', 'Positioning and perspective', 'ICP and buyer profile', 'Buyer belief map', 'Content and demand map']} /></Card>
-              <Card><CardTitle title="Strategy" /><ShortList items={['Short form operating system', 'Long form operating system', 'Attraction playbook', 'Nurture playbook', 'Conversion pathway', 'Format library', 'Hook and topic systems', 'Content allocation rules']} /></Card>
-              <Card><CardTitle title="Production" /><ShortList items={['Plan, capture, produce workflow', 'Capture calendar', 'Production SOPs', 'Directing standards', 'Upload and handoff system']} /></Card>
-              <Card><CardTitle title="Post production" /><ShortList items={['Editing SOPs', 'Universal Content Standard', 'Editing Standard', 'Format specific QC', 'Approval and revision process', 'Asset bank']} /></Card>
-              <Card><CardTitle title="Distribution and review" /><ShortList items={['Package and schedule process', 'Publish and review SOP', 'Weekly scorecard', 'Performance review rhythm', 'Repeat, improve, remove decisions']} /></Card>
-              <Card className="border-blue-500/20">
-                <CardTitle title="Support" />
-                <ShortList items={[
-                  'One Brand Day',
-                  'Four weeks of 1:1 implementation with your operator, from January',
-                  'One team call per week during installation',
-                  'Training every fortnight',
-                  <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
-                  'Two Loom reviews per week during active implementation',
-                  <>Weekly advisory sessions, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
-                  'Monthly founder and operator board review',
-                  'WhatsApp implementation support, 24 hour replies, during the agreed support window',
-                ]} />
-              </Card>
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              The support is there to install the system, so your team stops needing me.
+            <Lead>
+              Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
+            </Lead>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              A Brand Day, four weeks of 1:1 implementation with your operator, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
+            <More label="See everything included">
+              <div className="space-y-8">
+                {[
+                  ['Foundation', ['Brand Bible', 'Positioning and perspective', 'ICP and buyer profile', 'Buyer belief map', 'Content and demand map']],
+                  ['Strategy', ['Short form operating system', 'Long form operating system', 'Attraction playbook', 'Nurture playbook', 'Conversion pathway', 'Format library', 'Hook and topic systems', 'Content allocation rules']],
+                  ['Production', ['Plan, capture, produce workflow', 'Capture calendar', 'Production SOPs', 'Directing standards', 'Upload and handoff system']],
+                  ['Post production', ['Editing SOPs', 'Universal Content Standard', 'Editing Standard', 'Format specific QC', 'Approval and revision process', 'Asset bank']],
+                  ['Distribution and review', ['Package and schedule process', 'Publish and review SOP', 'Weekly scorecard', 'Performance review rhythm', 'Repeat, improve, remove decisions']],
+                ].map(([t, items]) => (
+                  <div key={t as string}>
+                    <p className="text-white font-semibold mb-3">{t as string}</p>
+                    <Ticks items={items as string[]} />
+                  </div>
+                ))}
+                <div>
+                  <p className="text-white font-semibold mb-3">Support</p>
+                  <Ticks items={[
+                    'One Brand Day',
+                    'Four weeks of 1:1 implementation with your operator, from January',
+                    'One team call per week during installation',
+                    'Training every fortnight',
+                    <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
+                    'Two Loom reviews per week during active implementation',
+                    <>Weekly advisory sessions, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
+                    'Monthly founder and operator board review',
+                    'WhatsApp implementation support, 24 hour replies, during the agreed support window',
+                  ]} />
+                </div>
+              </div>
+            </More>
           </Section>
 
           <Divider />
 
-          <div id="payinfull" className="scroll-mt-28" />
           {/* PAY IN FULL */}
+          <div id="payinfull" className="scroll-mt-28" />
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.
-            </p>
+            <Lead>Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
           </Section>
           <StartTodayShowcase />
 
           <Divider />
 
+          {/* GUARANTEES + FIT */}
           <div id="guarantee" className="scroll-mt-28" />
-          {/* GUARANTEE + FIT */}
           <Section>
-            <Label>Guarantees and fit</Label>
+            <Label>Guarantees</Label>
             <H2>The risk sits with me.</H2>
-            <div className="grid md:grid-cols-2 gap-4 mt-8">
-              <Card className="border-blue-500/20">
-                <p className="text-white font-semibold mb-2">30 day implementation guarantee</p>
-                <p className="text-zinc-300 text-[14px] leading-relaxed">
-                  If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
-                </p>
-                <More label="What material change means">
-                  <Ticks items={['The weekly content process exists', 'Owners are assigned', 'At least one full content cycle has run', 'Your team is using the documented workflow']} />
-                </More>
-              </Card>
-              <Card className="border-blue-500/20">
-                <p className="text-white font-semibold mb-2">90 day installation guarantee</p>
-                <p className="text-zinc-300 text-[14px] leading-relaxed">
-                  If the agreed Authority Engine is not installed by day 90, we continue working with you at no additional cost until it is.
-                </p>
-                <More label="The conditions">
-                  <Ticks items={['Your team attends at least 80% of agreed sessions', 'Required founder inputs arrive on time', 'Your team completes the agreed implementation work']} />
-                  <p className="text-zinc-400 text-[14px] mt-4">The guarantees cover installation, not revenue.</p>
-                </More>
-              </Card>
+            <div className="mt-10">
+              <Statement title="Day 30.">
+                If your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
+              </Statement>
+              <Statement title="Day 90.">
+                If the agreed Authority Engine is not installed, we continue working with you at no additional cost until it is.
+              </Statement>
             </div>
-            <p className="text-white font-semibold text-lg mt-12 mb-1">You need a proven offer and a team.</p>
-            <div className="grid md:grid-cols-2 gap-4 mt-4">
-              <Card>
-                <p className="text-white text-sm font-semibold mb-4">This is for you if:</p>
-                <ShortList show={4} items={[
-                  'You already do $200K/month or more',
-                  'You have a proven offer',
-                  'You have real expertise and proof',
-                  'You already create some content',
-                  'You have an operator or team member to train',
-                  'You want the team running content without you managing every post',
-                  'You are willing to fulfil increased demand without standards dropping',
-                ]} />
-              </Card>
-              <Card>
-                <p className="text-white text-sm font-semibold mb-4">This is not:</p>
-                <ShortList show={4} cross items={[
-                  'A done for you content agency',
-                  'A course you consume alone',
-                  'A replacement for a proven offer',
-                  'A guarantee of revenue',
-                  'For founders starting from zero',
-                  'For teams unwilling to attend, implement or share data honestly',
-                ]} />
-              </Card>
-            </div>
+            <More label="What counts, and the conditions">
+              <p className="text-white font-semibold mb-3">Material change means:</p>
+              <Ticks items={['The weekly content process exists', 'Owners are assigned', 'At least one full content cycle has run', 'Your team is using the documented workflow']} />
+              <p className="text-white font-semibold mt-6 mb-3">Conditions:</p>
+              <Ticks items={['Your team attends at least 80% of agreed sessions', 'Required founder inputs arrive on time', 'Your team completes the agreed implementation work']} />
+              <p className="text-zinc-400 mt-4">The guarantees cover installation, not revenue.</p>
+            </More>
+
+            <p className="text-white text-xl font-semibold mt-20">You need a proven offer and a team.</p>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-4">
+              This is for you if you already do $200K/month or more, have a proven offer and real expertise, already create some content, and have someone on your team to train.
+            </p>
+            <p className="text-zinc-500 text-lg leading-relaxed mt-4">
+              It is not a done for you agency, and it is not for founders starting from zero.
+            </p>
+            <More label="See the full fit list">
+              <p className="text-white font-semibold mb-3">This is for you if:</p>
+              <Ticks items={['You already do $200K/month or more', 'You have a proven offer', 'You have real expertise and proof', 'You already create some content', 'You have an operator or team member to train', 'You want the team running content without you managing every post', 'You are willing to fulfil increased demand without standards dropping']} />
+              <p className="text-white font-semibold mt-6 mb-3">This is not:</p>
+              <Crosses items={['A done for you content agency', 'A course you consume alone', 'A replacement for a proven offer', 'A guarantee of revenue', 'For founders starting from zero', 'For teams unwilling to attend, implement or share data honestly']} />
+            </More>
           </Section>
 
           <Divider />
 
-          <div id="roles" className="scroll-mt-28" />
           {/* ROLES + WHO */}
+          <div id="roles" className="scroll-mt-28" />
           <Section>
-            <Label>Roles</Label>
+            <Label>Who does what</Label>
             <H2>I install it. Your team runs it.</H2>
-            <div className="grid md:grid-cols-2 gap-4 mt-8">
-              <Card>
-                <p className="text-white text-sm font-semibold mb-4">My role</p>
-                <ShortList show={4} items={['Architect the system', 'Install the playbooks', 'Train your operator', 'Review the real work', 'Diagnose bottlenecks', 'Read the data', 'Recommend the next move']} />
-              </Card>
-              <Card>
-                <p className="text-white text-sm font-semibold mb-4">Your team's role</p>
-                <ShortList show={4} items={['Film', 'Edit', 'Publish', 'Attend the sessions', 'Run the weekly rhythm', 'Bring the numbers honestly', 'Implement the agreed changes']} />
-              </Card>
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-4 text-[15px]">
-              The founder provides expertise and appears on camera where required. The team owns the rest.
+            <Lead>I architect the system, train your operator, review the real work and read the data with you.</Lead>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              Your team films, edits, publishes and runs the weekly rhythm. The founder provides expertise and appears on camera where required.
             </p>
-            <Card className="mt-8 flex gap-5 items-start">
+            <div className="mt-14 flex gap-6 items-start">
               <img
                 src="/founding/sean.jpg"
                 alt="Sean on set, mid explanation"
@@ -444,21 +458,18 @@ export default function FoundingV2() {
               />
               <div>
                 <p className="text-white text-lg font-semibold">Sean Fox</p>
-                <p className="text-zinc-400 text-sm">Founder of The Authority Engine, based on the Gold Coast.</p>
-                <p className="text-zinc-300 text-[14px] leading-relaxed mt-3">
+                <p className="text-zinc-400">Founder of The Authority Engine, based on the Gold Coast.</p>
+                <p className="text-zinc-300 leading-relaxed mt-3">
                   I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
                 </p>
-                <p className="text-zinc-400 text-[14px] leading-relaxed mt-2">
-                  The trail so far: Mitch Revs, then Jay Wright, then Taki Moore, and the network of 7 and 8 figure founders that came from them.
-                </p>
               </div>
-            </Card>
+            </div>
           </Section>
 
           <Divider />
 
-          <div id="faq" className="scroll-mt-28" />
           {/* FAQ */}
+          <div id="faq" className="scroll-mt-28" />
           <Section>
             <Label>Questions</Label>
             <H2>What founders ask before they buy.</H2>
@@ -472,45 +483,21 @@ export default function FoundingV2() {
             <Section>
               <Label>Investment</Label>
               <H2>$10,000 AUD. Closes 30 November.</H2>
-              <div className="glow-card p-8 md:p-10 mt-8">
+              <div className="glow-card p-8 md:p-10 mt-10">
                 <p className="text-zinc-400 text-[14px] mb-1">Standard investment</p>
                 <p className="font-display text-2xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
                 <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
                 <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
-                <p className="text-zinc-300 leading-relaxed mt-6">
-                  Only 5 installs for this intake, starting in January. The founding rate is in exchange for:
-                </p>
-                <div className="mt-4">
-                  <Ticks items={['Full implementation', 'Blunt feedback', 'Honest data', 'Permission to use results as case studies where appropriate']} />
-                </div>
-                <p className="text-zinc-400 leading-relaxed mt-6">
-                  I keep active installs limited so I can stay close to the team, the work and the data.
+                <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+                  Only 5 installs for this intake, starting in January. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
                 </p>
                 <BuyButton status={status} location="founding-v2-price" className="mt-8" />
-                <More label="What happens next">
-                  <ol className="space-y-3">
-                    {[
-                      'Lock in your place on the secure Stripe checkout.',
-                      'We set up your WhatsApp straight away.',
-                      'Receive the Start Here workspace and pre install materials.',
-                      'Book your Brand Day.',
-                      'Your team gets access to the training and systems.',
-                      'Implementation begins with your operator in January.',
-                      'Your first live content cycle runs straight away.',
-                    ].map((t, i) => (
-                      <li key={i} className="flex items-start gap-4">
-                        <span className="font-display text-sm font-extrabold text-blue-400 mt-[3px] w-5 flex-shrink-0">{`0${i + 1}`}</span>
-                        <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </More>
               </div>
             </Section>
           </section>
         </main>
 
-        {/* Wide screens: the buy card stays on screen */}
+        {/* Wide screens: a guide through the page, the price only at the end */}
         <aside className="hidden xl:block">
           <div className="sticky top-28">
             <Rail status={status} />
