@@ -276,6 +276,10 @@ export default function Founding() {
           <Section>
             <Label>Proof</Label>
             <H2>Built inside 8 figure businesses.</H2>
+            {/* Sean's own line, word for word from /offer. */}
+            <p className="text-zinc-400 leading-relaxed mt-6">
+              I've spent the last 24 months behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
+            </p>
             <div className="grid md:grid-cols-3 gap-4 mt-8">
               {PROOF.map((p) => (
                 <div key={p.name} className="glow-card p-6">
