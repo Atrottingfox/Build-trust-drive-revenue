@@ -5,6 +5,7 @@ import { ArrowRight, Check, Loader2, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta } from '../lib/track';
+import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 
 /*
   /founding. The founding 90 Day offer, bought straight off the page.
@@ -216,18 +217,6 @@ const Crosses = ({ items }: { items: React.ReactNode[] }) => (
   </ul>
 );
 
-/* A named deliverable with one plain line on what it actually is. Same shape
-   as the deliverable lists on /offer and /morgan. */
-const Item = ({ name, children, soon }: { name: string; children: React.ReactNode; soon?: boolean }) => (
-  <li className="flex items-start gap-3">
-    <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-    <span className="text-[15px] leading-relaxed">
-      <span className="text-white font-semibold">{name}</span>
-      <span className="text-zinc-400"> {children}</span>
-      {soon && <span className="text-zinc-500"> Coming soon.</span>}
-    </span>
-  </li>
-);
 
 /* Proof already public on /brand-day. Same three, same words. */
 const PROOF = [
@@ -340,24 +329,19 @@ export default function Founding() {
 
       <div className="gradient-line" />
 
-      {/* PAY IN FULL */}
+      {/* PAY IN FULL, with the visual layer */}
       <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Pay in full</Label>
-            <H2>Pay in full. Start today.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.
-            </p>
-            <ul className="space-y-4">
-              <Item name="Every SOP.">The ones we run with clients, across every format.</Item>
-              <Item name="Every edit.">Plus the review cadence and posting rules.</Item>
-              <Item name="Every training video.">The full library.</Item>
-              <Item name="Both playbooks.">Short form and long form, complete.</Item>
-              <Item name="Office hours, early.">Jump in and ask before we start.</Item>
-              <Item name="WhatsApp, from today.">Answers before the end of the year.</Item>
-            </ul>
+            <div className="max-w-3xl">
+              <Label>Pay in full</Label>
+              <H2>Pay in full. Start today.</H2>
+              <p className="text-zinc-400 leading-relaxed mt-6">
+                Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.
+              </p>
+            </div>
           </Section>
+          <StartTodayShowcase />
         </div>
       </section>
 
