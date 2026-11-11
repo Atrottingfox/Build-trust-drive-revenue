@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
+import ReceiveShowcase from '../components/founding/ReceiveShowcase';
 import VslPlayer from '../components/founding/VslPlayer';
 import {
   BuyButton,
@@ -347,12 +348,9 @@ export default function FoundingV2() {
           <Section>
             <Label>What you receive</Label>
             <H2>Everything your team runs from.</H2>
-            <Lead>
-              Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
-            </Lead>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, 1:1 guided implementation from January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
-            </p>
+          </Section>
+          <ReceiveShowcase />
+          <Section>
             <More label="See everything included">
               <div className="space-y-8">
                 {[

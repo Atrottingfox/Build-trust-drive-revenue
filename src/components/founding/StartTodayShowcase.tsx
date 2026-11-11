@@ -36,7 +36,7 @@ const PLAYBOOKS = [
 const FORMATS = ['Belief breaker', 'Strategy breakdown', 'Client breakdown', 'Question + Answer', 'Draw / show', 'Signature series', 'Testimonials', 'Off the cuff'];
 
 /* A browser style frame so every visual reads as a real screen. */
-const Window = ({ title, children }: { title: string; children: React.ReactNode }) => (
+export const Window = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="rounded-2xl border border-white/10 bg-[#0d0f14] overflow-hidden shadow-[0_30px_80px_-30px_rgba(59,125,255,0.35)]">
     <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-white/[0.02]">
       <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
@@ -93,7 +93,7 @@ const ScrollingList = ({ items, icon }: { items: string[]; icon?: boolean }) => 
   </div>
 );
 
-function Visual({ index }: { index: number }) {
+export function Visual({ index }: { index: number }) {
   switch (index) {
     case 0:
       return (
