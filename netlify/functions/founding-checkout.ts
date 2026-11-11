@@ -1,4 +1,6 @@
 import { provisionPortal } from "./_portal";
+import { GHL_API, GHL_VERSION } from "./_ghl";
+import { TEST_CENTS, TEST_TAG } from "./_pricing";
 import type { Handler } from "@netlify/functions";
 import { addToWaitlist, CLOSES_AT, handleFoundingSale, PAYMENT_KIND, soldCount, stripe, stripeKey, TOTAL_SPOTS } from "./_founding";
 
@@ -45,6 +47,30 @@ const INVOICE_DESCRIPTION =
 
 const PAGE = "https://authorityengine.com.au/founding";
 
+/*
+  A $1 test run (Sean, 12 Nov 2026). /founding?test=<email> passes that email
+  here. Only a GHL contact with that exact email AND the zz-test tag pays $1,
+  the same rule as every other checkout (see _pricing.ts). Anybody else, or GHL
+  being unreachable, pays the real price. A test sale is marked on the
+  PaymentIntent as founding-90-test, so it never uses one of the 5 spots.
+*/
+async function isTestEmail(email: string): Promise<boolean> {
+  const token = process.env.GHL_TOKEN;
+  const location = process.env.GHL_LOCATION_ID;
+  const clean = email.trim().toLowerCase();
+  if (!token || !location || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean)) return false;
+  try {
+    const r = await fetch(`${GHL_API}/contacts/?locationId=${encodeURIComponent(location)}&query=${encodeURIComponent(clean)}`, {
+      headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, Accept: "application/json" },
+    });
+    if (!r.ok) return false;
+    const match = ((await r.json())?.contacts || []).find((c: any) => String(c?.email || "").toLowerCase() === clean);
+    return Boolean(match && (match.tags || []).includes(TEST_TAG));
+  } catch {
+    return false;
+  }
+}
+
 const json = (body: unknown) => ({ statusCode: 200, headers, body: JSON.stringify(body) });
 
 async function status() {
@@ -86,13 +112,17 @@ const handler: Handler = async (event) => {
     const s = await status();
     if (!s.open) return json({ configured: true, ...s, url: null });
 
+    const testEmail = typeof body.testEmail === "string" ? body.testEmail.slice(0, 120) : "";
+    const isTest = testEmail ? await isTestEmail(testEmail) : false;
+    const cents = isTest ? TEST_CENTS : PRICE_AUD_CENTS;
+
     const form = new URLSearchParams({
       mode: "payment",
       success_url: `${PAGE}?paid=1&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: PAGE,
       "line_items[0][quantity]": "1",
       "line_items[0][price_data][currency]": "aud",
-      "line_items[0][price_data][unit_amount]": String(PRICE_AUD_CENTS),
+      "line_items[0][price_data][unit_amount]": String(cents),
       "line_items[0][price_data][product_data][name]": PRODUCT_NAME,
       /* WhatsApp is set up as soon as they buy, so the number is required. */
       "phone_number_collection[enabled]": "true",
@@ -104,11 +134,16 @@ const handler: Handler = async (event) => {
       "invoice_creation[invoice_data][metadata][payment]": PAYMENT_KIND,
       "metadata[payment]": PAYMENT_KIND,
       /* On the PaymentIntent too, which is what the spot count searches. */
-      "payment_intent_data[metadata][payment]": PAYMENT_KIND,
+      "payment_intent_data[metadata][payment]": isTest ? `${PAYMENT_KIND}-test` : PAYMENT_KIND,
       "payment_intent_data[description]": INVOICE_DESCRIPTION,
       /* Unpaid sessions expire after 30 minutes so nobody sits on a spot. */
       "expires_at": String(Math.floor(Date.now() / 1000) + 30 * 60),
     });
+
+    if (isTest) {
+      form.set("customer_email", testEmail.trim().toLowerCase());
+      form.set("metadata[test]", "1");
+    }
 
     const r = await stripe("checkout/sessions", { method: "POST", form });
     if (!r.ok) {
@@ -116,7 +151,7 @@ const handler: Handler = async (event) => {
       console.error("founding-checkout: session create failed", r.status, JSON.stringify(e));
       return json({ configured: false, error: true, stripeMessage: e.message || null });
     }
-    return json({ configured: true, url: r.data.url, amountCents: PRICE_AUD_CENTS });
+    return json({ configured: true, url: r.data.url, amountCents: cents });
   }
 
   /* ---------- Confirm (the thank you page) ---------- */

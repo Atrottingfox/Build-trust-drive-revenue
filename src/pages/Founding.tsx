@@ -216,7 +216,7 @@ export function StickyBar({ status }: { status: Status | null }) {
       const r = await fetch(FN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'checkout' }),
+        body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
       });
       const d = await r.json();
       if (d.url) {
@@ -270,7 +270,7 @@ export function BuyButton({ status, location, className = '' }: { status: Status
       const r = await fetch(FN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'checkout' }),
+        body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
       });
       const d = await r.json();
       if (d.url) {
