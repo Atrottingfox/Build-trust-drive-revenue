@@ -190,8 +190,13 @@ function Waitlist() {
 
 /* Mobile only. Appears once the hero is gone, hides at the price card so it
    never sits on top of the real button, and disappears when the intake closes. */
-export function StickyBar({ status }: { status: Status | null }) {
+/* revealAt: an element id. Until the reader reaches it the bar leads with the
+   spots and countdown, not the price (/founding-v2). Without it, the price
+   shows the whole way (/founding). */
+export function StickyBar({ status, revealAt }: { status: Status | null; revealAt?: string }) {
   const [show, setShow] = useState(false);
+  const [priced, setPriced] = useState(!revealAt);
+  const countdown = useCountdown(status?.closesAt || CLOSES_AT);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
     const onScroll = () => {
@@ -199,11 +204,15 @@ export function StickyBar({ status }: { status: Status | null }) {
       const pastHero = window.scrollY > 700;
       const atPrice = price ? price.getBoundingClientRect().top < window.innerHeight : false;
       setShow(pastHero && !atPrice);
+      if (revealAt) {
+        const mark = document.getElementById(revealAt);
+        setPriced(mark ? mark.getBoundingClientRect().top < window.innerHeight * 0.6 : false);
+      }
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [revealAt]);
   if (status && !status.open) return null;
 
   const left = status && status.remaining !== null ? `${status.remaining} of ${status.total} spots left` : '5 spots';
@@ -236,8 +245,17 @@ export function StickyBar({ status }: { status: Status | null }) {
     >
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD</p>
-          <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
+          {priced ? (
+            <>
+              <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD</p>
+              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
+            </>
+          ) : (
+            <>
+              <p className="text-white text-[15px] font-semibold leading-tight">5 spots, starting in January</p>
+              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">{countdown ? `Closes 30 Nov. ${countdown} left` : 'Closes 30 Nov.'}</p>
+            </>
+          )}
         </div>
         <button
           type="button"

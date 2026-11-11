@@ -505,7 +505,7 @@ export default function FoundingV2() {
         </aside>
       </div>
 
-      <StickyBar status={status} />
+      <StickyBar status={status} revealAt="faq" />
       <div className="h-20 md:hidden" />
       <Footer />
     </div>
