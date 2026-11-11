@@ -169,11 +169,11 @@ function Visual({ index }: { index: number }) {
       );
     case 4:
       return (
-        <Window title="Office hours">
-          <Clip src="live" sub="Live" label="Jump in and ask, before we start" />
+        <Window title="Advisory">
+          <Clip src="live" sub="Before you start" label="An advisory board call" />
           <div className="flex items-center gap-3 px-5 py-4">
             <CalendarDays className="w-4 h-4 text-blue-400" />
-            <span className="text-[13px] text-zinc-300">Every Thursday. Mondays coming soon.</span>
+            <span className="text-[13px] text-zinc-300">Then advisory sessions every Thursday. Mondays coming soon.</span>
           </div>
         </Window>
       );
@@ -197,7 +197,7 @@ const ITEMS: { name: string; text: string }[] = [
   { name: 'Every edit.', text: 'Plus the review cadence and posting rules.' },
   { name: 'Every training video.', text: 'The full library.' },
   { name: 'Both playbooks.', text: 'Short form and long form, complete.' },
-  { name: 'Office hours, early.', text: 'Jump in and ask before we start.' },
+  { name: 'Advisory board call.', text: 'Before you start, so you can jump in and ask.' },
   { name: 'WhatsApp, from today.', text: 'Answers before the end of the year.' },
 ];
 

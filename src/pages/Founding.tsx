@@ -104,18 +104,25 @@ function useCountdown(iso: string) {
 }
 
 function SpotsLine({ status }: { status: Status | null }) {
-  /* Only scarcity we can honour: the live count from Stripe, and the date. */
-  const left = status && status.remaining !== null && status.remaining < status.total
-    ? `${status.remaining} of ${status.total} intro spots left.`
-    : '5 intro spots. Founders start in January.';
+  /* Sean's three lines, 11 Nov. The first carries the live count once a spot sells. */
+  /* The hero already says 5 spots, starting in January, so the count only
+     shows here once one has sold. */
+  const spots = status && status.remaining !== null && status.remaining < status.total
+    ? `${status.remaining} of ${status.total} spots left`
+    : '';
   const countdown = useCountdown(status?.closesAt || CLOSES_AT);
   return (
-    <div className="mt-4 space-y-1">
-      <p className="text-zinc-400 text-sm">
-        <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
-      </p>
+    <div className="mt-5">
+      <ul className="space-y-1.5">
+        {[spots, 'Secure yours now to get access today', 'Access to our resource library and advisory'].filter(Boolean).map((t, i) => (
+          <li key={t} className="flex items-center gap-2.5 text-sm">
+            <Check className="w-4 h-4 text-blue-400 flex-shrink-0" />
+            <span className={i === 0 && spots ? 'text-white font-semibold' : 'text-zinc-300'}>{t}</span>
+          </li>
+        ))}
+      </ul>
       {countdown && (
-        <p className="text-sm text-blue-400 font-semibold tabular-nums">{countdown} left</p>
+        <p className="text-sm text-blue-400 font-semibold tabular-nums mt-3">Closes 30 November. {countdown} left</p>
       )}
     </div>
   );
@@ -349,7 +356,7 @@ function Paid() {
                 'We set up your WhatsApp channel, on the number you gave at checkout',
                 'You receive the Start Here workspace and pre install materials',
                 'Your team gets every SOP, edit, playbook and training video',
-                'You get early access to office hours, so you can jump in and ask',
+                'An advisory board call before you start',
                 'We lock in your Brand Day date',
                 'Implementation begins with your operator in January',
               ]} />
@@ -389,12 +396,6 @@ const Crosses = ({ items }: { items: React.ReactNode[] }) => (
 );
 
 
-/* Proof already public on /brand-day. Same three, same words. */
-const PROOF = [
-  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 12 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
-  { name: 'Jay Wright', stat: '2x', context: 'following and revenue in 12 months', sub: 'Ecommerce brands LSKD and Tiger Lily.' },
-  { name: 'Mitch Revs', stat: '19k to 50k', context: 'followers in 2 months', sub: '1.4M organic impressions 3 months straight.' },
-];
 
 
 /* A titled group of ticks, used for the three outcomes and what you receive. */
@@ -464,61 +465,12 @@ export default function Founding() {
               Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              Intro offer for 5 founders, starting in January.
+              5 spots, starting in January.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
-          </Section>
-        </div>
-      </section>
-
-      {/* PROOF, straight under the promise */}
-      <section className="pb-20 md:pb-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Proof</Label>
-            <H2>Built inside 8 figure businesses.</H2>
-            {/* Sean's own line, word for word from /offer. */}
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              I've spent the last 24 months behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
-            </p>
-            <div className="grid md:grid-cols-3 gap-4 mt-8">
-              {PROOF.map((p) => (
-                <div key={p.name} className="glow-card p-6">
-                  <p className="font-display text-3xl font-extrabold text-white">{p.stat}</p>
-                  <p className="text-zinc-400 text-[14px] mt-1">{p.context}</p>
-                  <p className="text-white text-sm font-semibold mt-4">{p.name}</p>
-                  <p className="text-zinc-400 text-[13px] mt-1 leading-relaxed">{p.sub}</p>
-                </div>
-              ))}
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* THE PROBLEM */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The problem</Label>
-            <H2>Your content still depends on you.</H2>
-            <div className="mt-8">
-              <Crosses items={[
-                'You deciding what to post',
-                'You being available to film everything',
-                'Your team guessing what good means',
-                'Editors producing clips without strategic direction',
-                'Nobody knowing which content actually worked',
-                'The system stopping when you stop',
-              ]} />
-            </div>
-            <p className="text-zinc-300 leading-relaxed mt-8">
-              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator.
-            </p>
           </Section>
         </div>
       </section>
@@ -530,6 +482,9 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>What this installs</Label>
+            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+            </p>
             <H2>By day 90, your team can answer these.</H2>
             <div className="grid sm:grid-cols-2 gap-3 mt-8">
               {[
@@ -549,7 +504,10 @@ export default function Founding() {
               ))}
             </div>
             <p className="text-zinc-400 leading-relaxed mt-8">
-              A working operating system your team uses to plan, produce, judge, publish and improve content. You are never left to figure out a library alone.
+              A working operating system your team uses to plan, produce, judge, publish and improve content.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
             </p>
           </Section>
         </div>
@@ -683,7 +641,7 @@ export default function Founding() {
                 'Training every fortnight',
                 <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
                 'Two Loom reviews per week during active implementation',
-                <>Weekly office hours, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
+                <>Weekly advisory sessions, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
                 'Monthly founder and operator board review',
                 'WhatsApp implementation support, 24 hour replies, during the agreed support window',
               ]} />
