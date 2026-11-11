@@ -379,7 +379,7 @@ export default function BrandDayOffer() {
               <p className="text-zinc-400 text-[14px] mb-1">Strategy Day</p>
               <p className="font-display text-5xl font-extrabold text-white">$5,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                There are <span className="text-white font-semibold">14 Strategy Days remaining</span> at the founding price. Once those are filled, the price increases to <span className="text-white font-semibold">$10,000 AUD</span>.
+                There are <span className="text-white font-semibold">10 Strategy Days remaining</span> at the founding price. Once those are filled, the price increases to <span className="text-white font-semibold">$10,000 AUD</span>.
               </p>
               <p className="text-zinc-500 text-[15px] leading-relaxed mt-5">
                 The Strategy Day stands alone. You leave with the strategy and can implement it with your existing team or partners.

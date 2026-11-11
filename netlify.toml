@@ -35,6 +35,12 @@
 [functions."self-heal"]
   schedule = "17 * * * *"
 
+# Founding 90 Day sales the thank you page never confirmed (closed tab). Same
+# GHL contact, founding-paid tag and Slack alert. Safe to rerun: Stripe session
+# metadata alerted=1 marks a sale as done.
+[functions."founding-sweep"]
+  schedule = "*/10 * * * *"
+
 # The morning after a Brand Day, ask whether to invite them into the 90 days.
 # 21:00 UTC is 07:00 Brisbane. One Slack message, one link, no app needed.
 # Flags a paid client who has not booked their prep call, so it can be

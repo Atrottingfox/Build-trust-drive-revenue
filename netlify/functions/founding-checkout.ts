@@ -1,4 +1,5 @@
 import type { Handler } from "@netlify/functions";
+import { handleFoundingSale } from "./_founding";
 
 /*
   The founding 90 Day offer at /founding. Buy straight off the page, no
@@ -93,20 +94,6 @@ async function status() {
   };
 }
 
-async function slack(text: string): Promise<void> {
-  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
-  if (!url) return;
-  try {
-    await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-  } catch {
-    /* An alert that fails must not fail the thank you page. */
-  }
-}
-
 const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") return { statusCode: 200, headers, body: "" };
 
@@ -184,26 +171,9 @@ const handler: Handler = async (event) => {
     const d = session.customer_details || {};
     const firstName = String(d.name || "").split(" ")[0] || "";
 
-    /* One alert per sale. The flag lives on the session itself, so a refresh
-       of the thank you page never posts it twice. */
-    if (paid && session.metadata?.alerted !== "1") {
-      const amount = ((session.amount_total ?? 0) / 100).toLocaleString("en-AU", {
-        style: "currency",
-        currency: (session.currency || "aud").toUpperCase(),
-      });
-      await slack(
-        [
-          `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day (fast action, paid in full).*`,
-          `${amount} received.`,
-          `Email: ${d.email || "not given"}   Phone: ${d.phone || "not given"}`,
-          `Set up their WhatsApp now, give them the SOPs, playbooks, training videos and early office hours, and lock in their Brand Day date.`,
-        ].join("\n")
-      );
-      await stripe(`checkout/sessions/${id}`, {
-        method: "POST",
-        form: new URLSearchParams({ "metadata[alerted]": "1" }),
-      });
-    }
+    /* GHL contact, founding-paid tag, Slack alert. Once per sale: the flag
+       lives on the session, so a refresh or the sweep never repeats it. */
+    if (paid) await handleFoundingSale(session, "thank-you page");
 
     return json({ paid, firstName });
   }
