@@ -32,10 +32,13 @@ export const handler: Handler = async () => {
   if (!token || !location || !secret) return { statusCode: 200, body: "not configured" };
 
   let clients: { name: string; email: string; claimUrl: string; slug: string }[] = [];
+  let noWhatsapp: { name: string; email: string }[] = [];
   try {
     const r = await fetch(UNCLAIMED_URL, { method: "POST", headers: { "x-call-context-key": secret }, signal: AbortSignal.timeout(10000) });
     if (!r.ok) throw new Error(`portal-unclaimed ${r.status}`);
-    clients = (await r.json())?.clients || [];
+    const out = await r.json();
+    clients = out?.clients || [];
+    noWhatsapp = out?.noWhatsapp || [];
   } catch (err) {
     await slack(`:warning: The portal reminder could not run: ${String(err)}`);
     return { statusCode: 200, body: "lookup failed" };
@@ -60,5 +63,15 @@ export const handler: Handler = async () => {
   if (lines.length) {
     await slack(`:key: *Portal not set up after 48 hours.*\n` + lines.map((l) => `  • ${l}`).join("\n"));
   }
-  return { statusCode: 200, body: JSON.stringify({ reminded: lines.length }) };
+  /* Paid over 24 hours ago and still no WhatsApp link on their portal. The
+     welcome email promised one within 24 hours (Sean, 2026-11-12). */
+  if (noWhatsapp.length) {
+    await slack(
+      `:speech_balloon: *No WhatsApp group yet, and their welcome email promised one within 24 hours.*\n` +
+        noWhatsapp.map((c) => `  • ${esc(c.name || c.email)} (${esc(c.email || "no email")})`).join("\n") +
+        `\nMake the group, then paste the invite link on their portal hub (Edit hub). That emails it to them.`
+    );
+  }
+
+  return { statusCode: 200, body: JSON.stringify({ reminded: lines.length, noWhatsapp: noWhatsapp.length }) };
 };

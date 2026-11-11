@@ -3,6 +3,7 @@ import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
 import { isTestContact, priceCents } from "./_pricing";
 import { DAY61_OPTION } from "./_variants";
+import { OFFICE_HOURS, WHATSAPP_LINE } from "./_calls";
 
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
@@ -429,6 +430,7 @@ const handler: Handler = async (event) => {
                 `<p>${first},</p>`,
                 `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`,
                 portalLine,
+                WHATSAPP_LINE,
                 `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.</p>`,
                 `<p>Sean</p>`,
               ].join(""))
@@ -447,6 +449,7 @@ const handler: Handler = async (event) => {
               `<p>One call a week for the first four weeks, then fortnightly, then one in month three. Your board call runs every four weeks, for as long as we work together.</p>`,
               `<p>It also asks for your media operator's name and email, because they are the one on every weekly call, not you. If you haven't hired yet, leave it blank and come back to the same link once you have.</p>`,
               portalLine,
+              WHATSAPP_LINE,
               `<p>Sean</p>`,
             ].join("")
           );
@@ -547,6 +550,39 @@ const handler: Handler = async (event) => {
       email: session.customer_details?.email || undefined,
       name: session.customer_details?.name || session.customer_details?.email || undefined,
     });
+
+    /* The Brand Day welcome email (Sean, 2026-11-12: payment to onboard, the
+       same for everyone). Until now a Brand Day buyer got no email from code,
+       so a closed tab meant no portal link for two days. Once per payment: the
+       flag lives on the Stripe session, so a refreshed thank you page never
+       sends it twice. */
+    const kind = session.metadata?.payment;
+    const isBrandDayPaid = !kind || kind === "brand-day";
+    const ghl = process.env.GHL_TOKEN;
+    if (isBrandDayPaid && contactId && ghl && session.metadata?.welcomed !== "1") {
+      const first = String(session.customer_details?.name || "").split(" ")[0] || "there";
+      const pick = `https://authorityengine.com.au/lock-in?c=${encodeURIComponent(contactId)}`;
+      const { sent, reason } = await sendEmail(ghl, contactId, "You're in. Here's what happens now.", [
+        `<p>${first},</p>`,
+        `<p>Payment received. Your Brand Day is locked in.</p>`,
+        `<p>1. <a href="${pick}">Pick your date</a>, if you haven't already.</p>`,
+        portal.claimUrl
+          ? `<p>2. <a href="${portal.claimUrl}">Set up your portal</a>. Your Brand Day date, your calls and everything for the build live there.</p>`
+          : `<p>2. Your portal is at <a href="https://contentengine.live/login">contentengine.live</a>. Your Brand Day date, your calls and everything for the build live there.</p>`,
+        `<p>3. Office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">office hours form</a> before you come.</p>`,
+        WHATSAPP_LINE,
+        `<p>Sean</p>`,
+      ].join(""));
+      if (sent) {
+        await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${secret}`, "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ "metadata[welcomed]": "1" }).toString(),
+        }).catch(() => {});
+      } else {
+        await slackAlert(`:warning: *${first} paid for a Brand Day and did not get their welcome email.* Reason: ${reason}. Send them their portal link by hand${portal.claimUrl ? `: ${portal.claimUrl}` : "."}`);
+      }
+    }
 
     return {
       statusCode: 200,
