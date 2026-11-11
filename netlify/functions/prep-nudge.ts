@@ -168,6 +168,11 @@ const handler: Handler = async () => {
       await addTags(ghlToken, chaseId, [FINAL_TAG]);
       chased.push(`${label}  [tomorrow, 24 hours]`);
     } else {
+      /* A new call cycle starts here. Clear the last call's later tags first:
+         GHL only sends when a tag is newly added, so a prep-morning-of or
+         prep-final-call left on from the previous call would silently stop
+         this call's emails (found 2026-11-11). */
+      await removeTags(ghlToken, chaseId, [FINAL_TAG, MORNING_TAG]);
       await addTags(ghlToken, chaseId, [FIRST_TAG]);
       chased.push(`${label}  [48 hours]`);
     }
