@@ -20,7 +20,10 @@ export default async (_request: Request, context: Context) => {
     .replace(/(<meta (?:property|name)="(?:og|twitter):description" content=")[^"]*/g, `$1${DESC}`)
     .replace(/(<meta name="description" content=")[^"]*/, `$1${DESC}`)
     .replace(/(<meta (?:property|name)="(?:og|twitter):image" content=")[^"]*/g, `$1${IMAGE}`)
-    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${URL_}`);
+    .replace(/(<meta property="og:url" content=")[^"]*/, `$1${URL_}`)
+    /* The static canonical points at the homepage, which tells Google this page
+       is a duplicate of it. */
+    .replace(/(<link rel="canonical" href=")[^"]*/, `$1${URL_}`);
 
   const headers = new Headers(res.headers);
   headers.delete("content-length");

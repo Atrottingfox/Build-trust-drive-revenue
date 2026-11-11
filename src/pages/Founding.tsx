@@ -110,7 +110,7 @@ function SpotsLine({ status }: { status: Status | null }) {
   const countdown = useCountdown(status?.closesAt || CLOSES_AT);
   return (
     <div className="mt-4 space-y-1">
-      <p className="text-zinc-500 text-sm">
+      <p className="text-zinc-400 text-sm">
         <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
       </p>
       {countdown && (
@@ -154,7 +154,7 @@ function Waitlist() {
           onChange={(e) => setName(e.target.value)}
           placeholder="Name"
           aria-label="Name"
-          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-500 focus:outline-none focus:border-blue-400"
+          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-400 focus:outline-none focus:border-blue-400"
         />
         <input
           type="email"
@@ -163,7 +163,7 @@ function Waitlist() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           aria-label="Email"
-          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-500 focus:outline-none focus:border-blue-400"
+          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-400 focus:outline-none focus:border-blue-400"
         />
       </div>
       <button
@@ -228,7 +228,7 @@ function StickyBar({ status }: { status: Status | null }) {
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
           <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD</p>
-          <p className="text-zinc-500 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
+          <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
         </div>
         <button
           type="button"
@@ -352,7 +352,7 @@ function Paid() {
                 'We lock in your Brand Day date',
                 'Implementation begins with your operator in January',
               ]} />
-              <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
+              <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
               </p>
             </>
@@ -448,11 +448,11 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Stop being the content manager.
             </h1>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
               Install the system your team runs.
             </p>
             {/* Sean's line, 11 Nov 2026. */}
@@ -486,7 +486,7 @@ export default function Founding() {
                   <p className="font-display text-3xl font-extrabold text-white">{p.stat}</p>
                   <p className="text-zinc-400 text-[14px] mt-1">{p.context}</p>
                   <p className="text-white text-sm font-semibold mt-4">{p.name}</p>
-                  <p className="text-zinc-500 text-[13px] mt-1 leading-relaxed">{p.sub}</p>
+                  <p className="text-zinc-400 text-[13px] mt-1 leading-relaxed">{p.sub}</p>
                 </div>
               ))}
             </div>
@@ -608,7 +608,7 @@ export default function Founding() {
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
                     <p className="font-display text-sm font-extrabold text-blue-400">{ph.n}</p>
                     <p className="text-white text-lg font-semibold">{ph.name}</p>
-                    <p className="text-zinc-500 text-sm">{ph.weeks}</p>
+                    <p className="text-zinc-400 text-sm">{ph.weeks}</p>
                   </div>
                   <p className="text-zinc-400 text-[15px] leading-relaxed mb-5">{ph.lead}</p>
                   <div className="grid sm:grid-cols-2 gap-x-6">
@@ -677,9 +677,9 @@ export default function Founding() {
                 'Four weeks of 1:1 implementation with your operator, from January',
                 'One team call per week during installation',
                 'Training every fortnight',
-                <>Operator hotseat every fortnight <span className="text-zinc-500">(coming soon)</span></>,
+                <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
                 'Two Loom reviews per week during active implementation',
-                <>Weekly office hours, every Thursday <span className="text-zinc-500">(Monday coming soon)</span></>,
+                <>Weekly office hours, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
                 'Monthly founder and operator board review',
                 'WhatsApp implementation support, 24 hour replies, during the agreed support window',
               ]} />
@@ -742,7 +742,7 @@ export default function Founding() {
             <div className="grid md:grid-cols-[220px_1fr] gap-8 items-start mt-2">
               <img
                 src="/founding/sean.jpg"
-                alt="Sean Fox"
+                alt="Sean on set, mid explanation"
                 width={440}
                 height={550}
                 loading="lazy"
@@ -817,7 +817,7 @@ export default function Founding() {
                 <p className="text-zinc-300 text-[15px] leading-relaxed">
                   If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
                 </p>
-                <p className="text-zinc-500 text-[14px] mt-5 mb-3">Material change means:</p>
+                <p className="text-zinc-400 text-[14px] mt-5 mb-3">Material change means:</p>
                 <Ticks items={[
                   'The weekly content process exists',
                   'Owners are assigned',
@@ -838,7 +838,7 @@ export default function Founding() {
               'Required founder inputs arrive on time',
               'Your team completes the agreed implementation work',
             ]} />
-            <p className="text-zinc-500 text-[15px] leading-relaxed mt-6">
+            <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
               The guarantees cover installation, not revenue.
             </p>
           </Section>
@@ -918,7 +918,7 @@ export default function Founding() {
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
               Stop being the content manager.
             </h2>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mt-4">
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
               Install the system your team runs.
             </p>
             <div className="flex justify-center">

@@ -42,7 +42,7 @@ const Window = ({ title, children }: { title: string; children: React.ReactNode 
       <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
       <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
       <span className="w-2.5 h-2.5 rounded-full bg-white/15" />
-      <span className="ml-3 text-[12px] text-zinc-500 truncate">{title}</span>
+      <span className="ml-3 text-[12px] text-zinc-400 truncate">{title}</span>
     </div>
     {children}
   </div>
@@ -113,7 +113,7 @@ function Visual({ index }: { index: number }) {
                 transition={{ duration: 4.5, ease: 'linear', repeat: Infinity }}
               />
             </div>
-            <div className="flex justify-between text-[11px] text-zinc-500 mt-2">
+            <div className="flex justify-between text-[11px] text-zinc-400 mt-2">
               <span>Hook</span><span>Body</span><span>Payoff</span><span>CTA</span>
             </div>
           </div>
