@@ -34,7 +34,7 @@ const FAQ: { q: string; a: string[] }[] = [
     q: 'What if my team cannot do this?',
     a: [
       'Most teams are given the job and never the playbook.',
-      'Yours gets every SOP, every edit, the training library and two Loom reviews a week on their own work. If you cannot see a material change in your team by day 30, I pay you $5,000 AUD.',
+      'Yours gets every SOP, every edit, the training library and two Loom reviews a week on their own work. If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I refund $5,000 AUD.',
     ],
   },
   {
@@ -47,7 +47,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'What does my team need to commit to?',
     a: [
-      'Turning up to at least 80% of the sessions, and getting the founder inputs we agree to us on time. That is also the condition on both guarantees.',
+      'Attending at least 80% of agreed sessions, getting the required founder inputs to us on time, and completing the agreed implementation work. Those are also the conditions on both guarantees.',
     ],
   },
   {
