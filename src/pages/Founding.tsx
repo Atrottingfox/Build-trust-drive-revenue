@@ -8,6 +8,7 @@ import { trackCta } from '../lib/track';
 import { usePageVisits } from '../lib/pageVisits';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
+import VslPlayer from '../components/founding/VslPlayer';
 
 /*
   /founding. The founding 90 Day offer, bought straight off the page.
@@ -455,6 +456,9 @@ export default function Founding() {
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
               Install the system your team runs.
             </p>
+            <div className="mb-10">
+              <VslPlayer />
+            </div>
             {/* Sean's line, 11 Nov 2026. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
               Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with.
