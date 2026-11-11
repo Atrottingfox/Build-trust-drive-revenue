@@ -159,3 +159,8 @@ lives at "Margot - Call breakdown" under Extra pages.
 - What: TOTAL_SPOTS in netlify/functions/founding-checkout.ts 10 to 5. Page now sells an intro offer for 5 founders starting in January. Checkout refuses once 5 PaymentIntents tagged founding-90 have succeeded, or after 30 Nov Brisbane.
 - Rollback: git revert 303db01 and push main.
 - Why: Sean, 11 Nov: intro offer for 5 founders to start in January.
+
+## 2026-11-11 - Portal link in the payment email, prep nudges on Brisbane time
+- What: verify-payment calls contentengine provision-client after an install payment and adds the "set your password" link to the existing Payment received email (Slack alert if it can't). prep-nudge works out today in Brisbane (it used UTC, so every nudge went a day early), tags prep-not-submitted 48h out, prep-final-call 24h out, new prep-morning-of on the day, and runs 06:00 Brisbane. PROVISION_SECRET was added then removed the same hour: it pushed the site past Netlify's 4KB function env limit and failed deploys f254a97 and 0092b53. Fixed by reusing CALL_CONTEXT_SECRET (5f294ee).
+- Rollback: git revert 5f294ee 0092b53.
+- Why: Sean, 2026-11-11: portal per client at sign up, and the pre call form chased 48h, 24h and the morning of.
