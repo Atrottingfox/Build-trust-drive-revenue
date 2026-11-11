@@ -216,7 +216,7 @@ export default function FoundingV2() {
             </p>
             {/* Sean's /offer copy, 12 Nov: the premise he wants on this page. */}
             <Lead>
-              Build a brand that commands attention from the right people, and install the buying beliefs your best clients need, so your team can keep scaling without you becoming a full time creator.
+              Create a brand that commands attention from the right people, and install the buying beliefs your best clients need, so your team can keep scaling without you becoming a full time creator.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
               No dancing on camera. No 12am scrolling for content ideas. No more random, inconsistent posts.
