@@ -66,12 +66,13 @@ function useStatus() {
 }
 
 function SpotsLine({ status }: { status: Status | null }) {
-  if (!status || status.remaining === null) {
-    return <p className="text-zinc-500 text-sm mt-4">10 spots only. Open until 30 November.</p>;
-  }
+  /* Only scarcity we can honour: the live count from Stripe, and the date. */
+  const left = status && status.remaining !== null && status.remaining < status.total
+    ? `${status.remaining} of ${status.total} installs left for this intake.`
+    : '10 installs available for this intake.';
   return (
     <p className="text-zinc-500 text-sm mt-4">
-      <span className="text-white font-semibold">{status.remaining} of {status.total} spots left.</span> Open until 30 November.
+      <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
     </p>
   );
 }
@@ -98,7 +99,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
         window.location.href = d.url;
         return;
       }
-      setError(d.open === false ? 'All 10 spots are gone.' : 'Checkout did not load. Refresh and try again, or message us and we will sort it.');
+      setError(d.open === false ? 'All 10 installs for this intake are taken.' : 'Checkout did not load. Refresh and try again, or message us and we will sort it.');
     } catch {
       setError('Checkout did not load. Refresh and try again, or message us and we will sort it.');
     }
@@ -112,7 +113,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
           href="/brandday"
           className="inline-flex items-center gap-2 bg-zinc-800 text-zinc-300 px-7 py-3.5 rounded-full text-[15px] font-semibold"
         >
-          Founding spots are closed. See the Brand Day
+          This intake is closed. See the Brand Day
           <ArrowRight className="w-4 h-4" />
         </a>
       ) : (
@@ -123,7 +124,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
           className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-          Lock in for $10,000
+          Lock in for $10,000 AUD
           {!busy && <ArrowRight className="w-4 h-4" />}
         </button>
       )}
@@ -228,6 +229,21 @@ const Item = ({ name, children, soon }: { name: string; children: React.ReactNod
   </li>
 );
 
+/* Proof already public on /brand-day. Same three, same words. */
+const PROOF = [
+  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 12 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
+  { name: 'Jay Wright', stat: '2x', context: 'following and revenue in 12 months', sub: 'Ecommerce brands LSKD and Tiger Lily.' },
+  { name: 'Mitch Revs', stat: '19k to 50k', context: 'followers in 2 months', sub: '1.4M organic impressions 3 months straight.' },
+];
+
+const Pillar = ({ n, title, items }: { n: string; title: string; items: React.ReactNode[] }) => (
+  <div className="glow-card p-8">
+    <p className="font-display text-sm font-extrabold text-blue-400 mb-2">{n}</p>
+    <p className="text-white text-lg font-semibold mb-5">{title}</p>
+    <Ticks items={items} />
+  </div>
+);
+
 export default function Founding() {
   const paid = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const status = useStatus();
@@ -237,62 +253,49 @@ export default function Founding() {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="8 figure playbooks, installed in 90 days. Your team runs them. You film. Brand Day plus 90 days of implementation. 10 spots, open until 30 November."
+        description="Stop being the content manager. In 90 days your team gets a working media operating system, built from the playbooks of every 8 figure company I've worked with. $10,000 AUD, closes 30 November."
         path="/founding"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* HERO */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-24">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">90 Day Install</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              8 figure playbooks. Installed in 90 days.
+              Stop being the content manager.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
-              Your team runs them. You film.
+              Your team gets a working media operating system.
             </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-5">
-              I built these playbooks from every 8 figure company I've worked with. Your team learns which formats, angles and hooks are working, and doubles down on them. So you can blitz past them.
+              In 90 days we install the strategy, formats, hooks, SOPs and review rhythm your team needs to publish consistently and turn attention into qualified demand.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              Under 5 hours a week from you, plus filming. More only if you want to.
+              Built from the playbooks of every 8 figure company I've worked with. You film. Outside of that, you spend under 5 hours a week on content.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
           </Section>
         </div>
       </section>
 
-      <div className="gradient-line" />
-
-      {/* WHAT YOU GET */}
-      <section className="py-20 md:py-24">
+      {/* PROOF, straight under the promise */}
+      <section className="pb-20 md:pb-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>The offer</Label>
-            <H2>Plan it in a day. Install it in 90.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              Your Brand Day sets the strategy. The next 90 days put it to work with your team.
-            </p>
-            <div className="glow-card border-blue-500/20 p-8 mt-8">
-              <p className="text-white text-sm font-semibold mb-2">The Brand Day</p>
-              <p className="text-zinc-400 text-[15px] leading-relaxed">
-                One full day in person. We map your brand, your exact buyer, what they need to believe before they buy, and the content that gets them there. There are 10 Brand Days left at $5,000 before the price doubles to $10,000. One is included here.
-              </p>
-            </div>
-            <div className="glow-card p-8 mt-6">
-              <p className="text-white text-sm font-semibold mb-5">The 90 days</p>
-              <ul className="space-y-4">
-                <Item name="WhatsApp, 24 hour replies.">Set up the moment you buy.</Item>
-                <Item name="Two Loom reviews a week.">On your real content, so your team learns from their own work.</Item>
-                <Item name="Four weeks of 1:1s with your operator.">Starts in January, after your Brand Day.</Item>
-                <Item name="Office hours every Thursday.">Get answers live. Mondays coming soon.</Item>
-                <Item name="Training every fortnight.">For you and your team.</Item>
-                <Item name="Hotseat every fortnight." soon>Your content, reviewed live.</Item>
-                <Item name="Board meeting every month.">We read the numbers and set the next move.</Item>
-              </ul>
+            <Label>Proof</Label>
+            <H2>Built inside 8 figure businesses.</H2>
+            <div className="grid md:grid-cols-3 gap-4 mt-8">
+              {PROOF.map((p) => (
+                <div key={p.name} className="glow-card p-6">
+                  <p className="font-display text-3xl font-extrabold text-white">{p.stat}</p>
+                  <p className="text-zinc-400 text-[14px] mt-1">{p.context}</p>
+                  <p className="text-white text-sm font-semibold mt-4">{p.name}</p>
+                  <p className="text-zinc-500 text-[13px] mt-1 leading-relaxed">{p.sub}</p>
+                </div>
+              ))}
             </div>
           </Section>
         </div>
@@ -300,14 +303,51 @@ export default function Founding() {
 
       <div className="gradient-line" />
 
-      {/* FAST ACTION */}
+      {/* THE INSTALL */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The install</Label>
+            <H2>Plan it in a day. Install it in 90.</H2>
+            <p className="text-zinc-400 leading-relaxed mt-6">
+              Three things get installed, in order.
+            </p>
+            <div className="space-y-6 mt-8">
+              <Pillar n="01" title="Strategy installed" items={[
+                'Your Brand Day. One full day in person, included. 10 left at $5,000 AUD before the price doubles',
+                'Your buyer, positioning and content pillars',
+                'The formats, angles and hooks to double down on',
+                'The complete short form and long form playbooks',
+              ]} />
+              <Pillar n="02" title="Team trained" items={[
+                'The full SOP library, across every format',
+                'Four weeks of 1:1 implementation with your operator, from January',
+                'Two Loom reviews a week on your real content',
+                'Training every fortnight',
+                <>Hotseat every fortnight <span className="text-zinc-500">(coming soon)</span></>,
+              ]} />
+              <Pillar n="03" title="System operating" items={[
+                'A weekly review rhythm, plus the posting rules',
+                <>Office hours every Thursday <span className="text-zinc-500">(Monday coming soon)</span></>,
+                'A board meeting every month on the numbers',
+                'WhatsApp with us, 24 hour replies',
+                'Your workload capped at under 5 hours a week, outside of filming',
+              ]} />
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* PAY IN FULL */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
             <p className="text-zinc-400 leading-relaxed mt-6 mb-8">
-              Implementation starts in January. Pay $10,000 by 30 November and your team gets all of this now.
+              Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.
             </p>
             <ul className="space-y-4">
               <Item name="Every SOP.">The ones we run with clients, across every format.</Item>
@@ -323,7 +363,7 @@ export default function Founding() {
 
       <div className="gradient-line" />
 
-      {/* WHO DOES WHAT */}
+      {/* ROLES */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
@@ -343,7 +383,7 @@ export default function Founding() {
                 <p className="text-white text-sm font-semibold mb-5">Your team</p>
                 <Ticks items={[
                   'Film, edit and post',
-                  'Turn up to the calls',
+                  'Turn up to the sessions',
                   'Run the playbooks week to week',
                   'Bring the numbers, honestly',
                 ]} />
@@ -360,18 +400,24 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Guarantee</Label>
-            <H2>I pay you $5,000 if nothing changes.</H2>
-            <div className="glow-card border-blue-500/20 p-8 md:p-10 mt-8 space-y-5">
-              <p className="text-zinc-300 leading-relaxed">
-                If you can't see a material change in your team by day 30, I'll pay you $5,000 for your time.
-              </p>
-              <p className="text-zinc-300 leading-relaxed">
-                If the playbooks aren't installed by day 90, we keep working with you until they are.
-              </p>
-              <p className="text-zinc-500 text-[15px] leading-relaxed">
-                One condition. Your team turns up to 80% of the meetings.
-              </p>
+            <H2>The risk sits with me.</H2>
+            <div className="grid md:grid-cols-2 gap-6 mt-8">
+              <div className="glow-card border-blue-500/20 p-8">
+                <p className="text-white text-sm font-semibold mb-3">30 day implementation guarantee</p>
+                <p className="text-zinc-300 text-[15px] leading-relaxed">
+                  If by day 30 your team has not made a material change to how content is planned, produced, reviewed or published, I pay you $5,000 AUD.
+                </p>
+              </div>
+              <div className="glow-card border-blue-500/20 p-8">
+                <p className="text-white text-sm font-semibold mb-3">90 day installation guarantee</p>
+                <p className="text-zinc-300 text-[15px] leading-relaxed">
+                  If the agreed playbooks and operating rhythm are not installed by day 90, we keep working with you at no extra cost until they are.
+                </p>
+              </div>
             </div>
+            <p className="text-zinc-500 text-[15px] leading-relaxed mt-6">
+              The condition: your team attends at least 80% of the sessions, and the founder inputs we agree arrive on time.
+            </p>
           </Section>
         </div>
       </section>
@@ -415,17 +461,17 @@ export default function Founding() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Price</Label>
-            <H2>$10,000. 10 spots. Closes 30 November.</H2>
+            <H2>$10,000 AUD. Closes 30 November.</H2>
             <div className="glow-card p-8 md:p-10 mt-8">
-              <p className="text-zinc-400 text-[14px] mb-1">Brand Day plus 90 days of implementation</p>
+              <p className="text-zinc-400 text-[14px] mb-1">Brand Day plus the 90 Day Install</p>
               <p className="font-display text-2xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Paid in full by 30 November</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                Normally $15,000. Pay in full by 30 November and it's $10,000, plus everything in the pay in full list.
+                The install is $15,000 AUD. Pay in full by 30 November and it is $10,000 AUD, plus everything in the pay in full list.
               </p>
               <p className="text-zinc-400 leading-relaxed mt-4">
-                Only 10 spots. I keep active installs low so I can stay close to your team and your data.
+                I keep active installs low so I can stay close to your team and your data.
               </p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
