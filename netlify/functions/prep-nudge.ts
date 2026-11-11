@@ -45,7 +45,15 @@ import {
 */
 const FIRST_TAG = "prep-not-submitted";   // 48 hours out
 const FINAL_TAG = "prep-final-call";      // 24 hours out
-const ALL_TAGS = [FIRST_TAG, FINAL_TAG];
+const MORNING_TAG = "prep-morning-of";    // the morning of the call
+const ALL_TAGS = [FIRST_TAG, FINAL_TAG, MORNING_TAG];
+
+/* Today's date in Brisbane. toDateStr(new Date()) gave the UTC date, which at
+   the old 09:00 Brisbane run was still yesterday, so every nudge went a day
+   early: the "48 hour" one landed a day out and the "24 hour" one on the
+   morning of the call (found 2026-11-11). Brisbane has no daylight saving, so
+   a fixed +10 is exact. */
+const brisbaneToday = () => toDateStr(new Date(Date.now() + 10 * 3600_000));
 
 
 async function slack(text: string) {
@@ -83,7 +91,7 @@ const handler: Handler = async () => {
     return { statusCode: 200, body: JSON.stringify({ ok: false }) };
   }
 
-  const today = toDateStr(new Date());
+  const today = brisbaneToday();
 
   let events;
   let subs: Submission[];
@@ -91,9 +99,12 @@ const handler: Handler = async () => {
     /* Tomorrow and the day after, so one run covers both the 48 hour nudge and
        the 24 hour one. A single window a day wide would skip a client whenever
        the job ran slightly late. */
+    /* Sean (2026-11-11): the form is due 48 hours before, a reminder 24 hours
+       before, and another the morning of if it still is not in. So one run
+       covers calls today, tomorrow and the day after. */
     events = await listInstallEvents(
       token,
-      toUtcIso(addDays(today, 1), 0),
+      toUtcIso(today, 0),
       toUtcIso(addDays(today, 3), 0)
     );
     subs = await recentSubmissions(addDays(today, -SUBMISSION_WINDOW_DAYS));
@@ -127,7 +138,8 @@ const handler: Handler = async () => {
     */
     const chaseId = ev.operatorContact || ev.client;
     const isReady = submitted(subs, ev.clientName, ev.operatorName);
-    const daysOut = ev.startLocal.slice(0, 10) === addDays(today, 1) ? 1 : 2;
+    const day = ev.startLocal.slice(0, 10);
+    const daysOut = day === today ? 0 : day === addDays(today, 1) ? 1 : 2;
     const when = ev.startLocal.slice(11, 16);
     const who = ev.operatorContact ? ev.operatorName || ev.operatorEmail : `${ev.clientName} (no operator, chasing the founder)`;
     const label = `${who}, ${ev.clientName}${ev.board ? " board call" : ` week ${ev.week}`} at ${when}`;
@@ -147,10 +159,14 @@ const handler: Handler = async () => {
       is removed as the later one is added, so a contact never carries both and
       a workflow cannot fire twice off the same state.
     */
-    if (daysOut === 1) {
+    if (daysOut === 0) {
+      await removeTags(ghlToken, chaseId, [FIRST_TAG, FINAL_TAG]);
+      await addTags(ghlToken, chaseId, [MORNING_TAG]);
+      chased.push(`${label}  [today, morning of]`);
+    } else if (daysOut === 1) {
       await removeTags(ghlToken, chaseId, [FIRST_TAG]);
       await addTags(ghlToken, chaseId, [FINAL_TAG]);
-      chased.push(`${label}  [tomorrow, final]`);
+      chased.push(`${label}  [tomorrow, 24 hours]`);
     } else {
       await addTags(ghlToken, chaseId, [FIRST_TAG]);
       chased.push(`${label}  [48 hours]`);
@@ -159,7 +175,7 @@ const handler: Handler = async () => {
 
   if (chased.length) {
     await slack(
-      `:clipboard: *Content review not in, calls in two days.*\n` +
+      `:clipboard: *Content review not in, calls in the next two days.*\n` +
         chased.map((c) => `  • ${c}`).join("\n") +
         `\n\n${FORM_URL}` +
         (ready.length ? `\n\n${ready.length} already submitted.` : "")
