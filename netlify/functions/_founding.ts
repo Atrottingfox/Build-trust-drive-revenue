@@ -104,7 +104,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       `<p>You're in. Your spot is locked in.</p>`,
       portal.claimUrl ? `<p>1. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>1. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
       `<p>2. <a href="${brandDay}">Lock in your Brand Day date</a>.</p>`,
-      `<p>3. Office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">office hours form</a> before you come.</p>`,
+      `<p>3. Advisory sessions run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">advisory session form</a> before you come.</p>`,
       `<p>Your weekly calls and advisory board calls start after your Brand Day.</p>`,
       WHATSAPP_LINE,
       `<p>Sean</p>`,
@@ -120,7 +120,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       contactId
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
         : `:warning: Could not create or tag them in GoHighLevel. Add them by hand with the \`${PAID_TAG}\` tag.`,
-      welcomed ? `Welcome email sent (portal, Brand Day booking, office hours).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
+      welcomed ? `Welcome email sent (portal, Brand Day booking, advisory sessions).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
       portal.claimUrl ? `Portal made: ${portal.claimUrl}` : portal.error ? `:warning: No portal made (${portal.error}). Invite them from contentengine.live/clients.` : `Portal: they already have an account.`,
       `Now: make their WhatsApp group and paste the invite link on their portal hub (Edit hub), which emails it to them. Then give them the SOPs, playbooks, training videos and early office hours, and lock in their Brand Day date.`,
     ].join("\n")
