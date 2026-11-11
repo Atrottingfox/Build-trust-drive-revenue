@@ -130,9 +130,9 @@ function Visual({ index }: { index: number }) {
               <p className="absolute left-3 bottom-2 text-[11px] text-white font-semibold">02 Authority Engine Fundamentals</p>
             </div>
             <div className="relative aspect-video bg-black">
-              <video className="absolute inset-0 w-full h-full object-cover" src="/founding/train-16b.mp4" poster="/founding/train-16b.jpg" autoPlay muted loop playsInline preload="metadata" />
+              <video className="absolute inset-0 w-full h-full object-cover" src="/founding/train-13.mp4" poster="/founding/train-13.jpg" autoPlay muted loop playsInline preload="metadata" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <p className="absolute left-3 bottom-2 text-[11px] text-white font-semibold">16 Capture, on set</p>
+              <p className="absolute left-3 bottom-2 text-[11px] text-white font-semibold">13 Stealing Ideas Effectively</p>
             </div>
           </div>
         </Window>
