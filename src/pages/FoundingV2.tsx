@@ -212,7 +212,7 @@ export default function FoundingV2() {
               <VslPlayer />
             </div>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
-              Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with.
+              Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
             {/* Sean's /offer copy, 12 Nov: the premise he wants on this page. */}
             <Lead>
