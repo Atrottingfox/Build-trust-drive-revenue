@@ -1,3 +1,4 @@
+import { provisionPortal } from "./_portal";
 import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
 import { isTestContact, priceCents } from "./_pricing";
@@ -417,6 +418,18 @@ const handler: Handler = async (event) => {
           const first = contact?.firstName || "there";
           const slot = `https://authorityengine.com.au/slot?c=${encodeURIComponent(contactId)}`;
 
+          /* Their portal on contentengine.live: one "set your password" link,
+             carried in this same email. See _portal.ts. */
+          const portal = await provisionPortal(contact);
+          const portalLine = portal.claimUrl
+            ? `<p>Your portal is ready. <a href="${portal.claimUrl}">Set your password</a> and everything for the build lives there.</p>`
+            : portal.loginUrl
+              ? `<p>Everything for the build lives in your portal: <a href="${portal.loginUrl}">log in</a>.</p>`
+              : "";
+          if (portal.error) {
+            await slackAlert(`:warning: *${contact?.firstName || "A client"} paid but no portal link was made.* ${portal.error}. Invite them by hand from contentengine.live/clients.`);
+          }
+
           /* A day 61 option client is on their own call rhythm, not the
              standard weekly one, so they are not sent to /slot. */
           const ownRhythm = DAY61_OPTION.has(String(contactId));
@@ -424,6 +437,7 @@ const handler: Handler = async (event) => {
             ? await sendEmail(token, contactId, "Payment received.", [
                 `<p>${first},</p>`,
                 `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`,
+                portalLine,
                 `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.</p>`,
                 `<p>Sean</p>`,
               ].join(""))
@@ -441,6 +455,7 @@ const handler: Handler = async (event) => {
               `<p>Two choices on that page. Your weekly call, and your board call every four weeks. Both hours are then yours for the whole build, and every session goes straight into your calendar. You will not get a booking link again.</p>`,
               `<p>One call a week for the first four weeks, then fortnightly, then one in month three. Your board call runs every four weeks, for as long as we work together.</p>`,
               `<p>It also asks for your media operator's name and email, because they are the one on every weekly call, not you. If you haven't hired yet, leave it blank and come back to the same link once you have.</p>`,
+              portalLine,
               `<p>Sean</p>`,
             ].join("")
           );

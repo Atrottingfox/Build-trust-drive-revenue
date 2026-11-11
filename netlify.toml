@@ -71,9 +71,10 @@
 # in. Two days rather than one because a nudge the night before arrives after
 # the work could realistically be done, which makes it an apology rather than a
 # prompt. Clears the tag once the form lands, so nobody is chased for something
-# they have already done. 09:00 Brisbane. Silent when everybody is prepared.
+# they have already done. Silent when everybody is prepared.
 [functions."prep-nudge"]
-  schedule = "0 23 * * *"
+  # 06:00 Brisbane (2026-11-11), so a call before 9am still gets its morning nudge.
+  schedule = "0 20 * * *"
 
 # The second $5,000 is raised and finalised on day one, set to take the saved
 # card by itself. That is the agreement, and it is right that doing nothing
