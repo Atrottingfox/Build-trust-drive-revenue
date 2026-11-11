@@ -170,7 +170,7 @@ function Visual({ index }: { index: number }) {
     case 4:
       return (
         <Window title="Office hours">
-          <Clip src="train-16b" sub="Live" label="Jump in and ask, before we start" />
+          <Clip src="live" sub="Live" label="Jump in and ask, before we start" />
           <div className="flex items-center gap-3 px-5 py-4">
             <CalendarDays className="w-4 h-4 text-blue-400" />
             <span className="text-[13px] text-zinc-300">Every Thursday. Mondays coming soon.</span>
