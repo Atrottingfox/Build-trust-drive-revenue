@@ -17,10 +17,14 @@ const PROVISION_URL =
   process.env.PORTAL_PROVISION_URL || "https://contentengine.live/.netlify/functions/provision-client";
 
 export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null): Promise<{ claimUrl?: string; loginUrl?: string; error?: string }> {
-  const secret = process.env.PROVISION_SECRET;
+  /* The secret contentengine and this site already share (it is how
+     contentengine asks client-upcoming for call times). A new variable pushed
+     this site over Netlify's 4KB function environment limit and stopped every
+     deploy (2026-11-11), so this one is reused. */
+  const secret = process.env.CALL_CONTEXT_SECRET;
   const email = String(contact?.email || "").trim();
   const name = String(contact?.name || [contact?.firstName, contact?.lastName].filter(Boolean).join(" ")).trim();
-  if (!secret) return { error: "PROVISION_SECRET not set" };
+  if (!secret) return { error: "CALL_CONTEXT_SECRET not set" };
   if (!email || !name) return { error: "contact has no email or name" };
   try {
     const r = await fetch(PROVISION_URL, {
