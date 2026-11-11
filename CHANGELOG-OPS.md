@@ -149,3 +149,13 @@ lives at "Margot - Call breakdown" under Extra pages.
 - **Audience:** internal alerts, Slack health channel only. Real applicant path untouched. No env or GHL changes.
 - **Expect:** the no email alarm can now actually fire. The 3 Nov canary contact got no email in 2h20m, so check the `New application (brand day)` trigger if it does.
 - **Rollback:** `git revert` this commit and push, or publish the prior deploy in Netlify.
+
+## 2026-11-11 - /founding live (Founding 90 Day, buy direct)
+- What: new page /founding + netlify/functions/founding-checkout.ts. Hosted Stripe Checkout, $10,000 AUD flat (no GST added), metadata.payment = founding-90. Live spot count via PaymentIntent search, closes at 10 sales or 2026-12-01 00:00 Brisbane. Slack alert on SLACK_WEBHOOK_MONEY from the thank you page.
+- Rollback: git revert 3f2dd13 and push main (or one click rollback in Netlify).
+- Why: Sean wanted the founding offer buyable straight off the page until end of November.
+
+## 2026-11-11 - /founding cap cut from 10 to 5
+- What: TOTAL_SPOTS in netlify/functions/founding-checkout.ts 10 to 5. Page now sells an intro offer for 5 founders starting in January. Checkout refuses once 5 PaymentIntents tagged founding-90 have succeeded, or after 30 Nov Brisbane.
+- Rollback: git revert 303db01 and push main.
+- Why: Sean, 11 Nov: intro offer for 5 founders to start in January.
