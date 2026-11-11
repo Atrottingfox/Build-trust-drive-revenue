@@ -308,7 +308,7 @@ export default function Founding() {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="Stop being the content manager. In 90 days your team gets a working media operating system, built from the playbooks of every 8 figure company I've worked with. $10,000 AUD, closes 30 November."
+        description="Stop being the content manager. In 90 days your team gets a working media operating system, built from the playbooks I've created alongside the 6 Australian 8 figure+ B2B companies I've worked with over the past 36 months. $10,000 AUD, closes 30 November."
         path="/founding"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -325,11 +325,15 @@ export default function Founding() {
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-500 leading-[1.15] mb-8">
               Your team gets a working media operating system.
             </p>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-5">
+            {/* Sean's line, 11 Nov 2026. Sits straight under the promise. */}
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
+              Built from the playbooks I've created alongside the 6 Australian 8 figure+ B2B companies I've worked with over the past 36 months.
+            </p>
+            <p className="text-zinc-300 leading-relaxed mb-5">
               In 90 days we install the strategy, formats, hooks, SOPs and review rhythm your team needs to publish consistently and turn attention into qualified demand.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              Built from the playbooks of every 8 figure company I've worked with. You film. Outside of that, you spend under 5 hours a week on content.
+              You film. Outside of that, you spend under 5 hours a week on content.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
           </Section>
