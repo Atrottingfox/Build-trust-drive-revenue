@@ -243,10 +243,11 @@ function Paid() {
               <p className="text-zinc-400 leading-relaxed mb-6">What happens now:</p>
               <Ticks items={[
                 'We set up your WhatsApp channel, on the number you gave at checkout',
-                'You get access to every SOP, edit, playbook and training video',
+                'You receive the Start Here workspace and pre install materials',
+                'Your team gets every SOP, edit, playbook and training video',
                 'You get early access to office hours, so you can jump in and ask',
                 'We lock in your Brand Day date',
-                '1:1 implementation with your operator starts in January',
+                'Implementation begins with your operator in January',
               ]} />
               <p className="text-zinc-500 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
