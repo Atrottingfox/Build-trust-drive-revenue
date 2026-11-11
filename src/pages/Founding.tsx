@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta } from '../lib/track';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
+import FoundingFaq from '../components/founding/FoundingFaq';
 
 /*
   /founding. The founding 90 Day offer, bought straight off the page.
@@ -75,6 +76,71 @@ function SpotsLine({ status }: { status: Status | null }) {
     <p className="text-zinc-500 text-sm mt-4">
       <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
     </p>
+  );
+}
+
+/* Mobile only. Appears once the hero is gone, hides at the price card so it
+   never sits on top of the real button, and disappears when the intake closes. */
+function StickyBar({ status }: { status: Status | null }) {
+  const [show, setShow] = useState(false);
+  const [busy, setBusy] = useState(false);
+  useEffect(() => {
+    const onScroll = () => {
+      const price = document.getElementById('price');
+      const pastHero = window.scrollY > 700;
+      const atPrice = price ? price.getBoundingClientRect().top < window.innerHeight : false;
+      setShow(pastHero && !atPrice);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+  if (status && !status.open) return null;
+
+  const left = status && status.remaining !== null ? `${status.remaining} of ${status.total} left` : '10 installs';
+  const buy = async () => {
+    if (busy) return;
+    trackCta('founding-sticky');
+    setBusy(true);
+    try {
+      const r = await fetch(FN, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'checkout' }),
+      });
+      const d = await r.json();
+      if (d.url) {
+        window.location.href = d.url;
+        return;
+      }
+    } catch {
+      /* Fall through to the price card, which shows the full error. */
+    }
+    setBusy(false);
+    document.getElementById('price')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div
+      className={`md:hidden fixed inset-x-0 bottom-0 z-[70] border-t border-white/10 bg-[#0b0c10]/95 backdrop-blur px-4 pt-3 pb-[max(12px,env(safe-area-inset-bottom))] transition-transform duration-300 ${show ? 'translate-y-0' : 'translate-y-full'}`}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD</p>
+          <p className="text-zinc-500 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
+        </div>
+        <button
+          type="button"
+          onClick={buy}
+          disabled={busy}
+          className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-[14px] font-semibold disabled:opacity-70"
+        >
+          {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+          Lock in
+          {!busy && <ArrowRight className="w-4 h-4" />}
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -444,8 +510,21 @@ export default function Founding() {
 
       <div className="gradient-line" />
 
+      {/* FAQ */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Questions</Label>
+            <H2>What founders ask before they buy.</H2>
+            <FoundingFaq />
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* PRICE */}
-      <section className="py-20 md:py-28">
+      <section id="price" className="py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Price</Label>
@@ -482,6 +561,8 @@ export default function Founding() {
         </div>
       </section>
 
+      <StickyBar status={status} />
+      <div className="h-20 md:hidden" />
       <Footer />
     </div>
   );
