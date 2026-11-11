@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { handleFoundingSale, PAYMENT_KIND, stripe, stripeKey } from "./_founding";
+import { handleAbandoned, handleFoundingSale, PAYMENT_KIND, stripe, stripeKey } from "./_founding";
 
 /*
   Every 10 minutes: any founding 90 Day sale that the thank you page never
@@ -26,7 +26,18 @@ const handler: Handler = async () => {
     if (s?.metadata?.payment !== PAYMENT_KIND) continue;
     if (await handleFoundingSale(s, "sweep")) handled++;
   }
-  return { statusCode: 200, body: JSON.stringify({ handled }) };
+  /* Checkouts that were opened and left. Sessions expire after 30 minutes, so
+     each one is picked up within about 40. */
+  let abandoned = 0;
+  const x = await stripe(`checkout/sessions?status=expired&limit=100&created[gte]=${since}`);
+  if (x.ok) {
+    for (const s of x.data?.data || []) {
+      if (s?.metadata?.payment !== PAYMENT_KIND) continue;
+      if (await handleAbandoned(s)) abandoned++;
+    }
+  }
+
+  return { statusCode: 200, body: JSON.stringify({ handled, abandoned }) };
 };
 
 export { handler };

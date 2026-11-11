@@ -81,6 +81,8 @@ const handler: Handler = async (event) => {
     const c = await getContact(process.env.GHL_TOKEN, contactId);
     who = clean([c?.firstName, c?.lastName].filter(Boolean).join(" "), 60);
   }
+  /* A personal link (?for=jane-smith) names the visit when there is no contact id. */
+  if (!who && b.forName) who = clean(String(b.forName).replace(/[-_+]/g, " "), 60);
 
   const page = `authorityengine.com.au${path}`;
   const title = clean(b.title, 80);

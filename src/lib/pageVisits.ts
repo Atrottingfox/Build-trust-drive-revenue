@@ -67,6 +67,8 @@ export function usePageVisits(path: string, title: string, enabled: boolean) {
       path,
       title,
       contactId: new URLSearchParams(window.location.search).get('c'),
+      /* A personal link, /founding?for=jane, names the visit without a GHL id. */
+      forName: new URLSearchParams(window.location.search).get('for'),
       team: isTeam(),
       referrer: document.referrer || '',
     };

@@ -5,6 +5,7 @@ import { ArrowRight, Check, Loader2, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import { trackCta } from '../lib/track';
+import { usePageVisits } from '../lib/pageVisits';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 
@@ -68,7 +69,10 @@ const Ticks = ({ items }: { items: React.ReactNode[] }) => (
   </ul>
 );
 
-type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean };
+type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string };
+
+/* Same deadline the checkout enforces. The server's value wins when it loads. */
+const CLOSES_AT = '2026-12-01T00:00:00+10:00';
 
 /* Shared across every buy button on the page, so they all agree. */
 function useStatus() {
@@ -76,10 +80,26 @@ function useStatus() {
   useEffect(() => {
     fetch(FN)
       .then((r) => r.json())
-      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured }))
+      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured, closesAt: d.closesAt }))
       .catch(() => setStatus({ open: true, remaining: null, total: 5 }));
   }, []);
   return status;
+}
+
+/* A real countdown to the real deadline. Ticks once a minute, shows nothing
+   once the time is up (the button handles that). */
+function useCountdown(iso: string) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 60_000);
+    return () => clearInterval(t);
+  }, []);
+  const ms = new Date(iso).getTime() - now;
+  if (!(ms > 0)) return '';
+  const d = Math.floor(ms / 86_400_000);
+  const h = Math.floor((ms % 86_400_000) / 3_600_000);
+  const m = Math.floor((ms % 3_600_000) / 60_000);
+  return d > 0 ? `${d}d ${h}h ${m}m` : `${h}h ${m}m`;
 }
 
 function SpotsLine({ status }: { status: Status | null }) {
@@ -87,10 +107,75 @@ function SpotsLine({ status }: { status: Status | null }) {
   const left = status && status.remaining !== null && status.remaining < status.total
     ? `${status.remaining} of ${status.total} intro spots left.`
     : '5 intro spots. Founders start in January.';
+  const countdown = useCountdown(status?.closesAt || CLOSES_AT);
   return (
-    <p className="text-zinc-500 text-sm mt-4">
-      <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
-    </p>
+    <div className="mt-4 space-y-1">
+      <p className="text-zinc-500 text-sm">
+        <span className="text-white font-semibold">{left}</span> Closes 30 November or when full.
+      </p>
+      {countdown && (
+        <p className="text-sm text-blue-400 font-semibold tabular-nums">{countdown} left</p>
+      )}
+    </div>
+  );
+}
+
+/* Once the intake is full or closed, the button becomes this. */
+function Waitlist() {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [state, setState] = useState<'idle' | 'busy' | 'done' | 'error'>('idle');
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (state === 'busy') return;
+    setState('busy');
+    try {
+      const r = await fetch(FN, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'waitlist', email, name }),
+      });
+      setState(r.ok ? 'done' : 'error');
+    } catch {
+      setState('error');
+    }
+  };
+  if (state === 'done') {
+    return <p className="text-white font-semibold">You're on the list. You'll hear first when the next intake opens.</p>;
+  }
+  return (
+    <form onSubmit={submit} className="max-w-md">
+      <p className="text-white font-semibold mb-1">This intake is closed.</p>
+      <p className="text-zinc-400 text-sm mb-4">Join the waitlist and hear first when the next one opens.</p>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name"
+          aria-label="Name"
+          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-500 focus:outline-none focus:border-blue-400"
+        />
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          aria-label="Email"
+          className="flex-1 min-w-0 rounded-full bg-white/5 border border-white/10 px-5 py-3 text-white text-[15px] placeholder:text-zinc-500 focus:outline-none focus:border-blue-400"
+        />
+      </div>
+      <button
+        type="submit"
+        disabled={state === 'busy'}
+        className="mt-3 inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold disabled:opacity-70"
+      >
+        {state === 'busy' ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+        Join the waitlist
+      </button>
+      {state === 'error' && <p className="text-red-400 text-sm mt-3">That did not go through. Check the email and try again.</p>}
+    </form>
   );
 }
 
@@ -193,13 +278,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
   return (
     <div className={className}>
       {closed ? (
-        <a
-          href="/brandday"
-          className="inline-flex items-center gap-2 bg-zinc-800 text-zinc-300 px-7 py-3.5 rounded-full text-[15px] font-semibold"
-        >
-          This intake is closed. See the Brand Day
-          <ArrowRight className="w-4 h-4" />
-        </a>
+        <Waitlist />
       ) : (
         <button
           type="button"
@@ -347,6 +426,11 @@ const PHASES = [
 export default function Founding() {
   const paid = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const status = useStatus();
+  /* Personal links: /founding?for=jane-smith (or ?c=<GHL contact id>) post the
+     visit, time on page, scroll depth and clicks to Slack. Plain visits are not
+     tracked, so the channel only carries people Sean sent the link to. */
+  const personal = typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
+  usePageVisits('/founding', '90 Day Install', personal && !paid);
   if (paid) return <Paid />;
 
   return (
@@ -644,6 +728,40 @@ export default function Founding() {
             <p className="text-zinc-400 leading-relaxed mt-6">
               The founder provides expertise and appears on camera where required. The team owns the rest.
             </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* WHO */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Who you'll be working with</Label>
+            <div className="grid md:grid-cols-[220px_1fr] gap-8 items-start mt-2">
+              <img
+                src="/founding/sean.jpg"
+                alt="Sean Fox"
+                width={440}
+                height={550}
+                loading="lazy"
+                className="w-full max-w-[220px] aspect-[4/5] object-cover rounded-2xl border border-white/10"
+              />
+              <div>
+                <H2>Sean Fox.</H2>
+                <p className="text-zinc-300 leading-relaxed mt-6">
+                  Founder of The Authority Engine, based on the Gold Coast.
+                </p>
+                <p className="text-zinc-400 leading-relaxed mt-4">
+                  I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
+                </p>
+                <p className="text-white text-sm font-semibold mt-8 mb-3">The trail so far</p>
+                <p className="text-zinc-300 leading-relaxed">
+                  Mitch Revs, then Jay Wright, then Taki Moore, and the network of 7 and 8 figure founders that came from them.
+                </p>
+              </div>
+            </div>
           </Section>
         </div>
       </section>

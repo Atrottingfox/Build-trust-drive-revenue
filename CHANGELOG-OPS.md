@@ -164,3 +164,8 @@ lives at "Margot - Call breakdown" under Extra pages.
 - What: verify-payment calls contentengine provision-client after an install payment and adds the "set your password" link to the existing Payment received email (Slack alert if it can't). prep-nudge works out today in Brisbane (it used UTC, so every nudge went a day early), tags prep-not-submitted 48h out, prep-final-call 24h out, new prep-morning-of on the day, and runs 06:00 Brisbane. PROVISION_SECRET was added then removed the same hour: it pushed the site past Netlify's 4KB function env limit and failed deploys f254a97 and 0092b53. Fixed by reusing CALL_CONTEXT_SECRET (5f294ee).
 - Rollback: git revert 5f294ee 0092b53.
 - Why: Sean, 2026-11-11: portal per client at sign up, and the pre call form chased 48h, 24h and the morning of.
+
+## 2026-11-11 - /founding: waitlist, abandoned checkouts, morning digest, countdown, personal links, who section
+- What: founding-checkout gains a waitlist action (GHL tag founding-waitlist + Slack). founding-sweep also reads expired checkouts and, where the person left an email, tags founding-abandoned + Slack (once per person). New scheduled founding-digest, 21:30 UTC (07:30 Brisbane) daily, stops the day after 30 Nov. page-visit and usePageVisits accept ?for=name so personal links name the visitor. Page: countdown to the deadline, waitlist replaces the button when closed, "Who you'll be working with" section, visits tracked only on personal links. Shared cap and close date now live in _founding.ts. Tests in tests/founding.test.ts.
+- Rollback: git revert <this commit> and push main.
+- Why: Sean, 2026-11-11: "everything you can do, do it".

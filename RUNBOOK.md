@@ -78,6 +78,20 @@ Symptom: a client's workbook data is wrong/missing/overwritten.
 
 ---
 
+## /founding (Founding 5 offer)
+
+Live sales page that takes $10,000 AUD through Stripe. Code: src/pages/Founding.tsx, src/components/founding/, netlify/functions/_founding.ts, founding-checkout.ts, founding-sweep.ts, founding-digest.ts. Notion: "Founding 90 Day Install - Directory" under Authority Engine.
+
+- **Check spots left:** open https://authorityengine.com.au/.netlify/functions/founding-checkout
+- **Change the cap:** TOTAL_SPOTS in netlify/functions/_founding.ts. Push to main.
+- **Change the close date:** CLOSES_AT in netlify/functions/_founding.ts AND CLOSES_AT in src/pages/Founding.tsx (the countdown). Push to main.
+- **Close it right now:** set CLOSES_AT to a past date in _founding.ts and push. The button turns into the waitlist. Nothing else needs touching.
+- **Never pause it by removing STRIPE_SECRET_KEY.** Every other checkout on the site uses that key. Close it as above instead.
+- **A sale did not show in Slack or GHL:** founding-sweep picks it up within 10 minutes. If not, check the Stripe session metadata: alerted=1 means it was handled.
+- **Somebody asks for the guarantee refund:** refund $5,000 AUD from the payment in Stripe (Payments, search metadata payment = founding-90). The terms are on the page and in the agreement draft in Notion.
+- **Roll back the page:** git revert the commit and push, or one click rollback in Netlify Deploys.
+- **Personal links:** https://authorityengine.com.au/founding?for=first-last posts visits to the visits Slack channel.
+
 ## Discipline reminders
 
 - Never run DDL without first snapshotting and stating the rollback.

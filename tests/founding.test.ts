@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { handleFoundingSale } from "../netlify/functions/_founding";
+import { handleFoundingSale, handleAbandoned } from "../netlify/functions/_founding";
+import { buildDigest } from "../netlify/functions/founding-digest";
 import { handler as sweep } from "../netlify/functions/founding-sweep";
 import { handler as checkout } from "../netlify/functions/founding-checkout";
 
@@ -130,7 +131,7 @@ describe("the 10 minute sweep", () => {
     });
 
     const res: any = await sweep({} as any, {} as any);
-    expect(JSON.parse(res.body)).toEqual({ handled: 1 });
+    expect(JSON.parse(res.body)).toEqual({ handled: 1, abandoned: 0 });
     expect(slackPosts()).toHaveLength(1);
     expect(stripeUpdates().map((c) => c.url)).toEqual(["https://api.stripe.com/v1/checkout/sessions/cs_live_new"]);
   });
@@ -190,5 +191,94 @@ describe("the checkout", () => {
 
     const res = JSON.parse((await post({ action: "checkout" })).body);
     expect(res.url).toBe("https://checkout.stripe.com/y");
+  });
+});
+
+describe("abandoned checkouts", () => {
+  const expired = (over: any = {}) => ({
+    id: "cs_live_gone",
+    status: "expired",
+    payment_status: "unpaid",
+    metadata: { payment: "founding-90" },
+    customer_details: { name: "Sam Prospect", email: "sam@example.com", phone: null },
+    ...over,
+  });
+
+  it("tags founding-abandoned and posts Slack when they left an email", async () => {
+    mockFetch((u, init) => {
+      if (u.includes("/contacts/?locationId")) return { json: { contacts: [] } };
+      if (u.endsWith("/contacts/") && init.method === "POST") return { json: { contact: { id: "c_9" } } };
+      return { json: {} };
+    });
+    expect(await handleAbandoned(expired())).toBe(true);
+    const create = calls.find((c) => c.url.endsWith("/contacts/") && c.method === "POST")!;
+    expect(JSON.parse(create.body).tags).toEqual(["founding-abandoned"]);
+    expect(JSON.parse(slackPosts()[0].body).text).toContain("did not pay");
+  });
+
+  it("stays quiet for an anonymous session, a repeat, or someone who then bought", async () => {
+    mockFetch(() => ({ json: {} }));
+    expect(await handleAbandoned(expired({ customer_details: {} }))).toBe(false);
+    expect(await handleAbandoned(expired({ metadata: { payment: "founding-90", abandon_alerted: "1" } }))).toBe(false);
+    expect(calls).toHaveLength(0);
+
+    mockFetch((u) => (u.includes("/contacts/?locationId") ? { json: { contacts: [{ id: "c_1", email: "sam@example.com", tags: ["founding-paid"] }] } } : { json: {} }));
+    expect(await handleAbandoned(expired())).toBe(false);
+    expect(slackPosts()).toHaveLength(0);
+  });
+});
+
+describe("the waitlist", () => {
+  const post = (body: any) => checkout({ httpMethod: "POST", body: JSON.stringify(body) } as any, {} as any) as any;
+
+  it("tags founding-waitlist and posts Slack", async () => {
+    mockFetch((u, init) => {
+      if (u.includes("/contacts/?locationId")) return { json: { contacts: [] } };
+      if (u.endsWith("/contacts/") && init.method === "POST") return { json: { contact: { id: "c_w" } } };
+      return { json: {} };
+    });
+    const res = await post({ action: "waitlist", email: "kim@example.com", name: "Kim Lee" });
+    expect(JSON.parse(res.body)).toEqual({ ok: true });
+    const create = calls.find((c) => c.url.endsWith("/contacts/") && c.method === "POST")!;
+    expect(JSON.parse(create.body)).toMatchObject({ email: "kim@example.com", firstName: "Kim", tags: ["founding-waitlist"] });
+    expect(slackPosts()).toHaveLength(1);
+  });
+
+  it("rejects a bad email without touching GoHighLevel", async () => {
+    mockFetch(() => ({ json: {} }));
+    const res = await post({ action: "waitlist", email: "not-an-email", name: "x" });
+    expect(res.statusCode).toBe(400);
+    expect(calls).toHaveLength(0);
+  });
+});
+
+describe("the morning digest", () => {
+  it("reports spots, days left and the last 24 hours", async () => {
+    mockFetch((u) => {
+      if (u.includes("payment_intents/search")) return { json: { data: [{}, {}] } };
+      if (u.includes("checkout/sessions?limit=100")) {
+        return {
+          json: {
+            data: [
+              { metadata: { payment: "founding-90" }, payment_status: "paid", status: "complete" },
+              { metadata: { payment: "founding-90" }, payment_status: "unpaid", status: "expired", customer_details: { email: "a@b.co" } },
+              { metadata: { payment: "founding-90" }, payment_status: "unpaid", status: "expired" },
+              { metadata: { payment: "brand-day" }, payment_status: "paid", status: "complete" },
+            ],
+          },
+        };
+      }
+      return { json: {} };
+    });
+    const text = (await buildDigest(new Date("2026-11-20T07:30:00+10:00").getTime()))!;
+    expect(text).toContain("11 days to go");
+    expect(text).toContain("Sold 2 of 5. 3 left.");
+    expect(text).toContain("3 checkouts started, 1 paid, 2 left without paying (1 left an email)");
+  });
+
+  it("stops the day after the intake closes", async () => {
+    mockFetch(() => ({ json: {} }));
+    expect(await buildDigest(new Date("2026-12-02T08:00:00+10:00").getTime())).toBeNull();
+    expect(calls).toHaveLength(0);
   });
 });

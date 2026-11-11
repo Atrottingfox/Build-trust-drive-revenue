@@ -41,6 +41,11 @@
 [functions."founding-sweep"]
   schedule = "*/10 * * * *"
 
+# Founding 5 morning digest to Slack, 07:30 Brisbane (21:30 UTC). Spots, days
+# left, last 24 hours of checkouts. Stops itself the day after the intake closes.
+[functions."founding-digest"]
+  schedule = "30 21 * * *"
+
 # The morning after a Brand Day, ask whether to invite them into the 90 days.
 # 21:00 UTC is 07:00 Brisbane. One Slack message, one link, no app needed.
 # Flags a paid client who has not booked their prep call, so it can be

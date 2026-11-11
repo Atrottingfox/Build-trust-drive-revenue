@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { handleFoundingSale } from "./_founding";
+import { addToWaitlist, CLOSES_AT, handleFoundingSale, PAYMENT_KIND, soldCount, stripe, stripeKey, TOTAL_SPOTS } from "./_founding";
 
 /*
   The founding 90 Day offer at /founding. Buy straight off the page, no
@@ -37,50 +37,14 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const PAYMENT_KIND = "founding-90";
-const TOTAL_SPOTS = 5;
 const PRICE_AUD_CENTS = 1000000;
 const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding Fast Action, paid in full";
 const INVOICE_DESCRIPTION =
   "Brand Day plus 90 days of implementation. Founding fast action price, paid in full.";
 
-/* Midnight at the end of 30 November, Brisbane (UTC+10, no daylight saving). */
-const CLOSES_AT = new Date("2026-12-01T00:00:00+10:00");
-
 const PAGE = "https://authorityengine.com.au/founding";
 
 const json = (body: unknown) => ({ statusCode: 200, headers, body: JSON.stringify(body) });
-
-function stripeKey(): string | undefined {
-  return process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
-}
-
-async function stripe(path: string, init: { method?: string; form?: URLSearchParams } = {}) {
-  const res = await fetch(`https://api.stripe.com/v1/${path}`, {
-    method: init.method || "GET",
-    headers: {
-      Authorization: `Bearer ${stripeKey()}`,
-      ...(init.form ? { "Content-Type": "application/x-www-form-urlencoded" } : {}),
-    },
-    body: init.form ? init.form.toString() : undefined,
-  });
-  return { ok: res.ok, status: res.status, data: await res.json() };
-}
-
-/* Paid spots so far, or null when Stripe will not say. */
-async function soldCount(): Promise<number | null> {
-  try {
-    const q = encodeURIComponent(`status:'succeeded' AND metadata['payment']:'${PAYMENT_KIND}'`);
-    const r = await stripe(`payment_intents/search?query=${q}&limit=100`);
-    if (!r.ok) {
-      console.error("founding-checkout: search failed", r.status, JSON.stringify(r.data?.error || {}));
-      return null;
-    }
-    return Array.isArray(r.data?.data) ? r.data.data.length : null;
-  } catch {
-    return null;
-  }
-}
 
 async function status() {
   const closedByDate = Date.now() >= CLOSES_AT.getTime();
@@ -176,6 +140,17 @@ const handler: Handler = async (event) => {
     if (paid) await handleFoundingSale(session, "thank-you page");
 
     return json({ paid, firstName });
+  }
+
+  /* ---------- Waitlist (once full or closed) ---------- */
+  if (body.action === "waitlist") {
+    const email = String(body.email || "").trim().slice(0, 120);
+    const name = String(body.name || "").replace(/[<>*_`~|]/g, "").trim().slice(0, 80);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ ok: false, error: "email" }) };
+    }
+    await addToWaitlist(email, name);
+    return json({ ok: true });
   }
 
   return { statusCode: 400, headers, body: JSON.stringify({ error: "unknown action" }) };
