@@ -382,7 +382,7 @@ function Paid() {
                 'Your team gets every SOP, edit, playbook and training video',
                 'An advisory board call before you start',
                 'We lock in your Brand Day date',
-                'Implementation begins with your operator in January',
+                '1:1 guided implementation starts January',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
@@ -654,7 +654,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.
+                1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.
               </p>
             </div>
           </Section>
@@ -673,7 +673,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <div className="glow-card p-8 mt-8">
               <Ticks items={[
                 'One Brand Day',
-                'Four weeks of 1:1 implementation with your operator, from January',
+                '1:1 guided implementation starts January, four weeks with your operator',
                 'One team call per week during installation',
                 'Training every fortnight',
                 <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
@@ -884,6 +884,10 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <p className="text-zinc-400 leading-relaxed mt-6">
                 I keep active installs limited so I can stay close to the team, the work and the data.
               </p>
+              <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                <p className="text-white font-semibold">Your Brand Day is included.</p>
+                <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+              </div>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
@@ -894,7 +898,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
-                'Implementation begins with your operator in January.',
+                '1:1 guided implementation starts January.',
                 'Your first live content cycle runs straight away.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">

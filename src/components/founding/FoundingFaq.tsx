@@ -40,7 +40,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Why not wait until the new year?',
     a: [
-      'Implementation starts in January anyway.',
+      '1:1 guided implementation starts January anyway.',
       'Pay in full by 30 November and your team has the SOPs, playbooks and training in December, so January runs from day one.',
     ],
   },
@@ -53,7 +53,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'When is my Brand Day?',
     a: [
-      'We lock in your date as soon as you buy. 1:1 implementation with your operator starts in January, after your Brand Day.',
+      'We lock in your date as soon as you buy. 1:1 guided implementation starts January, after your Brand Day.',
     ],
   },
 ];

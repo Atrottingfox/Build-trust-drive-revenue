@@ -123,6 +123,7 @@ function Rail({ status }: { status: Status | null }) {
           <div className="glow-card p-6">
             <p className="text-blue-400 font-semibold text-sm">5 spots, starting in January.</p>
             {countdown && <p className="text-zinc-400 text-[13px] mt-1 tabular-nums">Closes 30 November. {countdown} left</p>}
+            <p className="text-zinc-300 text-[13px] mt-3 leading-snug">Includes your Brand Day. 11 left at $5,000, then <span className="text-white font-semibold">$10,000</span>.</p>
             <p className="text-zinc-500 text-[11px] uppercase tracking-widest mt-6 mb-3">On this page</p>
             <ol className="space-y-1">
               {CHAPTERS.map((c, i) => {
@@ -155,12 +156,8 @@ function Rail({ status }: { status: Status | null }) {
   );
 }
 
-/* Same phases as /founding, with Phase 1 told the way /offer tells the Brand Day. */
-const PHASES_V2 = PHASES.map((ph, i) =>
-  i === 0
-    ? { ...ph, lead: 'Your Brand Day analyses your current bottlenecks, maps how content actually drives revenue in your business, and builds your Buying Belief Map. Then we run it straight away on real content.' }
-    : ph
-);
+/* Same phases as /founding. The Brand Day is its own step before them. */
+const PHASES_V2 = PHASES;
 
 const Divider = () => <div className="gradient-line my-24 md:my-32" />;
 
@@ -306,6 +303,19 @@ export default function FoundingV2() {
               The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
             </Lead>
             <ol className="relative mt-12 ml-2 border-l border-white/10">
+              {/* The Brand Day, its own step before week 1 (Sean, 12 Nov). Wording from /offer. */}
+              <li className="relative pl-8 pb-12">
+                <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-white ring-4 ring-blue-500/30" />
+                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
+                <p className="font-display text-3xl font-extrabold text-white mt-1">Brand Day</p>
+                <p className="text-zinc-300 text-lg leading-relaxed mt-2">
+                  One full day in person. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
+                </p>
+                <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                  <p className="text-white font-semibold">Your Brand Day is included.</p>
+                  <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                </div>
+              </li>
               {PHASES_V2.map((ph) => (
                 <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
                   <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
@@ -341,7 +351,7 @@ export default function FoundingV2() {
               Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, four weeks of 1:1 implementation with your operator, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+              A Brand Day, 1:1 guided implementation from January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
             <More label="See everything included">
               <div className="space-y-8">
@@ -361,7 +371,7 @@ export default function FoundingV2() {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    'Four weeks of 1:1 implementation with your operator, from January',
+                    '1:1 guided implementation starts January, four weeks with your operator',
                     'One team call per week during installation',
                     'Training every fortnight',
                     <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
@@ -382,7 +392,7 @@ export default function FoundingV2() {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
+            <Lead>1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
           </Section>
           <StartTodayShowcase />
 
@@ -479,6 +489,10 @@ export default function FoundingV2() {
                 <p className="text-zinc-300 text-lg leading-relaxed mt-6">
                   Only 5 installs for this intake, starting in January. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
                 </p>
+                <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                  <p className="text-white font-semibold">Your Brand Day is included.</p>
+                  <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                </div>
                 <BuyButton status={status} location="founding-v2-price" className="mt-8" />
               </div>
             </Section>
