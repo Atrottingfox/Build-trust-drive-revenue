@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { Check, ChevronDown } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -15,6 +16,7 @@ import {
   SpotsLine,
   StickyBar,
   Ticks,
+  useCountdown,
   useStatus,
   type Status,
 } from './Founding';
@@ -28,7 +30,9 @@ import {
     - Long lists show the first few items, the rest open with "Show all".
     - Outcomes, phases and what you receive sit side by side as cards.
     - Guarantee and fit share one section. Roles and Who share another.
-    - On wide screens a buy card stays on screen on the right.
+    - On wide screens the right rail is a guide through the page (where you
+      are, what's done, jump to any section). The price card only slides up
+      into it once the reader reaches the questions near the end.
     - The closing headline is dropped. The price section ends the page.
 */
 
@@ -101,6 +105,93 @@ function BuyCard({ status }: { status: Status | null }) {
   );
 }
 
+
+const CHAPTERS = [
+  { id: 'installs', label: 'What this installs' },
+  { id: 'how', label: 'How it works' },
+  { id: 'receive', label: 'What you receive' },
+  { id: 'payinfull', label: 'Start today' },
+  { id: 'guarantee', label: 'Guarantees and fit' },
+  { id: 'roles', label: 'Who does what' },
+  { id: 'faq', label: 'Questions' },
+  { id: 'price', label: 'Investment' },
+];
+/* From here on the rail swaps to the price card. */
+const REVEAL_AT = CHAPTERS.findIndex((c) => c.id === 'faq');
+
+/* Which chapter the reader is in: the last one whose top has passed 40% of the screen. */
+function useActiveChapter() {
+  const [active, setActive] = useState(-1);
+  useEffect(() => {
+    const onScroll = () => {
+      const line = window.innerHeight * 0.4;
+      let idx = -1;
+      CHAPTERS.forEach((c, i) => {
+        const el = document.getElementById(c.id);
+        if (el && el.getBoundingClientRect().top < line) idx = i;
+      });
+      setActive(idx);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+  return active;
+}
+
+/* The right rail on wide screens. A guide through the page first, the price
+   only once the reader reaches the questions near the end. */
+function Rail({ status }: { status: Status | null }) {
+  const active = useActiveChapter();
+  const countdown = useCountdown(status?.closesAt || '2026-12-01T00:00:00+10:00');
+  const reveal = active >= REVEAL_AT;
+  return (
+    <AnimatePresence mode="wait">
+      {reveal ? (
+        <motion.div key="price" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }} transition={{ duration: 0.45, ease: 'easeOut' }}>
+          <BuyCard status={status} />
+        </motion.div>
+      ) : (
+        <motion.div key="guide" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.35 }}>
+          <div className="glow-card p-6">
+            <p className="text-blue-400 font-semibold text-sm">5 spots, starting in January.</p>
+            {countdown && <p className="text-zinc-400 text-[13px] mt-1 tabular-nums">Closes 30 November. {countdown} left</p>}
+            <p className="text-zinc-500 text-[11px] uppercase tracking-widest mt-6 mb-3">On this page</p>
+            <ol className="space-y-1">
+              {CHAPTERS.map((c, i) => {
+                const done = i < active;
+                const here = i === active;
+                return (
+                  <li key={c.id}>
+                    <a
+                      href={`#${c.id}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById(c.id)?.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                      className={`flex items-center gap-3 rounded-lg px-2 py-1.5 text-[14px] transition-colors ${here ? 'bg-white/5 text-white font-semibold' : done ? 'text-zinc-400' : 'text-zinc-500 hover:text-zinc-300'}`}
+                    >
+                      <span className={`flex h-4 w-4 items-center justify-center rounded-full border ${done ? 'border-blue-400 bg-blue-500/20' : here ? 'border-blue-400' : 'border-white/15'}`}>
+                        {done && <Check className="h-2.5 w-2.5 text-blue-300" />}
+                        {here && <span className="h-1.5 w-1.5 rounded-full bg-blue-400" />}
+                      </span>
+                      {c.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 const Divider = () => <div className="gradient-line my-16 md:my-20" />;
 
 export default function FoundingV2() {
@@ -149,6 +240,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="installs" className="scroll-mt-28" />
           {/* WHAT THIS INSTALLS + OUTCOMES */}
           <Section>
             <Label>What this installs</Label>
@@ -198,6 +290,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="how" className="scroll-mt-28" />
           {/* HOW IT WORKS */}
           <Section>
             <Label>How it works</Label>
@@ -220,6 +313,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="receive" className="scroll-mt-28" />
           {/* WHAT YOU RECEIVE + SUPPORT */}
           <Section>
             <Label>What you receive</Label>
@@ -252,6 +346,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="payinfull" className="scroll-mt-28" />
           {/* PAY IN FULL */}
           <Section>
             <Label>Pay in full</Label>
@@ -264,6 +359,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="guarantee" className="scroll-mt-28" />
           {/* GUARANTEE + FIT */}
           <Section>
             <Label>Guarantees and fit</Label>
@@ -319,6 +415,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="roles" className="scroll-mt-28" />
           {/* ROLES + WHO */}
           <Section>
             <Label>Roles</Label>
@@ -360,6 +457,7 @@ export default function FoundingV2() {
 
           <Divider />
 
+          <div id="faq" className="scroll-mt-28" />
           {/* FAQ */}
           <Section>
             <Label>Questions</Label>
@@ -370,7 +468,7 @@ export default function FoundingV2() {
           <Divider />
 
           {/* PRICE */}
-          <section id="price">
+          <section id="price" className="scroll-mt-28">
             <Section>
               <Label>Investment</Label>
               <H2>$10,000 AUD. Closes 30 November.</H2>
@@ -415,7 +513,7 @@ export default function FoundingV2() {
         {/* Wide screens: the buy card stays on screen */}
         <aside className="hidden xl:block">
           <div className="sticky top-28">
-            <BuyCard status={status} />
+            <Rail status={status} />
           </div>
         </aside>
       </div>
