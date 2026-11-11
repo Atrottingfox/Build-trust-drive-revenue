@@ -169,11 +169,11 @@ function Visual({ index }: { index: number }) {
       );
     case 4:
       return (
-        <Window title="Advisory">
-          <Clip src="live" sub="Before you start" label="An advisory board call" />
+        <Window title="Office hours">
+          <Clip src="live" sub="Live" label="Jump in and ask, before we start" />
           <div className="flex items-center gap-3 px-5 py-4">
             <CalendarDays className="w-4 h-4 text-blue-400" />
-            <span className="text-[13px] text-zinc-300">Then advisory sessions every Thursday. Mondays coming soon.</span>
+            <span className="text-[13px] text-zinc-300">Every Thursday. Mondays coming soon.</span>
           </div>
         </Window>
       );
@@ -192,13 +192,13 @@ function Visual({ index }: { index: number }) {
   }
 }
 
-const ITEMS: { name: string; text: string }[] = [
-  { name: 'Every SOP.', text: 'The ones we run with clients, across every format.' },
-  { name: 'Every edit.', text: 'Plus the review cadence and posting rules.' },
-  { name: 'Every training video.', text: 'The full library.' },
-  { name: 'Both playbooks.', text: 'Short form and long form, complete.' },
-  { name: 'Advisory board call.', text: 'Before you start, so you can jump in and ask.' },
-  { name: 'WhatsApp, from today.', text: 'Answers before the end of the year.' },
+/* v is the Visual to show. Sean, 12 Nov: no "Every edit", office hours back. */
+const ITEMS: { name: string; text: string; v: number }[] = [
+  { name: 'Every SOP.', text: 'The ones we run with clients, across every format.', v: 0 },
+  { name: 'Every training video.', text: 'The full library.', v: 2 },
+  { name: 'Both playbooks.', text: 'Short form and long form, complete.', v: 3 },
+  { name: 'Office hours, early.', text: 'Jump in and ask before we start.', v: 4 },
+  { name: 'WhatsApp, from today.', text: 'Answers before the end of the year.', v: 5 },
 ];
 
 export default function StartTodayShowcase() {
@@ -240,7 +240,7 @@ export default function StartTodayShowcase() {
               </div>
               {/* Mobile: the visual sits under its own item. */}
               <div className="md:hidden mt-5 mb-8">
-                <Visual index={i} />
+                <Visual index={ITEMS[i].v} />
               </div>
             </div>
           </li>
@@ -256,7 +256,7 @@ export default function StartTodayShowcase() {
               exit={{ opacity: 0, y: -12, scale: 0.98 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
             >
-              <Visual index={active} />
+              <Visual index={ITEMS[active].v} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -341,7 +341,7 @@ export function StartTodayCompact() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
             >
-              <Visual index={active} />
+              <Visual index={ITEMS[active].v} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -351,7 +351,7 @@ export function StartTodayCompact() {
       <div className="md:hidden -mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {ITEMS.map((it, i) => (
           <div key={it.name} className="snap-center shrink-0 w-[85%]">
-            <Visual index={i} />
+            <Visual index={ITEMS[i].v} />
             <p className="text-white font-semibold text-[16px] mt-4">{it.name}</p>
             <p className="text-zinc-400 text-[14px] mt-0.5">{it.text}</p>
           </div>

@@ -70,7 +70,7 @@ function BuyCard({ status }: { status: Status | null }) {
 
 
 const CHAPTERS = [
-  { id: 'installs', label: 'How people buy' },
+  { id: 'installs', label: 'What this installs' },
   { id: 'how', label: 'How it works' },
   { id: 'receive', label: 'What you receive' },
   { id: 'payinfull', label: 'Start today' },
@@ -214,13 +214,6 @@ export default function FoundingV2() {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
               Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
-            {/* Sean's /offer copy, 12 Nov: the premise he wants on this page. */}
-            <Lead>
-              Create a brand that commands attention from the right people, and install the buying beliefs your best clients need, so your team can keep scaling without you becoming a full time creator.
-            </Lead>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              No dancing on camera. No 12am scrolling for content ideas. No more random, inconsistent posts.
-            </p>
             <p className="text-blue-400 font-semibold text-lg mt-10">5 spots, starting in January.</p>
             <p className="text-zinc-400 mt-2">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
@@ -235,20 +228,15 @@ export default function FoundingV2() {
           {/* HOW PEOPLE BUY */}
           <div id="installs" className="scroll-mt-28" />
           <Section>
-            <Label>How people buy</Label>
-            <H2>Every piece of content has a job.</H2>
-            <Lead>Before anyone buys, they need to believe specific things about their problem, your solution and you.</Lead>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              Your Brand Day maps those beliefs into your Buying Belief Map. From there, every piece of content carries one of them. Nothing goes out for the sake of it.
-            </p>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              That is how trust gets engineered, piece by piece, from the first time someone sees you to the moment they buy. Polish comes later. What matters first is giving your buyers what they need to make the purchase.
-            </p>
-
-            <p className="text-white text-xl font-semibold mt-16 mb-6">By day 90, your team can answer these.</p>
-            <ol className="divide-y divide-white/5 border-y border-white/5">
+            <Label>What this installs</Label>
+            <Lead>
+              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+            </Lead>
+            <div className="mt-14">
+              <H2>By day 90, your team can answer these.</H2>
+            </div>
+            <ol className="mt-8 divide-y divide-white/5 border-y border-white/5">
               {[
-                'What does our buyer need to believe?',
                 'What should we make?',
                 'Who is it for?',
                 'Which format fits?',
@@ -265,7 +253,7 @@ export default function FoundingV2() {
               ))}
             </ol>
             <p className="text-zinc-400 text-lg leading-relaxed mt-8">
-              Your team gets up to speed on what your buyers need to see, so every piece they make has a reason to exist.
+              A working operating system your team uses to plan, produce, judge, publish and improve content.
             </p>
             <p className="text-zinc-500 leading-relaxed mt-4">
               This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
@@ -447,19 +435,19 @@ export default function FoundingV2() {
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
               Your team films, edits, publishes and runs the weekly rhythm. The founder provides expertise and appears on camera where required.
             </p>
-            <div className="mt-14 flex gap-6 items-start">
+            <div className="mt-14 grid sm:grid-cols-[minmax(0,320px)_1fr] gap-8 items-end">
               <img
                 src="/founding/sean.jpg"
                 alt="Sean on set, mid explanation"
-                width={160}
-                height={200}
+                width={440}
+                height={550}
                 loading="lazy"
-                className="w-24 sm:w-28 aspect-[4/5] object-cover rounded-xl border border-white/10 flex-shrink-0"
+                className="w-full max-w-[320px] aspect-[4/5] object-cover rounded-2xl border border-white/10"
               />
               <div>
-                <p className="text-white text-lg font-semibold">Sean Fox</p>
-                <p className="text-zinc-400">Founder of The Authority Engine, based on the Gold Coast.</p>
-                <p className="text-zinc-300 leading-relaxed mt-3">
+                <p className="font-display text-3xl font-extrabold text-white tracking-[-0.02em]">Sean Fox</p>
+                <p className="text-zinc-400 mt-1">Founder of The Authority Engine, based on the Gold Coast.</p>
+                <p className="text-zinc-300 text-lg leading-relaxed mt-5">
                   I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
                 </p>
               </div>
