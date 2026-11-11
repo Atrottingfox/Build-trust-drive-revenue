@@ -203,10 +203,10 @@ export default function FoundingV2() {
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Engineer how content drives revenue.
+              Stop being the content manager.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-10">
-              Every piece of content has a job.
+              Install the system your team runs.
             </p>
             <div className="mb-10">
               <VslPlayer />
