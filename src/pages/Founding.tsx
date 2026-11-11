@@ -19,6 +19,21 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 
 const FN = '/.netlify/functions/founding-checkout';
 
+/* GA4 ecommerce events, so the funnel shows where people drop off. Never load
+   bearing: a blocked analytics script must not stop a checkout. */
+function ga(event: string, extra: Record<string, unknown> = {}) {
+  try {
+    window.gtag?.('event', event, {
+      currency: 'AUD',
+      value: 10000,
+      items: [{ item_id: 'founding-90', item_name: 'Founding 90 Day Install', price: 10000, quantity: 1 }],
+      ...extra,
+    });
+  } catch {
+    /* analytics is never load bearing */
+  }
+}
+
 function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   return (
@@ -101,6 +116,7 @@ function StickyBar({ status }: { status: Status | null }) {
   const buy = async () => {
     if (busy) return;
     trackCta('founding-sticky');
+    ga('begin_checkout', { cta_location: 'founding-sticky' });
     setBusy(true);
     try {
       const r = await fetch(FN, {
@@ -153,6 +169,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
   const buy = async () => {
     if (busy || closed) return;
     trackCta(location);
+    ga('begin_checkout', { cta_location: location });
     setBusy(true);
     setError('');
     try {
@@ -217,7 +234,14 @@ function Paid() {
       body: JSON.stringify({ action: 'confirm', sessionId: id }),
     })
       .then((r) => r.json())
-      .then((d) => setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '' }))
+      .then((d) => {
+        setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '' });
+        if (d.paid) {
+          let seen = false;
+          try { seen = localStorage.getItem('ga_purchase_' + id) === '1'; localStorage.setItem('ga_purchase_' + id, '1'); } catch { /* private window */ }
+          if (!seen) ga('purchase', { transaction_id: id });
+        }
+      })
       .catch(() => setState({ loading: false, paid: false, firstName: '' }));
   }, []);
 
@@ -331,6 +355,7 @@ export default function Founding() {
         title="90 Day Install"
         description="Stop being the content manager. Install the system your team runs. Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
         path="/founding"
+        image="https://authorityengine.com.au/og-founding.jpg"
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
