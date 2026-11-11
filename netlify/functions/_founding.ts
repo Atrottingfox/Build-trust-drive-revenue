@@ -1,4 +1,5 @@
 import { addTags, contactUrl, findOrCreateByEmail, GHL_API, GHL_VERSION } from "./_ghl";
+import { provisionPortal } from "./_portal";
 
 /*
   Everything that happens after somebody buys the founding 90 Day at /founding.
@@ -85,6 +86,10 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
     currency: (session.currency || "aud").toUpperCase(),
   });
 
+  /* Their portal, made now so a buyer who closed the tab still gets the 48
+     hour reminder (portal-chase), and so the link is in Slack. */
+  const portal = await provisionPortal({ email: d.email, name: d.name });
+
   await slack(
     [
       `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day (intro offer, paid in full).*`,
@@ -93,6 +98,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       contactId
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
         : `:warning: Could not create or tag them in GoHighLevel. Add them by hand with the \`${PAID_TAG}\` tag.`,
+      portal.claimUrl ? `Portal made: ${portal.claimUrl}` : portal.error ? `:warning: No portal made (${portal.error}). Invite them from contentengine.live/clients.` : `Portal: they already have an account.`,
       `Now: set up their WhatsApp, give them the SOPs, playbooks, training videos and early office hours, and lock in their Brand Day date.`,
     ].join("\n")
   );

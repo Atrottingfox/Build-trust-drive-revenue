@@ -308,7 +308,7 @@ function BuyButton({ status, location, className = '' }: { status: Status | null
 
 /* What they see when Stripe sends them back paid. */
 function Paid() {
-  const [state, setState] = useState<{ loading: boolean; paid: boolean; firstName: string }>({
+  const [state, setState] = useState<{ loading: boolean; paid: boolean; firstName: string; portalUrl?: string | null }>({
     loading: true,
     paid: false,
     firstName: '',
@@ -323,7 +323,7 @@ function Paid() {
     })
       .then((r) => r.json())
       .then((d) => {
-        setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '' });
+        setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '', portalUrl: d.portalUrl || null });
         if (d.paid) {
           let seen = false;
           try { seen = localStorage.getItem('ga_purchase_' + id) === '1'; localStorage.setItem('ga_purchase_' + id, '1'); } catch { /* private window */ }
@@ -352,6 +352,11 @@ function Paid() {
               <p className="text-zinc-300 text-lg leading-relaxed mb-8">
                 Your spot is locked in. Your receipt and tax invoice are on their way to your inbox.
               </p>
+              {state.portalUrl && (
+                <a href={state.portalUrl} className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors mb-10">
+                  Set up your portal <ArrowRight className="w-4 h-4" />
+                </a>
+              )}
               <p className="text-zinc-400 leading-relaxed mb-6">What happens now:</p>
               <Ticks items={[
                 'We set up your WhatsApp channel, on the number you gave at checkout',

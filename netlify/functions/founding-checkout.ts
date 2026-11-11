@@ -1,3 +1,4 @@
+import { provisionPortal } from "./_portal";
 import type { Handler } from "@netlify/functions";
 import { addToWaitlist, CLOSES_AT, handleFoundingSale, PAYMENT_KIND, soldCount, stripe, stripeKey, TOTAL_SPOTS } from "./_founding";
 
@@ -138,8 +139,13 @@ const handler: Handler = async (event) => {
     /* GHL contact, founding-paid tag, Slack alert. Once per sale: the flag
        lives on the session, so a refresh or the sweep never repeats it. */
     if (paid) await handleFoundingSale(session, "thank-you page");
+    /* Sean, 2026-11-11: paid > portal for the first time, the same flow for
+       every client. The thank you page hands them their one time "set your
+       password" link straight away. Safe to ask twice: an unused link is
+       reused, and an existing account gets a log in link instead. */
+    const portal = paid ? await provisionPortal({ email: d.email, name: d.name }) : {};
 
-    return json({ paid, firstName });
+    return json({ paid, firstName, portalUrl: portal.claimUrl || portal.loginUrl || null });
   }
 
   /* ---------- Waitlist (once full or closed) ---------- */
