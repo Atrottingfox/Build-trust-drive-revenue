@@ -4,6 +4,7 @@ Allow: /brand-day$
 Allow: /apply$
 
 Disallow: /90dayprogram
+Disallow: /founding-review
 Disallow: /undeniability-part2
 Disallow: /undeniability-review
 Disallow: /undeniability-advisory

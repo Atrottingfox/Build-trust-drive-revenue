@@ -30,4 +30,4 @@ export default async (_request: Request, context: Context) => {
   return new Response(html, { status: res.status, headers });
 };
 
-export const config = { path: ["/founding"] };
+export const config = { path: ["/founding", "/founding-review"] };

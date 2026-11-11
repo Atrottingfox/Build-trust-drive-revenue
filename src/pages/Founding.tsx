@@ -9,6 +9,7 @@ import { usePageVisits } from '../lib/pageVisits';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
+import ReviewForm from '../components/founding/ReviewForm';
 
 /*
   /founding. The founding 90 Day offer, bought straight off the page.
@@ -425,7 +426,7 @@ const PHASES = [
   },
 ];
 
-export default function Founding() {
+export default function Founding({ review = false }: { review?: boolean }) {
   const paid = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const status = useStatus();
   /* Personal links: /founding?for=jane-smith (or ?c=<GHL contact id>) post the
@@ -440,10 +441,23 @@ export default function Founding() {
       <SEO
         title="90 Day Install"
         description="Stop being the content manager. Install the system your team runs. Built from the playbooks I've created alongside the six 8 figure+ B2B companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
-        path="/founding"
+        path={review ? '/founding-review' : '/founding'}
         image="https://authorityengine.com.au/og-founding.jpg"
+        noIndex={review}
       />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
+
+      {review && (
+        <div className="pt-28 -mb-20 md:-mb-28">
+          <div className="max-w-3xl mx-auto px-6 lg:px-8">
+            <div className="glow-card border-blue-500/30 p-5 md:p-6">
+              <p className="text-white font-semibold">You're seeing the Founding 5 page before it goes wide.</p>
+              <p className="text-zinc-300 text-[15px] mt-1">Read it like a founder would, then tell me what you'd change. The form is at the bottom.</p>
+              <a href="#feedback" className="inline-block text-blue-400 font-semibold text-[15px] mt-3">Jump to the form</a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* HERO */}
       <section className="pt-32 pb-16 md:pt-40 md:pb-20">
@@ -890,7 +904,21 @@ export default function Founding() {
         </div>
       </section>
 
-      <StickyBar status={status} />
+      {review && (
+        <>
+          <div className="gradient-line" />
+          <section id="feedback" className="py-20 md:py-28">
+            <div className="max-w-2xl mx-auto px-6 lg:px-8">
+              <Label>Your feedback</Label>
+              <H2>What would you change?</H2>
+              <p className="text-zinc-400 leading-relaxed mt-4 mb-10">Be blunt. It goes straight to Sean.</p>
+              <ReviewForm />
+            </div>
+          </section>
+        </>
+      )}
+
+      {!review && <StickyBar status={status} />}
       <div className="h-20 md:hidden" />
       <Footer />
     </div>
