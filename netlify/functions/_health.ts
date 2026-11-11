@@ -45,6 +45,10 @@ const EXPECTED_CENTS: Record<string, number> = {
   CHECKOUT_AMOUNT_CENTS: 500000,
   INSTALL_PAYMENT_1_CENTS: 500000,
   INSTALL_PAYMENT_2_CENTS: 500000,
+  /* charge-install's manual fallback reads this one. A test value left in it
+     would charge the wrong amount by hand (2026-11-11). Unset reads as fine:
+     charge-install stays switched off without it. */
+  INSTALL_AMOUNT_CENTS: 500000,
 };
 
 /*

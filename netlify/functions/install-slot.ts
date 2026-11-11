@@ -45,6 +45,7 @@ import {
 */
 
 const REQUIRED_TAG = "install-signed";
+const PAID_TAGS = ["step-2-paid", "install-payment-1-paid"];
 const BOOKED_TAG = "install-slot-booked";
 const OPERATOR_TAG = "install-operator-set";
 const NO_OPERATOR_TAG = "install-no-operator";
@@ -183,6 +184,14 @@ const handler: Handler = async (event) => {
   if (!tags.includes(REQUIRED_TAG)) {
     return html(
       "<h1>Not ready yet</h1><p>Your slot opens once the agreement is signed. If you have signed and are seeing this, tell Sean.</p>",
+      403
+    );
+  }
+  /* Sean, 2026-11-11: calls are locked after paying, not just after signing,
+     so an unpaid signer cannot take an hour off the grid. */
+  if (!PAID_TAGS.some((t) => tags.includes(t))) {
+    return html(
+      "<h1>Not ready yet</h1><p>Your calls open once the first payment is through. If you have paid and are seeing this, tell Sean.</p>",
       403
     );
   }

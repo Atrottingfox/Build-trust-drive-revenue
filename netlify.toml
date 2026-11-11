@@ -99,6 +99,11 @@
 [functions."slot-chase"]
   schedule = "0 23 * * *"
 
+# Portal not set up 48 hours after payment: one reminder email with the same
+# set your password link, and a line in Slack. 09:00 Brisbane.
+[functions."portal-chase"]
+  schedule = "0 23 * * *"
+
 # Paid for a Brand Day and never picked the date. The order on /lock-in is pay,
 # then choose, so between those two clicks sits somebody who has handed over
 # $5,000 with nothing in the calendar. Hourly, with an hour of grace, so the

@@ -256,6 +256,16 @@ const handler: Handler = async (event) => {
         }),
       });
       tagged = tagRes.ok;
+      /* Sean, 2026-11-11: a Brand Day bought in the page posted nothing to
+         Slack (only the old buy button path did). Say it once, when the tag
+         lands. */
+      const isBrandDay = !session.metadata?.payment || session.metadata.payment === "brand-day";
+      if (tagRes.ok && isBrandDay) {
+        const hook = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
+        const who = session.customer_details?.name || session.customer_details?.email || contactId;
+        const amount = ((session.amount_total || 0) / 100).toLocaleString("en-AU", { style: "currency", currency: String(session.currency || "aud").toUpperCase() });
+        if (hook) await fetch(hook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ text: `:moneybag: *${who}* paid ${amount} for a Brand Day.` }) }).catch(() => {});
+      }
       if (!tagRes.ok) {
         const failText = await tagRes.text();
         console.error("GHL tag failed after verified payment:", tagRes.status, failText, contactId);
@@ -273,27 +283,8 @@ const handler: Handler = async (event) => {
           why a prep call had not appeared. A payment that cannot be attributed
           is the loudest thing this system can have to say.
         */
-        const webhook = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
-        if (webhook) {
-          await fetch(webhook, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              text: [
-                ":rotating_light: *PAYMENT RECEIVED THAT WE CANNOT ATTRIBUTE*",
-                "",
-                `Stripe took the money. GoHighLevel refused the tag (HTTP ${tagRes.status}).`,
-                `Contact id: \`${contactId}\` — most likely deleted or merged.`,
-                `Stripe session: \`${sessionId}\``,
-                "",
-                "Nothing downstream has fired: no confirmation, no calendar, no prep call.",
-                "Find them in Stripe, recreate or locate the contact, and tag `brand-day-paid` by hand.",
-              ].join("\n"),
-            }),
-          }).catch(() => {
-            /* Already in the logs. */
-          });
-        }
+        /* The Slack alert for this lives once, further down (attached === false),
+           so a failed tag no longer posts two alerts (2026-11-11). */
       }
 
       /*
@@ -525,7 +516,8 @@ const handler: Handler = async (event) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             text: [
-              "*Payment received that could not be linked to a contact*",
+              ":rotating_light: *PAYMENT RECEIVED THAT WE CANNOT ATTRIBUTE*",
+              "Nothing downstream has fired: no confirmation, no calendar, no prep call.",
               `*Amount:* ${amount} ${String(session.currency || "").toUpperCase()}`,
               `*Email:* ${session.customer_details?.email || "unknown"}`,
               `*Stripe customer:* ${session.customer || "none"}`,
@@ -534,7 +526,10 @@ const handler: Handler = async (event) => {
                 ? `*Contact id on the payment:* ${contactId} (tagging it failed, it may have been deleted)`
                 : "*No contact id on the payment.*",
               "",
-              "They have paid. Find or recreate them in GHL and tag brand-day-paid by hand.",
+              `They have paid. Find or recreate them in GHL and tag ${
+                session.metadata?.payment === "install-1" ? "step-2-paid and install-payment-1-paid"
+                  : session.metadata?.payment === "intensive-1" ? "intensive-paid" : "brand-day-paid"
+              } by hand.`,
             ].join("\n"),
           }),
         }).catch(() => {
