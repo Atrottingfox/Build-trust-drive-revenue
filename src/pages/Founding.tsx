@@ -37,7 +37,7 @@ function ga(event: string, extra: Record<string, unknown> = {}) {
   }
 }
 
-function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+export function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   return (
     <motion.section
@@ -52,15 +52,15 @@ function Section({ children, className = '' }: { children: React.ReactNode; clas
   );
 }
 
-const Label = ({ children }: { children: React.ReactNode }) => (
+export const Label = ({ children }: { children: React.ReactNode }) => (
   <p className="text-sm font-medium text-blue-400 uppercase tracking-widest mb-5">{children}</p>
 );
 
-const H2 = ({ children }: { children: React.ReactNode }) => (
+export const H2 = ({ children }: { children: React.ReactNode }) => (
   <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.02em] text-white leading-[1.1]">{children}</h2>
 );
 
-const Ticks = ({ items }: { items: React.ReactNode[] }) => (
+export const Ticks = ({ items }: { items: React.ReactNode[] }) => (
   <ul className="space-y-3">
     {items.map((t, i) => (
       <li key={i} className="flex items-start gap-3">
@@ -71,13 +71,13 @@ const Ticks = ({ items }: { items: React.ReactNode[] }) => (
   </ul>
 );
 
-type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string };
+export type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string };
 
 /* Same deadline the checkout enforces. The server's value wins when it loads. */
 const CLOSES_AT = '2026-12-01T00:00:00+10:00';
 
 /* Shared across every buy button on the page, so they all agree. */
-function useStatus() {
+export function useStatus() {
   const [status, setStatus] = useState<Status | null>(null);
   useEffect(() => {
     fetch(FN)
@@ -90,7 +90,7 @@ function useStatus() {
 
 /* A real countdown to the real deadline. Ticks once a minute, shows nothing
    once the time is up (the button handles that). */
-function useCountdown(iso: string) {
+export function useCountdown(iso: string) {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {
     const t = setInterval(() => setNow(Date.now()), 60_000);
@@ -104,7 +104,7 @@ function useCountdown(iso: string) {
   return d > 0 ? `${d}d ${h}h ${m}m` : `${h}h ${m}m`;
 }
 
-function SpotsLine({ status }: { status: Status | null }) {
+export function SpotsLine({ status }: { status: Status | null }) {
   /* Sean's three lines, 11 Nov. The first carries the live count once a spot sells. */
   /* The hero already says 5 spots, starting in January, so the count only
      shows here once one has sold. */
@@ -190,7 +190,7 @@ function Waitlist() {
 
 /* Mobile only. Appears once the hero is gone, hides at the price card so it
    never sits on top of the real button, and disappears when the intake closes. */
-function StickyBar({ status }: { status: Status | null }) {
+export function StickyBar({ status }: { status: Status | null }) {
   const [show, setShow] = useState(false);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
@@ -254,7 +254,7 @@ function StickyBar({ status }: { status: Status | null }) {
   );
 }
 
-function BuyButton({ status, location, className = '' }: { status: Status | null; location: string; className?: string }) {
+export function BuyButton({ status, location, className = '' }: { status: Status | null; location: string; className?: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -390,7 +390,7 @@ function Paid() {
   );
 }
 
-const Crosses = ({ items }: { items: React.ReactNode[] }) => (
+export const Crosses = ({ items }: { items: React.ReactNode[] }) => (
   <ul className="space-y-3">
     {items.map((t, i) => (
       <li key={i} className="flex items-start gap-3">
@@ -413,7 +413,7 @@ const Group = ({ title, items, n }: { title: string; items: React.ReactNode[]; n
   </div>
 );
 
-const PHASES = [
+export const PHASES = [
   {
     n: 'Phase 1', name: 'Install', weeks: 'Weeks 1 to 4',
     lead: 'We build and launch the system. Your Brand Day creates the blueprint, then we run it straight away on real content.',
