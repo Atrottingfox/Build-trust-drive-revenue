@@ -16,7 +16,7 @@
 const PROVISION_URL =
   process.env.PORTAL_PROVISION_URL || "https://contentengine.live/.netlify/functions/provision-client";
 
-export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null): Promise<{ claimUrl?: string; loginUrl?: string; error?: string }> {
+export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null, extra: { brandDay?: string } = {}): Promise<{ claimUrl?: string; loginUrl?: string; error?: string }> {
   /* The secret contentengine and this site already share (it is how
      contentengine asks client-upcoming for call times). A new variable pushed
      this site over Netlify's 4KB function environment limit and stopped every
@@ -30,7 +30,7 @@ export async function provisionPortal(contact: { email?: string; firstName?: str
     const r = await fetch(PROVISION_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-provision-secret": secret },
-      body: JSON.stringify({ email, name }),
+      body: JSON.stringify({ email, name, brandDay: extra.brandDay }),
       signal: AbortSignal.timeout(8000),
     });
     const body = await r.json().catch(() => ({}));

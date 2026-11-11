@@ -1,4 +1,5 @@
-import { addTags, contactUrl, findOrCreateByEmail, GHL_API, GHL_VERSION } from "./_ghl";
+import { addTags, contactUrl, findOrCreateByEmail, GHL_API, GHL_VERSION, sendEmail } from "./_ghl";
+import { BRAND_DAY_BOOKING, OFFICE_HOURS } from "./_calls";
 import { provisionPortal } from "./_portal";
 
 /*
@@ -90,6 +91,27 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
      hour reminder (portal-chase), and so the link is in Slack. */
   const portal = await provisionPortal({ email: d.email, name: d.name });
 
+  /* Sean, 2026-11-12: "the founding buyers next steps all implemented asap".
+     One welcome email, sent from here like the install payment email (the tag
+     route has failed before): the portal, the Brand Day booking and office
+     hours, which is the one call they join before their Brand Day. */
+  let welcomed = false;
+  if (token && contactId) {
+    const first = String(d.name || "").split(" ")[0] || "there";
+    const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}`;
+    const { sent } = await sendEmail(token, contactId, "You're in. Here's what happens now.", [
+      `<p>${first},</p>`,
+      `<p>You're in. Your spot is locked in.</p>`,
+      portal.claimUrl ? `<p>1. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>1. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
+      `<p>2. <a href="${brandDay}">Lock in your Brand Day date</a>.</p>`,
+      `<p>3. Office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">office hours form</a> before you come.</p>`,
+      `<p>Your weekly calls and advisory board calls start after your Brand Day.</p>`,
+      `<p>We set up your WhatsApp channel on the number you gave at checkout. If you have not heard from us within 24 hours, reply to this email.</p>`,
+      `<p>Sean</p>`,
+    ].join(""));
+    welcomed = sent;
+  }
+
   await slack(
     [
       `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day (intro offer, paid in full).*`,
@@ -98,6 +120,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       contactId
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
         : `:warning: Could not create or tag them in GoHighLevel. Add them by hand with the \`${PAID_TAG}\` tag.`,
+      welcomed ? `Welcome email sent (portal, Brand Day booking, office hours).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
       portal.claimUrl ? `Portal made: ${portal.claimUrl}` : portal.error ? `:warning: No portal made (${portal.error}). Invite them from contentengine.live/clients.` : `Portal: they already have an account.`,
       `Now: set up their WhatsApp, give them the SOPs, playbooks, training videos and early office hours, and lock in their Brand Day date.`,
     ].join("\n")

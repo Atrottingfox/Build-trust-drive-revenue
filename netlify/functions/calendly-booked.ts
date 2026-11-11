@@ -1,3 +1,4 @@
+import { provisionPortal } from "./_portal";
 import type { Handler } from "@netlify/functions";
 import { reconcile, contactUrl } from "./_ghl";
 
@@ -290,6 +291,14 @@ const handler: Handler = async (event) => {
       }
     } else if (isBrandDay && !brandDayDateFieldId) {
       console.error("GHL_FIELD_BRAND_DAY_DATE not set, booking date not recorded.");
+    }
+
+    /* Sean, 2026-11-12: the Brand Day date shows on the client's portal home
+       with a countdown. Makes the portal if they do not have one yet. Never
+       blocks the booking. */
+    if (isBrandDay && startTime && payload.email) {
+      const portal = await provisionPortal({ email: payload.email, name: payload.name || payload.email }, { brandDay: startTime });
+      if (portal.error) console.error("calendly-booked: portal not updated:", portal.error);
     }
 
     /*

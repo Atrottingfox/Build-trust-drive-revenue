@@ -213,6 +213,7 @@ function contactIdFrom(search: string, path: string): string | null {
 export default function LockIn() {
   const [contactId, setContactId] = useState<string | null>(null);
   const [paid, setPaid] = useState(false);
+  const [portalUrl, setPortalUrl] = useState<string | null>(null);
   const [checkoutSession, setCheckoutSession] = useState<string | null>(null);
   const [booked, setBooked] = useState(false);
   const [bookedAt, setBookedAt] = useState<string | null>(null);
@@ -418,6 +419,7 @@ export default function LockIn() {
           // Stripe says this session was never paid. Lock it back down.
           // Nothing to clear from the browser: it no longer keeps a copy.
           if (v?.verified && v.paid === false) setPaid(false);
+          if (v?.portalUrl) setPortalUrl(v.portalUrl);
         })
         .catch(() => {
           // Verification is a bonus, not a gate. They keep the calendar.
@@ -635,6 +637,11 @@ export default function LockIn() {
               Your Brand Day is paid for and in both our calendars. Your receipt is in
               your inbox.
             </p>
+            {portalUrl && (
+              <a href={portalUrl} className="mt-8 btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">
+                Set up your portal
+              </a>
+            )}
           </div>
 
           <div className="max-w-2xl mx-auto mt-14">

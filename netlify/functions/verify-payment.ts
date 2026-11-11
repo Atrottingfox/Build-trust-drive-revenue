@@ -539,10 +539,19 @@ const handler: Handler = async (event) => {
       console.error("Payment could not be linked to a GHL contact:", sessionId, contactId || "(none)");
     }
 
+    /* Every paying client gets their portal (Sean, 2026-11-12: paid > portal
+       for the first time, the same for everyone). The page that took the
+       payment shows Set up your portal straight away. Safe to repeat: an
+       unused link is reused. */
+    const portal = await provisionPortal({
+      email: session.customer_details?.email || undefined,
+      name: session.customer_details?.name || session.customer_details?.email || undefined,
+    });
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ verified: true, paid: true, contactId: contactId || null }),
+      body: JSON.stringify({ verified: true, paid: true, contactId: contactId || null, portalUrl: portal.claimUrl || portal.loginUrl || null }),
     };
   } catch (err) {
     // Never block. They may well have paid.

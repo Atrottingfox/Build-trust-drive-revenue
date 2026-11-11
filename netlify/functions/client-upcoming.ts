@@ -120,6 +120,11 @@ const handler: Handler = async (event) => {
       },
       /* So a portal can show the run of calls, not just the next one. */
       remaining: theirs.length,
+      calls: theirs.slice(0, 30).map((e) => ({
+        startLocal: e.startLocal,
+        callType: e.board ? "board" : "weekly",
+        week: e.board ? null : Number(e.week) || null,
+      })),
     });
   } catch (err) {
     console.error("client-upcoming:", err);
