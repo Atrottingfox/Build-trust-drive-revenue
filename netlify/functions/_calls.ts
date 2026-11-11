@@ -15,4 +15,13 @@ export const OFFICE_HOURS = {
 export const WHATSAPP_LINE =
   "<p>Your WhatsApp group is set up within 24 hours. The link lands in your inbox and on your portal.</p>";
 
+/* With a group from the pool (Sean, 2026-11-12: 10 ready made "AE Content
+   Advisory" groups), the email carries the link itself. Without one, the 24
+   hour promise. */
+export function whatsappLine(url?: string | null): string {
+  if (!url) return WHATSAPP_LINE;
+  const safe = url.replace(/"/g, "");
+  return `<p><a href="${safe}">Join your WhatsApp group</a>. Post your questions there. For urgent blockers, tag the operator.</p>`;
+}
+
 export const BRAND_DAY_BOOKING = "https://calendly.com/sean-authorityengine/vip-day";

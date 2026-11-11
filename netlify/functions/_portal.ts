@@ -16,7 +16,7 @@
 const PROVISION_URL =
   process.env.PORTAL_PROVISION_URL || "https://contentengine.live/.netlify/functions/provision-client";
 
-export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null, extra: { brandDay?: string } = {}): Promise<{ claimUrl?: string; loginUrl?: string; error?: string }> {
+export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null, extra: { brandDay?: string } = {}): Promise<{ claimUrl?: string; loginUrl?: string; whatsappUrl?: string; error?: string }> {
   /* The secret contentengine and this site already share (it is how
      contentengine asks client-upcoming for call times). A new variable pushed
      this site over Netlify's 4KB function environment limit and stopped every
@@ -35,7 +35,7 @@ export async function provisionPortal(contact: { email?: string; firstName?: str
     });
     const body = await r.json().catch(() => ({}));
     if (!r.ok) return { error: `provision-client ${r.status}: ${body?.error || ""}` };
-    return { claimUrl: body.claimUrl, loginUrl: body.loginUrl };
+    return { claimUrl: body.claimUrl, loginUrl: body.loginUrl, whatsappUrl: body.whatsappUrl || undefined };
   } catch (e) {
     return { error: `provision-client unreachable: ${(e as Error).message}` };
   }

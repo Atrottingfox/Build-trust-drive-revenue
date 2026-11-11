@@ -3,7 +3,7 @@ import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
 import { isTestContact, priceCents } from "./_pricing";
 import { DAY61_OPTION } from "./_variants";
-import { OFFICE_HOURS, WHATSAPP_LINE } from "./_calls";
+import { OFFICE_HOURS, whatsappLine } from "./_calls";
 
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
@@ -430,7 +430,7 @@ const handler: Handler = async (event) => {
                 `<p>${first},</p>`,
                 `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`,
                 portalLine,
-                WHATSAPP_LINE,
+                whatsappLine(portal.whatsappUrl),
                 `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.</p>`,
                 `<p>Sean</p>`,
               ].join(""))
@@ -449,7 +449,7 @@ const handler: Handler = async (event) => {
               `<p>One call a week for the first four weeks, then fortnightly, then one in month three. Your board call runs every four weeks, for as long as we work together.</p>`,
               `<p>It also asks for your media operator's name and email, because they are the one on every weekly call, not you. If you haven't hired yet, leave it blank and come back to the same link once you have.</p>`,
               portalLine,
-              WHATSAPP_LINE,
+              whatsappLine(portal.whatsappUrl),
               `<p>Sean</p>`,
             ].join("")
           );
@@ -570,7 +570,7 @@ const handler: Handler = async (event) => {
           ? `<p>2. <a href="${portal.claimUrl}">Set up your portal</a>. Your Brand Day date, your calls and everything for the build live there.</p>`
           : `<p>2. Your portal is at <a href="https://contentengine.live/login">contentengine.live</a>. Your Brand Day date, your calls and everything for the build live there.</p>`,
         `<p>3. Office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">office hours form</a> before you come.</p>`,
-        WHATSAPP_LINE,
+        whatsappLine(portal.whatsappUrl),
         `<p>Sean</p>`,
       ].join(""));
       if (sent) {
