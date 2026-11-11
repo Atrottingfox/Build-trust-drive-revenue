@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, ChevronDown } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import StartTodayShowcase from '../components/founding/StartTodayShowcase';
+import { StartTodayCompact } from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import {
@@ -396,7 +396,7 @@ export default function FoundingV2() {
             <H2>Pay in full. Start today.</H2>
             <Lead>Implementation starts in January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
           </Section>
-          <StartTodayShowcase />
+          <StartTodayCompact />
 
           <Divider />
 

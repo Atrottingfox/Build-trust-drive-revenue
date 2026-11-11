@@ -264,3 +264,100 @@ export default function StartTodayShowcase() {
     </div>
   );
 }
+
+/*
+  The compact version, used on /founding-v2. Same six items, same visuals,
+  about one screen tall instead of six.
+
+  Wide screens: the list on the left, one visual on the right. The next item
+  lights up every 5 seconds with a progress bar under it, clicking an item
+  jumps to it, hovering pauses.
+
+  Phones: one card per item, swiped sideways.
+*/
+const STEP_MS = 5000;
+
+export function StartTodayCompact() {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    if (paused) return;
+    const t = setTimeout(() => {
+      setActive((a) => (a + 1) % ITEMS.length);
+      setTick((n) => n + 1);
+    }, STEP_MS);
+    return () => clearTimeout(t);
+  }, [active, paused, tick]);
+
+  const pick = (i: number) => {
+    setActive(i);
+    setTick((n) => n + 1);
+  };
+
+  return (
+    <div className="mt-10">
+      {/* Wide screens */}
+      <div
+        className="hidden md:grid md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-10 items-start"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <ul className="space-y-1">
+          {ITEMS.map((it, i) => {
+            const on = i === active;
+            return (
+              <li key={it.name}>
+                <button
+                  type="button"
+                  onClick={() => pick(i)}
+                  className={`w-full text-left rounded-xl px-4 py-3.5 transition-colors ${on ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'}`}
+                >
+                  <p className={`font-semibold text-[16px] ${on ? 'text-white' : 'text-zinc-400'}`}>{it.name}</p>
+                  <p className={`text-[14px] mt-0.5 ${on ? 'text-zinc-300' : 'text-zinc-500'}`}>{it.text}</p>
+                  <div className="mt-3 h-[2px] w-full rounded-full bg-white/5 overflow-hidden">
+                    {on && (
+                      <motion.div
+                        key={`${active}-${tick}`}
+                        className="h-full bg-blue-500"
+                        initial={{ width: '0%' }}
+                        animate={{ width: paused ? undefined : '100%' }}
+                        transition={{ duration: STEP_MS / 1000, ease: 'linear' }}
+                      />
+                    )}
+                  </div>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="min-h-[420px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={active}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Visual index={active} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* Phones: swipe sideways */}
+      <div className="md:hidden -mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {ITEMS.map((it, i) => (
+          <div key={it.name} className="snap-center shrink-0 w-[85%]">
+            <Visual index={i} />
+            <p className="text-white font-semibold text-[16px] mt-4">{it.name}</p>
+            <p className="text-zinc-400 text-[14px] mt-0.5">{it.text}</p>
+          </div>
+        ))}
+      </div>
+      <p className="md:hidden text-zinc-500 text-[13px] mt-2">Swipe to see all six.</p>
+    </div>
+  );
+}
