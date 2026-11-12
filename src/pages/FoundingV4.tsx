@@ -18,6 +18,44 @@ import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, us
 
 const FN = '/.netlify/functions/founding-checkout';
 
+const SUPPORT: [string, string[]][] = [
+  [
+    'Before week 1',
+    [
+      'One Brand Day',
+      '1:1 guided implementation starts in the next available cohort month (January, then February)'
+    ]
+  ],
+  [
+    'Weekly',
+    [
+      'Implementation calls for the first 4 weeks, then fortnightly for the next 8',
+      'One team call per week during installation',
+      'Two Loom reviews per week during active implementation',
+      'Advisory sessions, every Thursday|(Monday coming soon)'
+    ]
+  ],
+  [
+    'Fortnightly',
+    [
+      'Training every fortnight',
+      'Operator hotseat every fortnight|(coming soon)'
+    ]
+  ],
+  [
+    'Monthly',
+    [
+      'Founder and operator board review'
+    ]
+  ],
+  [
+    'Any day',
+    [
+      'WhatsApp implementation support, 24 hour replies, during the agreed support window'
+    ]
+  ]
+];
+
 const Divider = () => <div className="gradient-line my-24 md:my-28" />;
 
 const Pill = ({ children }: { children: React.ReactNode }) => (
@@ -211,6 +249,40 @@ export default function FoundingV4() {
 
         <Divider />
 
+        {/* WHAT THIS INSTALLS, copied from /founding (Sean likes it, 12 Nov) */}
+        <Section>
+          <Label>What this installs</Label>
+          <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+            The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+          </p>
+          <H2>By day 90, your team can answer these.</H2>
+          <div className="grid sm:grid-cols-2 gap-3 mt-8">
+            {[
+              'What should we make?',
+              'Who is it for?',
+              'Which format fits?',
+              'How do we capture it?',
+              'How do we produce it?',
+              'Is it good enough to publish?',
+              'Did it work?',
+              'What do we do more of next?',
+            ].map((q, i) => (
+              <div key={q} className="glow-card px-5 py-4 flex items-center gap-4">
+                <span className="font-display text-sm font-extrabold text-blue-400 w-5">{`0${i + 1}`}</span>
+                <span className="text-white text-[15px] font-semibold">{q}</span>
+              </div>
+            ))}
+          </div>
+          <p className="text-zinc-400 leading-relaxed mt-8">
+            A working operating system your team uses to plan, produce, judge, publish and improve content.
+          </p>
+          <p className="text-zinc-400 leading-relaxed mt-4">
+            This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
+          </p>
+        </Section>
+
+        <Divider />
+
         {/* LEAVE WITH, concrete items already on the page (trial, 12 Nov) */}
         <Section>
           <Label>By day 90</Label>
@@ -234,15 +306,63 @@ export default function FoundingV4() {
 
         <Divider />
 
-        {/* FIT */}
+        {/* SUPPORT, /founding's items laid out by rhythm (trial, 12 Nov) */}
+        <Section>
+          <Label>Support and implementation</Label>
+          <H2>Support until it runs without me.</H2>
+          <div className="mt-8 divide-y divide-white/5 border-y border-white/5">
+            {SUPPORT.map(([when, items]) => (
+              <div key={when} className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-8 py-6">
+                <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest pt-0.5">{when}</p>
+                <ul className="space-y-2">
+                  {items.map((t) => {
+                    const [main, note] = t.split('|');
+                    return (
+                      <li key={t} className="text-zinc-200 text-[16px] leading-relaxed">
+                        {main}{note && <span className="text-zinc-500"> {note}</span>}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="text-zinc-400 leading-relaxed mt-6">
+            The support is there to install the system, so your team stops needing me.
+          </p>
+        </Section>
+
+        <Divider />
+
+        {/* FIT, copied from /founding (Sean likes it, 12 Nov) */}
         <Section>
           <Label>Fit</Label>
-          <H2>This is for you if...</H2>
-          <div className="mt-8">
-            <Ticks items={['You already do $200K/month or more', 'You have a proven offer and real expertise', 'You already create some content', 'You have an operator or team member to train', 'You want the team running content without you managing every post']} />
+          <H2>You need a proven offer and a team.</H2>
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
+            <div className="glow-card p-8">
+              <p className="text-white text-sm font-semibold mb-5">This is for you if:</p>
+              <Ticks items={[
+                'You already do $200K/month or more',
+                'You have a proven offer',
+                'You have real expertise and proof',
+                'You already create some content',
+                'You have an operator or team member to train',
+                'You want the team running content without you managing every post',
+                'You are willing to fulfil increased demand without standards dropping',
+              ]} />
+            </div>
+            <div className="glow-card p-8">
+              <p className="text-white text-sm font-semibold mb-5">This is not:</p>
+              <Crosses items={[
+                'A done for you content agency',
+                'A course you consume alone',
+                'A replacement for a proven offer',
+                'A guarantee of revenue',
+                'For founders starting from zero',
+                'For teams unwilling to attend, implement or share data honestly',
+              ]} />
+            </div>
           </div>
-          <p className="text-white text-xl font-semibold mt-12 mb-6">This isn't for you if...</p>
-          <Crosses items={['You want a done for you content agency', 'You are starting from zero', 'Your team will not attend, implement or share data honestly']} />
           <MiniCta status={status} location="founding-v4-fit" />
         </Section>
 
@@ -261,9 +381,10 @@ export default function FoundingV4() {
                 'One team call per week during installation',
                 'Training every fortnight',
                 'Two Loom reviews per week during active implementation',
-                'Weekly office hours, every Thursday',
+                'Operator hotseat every fortnight (coming soon)',
+                'Weekly advisory sessions, every Thursday (Monday coming soon)',
                 'Monthly founder and operator board review',
-                'WhatsApp support, 24 hour replies',
+                'WhatsApp implementation support, 24 hour replies, during the agreed support window',
                 'Every SOP, every training video, both playbooks, straight away',
                 '$5,000 guarantee at day 30, keep working past day 90',
               ].map((t) => (
