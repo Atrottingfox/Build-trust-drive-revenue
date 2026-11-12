@@ -28,7 +28,7 @@ const Sep = () => <span className="text-zinc-600">|</span>;
 /* Key facts strip, top of the page and in the closing. */
 const Facts = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>Starts January</Pill><Sep />
+    <Pill>First cohort January, next February</Pill><Sep />
     <Pill>5 spots</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
     <Pill>$5,000 guarantee</Pill>
@@ -38,7 +38,7 @@ const Facts = () => (
 /* Logistics, top of the hero, like the dates line on the challenge page. */
 const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>Starts January</Pill><Sep />
+    <Pill>First cohort January, next February</Pill><Sep />
     <Pill>Full media strategy day included</Pill><Sep />
     <Pill>90 days of guided implementation</Pill>
   </div>
@@ -96,7 +96,7 @@ function Bar({ status }: { status: Status | null }) {
     <div className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/10 bg-[#0b0c10]/95 backdrop-blur">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-3 pb-[max(12px,env(safe-area-inset-bottom))] flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-white text-[14px] md:text-[15px] font-semibold leading-tight">Starts January | 5 spots | $10,000 AUD</p>
+          <p className="text-white text-[14px] md:text-[15px] font-semibold leading-tight">January cohort | Next: February | $10,000 AUD</p>
           {countdown && <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">Closes 30 November. {countdown} left</p>}
         </div>
         <button type="button" onClick={buy} disabled={busy} className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-[14px] font-semibold disabled:opacity-70">
@@ -185,7 +185,7 @@ export default function FoundingV4() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available cohort month, starting January. Pay $10,000 AUD by 30 November and your team gets all of this now.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available cohort month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
         </Section>
         <StartTodayShowcase />
         <MiniCta status={status} location="founding-v4-payinfull" />
@@ -246,7 +246,7 @@ export default function FoundingV4() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts in the next available cohort month, starting January',
+                '1:1 guided implementation starts in the next available cohort month (January, then February)',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
@@ -314,7 +314,7 @@ export default function FoundingV4() {
         <Section>
           <div className="text-center">
             <H2>Doors close 30 November.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots. Starting January. Your Brand Day included.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots in the January cohort. The next cohort starts in February. Pay now and get access today.</p>
             <div className="flex justify-center mt-6"><Facts /></div>
             <div className="flex justify-center">
               <BuyButton status={status} location="founding-v4-close" className="mt-8" />

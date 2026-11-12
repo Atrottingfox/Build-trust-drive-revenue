@@ -63,7 +63,7 @@ function BuyCard({ status }: { status: Status | null }) {
       <p className="font-display text-lg font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
       <p className="text-zinc-400 text-[13px] mt-3">Founding 5, paid in full</p>
       <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
-      <p className="text-blue-400 font-semibold text-sm mt-3">5 spots, starting in January.</p>
+      <p className="text-blue-400 font-semibold text-sm mt-3">5 spots in the January cohort. Next cohort February.</p>
       <BuyButton status={status} location="founding-v2-card" className="mt-5 [&_button]:w-full [&_button]:justify-center [&_a]:w-full" />
     </div>
   );
@@ -122,7 +122,7 @@ function Rail({ status }: { status: Status | null }) {
       ) : (
         <motion.div key="guide" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.35 }}>
           <div className="glow-card p-6">
-            <p className="text-blue-400 font-semibold text-sm">5 spots, starting in January.</p>
+            <p className="text-blue-400 font-semibold text-sm">5 spots in the January cohort. Next cohort February.</p>
             {countdown && <p className="text-zinc-400 text-[13px] mt-1 tabular-nums">Closes 30 November. {countdown} left</p>}
             <p className="text-zinc-500 text-[11px] uppercase tracking-widest mt-6 mb-3">On this page</p>
             <ol className="space-y-1">
@@ -218,7 +218,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
               Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
-            <p className="text-blue-400 font-semibold text-lg mt-10">5 spots, starting in January.</p>
+            <p className="text-blue-400 font-semibold text-lg mt-10">5 spots in the January cohort. Next cohort February.</p>
             <p className="text-zinc-400 mt-2">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
@@ -358,7 +358,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, 1:1 guided implementation from the next available cohort month, starting January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+              A Brand Day, 1:1 guided implementation from the next available cohort month (January, then February), weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
             <More label="See everything included">
               <div className="space-y-8">
@@ -378,7 +378,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    '1:1 guided implementation starts in the next available cohort month, starting January',
+                    '1:1 guided implementation starts in the next available cohort month (January, then February)',
                     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                     'One team call per week during installation',
                     'Training every fortnight',
@@ -400,7 +400,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>1:1 guided implementation starts in the next available cohort month, starting January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
+            <Lead>1:1 guided implementation starts in the next available cohort month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</Lead>
           </Section>
           <StartTodayShowcase />
 
@@ -495,7 +495,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                 <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
                 <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
                 <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-                  Only 5 installs for this intake, starting in January. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
+                  Only 5 installs in the January cohort. The next cohort starts in February. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Your Brand Day is included.</p>
