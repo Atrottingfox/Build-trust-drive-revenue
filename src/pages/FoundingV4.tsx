@@ -39,8 +39,7 @@ const Facts = () => (
 const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>Starts January</Pill><Sep />
-    <Pill>Brand Day in person</Pill><Sep />
-    <Pill>Weekly calls, then fortnightly</Pill>
+    <Pill>Brand Day in person</Pill>
   </div>
 );
 
@@ -133,12 +132,8 @@ export default function FoundingV4() {
           <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] text-white leading-[1.02] mt-8 mb-6">
             Own your category.
           </h1>
-          {/* Sean's frame, word for word (his /offer hero). */}
-          <p className="text-zinc-300 text-xl leading-relaxed">
-            Engineer how content drives revenue, build a brand that commands attention from the right people, and install the buying beliefs your best clients need so your team can keep scaling without you becoming a full time creator.
-          </p>
           {/* Suggested lines, Sean to rewrite. */}
-          <p className="text-white text-lg font-semibold leading-relaxed mt-6">
+          <p className="text-white text-lg font-semibold leading-relaxed">
             In 90 days your team is planning, filming and posting the content your best clients need to buy, without you.
           </p>
           <div className="mt-10">
