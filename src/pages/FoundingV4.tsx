@@ -151,14 +151,14 @@ export default function FoundingV4() {
           <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Founding 5</p>
           <Facts />
           <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] text-white leading-[1.02] mt-8 mb-6">
-            Own your category.
+            Own your category without becoming a fulltime creator.
           </h1>
           {/* Sean's words, 12 Nov. */}
           <p className="text-white text-lg md:text-xl font-bold leading-relaxed">
-            Engineer the system that makes the right buyers notice you, trust you, and choose you without turning into a full time creator.
+            Build the brand and content system that makes the right buyers notice you, trust you, and choose you, without becoming a fulltime creator.
           </p>
           <p className="text-zinc-300 text-lg leading-relaxed mt-4">
-            In 90 days, your team is planning and publishing the content that moves buyers toward a decision.
+            In 90 days, your team will know what to make, how to produce it, and what to improve next.
           </p>
           <div className="mt-10">
             <VslPlayer />
