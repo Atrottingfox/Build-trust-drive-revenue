@@ -91,31 +91,43 @@ const UPSCALE: InstallVariant = {
 };
 
 
-/* Morgan Nelson, 2026-11-12. Standard money, cut down to what he needs.
-   Sean: "it should just be simply helping him to get up to speed fast.
-   remove anythign that's not requried", "we'll have his videographer as a
-   marketer by the end", no VSL, no hiring support (already helped).
-   His Build (the Brand Day) is done, so it is not in here. */
+/* Morgan Nelson, 2026-11-12 (v2). The standard 90 Day minus the VSL and
+   build talk. Sean: "inject your videographer with the skills they need,
+   fast", "it's 15,000 with 5,000 credited from the brand day, with 10,000
+   left to pay", "include the weekly office hours, the async comms, the
+   guided implementation". By the end, his videographer is a marketer.
+   No hiring support (already helped). */
 const MORGAN_TERMS: TermsSection[] = [
   {
     heading: '1. What this is',
     body: [
-      'Simply helping your videographer get up to speed fast.',
-      'This is one engagement of 90 days. This agreement covers the whole 90 days.',
+      'The Authority Engine helps you design and install a content operating system that generates qualified demand from organic content.',
+      'This is one engagement of 90 days, delivered in two stages: getting your videographer up to speed across weeks 1 to 4, and the Tune across weeks 5 to 12.',
+      'This agreement covers the whole 90 days.',
     ],
   },
   {
     heading: '2. What I deliver',
     body: [
-      "Weeks 1 to 4. One 60 minute call per week with you and your key people.",
-      'Weeks 5 to 12. One 60 minute call per fortnight, and 24 hour feedback via WhatsApp.',
+      'Weeks 1 to 4. Inject your videographer with the skills they need, fast. One 60 minute call per week with you and your key people, and weekly Office Hours.',
+      'Weeks 5 to 12. Your team runs it and I act as advisor. One 60 minute call per fortnight, and weekly Office Hours.',
       'Every month. One 60 minute board call.',
+      'Throughout the 90 days. Guided implementation, async comms with up to one Loom per week for asset review, and 24 hour feedback via WhatsApp.',
       "By the end, we'll have your videographer as a marketer.",
       'I provide strategy, frameworks and advisory. I do not provide done for you execution: no filming, editing, posting, account management or staff management. Your team implements.',
     ],
   },
   { ...TERMS[2], heading: '3. What you commit to' },
-  { ...TERMS[3], heading: '4. Fees and payment' },
+  {
+    heading: '4. Fees and payment',
+    body: [
+      'The fee for the 90 days is AUD $15,000. Your AUD $5,000 Brand Day is credited, leaving AUD $10,000, paid in two instalments of AUD $5,000.',
+      'The first is due on signing. The second is charged automatically to the same card 30 days later. By signing, you are agreeing to both.',
+      'There is no third instalment.',
+      'Fees are non refundable once the engagement starts.',
+      'If a payment fails, I will let you know and we will sort it out. Work continues while we do.',
+    ],
+  },
   { ...TERMS[5], heading: '5. No guarantees' },
   { ...TERMS[6], heading: '6. Ending it early' },
   { ...TERMS[7], heading: '7. Intellectual property' },
@@ -126,27 +138,32 @@ const MORGAN_TERMS: TermsSection[] = [
 const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
-  version: TERMS_VERSION + '-morgan-1',
+  version: TERMS_VERSION + '-morgan-2',
   phases: [
     {
       when: 'Weeks 1 to 4',
       title: 'Up to speed',
-      body: 'Simply helping your videographer get up to speed fast.',
-      rhythm: 'One 60 minute call a week with you and your key people, plus a board call a month.',
+      body: 'Inject your videographer with the skills they need, fast. Guided implementation, so the first content goes out the way it should.',
+      rhythm: 'One 60 minute call a week with you and your key people. Weekly Office Hours. Async comms and 24 hour feedback on WhatsApp. A board call a month.',
     },
     {
       when: 'Weeks 5 to 12',
       title: 'Tune',
-      body: 'Your team runs it and I move to advisor.',
-      rhythm: 'A 60 minute call a fortnight, a board call a month, and 24 hour feedback on WhatsApp.',
+      body: 'Your team runs it and I move to advisor. We tighten the hooks and the content on real data, and test the strongest pieces with your warmest audience.',
+      rhythm: 'A 60 minute call a fortnight. Weekly Office Hours. Up to one Loom a week and 24 hour feedback on WhatsApp. A board call a month.',
     },
     {
       when: 'Day 90',
       title: 'What you have',
-      body: "Your videographer as a marketer.",
+      body: 'Your videographer working as a marketer and running the rhythm, one repeatable monthly content cycle, and you spending under two hours a week on it.',
       rhythm: '',
     },
   ],
+  feeLine:
+    'I provide the strategy, frameworks and advisory. Your team implements. AUD $15,000 for the 90 days. Your $5,000 Brand Day is credited, so $10,000 is left to pay: $5,000 today and $5,000 in 30 days.',
+  checkboxLine:
+    'I have read the agreement, I am authorised to enter into it, and I agree to both instalments of $5,000.',
+  payLine: '$5,000 today, $5,000 in 30 days, to the same card. Nothing after that.',
 };
 
 const BY_CONTACT: Record<string, InstallVariant> = {
