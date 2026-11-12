@@ -34,7 +34,7 @@ const Facts = () => (
     <Pill>Starts January</Pill><Sep />
     <Pill>5 spots</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
-    <Pill>Refund guarantee</Pill>
+    <Pill>$5,000 guarantee</Pill>
   </div>
 );
 
@@ -161,7 +161,7 @@ export default function FoundingV3() {
           <Label>Guarantee</Label>
           <H2>The risk sits with me.</H2>
           <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-            If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
+            If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
           </p>
           <p className="text-zinc-300 text-lg leading-relaxed mt-4">
             If the agreed Authority Engine is not installed by day 90, we continue working with you at no additional cost until it is.
@@ -181,10 +181,6 @@ export default function FoundingV3() {
             <Ticks items={[
               'Your Brand Demand Workbook, mapped on the day',
               'Your avatar card: the Hero Buyer every piece of content gets tested against',
-              'Your voice card: how the founder sounds, how the team writes',
-              'Your hook bank: 6 archetype buckets, 90 patterns',
-              'Your 4 numbers: reach, capture, conversion, compounding',
-              'Every SOP and both playbooks, short form and long form',
               'A team that knows what to make next without asking you every time',
             ]} />
           </div>
@@ -221,7 +217,7 @@ export default function FoundingV3() {
                 'Monthly founder and operator board review',
                 'WhatsApp support, 24 hour replies',
                 'Every SOP, every training video, both playbooks, straight away',
-                'Refund guarantee at day 30, keep working past day 90',
+                '$5,000 guarantee at day 30, keep working past day 90',
               ].map((t) => (
                 <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
               ))}

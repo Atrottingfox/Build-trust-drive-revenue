@@ -814,7 +814,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <div className="glow-card border-blue-500/20 p-8">
                 <p className="text-white text-sm font-semibold mb-3">30 day implementation guarantee</p>
                 <p className="text-zinc-300 text-[15px] leading-relaxed">
-                  If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
+                  If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
                 </p>
                 <p className="text-zinc-400 text-[14px] mt-5 mb-3">Material change means:</p>
                 <Ticks items={[

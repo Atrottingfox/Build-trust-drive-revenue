@@ -412,7 +412,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
             <H2>The risk sits with me.</H2>
             <div className="mt-10">
               <Statement title="Day 30.">
-                If your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
+                If your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
               </Statement>
               <Statement title="Day 90.">
                 If the agreed Authority Engine is not installed, we continue working with you at no additional cost until it is.
