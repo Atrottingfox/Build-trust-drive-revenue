@@ -394,7 +394,6 @@ export default function Install() {
                         <TermsBody lines={section.body} />
                       </div>
                     ))}
-                    <p className="text-zinc-600 text-xs">Version {v.version}</p>
                   </div>
 
                   {!complete ? (
