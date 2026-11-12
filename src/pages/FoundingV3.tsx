@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import StartTodayShowcase, { Visual, Window } from '../components/founding/StartTodayShowcase';
+import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import { trackCta } from '../lib/track';
@@ -11,8 +11,7 @@ import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, us
 /*
   /founding-v3. Same offer and words as /founding, laid out on the principles
   Sean pointed at on 12 Nov (a challenge sales page he liked): key facts up
-  top, the video, a four step who does what with real images, the 90 days as a
-  production call sheet, come with / leave with, a plain everything you get
+  top, the video, a plain timeline, come with / leave with, a plain everything you get
   stack, his story in his own words, FAQ, doors close, a bottom bar on every
   screen and a results disclaimer. Hidden from Google.
 
@@ -38,66 +37,6 @@ const Facts = () => (
     <Pill>Refund guarantee</Pill>
   </div>
 );
-
-const Img = ({ src, title }: { src: string; title: string }) => (
-  <Window title={title}>
-    <img src={src} alt={title} loading="lazy" className="block w-full aspect-video object-cover" />
-  </Window>
-);
-
-const STEPS: { who: string; title: string; text: string; visual: React.ReactNode }[] = [
-  { who: 'Us', title: 'Your Brand Day.', text: 'One full day in person. We analyse your bottlenecks, map how content drives revenue in your business, and build your Buying Belief Map.', visual: <Img src="/founding/receive/brand-cover.jpg" title="Brand Demand Workbook" /> },
-  { who: 'Us', title: 'We install the playbooks.', text: 'The strategy, playbooks, workflows, standards and review rhythm your team needs.', visual: <Visual index={0} /> },
-  { who: 'Your team', title: 'Your team runs it.', text: '1:1 guided implementation starts January. Your operator learns the rhythm and owns it.', visual: <Visual index={2} /> },
-  { who: 'You', title: 'You film.', text: 'Outside of filming, you spend under 5 hours a week on content, unless you want to.', visual: <Img src="/founding/live.jpg" title="On set" /> },
-];
-
-/* The 90 days as a production call sheet. */
-function CallSheet() {
-  const rows = [
-    { tag: 'Before week 1', name: 'Brand Day', text: 'One full day in person. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.' },
-    ...PHASES.map((p) => ({ tag: p.weeks, name: p.name, text: p.lead })),
-  ];
-  return (
-    <div className="glow-card overflow-hidden mt-10">
-      <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/[0.02]">
-        <p className="text-white font-semibold">90 Day Install</p>
-        <span className="text-[11px] font-semibold uppercase tracking-widest text-blue-400">Call sheet</span>
-      </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
-        {[['Production', 'The Authority Engine'], ['Talent', 'You + your team'], ['Starts', 'January'], ['Spots', '5']].map(([k, v]) => (
-          <div key={k} className="bg-[#0d0f14] px-6 py-4">
-            <p className="text-zinc-500 text-[11px] uppercase tracking-widest">{k}</p>
-            <p className="text-white font-semibold mt-1">{v}</p>
-          </div>
-        ))}
-      </div>
-      <ol>
-        {rows.map((r, i) => (
-          <li key={r.name} className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-6 px-6 py-6 border-t border-white/5">
-            <div>
-              <p className="font-display text-2xl font-extrabold text-blue-400">{i}</p>
-              <p className="text-zinc-500 text-[12px] uppercase tracking-widest mt-1">{r.tag}</p>
-            </div>
-            <div>
-              <p className="text-white text-xl font-semibold">{r.name}</p>
-              <p className="text-zinc-400 leading-relaxed mt-1">{r.text}</p>
-              {i === 0 && (
-                <div className="mt-4 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-3">
-                  <p className="text-zinc-200 text-[15px]">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
-                </div>
-              )}
-            </div>
-          </li>
-        ))}
-        <li className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-6 px-6 py-5 border-t border-white/5 bg-white/[0.02]">
-          <p className="text-zinc-500 text-[12px] uppercase tracking-widest pt-1">Wrap</p>
-          <p className="text-white font-semibold">Your team runs the engine without you.</p>
-        </li>
-      </ol>
-    </div>
-  );
-}
 
 /* Bottom bar on every screen size. */
 function Bar({ status }: { status: Status | null }) {
@@ -170,34 +109,39 @@ export default function FoundingV3() {
 
         <Divider />
 
-        {/* WHO DOES WHAT, four steps */}
+
+        {/* HOW IT WORKS, plain timeline */}
         <Section>
           <Label>How it works</Label>
-          <H2>I install it. Your team runs it.</H2>
-          <div className="mt-12 space-y-16">
-            {STEPS.map((s, i) => (
-              <div key={s.title} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
-                <div className={`min-w-0 ${i % 2 ? 'md:order-2' : ''}`}>
-                  <span className={`inline-block text-[11px] font-semibold uppercase tracking-widest ${s.who === 'Us' ? 'text-blue-400' : s.who === 'You' ? 'text-white' : 'text-zinc-300'}`}>{`0${i + 1}  ${s.who}`}</span>
-                  <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">{s.title}</p>
-                  <p className="text-zinc-400 text-lg leading-relaxed mt-3">{s.text}</p>
-                </div>
-                <div className={`min-w-0 ${i % 2 ? 'md:order-1' : ''}`}>{s.visual}</div>
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        <Divider />
-
-        {/* CALL SHEET */}
-        <Section>
-          <Label>The 90 days</Label>
-          <H2>Your call sheet.</H2>
+          <H2>Install. Transfer. Operate.</H2>
           <p className="text-zinc-400 text-lg leading-relaxed mt-6">
             The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
           </p>
-          <CallSheet />
+          <ol className="relative mt-12 ml-2 border-l border-white/10">
+            <li className="relative pl-8 pb-12">
+              <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-white ring-4 ring-blue-500/30" />
+              <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
+              <p className="font-display text-3xl font-extrabold text-white mt-1">Brand Day</p>
+              <p className="text-zinc-300 text-lg leading-relaxed mt-2">
+                One full day in person. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
+              </p>
+              <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                <p className="text-white font-semibold">Your Brand Day is included.</p>
+                <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+              </div>
+            </li>
+            {PHASES.map((ph) => (
+              <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
+                <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
+                <p className="text-zinc-500 text-sm uppercase tracking-widest">{ph.weeks}</p>
+                <p className="font-display text-2xl font-extrabold text-white mt-1">{ph.name}</p>
+                <p className="text-zinc-400 text-lg leading-relaxed mt-2">{ph.lead}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="text-zinc-300 text-lg leading-relaxed mt-10">
+            By the end, your team knows what to do next without asking you every time.
+          </p>
         </Section>
 
         <Divider />
