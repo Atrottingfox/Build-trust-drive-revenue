@@ -69,8 +69,7 @@ const Facts = () => (
     <Pill>First intake January, next February</Pill><Sep />
     <Pill>5 spots</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
-    <Pill>1:1 guided implementation</Pill><Sep />
-    <Pill>$5,000 guarantee</Pill>
+    <Pill>1:1 guided implementation</Pill>
   </div>
 );
 
