@@ -154,11 +154,11 @@ export default function FoundingV4() {
             Own your category.
           </h1>
           {/* Sean's words, 12 Nov. */}
-          <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
-            In 90 days, your team is planning and publishing the content that moves buyers toward a decision.
+          <p className="text-white text-lg md:text-xl font-bold leading-relaxed">
+            Engineer the system that makes the right buyers notice you, trust you, and choose you without turning into a full time creator.
           </p>
           <p className="text-zinc-300 text-lg leading-relaxed mt-4">
-            Engineer the system that makes the right buyers notice you, trust you, and choose you without turning into a full time creator.
+            In 90 days, your team is planning and publishing the content that moves buyers toward a decision.
           </p>
           <div className="mt-10">
             <VslPlayer />
