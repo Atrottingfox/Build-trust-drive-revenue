@@ -78,8 +78,7 @@ const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>First cohort January, next February</Pill><Sep />
     <Pill>Full media strategy day included</Pill><Sep />
-    <Pill>90 days of guided implementation</Pill><Sep />
-    <Pill>Changed by day 30 or I pay you $5,000</Pill>
+    <Pill>90 days of guided implementation</Pill>
   </div>
 );
 
