@@ -11,8 +11,7 @@ import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, us
 /*
   /founding-v4. "Own your category" frame (Sean's /offer hero, 12 Nov) with the
   language lessons from the challenge page: a result you can picture, who does
-  what in short sentences, numbers early, the problem as friction (Sean's own
-  /brandday lines), outcomes as verbs, the guarantee as a promise. Buying
+  what in short sentences, numbers early, outcomes as verbs, the guarantee as a promise. Buying
   beliefs only through the Brand Day and Buying Belief Map, never as their own
   section (Sean cut "How people buy"). Hidden from Google.
 */
@@ -108,39 +107,6 @@ export default function FoundingV4() {
           </p>
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
           <BuyButton status={status} location="founding-v3-hero" className="mt-8" />
-        </Section>
-
-        <Divider />
-
-        {/* THE PROBLEM, Sean's /brandday lines */}
-        <Section>
-          <Label>The problem</Label>
-          <H2>Content has not caught up to the rest of the business.</H2>
-          <div className="mt-8">
-            <Crosses items={[
-              'Generating engagement that does not turn into sales conversions',
-              'Your team is busy, but not strategic',
-              'You are still the bottleneck',
-              'Your sales team is doing too much persuasion',
-            ]} />
-          </div>
-        </Section>
-
-        <Divider />
-
-        {/* CATEGORY, Sean's /brandday lines */}
-        <Section>
-          <Label>Category ownership</Label>
-          <H2>Why category ownership matters.</H2>
-          <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-            When you own your category, the right buyers do not see you as one of many options. They understand:
-          </p>
-          <div className="mt-6">
-            <Ticks items={['The problem you solve', 'Why the problem matters now', 'Why your approach is different', 'Why you are the person to solve it']} />
-          </div>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-8">
-            The goal is not to become famous. The goal is to become the obvious choice for your people, and the ones most likely to buy.
-          </p>
         </Section>
 
         <Divider />
