@@ -1,5 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { GHL_API, GHL_VERSION, addTags, getTags } from "./_ghl";
+import { realCents } from "./_pricing";
 
 /*
   Charges the card saved at Brand Day checkout, without the client present.
@@ -119,7 +120,7 @@ const handler: Handler = async (event) => {
     }
 
     const form = new URLSearchParams({
-      amount: String(amount),
+      amount: String(await realCents("INSTALL_AMOUNT_CENTS", 500000)),
       currency: "aud",
       customer: customerId,
       payment_method: paymentMethod,
@@ -158,7 +159,7 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ charged: true, paymentIntent: intent.id, amount: Number(amount) }),
+      body: JSON.stringify({ charged: true, paymentIntent: intent.id, amount: Number(intent.amount) }),
     };
   } catch (err) {
     console.error("charge-install error:", err);

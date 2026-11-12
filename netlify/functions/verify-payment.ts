@@ -443,12 +443,15 @@ const handler: Handler = async (event) => {
               DAY61_OPTION.has(String(contactId))
                 ? `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`
                 : `<p>Payment received. That is the first of two, and the second is invoiced to the same card in 30 days. Nothing after that.</p>`,
+              /* One order for every welcome email (Sean, 2026-11-12): portal,
+                 next step, group advisory, WhatsApp. */
+              portalLine,
               `<p>One thing left, and it takes a minute.</p>`,
               `<p><a href="${slot}">Lock your weekly hour</a></p>`,
               `<p>Two choices on that page. Your weekly call, and your board call every four weeks. Both hours are then yours for the whole build, and every session goes straight into your calendar. You will not get a booking link again.</p>`,
               `<p>One call a week for the first four weeks, then fortnightly, then one in month three. Your board call runs every four weeks, for as long as we work together.</p>`,
               `<p>It also asks for your media operator's name and email, because they are the one on every weekly call, not you. If you haven't hired yet, leave it blank and come back to the same link once you have.</p>`,
-              portalLine,
+              `<p>Group advisory runs every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
               whatsappLine(portal.whatsappUrl),
               `<p>Sean</p>`,
             ].join("")
@@ -565,10 +568,10 @@ const handler: Handler = async (event) => {
       const { sent, reason } = await sendEmail(ghl, contactId, "You're in. Here's what happens now.", [
         `<p>${first},</p>`,
         `<p>Payment received. Your Brand Day is locked in.</p>`,
-        `<p>1. <a href="${pick}">Pick your date</a>, if you haven't already.</p>`,
         portal.claimUrl
-          ? `<p>2. <a href="${portal.claimUrl}">Set up your portal</a>. Your Brand Day date, your calls and everything for the build live there.</p>`
-          : `<p>2. Your portal is at <a href="https://contentengine.live/login">contentengine.live</a>. Your Brand Day date, your calls and everything for the build live there.</p>`,
+          ? `<p>1. <a href="${portal.claimUrl}">Set up your portal</a>. Your Brand Day date, your calls and everything for the build live there.</p>`
+          : `<p>1. Your portal is at <a href="https://contentengine.live/login">contentengine.live</a>. Your Brand Day date, your calls and everything for the build live there.</p>`,
+        `<p>2. <a href="${pick}">Pick your date</a>, if you haven't already.</p>`,
         `<p>3. Group advisory runs every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
         whatsappLine(portal.whatsappUrl),
         `<p>Sean</p>`,

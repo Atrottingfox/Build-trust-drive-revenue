@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { isTestContact, priceCents } from "./_pricing";
+import { isTestContact, priceCents, realCents } from "./_pricing";
 
 /*
   Creates a Stripe Checkout Session in embedded mode, so the card fields render
@@ -170,7 +170,7 @@ const handler: Handler = async (event) => {
       ? priceCents("CHECKOUT_AMOUNT_CENTS", true)
       : intensive
         ? INTENSIVE.amountCents
-        : PRICE_AUD_CENTS;
+        : await realCents("CHECKOUT_AMOUNT_CENTS", 500000);
 
     const form = new URLSearchParams({
       "ui_mode": "embedded",

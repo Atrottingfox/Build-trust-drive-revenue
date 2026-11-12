@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { isTestContact, priceCents } from "./_pricing";
+import { isTestContact, priceCents, realCents } from "./_pricing";
 import { GHL_API, GHL_VERSION } from "./_ghl";
 import { DAY61_OPTION } from "./_variants";
 
@@ -54,7 +54,7 @@ const handler: Handler = async (event) => {
     A hardcoded "$5,000 in 30 days" would keep saying that after somebody
     changed the figure, which is the worst kind of wrong: confident and stale.
   */
-  let secondAmount = Number(process.env.INSTALL_PAYMENT_2_CENTS) || 0;
+  let secondAmount = await realCents("INSTALL_PAYMENT_2_CENTS", 500000);
   const secondDays = Number(process.env.INSTALL_PAYMENT_2_DAYS) || 30;
   const money = (cents: number) =>
     (cents / 100).toLocaleString("en-AU", { style: "currency", currency: "AUD", maximumFractionDigits: 2 });
@@ -79,7 +79,7 @@ const handler: Handler = async (event) => {
     /* A test contact walks the whole journey for a dollar, this step included.
        Everybody else pays the real price, which never moves. */
     const isTest = await isTestContact(contactId);
-    const chargeCents = isTest ? priceCents("INSTALL_PAYMENT_1_CENTS", true) : Number(amount);
+    const chargeCents = isTest ? priceCents("INSTALL_PAYMENT_1_CENTS", true) : await realCents("INSTALL_PAYMENT_1_CENTS", 500000);
     /* The page states what the second payment will be. Left alone it would
        promise $5,000 on a checkout charging a dollar, which makes the rehearsal
        useless for showing anybody. */

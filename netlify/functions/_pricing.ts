@@ -64,3 +64,32 @@ export function priceCents(envVar: string, isTest: boolean, fallback = 500000): 
   const raw = Number(process.env[envVar]);
   return Number.isFinite(raw) && raw > 0 ? raw : fallback;
 }
+
+/*
+  The real price for a real buyer, guarded (Sean, 2026-11-12, after three
+  price settings sat at $1 for every buyer: "put it to full price").
+
+  A price setting under $100 is never a real price on this site. It is a test
+  value somebody forgot to put back. So a real buyer is charged the full price
+  instead, and Slack is told loudly which setting is wrong. Only a zz-test
+  contact (priceCents with isTest) ever pays $1.
+*/
+const FLOOR_CENTS = 10000;
+
+export async function realCents(envVar: string, fullPrice: number): Promise<number> {
+  const raw = Number(process.env[envVar]);
+  if (!process.env[envVar] || !Number.isFinite(raw) || raw <= 0) return fullPrice;
+  if (raw >= FLOOR_CENTS) return raw;
+  const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
+  if (url) {
+    const dollars = (c: number) => (c / 100).toLocaleString("en-AU", { style: "currency", currency: "AUD" });
+    await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: `:rotating_light: *PRICE SETTING WRONG: ${envVar} is ${dollars(raw)} on Netlify.* A real buyer was charged the full ${dollars(fullPrice)} instead. Put ${envVar} back to ${fullPrice} in the authority-site Netlify settings. Buyers tagged zz-test still pay $1.`,
+      }),
+    }).catch(() => {});
+  }
+  return fullPrice;
+}
