@@ -175,6 +175,17 @@ export default function FoundingV4() {
 
         <Divider />
 
+        {/* PAY IN FULL (Sean likes this one) */}
+        <Section>
+          <Label>Pay in full</Label>
+          <H2>Pay in full. Start today.</H2>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
+        </Section>
+        <StartTodayShowcase />
+        <MiniCta status={status} location="founding-v4-payinfull" />
+
+        <Divider />
+
         {/* HOW IT WORKS, plain timeline */}
         <Section>
           <Label>How it works</Label>
@@ -209,17 +220,6 @@ export default function FoundingV4() {
           </p>
           <MiniCta status={status} location="founding-v4-how" />
         </Section>
-
-        <Divider />
-
-        {/* PAY IN FULL (Sean likes this one) */}
-        <Section>
-          <Label>Pay in full</Label>
-          <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
-        </Section>
-        <StartTodayShowcase />
-        <MiniCta status={status} location="founding-v4-payinfull" />
 
         <Divider />
 
