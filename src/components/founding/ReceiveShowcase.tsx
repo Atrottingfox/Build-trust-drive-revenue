@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import { Visual, Window } from './StartTodayShowcase';
+import { Window } from './StartTodayShowcase';
 
 /*
   "What you receive" on /founding-v2, the same scroll matched layout as the Pay
@@ -24,7 +24,7 @@ const ITEMS: { name: string; text: string; visual: React.ReactNode }[] = [
   { name: 'Your voice.', text: 'How the founder sounds. How the team writes.', visual: <Shot src="voice-cover" title="Voice workbook" /> },
   { name: 'Your hook bank.', text: '6 archetype buckets. 90 patterns.', visual: <Shot src="hooks-cover" title="Hook bank" /> },
   { name: 'Your 4 numbers.', text: 'Reach, capture, conversion, compounding. Your operator owns the dashboard.', visual: <Shot src="kpi" title="KPI dashboard" /> },
-  { name: 'A team that runs it themselves.', text: 'Every SOP and playbook in one place, so the system runs without you.', visual: <Visual index={0} /> },
+  { name: 'A team that runs it themselves.', text: 'Turning your brand into a content engine that compounds. Strategy, production and distribution your team runs.', visual: <Shot src="content-cover" title="Content workbook" /> },
 ];
 
 export default function ReceiveShowcase() {
@@ -42,7 +42,20 @@ export default function ReceiveShowcase() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-10 md:gap-12 mt-10">
-      <ul className="min-w-0 space-y-3 md:space-y-0">
+      {/* Phones: one swipe row instead of seven stacked images */}
+      <div className="md:hidden">
+        <div className="-mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {ITEMS.map((it) => (
+            <div key={it.name} className="snap-center shrink-0 w-[85%]">
+              {it.visual}
+              <p className="text-white font-semibold text-[16px] mt-4">{it.name}</p>
+              <p className="text-zinc-400 text-[14px] mt-0.5">{it.text}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-zinc-500 text-[13px] mt-2">Swipe to see all seven.</p>
+      </div>
+      <ul className="hidden md:block min-w-0 md:space-y-0">
         {ITEMS.map((it, i) => (
           <li
             key={it.name}
@@ -59,7 +72,7 @@ export default function ReceiveShowcase() {
                   <p className="text-zinc-400 text-[15px] mt-1">{it.text}</p>
                 </div>
               </div>
-              <div className="md:hidden mt-5 mb-8">{it.visual}</div>
+
             </div>
           </li>
         ))}

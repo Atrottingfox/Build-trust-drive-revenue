@@ -181,7 +181,7 @@ export default function App() {
           <Route path="/offer" element={<Offer />} />
           <Route path="/brandday" element={<BrandDayOffer />} />
           <Route path="/founding" element={<Founding />} />
-          <Route path="/founding-review" element={<Founding review />} />
+          <Route path="/founding-review" element={<FoundingV2 review />} />
           <Route path="/founding-v2" element={<FoundingV2 />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />

@@ -6,6 +6,7 @@ import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import ReceiveShowcase from '../components/founding/ReceiveShowcase';
+import ReviewForm from '../components/founding/ReviewForm';
 import VslPlayer from '../components/founding/VslPlayer';
 import {
   BuyButton,
@@ -124,7 +125,6 @@ function Rail({ status }: { status: Status | null }) {
           <div className="glow-card p-6">
             <p className="text-blue-400 font-semibold text-sm">5 spots, starting in January.</p>
             {countdown && <p className="text-zinc-400 text-[13px] mt-1 tabular-nums">Closes 30 November. {countdown} left</p>}
-            <p className="text-zinc-300 text-[13px] mt-3 leading-snug">Includes your Brand Day. 11 left at $5,000, then <span className="text-white font-semibold">$10,000</span>.</p>
             <p className="text-zinc-500 text-[11px] uppercase tracking-widest mt-6 mb-3">On this page</p>
             <ol className="space-y-1">
               {CHAPTERS.map((c, i) => {
@@ -180,15 +180,15 @@ const Lead = ({ children }: { children: React.ReactNode }) => (
   <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mt-6">{children}</p>
 );
 
-export default function FoundingV2() {
+export default function FoundingV2({ review = false }: { review?: boolean }) {
   const status = useStatus();
 
   return (
     <div className="min-h-screen bg-base">
       <SEO
-        title="90 Day Install (layout test)"
-        description="Layout test of the Founding 5 page."
-        path="/founding-v2"
+        title={review ? '90 Day Install (review)' : '90 Day Install (layout test)'}
+        description="Founding 5 page, private."
+        path={review ? '/founding-review' : '/founding-v2'}
         image="https://authorityengine.com.au/og-founding.jpg"
         noIndex
       />
@@ -196,6 +196,13 @@ export default function FoundingV2() {
 
       <div className="max-w-6xl mx-auto px-6 lg:px-8 pt-32 md:pt-40 pb-24 xl:grid xl:grid-cols-[minmax(0,1fr)_280px] xl:gap-16">
         <main className="min-w-0 max-w-2xl">
+          {review && (
+            <div className="glow-card border-blue-500/30 p-5 md:p-6 mb-12">
+              <p className="text-white font-semibold">You're seeing the Founding 5 page before it goes wide.</p>
+              <p className="text-zinc-300 text-[15px] mt-1">Read it like a founder would, then tell me what you'd change. The form is at the bottom.</p>
+              <a href="#feedback" className="inline-block text-blue-400 font-semibold text-[15px] mt-3">Jump to the form</a>
+            </div>
+          )}
           {/* HERO */}
           <Section>
             <div className="accent-line mb-8" />
@@ -495,6 +502,18 @@ export default function FoundingV2() {
               </div>
             </Section>
           </section>
+
+          {review && (
+            <>
+              <Divider />
+              <section id="feedback" className="scroll-mt-28">
+                <Label>Your feedback</Label>
+                <H2>What would you change?</H2>
+                <p className="text-zinc-400 leading-relaxed mt-4 mb-10">Be blunt. It goes straight to Sean.</p>
+                <ReviewForm />
+              </section>
+            </>
+          )}
         </main>
 
         {/* Wide screens: a guide through the page, the price only at the end */}
