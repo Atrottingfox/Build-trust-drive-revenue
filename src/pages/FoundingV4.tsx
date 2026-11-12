@@ -73,15 +73,6 @@ const Facts = () => (
   </div>
 );
 
-/* Logistics, top of the hero, like the dates line on the challenge page. */
-const Logistics = () => (
-  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>First intake January, next February</Pill><Sep />
-    <Pill>Full media strategy day included</Pill><Sep />
-    <Pill>90 days of guided implementation</Pill>
-  </div>
-);
-
 /* A plain button after each section. Same checkout, no repeated spots line. */
 function MiniCta({ status, location }: { status: Status | null; location: string }) {
   const [busy, setBusy] = useState(false);
@@ -159,13 +150,16 @@ export default function FoundingV4() {
         {/* HERO */}
         <Section>
           <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Founding 5</p>
-          <Logistics />
+          <Facts />
           <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] text-white leading-[1.02] mt-8 mb-6">
-            Own your category.
+            Get clients from content.
           </h1>
-          {/* Suggested lines, Sean to rewrite. */}
-          <p className="text-white text-lg font-semibold leading-relaxed">
-            In 90 days your team is planning, filming and posting the content your best clients need to buy, without you.
+          {/* Sean's words, 12 Nov. */}
+          <p className="text-zinc-300 text-lg md:text-xl leading-relaxed">
+            Engineer the system that makes the right buyers notice you, trust you, and choose you without turning into a full time creator.
+          </p>
+          <p className="text-white text-lg font-semibold leading-relaxed mt-4">
+            In 90 days, your team is planning, filming, and publishing the content that moves buyers toward a decision.
           </p>
           <div className="mt-10">
             <p className="text-zinc-400 text-sm mb-3">Watch this 4 minute video to see how it works.</p>
@@ -176,7 +170,6 @@ export default function FoundingV4() {
           </p>
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
           <BuyButton status={status} location="founding-v4-hero" className="mt-8" />
-          <div className="mt-5"><Facts /></div>
           <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
         </Section>
 
