@@ -139,6 +139,7 @@ const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
   version: TERMS_VERSION + '-morgan-4',
+  intro: 'Here is what the next 90 look like, and the three things to sort before we start.',
   phases: [
     {
       when: 'Weeks 1 to 4',
