@@ -62,8 +62,8 @@ function BuyCard({ status }: { status: Status | null }) {
       <p className="text-zinc-400 text-[13px]">From February, once 5 are sold</p>
       <p className="font-display text-lg font-extrabold text-zinc-300">$15,000 AUD</p>
       <p className="text-zinc-400 text-[13px] mt-3">Founding 5, paid in full</p>
-      <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
-      <p className="text-blue-400 font-semibold text-sm mt-3">5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.</p>
+      <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
+      <p className="text-blue-400 font-semibold text-sm mt-3">5 spots in the January intake at $10,000 AUD + GST. Once they sell, February goes to $15,000 AUD.</p>
       <BuyButton status={status} location="founding-v2-card" className="mt-5 [&_button]:w-full [&_button]:justify-center [&_a]:w-full" />
     </div>
   );
@@ -122,7 +122,7 @@ function Rail({ status }: { status: Status | null }) {
       ) : (
         <motion.div key="guide" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.35 }}>
           <div className="glow-card p-6">
-            <p className="text-blue-400 font-semibold text-sm">5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.</p>
+            <p className="text-blue-400 font-semibold text-sm">5 spots in the January intake at $10,000 AUD + GST. Once they sell, February goes to $15,000 AUD.</p>
             {countdown && <p className="text-zinc-400 text-[13px] mt-1 tabular-nums">Closes 30 November. {countdown} left</p>}
             <p className="text-zinc-500 text-[11px] uppercase tracking-widest mt-6 mb-3">On this page</p>
             <ol className="space-y-1">
@@ -218,7 +218,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
               Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
-            <p className="text-blue-400 font-semibold text-lg mt-10">5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.</p>
+            <p className="text-blue-400 font-semibold text-lg mt-10">5 spots in the January intake at $10,000 AUD + GST. Once they sell, February goes to $15,000 AUD.</p>
             <p className="text-zinc-400 mt-2">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
@@ -400,7 +400,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</Lead>
+            <Lead>1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</Lead>
           </Section>
           <StartTodayShowcase />
 
@@ -488,20 +488,20 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <section id="price" className="scroll-mt-28">
             <Section>
               <Label>Investment</Label>
-              <H2>$10,000 AUD. Closes 30 November.</H2>
+              <H2>$10,000 AUD + GST. Closes 30 November.</H2>
               <div className="glow-card p-8 md:p-10 mt-10">
                 <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold</p>
                 <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD</p>
                 <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
-                <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
+                <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
                 <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-                  Only 5 installs in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
+                  Only 5 installs in the January intake at $10,000 AUD + GST. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for full implementation, blunt feedback, honest data, and permission to use results as case studies where appropriate.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                   <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                 </div>
-                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
+                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
                 <BuyButton status={status} location="founding-v2-price" className="mt-8" />
               </div>
             </Section>

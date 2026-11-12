@@ -37,7 +37,7 @@ function mockFetch(handler: (url: string, init: any) => any) {
 const paidSession = (over: any = {}) => ({
   id: "cs_live_abc123",
   payment_status: "paid",
-  amount_total: 1000000,
+  amount_total: 1100000,
   currency: "aud",
   metadata: { payment: "founding-90" },
   customer_details: { name: "Jane Founder", email: "jane@example.com", phone: "+61400000000" },
@@ -75,7 +75,7 @@ describe("a founding sale", () => {
     expect(slackPosts()).toHaveLength(1);
     const text = JSON.parse(slackPosts()[0].body).text;
     expect(text).toContain("Jane Founder");
-    expect(text).toContain("$10,000.00");
+    expect(text).toContain("$11,000.00");
     expect(text).toContain("+61400000000");
 
     expect(stripeUpdates()).toHaveLength(1);
@@ -140,7 +140,7 @@ describe("the 10 minute sweep", () => {
 describe("the checkout", () => {
   const post = (body: any) => checkout({ httpMethod: "POST", body: JSON.stringify(body) } as any, {} as any) as any;
 
-  it("sells while spots are left: $10,000 AUD, phone collected, tagged founding-90", async () => {
+  it("sells while spots are left: $10,000 AUD + GST, phone collected, tagged founding-90", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-11-15T00:00:00+10:00"));
     mockFetch((u) => {
@@ -153,7 +153,7 @@ describe("the checkout", () => {
     expect(res.url).toBe("https://checkout.stripe.com/x");
 
     const create = decodeURIComponent(calls.find((c) => c.url.endsWith("/checkout/sessions"))!.body);
-    expect(create).toContain("line_items[0][price_data][unit_amount]=1000000");
+    expect(create).toContain("line_items[0][price_data][unit_amount]=1100000");
     expect(create).toContain("line_items[0][price_data][currency]=aud");
     expect(create).toContain("phone_number_collection[enabled]=true");
     expect(create).toContain("metadata[payment]=founding-90");

@@ -61,7 +61,7 @@ function Bar({ status }: { status: Status | null }) {
     <div className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/10 bg-[#0b0c10]/95 backdrop-blur">
       <div className="max-w-5xl mx-auto px-4 md:px-8 py-3 pb-[max(12px,env(safe-area-inset-bottom))] flex items-center justify-between gap-4">
         <div className="min-w-0">
-          <p className="text-white text-[14px] md:text-[15px] font-semibold leading-tight">January $10,000 AUD | February $15,000 AUD</p>
+          <p className="text-white text-[14px] md:text-[15px] font-semibold leading-tight">January $10,000 AUD | February $15,000 AUD | plus GST</p>
           {countdown && <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">Closes 30 November. {countdown} left</p>}
         </div>
         <button type="button" onClick={buy} disabled={busy} className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-[14px] font-semibold disabled:opacity-70">
@@ -150,7 +150,7 @@ export default function FoundingV3() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
         </Section>
         <StartTodayShowcase />
 
@@ -229,10 +229,10 @@ export default function FoundingV3() {
                 </div>
                 <div className="flex items-baseline justify-between gap-4 mt-3">
                   <p className="text-white font-semibold">Founding 5, paid in full by 30 November</p>
-                  <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
+                  <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
                 </div>
                 <p className="text-zinc-400 text-[14px] mt-4">Lock it in now to get your Brand Day included in the price. There are 11 Brand Days left at $5,000. After that the price goes to $10,000.</p>
-                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
+                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
                 <BuyButton status={status} location="founding-v3-price" className="mt-6" />
               </div>
             </div>
@@ -282,7 +282,7 @@ export default function FoundingV3() {
         <Section>
           <div className="text-center">
             <H2>Doors close 30 November.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD. Lock it in now to get your Brand Day included in the price.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots in the January intake at $10,000 AUD + GST. Once they sell, February goes to $15,000 AUD. Lock it in now to get your Brand Day included in the price.</p>
             <div className="flex justify-center mt-6"><Facts /></div>
             <div className="flex justify-center">
               <BuyButton status={status} location="founding-v3-close" className="mt-8" />

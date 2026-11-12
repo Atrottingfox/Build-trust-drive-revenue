@@ -248,7 +248,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
         <div className="min-w-0">
           {priced ? (
             <>
-              <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD</p>
+              <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD + GST</p>
               <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
             </>
           ) : (
@@ -315,7 +315,7 @@ export function BuyButton({ status, location, className = '' }: { status: Status
           className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-          Lock in for $10,000 AUD
+          Lock in for $10,000 AUD + GST
           {!busy && <ArrowRight className="w-4 h-4" />}
         </button>
       )}
@@ -464,7 +464,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="Stop being the content manager. Install the system your team runs. Built from the playbooks created alongside six 8 figure+ companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
+        description="Stop being the content manager. Install the system your team runs. Built from the playbooks created alongside six 8 figure+ companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD + GST, closes 30 November."
         path={review ? '/founding-review' : '/founding'}
         image="https://authorityengine.com.au/og-founding.jpg"
         noIndex={review}
@@ -509,7 +509,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
-            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
+            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
           </Section>
         </div>
       </section>
@@ -562,7 +562,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.
+                1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
             </div>
           </Section>
@@ -723,12 +723,12 @@ export default function Founding({ review = false }: { review?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Investment</Label>
-            <H2>$10,000 AUD. Closes 30 November.</H2>
+            <H2>$10,000 AUD + GST. Closes 30 November.</H2>
             <div className="glow-card p-8 md:p-10 mt-8">
               <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold</p>
               <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD</p>
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
-              <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
+              <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
               <p className="text-zinc-300 leading-relaxed mt-6">
                 Only 5 installs in the January intake. The founding rate is in exchange for:
               </p>
@@ -747,7 +747,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>

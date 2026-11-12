@@ -11,7 +11,7 @@ import { addToWaitlist, CLOSES_AT, handleFoundingSale, PAYMENT_KIND, soldCount, 
   One function, three jobs:
 
     GET                          -> is it open, and how many spots are left
-    POST { action: "checkout" }  -> a hosted Stripe Checkout URL for $10,000
+    POST { action: "checkout" }  -> a hosted Stripe Checkout URL for $10,000 + GST ($11,000)
     POST { action: "confirm", sessionId } -> the thank you state, plus one
                                     Slack alert per sale
 
@@ -40,10 +40,12 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const PRICE_AUD_CENTS = 1000000;
-const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding Fast Action, paid in full";
+/* $10,000 + 10% GST = $11,000 (Sean, 13 Nov 2026: the $10,000 is not GST inclusive).
+   Same convention as advisory.ts and founder-partner.ts: one line, GST inclusive total. */
+const PRICE_AUD_CENTS = 1100000;
+const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding Fast Action, paid in full ($10,000 + GST)";
 const INVOICE_DESCRIPTION =
-  "Brand Day plus 90 days of implementation. Founding fast action price, paid in full.";
+  "Brand Day plus 90 days of implementation. Founding fast action price, paid in full. $10,000 plus 10% GST ($1,000), $11,000 total.";
 
 const PAGE = "https://authorityengine.com.au/founding";
 
