@@ -444,7 +444,7 @@ export const PHASES = [
   },
   {
     n: 'Phase 3', name: 'Operate and improve', weeks: 'Weeks 9 to 12',
-    lead: 'Your team runs the engine.',
+    lead: 'Your team runs the strategy.',
     items: ['Operator owns the weekly rhythm', 'Founder involvement drops', 'Content performance reviewed', 'Strong formats and topics repeated', 'Weak points fixed', 'The next 90 day plan created'],
   },
 ];
