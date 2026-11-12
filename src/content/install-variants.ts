@@ -90,7 +90,67 @@ const UPSCALE: InstallVariant = {
     'I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.',
 };
 
+
+/* Morgan Nelson, 2026-11-12. Standard money, cut down to what he needs.
+   Sean: "it should just be simply helping him to get up to speed fast.
+   remove anythign that's not requried", "we'll have his videographer as a
+   marketer by the end", no VSL, no hiring support (already helped).
+   His Build (the Brand Day) is done, so it is not in here. */
+const MORGAN_TERMS: TermsSection[] = [
+  {
+    heading: '1. What this is',
+    body: [
+      'Simply helping your videographer get up to speed fast.',
+      'This is one engagement of 90 days. This agreement covers the whole 90 days.',
+    ],
+  },
+  {
+    heading: '2. What I deliver',
+    body: [
+      "Weeks 1 to 4. One 60 minute call per week with you and your key people.",
+      'Weeks 5 to 12. One 60 minute call per fortnight, and 24 hour feedback via WhatsApp.',
+      'Every month. One 60 minute board call.',
+      "By the end, we'll have your videographer as a marketer.",
+      'I provide strategy, frameworks and advisory. I do not provide done for you execution: no filming, editing, posting, account management or staff management. Your team implements.',
+    ],
+  },
+  { ...TERMS[2], heading: '3. What you commit to' },
+  { ...TERMS[3], heading: '4. Fees and payment' },
+  { ...TERMS[5], heading: '5. No guarantees' },
+  { ...TERMS[6], heading: '6. Ending it early' },
+  { ...TERMS[7], heading: '7. Intellectual property' },
+  { ...TERMS[8], heading: '8. Liability' },
+  { ...TERMS[9], heading: '9. General' },
+];
+
+const MORGAN: InstallVariant = {
+  ...STANDARD,
+  terms: MORGAN_TERMS,
+  version: TERMS_VERSION + '-morgan-1',
+  phases: [
+    {
+      when: 'Weeks 1 to 4',
+      title: 'Up to speed',
+      body: 'Simply helping your videographer get up to speed fast.',
+      rhythm: 'One 60 minute call a week with you and your key people, plus a board call a month.',
+    },
+    {
+      when: 'Weeks 5 to 12',
+      title: 'Tune',
+      body: 'Your team runs it and I move to advisor.',
+      rhythm: 'A 60 minute call a fortnight, a board call a month, and 24 hour feedback on WhatsApp.',
+    },
+    {
+      when: 'Day 90',
+      title: 'What you have',
+      body: "Your videographer as a marketer.",
+      rhythm: '',
+    },
+  ],
+};
+
 const BY_CONTACT: Record<string, InstallVariant> = {
+  dTsxeHNWC5Vv0Q8DUYHF: MORGAN,
   '4h47HYqgK7VD4eaExDAI': UPSCALE,
 };
 
