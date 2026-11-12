@@ -109,7 +109,7 @@ const MORGAN_TERMS: TermsSection[] = [
   {
     heading: '2. What I deliver',
     body: [
-      'Weeks 1 to 4. Inject your videographer with the skills they need, fast. One 60 minute call per week with you and your key people, and weekly Office Hours.',
+      'Weeks 1 to 4. Inject your videographer with the skills they need, fast. One 60 minute call per week with your media operator, and weekly Office Hours.',
       'Weeks 5 to 12. One 60 minute call per fortnight, and weekly Office Hours.',
       'Every month. One 60 minute board call.',
       'Throughout the 90 days. Guided implementation, async comms with up to two Looms per week for asset review, and 24 hour feedback via WhatsApp.',
@@ -138,14 +138,14 @@ const MORGAN_TERMS: TermsSection[] = [
 const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
-  version: TERMS_VERSION + '-morgan-4',
+  version: TERMS_VERSION + '-morgan-5',
   intro: 'Here is what the next 90 look like, and the three things to sort before we start.',
   phases: [
     {
       when: 'Weeks 1 to 4',
       title: 'Up to speed',
       body: 'Inject your videographer with the skills they need, fast. Guided implementation, so the first content goes out the way it should.',
-      rhythm: 'One 60 minute call a week with you and your key people. Weekly Office Hours. Async comms and 24 hour feedback on WhatsApp. A board call a month.',
+      rhythm: 'One 60 minute call a week with your media operator. Weekly Office Hours. Async comms and 24 hour feedback on WhatsApp. A board call a month.',
     },
     {
       when: 'Weeks 5 to 12',
