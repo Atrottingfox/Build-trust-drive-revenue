@@ -252,7 +252,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
             </>
           ) : (
             <>
-              <p className="text-white text-[15px] font-semibold leading-tight">5 spots in the January cohort</p>
+              <p className="text-white text-[15px] font-semibold leading-tight">5 spots in the January intake</p>
               <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">{countdown ? `Closes 30 Nov. ${countdown} left` : 'Closes 30 Nov.'}</p>
             </>
           )}
@@ -382,7 +382,7 @@ function Paid() {
                 'Your team gets every SOP, edit, playbook and training video',
                 'An advisory board call before you start',
                 'We lock in your Brand Day date',
-                '1:1 guided implementation starts in the next available cohort month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month (January, then February)',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
@@ -502,7 +502,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 spots in the January cohort at $10,000 AUD. Once they sell, February goes to $15,000 AUD.
+              5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
@@ -654,7 +654,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts in the next available cohort month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.
+                1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.
               </p>
             </div>
           </Section>
@@ -673,7 +673,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <div className="glow-card p-8 mt-8">
               <Ticks items={[
                 'One Brand Day',
-                '1:1 guided implementation starts in the next available cohort month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month (January, then February)',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
@@ -872,7 +872,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                Only 5 installs in the January cohort at $10,000 AUD. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for:
+                Only 5 installs in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for:
               </p>
               <div className="mt-4">
                 <Ticks items={[
@@ -889,7 +889,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 <p className="text-white font-semibold">Your Brand Day is included.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February cohort. Future increases follow the level of proof, implementation depth and available capacity.</p>
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future increases follow the level of proof, implementation depth and available capacity.</p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
@@ -900,7 +900,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
-                '1:1 guided implementation starts in the next available cohort month (January, then February).',
+                '1:1 guided implementation starts in the next available intake month (January, then February).',
                 'Your first live content cycle runs straight away.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">

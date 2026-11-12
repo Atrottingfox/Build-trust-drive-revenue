@@ -23,7 +23,7 @@ const SUPPORT: [string, string[]][] = [
     'Before week 1',
     [
       'One Brand Day',
-      '1:1 guided implementation starts in the next available cohort month (January, then February)'
+      '1:1 guided implementation starts in the next available intake month (January, then February)'
     ]
   ],
   [
@@ -66,7 +66,7 @@ const Sep = () => <span className="text-zinc-600">|</span>;
 /* Key facts strip, top of the page and in the closing. */
 const Facts = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>First cohort January, next February</Pill><Sep />
+    <Pill>First intake January, next February</Pill><Sep />
     <Pill>5 spots</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
     <Pill>$5,000 guarantee</Pill>
@@ -76,7 +76,7 @@ const Facts = () => (
 /* Logistics, top of the hero, like the dates line on the challenge page. */
 const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>First cohort January, next February</Pill><Sep />
+    <Pill>First intake January, next February</Pill><Sep />
     <Pill>Full media strategy day included</Pill><Sep />
     <Pill>90 days of guided implementation</Pill>
   </div>
@@ -177,7 +177,7 @@ export default function FoundingV4() {
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
           <BuyButton status={status} location="founding-v4-hero" className="mt-8" />
           <div className="mt-5"><Facts /></div>
-          <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February cohort. Future increases follow the level of proof, implementation depth and available capacity.</p>
+          <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future increases follow the level of proof, implementation depth and available capacity.</p>
         </Section>
 
         <Divider />
@@ -223,7 +223,7 @@ export default function FoundingV4() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available cohort month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD by 30 November and your team gets access to all of this today.</p>
         </Section>
         <StartTodayShowcase />
         <MiniCta status={status} location="founding-v4-payinfull" />
@@ -352,7 +352,7 @@ export default function FoundingV4() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts in the next available cohort month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month (January, then February)',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
@@ -376,7 +376,7 @@ export default function FoundingV4() {
                   <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
                 </div>
                 <p className="text-zinc-400 text-[14px] mt-4">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to $10,000.</p>
-                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February cohort. Future increases follow the level of proof, implementation depth and available capacity.</p>
+                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future increases follow the level of proof, implementation depth and available capacity.</p>
                 <BuyButton status={status} location="founding-v4-price" className="mt-6" />
               </div>
             </div>
@@ -421,7 +421,7 @@ export default function FoundingV4() {
         <Section>
           <div className="text-center">
             <H2>Doors close 30 November.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots in the January cohort at $10,000 AUD. Once they sell, February goes to $15,000 AUD. Pay now and get access today.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD. Pay now and get access today.</p>
             <div className="flex justify-center mt-6"><Facts /></div>
             <div className="flex justify-center">
               <BuyButton status={status} location="founding-v4-close" className="mt-8" />
