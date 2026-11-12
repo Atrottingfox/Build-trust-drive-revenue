@@ -150,7 +150,7 @@ const MORGAN: InstallVariant = {
     {
       when: 'Weeks 5 to 12',
       title: 'Tune',
-      body: 'We tighten the hooks and the content on real data, and test the strongest pieces with your warmest audience.',
+      body: 'Continue developing their skills as a creative director. Tighten the hooks with intentional experimentation to get real data, and test the strongest pieces with your warmest audience.',
       rhythm: 'A 60 minute call a fortnight. Weekly Office Hours. Up to two Looms a week and 24 hour feedback on WhatsApp. A board call a month.',
     },
     {
