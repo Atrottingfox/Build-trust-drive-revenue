@@ -151,7 +151,7 @@ export default function FoundingV4() {
           <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Founding 5</p>
           <Facts />
           <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] text-white leading-[1.02] mt-8 mb-6">
-            Get clients from content.
+            Own your category.
           </h1>
           {/* Sean's words, 12 Nov. */}
           <p className="text-zinc-300 text-lg md:text-xl leading-relaxed">
