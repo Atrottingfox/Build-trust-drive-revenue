@@ -502,7 +502,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 spots in the January cohort. Next cohort February.
+              5 spots in the January cohort at $10,000 AUD. Once they sell, February goes to $15,000 AUD.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
@@ -867,12 +867,12 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <Label>Investment</Label>
             <H2>$10,000 AUD. Closes 30 November.</H2>
             <div className="glow-card p-8 md:p-10 mt-8">
-              <p className="text-zinc-400 text-[14px] mb-1">Standard investment</p>
-              <p className="font-display text-2xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
+              <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold</p>
+              <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD</p>
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                Only 5 installs in the January cohort. The next cohort starts in February. The founding rate is in exchange for:
+                Only 5 installs in the January cohort at $10,000 AUD. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for:
               </p>
               <div className="mt-4">
                 <Ticks items={[
@@ -889,7 +889,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 <p className="text-white font-semibold">Your Brand Day is included.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February cohort. Future increases follow the level of proof, implementation depth and available capacity.</p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
