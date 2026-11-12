@@ -431,7 +431,7 @@ const handler: Handler = async (event) => {
                 `<p>Payment received. The second $5,000 is charged to the same card on Day 31. A further $5,000 on Day 61 only if we choose Track B at Day 30.</p>`,
                 portalLine,
                 whatsappLine(portal.whatsappUrl),
-                `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and Office Hours.</p>`,
+                `<p>I will send you the times for your calls. For the first 30 days that is one 60 minute calibration call every fortnight with you and your key people, plus the weekly team training and group advisory.</p>`,
                 `<p>Sean</p>`,
               ].join(""))
             : await sendEmail(
@@ -569,7 +569,7 @@ const handler: Handler = async (event) => {
         portal.claimUrl
           ? `<p>2. <a href="${portal.claimUrl}">Set up your portal</a>. Your Brand Day date, your calls and everything for the build live there.</p>`
           : `<p>2. Your portal is at <a href="https://contentengine.live/login">contentengine.live</a>. Your Brand Day date, your calls and everything for the build live there.</p>`,
-        `<p>3. Office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">office hours form</a> before you come.</p>`,
+        `<p>3. Group advisory runs every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
         whatsappLine(portal.whatsappUrl),
         `<p>Sean</p>`,
       ].join(""));

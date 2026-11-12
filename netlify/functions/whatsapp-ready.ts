@@ -55,9 +55,9 @@ export const handler: Handler = async (event) => {
   if (!contactId) return reply(200, { sent: false, reason: "no GHL contact" });
 
   const first = name.split(" ")[0] || "there";
-  const { sent, reason } = await sendEmail(token, contactId, "Your WhatsApp group is ready", [
+  const { sent, reason } = await sendEmail(token, contactId, "Your brand WhatsApp group is ready", [
     `<p>${esc(first)},</p>`,
-    `<p>Your WhatsApp group is ready. <a href="${esc(url)}">Join it here</a>.</p>`,
+    `<p>Your brand WhatsApp group is ready. <a href="${esc(url)}">Join it here</a> for async comms with your team and I.</p>`,
     `<p>Post your questions there. For urgent blockers, tag the operator. The link is on your portal too, under Need help.</p>`,
     `<p>Sean</p>`,
   ].join(""));
