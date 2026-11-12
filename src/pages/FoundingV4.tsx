@@ -39,7 +39,8 @@ const Facts = () => (
 const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>Starts January</Pill><Sep />
-    <Pill>Brand Day in person</Pill>
+    <Pill>Full media strategy day included</Pill><Sep />
+    <Pill>90 days of guided implementation</Pill>
   </div>
 );
 

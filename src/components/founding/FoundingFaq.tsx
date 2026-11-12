@@ -51,6 +51,13 @@ const FAQ: { q: string; a: string[] }[] = [
     ],
   },
   {
+    q: 'Can I work with you privately to hire talent?',
+    a: [
+      'Yes. I work with a small number of founders privately to find and hire the talent who runs it.',
+      'We take 5 per quarter, at $50,000 AUD.',
+    ],
+  },
+  {
     q: 'When is my Brand Day?',
     a: [
       'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available cohort month, starting January, after your Brand Day.',
