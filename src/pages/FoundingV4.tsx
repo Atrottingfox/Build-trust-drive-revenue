@@ -35,6 +35,47 @@ const Facts = () => (
   </div>
 );
 
+/* Logistics, top of the hero, like the dates line on the challenge page. */
+const Logistics = () => (
+  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+    <Pill>Starts January</Pill><Sep />
+    <Pill>Brand Day in person</Pill><Sep />
+    <Pill>Weekly calls, then fortnightly</Pill>
+  </div>
+);
+
+/* A plain button after each section. Same checkout, no repeated spots line. */
+function MiniCta({ status, location }: { status: Status | null; location: string }) {
+  const [busy, setBusy] = useState(false);
+  if (status && !status.open) return null;
+  const buy = async () => {
+    if (busy) return;
+    trackCta(location);
+    setBusy(true);
+    try {
+      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout' }) });
+      const d = await r.json();
+      if (d.url) { window.location.href = d.url; return; }
+    } catch {
+      /* fall through */
+    }
+    setBusy(false);
+    document.getElementById('price')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <div className="mt-12">
+      <button type="button" onClick={buy} disabled={busy} className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors disabled:opacity-70">
+        {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+        Lock in your spot
+        {!busy && <ArrowRight className="w-4 h-4" />}
+      </button>
+    </div>
+  );
+}
+
+/* Real frames from Sean's shoots, swiped sideways, like the year on set strip. */
+const ON_SET = ['train-16a', 'train-02a', 'live', 'train-13', 'train-02b', 'train-16b', 'sean'];
+
 /* Bottom bar on every screen size. */
 function Bar({ status }: { status: Status | null }) {
   const [busy, setBusy] = useState(false);
@@ -82,8 +123,8 @@ export default function FoundingV4() {
       <div className="max-w-3xl mx-auto px-6 lg:px-8 pt-32 md:pt-40 pb-32">
         {/* HERO */}
         <Section>
-          <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Intro offer</p>
-          <Facts />
+          <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Founding 5</p>
+          <Logistics />
           <h1 className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] text-white leading-[1.02] mt-8 mb-6">
             Own your category.
           </h1>
@@ -104,8 +145,23 @@ export default function FoundingV4() {
           </p>
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
           <BuyButton status={status} location="founding-v4-hero" className="mt-8" />
+          <div className="mt-5"><Facts /></div>
           <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
         </Section>
+
+        <Divider />
+
+        {/* BRIDGE (suggested line, Sean to rewrite) */}
+        <Section>
+          <H2>Founders pay us to run this inside their business.</H2>
+          <p className="text-zinc-300 text-xl leading-relaxed mt-5">Now your team learns to run it themselves.</p>
+        </Section>
+        <div className="mt-10 -mx-6 px-6 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {ON_SET.map((f) => (
+            <img key={f} src={`/founding/${f}.jpg`} alt="Sean on set" loading="lazy" className="snap-start shrink-0 w-[62%] sm:w-[38%] aspect-[4/5] object-cover rounded-xl border border-white/10" />
+          ))}
+        </div>
+        <p className="text-zinc-500 text-[13px] mt-2">On set. Swipe through.</p>
 
         <Divider />
 
@@ -141,6 +197,7 @@ export default function FoundingV4() {
           <p className="text-zinc-300 text-lg leading-relaxed mt-10">
             By the end, your team knows what to do next without asking you every time.
           </p>
+          <MiniCta status={status} location="founding-v4-how" />
         </Section>
 
         <Divider />
@@ -152,6 +209,7 @@ export default function FoundingV4() {
           <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available cohort month. Pay $10,000 AUD by 30 November and your team gets all of this now.</p>
         </Section>
         <StartTodayShowcase />
+        <MiniCta status={status} location="founding-v4-payinfull" />
 
         <Divider />
 
@@ -168,6 +226,7 @@ export default function FoundingV4() {
           <p className="text-zinc-500 leading-relaxed mt-6">
             To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantees cover installation, not revenue.
           </p>
+          <MiniCta status={status} location="founding-v4-guarantee" />
         </Section>
 
         <Divider />
@@ -181,6 +240,7 @@ export default function FoundingV4() {
               <p key={t} className="font-display text-2xl md:text-3xl font-extrabold text-white py-5">{t}</p>
             ))}
           </div>
+          <MiniCta status={status} location="founding-v4-changes" />
         </Section>
 
         <Divider />
@@ -194,6 +254,7 @@ export default function FoundingV4() {
           </div>
           <p className="text-white text-xl font-semibold mt-12 mb-6">This isn't for you if...</p>
           <Crosses items={['You want a done for you content agency', 'You are starting from zero', 'Your team will not attend, implement or share data honestly']} />
+          <MiniCta status={status} location="founding-v4-fit" />
         </Section>
 
         <Divider />
@@ -256,11 +317,6 @@ export default function FoundingV4() {
                 I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
               </p>
             </div>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
-            {['train-02a', 'train-16a', 'train-13', 'live'].map((f) => (
-              <img key={f} src={`/founding/${f}.jpg`} alt="Sean on set" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-xl border border-white/10" />
-            ))}
           </div>
         </Section>
 
