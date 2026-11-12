@@ -73,9 +73,6 @@ function MiniCta({ status, location }: { status: Status | null; location: string
   );
 }
 
-/* Real frames from Sean's shoots, swiped sideways, like the year on set strip. */
-const ON_SET = ['train-16a', 'train-02a', 'live', 'train-13', 'train-02b', 'train-16b', 'sean'];
-
 /* Bottom bar on every screen size. */
 function Bar({ status }: { status: Status | null }) {
   const [busy, setBusy] = useState(false);
@@ -148,20 +145,6 @@ export default function FoundingV4() {
           <div className="mt-5"><Facts /></div>
           <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
         </Section>
-
-        <Divider />
-
-        {/* BRIDGE (suggested line, Sean to rewrite) */}
-        <Section>
-          <H2>Founders pay us to run this inside their business.</H2>
-          <p className="text-zinc-300 text-xl leading-relaxed mt-5">Now your team learns to run it themselves.</p>
-        </Section>
-        <div className="mt-10 -mx-6 px-6 flex gap-3 overflow-x-auto snap-x snap-mandatory pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {ON_SET.map((f) => (
-            <img key={f} src={`/founding/${f}.jpg`} alt="Sean on set" loading="lazy" className="snap-start shrink-0 w-[62%] sm:w-[38%] aspect-[4/5] object-cover rounded-xl border border-white/10" />
-          ))}
-        </div>
-        <p className="text-zinc-500 text-[13px] mt-2">On set. Swipe through.</p>
 
         <Divider />
 
