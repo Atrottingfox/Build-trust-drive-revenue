@@ -232,6 +232,7 @@ export default function FoundingV3() {
                   <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
                 </div>
                 <p className="text-zinc-400 text-[14px] mt-4">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to $10,000.</p>
+                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
                 <BuyButton status={status} location="founding-v3-price" className="mt-6" />
               </div>
             </div>

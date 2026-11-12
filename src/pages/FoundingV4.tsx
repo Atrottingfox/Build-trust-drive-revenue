@@ -95,9 +95,6 @@ export default function FoundingV4() {
           <p className="text-white text-lg font-semibold leading-relaxed mt-6">
             In 90 days your team is planning, filming and posting the content your best clients need to buy, without you.
           </p>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-2">
-            I map your category. Your team runs the content. You film.
-          </p>
           <div className="mt-10">
             <p className="text-zinc-400 text-sm mb-3">Watch this video to see how it works.</p>
             <VslPlayer />
@@ -106,7 +103,8 @@ export default function FoundingV4() {
             Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
           </p>
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
-          <BuyButton status={status} location="founding-v3-hero" className="mt-8" />
+          <BuyButton status={status} location="founding-v4-hero" className="mt-8" />
+          <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
         </Section>
 
         <Divider />
@@ -231,7 +229,8 @@ export default function FoundingV4() {
                   <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
                 </div>
                 <p className="text-zinc-400 text-[14px] mt-4">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to $10,000.</p>
-                <BuyButton status={status} location="founding-v3-price" className="mt-6" />
+                <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
+                <BuyButton status={status} location="founding-v4-price" className="mt-6" />
               </div>
             </div>
           </Section>
@@ -283,7 +282,7 @@ export default function FoundingV4() {
             <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots. Starting January. Your Brand Day included.</p>
             <div className="flex justify-center mt-6"><Facts /></div>
             <div className="flex justify-center">
-              <BuyButton status={status} location="founding-v3-close" className="mt-8" />
+              <BuyButton status={status} location="founding-v4-close" className="mt-8" />
             </div>
           </div>
           <p className="text-zinc-600 text-[12px] leading-relaxed mt-16">
