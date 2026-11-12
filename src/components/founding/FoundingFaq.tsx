@@ -53,8 +53,9 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Can I work with you privately to hire talent?',
     a: [
-      'Yes. I work with a small number of founders privately to find and hire the talent who runs it.',
-      'We take 5 per quarter, at $50,000 AUD.',
+      'We work with a small number of founders privately each quarter.',
+      'This typically does include finding and hiring the talent who runs their team.',
+      'We take 5 per quarter at $50,000 AUD with a minimum 6 month commitment.',
     ],
   },
   {
