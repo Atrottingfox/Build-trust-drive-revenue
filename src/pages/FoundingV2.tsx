@@ -316,7 +316,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                 <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
                 <p className="font-display text-3xl font-extrabold text-white mt-1">Brand Day</p>
                 <p className="text-zinc-300 text-lg leading-relaxed mt-2">
-                  One full day in person. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
+                  One full media strategy day, in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Your Brand Day is included.</p>
@@ -358,7 +358,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, 1:1 guided implementation from the next available cohort month, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+              A Brand Day, 1:1 guided implementation from the next available cohort month, starting January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
             <More label="See everything included">
               <div className="space-y-8">
@@ -378,7 +378,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    '1:1 guided implementation starts in the next available cohort month',
+                    '1:1 guided implementation starts in the next available cohort month, starting January',
                     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                     'One team call per week during installation',
                     'Training every fortnight',
@@ -400,7 +400,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>1:1 guided implementation starts in the next available cohort month. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
+            <Lead>1:1 guided implementation starts in the next available cohort month, starting January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
           </Section>
           <StartTodayShowcase />
 
