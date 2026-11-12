@@ -66,10 +66,9 @@ const Sep = () => <span className="text-zinc-600">|</span>;
 /* Key facts strip, top of the page and in the closing. */
 const Facts = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-    <Pill>First intake January, next February</Pill><Sep />
-    <Pill>5 spots</Pill><Sep />
+    <Pill>1:1 implementation</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
-    <Pill>1:1 guided implementation</Pill>
+    <Pill>5 spots per month</Pill>
   </div>
 );
 
