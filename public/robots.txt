@@ -6,6 +6,7 @@ Allow: /apply$
 Disallow: /90dayprogram
 Disallow: /founding-review
 Disallow: /founding-v2
+Disallow: /founding-v3
 Disallow: /undeniability-part2
 Disallow: /undeniability-review
 Disallow: /undeniability-advisory

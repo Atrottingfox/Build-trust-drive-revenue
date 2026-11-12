@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
-import ReceiveShowcase from '../components/founding/ReceiveShowcase';
 import ReviewForm from '../components/founding/ReviewForm';
 import VslPlayer from '../components/founding/VslPlayer';
 import {
@@ -269,32 +268,32 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
 
           {/* WHAT CHANGES (three outcomes) */}
           <Section>
-            <Label>What changes</Label>
+            <Label>The three outcomes</Label>
             <H2>Three outcomes by day 90.</H2>
             <div className="mt-10">
               <Statement n="01" title="Strategy installed.">
-                Your team knows what your buyers need to believe, who the content is for, and what to make each week.
+                Your team knows who the content is for, what the brand stands for, and what to make each week.
               </Statement>
-              <Statement n="02" title="Team up to speed.">
-                Your team learns what makes your buyers buy, then runs the plan, the capture and the edits without guessing.
+              <Statement n="02" title="Team trained.">
+                Your operator learns to run the weekly plan, coordinate capture, brief editors and approve content against objective standards.
               </Statement>
               <Statement n="03" title="System operating.">
-                A repeatable rhythm, clear owners, and a scorecard that tracks how well your content installs those beliefs and converts into pipeline.
+                A repeatable rhythm, clear owners, and a scoreboard connected to qualified demand.
               </Statement>
             </div>
             <More label="See the full list">
               <div className="space-y-8">
                 <div>
                   <p className="text-white font-semibold mb-3">Strategy installed. Your team knows:</p>
-                  <Ticks items={['What your buyers need to believe before they buy', 'Who the content is for', 'What the brand stands for', 'What the business should be known for', 'Which formats and channels matter', 'What content to make each week']} />
+                  <Ticks items={['Who the content is for', 'What the brand stands for', 'What the business should be known for', 'Which buyer beliefs content must create', 'Which formats and channels matter', 'What content to make each week']} />
                 </div>
                 <div>
-                  <p className="text-white font-semibold mb-3">Team up to speed. Your team learns:</p>
-                  <Ticks items={['What makes your buyers buy', 'Which belief each piece of content builds', 'Run the weekly content plan', 'Coordinate capture', 'Brief editors', 'Use the production and editing SOPs', 'Approve content against objective standards', 'Publish and log content', 'Read the scorecard', 'Decide what to repeat, improve or remove']} />
+                  <p className="text-white font-semibold mb-3">Team trained. Your operator learns to:</p>
+                  <Ticks items={['Run the weekly content plan', 'Coordinate capture', 'Brief editors', 'Use the production and editing SOPs', 'Approve content against objective standards', 'Publish and log content', 'Read the scorecard', 'Decide what to repeat, improve or remove']} />
                 </div>
                 <div>
                   <p className="text-white font-semibold mb-3">System operating. Your business has:</p>
-                  <Ticks items={['A repeatable content rhythm', 'A documented workflow', 'Clear ownership', 'Format cards', 'Production and editing SOPs', 'Universal content standards', 'A publishing process', 'A weekly review loop', 'A scorecard that tracks how well your content installs those beliefs and converts into pipeline']} />
+                  <Ticks items={['A repeatable content rhythm', 'A documented workflow', 'Clear ownership', 'Format cards', 'Production and editing SOPs', 'Universal content standards', 'A publishing process', 'A weekly review loop', 'A scoreboard connected to qualified demand']} />
                 </div>
               </div>
             </More>
@@ -355,9 +354,12 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>What you receive</Label>
             <H2>Everything your team runs from.</H2>
-          </Section>
-          <ReceiveShowcase />
-          <Section>
+            <Lead>
+              Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
+            </Lead>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+              A Brand Day, 1:1 guided implementation from January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+            </p>
             <More label="See everything included">
               <div className="space-y-8">
                 {[

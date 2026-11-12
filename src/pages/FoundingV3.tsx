@@ -1,0 +1,359 @@
+import React, { useState } from 'react';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import Footer from '../components/Footer';
+import SEO from '../components/SEO';
+import StartTodayShowcase, { Visual, Window } from '../components/founding/StartTodayShowcase';
+import FoundingFaq from '../components/founding/FoundingFaq';
+import VslPlayer from '../components/founding/VslPlayer';
+import { trackCta } from '../lib/track';
+import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, useStatus, type Status } from './Founding';
+
+/*
+  /founding-v3. Same offer and words as /founding, laid out on the principles
+  Sean pointed at on 12 Nov (a challenge sales page he liked): key facts up
+  top, the video, a four step who does what with real images, the 90 days as a
+  production call sheet, come with / leave with, a plain everything you get
+  stack, his story in his own words, FAQ, doors close, a bottom bar on every
+  screen and a results disclaimer. Hidden from Google.
+
+  Left out on purpose: a wall of client names and follower counts (Sean cut
+  the proof section on 11 Nov, and there are no verified follower numbers).
+*/
+
+const FN = '/.netlify/functions/founding-checkout';
+
+const Divider = () => <div className="gradient-line my-24 md:my-28" />;
+
+const Pill = ({ children }: { children: React.ReactNode }) => (
+  <span className="text-zinc-300 text-[14px] md:text-[15px]">{children}</span>
+);
+const Sep = () => <span className="text-zinc-600">|</span>;
+
+/* Key facts strip, top of the page and in the closing. */
+const Facts = () => (
+  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+    <Pill>Starts January</Pill><Sep />
+    <Pill>5 spots</Pill><Sep />
+    <Pill>Brand Day included</Pill><Sep />
+    <Pill>Refund guarantee</Pill>
+  </div>
+);
+
+const Img = ({ src, title }: { src: string; title: string }) => (
+  <Window title={title}>
+    <img src={src} alt={title} loading="lazy" className="block w-full aspect-video object-cover" />
+  </Window>
+);
+
+const STEPS: { who: string; title: string; text: string; visual: React.ReactNode }[] = [
+  { who: 'Us', title: 'Your Brand Day.', text: 'One full day in person. We analyse your bottlenecks, map how content drives revenue in your business, and build your Buying Belief Map.', visual: <Img src="/founding/receive/brand-cover.jpg" title="Brand Demand Workbook" /> },
+  { who: 'Us', title: 'We install the playbooks.', text: 'The strategy, playbooks, workflows, standards and review rhythm your team needs.', visual: <Visual index={0} /> },
+  { who: 'Your team', title: 'Your team runs it.', text: '1:1 guided implementation starts January. Your operator learns the rhythm and owns it.', visual: <Visual index={2} /> },
+  { who: 'You', title: 'You film.', text: 'Outside of filming, you spend under 5 hours a week on content, unless you want to.', visual: <Img src="/founding/live.jpg" title="On set" /> },
+];
+
+/* The 90 days as a production call sheet. */
+function CallSheet() {
+  const rows = [
+    { tag: 'Before week 1', name: 'Brand Day', text: 'One full day in person. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.' },
+    ...PHASES.map((p) => ({ tag: p.weeks, name: p.name, text: p.lead })),
+  ];
+  return (
+    <div className="glow-card overflow-hidden mt-10">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 bg-white/[0.02]">
+        <p className="text-white font-semibold">90 Day Install</p>
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-blue-400">Call sheet</span>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5">
+        {[['Production', 'The Authority Engine'], ['Talent', 'You + your team'], ['Starts', 'January'], ['Spots', '5']].map(([k, v]) => (
+          <div key={k} className="bg-[#0d0f14] px-6 py-4">
+            <p className="text-zinc-500 text-[11px] uppercase tracking-widest">{k}</p>
+            <p className="text-white font-semibold mt-1">{v}</p>
+          </div>
+        ))}
+      </div>
+      <ol>
+        {rows.map((r, i) => (
+          <li key={r.name} className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-6 px-6 py-6 border-t border-white/5">
+            <div>
+              <p className="font-display text-2xl font-extrabold text-blue-400">{i}</p>
+              <p className="text-zinc-500 text-[12px] uppercase tracking-widest mt-1">{r.tag}</p>
+            </div>
+            <div>
+              <p className="text-white text-xl font-semibold">{r.name}</p>
+              <p className="text-zinc-400 leading-relaxed mt-1">{r.text}</p>
+              {i === 0 && (
+                <div className="mt-4 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-3">
+                  <p className="text-zinc-200 text-[15px]">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+        <li className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-6 px-6 py-5 border-t border-white/5 bg-white/[0.02]">
+          <p className="text-zinc-500 text-[12px] uppercase tracking-widest pt-1">Wrap</p>
+          <p className="text-white font-semibold">Your team runs the engine without you.</p>
+        </li>
+      </ol>
+    </div>
+  );
+}
+
+/* Bottom bar on every screen size. */
+function Bar({ status }: { status: Status | null }) {
+  const [busy, setBusy] = useState(false);
+  const countdown = useCountdown(status?.closesAt || '2026-12-01T00:00:00+10:00');
+  if (status && !status.open) return null;
+  const buy = async () => {
+    if (busy) return;
+    trackCta('founding-v3-bar');
+    setBusy(true);
+    try {
+      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout' }) });
+      const d = await r.json();
+      if (d.url) { window.location.href = d.url; return; }
+    } catch {
+      /* fall through to the price section */
+    }
+    setBusy(false);
+    document.getElementById('price')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-[70] border-t border-white/10 bg-[#0b0c10]/95 backdrop-blur">
+      <div className="max-w-5xl mx-auto px-4 md:px-8 py-3 pb-[max(12px,env(safe-area-inset-bottom))] flex items-center justify-between gap-4">
+        <div className="min-w-0">
+          <p className="text-white text-[14px] md:text-[15px] font-semibold leading-tight">Starts January | 5 spots | $10,000 AUD</p>
+          {countdown && <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">Closes 30 November. {countdown} left</p>}
+        </div>
+        <button type="button" onClick={buy} disabled={busy} className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-[14px] font-semibold disabled:opacity-70">
+          {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+          Lock in
+          {!busy && <ArrowRight className="w-4 h-4" />}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function FoundingV3() {
+  const status = useStatus();
+
+  return (
+    <div className="min-h-screen bg-base">
+      <SEO title="90 Day Install (v3)" description="Founding 5 page, layout v3." path="/founding-v3" image="https://authorityengine.com.au/og-founding.jpg" noIndex />
+      <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
+
+      <div className="max-w-3xl mx-auto px-6 lg:px-8 pt-32 md:pt-40 pb-32">
+        {/* HERO */}
+        <Section>
+          <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-4">The Authority Engine - Intro offer</p>
+          <Facts />
+          <h1 className="font-display text-4xl md:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mt-8 mb-5">
+            Stop being the content manager.
+          </h1>
+          <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15]">
+            Install the system your team runs.
+          </p>
+          <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+            I install the playbooks. Your team runs them. You film.
+          </p>
+          <div className="mt-10">
+            <p className="text-zinc-400 text-sm mb-3">Watch this video to see how it works.</p>
+            <VslPlayer />
+          </div>
+          <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-10">
+            Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
+          </p>
+          <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
+          <BuyButton status={status} location="founding-v3-hero" className="mt-8" />
+        </Section>
+
+        <Divider />
+
+        {/* WHO DOES WHAT, four steps */}
+        <Section>
+          <Label>How it works</Label>
+          <H2>I install it. Your team runs it.</H2>
+          <div className="mt-12 space-y-16">
+            {STEPS.map((s, i) => (
+              <div key={s.title} className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+                <div className={`min-w-0 ${i % 2 ? 'md:order-2' : ''}`}>
+                  <span className={`inline-block text-[11px] font-semibold uppercase tracking-widest ${s.who === 'Us' ? 'text-blue-400' : s.who === 'You' ? 'text-white' : 'text-zinc-300'}`}>{`0${i + 1}  ${s.who}`}</span>
+                  <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">{s.title}</p>
+                  <p className="text-zinc-400 text-lg leading-relaxed mt-3">{s.text}</p>
+                </div>
+                <div className={`min-w-0 ${i % 2 ? 'md:order-1' : ''}`}>{s.visual}</div>
+              </div>
+            ))}
+          </div>
+        </Section>
+
+        <Divider />
+
+        {/* CALL SHEET */}
+        <Section>
+          <Label>The 90 days</Label>
+          <H2>Your call sheet.</H2>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">
+            The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+          </p>
+          <CallSheet />
+        </Section>
+
+        <Divider />
+
+        {/* PAY IN FULL (Sean likes this one) */}
+        <Section>
+          <Label>Pay in full</Label>
+          <H2>Pay in full. Start today.</H2>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.</p>
+        </Section>
+        <StartTodayShowcase />
+
+        <Divider />
+
+        {/* GUARANTEE */}
+        <Section>
+          <Label>Guarantee</Label>
+          <H2>The risk sits with me.</H2>
+          <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+            If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will refund $5,000 AUD.
+          </p>
+          <p className="text-zinc-300 text-lg leading-relaxed mt-4">
+            If the agreed Authority Engine is not installed by day 90, we continue working with you at no additional cost until it is.
+          </p>
+          <p className="text-zinc-500 leading-relaxed mt-6">
+            To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantees cover installation, not revenue.
+          </p>
+        </Section>
+
+        <Divider />
+
+        {/* COME WITH / LEAVE WITH */}
+        <Section>
+          <Label>What you leave with</Label>
+          <H2>Come with your team. Leave with a system they run.</H2>
+          <div className="mt-8">
+            <Ticks items={[
+              'Your Brand Demand Workbook, mapped on the day',
+              'Your avatar card: the Hero Buyer every piece of content gets tested against',
+              'Your voice card: how the founder sounds, how the team writes',
+              'Your hook bank: 6 archetype buckets, 90 patterns',
+              'Your 4 numbers: reach, capture, conversion, compounding',
+              'Every SOP and both playbooks, short form and long form',
+              'A team that knows what to make next without asking you every time',
+            ]} />
+          </div>
+        </Section>
+
+        <Divider />
+
+        {/* FIT */}
+        <Section>
+          <Label>Fit</Label>
+          <H2>This is for you if...</H2>
+          <div className="mt-8">
+            <Ticks items={['You already do $200K/month or more', 'You have a proven offer and real expertise', 'You already create some content', 'You have an operator or team member to train', 'You want the team running content without you managing every post']} />
+          </div>
+          <p className="text-white text-xl font-semibold mt-12 mb-6">This isn't for you if...</p>
+          <Crosses items={['You want a done for you content agency', 'You are starting from zero', 'Your team will not attend, implement or share data honestly']} />
+        </Section>
+
+        <Divider />
+
+        {/* EVERYTHING YOU GET + PRICE */}
+        <section id="price" className="scroll-mt-28">
+          <Section>
+            <Label>Everything you get</Label>
+            <H2>Everything your team needs to run it.</H2>
+            <div className="glow-card mt-10 divide-y divide-white/5">
+              {[
+                'One Brand Day, in person',
+                '1:1 guided implementation starts January, four weeks with your operator',
+                'One team call per week during installation',
+                'Training every fortnight',
+                'Two Loom reviews per week during active implementation',
+                'Weekly office hours, every Thursday',
+                'Monthly founder and operator board review',
+                'WhatsApp support, 24 hour replies',
+                'Every SOP, every training video, both playbooks, straight away',
+                'Refund guarantee at day 30, keep working past day 90',
+              ].map((t) => (
+                <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
+              ))}
+              <div className="px-6 py-6 bg-white/[0.02]">
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="text-zinc-400">Standard investment</p>
+                  <p className="font-display text-xl font-extrabold text-zinc-600 line-through decoration-zinc-600">$15,000 AUD</p>
+                </div>
+                <div className="flex items-baseline justify-between gap-4 mt-3">
+                  <p className="text-white font-semibold">Founding 5, paid in full by 30 November</p>
+                  <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD</p>
+                </div>
+                <p className="text-zinc-400 text-[14px] mt-4">Your Brand Day is included. There are 11 Brand Days left at $5,000. After that the price goes to $10,000.</p>
+                <BuyButton status={status} location="founding-v3-price" className="mt-6" />
+              </div>
+            </div>
+          </Section>
+        </section>
+
+        <Divider />
+
+        {/* SEAN */}
+        <Section>
+          <Label>Who you'll be working with</Label>
+          <div className="grid md:grid-cols-[320px_1fr] gap-10 items-start mt-4">
+            <img src="/founding/sean.jpg" alt="Sean on set" width={440} height={550} loading="lazy" className="w-full max-w-[320px] aspect-[4/5] object-cover rounded-2xl border border-white/10" />
+            <div>
+              <H2>Hey, I'm Sean Fox.</H2>
+              {/* Sean's own words, 01 Authority Engine Fundamentals, and his /offer line. */}
+              <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+                I cut my teeth door knocking. I door knocked 500 doors in 30 days when I was a 17 year old kid trying to sell my art into different businesses.
+              </p>
+              <p className="text-zinc-300 text-lg leading-relaxed mt-4">
+                I've spent the last 24 months behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
+              </p>
+              <p className="text-zinc-400 text-lg leading-relaxed mt-4">
+                I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
+            {['train-02a', 'train-16a', 'train-13', 'live'].map((f) => (
+              <img key={f} src={`/founding/${f}.jpg`} alt="Sean on set" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-xl border border-white/10" />
+            ))}
+          </div>
+        </Section>
+
+        <Divider />
+
+        {/* FAQ */}
+        <Section>
+          <Label>FAQ</Label>
+          <H2>What founders ask before they buy.</H2>
+          <FoundingFaq />
+        </Section>
+
+        <Divider />
+
+        {/* CLOSE */}
+        <Section>
+          <div className="text-center">
+            <H2>Doors close 30 November.</H2>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-5">Five spots. Starting January. Your Brand Day included.</p>
+            <div className="flex justify-center mt-6"><Facts /></div>
+            <div className="flex justify-center">
+              <BuyButton status={status} location="founding-v3-close" className="mt-8" />
+            </div>
+          </div>
+          <p className="text-zinc-600 text-[12px] leading-relaxed mt-16">
+            Results vary. Your results depend on your offer, your team and your market. The guarantees cover installation, not revenue.
+          </p>
+        </Section>
+      </div>
+
+      <Bar status={status} />
+      <Footer />
+    </div>
+  );
+}
