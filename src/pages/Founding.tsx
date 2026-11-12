@@ -886,10 +886,10 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 I keep active installs limited so I can stay close to the team, the work and the data.
               </p>
               <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
-                <p className="text-white font-semibold">Your Brand Day is included.</p>
+                <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future increases follow the level of proof, implementation depth and available capacity.</p>
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
               <BuyButton status={status} location="founding-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
