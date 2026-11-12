@@ -112,7 +112,10 @@ const handler: Handler = async (event) => {
     const s = await status();
     if (!s.open) return json({ configured: true, ...s, url: null });
 
-    const testEmail = typeof body.testEmail === "string" ? body.testEmail.slice(0, 120) : "";
+    /* A "+" in the page address (?test=sean+zztest@...) arrives as a space, and
+       no email has a space, so it is put back (2026-11-12: the test ran at the
+       full price twice because of it). */
+    const testEmail = typeof body.testEmail === "string" ? body.testEmail.slice(0, 120).trim().replace(/\s+/g, "+") : "";
     const isTest = testEmail ? await isTestEmail(testEmail) : false;
     const cents = isTest ? TEST_CENTS : PRICE_AUD_CENTS;
 
