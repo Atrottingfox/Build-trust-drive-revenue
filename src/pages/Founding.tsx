@@ -682,7 +682,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <div className="glow-card border-blue-500/20 p-8">
                 <p className="text-white text-sm font-semibold mb-3">90 day guarantee</p>
                 <p className="text-zinc-300 text-[15px] leading-relaxed">
-                  If you do not have a consistent rhythm of content going out by day 90 that brings in new leads every month, we'll continue working with you until you do.
+                  If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
                 </p>
               </div>
             </div>

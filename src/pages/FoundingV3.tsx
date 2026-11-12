@@ -164,7 +164,7 @@ export default function FoundingV3() {
             If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
           </p>
           <p className="text-zinc-300 text-lg leading-relaxed mt-4">
-            If you do not have a consistent rhythm of content going out by day 90 that brings in new leads every month, we'll continue working with you until you do.
+            If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
           </p>
           <p className="text-zinc-500 leading-relaxed mt-6">
             To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantees cover installation, not revenue.

@@ -416,7 +416,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                 If your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
               </Statement>
               <Statement title="Day 90.">
-                If you do not have a consistent rhythm of content going out by day 90 that brings in new leads every month, we'll continue working with you until you do.
+                If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
               </Statement>
             </div>
             <More label="What counts, and the conditions">
