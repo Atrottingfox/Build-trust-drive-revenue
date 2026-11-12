@@ -209,7 +209,7 @@ export default function FoundingV3() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts January, four weeks with your operator',
+                '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 'Two Loom reviews per week during active implementation',

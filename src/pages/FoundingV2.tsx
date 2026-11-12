@@ -378,7 +378,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    '1:1 guided implementation starts January, four weeks with your operator',
+                    '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
                     'One team call per week during installation',
                     'Training every fortnight',
                     <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,

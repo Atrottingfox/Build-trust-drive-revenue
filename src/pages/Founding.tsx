@@ -673,7 +673,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <div className="glow-card p-8 mt-8">
               <Ticks items={[
                 'One Brand Day',
-                '1:1 guided implementation starts January, four weeks with your operator',
+                '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
