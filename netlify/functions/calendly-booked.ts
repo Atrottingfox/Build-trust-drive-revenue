@@ -102,6 +102,20 @@ const handler: Handler = async (event) => {
     }
 
     if (!contactId) {
+      /* Still put the Brand Day date on their portal (Sean, 2026-11-12: "when
+         someone books their brand day, does it then show in the portal"). The
+         portal's own Book your Brand Day button links to Calendly without a
+         GHL contact id, and those bookings stopped here before reaching the
+         portal. Matched by email instead. Brand Day only, never a prep call. */
+      const name = `${payload.scheduled_event?.name || payload.event_type?.name || ""} ${payload.scheduled_event?.event_type || payload.event_type?.uri || ""}`.toLowerCase();
+      const typeUri = String(payload.scheduled_event?.event_type || payload.event_type?.uri || "");
+      const brandDayId = process.env.CALENDLY_TYPE_BRAND_DAY || "67a02dc5-7d2c-4d54-8dcd-2268983ce45e";
+      const prep = /prep[-\s]?call/.test(name);
+      const brandDay = !prep && (typeUri.endsWith(brandDayId) || /vip[-\s]?day|brand[-\s]?day|vip[-\s]?strategy[-\s]?day|strategy[-\s]?day/.test(name));
+      if (brandDay && startTime && payload.email) {
+        const portal = await provisionPortal({ email: payload.email, name: payload.name || payload.email }, { brandDay: startTime });
+        if (portal.error) console.error("calendly-booked: portal not updated:", portal.error);
+      }
       console.error(
         "Calendly booking with no utm_content, cannot match to a GHL contact.",
         "invitee:", payload.email || "unknown",

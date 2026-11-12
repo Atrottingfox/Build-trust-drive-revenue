@@ -60,6 +60,18 @@ export async function slack(text: string): Promise<void> {
 
 /* Returns true when this call did the work, false when it was already done or
    the session is not a paid founding sale. */
+/* When a founding buyer starts (Sean, 2026-11-12: "it'll be 15th of the
+   month ... 15th jan, 15th feb"). The 15th of the month after they buy, and
+   never before the first cohort on 15 January 2027. Brisbane dates. */
+export function cohortStart(paidMs: number): string {
+  const d = new Date(paidMs + 10 * 3600_000);
+  const next = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 15));
+  const first = Date.UTC(2027, 0, 15);
+  return new Date(Math.max(next.getTime(), first)).toISOString().slice(0, 10);
+}
+const longDate = (iso: string) =>
+  new Date(`${iso}T00:00:00+10:00`).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane" });
+
 export async function handleFoundingSale(session: any, via: "thank-you page" | "sweep"): Promise<boolean> {
   if (session?.metadata?.payment !== PAYMENT_KIND) return false;
   if (session?.payment_status !== "paid") return false;
@@ -89,7 +101,8 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
 
   /* Their portal, made now so a buyer who closed the tab still gets the 48
      hour reminder (portal-chase), and so the link is in Slack. */
-  const portal = await provisionPortal({ email: d.email, name: d.name });
+  const start = cohortStart((session.created ? session.created * 1000 : Date.now()));
+  const portal = await provisionPortal({ email: d.email, name: d.name }, { start });
 
   /* Sean, 2026-11-12: "the founding buyers next steps all implemented asap".
      One welcome email, sent from here like the install payment email (the tag
@@ -98,7 +111,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
   let welcomed = false;
   if (token && contactId) {
     const first = String(d.name || "").split(" ")[0] || "there";
-    const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}`;
+    const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}&utm_content=${encodeURIComponent(contactId)}`;
     const { sent } = await sendEmail(token, contactId, "You're in. Here's what happens now.", [
       `<p>${first},</p>`,
       `<p>You're in. Your spot is locked in.</p>`,
@@ -116,6 +129,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
     [
       `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day (intro offer, paid in full).*`,
       `${amount} received. Picked up by the ${via}.`,
+      `Starts: ${longDate(start)} (cohort start, the 15th).`,
       `Email: ${d.email || "not given"}   Phone: ${d.phone || "not given"}`,
       contactId
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
