@@ -110,7 +110,7 @@ const MORGAN_TERMS: TermsSection[] = [
     heading: '2. What I deliver',
     body: [
       'Weeks 1 to 4. Inject your videographer with the skills they need, fast. One 60 minute call per week with you and your key people, and weekly Office Hours.',
-      'Weeks 5 to 12. Your team runs it and I act as advisor. One 60 minute call per fortnight, and weekly Office Hours.',
+      'Weeks 5 to 12. One 60 minute call per fortnight, and weekly Office Hours.',
       'Every month. One 60 minute board call.',
       'Throughout the 90 days. Guided implementation, async comms with up to two Looms per week for asset review, and 24 hour feedback via WhatsApp.',
       "By the end, we'll have your videographer as a marketer.",
@@ -138,7 +138,7 @@ const MORGAN_TERMS: TermsSection[] = [
 const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
-  version: TERMS_VERSION + '-morgan-3',
+  version: TERMS_VERSION + '-morgan-4',
   phases: [
     {
       when: 'Weeks 1 to 4',
@@ -149,13 +149,13 @@ const MORGAN: InstallVariant = {
     {
       when: 'Weeks 5 to 12',
       title: 'Tune',
-      body: 'Your team runs it and I move to advisor. We tighten the hooks and the content on real data, and test the strongest pieces with your warmest audience.',
+      body: 'We tighten the hooks and the content on real data, and test the strongest pieces with your warmest audience.',
       rhythm: 'A 60 minute call a fortnight. Weekly Office Hours. Up to two Looms a week and 24 hour feedback on WhatsApp. A board call a month.',
     },
     {
       when: 'Day 90',
       title: 'What you have',
-      body: 'Your videographer working as a marketer and running the rhythm, one repeatable monthly content cycle, and you spending under two hours a week on it.',
+      body: 'Your videographer working as a marketer and running a consistent content rhythm, with one repeatable monthly content cycle that consistently generates demand.',
       rhythm: '',
     },
   ],
