@@ -432,6 +432,36 @@ const Group = ({ title, items, n }: { title: string; items: React.ReactNode[]; n
   </div>
 );
 
+/* A plain buy button between sections (Sean, 13 Nov: more payment buttons).
+   Same checkout as BuyButton. If the checkout fails it scrolls to the price. */
+function SectionCta({ status, location }: { status: Status | null; location: string }) {
+  const [busy, setBusy] = useState(false);
+  if (status && !status.open) return null;
+  const buy = async () => {
+    if (busy) return;
+    trackCta(location);
+    setBusy(true);
+    try {
+      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }) });
+      const d = await r.json();
+      if (d.url) { window.location.href = d.url; return; }
+    } catch {
+      /* fall through */
+    }
+    setBusy(false);
+    document.getElementById('price')?.scrollIntoView({ behavior: 'smooth' });
+  };
+  return (
+    <div className="max-w-3xl mx-auto px-6 lg:px-8 pb-20 md:pb-24 -mt-4">
+      <button type="button" onClick={buy} disabled={busy} className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors disabled:opacity-70">
+        {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+        Lock in your spot
+        {!busy && <ArrowRight className="w-4 h-4" />}
+      </button>
+    </div>
+  );
+}
+
 export const PHASES = [
   {
     n: 'Phase 1', name: 'Install', weeks: 'Weeks 1 to 4',
@@ -552,6 +582,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
         </div>
       </section>
 
+      <SectionCta status={status} location="founding-installs" />
+
       <div className="gradient-line" />
 
       {/* PAY IN FULL, with the visual layer */}
@@ -570,6 +602,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
         </div>
       </section>
 
+      <SectionCta status={status} location="founding-payinfull" />
+
       <div className="gradient-line" />
 
       {/* SUPPORT */}
@@ -585,6 +619,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
           </Section>
         </div>
       </section>
+
+      <SectionCta status={status} location="founding-support" />
 
       <div className="gradient-line" />
 
@@ -661,6 +697,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
         </div>
       </section>
 
+      <SectionCta status={status} location="founding-fit" />
+
       <div className="gradient-line" />
 
       {/* GUARANTEE */}
@@ -703,6 +741,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
         </div>
       </section>
 
+      <SectionCta status={status} location="founding-guarantee" />
+
       <div className="gradient-line" />
 
       {/* FAQ */}
@@ -715,6 +755,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
           </Section>
         </div>
       </section>
+
+      <SectionCta status={status} location="founding-faq" />
 
       <div className="gradient-line" />
 
