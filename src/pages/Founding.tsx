@@ -464,7 +464,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
     <div className="min-h-screen bg-base">
       <SEO
         title="90 Day Install"
-        description="Stop being the content manager. Install the system your team runs. Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
+        description="Stop being the content manager. Install the system your team runs. Built from the playbooks created alongside six 8 figure+ companies we've worked with. Intro offer for 5 founders starting in January. $10,000 AUD, closes 30 November."
         path={review ? '/founding-review' : '/founding'}
         image="https://authorityengine.com.au/og-founding.jpg"
         noIndex={review}
@@ -500,7 +500,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
             </div>
             {/* Sean's line, 11 Nov 2026. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
+              Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
               5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.

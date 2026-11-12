@@ -127,7 +127,7 @@ export default function FoundingV4() {
             <VslPlayer />
           </div>
           <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-10">
-            Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
+            Built from the playbooks created alongside six 8 figure+ companies we've worked with.
           </p>
           <p className="text-zinc-400 mt-3">For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.</p>
           <BuyButton status={status} location="founding-v4-hero" className="mt-8" />

@@ -216,7 +216,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               <VslPlayer />
             </div>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
-              Built from playbooks created alongside the six 8 figure+ B2B companies we've worked with.
+              Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold text-lg mt-10">5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.</p>
             <p className="text-zinc-400 mt-2">
