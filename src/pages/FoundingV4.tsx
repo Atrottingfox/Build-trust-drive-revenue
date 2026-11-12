@@ -73,6 +73,14 @@ function MiniCta({ status, location }: { status: Status | null; location: string
   );
 }
 
+/* Proof, public already on /brand-day (same three, same words) plus Sean's
+   "$10M+ created for clients in the past 24 months" (his proof stack). */
+const PROOF = [
+  { name: 'Taki Moore', stat: '+$5M', context: 'from content in 12 months', sub: 'Doubled following. Business up 80%. Team of 8.' },
+  { name: 'Jay Wright', stat: '2x', context: 'following and revenue in 12 months', sub: 'Ecommerce brands LSKD and Tiger Lily.' },
+  { name: 'Mitch Revs', stat: '19k to 50k', context: 'followers in 2 months', sub: '1.4M organic impressions 3 months straight.' },
+];
+
 /* Bottom bar on every screen size. */
 function Bar({ status }: { status: Status | null }) {
   const [busy, setBusy] = useState(false);
@@ -144,6 +152,26 @@ export default function FoundingV4() {
           <BuyButton status={status} location="founding-v4-hero" className="mt-8" />
           <div className="mt-5"><Facts /></div>
           <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD. Future increases follow the level of proof, implementation depth and available capacity.</p>
+        </Section>
+
+        <Divider />
+
+        {/* PROOF, straight after the video like the challenge page */}
+        <Section>
+          <Label>Proof</Label>
+          <p className="font-display text-6xl md:text-7xl font-extrabold text-white tracking-[-0.03em]">$10M+</p>
+          <p className="text-zinc-300 text-lg mt-2">created for clients in the past 24 months.</p>
+          <div className="grid sm:grid-cols-3 gap-4 mt-10">
+            {PROOF.map((p) => (
+              <div key={p.name} className="glow-card p-6">
+                <p className="font-display text-3xl font-extrabold text-white">{p.stat}</p>
+                <p className="text-zinc-400 text-[14px] mt-1">{p.context}</p>
+                <p className="text-white text-sm font-semibold mt-4">{p.name}</p>
+                <p className="text-zinc-500 text-[13px] mt-1 leading-relaxed">{p.sub}</p>
+              </div>
+            ))}
+          </div>
+          <MiniCta status={status} location="founding-v4-proof" />
         </Section>
 
         <Divider />
