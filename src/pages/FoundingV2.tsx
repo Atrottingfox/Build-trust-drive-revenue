@@ -358,7 +358,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, 1:1 guided implementation from January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+              A Brand Day, 1:1 guided implementation from the next available cohort month, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
             <More label="See everything included">
               <div className="space-y-8">
@@ -378,7 +378,8 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
+                    '1:1 guided implementation starts in the next available cohort month',
+                    'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                     'One team call per week during installation',
                     'Training every fortnight',
                     <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
@@ -399,7 +400,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
+            <Lead>1:1 guided implementation starts in the next available cohort month. Pay $10,000 AUD by 30 November and your team gets all of this now.</Lead>
           </Section>
           <StartTodayShowcase />
 

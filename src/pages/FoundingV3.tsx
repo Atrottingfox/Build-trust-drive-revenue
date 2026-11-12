@@ -150,7 +150,7 @@ export default function FoundingV3() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available cohort month. Pay $10,000 AUD by 30 November and your team gets all of this now.</p>
         </Section>
         <StartTodayShowcase />
 
@@ -209,7 +209,8 @@ export default function FoundingV3() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
+                '1:1 guided implementation starts in the next available cohort month',
+                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 'Two Loom reviews per week during active implementation',

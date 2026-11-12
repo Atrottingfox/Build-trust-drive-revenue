@@ -382,7 +382,7 @@ function Paid() {
                 'Your team gets every SOP, edit, playbook and training video',
                 'An advisory board call before you start',
                 'We lock in your Brand Day date',
-                '1:1 guided implementation starts January',
+                '1:1 guided implementation starts in the next available cohort month',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
@@ -654,7 +654,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts January. Pay $10,000 AUD by 30 November and your team gets all of this now.
+                1:1 guided implementation starts in the next available cohort month. Pay $10,000 AUD by 30 November and your team gets all of this now.
               </p>
             </div>
           </Section>
@@ -673,7 +673,8 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <div className="glow-card p-8 mt-8">
               <Ticks items={[
                 'One Brand Day',
-                '1:1 guided implementation starts January. Weekly for the first 4 weeks, then fortnightly for the next 8',
+                '1:1 guided implementation starts in the next available cohort month',
+                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
@@ -898,7 +899,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
-                '1:1 guided implementation starts January.',
+                '1:1 guided implementation starts in the next available cohort month.',
                 'Your first live content cycle runs straight away.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">
