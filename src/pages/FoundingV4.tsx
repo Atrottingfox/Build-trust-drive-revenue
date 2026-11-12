@@ -40,7 +40,8 @@ const Logistics = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>First cohort January, next February</Pill><Sep />
     <Pill>Full media strategy day included</Pill><Sep />
-    <Pill>90 days of guided implementation</Pill>
+    <Pill>90 days of guided implementation</Pill><Sep />
+    <Pill>Changed by day 30 or I pay you $5,000</Pill>
   </div>
 );
 
@@ -130,7 +131,7 @@ export default function FoundingV4() {
             In 90 days your team is planning, filming and posting the content your best clients need to buy, without you.
           </p>
           <div className="mt-10">
-            <p className="text-zinc-400 text-sm mb-3">Watch this video to see how it works.</p>
+            <p className="text-zinc-400 text-sm mb-3">Watch this 4 minute video to see how it works.</p>
             <VslPlayer />
           </div>
           <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-10">
@@ -195,7 +196,7 @@ export default function FoundingV4() {
         {/* GUARANTEE */}
         <Section>
           <Label>Guarantee</Label>
-          <H2>If your team hasn't changed by day 30, I pay you $5,000.</H2>
+          <H2>Your team changes by day 30, or I pay you $5,000.</H2>
           <p className="text-zinc-300 text-lg leading-relaxed mt-6">
             If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
           </p>
@@ -210,13 +211,22 @@ export default function FoundingV4() {
 
         <Divider />
 
-        {/* WHAT CHANGES, outcomes as verbs (suggested lines) */}
+        {/* LEAVE WITH, concrete items already on the page (trial, 12 Nov) */}
         <Section>
           <Label>By day 90</Label>
-          <H2>What changes.</H2>
+          <H2>What your team leaves with.</H2>
           <div className="mt-8 divide-y divide-white/5 border-y border-white/5">
-            {['Your buyers understand why you.', 'Your team knows what to make.', 'Your operator runs the week.', 'You stop being asked.'].map((t) => (
-              <p key={t} className="font-display text-2xl md:text-3xl font-extrabold text-white py-5">{t}</p>
+            {[
+              'Your brand and content dialled from one full media strategy day',
+              'Every SOP we run with clients, across every format',
+              'The full training video library',
+              'Both playbooks, short form and long form, complete',
+              'A team trained to plan, film and post without you',
+            ].map((t, i) => (
+              <div key={t} className="flex items-baseline gap-5 py-5">
+                <span className="font-display text-blue-400 font-extrabold text-lg w-6 flex-shrink-0">{i + 1}</span>
+                <p className="text-white text-lg md:text-xl font-semibold leading-snug">{t}</p>
+              </div>
             ))}
           </div>
           <MiniCta status={status} location="founding-v4-changes" />
@@ -305,7 +315,7 @@ export default function FoundingV4() {
         <Section>
           <Label>FAQ</Label>
           <H2>What founders ask before they buy.</H2>
-          <FoundingFaq />
+          <FoundingFaq leadWith="What if my team cannot do this?" />
         </Section>
 
         <Divider />
