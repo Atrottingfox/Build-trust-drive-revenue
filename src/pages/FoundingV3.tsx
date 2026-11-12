@@ -48,7 +48,7 @@ function Bar({ status }: { status: Status | null }) {
     trackCta('founding-v3-bar');
     setBusy(true);
     try {
-      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout' }) });
+      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }) });
       const d = await r.json();
       if (d.url) { window.location.href = d.url; return; }
     } catch {
