@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
+import SupportRhythm from '../components/founding/SupportRhythm';
 import VslPlayer from '../components/founding/VslPlayer';
 import { trackCta } from '../lib/track';
 import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, useStatus, type Status } from './Founding';
@@ -17,44 +18,6 @@ import { BuyButton, Crosses, H2, Label, PHASES, Section, Ticks, useCountdown, us
 */
 
 const FN = '/.netlify/functions/founding-checkout';
-
-const SUPPORT: [string, string[]][] = [
-  [
-    'Before week 1',
-    [
-      'One Brand Day',
-      '1:1 guided implementation starts in the next available intake month (January, then February)'
-    ]
-  ],
-  [
-    'Weekly',
-    [
-      'Implementation calls for the first 4 weeks, then fortnightly for the next 8',
-      'One team call per week during installation',
-      'Two Loom reviews per week during active implementation',
-      'Advisory sessions, every Thursday|(Monday coming soon)'
-    ]
-  ],
-  [
-    'Fortnightly',
-    [
-      'Training every fortnight',
-      'Operator hotseat every fortnight|(coming soon)'
-    ]
-  ],
-  [
-    'Monthly',
-    [
-      'Founder and operator board review'
-    ]
-  ],
-  [
-    'Any day',
-    [
-      'WhatsApp implementation support, 24 hour replies, during the agreed support window'
-    ]
-  ]
-];
 
 const Divider = () => <div className="gradient-line my-24 md:my-28" />;
 
@@ -229,7 +192,7 @@ export default function FoundingV4() {
             If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
           </p>
           <p className="text-zinc-300 text-lg leading-relaxed mt-4">
-            If the agreed Authority Engine is not installed by day 90, we continue working with you at no additional cost until it is.
+            If you do not have a consistent rhythm of content going out by day 90 that brings in new leads every month, we'll continue working with you until you do.
           </p>
           <p className="text-zinc-500 leading-relaxed mt-6">
             To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantees cover installation, not revenue.
@@ -277,23 +240,7 @@ export default function FoundingV4() {
         <Section>
           <Label>Support and implementation</Label>
           <H2>Support until it runs without me.</H2>
-          <div className="mt-8 divide-y divide-white/5 border-y border-white/5">
-            {SUPPORT.map(([when, items]) => (
-              <div key={when} className="grid md:grid-cols-[160px_1fr] gap-2 md:gap-8 py-6">
-                <p className="text-blue-400 text-sm font-semibold uppercase tracking-widest pt-0.5">{when}</p>
-                <ul className="space-y-2">
-                  {items.map((t) => {
-                    const [main, note] = t.split('|');
-                    return (
-                      <li key={t} className="text-zinc-200 text-[16px] leading-relaxed">
-                        {main}{note && <span className="text-zinc-500"> {note}</span>}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <SupportRhythm />
           <p className="text-zinc-400 leading-relaxed mt-6">
             The support is there to install the system, so your team stops needing me.
           </p>

@@ -10,6 +10,7 @@ import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import ReviewForm from '../components/founding/ReviewForm';
+import SupportRhythm from '../components/founding/SupportRhythm';
 
 /*
   /founding. The founding 90 Day offer, bought straight off the page.
@@ -508,6 +509,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
             <BuyButton status={status} location="founding-hero" className="mt-10" />
+            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD.</p>
           </Section>
         </div>
       </section>
@@ -552,100 +554,6 @@ export default function Founding({ review = false }: { review?: boolean }) {
 
       <div className="gradient-line" />
 
-      {/* THREE OUTCOMES */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The three outcomes</Label>
-            <H2>Three outcomes by day 90.</H2>
-            <div className="space-y-6 mt-8">
-              <Group n="01" title="Strategy installed. Your team knows:" items={[
-                'Who the content is for',
-                'What the brand stands for',
-                'What the business should be known for',
-                'Which buyer beliefs content must create',
-                'Which formats and channels matter',
-                'What content to make each week',
-              ]} />
-              <Group n="02" title="Team trained. Your operator learns to:" items={[
-                'Run the weekly content plan',
-                'Coordinate capture',
-                'Brief editors',
-                'Use the production and editing SOPs',
-                'Approve content against objective standards',
-                'Publish and log content',
-                'Read the scorecard',
-                'Decide what to repeat, improve or remove',
-              ]} />
-              <Group n="03" title="System operating. Your business has:" items={[
-                'A repeatable content rhythm',
-                'A documented workflow',
-                'Clear ownership',
-                'Format cards',
-                'Production and editing SOPs',
-                'Universal content standards',
-                'A publishing process',
-                'A weekly review loop',
-                'A scoreboard connected to qualified demand',
-              ]} />
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* HOW IT WORKS */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>How it works</Label>
-            <H2>Install. Transfer. Operate.</H2>
-            <div className="space-y-6 mt-8">
-              {PHASES.map((ph) => (
-                <div key={ph.n} className="glow-card p-8">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-                    <p className="font-display text-sm font-extrabold text-blue-400">{ph.n}</p>
-                    <p className="text-white text-lg font-semibold">{ph.name}</p>
-                    <p className="text-zinc-400 text-sm">{ph.weeks}</p>
-                  </div>
-                  <p className="text-zinc-400 text-[15px] leading-relaxed mb-5">{ph.lead}</p>
-                  <div className="grid sm:grid-cols-2 gap-x-6">
-                    <Ticks items={ph.items} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="text-zinc-300 leading-relaxed mt-8">
-              By the end, your team knows what to do next without asking you every time.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* WHAT YOU RECEIVE */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <Section>
-            <div className="max-w-3xl">
-              <Label>What you receive</Label>
-              <H2>Everything your team runs from.</H2>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-              <Group title="Foundation" items={['Brand Bible', 'Positioning and perspective', 'ICP and buyer profile', 'Buyer belief map', 'Content and demand map']} />
-              <Group title="Strategy" items={['Short form operating system', 'Long form operating system', 'Attraction playbook', 'Nurture playbook', 'Conversion pathway', 'Format library', 'Hook and topic systems', 'Content allocation rules']} />
-              <Group title="Production" items={['Plan, capture, produce workflow', 'Capture calendar', 'Production SOPs', 'Directing standards', 'Upload and handoff system']} />
-              <Group title="Post production" items={['Editing SOPs', 'Universal Content Standard', 'Editing Standard', 'Format specific QC', 'Approval and revision process', 'Asset bank']} />
-              <Group title="Distribution and review" items={['Package and schedule process', 'Publish and review SOP', 'Weekly scorecard', 'Performance review rhythm', 'Repeat, improve, remove decisions']} />
-            </div>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
       {/* PAY IN FULL, with the visual layer */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -670,63 +578,9 @@ export default function Founding({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Support and implementation</Label>
             <H2>Support until it runs without me.</H2>
-            <div className="glow-card p-8 mt-8">
-              <Ticks items={[
-                'One Brand Day',
-                '1:1 guided implementation starts in the next available intake month (January, then February)',
-                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
-                'One team call per week during installation',
-                'Training every fortnight',
-                <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
-                'Two Loom reviews per week during active implementation',
-                <>Weekly advisory sessions, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
-                'Monthly founder and operator board review',
-                'WhatsApp implementation support, 24 hour replies, during the agreed support window',
-              ]} />
-            </div>
+            <SupportRhythm />
             <p className="text-zinc-400 leading-relaxed mt-6">
               The support is there to install the system, so your team stops needing me.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* ROLES */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Roles</Label>
-            <H2>I install it. Your team runs it.</H2>
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">My role</p>
-                <Ticks items={[
-                  'Architect the system',
-                  'Install the playbooks',
-                  'Train your operator',
-                  'Review the real work',
-                  'Diagnose bottlenecks',
-                  'Read the data',
-                  'Recommend the next move',
-                ]} />
-              </div>
-              <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">Your team's role</p>
-                <Ticks items={[
-                  'Film',
-                  'Edit',
-                  'Publish',
-                  'Attend the sessions',
-                  'Run the weekly rhythm',
-                  'Bring the numbers honestly',
-                  'Implement the agreed changes',
-                ]} />
-              </div>
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-6">
-              The founder provides expertise and appears on camera where required. The team owns the rest.
             </p>
           </Section>
         </div>
@@ -826,9 +680,9 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 ]} />
               </div>
               <div className="glow-card border-blue-500/20 p-8">
-                <p className="text-white text-sm font-semibold mb-3">90 day installation guarantee</p>
+                <p className="text-white text-sm font-semibold mb-3">90 day guarantee</p>
                 <p className="text-zinc-300 text-[15px] leading-relaxed">
-                  If the agreed Authority Engine is not installed by day 90, we continue working with you at no additional cost until it is.
+                  If you do not have a consistent rhythm of content going out by day 90 that brings in new leads every month, we'll continue working with you until you do.
                 </p>
               </div>
             </div>
