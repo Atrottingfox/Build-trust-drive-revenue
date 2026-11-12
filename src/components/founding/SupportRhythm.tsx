@@ -7,7 +7,7 @@
 const SUPPORT: [string, string[]][] = [
   ['Before week 1', [
     'One Brand Day',
-    'Group advisory sessions, every Thursday|(Monday coming soon)',
+    'Group advisory office hours, every Thursday|(Monday coming soon)',
     '1:1 guided implementation starts in the next available intake month (January, then February)',
   ]],
   ['Weekly', [

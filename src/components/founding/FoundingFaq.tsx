@@ -34,7 +34,7 @@ const FAQ: { q: string; a: string[] }[] = [
     q: 'What if my team cannot do this?',
     a: [
       'Most teams are given the job and never the playbook.',
-      'Yours gets every SOP, every edit, the training library and two Loom reviews a week on their own work. If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I will pay you $5,000 AUD.',
+      'Yours gets every SOP, the training library and two Loom reviews a week on their own work. If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I will pay you $5,000 AUD.',
     ],
   },
   {

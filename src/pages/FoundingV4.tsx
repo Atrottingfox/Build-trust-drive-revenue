@@ -31,7 +31,7 @@ const Facts = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>1:1 implementation</Pill><Sep />
     <Pill>Brand Day included</Pill><Sep />
-    <Pill>5 spots per month</Pill>
+    <Pill>5 spots in January</Pill>
   </div>
 );
 

@@ -8,7 +8,10 @@ const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan
 
 export function Navigation() {
   const location = useLocation();
-  const hideCta = NO_CTA_PATHS.includes(location.pathname.toLowerCase());
+  const path = location.pathname.toLowerCase();
+  const hideCta = NO_CTA_PATHS.includes(path);
+  // Founding pages are buy direct, never apply (Sean, 13 Nov).
+  const founding = path.startsWith('/founding');
   const [scrolled, setScrolled] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
   const lastScrollY = useRef(0);
@@ -53,7 +56,15 @@ export function Navigation() {
               <span className="font-semibold text-[15px]">The Authority Engine</span>
             </Link>
 
-            {!hideCta && (
+            {!hideCta && founding && (
+              <a
+                href="#price"
+                className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
+              >
+                Lock in
+              </a>
+            )}
+            {!hideCta && !founding && (
               <a
                 href="/apply"
                 className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
@@ -66,7 +77,7 @@ export function Navigation() {
       </nav>
 
       <AnimatePresence>
-        {showMobile && !hideCta && (
+        {showMobile && !hideCta && !founding && (
           <motion.div
             className="fixed bottom-6 left-0 right-0 sm:hidden z-50 px-5 pointer-events-none"
             initial={{ y: 60, opacity: 0 }}

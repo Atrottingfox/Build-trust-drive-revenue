@@ -503,7 +503,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 spots in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD.
+              5 spots in the January intake.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
@@ -606,6 +606,10 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 <H2>Sean Fox.</H2>
                 <p className="text-zinc-300 leading-relaxed mt-6">
                   Founder of The Authority Engine, based on the Gold Coast.
+                </p>
+                {/* Sean's own words, 01 Authority Engine Fundamentals. */}
+                <p className="text-zinc-300 leading-relaxed mt-4">
+                  I cut my teeth door knocking. I door knocked 500 doors in 30 days when I was a 17 year old kid trying to sell my art into different businesses.
                 </p>
                 <p className="text-zinc-400 leading-relaxed mt-4">
                   I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
@@ -715,7 +719,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
       <div className="gradient-line" />
 
       {/* PRICE */}
-      <section id="price" className="py-20 md:py-28">
+      <section id="price" className="py-20 md:py-28 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Investment</Label>
@@ -726,7 +730,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD</p>
               <p className="text-zinc-300 leading-relaxed mt-6">
-                Only 5 installs in the January intake at $10,000 AUD. Once they sell, February goes to $15,000 AUD. The founding rate is in exchange for:
+                Only 5 installs in the January intake. The founding rate is in exchange for:
               </p>
               <div className="mt-4">
                 <Ticks items={[
@@ -750,12 +754,12 @@ export default function Founding({ review = false }: { review?: boolean }) {
             <ol className="space-y-4">
               {[
                 'Lock in your place on the secure Stripe checkout.',
-                'We set up your WhatsApp straight away.',
+                'We set up your WhatsApp straight away, with direct access to me.',
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
                 '1:1 guided implementation starts in the next available intake month (January, then February).',
-                'Your first live content cycle runs straight away.',
+                'Your first live content cycle runs once implementation starts.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">
                   <span className="font-display text-sm font-extrabold text-blue-400 mt-[3px] w-5 flex-shrink-0">{`0${i + 1}`}</span>
