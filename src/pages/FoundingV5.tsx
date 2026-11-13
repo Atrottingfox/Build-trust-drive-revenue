@@ -53,14 +53,30 @@ export default function FoundingV5() {
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
-            <div className="glow-card p-6 md:p-7 mt-8">
-              <p className="text-white font-semibold mb-4">January intake</p>
-              <Ticks items={['5 places available', 'Brand Day included', '90 days of guided implementation', '$10,000 AUD + GST']} />
-              <p className="text-zinc-400 text-[15px] leading-relaxed mt-5">
+            {/* January intake, as four figures in one strip (Sean, 13 Nov: display it better). */}
+            <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden">
+              <div className="flex items-center justify-between gap-3 px-5 md:px-6 py-3 border-b border-white/10">
+                <p className="text-white text-sm font-semibold uppercase tracking-widest">January intake</p>
+                <p className="text-blue-400 text-sm font-semibold">Closes 30 November</p>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4">
+                {[
+                  { big: status && status.remaining !== null ? String(status.remaining) : '5', small: status && status.remaining !== null && status.remaining < status.total ? `of ${status.total} places left` : 'places available' },
+                  { big: '1 day', small: 'Brand Day included' },
+                  { big: '90 days', small: 'guided implementation' },
+                  { big: '$10,000', small: 'AUD + GST' },
+                ].map((c, i) => (
+                  <div key={c.small} className={`px-5 md:px-6 py-5 ${i % 2 === 1 ? 'border-l border-white/10' : ''} ${i > 1 ? 'border-t md:border-t-0 border-white/10' : ''} ${i === 2 ? 'md:border-l' : ''}`}>
+                    <p className="font-display text-3xl md:text-[34px] font-extrabold tracking-[-0.02em] text-white leading-none">{c.big}</p>
+                    <p className="text-zinc-400 text-[13px] mt-2 leading-snug">{c.small}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="px-5 md:px-6 py-3 border-t border-white/10 text-zinc-400 text-[13px] leading-relaxed">
                 Implementation begins January 2027. Pay by 30 November 2026 to secure the founding rate.
               </p>
             </div>
-            <BuyButton status={status} location="founding-v5-hero" label={CTA} className="mt-8" />
+            <BuyButton status={status} location="founding-v5-hero" label={CTA} className="mt-6" />
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">{LADDER}</p>
           </Section>
         </div>
