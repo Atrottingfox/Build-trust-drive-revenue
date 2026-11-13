@@ -12,7 +12,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Do we need more reach first?',
     a: [
-      'Reach sells the $20 product. Nobody buys a $20,000 service from attention.',
+      'Reach sells the $30 product. Nobody buys a $30,000 service from attention.',
       'A high ticket buyer needs the right attention, paired with authority. That is what the system is built to create.',
     ],
   },

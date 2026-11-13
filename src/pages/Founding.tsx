@@ -116,7 +116,7 @@ export function SpotsLine({ status }: { status: Status | null }) {
   return (
     <div className="mt-5">
       <ul className="space-y-1.5">
-        {[spots, 'Secure yours now to get access today', 'Access to our resource library and advisory group calls, with 1:1 kickoff at the next available intake'].filter(Boolean).map((t, i) => (
+        {[spots, 'Secure yours now to get access today', 'Access to our resource library and advisory group office hours, with 1:1 kickoff at the next available intake'].filter(Boolean).map((t, i) => (
           <li key={t} className="flex items-center gap-2.5 text-sm">
             <Check className="w-4 h-4 text-blue-400 flex-shrink-0" />
             <span className={i === 0 && spots ? 'text-white font-semibold' : 'text-zinc-300'}>{t}</span>
