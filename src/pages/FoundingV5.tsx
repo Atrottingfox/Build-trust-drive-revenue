@@ -16,8 +16,7 @@ import { BuyButton, Crosses, H2, Label, Section, SectionCta, StickyBar, Ticks, u
   Hidden from Google.
 */
 
-const CTA = 'Build your presell system';
-const NOTE = '$10,000 AUD + GST';
+const CTA = 'Lock in your January install';
 const LADDER = 'Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.';
 
 const Line = () => <div className="gradient-line" />;
@@ -39,25 +38,29 @@ export default function FoundingV5() {
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sell before the sale.
             </h1>
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-8">
-              Turn your expertise into content that answers the questions, objections and doubts your best buyers have before they speak to sales.
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
+              Turn your expertise into content that answers your buyers' questions, removes their objections, and builds trust before they speak to sales.
+            </p>
+            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+              In 90 days, we map what your buyers need to believe, turn those beliefs into content, and train your team to run the system without you becoming a fulltime creator.
             </p>
             <div className="mb-10">
               <VslPlayer />
             </div>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-6">
-              In 90 days, your team will know which beliefs to create, which content creates them, and how to produce it every week without relying on you for daily direction.
-            </p>
             <p className="text-white font-semibold leading-relaxed mb-6">
               Built from the playbooks created alongside six 8 figure+ companies we've worked with.
-            </p>
-            <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 spots in the January intake. Brand Day included. 90 days of guided implementation.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
-            <BuyButton status={status} location="founding-v5-hero" label={CTA} note={NOTE} className="mt-10" />
+            <div className="glow-card p-6 md:p-7 mt-8">
+              <p className="text-white font-semibold mb-4">January intake</p>
+              <Ticks items={['5 places available', 'Brand Day included', '90 days of guided implementation', '$10,000 AUD + GST']} />
+              <p className="text-zinc-400 text-[15px] leading-relaxed mt-5">
+                Implementation begins January 2027. Pay by 30 November 2026 to secure the founding rate.
+              </p>
+            </div>
+            <BuyButton status={status} location="founding-v5-hero" label={CTA} className="mt-8" />
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">{LADDER}</p>
           </Section>
         </div>
@@ -65,41 +68,77 @@ export default function FoundingV5() {
 
       <Line />
 
-      {/* WHAT THIS INSTALLS */}
+      {/* MORE THAN ATTENTION */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>What this installs</Label>
+            <Label>The commercial job</Label>
             <H2>Your content should do more than get attention.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-              The Authority Engine gives your content a commercial job. It creates buyer conviction.
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6 mb-6">
+              The Authority Engine gives your content a commercial job:
             </p>
-            <p className="text-white text-sm font-semibold mt-8 mb-4">We map:</p>
             <Ticks items={[
-              'What your buyers currently believe',
-              'What they misunderstand',
-              'What they need to believe before they buy',
-              'Which content creates each belief',
-              'What next step moves them closer to a decision',
+              'Make the right buyers recognise their problem',
+              'Show them why common solutions fail',
+              'Explain why your approach is different',
+              'Build trust in your expertise',
+              'Move them toward the next step',
             ]} />
-            <p className="text-zinc-300 leading-relaxed mt-8">
-              Your team then turns that map into a repeatable content cycle across short form, long form, lead magnets and sales assets.
-            </p>
-            <p className="text-zinc-400 leading-relaxed mt-4">
+            <p className="text-zinc-400 leading-relaxed mt-8">
               Your sales team should not have to explain everything from scratch on every call.
             </p>
-            <div className="grid md:grid-cols-3 gap-4 mt-10">
-              {[
-                { t: 'Buyer beliefs mapped', d: 'You know what your best buyers need to believe before they buy.' },
-                { t: 'Content built around those beliefs', d: 'Your short form, long form, lead magnets and sales assets each have a job.' },
-                { t: 'Team run presell system', d: 'Your operator can plan, produce, publish, review and improve the content cycle every week.' },
-              ].map((o, i) => (
-                <div key={o.t} className="glow-card p-6">
-                  <p className="font-display text-sm font-extrabold text-blue-400 mb-2">{`0${i + 1}`}</p>
-                  <p className="text-white font-semibold mb-2">{o.t}</p>
-                  <p className="text-zinc-400 text-[15px] leading-relaxed">{o.d}</p>
-                </div>
-              ))}
+          </Section>
+        </div>
+      </section>
+
+      <Line />
+
+      {/* WHAT WE INSTALL */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>What we install</Label>
+            <H2>The belief map, the content system and the team to run it.</H2>
+            <div className="space-y-4 mt-8">
+              <div className="glow-card p-7">
+                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">01</p>
+                <p className="text-white text-lg font-semibold mb-4">The belief map</p>
+                <p className="text-zinc-400 text-[15px] mb-3">We identify:</p>
+                <Ticks items={[
+                  'What your buyers believe now',
+                  'What they misunderstand',
+                  'What objections stop them buying',
+                  'What they need to believe before choosing you',
+                ]} />
+              </div>
+              <div className="glow-card p-7">
+                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">02</p>
+                <p className="text-white text-lg font-semibold mb-4">The content system</p>
+                <p className="text-zinc-400 text-[15px] mb-3">We turn those beliefs into:</p>
+                <Ticks items={[
+                  'Short form content',
+                  'Long form trust assets',
+                  'Lead magnets',
+                  'Hooks, topics and formats',
+                  'Clear calls to action',
+                ]} />
+                <p className="text-zinc-300 text-[15px] leading-relaxed mt-5">
+                  Every asset has a job. It either attracts attention, builds trust, or moves the buyer closer to action.
+                </p>
+              </div>
+              <div className="glow-card p-7">
+                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">03</p>
+                <p className="text-white text-lg font-semibold mb-4">The team capability</p>
+                <p className="text-zinc-400 text-[15px] mb-3">Your operator learns how to:</p>
+                <Ticks items={[
+                  'Plan the weekly content cycle',
+                  'Coordinate filming and production',
+                  'Brief and review editors',
+                  'Publish and track content',
+                  'Read the data',
+                  'Decide what to repeat, improve or remove',
+                ]} />
+              </div>
             </div>
           </Section>
         </div>
@@ -109,47 +148,17 @@ export default function FoundingV5() {
 
       <Line />
 
-      {/* BY DAY 90 */}
+      {/* THE 90 DAY PATH */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>By day 90</Label>
-            <H2>By day 90, your buyers have already heard the answers.</H2>
-            <p className="text-zinc-300 leading-relaxed mt-6 mb-6">Your content helps them understand:</p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                'Why their current problem matters',
-                'Why common solutions fail',
-                'What makes your approach different',
-                'Why they should trust you',
-                'What the next step is',
-              ].map((q, i) => (
-                <div key={q} className="glow-card px-5 py-4 flex items-center gap-4">
-                  <span className="font-display text-sm font-extrabold text-blue-400 w-5">{`0${i + 1}`}</span>
-                  <span className="text-white text-[15px] font-semibold">{q}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
-              And your team knows how to keep producing that content without you managing every post.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <Line />
-
-      {/* HOW IT RUNS */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>How it runs</Label>
-            <H2>Map the sale. Build it. Tune it.</H2>
+            <Label>The 90 day path</Label>
+            <H2>Map and build. Transfer. Operate.</H2>
             <div className="space-y-4 mt-8">
               {[
-                { w: 'Brand Day', t: 'Map the sale', d: 'We identify the buyer journey, belief gaps, category position and trust assets required to move someone toward a buying decision.' },
-                { w: 'Weeks 1 to 4', t: 'Build the presell system', d: 'Your team turns the belief map into real content and runs the first cycle.' },
-                { w: 'Weeks 5 to 12', t: 'Tune what creates conviction', d: 'We review audience response, qualified conversations, sales feedback and pipeline influence. Then we repeat what works and remove what does not.' },
+                { w: 'Weeks 1 to 4', t: 'Map and build', d: 'Brand Day, buyer beliefs, content strategy, first assets, and the first live content cycle.' },
+                { w: 'Weeks 5 to 8', t: 'Transfer', d: 'Your operator runs the system while we review real work and correct the bottlenecks.' },
+                { w: 'Weeks 9 to 12', t: 'Operate', d: 'Your team owns the rhythm. We refine what creates attention, trust and qualified demand.' },
               ].map((p) => (
                 <div key={p.w} className="glow-card p-6 md:p-7 md:grid md:grid-cols-[160px_1fr] md:gap-6">
                   <p className="text-blue-400 text-sm font-semibold mb-2 md:mb-0">{p.w}</p>
@@ -160,14 +169,35 @@ export default function FoundingV5() {
                 </div>
               ))}
             </div>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-[1.2] mt-14">
-              I map the beliefs that drive the sale. Your team turns them into content. Your sales team gets warmer buyers.
+          </Section>
+        </div>
+      </section>
+
+      <Line />
+
+      {/* BY DAY 90 */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>By day 90</Label>
+            <H2>By day 90, you have:</H2>
+            <div className="mt-8">
+              <Ticks items={[
+                'A documented Authority Engine',
+                'A trained operator',
+                'A repeatable content cycle',
+                'Content mapped to buyer beliefs',
+                'A system your team can run without daily founder direction',
+              ]} />
+            </div>
+            <p className="text-zinc-300 leading-relaxed mt-8">
+              You provide the expertise and film when needed. Your team turns it into content.
             </p>
           </Section>
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-how" />
+      <SectionCta status={status} location="founding-v5-day90" />
 
       <Line />
 
@@ -381,7 +411,7 @@ export default function FoundingV5() {
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">{LADDER}</p>
-              <BuyButton status={status} location="founding-v5-price" label={CTA} note={NOTE} className="mt-8" />
+              <BuyButton status={status} location="founding-v5-price" label={CTA} className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
             <ol className="space-y-4">
@@ -414,8 +444,11 @@ export default function FoundingV5() {
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
               Sell before the sale.
             </h2>
+            <p className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.25] mt-4">
+              I map the beliefs that drive the sale. Your team turns them into content. Your sales team gets warmer buyers.
+            </p>
             <div className="flex justify-center">
-              <BuyButton status={status} location="founding-v5-close" label={CTA} note={NOTE} className="mt-10" />
+              <BuyButton status={status} location="founding-v5-close" label={CTA} className="mt-10" />
             </div>
           </Section>
         </div>
