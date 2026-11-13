@@ -159,7 +159,7 @@ export default function FoundingV5() {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
+                1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
             </div>
           </Section>
@@ -365,7 +365,7 @@ export default function FoundingV5() {
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
-                '1:1 guided implementation starts in the next available intake month (January, then February).',
+                '1:1 guided implementation starts in the next available intake month, starting January.',
                 'Your first live content cycle runs once implementation starts.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">

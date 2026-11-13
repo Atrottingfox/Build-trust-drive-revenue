@@ -150,7 +150,7 @@ export default function FoundingV3() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
         </Section>
         <StartTodayShowcase />
 
@@ -209,7 +209,7 @@ export default function FoundingV3() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts in the next available intake month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month, starting January',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',

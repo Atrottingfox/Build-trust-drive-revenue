@@ -140,7 +140,7 @@ export default function FoundingV4() {
         <Section>
           <Label>Pay in full</Label>
           <H2>Pay in full. Start today.</H2>
-          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
+          <p className="text-zinc-400 text-lg leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
         </Section>
         <StartTodayShowcase />
         <MiniCta status={status} location="founding-v4-payinfull" />
@@ -290,13 +290,12 @@ export default function FoundingV4() {
             <div className="glow-card mt-10 divide-y divide-white/5">
               {[
                 'One Brand Day, in person',
-                '1:1 guided implementation starts in the next available intake month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month, starting January',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 'Two Loom reviews per week during active implementation',
-                'Operator hotseat every fortnight (coming soon)',
-                'Weekly advisory sessions, every Thursday (Monday coming soon)',
+                'Weekly advisory sessions, every Thursday',
                 'Monthly founder and operator board review',
                 'WhatsApp implementation support, 24 hour replies, during the agreed support window',
                 'Every SOP, every training video, both playbooks, straight away',

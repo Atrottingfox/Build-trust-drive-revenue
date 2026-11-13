@@ -40,7 +40,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Why not wait until the new year?',
     a: [
-      '1:1 guided implementation starts in the next available intake month (January, then February).',
+      '1:1 guided implementation starts in the next available intake month, starting January.',
       'Pay in full by 30 November and your team has the SOPs, playbooks and training in December, so implementation runs from day one.',
     ],
   },
@@ -61,7 +61,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'When is my Brand Day?',
     a: [
-      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month (January, then February), after your Brand Day.',
+      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month, starting January, after your Brand Day.',
     ],
   },
 ];

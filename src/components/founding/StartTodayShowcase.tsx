@@ -150,7 +150,7 @@ export function Visual({ index }: { index: number }) {
           <Clip src="live" sub="Live" label="Jump in and ask, before we start" />
           <div className="flex items-center gap-3 px-5 py-4">
             <CalendarDays className="w-4 h-4 text-blue-400" />
-            <span className="text-[13px] text-zinc-300">Every Thursday. Mondays coming soon.</span>
+            <span className="text-[13px] text-zinc-300">Every Thursday.</span>
           </div>
         </Window>
       );
@@ -166,12 +166,12 @@ export function Visual({ index }: { index: number }) {
 /*
   An example thread, labelled as one. Not a real client conversation.
   Sean, 13 Nov: set up the moment they buy, direct access to him. Thread
-  drafted 14 Nov to match the formats visual (Sean asked for something relevant).
+  drafted 14 Nov, outcome focused (Sean asked). Example only, not a real client.
 */
 const THREAD: { who: string; me?: boolean; text: string; time?: string }[] = [
-  { who: 'Operator', text: 'Went through the formats in the portal. Which ones do we film first?', time: '9:14am' },
-  { who: 'Sean', text: 'Start with Alignment. Two belief breakers and a yap. The steps are on each format card.', time: '9:41am' },
-  { who: 'You', me: true, text: 'Filmed both belief breakers this morning. Edits coming for review Thursday.', time: '11:02am' },
+  { who: 'Operator', text: 'That belief breaker booked two calls this week. Both said they watched it before reaching out.', time: '9:14am' },
+  { who: 'Sean', text: 'That is the job. Film two more on the same belief and pin it to the profile.', time: '9:41am' },
+  { who: 'You', me: true, text: 'First sales call where I did not have to explain what we do. They already got it.', time: '11:02am' },
 ];
 function WhatsAppThread() {
   return (

@@ -385,7 +385,7 @@ function Paid() {
                 'Your team gets every SOP, edit, playbook and training video',
                 'An advisory board call before you start',
                 'We lock in your Brand Day date',
-                '1:1 guided implementation starts in the next available intake month (January, then February)',
+                '1:1 guided implementation starts in the next available intake month, starting January',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
@@ -596,7 +596,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               <Label>Pay in full</Label>
               <H2>Pay in full. Start today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
+                1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
             </div>
           </Section>
@@ -802,7 +802,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 'Receive the Start Here workspace and pre install materials.',
                 'Book your Brand Day.',
                 'Your team gets access to the training and systems.',
-                '1:1 guided implementation starts in the next available intake month (January, then February).',
+                '1:1 guided implementation starts in the next available intake month, starting January.',
                 'Your first live content cycle runs once implementation starts.',
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">

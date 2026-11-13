@@ -358,7 +358,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               Your Brand Bible and Buying Belief Map, the short form and long form operating systems, every playbook and SOP, the scorecard, and the support to run them.
             </Lead>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6">
-              A Brand Day, 1:1 guided implementation from the next available intake month (January, then February), weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
+              A Brand Day, 1:1 guided implementation from the next available intake month, starting January, weekly advisory sessions, training every fortnight, Loom reviews on real work and a monthly board review.
             </p>
             <More label="See everything included">
               <div className="space-y-8">
@@ -378,13 +378,12 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
                   <p className="text-white font-semibold mb-3">Support</p>
                   <Ticks items={[
                     'One Brand Day',
-                    '1:1 guided implementation starts in the next available intake month (January, then February)',
+                    '1:1 guided implementation starts in the next available intake month, starting January',
                     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                     'One team call per week during installation',
                     'Training every fortnight',
-                    <>Operator hotseat every fortnight <span className="text-zinc-400">(coming soon)</span></>,
                     'Two Loom reviews per week during active implementation',
-                    <>Weekly advisory sessions, every Thursday <span className="text-zinc-400">(Monday coming soon)</span></>,
+                    'Weekly advisory sessions, every Thursday',
                     'Monthly founder and operator board review',
                     'WhatsApp implementation support, 24 hour replies, during the agreed support window',
                   ]} />
@@ -400,7 +399,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           <Section>
             <Label>Pay in full</Label>
             <H2>Pay in full. Start today.</H2>
-            <Lead>1:1 guided implementation starts in the next available intake month (January, then February). Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</Lead>
+            <Lead>1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</Lead>
           </Section>
           <StartTodayShowcase />
 

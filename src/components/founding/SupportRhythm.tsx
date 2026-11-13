@@ -7,8 +7,8 @@
 const SUPPORT: [string, string[]][] = [
   ['Before week 1', [
     'One Brand Day',
-    'Group advisory office hours, every Thursday|(Monday coming soon)',
-    '1:1 guided implementation starts in the next available intake month (January, then February)',
+    'Group advisory office hours, every Thursday',
+    '1:1 guided implementation starts in the next available intake month, starting January',
   ]],
   ['Weekly', [
     'Implementation calls for the first 4 weeks, then fortnightly for the next 8',
@@ -17,7 +17,6 @@ const SUPPORT: [string, string[]][] = [
   ]],
   ['Fortnightly', [
     'Training every fortnight',
-    'Operator hotseat every fortnight|(coming soon)',
   ]],
   ['Monthly', ['Founder and operator board review']],
   ['Any day', ['WhatsApp implementation support, 24 hour replies, during the agreed support window']],
