@@ -39,7 +39,7 @@ export default function FoundingV5() {
               Sell before the sale.
             </h1>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Turn your expertise into content that answers your buyers' questions, removes their objections, and builds trust before they speak to sales.
+              Make the right buyers understand your value, trust your method, and arrive ready to buy.
             </p>
             <p className="text-zinc-300 text-lg leading-relaxed mb-8">
               In 90 days, we map what your buyers need to believe, turn those beliefs into content, and train your team to run the system without you becoming a fulltime creator.
