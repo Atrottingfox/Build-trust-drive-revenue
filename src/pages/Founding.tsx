@@ -273,7 +273,8 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
   );
 }
 
-export function BuyButton({ status, location, className = '' }: { status: Status | null; location: string; className?: string }) {
+/* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
+export function BuyButton({ status, location, className = '', label = 'Lock in for $10,000 AUD + GST', note }: { status: Status | null; location: string; className?: string; label?: string; note?: string }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -315,10 +316,11 @@ export function BuyButton({ status, location, className = '' }: { status: Status
           className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-          Lock in for $10,000 AUD + GST
+          {label}
           {!busy && <ArrowRight className="w-4 h-4" />}
         </button>
       )}
+      {!closed && note && <p className="text-white text-[15px] font-semibold mt-3">{note}</p>}
       {!closed && <SpotsLine status={status} />}
       {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
     </div>
@@ -434,7 +436,7 @@ const Group = ({ title, items, n }: { title: string; items: React.ReactNode[]; n
 
 /* A plain buy button between sections (Sean, 13 Nov: more payment buttons).
    Same checkout as BuyButton. If the checkout fails it scrolls to the price. */
-function SectionCta({ status, location }: { status: Status | null; location: string }) {
+export function SectionCta({ status, location, label = 'Lock in your spot' }: { status: Status | null; location: string; label?: string }) {
   const [busy, setBusy] = useState(false);
   if (status && !status.open) return null;
   const buy = async () => {
@@ -455,7 +457,7 @@ function SectionCta({ status, location }: { status: Status | null; location: str
     <div className="max-w-3xl mx-auto px-6 lg:px-8 pb-20 md:pb-24 -mt-4">
       <button type="button" onClick={buy} disabled={busy} className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors disabled:opacity-70">
         {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-        Lock in your spot
+        {label}
         {!busy && <ArrowRight className="w-4 h-4" />}
       </button>
     </div>

@@ -69,6 +69,7 @@ const Founding = React.lazy(() => import('./pages/Founding'));
 const FoundingV2 = React.lazy(() => import('./pages/FoundingV2'));
 const FoundingV3 = React.lazy(() => import('./pages/FoundingV3'));
 const FoundingV4 = React.lazy(() => import('./pages/FoundingV4'));
+const FoundingV5 = React.lazy(() => import('./pages/FoundingV5'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
 const Booked = React.lazy(() => import('./pages/Booked'));
@@ -187,6 +188,7 @@ export default function App() {
           <Route path="/founding-v2" element={<FoundingV2 />} />
           <Route path="/founding-v3" element={<FoundingV3 />} />
           <Route path="/founding-v4" element={<FoundingV4 />} />
+          <Route path="/founding-v5" element={<FoundingV5 />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />

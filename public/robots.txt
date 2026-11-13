@@ -8,6 +8,7 @@ Disallow: /founding-review
 Disallow: /founding-v2
 Disallow: /founding-v3
 Disallow: /founding-v4
+Disallow: /founding-v5
 Disallow: /undeniability-part2
 Disallow: /undeniability-review
 Disallow: /undeniability-advisory
