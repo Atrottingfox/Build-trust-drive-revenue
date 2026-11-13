@@ -36,7 +36,7 @@ export default function FoundingV5() {
             </p>
             {/* Sean's hero copy, 14 Nov. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-8">
-              We install the strategy and standards your team need to build trust before the sale.
+              We install the strategy and standards your crew need to build trust before the sale.
             </p>
             <div className="mb-10">
               <VslPlayer />
