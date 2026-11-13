@@ -188,15 +188,14 @@ export function Visual({ index }: { index: number }) {
 
 /*
   An example thread, labelled as one. Not a real client conversation.
-  Sean, 13 Nov: set up the moment they buy, direct access to him. Replies are
-  Claude drafts for Sean to rewrite.
+  Sean, 13 Nov: set up the moment they buy, direct access to him. Thread is
+  Sean's own wording (13 Nov).
 */
-const THREAD: { who: string; me?: boolean; text: string; time: string }[] = [
-  { who: 'Operator', text: 'Filming Thursday. Which 3 scripts do we shoot first?', time: '9:14am' },
-  { who: 'Sean', me: true, text: 'The two belief ones, then the client breakdown. Format cards are in the short form playbook.', time: '9:41am' },
-  { who: 'Founder', text: 'Posted all 5 this week. First week I didn\'t touch it.', time: '4:52pm' },
+const THREAD: { who: string; me?: boolean; text: string; time?: string }[] = [
+  { who: 'Operator', text: 'Filming Thursday. Should we shoot the Youtube first? Or shortform?', time: '9:14am' },
+  { who: 'Sean', text: 'The two belief shorts, then the client breakdown. Format cards are in your portal. Then follow the prompts from our longform playbook', time: '9:41am' },
+  { who: 'You', me: true, text: 'Just finished the Youtube, that was easy as.' },
 ];
-
 function WhatsAppThread() {
   return (
     <div className="flex flex-col h-[300px]">
@@ -205,16 +204,16 @@ function WhatsAppThread() {
           <MessageCircle className="w-4 h-4 text-[#25D366]" />
         </span>
         <div className="min-w-0">
-          <p className="text-white text-[13px] font-semibold truncate">Authority Engine x Your team</p>
+          <p className="text-white text-[13px] font-semibold truncate">Authority Engine Advisory Board</p>
           <p className="text-zinc-500 text-[11px] truncate">You, Sean, your operator</p>
         </div>
       </div>
       <div className="flex-1 flex flex-col justify-end gap-2 px-4 py-3 bg-[#0b141a]/60">
-        {THREAD.map((m) => (
-          <div key={m.time} className={`max-w-[82%] rounded-xl px-3 py-2 ${m.me ? 'self-end bg-[#005c4b]' : 'self-start bg-[#202c33]'}`}>
+        {THREAD.map((m, i) => (
+          <div key={i} className={`max-w-[82%] rounded-xl px-3 py-2 ${m.me ? 'self-end bg-[#005c4b]' : 'self-start bg-[#202c33]'}`}>
             {!m.me && <p className="text-[11px] font-semibold text-[#25D366] mb-0.5">{m.who}</p>}
             <p className="text-[13px] text-zinc-100 leading-snug">{m.text}</p>
-            <p className="text-[10px] text-zinc-400 text-right mt-0.5">{m.time}</p>
+            {m.time && <p className="text-[10px] text-zinc-400 text-right mt-0.5">{m.time}</p>}
           </div>
         ))}
         <p className="self-start text-[11px] text-zinc-500 italic">Sean is typing...</p>
