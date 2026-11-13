@@ -11,8 +11,9 @@ import { AnimatePresence, motion } from 'framer-motion';
   creators' videos and this is a public page. If a format changes in the
   portal, copy it across here.
 
-  One format lights up at a time and the panel under the map shows its card.
-  Clicking a format pins it.
+  Four job boxes, the formats listed plainly under each (Sean, 14 Nov:
+  cleaner). One format lights up at a time and its description shows
+  underneath. Clicking a format pins it.
 */
 
 type Job = 'Attention' | 'Alignment' | 'Authorship' | 'Achievability';
@@ -46,11 +47,6 @@ const FORMATS: F[] = [
   { t: 'Client breakdown', j: 'Achievability', m: 'Create', l: "A client's result broken down on screen, with the numbers.", w: [] },
 ];
 
-/* A filled dot is Capture, a ring is Create, as in the portal. */
-const Dot = ({ m }: { m: F['m'] }) => (
-  <span className={`w-2 h-2 rounded-full flex-shrink-0 ${m === 'Capture' ? 'bg-blue-500' : 'border-[1.5px] border-blue-500'}`} />
-);
-
 /* The order the highlight walks through: one per job, round and round. */
 const WALK = [3, 8, 11, 17, 6, 13, 14, 0, 9, 12, 16, 5];
 
@@ -68,42 +64,33 @@ export default function FormatsMap() {
   const f = FORMATS[active];
 
   return (
-    <div className="px-4 md:px-5 pt-4 pb-5">
-      <div className="flex items-center gap-1.5 text-[11px] mb-3">
-        <span className="rounded-md bg-white/10 text-white px-2 py-1 font-semibold">Short form</span>
-        <span className="rounded-md text-zinc-500 px-2 py-1">Long form</span>
-      </div>
-      <p className="text-white text-[17px] md:text-[19px] font-extrabold tracking-[-0.02em] leading-tight">Every video does one of four jobs</p>
-      <div className="flex items-center gap-4 mt-2 mb-3 text-[11px] text-zinc-400">
-        <span className="flex items-center gap-1.5"><Dot m="Capture" />Capture: film what is already happening</span>
-        <span className="flex items-center gap-1.5"><Dot m="Create" />Create: plan it</span>
-      </div>
+    <div className="p-5">
+      <p className="text-white text-[18px] font-extrabold tracking-[-0.02em] leading-tight">Every video does one of four jobs</p>
+      <p className="text-zinc-500 text-[12px] mt-1">18 formats, each with its own step by step.</p>
 
-      <div className="divide-y divide-white/5 border-y border-white/5">
+      <div className="grid grid-cols-2 gap-px mt-4 rounded-xl overflow-hidden border border-white/5 bg-white/5">
         {JOBS.map(({ job, line }) => (
-          <div key={job} className="py-2.5 grid grid-cols-[92px_minmax(0,1fr)] md:grid-cols-[108px_minmax(0,1fr)] gap-3 items-start">
-            <div className="min-w-0">
-              <p className="text-white text-[13px] font-bold">{job}</p>
-              <p className="text-zinc-500 text-[10.5px] italic leading-snug mt-0.5">{line}</p>
-            </div>
-            <div className="flex flex-wrap gap-1.5">
+          <div key={job} className="bg-[#0d0f14] p-4">
+            <p className="text-white text-[13px] font-bold">{job}</p>
+            <p className="text-zinc-500 text-[11px] italic leading-snug mt-0.5 mb-3">{line}</p>
+            <ul className="space-y-1">
               {FORMATS.map((x, i) => x.j !== job ? null : (
-                <button
-                  key={x.t}
-                  type="button"
-                  onClick={() => setPinned(pinned === i ? null : i)}
-                  className={`flex items-center gap-1.5 rounded-md px-2 py-1 text-[11.5px] transition-colors duration-300 ${i === active ? 'bg-blue-500/20 text-white ring-1 ring-blue-500/50' : 'bg-white/[0.04] text-zinc-400 hover:text-zinc-200'}`}
-                >
-                  <Dot m={x.m} />
-                  {x.t}
-                </button>
+                <li key={x.t}>
+                  <button
+                    type="button"
+                    onClick={() => setPinned(pinned === i ? null : i)}
+                    className={`text-left text-[12.5px] leading-snug transition-colors duration-300 ${i === active ? 'text-blue-400 font-semibold' : 'text-zinc-400 hover:text-zinc-200'}`}
+                  >
+                    {x.t}
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>
 
-      <div className="mt-3 h-[124px] rounded-xl bg-white/[0.03] border border-white/5 px-4 py-3 overflow-hidden">
+      <div className="mt-4 h-[92px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
@@ -112,15 +99,8 @@ export default function FormatsMap() {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.25 }}
           >
-            <div className="flex items-center gap-2">
-              <Dot m={f.m} />
-              <p className="text-white text-[14px] font-semibold">{f.t}</p>
-              <span className="text-[10px] uppercase tracking-widest text-blue-400 font-semibold ml-auto">{f.j} - {f.m}</span>
-            </div>
-            <p className="text-zinc-300 text-[12.5px] leading-snug mt-1.5 line-clamp-2">{f.l}</p>
-            <p className="text-zinc-500 text-[11px] mt-2 truncate">
-              {f.w.length ? `Ways to make it: ${f.w.join(', ')}` : 'Step by step: production SOP, then editing SOP'}
-            </p>
+            <p className="text-white text-[14px] font-semibold">{f.t}</p>
+            <p className="text-zinc-400 text-[12.5px] leading-snug mt-1 line-clamp-2">{f.l}</p>
           </motion.div>
         </AnimatePresence>
       </div>

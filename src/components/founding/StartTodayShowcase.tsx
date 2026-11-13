@@ -165,13 +165,13 @@ export function Visual({ index }: { index: number }) {
 
 /*
   An example thread, labelled as one. Not a real client conversation.
-  Sean, 13 Nov: set up the moment they buy, direct access to him. Thread is
-  Sean's own wording (13 Nov).
+  Sean, 13 Nov: set up the moment they buy, direct access to him. Thread
+  drafted 14 Nov to match the formats visual (Sean asked for something relevant).
 */
 const THREAD: { who: string; me?: boolean; text: string; time?: string }[] = [
-  { who: 'Operator', text: 'Filming Thursday. Should we shoot the Youtube first? Or shortform?', time: '9:14am' },
-  { who: 'Sean', text: 'The two belief shorts, then the client breakdown. Format cards are in your portal. Then follow the prompts from our longform playbook', time: '9:41am' },
-  { who: 'You', me: true, text: 'Just finished the Youtube, that was easy as.' },
+  { who: 'Operator', text: 'Went through the formats in the portal. Which ones do we film first?', time: '9:14am' },
+  { who: 'Sean', text: 'Start with Alignment. Two belief breakers and a yap. The steps are on each format card.', time: '9:41am' },
+  { who: 'You', me: true, text: 'Filmed both belief breakers this morning. Edits coming for review Thursday.', time: '11:02am' },
 ];
 function WhatsAppThread() {
   return (
