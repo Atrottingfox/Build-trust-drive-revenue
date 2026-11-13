@@ -1,4 +1,3 @@
-import { ChevronDown } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -8,18 +7,12 @@ import VslPlayer from '../components/founding/VslPlayer';
 import { BuyButton, Crosses, H2, Label, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
 
 /*
-  /founding-v5. Same components as /founding (v1), with the "Sell before the
-  sale" spine from Sean's reference copy, 13 Nov. The page sells content that
-  removes doubt before the sales conversation. The SOP and playbook inventory
-  sits under "What your team receives". Locked items stay as v1 has them:
-  guarantees, price ladder, GST, January intake, support rhythm, proof line.
-  Hidden from Google.
+  /founding-v5. Sean, 13 Nov: everything /founding has, displayed exactly as
+  it is there, plus two sections: The commercial job (after the hero) and the
+  90 day path (before Pay in full). Copied from Founding.tsx on 13 Nov, so a
+  later change to /founding does not reach this page by itself. Hidden from
+  Google.
 */
-
-const CTA = 'Lock in your January install';
-const LADDER = 'Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.';
-
-const Line = () => <div className="gradient-line" />;
 
 export default function FoundingV5() {
   const status = useStatus();
@@ -36,76 +29,33 @@ export default function FoundingV5() {
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Sell before the sale.
+              Stop being the content manager.
             </h1>
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Make the right buyers understand your value, trust your method, and arrive ready to buy.
-            </p>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              In 90 days, we map what your buyers need to believe, turn those beliefs into content, and train your team to run the system without you becoming a fulltime creator.
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
+              Install the system your team runs.
             </p>
             <div className="mb-10">
               <VslPlayer />
             </div>
-            <p className="text-white font-semibold leading-relaxed mb-6">
+            {/* Sean's line, 11 Nov 2026. */}
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
               Built from the playbooks created alongside six 8 figure+ companies we've worked with.
+            </p>
+            <p className="text-blue-400 font-semibold leading-relaxed mb-6">
+              5 spots in the January intake.
             </p>
             <p className="text-zinc-400 leading-relaxed">
               For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
             </p>
-            {/* January intake, as four figures in one strip (Sean, 13 Nov: display it better). */}
-            <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden">
-              <div className="flex items-center justify-between gap-3 px-5 md:px-6 py-3 border-b border-white/10">
-                <p className="text-white text-sm font-semibold uppercase tracking-widest">January intake</p>
-                <p className="text-blue-400 text-sm font-semibold">Closes 30 November</p>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4">
-                {[
-                  { big: status && status.remaining !== null ? String(status.remaining) : '5', small: status && status.remaining !== null && status.remaining < status.total ? `of ${status.total} places left` : 'places available' },
-                  { big: '1 day', small: 'Brand Day included' },
-                  { big: '90 days', small: 'guided implementation' },
-                  { big: '$10,000', small: 'AUD + GST' },
-                ].map((c, i) => (
-                  <div key={c.small} className={`px-5 md:px-6 py-5 ${i % 2 === 1 ? 'border-l border-white/10' : ''} ${i > 1 ? 'border-t md:border-t-0 border-white/10' : ''} ${i === 2 ? 'md:border-l' : ''}`}>
-                    <p className="font-display text-3xl md:text-[34px] font-extrabold tracking-[-0.02em] text-white leading-none">{c.big}</p>
-                    <p className="text-zinc-400 text-[13px] mt-2 leading-snug">{c.small}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="px-5 md:px-6 py-3 border-t border-white/10 text-zinc-400 text-[13px] leading-relaxed">
-                Implementation begins January 2027. Pay by 30 November 2026 to secure the founding rate.
-              </p>
-            </div>
-            <BuyButton status={status} location="founding-v5-hero" label={CTA} className="mt-6" />
-            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">{LADDER}</p>
+            <BuyButton status={status} location="founding-v5-hero" className="mt-10" />
+            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
           </Section>
         </div>
       </section>
 
-      <Line />
+      <div className="gradient-line" />
 
-      {/* WHY NOW (Sean, 13 Nov) */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Why now</Label>
-            <H2>The market changed.</H2>
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-6">
-              Anyone can publish. Few can become the obvious choice.
-            </p>
-            <p className="text-zinc-300 leading-relaxed mt-6">
-              Your buyers are comparing you before they contact you. If your content only gets attention, your sales team still has to create the trust, explain the category, handle objections, and prove why your approach is different.
-            </p>
-            <p className="text-white font-semibold leading-relaxed mt-6">
-              The Authority Engine moves that work upstream.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <Line />
-
-      {/* MORE THAN ATTENTION */}
+      {/* THE COMMERCIAL JOB (Sean, 13 Nov) */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
@@ -128,62 +78,47 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <Line />
+      <div className="gradient-line" />
 
-      {/* WHAT WE INSTALL */}
+      {/* WHAT THIS INSTALLS */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>What we install</Label>
-            <H2>The belief map, the content system and the team to run it.</H2>
-            <div className="space-y-4 mt-8">
-              <div className="glow-card p-7">
-                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">01</p>
-                <p className="text-white text-lg font-semibold mb-4">The belief map</p>
-                <p className="text-zinc-400 text-[15px] mb-3">We identify:</p>
-                <Ticks items={[
-                  'What your buyers believe now',
-                  'What they misunderstand',
-                  'What objections stop them buying',
-                  'What they need to believe before choosing you',
-                ]} />
-              </div>
-              <div className="glow-card p-7">
-                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">02</p>
-                <p className="text-white text-lg font-semibold mb-4">The content system</p>
-                <p className="text-zinc-400 text-[15px] mb-3">We turn those beliefs into:</p>
-                <Ticks items={[
-                  'Short form content',
-                  'Long form trust assets',
-                  'Lead magnets',
-                  'Hooks, topics and formats',
-                  'Clear calls to action',
-                ]} />
-                <p className="text-zinc-300 text-[15px] leading-relaxed mt-5">
-                  Every asset has a job. It either attracts attention, builds trust, or moves the buyer closer to action.
-                </p>
-              </div>
-              <div className="glow-card p-7">
-                <p className="font-display text-sm font-extrabold text-blue-400 mb-2">03</p>
-                <p className="text-white text-lg font-semibold mb-4">The team capability</p>
-                <p className="text-zinc-400 text-[15px] mb-3">Your operator learns how to:</p>
-                <Ticks items={[
-                  'Plan the weekly content cycle',
-                  'Coordinate filming and production',
-                  'Brief and review editors',
-                  'Publish and track content',
-                  'Read the data',
-                  'Decide what to repeat, improve or remove',
-                ]} />
-              </div>
+            <Label>What this installs</Label>
+            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
+              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+            </p>
+            <H2>By day 90, your team can answer these.</H2>
+            <div className="grid sm:grid-cols-2 gap-3 mt-8">
+              {[
+                'What should we make?',
+                'Who is it for?',
+                'Which format fits?',
+                'How do we capture it?',
+                'How do we produce it?',
+                'Is it good enough to publish?',
+                'Did it work?',
+                'What do we do more of next?',
+              ].map((q, i) => (
+                <div key={q} className="glow-card px-5 py-4 flex items-center gap-4">
+                  <span className="font-display text-sm font-extrabold text-blue-400 w-5">{`0${i + 1}`}</span>
+                  <span className="text-white text-[15px] font-semibold">{q}</span>
+                </div>
+              ))}
             </div>
+            <p className="text-zinc-400 leading-relaxed mt-8">
+              A working operating system your team uses to plan, produce, judge, publish and improve content.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
+            </p>
           </Section>
         </div>
       </section>
 
       <SectionCta status={status} location="founding-v5-installs" />
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* THE 90 DAY PATH */}
       <section className="py-20 md:py-24">
@@ -210,35 +145,9 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <Line />
+      <div className="gradient-line" />
 
-      {/* BY DAY 90 */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>By day 90</Label>
-            <H2>By day 90, you have:</H2>
-            <div className="mt-8">
-              <Ticks items={[
-                'A documented Authority Engine',
-                'A trained operator',
-                'A repeatable content cycle',
-                'Content mapped to buyer beliefs',
-                'A system your team can run without daily founder direction',
-              ]} />
-            </div>
-            <p className="text-zinc-300 leading-relaxed mt-8">
-              You provide the expertise and film when needed. Your team turns it into content.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <SectionCta status={status} location="founding-v5-day90" />
-
-      <Line />
-
-      {/* PAY IN FULL, inventory under the accordion */}
+      {/* PAY IN FULL, with the visual layer */}
       <section className="py-20 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
@@ -250,19 +159,13 @@ export default function FoundingV5() {
               </p>
             </div>
           </Section>
-          <details className="group mt-10">
-            <summary className="list-none cursor-pointer glow-card px-6 py-5 flex items-center justify-between max-w-3xl [&::-webkit-details-marker]:hidden">
-              <span className="text-white text-lg font-semibold">What your team receives</span>
-              <ChevronDown className="w-5 h-5 text-zinc-400 transition-transform group-open:rotate-180" />
-            </summary>
-            <StartTodayShowcase />
-          </details>
+          <StartTodayShowcase />
         </div>
       </section>
 
       <SectionCta status={status} location="founding-v5-payinfull" />
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* SUPPORT */}
       <section className="py-20 md:py-24">
@@ -280,7 +183,7 @@ export default function FoundingV5() {
 
       <SectionCta status={status} location="founding-v5-support" />
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* WHO */}
       <section className="py-20 md:py-24">
@@ -301,6 +204,7 @@ export default function FoundingV5() {
                 <p className="text-zinc-300 leading-relaxed mt-6">
                   Founder of The Authority Engine, based on the Gold Coast.
                 </p>
+                {/* Sean's own words, 01 Authority Engine Fundamentals. */}
                 <p className="text-zinc-300 leading-relaxed mt-4">
                   I cut my teeth door knocking. I door knocked 500 doors in 30 days when I was a 17 year old kid trying to sell my art into different businesses.
                 </p>
@@ -317,7 +221,7 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* FIT */}
       <section className="py-20 md:py-24">
@@ -334,7 +238,6 @@ export default function FoundingV5() {
                   'You have real expertise and proof',
                   'You already create some content',
                   'You have an operator or team member to train',
-                  'You want buyers arriving with more context before sales',
                   'You want the team running content without you managing every post',
                   'You are willing to fulfil increased demand without standards dropping',
                 ]} />
@@ -357,9 +260,9 @@ export default function FoundingV5() {
 
       <SectionCta status={status} location="founding-v5-fit" />
 
-      <Line />
+      <div className="gradient-line" />
 
-      {/* GUARANTEE (locked wording, same as /founding) */}
+      {/* GUARANTEE */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
@@ -401,7 +304,7 @@ export default function FoundingV5() {
 
       <SectionCta status={status} location="founding-v5-guarantee" />
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* FAQ */}
       <section className="py-20 md:py-24">
@@ -416,7 +319,7 @@ export default function FoundingV5() {
 
       <SectionCta status={status} location="founding-v5-faq" />
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* PRICE */}
       <section id="price" className="py-20 md:py-28 scroll-mt-16">
@@ -447,8 +350,8 @@ export default function FoundingV5() {
                 <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">{LADDER}</p>
-              <BuyButton status={status} location="founding-v5-price" label={CTA} className="mt-8" />
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
+              <BuyButton status={status} location="founding-v5-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
             <ol className="space-y-4">
@@ -471,7 +374,7 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <Line />
+      <div className="gradient-line" />
 
       {/* CLOSE */}
       <section className="py-20 md:py-28">
@@ -479,13 +382,13 @@ export default function FoundingV5() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
-              Sell before the sale.
+              Stop being the content manager.
             </h2>
-            <p className="font-display text-xl md:text-2xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.25] mt-4">
-              I map the beliefs that drive the sale. Your team turns them into content. Your sales team gets warmer buyers.
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
+              Install the system your team runs.
             </p>
             <div className="flex justify-center">
-              <BuyButton status={status} location="founding-v5-close" label={CTA} className="mt-10" />
+              <BuyButton status={status} location="founding-v5-close" className="mt-10" />
             </div>
           </Section>
         </div>
