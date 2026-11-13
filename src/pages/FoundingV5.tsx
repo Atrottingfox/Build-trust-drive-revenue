@@ -68,6 +68,27 @@ export default function FoundingV5() {
 
       <Line />
 
+      {/* WHY NOW (Sean, 13 Nov) */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Why now</Label>
+            <H2>The market changed.</H2>
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-6">
+              Anyone can publish. Few can become the obvious choice.
+            </p>
+            <p className="text-zinc-300 leading-relaxed mt-6">
+              Your buyers are comparing you before they contact you. If your content only gets attention, your sales team still has to create the trust, explain the category, handle objections, and prove why your approach is different.
+            </p>
+            <p className="text-white font-semibold leading-relaxed mt-6">
+              The Authority Engine moves that work upstream.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <Line />
+
       {/* MORE THAN ATTENTION */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
