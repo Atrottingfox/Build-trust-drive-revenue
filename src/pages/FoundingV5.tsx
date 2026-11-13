@@ -29,10 +29,14 @@ export default function FoundingV5() {
             <div className="accent-line mb-8" />
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Stop being the content manager.
+              Sold before the call.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
-              Install the system your team runs.
+              Turn your media team into a sales asset.
+            </p>
+            {/* Sean's hero copy, 14 Nov. */}
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-8">
+              We give your team the strategy and standards to create content that builds buyer trust before sales gets involved.
             </p>
             <div className="mb-10">
               <VslPlayer />
@@ -45,7 +49,7 @@ export default function FoundingV5() {
               5 spots in the January intake.
             </p>
             <p className="text-zinc-400 leading-relaxed">
-              For 7 and 8 figure B2B founders, coaches and consultants already doing $200K/month or more.
+              For 7 and 8 figure B2B founders doing $200K/month or more.
             </p>
             <BuyButton status={status} location="founding-v5-hero" className="mt-10" />
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
@@ -382,10 +386,10 @@ export default function FoundingV5() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
-              Stop being the content manager.
+              Sold before the call.
             </h2>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
-              Install the system your team runs.
+              Turn your media team into a sales asset.
             </p>
             <div className="flex justify-center">
               <BuyButton status={status} location="founding-v5-close" className="mt-10" />
