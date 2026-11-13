@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check, FileText, MessageCircle, CalendarDays, Play } from 'lucide-react';
+import FormatsMap from './FormatsMap';
 
 /*
   The pay in full list on /founding, with a visual layer beside it.
@@ -13,6 +14,7 @@ import { Check, FileText, MessageCircle, CalendarDays, Play } from 'lucide-react
     - Training clips are cut from curriculum video 02 (Authority Engine
       Fundamentals part 2) and video 16 (Three Ways to Capture, and When to
       Script), files in /public/founding.
+    - The Formats window is FormatsMap.tsx, copied from the portal formats page.
     - Playbook and SOP titles are the real page titles from the Engineroom short
       form playbook (contentengine-v3 src/features/short-form/index.json).
   Nothing in here is a made up message, number or client.
@@ -33,7 +35,6 @@ const PLAYBOOKS = [
   '18 - How to craft all 3 hook types',
 ];
 
-const FORMATS = ['Belief breaker', 'Strategy breakdown', 'Client breakdown', 'Question + Answer', 'Draw / show', 'Signature series', 'Testimonials', 'Off the cuff'];
 
 /* A browser style frame so every visual reads as a real screen. */
 export const Window = ({ title, children }: { title: string; children: React.ReactNode }) => (
@@ -139,33 +140,9 @@ export function Visual({ index }: { index: number }) {
       );
     case 3:
       return (
-        <div className="relative h-[380px]">
-          <div className="absolute inset-x-6 top-0 rotate-[-3deg] opacity-60">
-            <Window title="Long form playbook">
-              <div className="px-5 py-5 space-y-2 text-[13px] text-zinc-400">
-                <p className="text-white font-semibold">Why. What. How.</p>
-                <p>The long form structure, step by step.</p>
-              </div>
-            </Window>
-          </div>
-          <div className="absolute inset-x-0 top-14">
-            <Window title="Short form playbook - Format cards">
-              <div className="grid grid-cols-2 gap-2 p-4">
-                {FORMATS.map((f, i) => (
-                  <motion.div
-                    key={f}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.08 }}
-                    className="rounded-lg bg-white/[0.04] border border-white/5 px-3 py-3 text-[13px] text-zinc-300"
-                  >
-                    {f}
-                  </motion.div>
-                ))}
-              </div>
-            </Window>
-          </div>
-        </div>
+        <Window title="contentengine.live - Playbooks - Short form - Formats">
+          <FormatsMap />
+        </Window>
       );
     case 4:
       return (
