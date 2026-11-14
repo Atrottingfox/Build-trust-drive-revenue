@@ -9,11 +9,15 @@ import { Plus } from 'lucide-react';
 */
 
 const FAQ: { q: string; a: string[] }[] = [
+  /* Sean's own answers, 14 Nov. Kept in his words, with the page's locked
+     facts: $30 / $30,000 (his 13 Nov change), "starting January" (14 Nov),
+     no "every edit". */
   {
     q: 'Do we need more reach first?',
     a: [
       'Reach sells the $30 product. Nobody buys a $30,000 service from attention.',
-      'A high ticket buyer needs the right attention, paired with authority. That is what the system is built to create.',
+      'What you need is an engaged audience and above 5,000 followers. Followers is not our goal, however we work best as an accelerant, not a fire starter.',
+      'A high ticket buyer needs the right attention, paired with authority.',
     ],
   },
   {
@@ -24,24 +28,27 @@ const FAQ: { q: string; a: string[] }[] = [
     ],
   },
   {
-    q: 'Do I have to be in every part of it?',
+    q: 'Why not wait until the new year?',
     a: [
-      'Your voice has to be in it. Your hours do not.',
-      'You film. Your team runs the rest. Outside of filming, you spend under 5 hours a week on content, more only if you want to.',
+      '1:1 implementation starts in the next available intake month, starting January.',
+      'Pay in full by 30 November and your team has the training, and access to group office hours advisory calls every Thursday up until kickoff date.',
+      'This way when we start, we\'re all ready to go. When spots fill for each month, a waitlist for the next intake begins.',
     ],
   },
   {
     q: 'What if my team cannot do this?',
     a: [
-      'Most teams are given the job and never the playbook.',
-      'Yours gets every SOP, the training library and two Loom reviews a week on their own work. If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I will pay you $5,000 AUD.',
+      'Most teams are more capable than we think. What they lack is the ability to self assess with a feedback loop tight enough to improve.',
+      'Yours gets every SOP, the training library and two Loom reviews a week on their own work. And as soon as 1:1 begins, they get prescriptive and direct assistance to break their biggest bottleneck.',
+      'If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I\'ll pay you $5,000 AUD for your time.',
     ],
   },
   {
-    q: 'Why not wait until the new year?',
+    q: 'Do I have to be in every part of it?',
     a: [
-      '1:1 guided implementation starts in the next available intake month, starting January.',
-      'Pay in full by 30 November and your team has the SOPs, playbooks and training in December, so implementation runs from day one.',
+      'You must film, be involved in ideation and be willing to collaborate on those ideas. Your team will do the rest.',
+      'Outside of filming you spend under 5 hours a week on content, more only if you want to.',
+      'And what we do first, is find the content that exists inside activities you\'re already doing.',
     ],
   },
   {

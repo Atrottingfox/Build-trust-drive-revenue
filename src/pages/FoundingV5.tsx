@@ -204,16 +204,19 @@ export default function FoundingV5() {
                 className="w-full max-w-[220px] aspect-[4/5] object-cover rounded-2xl border border-white/10"
               />
               <div>
-                <H2>Sean Fox.</H2>
+                {/* Sean's own words, 14 Nov. */}
+                <H2>Hey, I'm Sean Fox.</H2>
                 <p className="text-zinc-300 leading-relaxed mt-6">
-                  Founder of The Authority Engine, based on the Gold Coast.
+                  I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
-                {/* Sean's own words, 01 Authority Engine Fundamentals. */}
                 <p className="text-zinc-300 leading-relaxed mt-4">
-                  I cut my teeth door knocking. I door knocked 500 doors in 30 days when I was a 17 year old kid trying to sell my art into different businesses.
+                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
                 </p>
-                <p className="text-zinc-400 leading-relaxed mt-4">
-                  I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
+                <p className="text-zinc-300 leading-relaxed mt-4">
+                  We work with the top 1% as an accelerant where our sole job is to get it seen by the right people, through a team that runs it without you.
+                </p>
+                <p className="text-white font-semibold leading-relaxed mt-4">
+                  We see business as a vehicle for impact, content as the engine that drives it, and revenue as the fuel.
                 </p>
                 <p className="text-white text-sm font-semibold mt-8 mb-3">The trail so far</p>
                 <p className="text-zinc-300 leading-relaxed">
