@@ -218,10 +218,6 @@ export default function FoundingV5() {
                 <p className="text-white font-semibold leading-relaxed mt-4">
                   We see business as a vehicle for impact, content as the engine that drives it, and revenue as the fuel.
                 </p>
-                <p className="text-white text-sm font-semibold mt-8 mb-3">The trail so far</p>
-                <p className="text-zinc-300 leading-relaxed">
-                  Mitch Revs, then Jay Wright, then Taki Moore, and the network of 7 and 8 figure founders that came from them.
-                </p>
               </div>
             </div>
           </Section>

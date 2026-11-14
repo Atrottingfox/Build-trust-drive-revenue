@@ -652,10 +652,6 @@ export default function Founding({ review = false }: { review?: boolean }) {
                 <p className="text-zinc-400 leading-relaxed mt-4">
                   I'm the accelerant. The expertise is already yours. My job is to get it seen by the right people, through a team that runs it without you.
                 </p>
-                <p className="text-white text-sm font-semibold mt-8 mb-3">The trail so far</p>
-                <p className="text-zinc-300 leading-relaxed">
-                  Mitch Revs, then Jay Wright, then Taki Moore, and the network of 7 and 8 figure founders that came from them.
-                </p>
               </div>
             </div>
           </Section>
