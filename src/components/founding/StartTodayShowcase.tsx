@@ -157,48 +157,19 @@ export function Visual({ index }: { index: number }) {
     default:
       return (
         <Window title="WhatsApp">
-          <WhatsAppThread />
+          <div className="flex flex-col items-center justify-center text-center gap-4 h-[300px] px-8">
+            <span className="w-14 h-14 rounded-full bg-[#25D366]/15 flex items-center justify-center">
+              <MessageCircle className="w-6 h-6 text-[#25D366]" />
+            </span>
+            <p className="font-display text-3xl font-extrabold text-white">24 hour replies</p>
+            <p className="text-zinc-400 text-[14px]">Set up the moment you buy. Direct access to Sean.</p>
+          </div>
         </Window>
       );
   }
 }
 
-/*
-  An example thread, labelled as one. Not a real client conversation.
-  Sean, 13 Nov: set up the moment they buy, direct access to him. Thread
-  drafted 14 Nov, outcome focused (Sean asked). Example only, not a real client.
-*/
-const THREAD: { who: string; me?: boolean; text: string; time?: string }[] = [
-  { who: 'Operator', text: 'That belief breaker booked two calls this week. Both said they watched it before reaching out.', time: '9:14am' },
-  { who: 'Sean', text: 'That is the job. Film two more on the same belief and pin it to the profile.', time: '9:41am' },
-  { who: 'You', me: true, text: 'First sales call where I did not have to explain what we do. They already got it.', time: '11:02am' },
-];
-function WhatsAppThread() {
-  return (
-    <div className="flex flex-col h-[300px]">
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-white/5">
-        <span className="w-8 h-8 rounded-full bg-[#25D366]/15 flex items-center justify-center flex-shrink-0">
-          <MessageCircle className="w-4 h-4 text-[#25D366]" />
-        </span>
-        <div className="min-w-0">
-          <p className="text-white text-[13px] font-semibold truncate">Authority Engine Advisory Board</p>
-          <p className="text-zinc-500 text-[11px] truncate">You, Sean, your operator</p>
-        </div>
-      </div>
-      <div className="flex-1 flex flex-col justify-end gap-2 px-4 py-3 bg-[#0b141a]/60">
-        {THREAD.map((m, i) => (
-          <div key={i} className={`max-w-[82%] rounded-xl px-3 py-2 ${m.me ? 'self-end bg-[#005c4b]' : 'self-start bg-[#202c33]'}`}>
-            {!m.me && <p className="text-[11px] font-semibold text-[#25D366] mb-0.5">{m.who}</p>}
-            <p className="text-[13px] text-zinc-100 leading-snug">{m.text}</p>
-            {m.time && <p className="text-[10px] text-zinc-400 text-right mt-0.5">{m.time}</p>}
-          </div>
-        ))}
-        <p className="self-start text-[11px] text-zinc-500 italic">Sean is typing...</p>
-      </div>
-      <p className="px-4 py-1.5 text-[10px] text-zinc-600 border-t border-white/5">Example thread</p>
-    </div>
-  );
-}
+/* WhatsApp visual: logo, not a mock thread (Sean, 15 Nov). The example thread is in git history at 3216d80. */
 
 /* v is the Visual to show. Sean, 12 Nov: no "Every edit", office hours back. */
 const ITEMS: { name: string; text: string; v: number }[] = [
