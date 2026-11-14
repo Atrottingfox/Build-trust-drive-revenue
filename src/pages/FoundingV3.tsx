@@ -224,7 +224,7 @@ export default function FoundingV3() {
               ))}
               <div className="px-6 py-6 bg-white/[0.02]">
                 <div className="flex items-baseline justify-between gap-4">
-                  <p className="text-zinc-400">From February, once 5 are sold</p>
+                  <p className="text-zinc-400">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
                   <p className="font-display text-xl font-extrabold text-zinc-300">$15,000 AUD</p>
                 </div>
                 <div className="flex items-baseline justify-between gap-4 mt-3">

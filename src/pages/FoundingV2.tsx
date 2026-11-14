@@ -59,7 +59,7 @@ function More({ label, children }: { label: string; children: React.ReactNode })
 function BuyCard({ status }: { status: Status | null }) {
   return (
     <div className="glow-card border-blue-500/20 p-6">
-      <p className="text-zinc-400 text-[13px]">From February, once 5 are sold</p>
+      <p className="text-zinc-400 text-[13px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
       <p className="font-display text-lg font-extrabold text-zinc-300">$15,000 AUD</p>
       <p className="text-zinc-400 text-[13px] mt-3">Founding 5, paid in full</p>
       <p className="font-display text-4xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
@@ -489,7 +489,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               <Label>Investment</Label>
               <H2>$10,000 AUD + GST. Closes 30 November.</H2>
               <div className="glow-card p-8 md:p-10 mt-10">
-                <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold</p>
+                <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
                 <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD</p>
                 <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
                 <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
