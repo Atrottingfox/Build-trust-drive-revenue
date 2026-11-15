@@ -141,14 +141,6 @@ const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
   version: TERMS_VERSION + '-morgan-5',
-  headerVideo: {
-    src: '/install/morgan.mp4',
-    poster: '/install/morgan.jpg',
-    loopSrc: '/install/morgan-loop.mp4',
-    loopPoster: '/install/morgan-loop.jpg',
-    length: '4:13',
-    title: 'Morgan 90 Day',
-  },
   intro: 'Here is what the next 90 look like, and the three things to sort before we start.',
   phases: [
     {
