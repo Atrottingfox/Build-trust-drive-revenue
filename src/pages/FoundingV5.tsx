@@ -32,7 +32,7 @@ export default function FoundingV5() {
               Sold before the call.
             </h1>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
-              Turn your media team into a sales asset.
+              Turn your content team into a sales asset.
             </p>
             {/* Sean's hero copy, 15 Nov. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
@@ -392,7 +392,7 @@ export default function FoundingV5() {
               Sold before the call.
             </h2>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
-              Turn your media team into a sales asset.
+              Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
               <BuyButton status={status} location="founding-v5-close" className="mt-10" />
