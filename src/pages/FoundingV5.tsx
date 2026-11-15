@@ -43,7 +43,7 @@ export default function FoundingV5() {
               <VslPlayer src="/founding/vsl-a.mp4" poster="/founding/vsl-a.jpg" loopSrc="/founding/vsl-a-loop.mp4" loopPoster="/founding/vsl-a-loop.jpg" length="4:13" title="Founding 5 VSL a" />
             </div>
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
-              Watch the 3 minute walkthrough to see what your team installs over 90 days.
+              Watch the 4 minute walkthrough to see what your team installs over 90 days.
             </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
               5 founding installs. $10,000 AUD + GST. Guided 1:1 weekly implementation begins January.
