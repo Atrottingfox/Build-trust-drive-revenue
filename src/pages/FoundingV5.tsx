@@ -45,9 +45,16 @@ export default function FoundingV5() {
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 4 minute walkthrough to see what your team installs over 90 days.
             </p>
-            <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 founding installs. $10,000 AUD + GST. Guided 1:1 weekly implementation begins January.
-            </p>
+            {/* Sean, 16 Nov: what it is, price, what they get now, when implementation starts. */}
+            <div className="glow-card p-6 md:p-8 mb-8">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 founding installs</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">$10,000 AUD + GST, paid in full.</p>
+              <p className="text-white font-semibold mt-6">Get access immediately</p>
+              <p className="text-zinc-300 leading-relaxed mt-1">
+                Your team gets the full playbook library, training and advisory group office hours to prepare for implementation.
+              </p>
+              <p className="text-white font-semibold mt-6">Guided 1:1 implementation begins in January.</p>
+            </div>
             <p className="text-zinc-400 leading-relaxed mb-6">
               For 7 and 8 figure B2B founders doing $200K/month or more.
             </p>
@@ -55,7 +62,7 @@ export default function FoundingV5() {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
               Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
-            <BuyButton status={status} location="founding-v5-hero" className="mt-10" />
+            <BuyButton status={status} location="founding-v5-hero" label="Lock in your January install" className="mt-10" />
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
           </Section>
         </div>
