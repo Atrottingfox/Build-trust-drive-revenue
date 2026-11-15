@@ -43,9 +43,9 @@ const headers = {
 /* $10,000 + 10% GST = $11,000 (Sean, 13 Nov 2026: the $10,000 is not GST inclusive).
    Same convention as advisory.ts and founder-partner.ts: one line, GST inclusive total. */
 const PRICE_AUD_CENTS = 1100000;
-const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding Fast Action, paid in full ($10,000 + GST)";
+const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding, paid in full ($10,000 + GST)";
 const INVOICE_DESCRIPTION =
-  "Brand Day plus 90 days of implementation. Founding fast action price, paid in full. $10,000 plus 10% GST ($1,000), $11,000 total.";
+  "Brand Day plus 90 days of implementation. Founding price, paid in full. $10,000 plus 10% GST ($1,000), $11,000 total.";
 
 const PAGE = "https://authorityengine.com.au/founding";
 
