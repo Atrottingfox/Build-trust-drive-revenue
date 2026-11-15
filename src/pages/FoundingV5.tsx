@@ -219,7 +219,7 @@ export default function FoundingV5() {
                   We work with the top 1% as an accelerant where our sole job is to get it seen by the right people, through a team that runs it without you.
                 </p>
                 <p className="text-white font-semibold leading-relaxed mt-4">
-                  We see business as a vehicle for impact, content as the engine that drives it, and revenue as the fuel.
+                  Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.
                 </p>
               </div>
             </div>
