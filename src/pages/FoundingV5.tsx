@@ -45,25 +45,53 @@ export default function FoundingV5() {
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 4 minute walkthrough to see what your team installs over 90 days.
             </p>
-            {/* Sean, 16 Nov: what it is, price, what they get now, when implementation starts. */}
-            <div className="glow-card p-6 md:p-8 mb-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 founding installs</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">$10,000 AUD + GST, paid in full.</p>
-              <p className="text-white font-semibold mt-6">Get access immediately</p>
-              <p className="text-zinc-300 leading-relaxed mt-1">
-                Your team gets the full playbook library, training and advisory group office hours to prepare for implementation.
+            {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
+            <div className="glow-card p-6 md:p-8">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">Founding January intake</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">5 installs at $10,000 AUD + GST, paid in full.</p>
+              <p className="text-zinc-300 leading-relaxed mt-5">
+                Get access today to the playbooks, training and advisory group office hours.
               </p>
-              <p className="text-white font-semibold mt-6">Guided 1:1 implementation begins in January.</p>
+              <p className="text-white font-semibold mt-5">Guided 1:1 implementation begins in January.</p>
+              <p className="text-zinc-400 leading-relaxed mt-5">
+                For 7 and 8 figure B2B founders doing $200K/month or more.
+              </p>
+              {/* Sean's line, 11 Nov 2026. */}
+              <p className="text-zinc-400 leading-relaxed mt-2">
+                Built from the playbooks created alongside six 8 figure+ companies we've worked with.
+              </p>
+              <BuyButton status={status} location="founding-v5-hero" label="Lock in your January install" className="mt-8" />
             </div>
-            <p className="text-zinc-400 leading-relaxed mb-6">
-              For 7 and 8 figure B2B founders doing $200K/month or more.
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* WHAT GETS INSTALLED IN 90 DAYS (Sean, 16 Nov) */}
+      <section className="py-20 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The 90 day install</Label>
+            <H2>What gets installed in 90 days.</H2>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+              We install short form first, then add long form once the operating rhythm is working.
             </p>
-            {/* Sean's line, 11 Nov 2026. */}
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
-              Built from the playbooks created alongside six 8 figure+ companies we've worked with.
-            </p>
-            <BuyButton status={status} location="founding-v5-hero" label="Lock in your January install" className="mt-10" />
-            <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
+            <div className="space-y-4 mt-8">
+              {[
+                { w: 'Days 1 to 30', t: 'Install short form', d: 'Your team learns what to make, who it is for, which format fits, how to produce it, and what good looks like. By day 30, a repeatable short form cycle is running.' },
+                { w: 'Days 31 to 60', t: 'Add long form', d: 'Once short form is operating, long form is added to deepen authority, explain your mechanism, handle objections and build trust before the sales conversation.' },
+                { w: 'Days 61 to 90', t: 'Operate and improve', d: 'Your team runs both systems while we review performance, remove bottlenecks and decide what to do more of next.' },
+              ].map((p) => (
+                <div key={p.w} className="glow-card p-6 md:p-7 md:grid md:grid-cols-[160px_1fr] md:gap-6">
+                  <p className="text-blue-400 text-sm font-semibold mb-2 md:mb-0">{p.w}</p>
+                  <div>
+                    <p className="text-white text-lg font-semibold mb-2">{p.t}</p>
+                    <p className="text-zinc-400 text-[15px] leading-relaxed">{p.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </Section>
         </div>
       </section>
@@ -76,9 +104,7 @@ export default function FoundingV5() {
           <Section>
             <Label>The commercial job</Label>
             <H2>Your content should do more than get attention.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6 mb-6">
-              The Authority Engine gives your content a commercial job:
-            </p>
+            <div className="mt-8">
             <Ticks items={[
               'Make the right buyers recognise their problem',
               'Show them why common solutions fail',
@@ -86,6 +112,7 @@ export default function FoundingV5() {
               'Build trust in your expertise',
               'Move them toward the next step',
             ]} />
+            </div>
             <p className="text-zinc-400 leading-relaxed mt-8">
               Your sales team should not have to explain everything from scratch on every call.
             </p>
@@ -99,10 +126,7 @@ export default function FoundingV5() {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>What this installs</Label>
-            <p className="text-zinc-300 text-lg leading-relaxed mb-8">
-              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
-            </p>
+            <Label>By day 90</Label>
             <H2>By day 90, your team can answer these.</H2>
             <div className="grid sm:grid-cols-2 gap-3 mt-8">
               {[
@@ -131,35 +155,6 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-installs" />
-
-      <div className="gradient-line" />
-
-      {/* THE 90 DAY PATH */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The 90 day path</Label>
-            <H2>Map and build. Transfer. Operate.</H2>
-            <div className="space-y-4 mt-8">
-              {[
-                { w: 'Weeks 1 to 4', t: 'Map and build', d: 'Brand Day, buyer beliefs, content strategy, first assets, and the first live content cycle.' },
-                { w: 'Weeks 5 to 8', t: 'Transfer', d: 'Your operator runs the system while we review real work and correct the bottlenecks.' },
-                { w: 'Weeks 9 to 12', t: 'Operate', d: 'Your team owns the rhythm. We refine what creates attention, trust and qualified demand.' },
-              ].map((p) => (
-                <div key={p.w} className="glow-card p-6 md:p-7 md:grid md:grid-cols-[160px_1fr] md:gap-6">
-                  <p className="text-blue-400 text-sm font-semibold mb-2 md:mb-0">{p.w}</p>
-                  <div>
-                    <p className="text-white text-lg font-semibold mb-2">{p.t}</p>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed">{p.d}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Section>
-        </div>
-      </section>
-
       <div className="gradient-line" />
 
       {/* PAY IN FULL, with the visual layer */}
@@ -167,8 +162,8 @@ export default function FoundingV5() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
-              <Label>Pay in full</Label>
-              <H2>Pay in full. Start today.</H2>
+              <Label>Access today</Label>
+              <H2>Get access before implementation begins.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
                 1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
@@ -195,8 +190,6 @@ export default function FoundingV5() {
           </Section>
         </div>
       </section>
-
-      <SectionCta status={status} location="founding-v5-support" />
 
       <div className="gradient-line" />
 
@@ -272,8 +265,6 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-fit" />
-
       <div className="gradient-line" />
 
       {/* GUARANTEE */}
@@ -319,8 +310,6 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-faq" />
-
       <div className="gradient-line" />
 
       {/* PRICE */}
@@ -331,7 +320,7 @@ export default function FoundingV5() {
             <H2>$10,000 AUD + GST. Closes 30 November.</H2>
             <div className="glow-card p-8 md:p-10 mt-8">
               <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
-              <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD</p>
+              <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD <span className="text-zinc-500 text-[0.55em] font-semibold align-middle">+ GST</span></p>
               <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
               <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
               <p className="text-zinc-300 leading-relaxed mt-6">
@@ -352,7 +341,6 @@ export default function FoundingV5() {
                 <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                 <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
               </div>
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
               <BuyButton status={status} location="founding-v5-price" className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
