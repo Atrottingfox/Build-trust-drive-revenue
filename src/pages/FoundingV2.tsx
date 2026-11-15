@@ -260,7 +260,7 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
               A working operating system your team uses to plan, produce, judge, publish and improve content.
             </p>
             <p className="text-zinc-500 leading-relaxed mt-4">
-              This is the foundation. It gets your team what they need to start, without boxing in their creativity. It is not the end, and it is not what you will use forever.
+              This is the foundation. It gets your team what they need to start, without boxing in their creativity.
             </p>
           </Section>
 
