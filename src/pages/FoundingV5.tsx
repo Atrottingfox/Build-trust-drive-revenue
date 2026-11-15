@@ -34,22 +34,25 @@ export default function FoundingV5() {
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mb-8">
               Turn your media team into a sales asset.
             </p>
-            {/* Sean's hero copy, 14 Nov. */}
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-8">
-              We install the strategy and standards you need to build trust before the sale.
+            {/* Sean's hero copy, 15 Nov. */}
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
+              We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before they ever speak to sales.
             </p>
-            <div className="mb-10">
+            <p className="text-zinc-400 leading-relaxed mb-6">
+              For 7 and 8 figure B2B founders doing $200K/month or more.
+            </p>
+            <p className="text-zinc-300 leading-relaxed mb-6">
+              Watch the 3 minute walkthrough to see what your team installs over 90 days.
+            </p>
+            <div className="mb-6">
               <VslPlayer />
             </div>
-            {/* Sean's line, 11 Nov 2026. */}
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Built from the playbooks created alongside six 8 figure+ companies we've worked with.
-            </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 spots in the January intake.
+              5 founding installs. $10,000 AUD + GST. Guided implementation begins in January.
             </p>
-            <p className="text-zinc-400 leading-relaxed">
-              For 7 and 8 figure B2B founders doing $200K/month or more.
+            {/* Sean's line, 11 Nov 2026. */}
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
+              Built from the playbooks created alongside six 8 figure+ companies we've worked with.
             </p>
             <BuyButton status={status} location="founding-v5-hero" className="mt-10" />
             <p className="text-zinc-500 text-[13px] leading-relaxed mt-4">Founding rate. $10,000 AUD for the first five installs. Once those places are filled, the investment increases to $15,000 AUD, starting with the February intake. Future intakes then go to $20,000, then $25,000, and hold at $30,000 AUD. All prices are plus GST.</p>
