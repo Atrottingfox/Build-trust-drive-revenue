@@ -68,30 +68,71 @@ export default function FoundingV5() {
 
       <div className="gradient-line" />
 
-      {/* WHAT GETS INSTALLED IN 90 DAYS (Sean, 16 Nov) */}
+      {/* WHAT GETS INSTALLED IN 90 DAYS (Sean, 16 Nov, second pass: long form is the qualification layer) */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The 90 day install</Label>
             <H2>What gets installed in 90 days.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-              We install short form first, then add long form once the operating rhythm is working.
+            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-6">
+              Short form gets the right people into your world. Long form increases the calibre of the prospects who stay.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              We install short form first so your team develops a reliable operating rhythm. Once that foundation is running, long form is added as the depth and qualification layer, helping serious buyers understand your expertise before they enter the sales process.
             </p>
             <div className="space-y-4 mt-8">
               {[
-                { w: 'Days 1 to 30', t: 'Install short form', d: 'Your team learns what to make, who it is for, which format fits, how to produce it, and what good looks like. By day 30, a repeatable short form cycle is running.' },
-                { w: 'Days 31 to 60', t: 'Add long form', d: 'Once short form is operating, long form is added to deepen authority, explain your mechanism, handle objections and build trust before the sales conversation.' },
-                { w: 'Days 61 to 90', t: 'Operate and improve', d: 'Your team runs both systems while we review performance, remove bottlenecks and decide what to do more of next.' },
+                {
+                  w: 'Days 1 to 30',
+                  t: 'Establish the short form engine',
+                  intro: 'Your team installs the rhythm for planning, producing, reviewing and publishing short form. Short form gives you:',
+                  items: [
+                    'More entry points into your world',
+                    'Faster feedback on topics and hooks',
+                    'A consistent way to test buyer interests',
+                    'The operating discipline required to produce weekly',
+                  ],
+                  outro: 'By day 30, your team is not guessing what to make or waiting for the founder to solve every decision.',
+                },
+                {
+                  w: 'Days 31 to 60',
+                  t: 'Increase the calibre of the prospect',
+                  intro: 'Once short form is running, we introduce long form. It gives serious buyers enough depth to understand:',
+                  items: [
+                    'How you think',
+                    'Why common solutions fail',
+                    'What your mechanism is',
+                    'Whether your approach fits their situation',
+                    'Why they should trust you with a larger problem',
+                  ],
+                  outro: 'It helps lower intent people self select out and gives higher value prospects more reasons to raise their hand.',
+                },
+                {
+                  w: 'Days 61 to 90',
+                  t: 'Connect attention to authority',
+                  intro: 'Your short form creates entry points and your long form deepens belief, so your sales process receives prospects who already understand the problem, your point of view and the value of solving it.',
+                  items: [] as string[],
+                  outro: 'Your team then uses performance data to improve both layers.',
+                },
               ].map((p) => (
                 <div key={p.w} className="glow-card p-6 md:p-7 md:grid md:grid-cols-[160px_1fr] md:gap-6">
                   <p className="text-blue-400 text-sm font-semibold mb-2 md:mb-0">{p.w}</p>
                   <div>
                     <p className="text-white text-lg font-semibold mb-2">{p.t}</p>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed">{p.d}</p>
+                    <p className="text-zinc-400 text-[15px] leading-relaxed">{p.intro}</p>
+                    {p.items.length > 0 && (
+                      <div className="mt-4">
+                        <Ticks items={p.items} />
+                      </div>
+                    )}
+                    <p className="text-zinc-400 text-[15px] leading-relaxed mt-4">{p.outro}</p>
                   </div>
                 </div>
               ))}
             </div>
+            <p className="text-white font-semibold leading-relaxed mt-8">
+              A system that gets you seen by the right people, then gives the best prospects enough depth to choose you.
+            </p>
           </Section>
         </div>
       </section>
