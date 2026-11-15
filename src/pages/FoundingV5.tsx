@@ -14,6 +14,11 @@ import { BuyButton, Crosses, H2, Label, Section, SectionCta, StickyBar, Ticks, u
   Google.
 */
 
+/*
+  DELIBERATE small errors, Sean 16 Nov (so the page reads hand written). Do not fix:
+  "a engine" (Who), the double space after "This is the foundation." (By day 90),
+  "every every post" (Fit).
+*/
 export default function FoundingV5() {
   const status = useStatus();
 
@@ -190,7 +195,7 @@ export default function FoundingV5() {
               A working operating system your team uses to plan, produce, judge, publish and improve content.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-4">
-              This is the foundation. It gets your team what they need to start, without boxing in their creativity.
+              This is the foundation.{'\u00a0 '}It gets your team what they need to start, without boxing in their creativity.
             </p>
           </Section>
         </div>
@@ -258,7 +263,7 @@ export default function FoundingV5() {
                   I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
-                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
+                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into a engine that consistently drives revenue.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
                   We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
@@ -289,7 +294,7 @@ export default function FoundingV5() {
                   'You have real expertise and proof',
                   'You already create some content',
                   'You have an operator or team member to train',
-                  'You want the team running content without you managing every post',
+                  'You want the team running content without you managing every every post',
                   'You are willing to fulfil increased demand without standards dropping',
                 ]} />
               </div>
