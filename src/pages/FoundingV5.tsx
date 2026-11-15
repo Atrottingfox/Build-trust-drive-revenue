@@ -209,7 +209,7 @@ export default function FoundingV5() {
           <Section>
             <div className="max-w-3xl">
               <Label>Access today</Label>
-              <H2>Get access before implementation begins.</H2>
+              <H2>Start in January, get access today.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
                 1:1 guided implementation starts in the next available intake month, starting January.
               </p>
