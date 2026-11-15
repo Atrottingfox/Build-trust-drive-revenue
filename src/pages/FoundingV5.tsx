@@ -83,14 +83,14 @@ export default function FoundingV5() {
               Short form gets the right people into your world. Long form increases the calibre of the prospects who stay.
             </p>
             <p className="text-zinc-400 leading-relaxed mt-4">
-              We install short form first so your team develops a reliable operating rhythm. Once that foundation is running, long form is added as the depth and qualification layer, helping serious buyers understand your expertise before they enter the sales process.
+              We recalibrate the content you already make. Short form first, so your team has a reliable operating rhythm, then long form, embedding the exact videos required so serious buyers understand your expertise before they enter the sales process.
             </p>
             <div className="space-y-4 mt-8">
               {[
                 {
                   w: 'Days 1 to 30',
-                  t: 'Establish the short form engine',
-                  intro: 'Your team installs the rhythm for planning, producing, reviewing and publishing short form. Short form gives you:',
+                  t: 'Dial in your short form',
+                  intro: 'We recalibrate your short form to embed the exact videos required, and your team installs the rhythm for planning, producing, reviewing and publishing it. Short form gives you:',
                   items: [
                     'More entry points into your world',
                     'Faster feedback on topics and hooks',
@@ -101,8 +101,8 @@ export default function FoundingV5() {
                 },
                 {
                   w: 'Days 31 to 60',
-                  t: 'Increase the calibre of the prospect',
-                  intro: 'Once short form is running, we introduce long form. It gives serious buyers enough depth to understand:',
+                  t: 'Dial in your long form',
+                  intro: 'Once short form is running, we dial in your long form with the exact videos required to increase the calibre of the prospect. It gives serious buyers enough depth to understand:',
                   items: [
                     'How you think',
                     'Why common solutions fail',
