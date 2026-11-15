@@ -206,7 +206,10 @@ export default function FoundingV5() {
               <Label>Access today</Label>
               <H2>Get access before implementation begins.</H2>
               <p className="text-zinc-400 leading-relaxed mt-6">
-                1:1 guided implementation starts in the next available intake month, starting January. Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
+                1:1 guided implementation starts in the next available intake month, starting January.
+              </p>
+              <p className="text-zinc-400 leading-relaxed mt-3">
+                Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
             </div>
           </Section>
