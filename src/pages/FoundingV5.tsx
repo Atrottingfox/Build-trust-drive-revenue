@@ -27,7 +27,7 @@ export default function FoundingV5() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Intro offer</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine - Founding intake</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sold before the call.
             </h1>
@@ -38,17 +38,17 @@ export default function FoundingV5() {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
               We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before the sale.
             </p>
-            <p className="text-zinc-400 leading-relaxed mb-6">
-              For 7 and 8 figure B2B founders doing $200K/month or more.
-            </p>
-            <p className="text-zinc-400 text-sm italic leading-relaxed mb-2">
-              Watch the 3 minute walkthrough to see what your team installs over 90 days.
-            </p>
-            <div className="mb-6">
+            <div className="mb-3">
               <VslPlayer />
             </div>
+            <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
+              Watch the 3 minute walkthrough to see what your team installs over 90 days.
+            </p>
             <p className="text-blue-400 font-semibold leading-relaxed mb-6">
-              5 founding installs. $10,000 AUD + GST. Guided implementation begins in January.
+              5 founding installs. $10,000 AUD + GST. Guided 1:1 weekly implementation begins January.
+            </p>
+            <p className="text-zinc-400 leading-relaxed mb-6">
+              For 7 and 8 figure B2B founders doing $200K/month or more.
             </p>
             {/* Sean's line, 11 Nov 2026. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed">
