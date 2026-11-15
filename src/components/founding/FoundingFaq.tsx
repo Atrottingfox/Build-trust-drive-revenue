@@ -40,7 +40,7 @@ const FAQ: { q: string; a: string[] }[] = [
     a: [
       'Most teams are more capable than we think. What they lack is the ability to self assess with a feedback loop tight enough to improve.',
       'Yours gets every SOP, the training library and two Loom reviews a week on their own work. And as soon as 1:1 begins, they get prescriptive and direct assistance to break their biggest bottleneck.',
-      'If your team has not made a material change to how content is planned, produced, reviewed or published by day 30, I\'ll pay you $5,000 AUD for your time.',
+      'If you do not have a consistent rhythm of content going out by day 90, we\'ll work with you until you do.',
     ],
   },
   {

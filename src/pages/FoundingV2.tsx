@@ -408,22 +408,17 @@ export default function FoundingV2({ review = false }: { review?: boolean }) {
           {/* GUARANTEES + FIT */}
           <div id="guarantee" className="scroll-mt-28" />
           <Section>
-            <Label>Guarantees</Label>
+            <Label>Guarantee</Label>
             <H2>The risk sits with me.</H2>
             <div className="mt-10">
-              <Statement title="Day 30.">
-                If your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
-              </Statement>
               <Statement title="Day 90.">
                 If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
               </Statement>
             </div>
             <More label="What counts, and the conditions">
-              <p className="text-white font-semibold mb-3">Material change means:</p>
-              <Ticks items={['The weekly content process exists', 'Owners are assigned', 'At least one full content cycle has run', 'Your team is using the documented workflow']} />
-              <p className="text-white font-semibold mt-6 mb-3">Conditions:</p>
+              <p className="text-white font-semibold mb-3">Conditions:</p>
               <Ticks items={['Your team attends at least 80% of agreed sessions', 'Required founder inputs arrive on time', 'Your team completes the agreed implementation work']} />
-              <p className="text-zinc-400 mt-4">The guarantees cover installation, not revenue.</p>
+              <p className="text-zinc-400 mt-4">The guarantee covers installation, not revenue.</p>
             </More>
 
             <p className="text-white text-xl font-semibold mt-20">You need a proven offer and a team.</p>

@@ -33,8 +33,7 @@ const Facts = () => (
   <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
     <Pill>First intake January, next February</Pill><Sep />
     <Pill>5 spots</Pill><Sep />
-    <Pill>Brand Day included</Pill><Sep />
-    <Pill>$5,000 guarantee</Pill>
+    <Pill>Brand Day included</Pill>
   </div>
 );
 
@@ -161,13 +160,10 @@ export default function FoundingV3() {
           <Label>Guarantee</Label>
           <H2>The risk sits with me.</H2>
           <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-            If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
-          </p>
-          <p className="text-zinc-300 text-lg leading-relaxed mt-4">
             If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
           </p>
           <p className="text-zinc-500 leading-relaxed mt-6">
-            To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantees cover installation, not revenue.
+            To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.
           </p>
         </Section>
 
@@ -218,7 +214,7 @@ export default function FoundingV3() {
                 'Monthly founder and operator board review',
                 'WhatsApp support, 24 hour replies',
                 'Every SOP, every training video, both playbooks, straight away',
-                '$5,000 guarantee at day 30, keep working past day 90',
+                'Not there by day 90? We keep working with you until you are',
               ].map((t) => (
                 <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
               ))}
@@ -289,7 +285,7 @@ export default function FoundingV3() {
             </div>
           </div>
           <p className="text-zinc-600 text-[12px] leading-relaxed mt-16">
-            Results vary. Your results depend on your offer, your team and your market. The guarantees cover installation, not revenue.
+            Results vary. Your results depend on your offer, your team and your market. The guarantee covers installation, not revenue.
           </p>
         </Section>
       </div>

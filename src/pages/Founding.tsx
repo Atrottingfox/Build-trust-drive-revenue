@@ -703,22 +703,10 @@ export default function Founding({ review = false }: { review?: boolean }) {
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Guarantees</Label>
+            <Label>Guarantee</Label>
             <H2>The risk sits with me.</H2>
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="glow-card border-blue-500/20 p-8">
-                <p className="text-white text-sm font-semibold mb-3">30 day implementation guarantee</p>
-                <p className="text-zinc-300 text-[15px] leading-relaxed">
-                  If, by day 30, your team has not made a material change to how content is planned, produced, reviewed or published, I will pay you $5,000 AUD.
-                </p>
-                <p className="text-zinc-400 text-[14px] mt-5 mb-3">Material change means:</p>
-                <Ticks items={[
-                  'The weekly content process exists',
-                  'Owners are assigned',
-                  'At least one full content cycle has run',
-                  'Your team is using the documented workflow',
-                ]} />
-              </div>
+            {/* Sean, 16 Nov: no $5,000 payment guarantee. */}
+            <div className="mt-8">
               <div className="glow-card border-blue-500/20 p-8">
                 <p className="text-white text-sm font-semibold mb-3">90 day guarantee</p>
                 <p className="text-zinc-300 text-[15px] leading-relaxed">
@@ -733,7 +721,7 @@ export default function Founding({ review = false }: { review?: boolean }) {
               'Your team completes the agreed implementation work',
             ]} />
             <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              The guarantees cover installation, not revenue.
+              The guarantee covers installation, not revenue.
             </p>
           </Section>
         </div>
