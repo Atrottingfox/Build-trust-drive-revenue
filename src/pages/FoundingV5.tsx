@@ -217,7 +217,7 @@ export default function FoundingV5() {
                   Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into an engine that consistently drives revenue.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
-                  We work with the top 1% as an accelerant where our sole job is to get it seen by the right people, through a team that runs it without you.
+                  We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
                 </p>
                 <p className="text-white font-semibold leading-relaxed mt-4">
                   Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.
