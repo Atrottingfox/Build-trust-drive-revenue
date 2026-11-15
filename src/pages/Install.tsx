@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import VslPlayer from '../components/founding/VslPlayer';
 import { Container } from '../components/ui/Container';
 import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
@@ -352,6 +353,12 @@ export default function Install() {
                 'You have done the Day. Here is what the next 90 look like, and the three things to sort before we start.'}
             </p>
           </div>
+
+          {v.headerVideo && (
+            <div className="mb-12">
+              <VslPlayer {...v.headerVideo} />
+            </div>
+          )}
 
           {/* The 90 days specifically. They have already done the Brand Day. */}
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/40 p-6 sm:p-8 mb-4">

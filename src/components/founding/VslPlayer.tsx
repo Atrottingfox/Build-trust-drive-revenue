@@ -12,15 +12,32 @@ import { Play } from 'lucide-react';
   begin_checkout and purchase.
 */
 
-function ga(event: string, extra: Record<string, unknown> = {}) {
+function ga(event: string, extra: Record<string, unknown> = {}, title = 'Founding 5 VSL') {
   try {
-    window.gtag?.('event', event, { video_title: 'Founding 5 VSL', ...extra });
+    window.gtag?.('event', event, { video_title: title, ...extra });
   } catch {
     /* analytics is never load bearing */
   }
 }
 
-export default function VslPlayer() {
+type VslProps = {
+  /* Defaults are the founding VSL, so /founding renders exactly as before. */
+  src?: string;
+  poster?: string;
+  loopSrc?: string;
+  loopPoster?: string;
+  length?: string;
+  title?: string;
+};
+
+export default function VslPlayer({
+  src = '/founding/vsl.mp4',
+  poster = '/founding/vsl.jpg',
+  loopSrc = '/founding/vsl-loop.mp4',
+  loopPoster = '/founding/vsl-loop.jpg',
+  length = '3:40',
+  title = 'Founding 5 VSL',
+}: VslProps = {}) {
   const ref = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
   const sent = useRef(new Set<number>());
@@ -34,14 +51,14 @@ export default function VslPlayer() {
       for (const mark of [25, 50, 75]) {
         if (pct >= mark && !sent.current.has(mark)) {
           sent.current.add(mark);
-          ga('vsl_progress', { percent: mark });
+          ga('vsl_progress', { percent: mark }, title);
         }
       }
     };
     const onEnd = () => {
       if (!sent.current.has(100)) {
         sent.current.add(100);
-        ga('vsl_progress', { percent: 100 });
+        ga('vsl_progress', { percent: 100 }, title);
       }
     };
     v.addEventListener('timeupdate', onTime);
@@ -56,7 +73,7 @@ export default function VslPlayer() {
     const v = ref.current;
     if (!v) return;
     setStarted(true);
-    ga('vsl_play');
+    ga('vsl_play', {}, title);
     v.play().catch(() => {
       /* The native controls are showing, so a blocked play is one tap away. */
     });
@@ -67,8 +84,8 @@ export default function VslPlayer() {
       <video
         ref={ref}
         className={`absolute inset-0 h-full w-full object-cover ${started ? '' : 'invisible'}`}
-        src="/founding/vsl.mp4"
-        poster="/founding/vsl.jpg"
+        src={src}
+        poster={poster}
         preload="none"
         playsInline
         controls={started}
@@ -78,8 +95,8 @@ export default function VslPlayer() {
       {!started && (
         <video
           className="absolute inset-0 h-full w-full object-cover"
-          src="/founding/vsl-loop.mp4"
-          poster="/founding/vsl-loop.jpg"
+          src={loopSrc}
+          poster={loopPoster}
           autoPlay
           muted
           loop
@@ -99,7 +116,7 @@ export default function VslPlayer() {
             <Play className="ml-1 h-8 w-8 text-black" fill="currentColor" />
           </span>
           <span className="absolute bottom-4 left-4 rounded-md bg-black/60 px-2.5 py-1 text-[12px] font-semibold text-white">Watch with sound</span>
-          <span className="absolute bottom-4 right-4 rounded-md bg-black/60 px-2 py-1 text-[12px] font-semibold text-white">3:40</span>
+          <span className="absolute bottom-4 right-4 rounded-md bg-black/60 px-2 py-1 text-[12px] font-semibold text-white">{length}</span>
         </button>
       )}
     </div>

@@ -21,6 +21,8 @@ export type InstallVariant = {
   feeLine: string;
   checkboxLine: string;
   payLine: string;
+  /* A video at the top of the page, under the heading. */
+  headerVideo?: { src: string; poster: string; loopSrc: string; loopPoster: string; length: string; title: string };
   /* The call step after payment. Standard copy used when absent. */
   slotTitle?: string;
   slotLine?: string;
@@ -139,6 +141,14 @@ const MORGAN: InstallVariant = {
   ...STANDARD,
   terms: MORGAN_TERMS,
   version: TERMS_VERSION + '-morgan-5',
+  headerVideo: {
+    src: '/install/morgan.mp4',
+    poster: '/install/morgan.jpg',
+    loopSrc: '/install/morgan-loop.mp4',
+    loopPoster: '/install/morgan-loop.jpg',
+    length: '4:13',
+    title: 'Morgan 90 Day',
+  },
   intro: 'Here is what the next 90 look like, and the three things to sort before we start.',
   phases: [
     {
