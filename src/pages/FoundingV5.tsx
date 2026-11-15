@@ -36,7 +36,7 @@ export default function FoundingV5() {
             </p>
             {/* Sean's hero copy, 15 Nov. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before they ever speak to sales.
+              We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before the sale.
             </p>
             <p className="text-zinc-400 leading-relaxed mb-6">
               For 7 and 8 figure B2B founders doing $200K/month or more.
