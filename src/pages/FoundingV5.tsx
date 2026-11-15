@@ -39,7 +39,8 @@ export default function FoundingV5() {
               We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before the sale.
             </p>
             <div className="mb-3">
-              <VslPlayer />
+              {/* Sean, 16 Nov: VSL option a as the header video. */}
+              <VslPlayer src="/founding/vsl-a.mp4" poster="/founding/vsl-a.jpg" loopSrc="/founding/vsl-a-loop.mp4" loopPoster="/founding/vsl-a-loop.jpg" length="4:13" title="Founding 5 VSL a" />
             </div>
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 3 minute walkthrough to see what your team installs over 90 days.
