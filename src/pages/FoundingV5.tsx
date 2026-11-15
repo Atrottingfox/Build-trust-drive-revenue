@@ -41,7 +41,7 @@ export default function FoundingV5() {
             <p className="text-zinc-400 leading-relaxed mb-6">
               For 7 and 8 figure B2B founders doing $200K/month or more.
             </p>
-            <p className="text-zinc-300 leading-relaxed mb-6">
+            <p className="text-zinc-400 text-sm italic leading-relaxed mb-2">
               Watch the 3 minute walkthrough to see what your team installs over 90 days.
             </p>
             <div className="mb-6">
