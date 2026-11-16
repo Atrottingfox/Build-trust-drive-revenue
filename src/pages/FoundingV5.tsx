@@ -74,11 +74,11 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
             <div className="mb-3">
-              {/* Sean, 16 Nov: VSL option a as the header video. */}
-              <VslPlayer src="/founding/vsl-a.mp4" poster="/founding/vsl-a.jpg" loopSrc="/founding/vsl-a-loop.mp4" loopPoster="/founding/vsl-a-loop.jpg" length="4:13" title="Founding 5 VSL a" />
+              {/* Sean, 16 Nov: VSL final (2:45) as the header video. Option a is still in public/founding. */}
+              <VslPlayer src="/founding/vsl-final.mp4" poster="/founding/vsl-final.jpg" loopSrc="/founding/vsl-final-loop.mp4" loopPoster="/founding/vsl-final-loop.jpg" length="2:45" title="Founding 5 VSL final" />
             </div>
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
-              Watch the 4 minute walkthrough to see what your team installs over 90 days.
+              Watch the 3 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
