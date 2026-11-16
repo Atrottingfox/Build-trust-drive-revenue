@@ -50,26 +50,29 @@ export default function FoundingV5() {
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 4 minute walkthrough to see what your team installs over 90 days.
             </p>
+            {/* Moved out of the offer card, Sean 16 Nov. */}
+            <p className="text-zinc-400 text-sm leading-relaxed -mt-4 mb-6">
+              Built from playbooks developed alongside six 8 figure companies.
+            </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">Founding January intake</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">5 installs at $10,000 AUD + GST</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January founding intake</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Install the content operating system that builds trust before the sale.</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
                 Get immediate access to the playbooks, training and advisory group office hours.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-2">
                 Guided 1:1 implementation begins in January.
               </p>
-              <p className="text-zinc-400 leading-relaxed mt-4">
-                Once the 5 January installs are sold, the price increases to $15,000 AUD + GST for the February intake.
+              <p className="text-zinc-400 text-sm mt-6">5 installs available at the founding rate</p>
+              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-1">$10,000 AUD + GST</p>
+              <p className="text-zinc-400 text-sm leading-relaxed mt-3">
+                Once the five January installs are sold, the February intake is $15,000 AUD + GST.
               </p>
-              <p className="text-zinc-400 leading-relaxed mt-4">
-                For 7 and 8 figure B2B founders doing $200K/month or more.
+              <BuyButton status={status} location="founding-v5-hero" label="Secure your January install" className="mt-7" />
+              <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
+                Immediate access today. Payment in full reserves your place. Closes 30 November.
               </p>
-              <p className="text-zinc-400 leading-relaxed mt-2">
-                Built from playbooks developed alongside six 8 figure companies.
-              </p>
-              <BuyButton status={status} location="founding-v5-hero" label="Secure your January install" className="mt-8" />
             </div>
           </Section>
         </div>
@@ -289,6 +292,9 @@ export default function FoundingV5() {
           <Section>
             <Label>Fit</Label>
             <H2>You need a proven offer and a team.</H2>
+            <p className="text-zinc-400 leading-relaxed mt-4">
+              For 7 and 8 figure B2B founders doing $200K/month or more.
+            </p>
             <div className="grid md:grid-cols-2 gap-6 mt-8">
               <div className="glow-card p-8">
                 <p className="text-white text-sm font-semibold mb-5">This is for you if:</p>
