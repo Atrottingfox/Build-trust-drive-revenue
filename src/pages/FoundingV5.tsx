@@ -64,7 +64,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">{feb ? 'February 2027 | 5 places' : 'January 2027 | 5 founding places'}</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">{feb ? 'February intake | 5 places' : 'January intake | 5 places'}</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sold before the call.
             </h1>
@@ -94,14 +94,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 You also get immediate access to the playbooks, SOPs, training and Thursday advisory group office hours.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
-                Your Brand Day happens before guided 1:1 implementation begins during the next available intake month.
+                Your Brand Day takes place before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.
               </p>
               {!feb && <p className="text-white font-semibold text-sm leading-relaxed mt-5">
                 When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before price increases toward $30,000 AUD + GST during 2027.
               </p>}
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
-                Payment in full reserves your place and gets immediate access plus a 1:1 strategy call within 7 days.
+                Payment in full reserves your {feb ? 'February' : 'January'} place and gives your team immediate access plus a 1:1 strategy call within 7 days.
               </p>
               <FitCall />
             </div>
