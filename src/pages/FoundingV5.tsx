@@ -4,7 +4,8 @@ import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import FitCall from '../components/founding/FitCall';
-import { BuyButton, Crosses, H2, Label, PHASES, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
+import { BuyButton, Crosses, H2, Label, Paid, PHASES, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
+import { usePageVisits } from '../lib/pageVisits';
 
 /*
   /founding-v5. Sean, 13 Nov: everything /founding has, displayed exactly as
@@ -29,12 +30,29 @@ const PHASES_V5 = PHASES.map((ph) =>
       : ph
 );
 
-export default function FoundingV5() {
+export default function FoundingV5({ live = false }: { live?: boolean }) {
+  /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
+     /founding?paid=1, personal links (?for= or ?c=) post visits to Slack, and
+     the buttons report as founding-* so GA stays continuous with the old page. */
+  const paid = live && typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
+  const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
+  usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
+  const loc = live ? 'founding' : 'founding-v5';
+  if (paid) return <Paid />;
 
   return (
     <div className="min-h-screen bg-base">
-      <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding.jpg" noIndex />
+      {live ? (
+        <SEO
+          title="90 Day Install"
+          description="Sold before the call. Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
+          path="/founding"
+          image="https://authorityengine.com.au/og-founding.jpg"
+        />
+      ) : (
+        <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding.jpg" noIndex />
+      )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* HERO */}
@@ -74,7 +92,7 @@ export default function FoundingV5() {
               <p className="text-zinc-400 text-sm leading-relaxed mt-2">
                 Once the five January places are filled, the February intake will be $15,000 AUD + GST.
               </p>
-              <BuyButton status={status} location="founding-v5-hero" label="Secure your January place" hideSpots className="mt-7" />
+              <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                 Payment in full reserves your place. Closes 30 November.
               </p>
@@ -204,7 +222,7 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-payinfull" />
+      <SectionCta status={status} location={`${loc}-payinfull`} />
 
       <div className="gradient-line" />
 
@@ -336,7 +354,7 @@ export default function FoundingV5() {
         </div>
       </section>
 
-      <SectionCta status={status} location="founding-v5-guarantee" />
+      <SectionCta status={status} location={`${loc}-guarantee`} />
 
       <div className="gradient-line" />
 
@@ -378,11 +396,7 @@ export default function FoundingV5() {
               <p className="text-zinc-400 leading-relaxed mt-6">
                 I keep active installs limited so I can stay close to the team, the work and the data.
               </p>
-              <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
-                <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
-                <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
-              </div>
-              <BuyButton status={status} location="founding-v5-price" className="mt-8" />
+              <BuyButton status={status} location={`${loc}-price`} className="mt-8" />
             </div>
             <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
             <ol className="space-y-4">
@@ -419,7 +433,7 @@ export default function FoundingV5() {
               Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
-              <BuyButton status={status} location="founding-v5-close" className="mt-10" />
+              <BuyButton status={status} location={`${loc}-close`} className="mt-10" />
             </div>
           </Section>
         </div>

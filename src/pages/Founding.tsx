@@ -328,7 +328,7 @@ export function BuyButton({ status, location, className = '', label = 'Lock in f
 }
 
 /* What they see when Stripe sends them back paid. */
-function Paid() {
+export function Paid() {
   const [state, setState] = useState<{ loading: boolean; paid: boolean; firstName: string; portalUrl?: string | null }>({
     loading: true,
     paid: false,

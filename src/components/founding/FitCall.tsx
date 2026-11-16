@@ -11,7 +11,7 @@ const URL = 'https://calendly.com/sean-authorityengine/fit-call';
 
 function ga(event: string) {
   try {
-    window.gtag?.('event', event, { cta_location: 'founding-v5' });
+    window.gtag?.('event', event, { cta_location: window.location.pathname.replace('/', '') });
   } catch {
     /* analytics is never load bearing */
   }

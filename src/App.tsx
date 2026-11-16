@@ -65,10 +65,6 @@ const ProfitAnalyst = React.lazy(() => import('./pages/ProfitAnalyst'));
 const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
-const Founding = React.lazy(() => import('./pages/Founding'));
-const FoundingV2 = React.lazy(() => import('./pages/FoundingV2'));
-const FoundingV3 = React.lazy(() => import('./pages/FoundingV3'));
-const FoundingV4 = React.lazy(() => import('./pages/FoundingV4'));
 const FoundingV5 = React.lazy(() => import('./pages/FoundingV5'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
@@ -183,12 +179,13 @@ export default function App() {
           <Route path="/thenextstage" element={<TheNextStage />} />
           <Route path="/offer" element={<Offer />} />
           <Route path="/brandday" element={<BrandDayOffer />} />
-          <Route path="/founding" element={<Founding />} />
-          <Route path="/founding-review" element={<FoundingV2 review />} />
-          <Route path="/founding-v2" element={<FoundingV2 />} />
-          <Route path="/founding-v3" element={<FoundingV3 />} />
-          <Route path="/founding-v4" element={<FoundingV4 />} />
-          <Route path="/founding-v5" element={<FoundingV5 />} />
+          {/* Sean, 16 Nov: v5 is /founding. The old tests point at it. Old pages are in git (tag pre-founding-v5-live-*). */}
+          <Route path="/founding" element={<FoundingV5 live />} />
+          <Route path="/founding-review" element={<Navigate to="/founding" replace />} />
+          <Route path="/founding-v2" element={<Navigate to="/founding" replace />} />
+          <Route path="/founding-v3" element={<Navigate to="/founding" replace />} />
+          <Route path="/founding-v4" element={<Navigate to="/founding" replace />} />
+          <Route path="/founding-v5" element={<Navigate to="/founding" replace />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />
