@@ -88,7 +88,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-lg md:text-xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
               <p className="text-zinc-300 leading-relaxed mt-4">
-                This includes your $5,000 Brand Day and the complete $15,000 90 day Authority Engine implementation.
+                This includes your Brand Day and the complete 90 day Authority Engine implementation.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
                 You also get immediate access to the playbooks, SOPs, training and Thursday advisory group office hours.
