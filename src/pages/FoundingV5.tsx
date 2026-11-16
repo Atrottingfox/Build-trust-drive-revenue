@@ -24,10 +24,12 @@ import { usePageVisits } from '../lib/pageVisits';
    /founding and v2 keep the shared PHASES wording. */
 const PHASES_V5 = PHASES.map((ph) =>
   ph.name === 'Install'
-    ? { ...ph, lead: 'We build and launch the system, starting with short form. Your Brand Day creates the blueprint, then we run it straight away on real content.' }
+    ? { ...ph, lead: 'We build and launch your content, starting with short form. Your Brand Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support.' }
     : ph.name === 'Transfer'
-      ? { ...ph, lead: "Your operator runs the system with support. When short form is ready, we move to long form." }
-      : ph
+      ? { ...ph, lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form." }
+      : ph.name === 'Operate and improve'
+        ? { ...ph, lead: 'We iron out any kinks, iterate with data, and ensure the team can run it themselves.' }
+        : ph
 );
 
 export default function FoundingV5({ live = false }: { live?: boolean }) {
