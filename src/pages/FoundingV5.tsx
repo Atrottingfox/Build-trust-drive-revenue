@@ -94,14 +94,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 You also get immediate access to the playbooks, SOPs, training and Thursday advisory group office hours.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
-                Your Brand Day takes place before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.
+                Your Brand Day happens before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.
               </p>
               {!feb && <p className="text-white font-semibold text-sm leading-relaxed mt-5">
                 When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before price increases toward $30,000 AUD + GST during 2027.
               </p>}
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
-                Payment in full reserves your {feb ? 'February' : 'January'} place and gives your team immediate access plus a 1:1 strategy call within 7 days.
+                Payment in full reserves your {feb ? 'February' : 'January'} place and gets immediate access plus a 1:1 strategy call within 7 days.
               </p>
               <FitCall />
             </div>
