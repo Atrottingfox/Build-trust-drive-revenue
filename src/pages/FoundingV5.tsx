@@ -84,20 +84,20 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 intake | 5 places' : 'January 2027 intake | 5 places'}</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 x 1:1 places per month</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-lg md:text-xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
               <p className="text-zinc-300 leading-relaxed mt-4">
-                This includes your Brand Day and the complete 90 day Authority Engine implementation.
+                This includes your $5,000 Brand Day and the complete $15,000 90 day Authority Engine implementation.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
-                You get access to the playbooks, SOPs, training and Thursday advisory group office hours immediately.
+                You also get immediate access to the playbooks, SOPs, training and Thursday advisory group office hours.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
                 Your Brand Day happens before guided 1:1 implementation begins during the next available intake month.
               </p>
               {!feb && <p className="text-white font-semibold text-sm leading-relaxed mt-5">
-                When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before increasing to $30,000 AUD + GST during 2027.
+                When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before price increases toward $30,000 AUD + GST during 2027.
               </p>}
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
