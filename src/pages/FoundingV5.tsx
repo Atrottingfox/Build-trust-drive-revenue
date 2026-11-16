@@ -80,7 +80,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 × 90 day installs per month - 1:1 implementation starts January</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 × 90 day installs per month</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access today.</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
                 Your purchase includes the $5,000 Brand Day, complete playbooks and SOPs, training, 24 hour async feedback, and Thursday group advisory calls.
@@ -90,7 +90,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               </p>
               <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">$10,000 AUD + GST</p>
               <p className="text-zinc-400 text-sm leading-relaxed mt-2">
-                Once the five January places are filled, the February intake will be $15,000 AUD + GST.
+                Once the five January places are filled, the February intake will be $15,000 AUD + GST, before increasing to $30,000 AUD + GST.
               </p>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
