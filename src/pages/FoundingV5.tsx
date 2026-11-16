@@ -283,13 +283,10 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                   I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
-                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 7 &amp; 8 figure B2B founders, coaches and consultants doing $200K/month+, turning content into a engine that consistently drives revenue.
+                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 8 figure B2B founders doing $1M+/month, turning content into a engine that consistently drives revenue.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
                   We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
-                </p>
-                <p className="text-zinc-400 leading-relaxed mt-4">
-                  Built from playbooks developed alongside six 8 figure companies.
                 </p>
                 <p className="text-white font-semibold leading-relaxed mt-4">
                   Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.
