@@ -32,7 +32,7 @@ export default function FoundingV5() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">5 × 90 day installs per month - 1:1 starts January - Founding intake</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">5 × 90 day installs per month - 1:1 starts January</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sold before the call.
             </h1>
