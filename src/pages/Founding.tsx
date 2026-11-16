@@ -397,7 +397,8 @@ export function Paid() {
                 'Your team gets every SOP, edit, playbook and training video',
                 'Advisory group office hours before you start',
                 'We lock in your Brand Day date',
-                '1:1 guided implementation starts in the next available intake month, beginning January',
+                /* No month here: a February buyer lands on this screen too. */
+                '1:1 guided implementation starts in your intake month',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
