@@ -5,7 +5,7 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 import SupportRhythm from '../components/founding/SupportRhythm';
 import VslPlayer from '../components/founding/VslPlayer';
 import FitCall from '../components/founding/FitCall';
-import { BuyButton, Crosses, H2, Label, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
+import { BuyButton, Crosses, H2, Label, PHASES, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
 
 /*
   /founding-v5. Sean, 13 Nov: everything /founding has, displayed exactly as
@@ -82,70 +82,39 @@ export default function FoundingV5() {
 
       <div className="gradient-line" />
 
-      {/* WHAT GETS INSTALLED IN 90 DAYS (Sean, 16 Nov, second pass: long form is the qualification layer) */}
+      {/* HOW IT WORKS, the v2 section (Sean, 16 Nov) */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>The 90 day install</Label>
-            <H2>What gets installed in 90 days.</H2>
-            <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mt-6">
-              Short form gets the right people into your world. Long form increases the calibre of the prospects who stay.
+            <Label>How it works</Label>
+            <H2>Install. Transfer. Operate.</H2>
+            <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mt-6">
+              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
             </p>
-            <p className="text-zinc-400 leading-relaxed mt-4">
-              We recalibrate the content you already make. Short form first, so your team has a reliable operating rhythm, then long form, embedding the exact videos required so serious buyers understand your expertise before they enter the sales process.
-            </p>
-            <div className="space-y-4 mt-8">
-              {[
-                {
-                  w: 'Days 1 to 30',
-                  t: 'Dial in your short form',
-                  intro: 'We recalibrate your short form to embed the exact videos required, and your team installs the rhythm for planning, producing, reviewing and publishing it. Short form gives you:',
-                  items: [
-                    'More entry points into your world',
-                    'Faster feedback on topics and hooks',
-                    'A consistent way to test buyer interests',
-                    'The operating discipline required to produce weekly',
-                  ],
-                  outro: 'By day 30, your team is not guessing what to make or waiting for the founder to solve every decision.',
-                },
-                {
-                  w: 'Days 31 to 60',
-                  t: 'Dial in your long form',
-                  intro: 'Once short form is running, we dial in your long form with the exact videos required to increase the calibre of the prospect. It gives serious buyers enough depth to understand:',
-                  items: [
-                    'How you think',
-                    'Why common solutions fail',
-                    'What your mechanism is',
-                    'Whether your approach fits their situation',
-                    'Why they should trust you with a larger problem',
-                  ],
-                  outro: 'It helps lower intent people self select out and gives higher value prospects more reasons to raise their hand.',
-                },
-                {
-                  w: 'Days 61 to 90',
-                  t: 'Connect attention to authority',
-                  intro: 'Your short form creates entry points and your long form deepens belief, so your sales process receives prospects who already understand the problem, your point of view and the value of solving it.',
-                  items: [] as string[],
-                  outro: 'Your team then uses performance data to improve both layers.',
-                },
-              ].map((p) => (
-                <div key={p.w} className="glow-card p-6 md:p-7 md:grid md:grid-cols-[160px_1fr] md:gap-6">
-                  <p className="text-blue-400 text-sm font-semibold mb-2 md:mb-0">{p.w}</p>
-                  <div>
-                    <p className="text-white text-lg font-semibold mb-2">{p.t}</p>
-                    <p className="text-zinc-400 text-[15px] leading-relaxed">{p.intro}</p>
-                    {p.items.length > 0 && (
-                      <div className="mt-4">
-                        <Ticks items={p.items} />
-                      </div>
-                    )}
-                    <p className="text-zinc-400 text-[15px] leading-relaxed mt-4">{p.outro}</p>
-                  </div>
+            <ol className="relative mt-12 ml-2 border-l border-white/10">
+              <li className="relative pl-8 pb-12">
+                <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-white ring-4 ring-blue-500/30" />
+                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
+                <p className="font-display text-3xl font-extrabold text-white mt-1">Brand Day</p>
+                <p className="text-zinc-300 text-lg leading-relaxed mt-2">
+                  One full media strategy day, in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
+                </p>
+                <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                  <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
+                  <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                 </div>
+              </li>
+              {PHASES.map((ph) => (
+                <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
+                  <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
+                  <p className="text-zinc-500 text-sm uppercase tracking-widest">{ph.weeks}</p>
+                  <p className="font-display text-2xl font-extrabold text-white mt-1">{ph.name}</p>
+                  <p className="text-zinc-400 text-lg leading-relaxed mt-2">{ph.lead}</p>
+                </li>
               ))}
-            </div>
-            <p className="text-white font-semibold leading-relaxed mt-8">
-              A system that gets you seen by the right people, then gives the best prospects enough depth to choose you.
+            </ol>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-10">
+              By the end, your team knows what to do next without asking you every time.
             </p>
           </Section>
         </div>
