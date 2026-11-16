@@ -20,6 +20,16 @@ import { BuyButton, Crosses, H2, Label, PHASES, Section, SectionCta, StickyBar, 
   "a engine" (Who), the double space after "This is the foundation." (By day 90),
   "every every post" (Fit).
 */
+/* v5 only (Sean, 16 Nov): short form in Install, long form in Transfer when it's ready.
+   /founding and v2 keep the shared PHASES wording. */
+const PHASES_V5 = PHASES.map((ph) =>
+  ph.name === 'Install'
+    ? { ...ph, lead: 'We build and launch the system, starting with short form. Your Brand Day creates the blueprint, then we run it straight away on real content.' }
+    : ph.name === 'Transfer'
+      ? { ...ph, lead: "Your operator runs the system with support. When short form is ready, we move to long form." }
+      : ph
+);
+
 export default function FoundingV5() {
   const status = useStatus();
 
@@ -104,7 +114,7 @@ export default function FoundingV5() {
                   <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                 </div>
               </li>
-              {PHASES.map((ph) => (
+              {PHASES_V5.map((ph) => (
                 <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
                   <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
                   <p className="text-zinc-500 text-sm uppercase tracking-widest">{ph.weeks}</p>
