@@ -228,12 +228,12 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
-      {/* SUPPORT */}
-      <section className="py-20 md:py-24">
+      {/* EVERYTHING YOU GET + PRICE (Sean, 16 Nov: the v3 layout, price under the list) */}
+      <section id="price" className="py-20 md:py-24 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Support and implementation</Label>
-            <H2>Support until it runs without me.</H2>
+            <Label>Everything you get</Label>
+            <H2>Everything your team needs to run it.</H2>
             {/* Sean, 16 Nov: the v3 list. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
@@ -252,6 +252,17 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               ].map((t) => (
                 <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
               ))}
+              <div className="px-6 py-6 bg-white/[0.02]">
+                <div className="flex items-baseline justify-between gap-4">
+                  <p className="text-zinc-400 text-[14px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
+                  <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$15,000 AUD <span className="text-zinc-500 text-[0.6em] font-semibold">+ GST</span></p>
+                </div>
+                <div className="flex items-baseline justify-between gap-4 mt-4">
+                  <p className="text-white text-[15px] font-semibold">Founding 5, paid in full by 30 November</p>
+                  <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
+                </div>
+                <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
+              </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-6">
               The support is there to install the system, so your team stops needing me.
@@ -304,34 +315,23 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Fit</Label>
-            <H2>You need a proven offer and a team.</H2>
-            <p className="text-zinc-400 leading-relaxed mt-4">
-              For 7 and 8 figure B2B founders doing $200K/month or more.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6 mt-8">
-              <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">This is for you if:</p>
-                <Ticks items={[
-                  'You already do $200K/month or more',
-                  'You have a proven offer',
-                  'You have real expertise and proof',
-                  'You already create some content',
-                  'You have an operator or team member to train',
-                  'You want the team running content without you managing every every post',
-                  'You are willing to fulfil increased demand without standards dropping',
-                ]} />
-              </div>
-              <div className="glow-card p-8">
-                <p className="text-white text-sm font-semibold mb-5">This is not:</p>
-                <Crosses items={[
-                  'A done for you content agency',
-                  'A course you consume alone',
-                  'A replacement for a proven offer',
-                  'A guarantee of revenue',
-                  'For founders starting from zero',
-                  'For teams unwilling to attend, implement or share data honestly',
-                ]} />
-              </div>
+            <H2>This is for you if...</H2>
+            <div className="mt-8">
+              <Ticks items={[
+                'You already do $200K/month or more',
+                'You have a proven offer and real expertise',
+                'You already create some content',
+                'You have an operator or team member to train',
+                'You want the team running content without you managing every every post',
+              ]} />
+            </div>
+            <p className="font-display text-xl md:text-2xl font-extrabold text-white mt-14">This isn't for you if...</p>
+            <div className="mt-6">
+              <Crosses items={[
+                'You want a done for you content agency',
+                'You are starting from zero',
+                'Your team will not attend, implement or share data honestly',
+              ]} />
             </div>
           </Section>
         </div>
@@ -372,35 +372,12 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
-      {/* PRICE */}
-      <section id="price" className="py-20 md:py-28 scroll-mt-16">
+      {/* WHAT HAPPENS NEXT */}
+      <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Investment</Label>
-            <H2>$10,000 AUD + GST. Closes 30 November.</H2>
-            <div className="glow-card p-8 md:p-10 mt-8">
-              <p className="text-zinc-400 text-[14px] mb-1">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
-              <p className="font-display text-2xl font-extrabold text-zinc-300">$15,000 AUD <span className="text-zinc-500 text-[0.55em] font-semibold align-middle">+ GST</span></p>
-              <p className="text-zinc-400 text-[14px] mt-5 mb-1">Founding 5, paid in full by 30 November 2026</p>
-              <p className="font-display text-5xl font-extrabold text-white">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold align-middle">+ GST</span></p>
-              <p className="text-zinc-300 leading-relaxed mt-6">
-                Only 5 installs in the January intake. The founding rate is in exchange for:
-              </p>
-              <div className="mt-4">
-                <Ticks items={[
-                  'Full implementation',
-                  'Blunt feedback',
-                  'Honest data',
-                  'Permission to use results as case studies where appropriate',
-                ]} />
-              </div>
-              <p className="text-zinc-400 leading-relaxed mt-6">
-                I keep active installs limited so I can stay close to the team, the work and the data.
-              </p>
-              <BuyButton status={status} location={`${loc}-price`} className="mt-8" />
-            </div>
-            <p className="text-white text-sm font-semibold mt-12 mb-5">What happens next</p>
-            <ol className="space-y-4">
+            <Label>What happens next</Label>
+            <ol className="space-y-4 mt-2">
               {[
                 'Lock in your place on the secure Stripe checkout.',
                 'We set up your WhatsApp straight away, with direct access to me.',
