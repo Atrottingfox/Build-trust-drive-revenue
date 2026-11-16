@@ -42,7 +42,7 @@ export default function FoundingV5() {
             </p>
             {/* Sean's hero copy, 15 Nov. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              We install the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before the sale.
+              90 day install with the strategy, playbooks, workflows and standards your team needs to create content that makes the right buyers trust you before the sale.
             </p>
             <div className="mb-3">
               {/* Sean, 16 Nov: VSL option a as the header video. */}
