@@ -2,7 +2,6 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
-import SupportRhythm from '../components/founding/SupportRhythm';
 import VslPlayer from '../components/founding/VslPlayer';
 import FitCall from '../components/founding/FitCall';
 import { BuyButton, Crosses, H2, Label, PHASES, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
@@ -220,7 +219,23 @@ export default function FoundingV5() {
           <Section>
             <Label>Support and implementation</Label>
             <H2>Support until it runs without me.</H2>
-            <SupportRhythm />
+            {/* Sean, 16 Nov: the v3 list. */}
+            <div className="glow-card mt-8 divide-y divide-white/5">
+              {[
+                '1:1 guided implementation starts in the next available intake month, starting January',
+                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
+                'One team call per week during installation',
+                'Training every fortnight',
+                'Two Loom reviews per week during active implementation',
+                'Weekly office hours, every Thursday',
+                'Monthly founder and operator board review',
+                'WhatsApp support, 24 hour replies',
+                'Every SOP, every training video, both playbooks, straight away',
+                'Not there by day 90? We keep working with you until you are',
+              ].map((t) => (
+                <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
+              ))}
+            </div>
             <p className="text-zinc-400 leading-relaxed mt-6">
               The support is there to install the system, so your team stops needing me.
             </p>
@@ -313,23 +328,11 @@ export default function FoundingV5() {
           <Section>
             <Label>Guarantee</Label>
             <H2>The risk sits with me.</H2>
-            {/* Sean, 16 Nov: no $5,000 payment guarantee. */}
-            <div className="mt-8">
-              <div className="glow-card border-blue-500/20 p-8">
-                <p className="text-white text-sm font-semibold mb-3">90 day guarantee</p>
-                <p className="text-zinc-300 text-[15px] leading-relaxed">
-                  If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
-                </p>
-              </div>
-            </div>
-            <p className="text-white text-sm font-semibold mt-8 mb-4">Conditions</p>
-            <Ticks items={[
-              'Your team attends at least 80% of agreed sessions',
-              'Required founder inputs arrive on time',
-              'Your team completes the agreed implementation work',
-            ]} />
-            <p className="text-zinc-400 text-[15px] leading-relaxed mt-6">
-              The guarantee covers installation, not revenue.
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">
+              If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
+            </p>
+            <p className="text-zinc-500 leading-relaxed mt-6">
+              To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.
             </p>
           </Section>
         </div>
