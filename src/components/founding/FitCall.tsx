@@ -34,16 +34,13 @@ export default function FitCall() {
   return (
     <div className="mt-6 pt-6 border-t border-white/5">
       <p className="text-white text-[15px] font-semibold">Prefer to talk it through first?</p>
-      <p className="text-zinc-400 text-sm leading-relaxed mt-1">
-        If you have a specific question about fit, implementation or your team's starting point, request a fit call.
-      </p>
       <button
         type="button"
         onClick={() => {
           if (!open) ga('fit_call_open');
           setOpen(!open);
         }}
-        className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 text-sm font-semibold mt-3"
+        className="inline-flex items-center gap-1.5 text-blue-400 hover:text-blue-300 text-sm font-semibold mt-1"
       >
         Request a fit call
         <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : ''}`} />

@@ -48,7 +48,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       {live ? (
         <SEO
           title="90 Day Install"
-          description="Sold before the call. Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
+          description="Sold before the call. A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
           path="/founding"
           image="https://authorityengine.com.au/og-founding.jpg"
         />
@@ -71,7 +71,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean's hero copy, 15 Nov. */}
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.
+              A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
             <div className="mb-3">
               {/* Sean, 16 Nov: VSL option a as the header video. */}
@@ -82,16 +82,19 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 × 90 day installs per month</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access today.</p>
-              <p className="text-zinc-300 leading-relaxed mt-5">
-                Your purchase includes the $5,000 Brand Day, complete playbooks and SOPs, training, 24 hour async feedback, and Thursday group advisory calls.
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January 2027 intake | 5 places</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Join the January intake</p>
+              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-4">$10,000 AUD + GST</p>
+              <p className="text-zinc-300 leading-relaxed mt-4">
+                This includes your Brand Day and the complete 90 day Authority Engine implementation.
+              </p>
+              <p className="text-zinc-300 leading-relaxed mt-3">
+                You get access to the playbooks, SOPs, training and Thursday advisory calls immediately.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
                 Your Brand Day happens before guided 1:1 implementation begins during the next available intake month.
               </p>
-              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">$10,000 AUD + GST</p>
-              <p className="text-zinc-400 text-sm leading-relaxed mt-2">
+              <p className="text-white font-semibold text-sm leading-relaxed mt-5">
                 When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before increasing to $30,000 AUD + GST during 2027.
               </p>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
