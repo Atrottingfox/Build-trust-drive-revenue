@@ -53,19 +53,20 @@ export default function FoundingV5() {
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">Founding January intake</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">5 installs at $10,000 AUD + GST, paid in full.</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">5 installs at $10,000 AUD + GST</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
-                Get access today to the playbooks, training and advisory group office hours.
+                Get immediate access to the playbooks, training and advisory group office hours. Guided 1:1 implementation begins in January.
               </p>
-              <p className="text-white font-semibold mt-5">Guided 1:1 implementation begins in January.</p>
-              <p className="text-zinc-400 leading-relaxed mt-5">
+              <p className="text-zinc-400 leading-relaxed mt-4">
+                Once the 5 January installs are sold, the price increases to $15,000 AUD + GST for the February intake.
+              </p>
+              <p className="text-zinc-400 leading-relaxed mt-4">
                 For 7 and 8 figure B2B founders doing $200K/month or more.
               </p>
-              {/* Sean's line, 11 Nov 2026. */}
               <p className="text-zinc-400 leading-relaxed mt-2">
-                Built from the playbooks created alongside six 8 figure+ companies we've worked with.
+                Built from playbooks developed alongside six 8 figure companies.
               </p>
-              <BuyButton status={status} location="founding-v5-hero" label="Lock in your January install" className="mt-8" />
+              <BuyButton status={status} location="founding-v5-hero" label="Secure your January install" className="mt-8" />
             </div>
           </Section>
         </div>
