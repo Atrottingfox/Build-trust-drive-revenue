@@ -11,7 +11,7 @@ import { handler as checkout } from "../netlify/functions/founding-checkout";
   that records what was asked of it. The tests then check the things that would
   cost money or a client if they broke: one alert per sale, the founding-paid
   tag, the alerted flag that stops repeats, and the checkout refusing a sixth
-  buyer or a buyer after 30 November.
+  buyer into February at $15,000 + GST, and closing after 5 February sales.
 */
 
 type Call = { url: string; method: string; body: string };
@@ -158,26 +158,52 @@ describe("the checkout", () => {
     expect(create).toContain("phone_number_collection[enabled]=true");
     expect(create).toContain("metadata[payment]=founding-90");
     expect(create).toContain("payment_intent_data[metadata][payment]=founding-90");
+    expect(create).toContain("metadata[intake]=january");
   });
 
-  it("refuses a sixth buyer", async () => {
+  it("moves to the February intake after 5 January sales: $15,000 + GST, tagged february", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-11-15T00:00:00+10:00"));
-    mockFetch((u) => (u.includes("payment_intents/search") ? { json: { data: [{}, {}, {}, {}, {}] } } : { json: {} }));
+    mockFetch((u) => {
+      if (u.includes("payment_intents/search")) return { json: { data: [{}, {}, {}, {}, {}] } };
+      if (u.endsWith("/checkout/sessions")) return { json: { url: "https://checkout.stripe.com/feb" } };
+      return { json: {} };
+    });
+
+    const res = JSON.parse((await post({ action: "checkout" })).body);
+    expect(res.url).toBe("https://checkout.stripe.com/feb");
+    const create = decodeURIComponent(calls.find((c) => c.url.endsWith("/checkout/sessions"))!.body);
+    expect(create).toContain("line_items[0][price_data][unit_amount]=1650000");
+    expect(create).toContain("metadata[intake]=february");
+    expect(create).toContain("payment_intent_data[metadata][intake]=february");
+  });
+
+  it("refuses once 5 January and 5 February places are sold", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-11-15T00:00:00+10:00"));
+    const jan = Array.from({ length: 5 }, () => ({ metadata: { intake: "january" } }));
+    const feb = Array.from({ length: 5 }, () => ({ metadata: { intake: "february" } }));
+    mockFetch((u) => (u.includes("payment_intents/search") ? { json: { data: [...jan, ...feb] } } : { json: {} }));
 
     const res = JSON.parse((await post({ action: "checkout" })).body);
     expect(res).toMatchObject({ open: false, remaining: 0, url: null });
     expect(calls.some((c) => c.url.endsWith("/checkout/sessions"))).toBe(false);
   });
 
-  it("refuses after midnight 30 November, Brisbane", async () => {
+  it("sells February, not January, after midnight 30 November, Brisbane", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-12-01T00:00:01+10:00"));
-    mockFetch((u) => (u.includes("payment_intents/search") ? { json: { data: [] } } : { json: {} }));
+    mockFetch((u) => {
+      if (u.includes("payment_intents/search")) return { json: { data: [] } };
+      if (u.endsWith("/checkout/sessions")) return { json: { url: "https://checkout.stripe.com/late" } };
+      return { json: {} };
+    });
 
     const res = JSON.parse((await post({ action: "checkout" })).body);
-    expect(res).toMatchObject({ open: false, url: null });
-    expect(calls.some((c) => c.url.endsWith("/checkout/sessions"))).toBe(false);
+    expect(res.url).toBe("https://checkout.stripe.com/late");
+    const create = decodeURIComponent(calls.find((c) => c.url.endsWith("/checkout/sessions"))!.body);
+    expect(create).toContain("line_items[0][price_data][unit_amount]=1650000");
+    expect(create).toContain("metadata[intake]=february");
   });
 
   it("is still open one minute before the deadline", async () => {

@@ -2,7 +2,7 @@ import { provisionPortal } from "./_portal";
 import { GHL_API, GHL_VERSION } from "./_ghl";
 import { TEST_CENTS, TEST_TAG } from "./_pricing";
 import type { Handler } from "@netlify/functions";
-import { addToWaitlist, CLOSES_AT, handleFoundingSale, PAYMENT_KIND, soldCount, stripe, stripeKey, TOTAL_SPOTS } from "./_founding";
+import { addToWaitlist, currentIntake, handleFoundingSale, PAYMENT_KIND, stripe, stripeKey } from "./_founding";
 
 /*
   The founding 90 Day offer at /founding. Buy straight off the page, no
@@ -46,6 +46,11 @@ const PRICE_AUD_CENTS = 1100000;
 const PRODUCT_NAME = "Authority Engine 90 Day Install. Founding, paid in full ($10,000 + GST)";
 const INVOICE_DESCRIPTION =
   "Brand Day plus 90 days of implementation. Founding price, paid in full. $10,000 plus 10% GST ($1,000), $11,000 total.";
+/* February intake (Sean, 16 Nov 2026): $15,000 + 10% GST = $16,500. */
+const FEB_PRICE_AUD_CENTS = 1650000;
+const FEB_PRODUCT_NAME = "Authority Engine 90 Day Install. February intake, paid in full ($15,000 + GST)";
+const FEB_INVOICE_DESCRIPTION =
+  "Brand Day plus 90 days of implementation, February intake. Paid in full. $15,000 plus 10% GST ($1,500), $16,500 total.";
 
 const PAGE = "https://authorityengine.com.au/founding";
 
@@ -76,14 +81,13 @@ async function isTestEmail(email: string): Promise<boolean> {
 const json = (body: unknown) => ({ statusCode: 200, headers, body: JSON.stringify(body) });
 
 async function status() {
-  const closedByDate = Date.now() >= CLOSES_AT.getTime();
-  const sold = await soldCount();
-  const remaining = sold === null ? null : Math.max(0, TOTAL_SPOTS - sold);
+  const c = await currentIntake();
   return {
-    open: !closedByDate && remaining !== 0,
-    remaining,
-    total: TOTAL_SPOTS,
-    closesAt: CLOSES_AT.toISOString(),
+    open: c.intake !== null,
+    intake: c.intake,
+    remaining: c.remaining,
+    total: c.total,
+    closesAt: c.closesAt,
   };
 }
 
@@ -119,7 +123,10 @@ const handler: Handler = async (event) => {
        full price twice because of it). */
     const testEmail = typeof body.testEmail === "string" ? body.testEmail.slice(0, 120).trim().replace(/\s+/g, "+") : "";
     const isTest = testEmail ? await isTestEmail(testEmail) : false;
-    const cents = isTest ? TEST_CENTS : PRICE_AUD_CENTS;
+    const feb = s.intake === "february";
+    const cents = isTest ? TEST_CENTS : feb ? FEB_PRICE_AUD_CENTS : PRICE_AUD_CENTS;
+    const productName = feb ? FEB_PRODUCT_NAME : PRODUCT_NAME;
+    const invoiceDescription = feb ? FEB_INVOICE_DESCRIPTION : INVOICE_DESCRIPTION;
 
     const form = new URLSearchParams({
       mode: "payment",
@@ -128,19 +135,21 @@ const handler: Handler = async (event) => {
       "line_items[0][quantity]": "1",
       "line_items[0][price_data][currency]": "aud",
       "line_items[0][price_data][unit_amount]": String(cents),
-      "line_items[0][price_data][product_data][name]": PRODUCT_NAME,
+      "line_items[0][price_data][product_data][name]": productName,
       /* WhatsApp is set up as soon as they buy, so the number is required. */
       "phone_number_collection[enabled]": "true",
       "billing_address_collection": "required",
       "customer_creation": "always",
       /* A numbered tax invoice, not just a receipt. Flows into Xero. */
       "invoice_creation[enabled]": "true",
-      "invoice_creation[invoice_data][description]": INVOICE_DESCRIPTION,
+      "invoice_creation[invoice_data][description]": invoiceDescription,
       "invoice_creation[invoice_data][metadata][payment]": PAYMENT_KIND,
       "metadata[payment]": PAYMENT_KIND,
+      "metadata[intake]": s.intake || "january",
+      "payment_intent_data[metadata][intake]": s.intake || "january",
       /* On the PaymentIntent too, which is what the spot count searches. */
       "payment_intent_data[metadata][payment]": isTest ? `${PAYMENT_KIND}-test` : PAYMENT_KIND,
-      "payment_intent_data[description]": INVOICE_DESCRIPTION,
+      "payment_intent_data[description]": invoiceDescription,
       /* Unpaid sessions expire after 30 minutes so nobody sits on a spot. */
       "expires_at": String(Math.floor(Date.now() / 1000) + 30 * 60),
     });

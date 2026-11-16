@@ -41,6 +41,8 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
   usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
   const loc = live ? 'founding' : 'founding-v5';
+  /* Checkout moves to February once January has 5 sales or 30 November passes. */
+  const feb = status?.intake === 'february';
   if (paid) return <Paid />;
 
   return (
@@ -62,7 +64,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">January 2027 | 5 founding places</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">{feb ? 'February 2027 | 5 places' : 'January 2027 | 5 founding places'}</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sold before the call.
             </h1>
@@ -82,9 +84,9 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January 2027 intake | 5 places</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Join the January intake</p>
-              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-4">$10,000 AUD + GST</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 intake | 5 places' : 'January 2027 intake | 5 places'}</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
+              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
               <p className="text-zinc-300 leading-relaxed mt-4">
                 This includes your Brand Day and the complete 90 day Authority Engine implementation.
               </p>
@@ -94,9 +96,9 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <p className="text-zinc-300 leading-relaxed mt-3">
                 Your Brand Day happens before guided 1:1 implementation begins during the next available intake month.
               </p>
-              <p className="text-white font-semibold text-sm leading-relaxed mt-5">
+              {!feb && <p className="text-white font-semibold text-sm leading-relaxed mt-5">
                 When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before increasing to $30,000 AUD + GST during 2027.
-              </p>
+              </p>}
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                 Payment in full reserves your place and gets immediate access plus a 1:1 strategy call within 7 days.
@@ -256,13 +258,13 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
               ))}
               <div className="px-6 py-6 bg-white/[0.02]">
-                <div className="flex items-baseline justify-between gap-4">
+                {!feb && <div className="flex items-baseline justify-between gap-4">
                   <p className="text-zinc-400 text-[14px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
                   <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$15,000 AUD <span className="text-zinc-500 text-[0.6em] font-semibold">+ GST</span></p>
-                </div>
-                <div className="flex items-baseline justify-between gap-4 mt-4">
-                  <p className="text-white text-[15px] font-semibold">Founding 5, paid in full by 30 November</p>
-                  <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">$10,000 AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
+                </div>}
+                <div className={`flex items-baseline justify-between gap-4 ${feb ? '' : 'mt-4'}`}>
+                  <p className="text-white text-[15px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+                  <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
                 </div>
                 <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
               </div>

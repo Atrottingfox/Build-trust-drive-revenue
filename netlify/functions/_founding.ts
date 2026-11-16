@@ -28,6 +28,49 @@ export const TOTAL_SPOTS = 5;
 /* Midnight at the end of 30 November, Brisbane (UTC+10, no daylight saving). */
 export const CLOSES_AT = new Date("2026-12-01T00:00:00+10:00");
 
+/* February intake (Sean, 16 Nov 2026). Once January has 5 sales, or once 30
+   November passes, checkout sells February at $15,000 + GST, 5 places, no
+   closing date. Sales carry metadata intake=january|february. Sales made
+   before this existed have no intake and count as January. */
+export type Intake = "january" | "february";
+export const FEB_SPOTS = 5;
+
+export async function soldByIntake(): Promise<{ january: number; february: number } | null> {
+  try {
+    const q = encodeURIComponent(`status:'succeeded' AND metadata['payment']:'${PAYMENT_KIND}'`);
+    const r = await stripe(`payment_intents/search?query=${q}&limit=100`);
+    if (!r.ok || !Array.isArray(r.data?.data)) return null;
+    let january = 0;
+    let february = 0;
+    for (const pi of r.data.data) {
+      if (pi?.metadata?.intake === "february") february++;
+      else january++;
+    }
+    return { january, february };
+  } catch {
+    return null;
+  }
+}
+
+/* Which intake checkout is selling right now. */
+export async function currentIntake(): Promise<{ intake: Intake | null; remaining: number | null; total: number; closesAt: string | null }> {
+  const sold = await soldByIntake();
+  const janOpen = Date.now() < CLOSES_AT.getTime();
+  if (sold === null) {
+    /* Stripe would not say. Keep selling the intake the date allows, count unknown. */
+    return janOpen
+      ? { intake: "january", remaining: null, total: TOTAL_SPOTS, closesAt: CLOSES_AT.toISOString() }
+      : { intake: "february", remaining: null, total: FEB_SPOTS, closesAt: null };
+  }
+  if (janOpen && sold.january < TOTAL_SPOTS) {
+    return { intake: "january", remaining: TOTAL_SPOTS - sold.january, total: TOTAL_SPOTS, closesAt: CLOSES_AT.toISOString() };
+  }
+  if (sold.february < FEB_SPOTS) {
+    return { intake: "february", remaining: FEB_SPOTS - sold.february, total: FEB_SPOTS, closesAt: null };
+  }
+  return { intake: null, remaining: 0, total: FEB_SPOTS, closesAt: null };
+}
+
 export function stripeKey(): string | undefined {
   return process.env.STRIPE_SECRET_KEY || process.env.STRIPE_API_KEY;
 }
@@ -63,10 +106,11 @@ export async function slack(text: string): Promise<void> {
 /* When a founding buyer starts (Sean, 2026-11-12: "it'll be 15th of the
    month ... 15th jan, 15th feb"). The 15th of the month after they buy, and
    never before the first cohort on 15 January 2027. Brisbane dates. */
-export function cohortStart(paidMs: number): string {
+export function cohortStart(paidMs: number, intake?: string): string {
   const d = new Date(paidMs + 10 * 3600_000);
   const next = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 15));
-  const first = Date.UTC(2027, 0, 15);
+  /* A February buyer never starts before 15 February 2027. */
+  const first = intake === "february" ? Date.UTC(2027, 1, 15) : Date.UTC(2027, 0, 15);
   return new Date(Math.max(next.getTime(), first)).toISOString().slice(0, 10);
 }
 const longDate = (iso: string) =>
@@ -101,7 +145,8 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
 
   /* Their portal, made now so a buyer who closed the tab still gets the 48
      hour reminder (portal-chase), and so the link is in Slack. */
-  const start = cohortStart((session.created ? session.created * 1000 : Date.now()));
+  const intake = session?.metadata?.intake === "february" ? "february" : "january";
+  const start = cohortStart((session.created ? session.created * 1000 : Date.now()), intake);
   const portal = await provisionPortal({ email: d.email, name: d.name }, { start });
 
   /* Sean, 2026-11-12: "the founding buyers next steps all implemented asap".
@@ -128,7 +173,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
 
   await slack(
     [
-      `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day (intro offer, paid in full).*`,
+      `:moneybag: *${d.name || d.email || "Somebody"} just bought the founding 90 Day, ${intake === "february" ? "FEBRUARY intake" : "January intake"} (paid in full).*`,
       `${amount} received. Picked up by the ${via}.`,
       `Starts: ${longDate(start)} (cohort start, the 15th).`,
       `Email: ${d.email || "not given"}   Phone: ${d.phone || "not given"}`,

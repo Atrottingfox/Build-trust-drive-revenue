@@ -72,7 +72,7 @@ export const Ticks = ({ items }: { items: React.ReactNode[] }) => (
   </ul>
 );
 
-export type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string };
+export type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string | null; intake?: 'january' | 'february' | null };
 
 /* Same deadline the checkout enforces. The server's value wins when it loads. */
 const CLOSES_AT = '2026-12-01T00:00:00+10:00';
@@ -83,7 +83,7 @@ export function useStatus() {
   useEffect(() => {
     fetch(FN)
       .then((r) => r.json())
-      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured, closesAt: d.closesAt }))
+      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured, closesAt: d.closesAt ?? null, intake: d.intake ?? null }))
       .catch(() => setStatus({ open: true, remaining: null, total: 5 }));
   }, []);
   return status;
@@ -112,7 +112,8 @@ export function SpotsLine({ status }: { status: Status | null }) {
   const spots = status && status.remaining !== null && status.remaining < status.total
     ? `${status.remaining} of ${status.total} spots left`
     : '';
-  const countdown = useCountdown(status?.closesAt || CLOSES_AT);
+  /* February has no closing date, so no countdown. */
+  const countdown = useCountdown(status?.intake === 'february' ? '' : status?.closesAt || CLOSES_AT);
   return (
     <div className="mt-5">
       <ul className="space-y-1.5">
@@ -197,7 +198,8 @@ function Waitlist() {
 export function StickyBar({ status, revealAt }: { status: Status | null; revealAt?: string }) {
   const [show, setShow] = useState(false);
   const [priced, setPriced] = useState(!revealAt);
-  const countdown = useCountdown(status?.closesAt || CLOSES_AT);
+  /* February has no closing date, so no countdown. */
+  const countdown = useCountdown(status?.intake === 'february' ? '' : status?.closesAt || CLOSES_AT);
   const [busy, setBusy] = useState(false);
   useEffect(() => {
     const onScroll = () => {
@@ -248,13 +250,13 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
         <div className="min-w-0">
           {priced ? (
             <>
-              <p className="text-white text-[15px] font-semibold leading-tight">$10,000 AUD + GST</p>
-              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}. Closes 30 Nov.</p>
+              <p className="text-white text-[15px] font-semibold leading-tight">{status?.intake === 'february' ? '$15,000' : '$10,000'} AUD + GST</p>
+              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}.{status?.intake === 'february' ? ' February intake.' : ' Closes 30 Nov.'}</p>
             </>
           ) : (
             <>
-              <p className="text-white text-[15px] font-semibold leading-tight">5 spots in the January intake</p>
-              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">{countdown ? `Closes 30 Nov. ${countdown} left` : 'Closes 30 Nov.'}</p>
+              <p className="text-white text-[15px] font-semibold leading-tight">5 spots in the {status?.intake === 'february' ? 'February' : 'January'} intake</p>
+              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5 tabular-nums">{status?.intake === 'february' ? '$15,000 AUD + GST' : countdown ? `Closes 30 Nov. ${countdown} left` : 'Closes 30 Nov.'}</p>
             </>
           )}
         </div>
@@ -274,7 +276,9 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
 }
 
 /* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
-export function BuyButton({ status, location, className = '', label = 'Lock in for $10,000 AUD + GST', note, hideSpots = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean }) {
+export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean }) {
+  const feb = status?.intake === 'february';
+  const label = feb ? (labelIn ? labelIn.replace('January', 'February') : 'Lock in for $15,000 AUD + GST') : labelIn || 'Lock in for $10,000 AUD + GST';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
