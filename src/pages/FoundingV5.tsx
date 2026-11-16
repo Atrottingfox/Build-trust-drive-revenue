@@ -94,7 +94,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               </p>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
-                Payment in full reserves your place. Closes 30 November.
+                Payment in full reserves your place and gets immediate access plus a 1:1 strategy call within 7 days.
               </p>
               <FitCall />
             </div>
