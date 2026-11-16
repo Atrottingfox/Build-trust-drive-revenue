@@ -4,6 +4,7 @@ import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import SupportRhythm from '../components/founding/SupportRhythm';
 import VslPlayer from '../components/founding/VslPlayer';
+import FitCall from '../components/founding/FitCall';
 import { BuyButton, Crosses, H2, Label, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
 
 /*
@@ -73,6 +74,7 @@ export default function FoundingV5() {
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                 Immediate access today. Payment in full reserves your place. Closes 30 November.
               </p>
+              <FitCall />
             </div>
           </Section>
         </div>
