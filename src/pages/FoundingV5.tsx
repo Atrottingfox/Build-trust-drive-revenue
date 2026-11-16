@@ -88,7 +88,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 Your purchase includes the $5,000 Brand Day, complete playbooks and SOPs, training, 24 hour async feedback, and Thursday group advisory calls.
               </p>
               <p className="text-zinc-300 leading-relaxed mt-3">
-                Your Brand Day happens before guided 1:1 implementation begins in January.
+                Your Brand Day happens before guided 1:1 implementation begins during the next available intake month.
               </p>
               <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">$10,000 AUD + GST</p>
               <p className="text-zinc-400 text-sm leading-relaxed mt-2">
