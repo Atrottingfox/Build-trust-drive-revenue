@@ -64,22 +64,22 @@ export default function FormatsMap() {
   const f = FORMATS[active];
 
   return (
-    <div className="p-5">
-      <p className="text-white text-[18px] font-extrabold tracking-[-0.02em] leading-tight">Every video does one of four jobs</p>
+    <div className="p-4">
+      <p className="text-white text-[16px] font-extrabold tracking-[-0.02em] leading-tight">Every video does one of four jobs</p>
       <p className="text-zinc-500 text-[12px] mt-1">18 formats, each with its own step by step.</p>
 
-      <div className="grid grid-cols-2 gap-px mt-4 rounded-xl overflow-hidden border border-white/5 bg-white/5">
+      <div className="grid grid-cols-2 gap-px mt-3 rounded-xl overflow-hidden border border-white/5 bg-white/5">
         {JOBS.map(({ job, line }) => (
-          <div key={job} className="bg-[#0d0f14] p-4">
+          <div key={job} className="bg-[#0d0f14] px-3 py-2.5">
             <p className="text-white text-[13px] font-bold">{job}</p>
-            <p className="text-zinc-500 text-[11px] italic leading-snug mt-0.5 mb-3">{line}</p>
-            <ul className="space-y-1">
+            <p className="text-zinc-500 text-[11px] italic leading-snug mt-0.5 mb-1.5">{line}</p>
+            <ul className="flex flex-wrap gap-x-2.5 gap-y-0.5">
               {FORMATS.map((x, i) => x.j !== job ? null : (
                 <li key={x.t}>
                   <button
                     type="button"
                     onClick={() => setPinned(pinned === i ? null : i)}
-                    className={`text-left text-[12.5px] leading-snug transition-colors duration-300 ${i === active ? 'text-blue-400 font-semibold' : 'text-zinc-400 hover:text-zinc-200'}`}
+                    className={`text-left text-[12px] leading-snug transition-colors duration-300 ${i === active ? 'text-blue-400 font-semibold' : 'text-zinc-400 hover:text-zinc-200'}`}
                   >
                     {x.t}
                   </button>
@@ -90,7 +90,7 @@ export default function FormatsMap() {
         ))}
       </div>
 
-      <div className="mt-4 h-[92px] overflow-hidden">
+      <div className="mt-3 h-[60px] overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
