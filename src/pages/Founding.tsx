@@ -378,14 +378,22 @@ export function Paid() {
                   Set up your portal <ArrowRight className="w-4 h-4" />
                 </a>
               )}
+              {/* Sean, 16 Nov: the page promises a 1:1 strategy call within 7 days of payment. */}
+              <div className="glow-card p-6 mb-10">
+                <p className="text-white font-semibold">Book your 1:1 strategy call</p>
+                <p className="text-zinc-400 text-[15px] leading-relaxed mt-1">Pick a time in the next 7 days.</p>
+                <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-[15px] mt-3">
+                  Book the call <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
               <p className="text-zinc-400 leading-relaxed mb-6">What happens now:</p>
               <Ticks items={[
                 'We set up your WhatsApp channel, on the number you gave at checkout',
                 'You receive the Start Here workspace and pre install materials',
                 'Your team gets every SOP, edit, playbook and training video',
-                'An advisory board call before you start',
+                'Advisory group office hours before you start',
                 'We lock in your Brand Day date',
-                '1:1 guided implementation starts in the next available intake month, starting January',
+                '1:1 guided implementation starts in the next available intake month, beginning January',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.

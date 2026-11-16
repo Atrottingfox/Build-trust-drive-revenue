@@ -30,8 +30,8 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Why not wait until the new year?',
     a: [
-      '1:1 implementation starts in the next available intake month, starting January.',
-      'Pay in full by 30 November and your team has the training, and access to group office hours advisory calls every Thursday up until kickoff date.',
+      '1:1 implementation starts in the next available intake month, beginning January.',
+      'Pay in full by 30 November and your team has the training, and access to advisory group office hours every Thursday up until kickoff date.',
       'This way when we start, we\'re all ready to go. When spots fill for each month, a waitlist for the next intake begins.',
     ],
   },
@@ -68,7 +68,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'When is my Brand Day?',
     a: [
-      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month, starting January, after your Brand Day.',
+      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month, beginning January, after your Brand Day.',
     ],
   },
 ];

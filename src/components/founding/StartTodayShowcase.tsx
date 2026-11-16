@@ -146,7 +146,7 @@ export function Visual({ index }: { index: number }) {
       );
     case 4:
       return (
-        <Window title="Advisory office hours">
+        <Window title="Advisory group office hours">
           <Clip src="live" sub="Live" label="Jump in and ask, before we start" />
           <div className="flex items-center gap-3 px-5 py-4">
             <CalendarDays className="w-4 h-4 text-blue-400" />
@@ -176,7 +176,7 @@ const ITEMS: { name: string; text: string; v: number }[] = [
   { name: 'Every SOP.', text: 'The ones we run with clients, across every format.', v: 0 },
   { name: 'Every training video.', text: 'The full library.', v: 2 },
   { name: 'Both playbooks.', text: 'Short form and long form, complete.', v: 3 },
-  { name: 'Advisory office hours, early.', text: 'Jump in and ask before we start.', v: 4 },
+  { name: 'Advisory group office hours, early.', text: 'Jump in and ask before we start.', v: 4 },
   { name: 'WhatsApp, from today.', text: 'Set up the moment you buy. Direct access to me.', v: 5 },
 ];
 
