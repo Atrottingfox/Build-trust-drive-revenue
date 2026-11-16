@@ -92,7 +92,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               </p>
               <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">$10,000 AUD + GST</p>
               <p className="text-zinc-400 text-sm leading-relaxed mt-2">
-                Once the five January places are filled, the February intake will be $15,000 AUD + GST, before increasing to $30,000 AUD + GST.
+                When all five January places are filled, February intake automatically turns to $15,000 AUD + GST, before increasing to $30,000 AUD + GST during 2027.
               </p>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
