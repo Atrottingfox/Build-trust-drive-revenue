@@ -235,11 +235,13 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             {/* Sean, 16 Nov: the v3 list. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
-                '1:1 guided implementation starts in the next available intake month, starting January',
+                'One Brand Day, in person, before implementation begins',
+                '1:1 guided implementation starts in the next available intake month, beginning January',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'One team call per week during installation',
                 'Training every fortnight',
                 'Two Loom reviews per week during active implementation',
+                'Prescriptive advice directly through the portal',
                 'Weekly office hours, every Thursday',
                 'Monthly founder and operator board review',
                 'WhatsApp support, 24 hour replies',
