@@ -55,7 +55,10 @@ export default function FoundingV5() {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">Founding January intake</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white mt-2">5 installs at $10,000 AUD + GST</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
-                Get immediate access to the playbooks, training and advisory group office hours. Guided 1:1 implementation begins in January.
+                Get immediate access to the playbooks, training and advisory group office hours.
+              </p>
+              <p className="text-zinc-300 leading-relaxed mt-2">
+                Guided 1:1 implementation begins in January.
               </p>
               <p className="text-zinc-400 leading-relaxed mt-4">
                 Once the 5 January installs are sold, the price increases to $15,000 AUD + GST for the February intake.
