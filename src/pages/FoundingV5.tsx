@@ -42,7 +42,7 @@ export default function FoundingV5() {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">5 × 90 day installs per month - 1:1 starts January</p>
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">January 2027 | 5 founding places</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Sold before the call.
             </h1>
@@ -60,28 +60,23 @@ export default function FoundingV5() {
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 4 minute walkthrough to see what your team installs over 90 days.
             </p>
-            {/* Moved out of the offer card, Sean 16 Nov. */}
-            <p className="text-zinc-400 text-sm leading-relaxed -mt-4 mb-6">
-              Built from playbooks developed alongside six 8 figure companies.
-            </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January founding intake</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Install the content operating system that builds trust before the sale.</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January 2027 | 5 founding places</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access today.</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
-                Get immediate access to the playbooks, training and advisory group office hours.
+                Your purchase includes the $5,000 Brand Day, complete playbooks and SOPs, training, 24 hour async feedback, and Thursday group advisory calls.
               </p>
-              <p className="text-zinc-300 leading-relaxed mt-2">
-                Guided 1:1 implementation begins in January.
+              <p className="text-zinc-300 leading-relaxed mt-3">
+                Your Brand Day happens before guided 1:1 implementation begins in January.
               </p>
-              <p className="text-zinc-400 text-sm mt-6">5 installs available at the founding rate</p>
-              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-1">$10,000 AUD + GST</p>
-              <p className="text-zinc-400 text-sm leading-relaxed mt-3">
-                Once the five January installs are sold, the February intake is $15,000 AUD + GST.
+              <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">$10,000 AUD + GST</p>
+              <p className="text-zinc-400 text-sm leading-relaxed mt-2">
+                Once the five January places are filled, the February intake will be $15,000 AUD + GST.
               </p>
-              <BuyButton status={status} location="founding-v5-hero" label="Secure your January install" className="mt-7" />
+              <BuyButton status={status} location="founding-v5-hero" label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
-                Immediate access today. Payment in full reserves your place. Closes 30 November.
+                Payment in full reserves your place. Closes 30 November.
               </p>
               <FitCall />
             </div>
@@ -270,6 +265,9 @@ export default function FoundingV5() {
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
                   We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
+                </p>
+                <p className="text-zinc-400 leading-relaxed mt-4">
+                  Built from playbooks developed alongside six 8 figure companies.
                 </p>
                 <p className="text-white font-semibold leading-relaxed mt-4">
                   Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.

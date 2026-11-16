@@ -274,7 +274,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
 }
 
 /* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
-export function BuyButton({ status, location, className = '', label = 'Lock in for $10,000 AUD + GST', note }: { status: Status | null; location: string; className?: string; label?: string; note?: string }) {
+export function BuyButton({ status, location, className = '', label = 'Lock in for $10,000 AUD + GST', note, hideSpots = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -321,7 +321,7 @@ export function BuyButton({ status, location, className = '', label = 'Lock in f
         </button>
       )}
       {!closed && note && <p className="text-white text-[15px] font-semibold mt-3">{note}</p>}
-      {!closed && <SpotsLine status={status} />}
+      {!closed && !hideSpots && <SpotsLine status={status} />}
       {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
     </div>
   );
