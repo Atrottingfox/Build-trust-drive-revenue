@@ -80,7 +80,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">January 2027 | 5 founding places</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">5 × 90 day installs per month - 1:1 implementation starts January</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access today.</p>
               <p className="text-zinc-300 leading-relaxed mt-5">
                 Your purchase includes the $5,000 Brand Day, complete playbooks and SOPs, training, 24 hour async feedback, and Thursday group advisory calls.
