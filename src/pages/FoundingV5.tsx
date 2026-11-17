@@ -27,11 +27,10 @@ const PHASES_V5 = PHASES.map((ph) =>
   ph.name === 'Install'
     ? { ...ph, lead: 'We launch your content starting with short form. Your Brand Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.' }
     : ph.name === 'Transfer'
-      ? { ...ph, lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form." }
-      : ph.name === 'Operate and improve'
-        ? { ...ph, name: 'Tune', lead: 'We iron out any kinks, iterate with data, and ensure the team can run it themselves.' }
-        : ph
-);
+      /* Sean, 18 Nov: "i think we can combine transfer and tune". One step, weeks 5 to 12. */
+      ? { ...ph, weeks: 'Weeks 5 to 12', name: 'Transfer and tune', lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form. We iron out any kinks, iterate with data, and ensure the team can run it themselves." }
+      : ph
+).filter((ph) => ph.name !== 'Operate and improve');
 
 export default function FoundingV5({ live = false }: { live?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
@@ -51,7 +50,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       {live ? (
         <SEO
           title="90 Day Install"
-          description="Sold before the call. A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
+          description="The Authority Engine. A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
           path="/founding"
           image="https://authorityengine.com.au/og-founding.jpg"
         />
@@ -65,8 +64,8 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
-            {/* Sean's hero copy, 17 Nov: "Sold before the call" is the brow. */}
-            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">Sold before the call.</p>
+            {/* Sean's hero copy, 17 Nov: "Sold before the call" is the brow. 18 Nov: The Authority Engine instead. */}
+            <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
               Turn your content team into a sales asset.
             </h1>
@@ -410,7 +409,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
-              Sold before the call.
+              The Authority Engine
             </h2>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
               Turn your content team into a sales asset.
