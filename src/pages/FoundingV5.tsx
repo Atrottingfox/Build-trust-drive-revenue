@@ -92,15 +92,12 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               </>}
               <div className="mt-6 border-t border-white/10 divide-y divide-white/10">
                 <div className="py-4">
-                  <p className="text-white font-medium">Includes a $5,000 Brand Day</p>
-                  <p className="text-zinc-400 leading-relaxed mt-1">Your Brand Day creates the blueprint for the 90 day implementation.</p>
-                </div>
-                <div className="py-4">
                   <p className="text-white font-medium">Get access immediately when you pay in full</p>
                   <p className="text-zinc-400 leading-relaxed mt-1">Your team gets the playbooks, SOPs, training, Thursday advisory group office hours and a 1:1 strategy call within 7 days.</p>
                 </div>
                 <div className="py-4">
-                  <p className="text-zinc-400 leading-relaxed">Your Brand Day happens before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.</p>
+                  <p className="text-white font-medium">Includes a $5,000 Brand Day</p>
+                  <p className="text-zinc-400 leading-relaxed mt-1">Your Brand Day creates the blueprint for the 90 day implementation.</p>
                 </div>
               </div>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
