@@ -86,10 +86,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : 'January 2027 | 5 founding places'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
-              {!feb && <>
-                <p className="text-white font-medium mt-4">The price increases after January</p>
-                <p className="text-zinc-400 leading-relaxed mt-1">When all five January places are filled, February intake automatically turns to $15,000 AUD + GST.</p>
-              </>}
+              {!feb && <p className="text-zinc-400 leading-relaxed mt-3">When all five January places are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
               <div className="mt-6 border-t border-white/10 divide-y divide-white/10">
                 <div className="py-4">
                   <p className="text-white font-medium">Get access immediately when you pay in full</p>
