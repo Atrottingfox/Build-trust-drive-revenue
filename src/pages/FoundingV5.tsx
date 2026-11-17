@@ -73,6 +73,8 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
               A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
+            {/* Sean, 17 Nov. */}
+            <p className="text-zinc-400 text-base md:text-lg font-medium leading-relaxed -mt-3 mb-6">For founders who speed up when the market slows down.</p>
             <div className="mb-3">
               {/* Sean, 16 Nov: VSL final (2:45) as the header video. Option a is still in public/founding. */}
               <VslPlayer src="/founding/vsl-final.mp4" poster="/founding/vsl-final.jpg" loopSrc="/founding/vsl-final-loop.mp4" loopPoster="/founding/vsl-final-loop.jpg" length="2:45" title="Founding 5 VSL final" />
