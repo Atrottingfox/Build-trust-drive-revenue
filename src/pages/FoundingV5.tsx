@@ -17,7 +17,7 @@ import { usePageVisits } from '../lib/pageVisits';
 
 /*
   DELIBERATE small errors, Sean 16 Nov (so the page reads hand written). Do not fix:
-  "a engine" (Who), the double space after "This is the foundation." (By day 90),
+  the double space after "This is the foundation." (By day 90),
   "every every post" (Fit). 17 Nov, in How it works (Build): "in youyr business" and the
   double space before "Then we turn that".
 */
@@ -297,7 +297,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                   I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
-                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 8 figure B2B founders doing $1M+/month, turning content into a engine that consistently drives revenue.
+                  Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 8 figure B2B founders doing $1M+/month, creating content that consistently drives revenue.
                 </p>
                 <p className="text-zinc-300 leading-relaxed mt-4">
                   We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
