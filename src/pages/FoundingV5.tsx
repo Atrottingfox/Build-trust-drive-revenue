@@ -18,7 +18,7 @@ import { usePageVisits } from '../lib/pageVisits';
 /*
   DELIBERATE small errors, Sean 16 Nov (so the page reads hand written). Do not fix:
   "a engine" (Who), the double space after "This is the foundation." (By day 90),
-  "every every post" (Fit). 17 Nov, in How it works (Build): "in you business" and the
+  "every every post" (Fit). 17 Nov, in How it works (Build): "in youyr business" and the
   double space before "Then we turn that".
 */
 /* v5 only (Sean, 16 Nov): short form in Install, long form in Transfer when it's ready.
@@ -131,7 +131,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
                 <p className="font-display text-3xl font-extrabold text-white mt-1">Build</p>
                 <p className="text-zinc-300 text-lg leading-relaxed mt-2">
-                  One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in you business, and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
+                  One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in youyr business, and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
