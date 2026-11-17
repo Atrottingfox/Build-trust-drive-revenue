@@ -23,7 +23,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'Why not just hire an agency?',
     a: [
-      'An agency makes the content and leaves when the contract does.',
+      'An agency makes the content, and has one core goal - take as much as they can, for as little as possible.',
       'This trains your team to run the system themselves, so it stays when we step back.',
     ],
   },
@@ -54,7 +54,8 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'What does my team need to commit to?',
     a: [
-      'Attending at least 80% of agreed sessions, getting the required founder inputs to us on time, and completing the agreed implementation work. Those are also the conditions on the guarantee.',
+      'Attending at least 80% of agreed sessions, getting the required inputs to us on time, and completing the agreed implementation work.',
+      'Those are also the conditions on the guarantee.',
     ],
   },
   {
