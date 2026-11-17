@@ -67,10 +67,10 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             {/* Sean's hero copy, 17 Nov: "Sold before the call" is the brow. */}
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">Sold before the call.</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Turn your content team into a sales asset.
+              Turn media into a sales asset.
             </h1>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              A 90 day content operating system install for 7 and 8 figure B2B companies.
+              A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
             <div className="mb-3">
               {/* Sean, 16 Nov: VSL final (2:45) as the header video. Option a is still in public/founding. */}
