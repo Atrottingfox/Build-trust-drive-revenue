@@ -84,28 +84,28 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
-              {/* Sean, 17 Nov: value stack. Price, then the February price, then the Brand Day and access rows. */}
+              {/* Sean, 17 Nov: value stack, kept simple. Only the title and price are bold. */}
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : 'January 2027 | 5 founding places'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
-              {!feb && <p className="text-zinc-400 font-semibold mt-1">February intake: $15,000 AUD + GST</p>}
-              <div className="mt-6 space-y-3">
-                <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4 md:p-5">
-                  <p className="font-display text-lg md:text-xl font-extrabold text-white">Includes a $5,000 Brand Day</p>
-                  <p className="text-zinc-300 leading-relaxed mt-1">Your Brand Day creates the blueprint for the 90 day implementation.</p>
+              {!feb && <p className="text-zinc-500 mt-1">February intake: $15,000 AUD + GST</p>}
+              <div className="mt-6 border-t border-white/10 divide-y divide-white/10">
+                <div className="py-4">
+                  <p className="text-white font-medium">Includes a $5,000 Brand Day</p>
+                  <p className="text-zinc-400 leading-relaxed mt-1">Your Brand Day creates the blueprint for the 90 day implementation.</p>
                 </div>
-                <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4 md:p-5">
-                  <p className="font-display text-lg md:text-xl font-extrabold text-white">Get access immediately when you pay in full</p>
-                  <p className="text-zinc-300 leading-relaxed mt-1">Your team gets the playbooks, SOPs, training, Thursday advisory group office hours and a 1:1 strategy call within 7 days.</p>
+                <div className="py-4">
+                  <p className="text-white font-medium">Get access immediately when you pay in full</p>
+                  <p className="text-zinc-400 leading-relaxed mt-1">Your team gets the playbooks, SOPs, training, Thursday advisory group office hours and a 1:1 strategy call within 7 days.</p>
                 </div>
+                <div className="py-4">
+                  <p className="text-zinc-400 leading-relaxed">Your Brand Day happens before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.</p>
+                </div>
+                {!feb && <div className="py-4">
+                  <p className="text-white font-medium">The price increases after January</p>
+                  <p className="text-zinc-400 leading-relaxed mt-1">When all five January places are filled, February intake automatically turns to $15,000 AUD + GST.</p>
+                </div>}
               </div>
-              <p className="text-white font-semibold leading-relaxed mt-5">
-                Your Brand Day happens before guided 1:1 implementation begins in {feb ? 'February' : 'January'}.
-              </p>
-              {!feb && <>
-                <p className="font-display text-lg md:text-xl font-extrabold text-white mt-6">The price increases after January</p>
-                <p className="text-zinc-300 leading-relaxed mt-1">When all five January places are filled, February intake automatically turns to $15,000 AUD + GST.</p>
-              </>}
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                 Payment in full reserves your {feb ? 'February' : 'January'} place.{feb ? '' : ' Closes 30 November.'}
