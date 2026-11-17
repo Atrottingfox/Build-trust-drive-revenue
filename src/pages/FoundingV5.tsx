@@ -28,7 +28,7 @@ const PHASES_V5 = PHASES.map((ph) =>
     : ph.name === 'Transfer'
       ? { ...ph, lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form." }
       : ph.name === 'Operate and improve'
-        ? { ...ph, lead: 'We iron out any kinks, iterate with data, and ensure the team can run it themselves.' }
+        ? { ...ph, name: 'Tune', lead: 'We iron out any kinks, iterate with data, and ensure the team can run it themselves.' }
         : ph
 );
 
