@@ -24,7 +24,7 @@ import { usePageVisits } from '../lib/pageVisits';
    /founding and v2 keep the shared PHASES wording. */
 const PHASES_V5 = PHASES.map((ph) =>
   ph.name === 'Install'
-    ? { ...ph, lead: 'We build and launch your content, starting with short form. Your Brand Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support.' }
+    ? { ...ph, lead: 'We launch your content starting with short form. Your Brand Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.' }
     : ph.name === 'Transfer'
       ? { ...ph, lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form." }
       : ph.name === 'Operate and improve'
@@ -115,26 +115,27 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
-      {/* HOW IT WORKS, the v2 section (Sean, 16 Nov) */}
+      {/* HOW IT WORKS, Sean's copy 17 Nov */}
       <section className="py-20 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>How it works</Label>
-            <H2>Install. Transfer. Operate.</H2>
+            <H2>Build. Install. Tune.</H2>
             <p className="text-zinc-300 text-lg md:text-xl leading-relaxed mt-6">
-              The Authority Engine installs the strategy, playbooks, workflows, standards and review rhythm your team needs to turn founder expertise into qualified demand, without making you a full time creator (unless you want to).
+              The Authority Engine turns your founder expertise into a repeatable content system your team can plan, produce, review and improve without relying on you to make every decision.
             </p>
             <ol className="relative mt-12 ml-2 border-l border-white/10">
               <li className="relative pl-8 pb-12">
                 <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-white ring-4 ring-blue-500/30" />
                 <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
-                <p className="font-display text-3xl font-extrabold text-white mt-1">Brand Day</p>
+                <p className="font-display text-3xl font-extrabold text-white mt-1">Build</p>
                 <p className="text-zinc-300 text-lg leading-relaxed mt-2">
-                  One full media strategy day, in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
+                  One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in your business, and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
                   <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                  <p className="text-zinc-300 text-[15px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
               </li>
               {PHASES_V5.map((ph) => (
@@ -147,7 +148,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               ))}
             </ol>
             <p className="text-zinc-300 text-lg leading-relaxed mt-10">
-              By the end, your team knows what to do next without asking you every time.
+              By the end of 90 days, your team knows what to make, how to make it, what good looks like and what to do next.
             </p>
           </Section>
         </div>
