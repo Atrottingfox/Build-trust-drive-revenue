@@ -40,7 +40,7 @@ const FAQ: { q: string; a: string[] }[] = [
     a: [
       'Most teams are more capable than we think. What they lack is the ability to self assess with a feedback loop tight enough to improve.',
       'Yours gets every SOP, the training library and two Loom reviews a week on their own work. And as soon as 1:1 begins, they get prescriptive and direct assistance to break their biggest bottleneck.',
-      'If you do not have a consistent rhythm of content going out by day 90, we\'ll work with you until you do.',
+      'If you do not have a consistent rhythm of content going out by day 90, we\'ll continue working with you until you do.',
     ],
   },
   {
@@ -54,7 +54,7 @@ const FAQ: { q: string; a: string[] }[] = [
   {
     q: 'What does my team need to commit to?',
     a: [
-      'Attending at least 80% of agreed sessions, getting the required founder inputs to us on time, and completing the agreed implementation work. Those are also the conditions on both guarantees.',
+      'Attending at least 80% of agreed sessions, getting the required founder inputs to us on time, and completing the agreed implementation work. Those are also the conditions on the guarantee.',
     ],
   },
   {
