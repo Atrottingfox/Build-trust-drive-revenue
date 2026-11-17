@@ -251,7 +251,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 'Advisory group office hours, every Thursday',
                 'Monthly content advisory board meetings',
                 'WhatsApp support, 24 hour replies',
-                'Every SOP, every training video, both playbooks, straight away',
+                'Every SOP, every training video, all playbooks, straight away',
                 'Not there by day 90? We keep working with you until you are',
               ].map((t) => (
                 <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>

@@ -175,7 +175,7 @@ export function Visual({ index }: { index: number }) {
 const ITEMS: { name: string; text: string; v: number }[] = [
   { name: 'Every SOP.', text: 'The ones we run with clients, across every format.', v: 0 },
   { name: 'Every training video.', text: 'The full library.', v: 2 },
-  { name: 'Both playbooks.', text: 'Short form and long form, complete.', v: 3 },
+  { name: 'All playbooks.', text: 'Short form and long form.', v: 3 },
   { name: 'Advisory group office hours, early.', text: 'Jump in and ask before we start.', v: 4 },
   { name: 'WhatsApp, from today.', text: 'Set up the moment you buy. Direct access to me.', v: 5 },
 ];
