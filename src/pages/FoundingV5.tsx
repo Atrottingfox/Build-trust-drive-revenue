@@ -82,7 +82,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
               {/* Sean, 17 Nov: value stack, kept simple. Only the title and price are bold. */}
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : 'January 2027 | 5 founding places'}</p>
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
               {!feb && <p className="text-zinc-400 leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
