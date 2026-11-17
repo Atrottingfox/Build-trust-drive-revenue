@@ -12,7 +12,6 @@ const SUPPORT: [string, string[]][] = [
   ]],
   ['Weekly', [
     'Implementation calls for the first 4 weeks, then fortnightly for the next 8',
-    'One team call per week during installation',
     'Two Loom reviews per week during active implementation',
   ]],
   ['Fortnightly', [
