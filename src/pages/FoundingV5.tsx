@@ -73,8 +73,8 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
             <div className="mb-3">
-              {/* Sean, 18 Nov: back to "media operator vsl complete" (3:40) as the header video. VSL final and option a are still in public/founding. */}
-              <VslPlayer src="/founding/vsl.mp4" poster="/founding/vsl.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="3:40" title="Founding 5 VSL media operator complete" />
+              {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
+              <VslPlayer src="/founding/vsl-final-v2.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
             </div>
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
               Watch the 3 minute walkthrough to see what your team installs over 90 days.
