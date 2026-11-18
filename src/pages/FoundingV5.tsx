@@ -52,10 +52,10 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
           title="90 Day Install"
           description="The Authority Engine. A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
           path="/founding"
-          image="https://authorityengine.com.au/og-founding.jpg"
+          image="https://authorityengine.com.au/og-founding-v2.jpg"
         />
       ) : (
-        <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding.jpg" noIndex />
+        <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding-v2.jpg" noIndex />
       )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
