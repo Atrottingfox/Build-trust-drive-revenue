@@ -77,7 +77,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <VslPlayer src="/founding/vsl-final-v2.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
             </div>
             <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
-              Watch the 3 minute walkthrough to see what your team installs over 90 days.
+              Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
             <div className="glow-card p-6 md:p-8">
