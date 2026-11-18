@@ -6,7 +6,7 @@ import type { Context } from "https://edge.netlify.com";
   tags in the HTML on the way out. Image: public/og-founding-v3.jpg.
 */
 const TITLE = "Turn your content team into a sales asset.";
-const DESC = "A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.";
+const DESC = "A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.";
 /* Sean, 19 Nov: matches the page. New file name so DMs drop the cached old preview. */
 const IMAGE = "https://authorityengine.com.au/og-founding-v3.jpg";
 const URL_ = "https://authorityengine.com.au/founding";

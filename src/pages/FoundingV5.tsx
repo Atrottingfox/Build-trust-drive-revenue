@@ -50,7 +50,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       {live ? (
         <SEO
           title="90 Day Install"
-          description="The Authority Engine. A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
+          description="The Authority Engine. A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
           path="/founding"
           image="https://authorityengine.com.au/og-founding-v3.jpg"
         />
@@ -70,7 +70,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               Turn your content team into a sales asset.
             </h1>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              A 90 day content operating system install with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
+              A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
             <div className="mb-3">
               {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
@@ -236,7 +236,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Everything you get</Label>
-            <H2>Everything your team needs to run it.</H2>
+            <H2>Everything your team needs to run your content.</H2>
             {/* Sean, 16 Nov: the v3 list. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[

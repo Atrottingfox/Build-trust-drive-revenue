@@ -173,11 +173,11 @@ export function Visual({ index }: { index: number }) {
 
 /* v is the Visual to show. Sean, 12 Nov: no "Every edit", office hours back. */
 const ITEMS: { name: string; text: string; v: number }[] = [
-  { name: 'Every SOP.', text: 'The ones we run with clients, across every format.', v: 0 },
+  { name: 'Every SOP.', text: "The exact production & editing SOP's across all formats.", v: 0 },
   { name: 'Every training video.', text: 'The full library.', v: 2 },
   { name: 'All playbooks.', text: 'Short form and long form.', v: 3 },
-  { name: 'Advisory group office hours, early.', text: 'Jump in and ask before we start.', v: 4 },
-  { name: 'WhatsApp, from today.', text: 'Set up the moment you buy. Direct access to me.', v: 5 },
+  { name: 'Advisory group office hours before you start', text: 'Jump in and ask from today', v: 4 },
+  { name: '1:1 WhatsApp communication', text: 'Set up the moment you buy', v: 5 },
 ];
 
 export default function StartTodayShowcase() {
