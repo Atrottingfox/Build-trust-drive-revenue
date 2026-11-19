@@ -267,7 +267,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               </div>
             </div>
             <p className="text-zinc-400 leading-relaxed mt-6">
-              The support is there to install the system, so your team stops needing me.
+              The support is there to install the system so your team stops needing me.
             </p>
           </Section>
         </div>
