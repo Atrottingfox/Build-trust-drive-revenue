@@ -240,7 +240,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             {/* Sean, 16 Nov: the v3 list. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
-                'One full Brand Day with you and your team',
+                'A $5,000 Brand Day with you and your team',
                 '1:1 guided implementation starts in the next available intake month, beginning January',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'Training every fortnight',
@@ -291,7 +291,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               />
               <div>
                 {/* Sean's own words, 14 Nov. */}
-                <H2>Hey, I'm Sean Fox.</H2>
+                <H2>Sean Fox</H2>
                 <p className="text-zinc-300 leading-relaxed mt-6">
                   I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
