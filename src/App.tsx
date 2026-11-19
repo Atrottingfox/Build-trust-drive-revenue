@@ -186,8 +186,6 @@ export default function App() {
           <Route path="/founding-v3" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v4" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v5" element={<Navigate to="/founding" replace />} />
-          {/* Sean, 19 Nov: a test copy of /founding with the "It doesn't have to be like this" section. Not indexed. */}
-          <Route path="/founding-test" element={<FoundingV5 test />} />
           <Route path="/operations" element={<Operations />} />
           <Route path="/brand" element={<Brand />} />
           <Route path="/lock-in" element={<LockIn />} />

@@ -1,4 +1,3 @@
-import { Check, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -33,21 +32,7 @@ const PHASES_V5 = PHASES.map((ph) =>
       : ph
 ).filter((ph) => ph.name !== 'Operate and improve');
 
-/* Draft flips for /founding-test (19 Nov). Left: Sean's problems. Right: lines from the page and playbooks where they exist. */
-const FLIPS: [string, string][] = [
-  ['Founder dependent. You are the bottleneck.', 'Your team runs it. You only approve what matters.'],
-  ['Busy team with no strategy.', 'Your team knows what to make, how to make it, what good looks like and what to do next.'],
-  ['Your sales team does too much persuasion.', 'Sold before the call.'],
-  ['Scaling attention, not clients.', 'The right mix of formats gives the buyer everything they need before they buy.'],
-  ['Getting engagement, not sales.', 'Content that builds trust before the sale.'],
-  ["Reaching people who aren't qualified to buy.", 'Content made for the buyer who can actually pay you.'],
-  ['Content with no connection to the sales process.', 'Content mapped to how your business actually makes revenue.'],
-  ["The calibre of the brand hasn't caught up with the business.", "A brand that matches the business you've already built."],
-  ['No consistent way to get clients from content.', 'A repeatable content system your team can plan, produce, review and improve.'],
-  ['Content feels like a grind.', "Film what already happens in your week. Create fills what capture can't."],
-];
-
-export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
+export default function FoundingV5({ live = false }: { live?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
      /founding?paid=1, personal links (?for= or ?c=) post visits to Slack, and
      the buttons report as founding-* so GA stays continuous with the old page. */
@@ -122,36 +107,6 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       </section>
 
       <div className="gradient-line" />
-
-      {/* TEST ONLY (/founding-test, 19 Nov): "It doesn't have to be like this", Sean's problems with a flip for each. Draft for Sean to edit. */}
-      {test && (
-        <>
-          <section className="py-20 md:py-24">
-            <div className="max-w-4xl mx-auto px-6 lg:px-8">
-              <Section>
-                <H2>It doesn't have to be like this.</H2>
-                <div className="mt-10 grid gap-x-10 md:grid-cols-2">
-                  <p className="hidden md:block text-zinc-500 text-sm uppercase tracking-widest pb-3">The problem</p>
-                  <p className="hidden md:block text-blue-400 text-sm uppercase tracking-widest pb-3">It doesn't have to be</p>
-                  {FLIPS.map(([from, to]) => (
-                    <div key={from} className="contents">
-                      <div className="flex items-start gap-3 border-t border-white/10 pt-4 md:pb-4">
-                        <X className="w-4 h-4 mt-1 shrink-0 text-rose-400" />
-                        <p className="text-zinc-400 text-[17px] leading-relaxed">{from}</p>
-                      </div>
-                      <div className="flex items-start gap-3 md:border-t border-white/10 pt-2 md:pt-4 pb-5 md:pb-4">
-                        <Check className="w-4 h-4 mt-1 shrink-0 text-blue-400" />
-                        <p className="text-white text-[17px] font-semibold leading-relaxed">{to}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Section>
-            </div>
-          </section>
-          <div className="gradient-line" />
-        </>
-      )}
 
       {/* HOW IT WORKS, Sean's copy 17 Nov */}
       <section className="py-20 md:py-24">
