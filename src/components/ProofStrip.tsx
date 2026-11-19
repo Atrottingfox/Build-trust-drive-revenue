@@ -7,7 +7,7 @@ import CaseStudyModal from './CaseStudyModal';
 const results = [
   { prefix: "+$", end: 5, suffix: "M", decimals: 0, context: "revenue from content", name: "Taki Moore", detail: "12 months" },
   { prefix: "", end: 46, suffix: "k", endB: 90, suffixB: "k", decimals: 0, context: "following", name: "Jay Wright", detail: "10 months" },
-  { prefix: "", end: 1.2, suffix: "M+", decimals: 1, context: "organic impressions/mo", name: "Mitch Revs", detail: "3 months" },
+  // Mitch Revs 1.2M+ card removed (Sean, 19 Nov). Its case study is still in CaseStudyModal.
 ];
 
 function CountUp({ end, decimals, duration = 2.8, active }: { end: number; decimals: number; duration?: number; active: boolean }) {
@@ -76,7 +76,7 @@ export default function ProofStrip() {
           </a>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           {results.map((r, i) => (
             <motion.div
               key={i}
