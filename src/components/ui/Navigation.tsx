@@ -52,16 +52,16 @@ export function Navigation() {
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" onClick={handleClick} className="flex items-center gap-2.5 text-white group">
-              <Logo className="w-5 h-5 text-white group-hover:text-zinc-400 transition-colors" />
-              <span className="font-semibold text-[15px]">The Authority Engine</span>
+              <Logo className={`${founding ? 'w-6 h-6' : 'w-5 h-5'} text-white group-hover:text-zinc-400 transition-colors`} />
+              <span className={`font-semibold ${founding ? 'text-[18px]' : 'text-[15px]'}`}>The Authority Engine</span>
             </Link>
 
             {!hideCta && founding && (
               <a
                 href="#price"
-                className="hidden sm:flex items-center px-5 py-2 text-sm font-medium text-white border border-zinc-800 rounded-full hover:border-zinc-600 hover:bg-elevated transition-all"
+                className="btn-pulse hidden sm:flex items-center px-5 py-2 text-sm font-semibold bg-white text-black rounded-full hover:bg-zinc-200 transition-all"
               >
-                Lock in
+                {Date.now() < Date.parse('2026-12-01T00:00:00+10:00') ? 'Secure your January place' : 'Secure your February place'}
               </a>
             )}
             {!hideCta && !founding && (

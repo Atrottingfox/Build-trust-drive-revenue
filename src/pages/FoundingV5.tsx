@@ -61,7 +61,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* HERO */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-20">
+      <section className="pt-24 pb-12 md:pt-40 md:pb-20">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
@@ -77,16 +77,18 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
               <VslPlayer src="/founding/vsl-final-v2.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
             </div>
-            <p className="text-zinc-400 text-sm italic leading-relaxed mb-6">
+            <p className="text-zinc-400 text-[15px] italic leading-relaxed mb-6">
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
+            {/* Feedback, 21 Nov: a button straight under the video. */}
+            <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2 mb-8" />
             {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
-            <div className="glow-card p-6 md:p-8">
+            <div className="glow-card p-5 md:p-8">
               {/* Sean, 17 Nov: value stack, kept simple. Only the title and price are bold. */}
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
-              {!feb && <p className="text-zinc-400 leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
+              {!feb && <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
               {/* Sean, 20 Nov: line items, super short. */}
               <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
                 {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
@@ -96,7 +98,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 ))}
               </ul>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
-              <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
+              <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">
                 Payment in full reserves your {feb ? 'February' : 'January'} place.{feb ? '' : ' Closes 30 November.'}
               </p>
               <FitCall />
@@ -108,7 +110,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* HOW IT WORKS, Sean's copy 17 Nov */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>How it works</Label>
@@ -126,8 +128,8 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
-                  <p className="text-zinc-300 text-[15px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
-                  <p className="text-zinc-300 text-[15px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
+                  <p className="text-zinc-300 text-[17px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                  <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
               </li>
               {PHASES_V5.map((ph) => (
@@ -149,7 +151,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* THE COMMERCIAL JOB (Sean, 13 Nov) */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The commercial job</Label>
@@ -163,7 +165,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               'Move them toward the next step',
             ]} />
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-8">
               Your sales team should not have to explain everything from scratch on every call.
             </p>
           </Section>
@@ -173,7 +175,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* WHAT THIS INSTALLS */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>By day 90</Label>
@@ -191,14 +193,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               ].map((q, i) => (
                 <div key={q} className="glow-card px-5 py-4 flex items-center gap-4">
                   <span className="font-display text-sm font-extrabold text-blue-400 w-5">{`0${i + 1}`}</span>
-                  <span className="text-white text-[15px] font-semibold">{q}</span>
+                  <span className="text-white text-[17px] font-semibold">{q}</span>
                 </div>
               ))}
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-8">
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-8">
               A working operating system your team uses to plan, produce, judge, publish and improve content.
             </p>
-            <p className="text-zinc-400 leading-relaxed mt-4">
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-4">
               This is the foundation.{'\u00a0 '}It gets your team what they need to start, without boxing in their creativity.
             </p>
           </Section>
@@ -208,16 +210,16 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* PAY IN FULL, with the visual layer */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="max-w-3xl">
               <Label>Access today</Label>
               <H2>Start in January, get access today.</H2>
-              <p className="text-zinc-400 leading-relaxed mt-6">
+              <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">
                 1:1 guided implementation starts in the next available intake month, beginning January.
               </p>
-              <p className="text-zinc-400 leading-relaxed mt-3">
+              <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">
                 Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.
               </p>
             </div>
@@ -231,7 +233,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* EVERYTHING YOU GET + PRICE (Sean, 16 Nov: the v3 layout, price under the list) */}
-      <section id="price" className="py-20 md:py-24 scroll-mt-16">
+      <section id="price" className="py-14 md:py-24 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Everything you get</Label>
@@ -251,21 +253,21 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 'Every SOP, every training video, all playbooks, straight away',
                 'Not there by day 90? We keep working with you until you are',
               ].map((t) => (
-                <div key={t} className="px-6 py-4 text-zinc-200 text-[15px]">{t}</div>
+                <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
               ))}
               <div className="px-6 py-6 bg-white/[0.02]">
                 {!feb && <div className="flex items-baseline justify-between gap-4">
-                  <p className="text-zinc-400 text-[14px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
+                  <p className="text-zinc-400 text-[16px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
                   <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$15,000 AUD <span className="text-zinc-500 text-[0.6em] font-semibold">+ GST</span></p>
                 </div>}
                 <div className={`flex items-baseline justify-between gap-4 ${feb ? '' : 'mt-4'}`}>
-                  <p className="text-white text-[15px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+                  <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
                   <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
                 </div>
                 <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
               </div>
             </div>
-            <p className="text-zinc-400 leading-relaxed mt-6">
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">
               The support is there to install the system so your team stops needing me.
             </p>
           </Section>
@@ -275,7 +277,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* WHO */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Who you'll be working with</Label>
@@ -291,16 +293,16 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <div>
                 {/* Sean's own words, 14 Nov. */}
                 <H2>Sean Fox</H2>
-                <p className="text-zinc-300 leading-relaxed mt-6">
+                <p className="text-zinc-300 text-lg leading-relaxed mt-6">
                   I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.
                 </p>
-                <p className="text-zinc-300 leading-relaxed mt-4">
+                <p className="text-zinc-300 text-lg leading-relaxed mt-4">
                   Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 8 figure B2B founders doing $1M+/month, creating content that consistently drives revenue.
                 </p>
-                <p className="text-zinc-300 leading-relaxed mt-4">
+                <p className="text-zinc-300 text-lg leading-relaxed mt-4">
                   We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.
                 </p>
-                <p className="text-white font-semibold leading-relaxed mt-4">
+                <p className="text-white text-lg font-semibold leading-relaxed mt-4">
                   Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.
                 </p>
               </div>
@@ -312,7 +314,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* FIT */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Fit</Label>
@@ -343,7 +345,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* GUARANTEE */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>Guarantee</Label>
@@ -363,10 +365,10 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* FAQ */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Questions</Label>
+            <Label>Frequently asked questions</Label>
             <H2>What founders ask before they buy.</H2>
             <FoundingFaq />
           </Section>
@@ -376,7 +378,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* WHAT HAPPENS NEXT */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>What happens next</Label>
@@ -392,7 +394,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-4">
                   <span className="font-display text-sm font-extrabold text-blue-400 mt-[3px] w-5 flex-shrink-0">{`0${i + 1}`}</span>
-                  <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
+                  <span className="text-zinc-300 text-[17px] leading-relaxed">{t}</span>
                 </li>
               ))}
             </ol>
@@ -403,7 +405,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* CLOSE */}
-      <section className="py-20 md:py-28">
+      <section className="py-14 md:py-28">
         <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
             <div className="accent-line mx-auto mb-10" />

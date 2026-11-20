@@ -66,7 +66,7 @@ export const Ticks = ({ items }: { items: React.ReactNode[] }) => (
     {items.map((t, i) => (
       <li key={i} className="flex items-start gap-3">
         <Check className="w-4 h-4 text-blue-400 mt-1 flex-shrink-0" />
-        <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
+        <span className="text-zinc-300 text-[17px] leading-relaxed">{t}</span>
       </li>
     ))}
   </ul>
@@ -109,9 +109,8 @@ export function SpotsLine({ status }: { status: Status | null }) {
   /* Sean's three lines, 11 Nov. The first carries the live count once a spot sells. */
   /* The hero already says 5 spots, starting in January, so the count only
      shows here once one has sold. */
-  const spots = status && status.remaining !== null && status.remaining < status.total
-    ? `${status.remaining} of ${status.total} spots left`
-    : '';
+  /* Sean, 21 Nov: never show how many are left. */
+  const spots = '';
   /* February has no closing date, so no countdown. */
   const countdown = useCountdown(status?.intake === 'february' ? '' : status?.closesAt || CLOSES_AT);
   return (
@@ -218,7 +217,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
   }, [revealAt]);
   if (status && !status.open) return null;
 
-  const left = status && status.remaining !== null ? `${status.remaining} of ${status.total} spots left` : '5 spots';
+  const left = '5 spots'; /* Sean, 21 Nov: just 5, no count */
   const buy = async () => {
     if (busy) return;
     trackCta('founding-sticky');
@@ -264,11 +263,10 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
           type="button"
           onClick={buy}
           disabled={busy}
-          className="flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-5 py-3 rounded-full text-[14px] font-semibold disabled:opacity-70"
+          className="btn-pulse flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-4 py-3 rounded-full text-[13px] font-semibold disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-          Lock in
-          {!busy && <ArrowRight className="w-4 h-4" />}
+          {status?.intake === 'february' ? 'Secure your February place' : 'Secure your January place'}
         </button>
       </div>
     </div>
@@ -278,7 +276,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
 /* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
 export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean }) {
   const feb = status?.intake === 'february';
-  const label = feb ? (labelIn ? labelIn.replace('January', 'February') : 'Lock in for $15,000 AUD + GST') : labelIn || 'Lock in for $10,000 AUD + GST';
+  const label = feb ? (labelIn ? labelIn.replace('January', 'February') : 'Secure your February place') : labelIn || 'Secure your January place';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -317,7 +315,7 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
           type="button"
           onClick={buy}
           disabled={busy}
-          className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
+          className="btn-shine btn-pulse inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
           {label}
@@ -429,7 +427,7 @@ export const Crosses = ({ items }: { items: React.ReactNode[] }) => (
     {items.map((t, i) => (
       <li key={i} className="flex items-start gap-3">
         <X className="w-4 h-4 text-zinc-600 mt-1 flex-shrink-0" />
-        <span className="text-zinc-300 text-[15px] leading-relaxed">{t}</span>
+        <span className="text-zinc-300 text-[17px] leading-relaxed">{t}</span>
       </li>
     ))}
   </ul>
@@ -449,7 +447,7 @@ const Group = ({ title, items, n }: { title: string; items: React.ReactNode[]; n
 
 /* A plain buy button between sections (Sean, 13 Nov: more payment buttons).
    Same checkout as BuyButton. If the checkout fails it scrolls to the price. */
-export function SectionCta({ status, location, label = 'Lock in your spot' }: { status: Status | null; location: string; label?: string }) {
+export function SectionCta({ status, location, label = 'Secure your January place' }: { status: Status | null; location: string; label?: string }) {
   const [busy, setBusy] = useState(false);
   if (status && !status.open) return null;
   const buy = async () => {
@@ -467,8 +465,8 @@ export function SectionCta({ status, location, label = 'Lock in your spot' }: { 
     document.getElementById('price')?.scrollIntoView({ behavior: 'smooth' });
   };
   return (
-    <div className="max-w-3xl mx-auto px-6 lg:px-8 pb-20 md:pb-24 -mt-4">
-      <button type="button" onClick={buy} disabled={busy} className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors disabled:opacity-70">
+    <div className="max-w-3xl mx-auto px-6 lg:px-8 pb-14 md:pb-24 -mt-4">
+      <button type="button" onClick={buy} disabled={busy} className="btn-shine btn-pulse inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors disabled:opacity-70">
         {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
         {label}
         {!busy && <ArrowRight className="w-4 h-4" />}

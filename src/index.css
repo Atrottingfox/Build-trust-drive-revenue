@@ -123,3 +123,11 @@
 /* Hide scrollbar for carousel */
 .scrollbar-hide::-webkit-scrollbar { display: none; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Feedback, 21 Nov: a soft pulse so the buy buttons read as buttons. */
+@keyframes btn-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.28); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+.btn-pulse { animation: btn-pulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .btn-pulse { animation: none; } }
