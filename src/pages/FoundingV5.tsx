@@ -1,3 +1,4 @@
+import { Check, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -30,6 +31,21 @@ const PHASES_V5 = PHASES.map((ph) =>
       ? { ...ph, weeks: 'Weeks 5 to 12', name: 'Transfer and tune', lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form. We iron out any kinks, iterate with data, and ensure the team can run it themselves." }
       : ph
 ).filter((ph) => ph.name !== 'Operate and improve');
+
+/* Sean, 21 Nov: where they are vs where they could be. Left: his problem lines
+   (his message and the Brand Day page). Right: lines already on this page, his
+   bio, /offer and /accelerator. The brand row's right side is a draft. */
+const NOW_VS = [
+  ['Scaling attention without equal clients', 'Attention that turns into qualified leads and sales'],
+  ['Generating engagement that does not turn into sales conversions', 'Content that builds trust before the sale'],
+  ['The input does not match the output', 'Content that consistently drives revenue'],
+  ['Your brand does not match the scale of the business', "A brand that matches the business you've already built"],
+  ['The grind to be consistent', 'A consistent rhythm of content going out'],
+  ['Uncertainty of what to post', 'You never wonder what to post or why'],
+  ['Your team is busy, but not strategic', 'Your team knows what to make, how to make it, what good looks like and what to do next'],
+  ['You are still the bottleneck', 'A system your team runs without relying on you to make every decision'],
+  ['Your sales team is doing too much persuasion', 'Sold before the call'],
+];
 
 export default function FoundingV5({ live = false }: { live?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
@@ -80,6 +96,38 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
             <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2 mb-8" />
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* WHERE YOU ARE NOW (Sean, 21 Nov) */}
+      <section className="py-14 md:py-24">
+        <div className="max-w-4xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Where you are now</Label>
+            <H2>Typically content has not caught up to the rest of the business.</H2>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">This is what is happening:</p>
+            <div className="mt-8 glow-card overflow-hidden">
+              <div className="hidden md:grid grid-cols-2 border-b border-white/10">
+                <p className="px-6 py-4 text-zinc-500 text-sm uppercase tracking-widest">Now</p>
+                <p className="px-6 py-4 text-blue-400 text-sm uppercase tracking-widest border-l border-white/10">With the Authority Engine</p>
+              </div>
+              {NOW_VS.map(([now, next]) => (
+                <div key={now} className="grid md:grid-cols-2 border-b border-white/5 last:border-b-0">
+                  <div className="flex items-start gap-3 px-5 md:px-6 pt-4 md:py-4">
+                    <X className="w-4 h-4 mt-1 shrink-0 text-rose-400" strokeWidth={3} />
+                    <p className="text-zinc-400 text-[17px] leading-relaxed">{now}</p>
+                  </div>
+                  <div className="flex items-start gap-3 px-5 md:px-6 pt-2 pb-4 md:py-4 md:border-l border-white/10">
+                    <Check className="w-4 h-4 mt-1 shrink-0 text-blue-400" strokeWidth={3} />
+                    <p className="text-white text-[17px] font-semibold leading-relaxed">{next}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-white text-lg font-semibold leading-relaxed mt-8">You don't need to be in that position.</p>
           </Section>
         </div>
       </section>
