@@ -217,7 +217,7 @@ export function StickyBar({ status, revealAt }: { status: Status | null; revealA
   }, [revealAt]);
   if (status && !status.open) return null;
 
-  const left = '5 spots'; /* Sean, 21 Nov: just 5, no count */
+  const left = `5 spots for ${status?.intake === 'february' ? 'February' : 'January'}`; /* Sean, 21 Nov: 5 spots for the month, never a count */
   const buy = async () => {
     if (busy) return;
     trackCta('founding-sticky');
