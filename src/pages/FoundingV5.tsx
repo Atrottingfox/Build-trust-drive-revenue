@@ -1,3 +1,4 @@
+import { Check } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -86,16 +87,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
               {!feb && <p className="text-zinc-400 leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
-              <div className="mt-6 border-t border-white/10 divide-y divide-white/10">
-                <div className="py-4">
-                  <p className="text-white font-medium">Get access immediately when you pay in full</p>
-                  <p className="text-zinc-400 leading-relaxed mt-1">Your team gets the playbooks, SOPs, training, Thursday advisory group office hours and a 1:1 strategy call within 7 days.</p>
-                </div>
-                <div className="py-4">
-                  <p className="text-white font-medium">Includes a $5,000 Brand Day</p>
-                  <p className="text-zinc-400 leading-relaxed mt-1">Your Brand Day creates the blueprint for the 90 day implementation.</p>
-                </div>
-              </div>
+              {/* Sean, 20 Nov: line items, super short. */}
+              <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
+                {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-white text-[17px]">
+                    <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
+                  </li>
+                ))}
+              </ul>
               <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
               <p className="text-zinc-500 text-[13px] leading-relaxed mt-3">
                 Payment in full reserves your {feb ? 'February' : 'January'} place.{feb ? '' : ' Closes 30 November.'}
