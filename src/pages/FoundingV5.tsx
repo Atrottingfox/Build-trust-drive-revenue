@@ -82,27 +82,6 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
             <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2 mb-8" />
-            {/* Sean, 16 Nov: the offer and nothing else under the video. No ladder here. */}
-            <div className="glow-card p-5 md:p-8">
-              {/* Sean, 17 Nov: value stack, kept simple. Only the title and price are bold. */}
-              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
-              <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
-              {!feb && <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
-              {/* Sean, 20 Nov: line items, super short. */}
-              <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
-                {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
-                  <li key={t} className="flex items-center gap-3 text-white text-[17px]">
-                    <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
-                  </li>
-                ))}
-              </ul>
-              <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
-              <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">
-                Payment in full reserves your {feb ? 'February' : 'January'} place.{feb ? '' : ' Closes 30 November.'}
-              </p>
-              <FitCall />
-            </div>
           </Section>
         </div>
       </section>
@@ -144,6 +123,37 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             <p className="text-zinc-300 text-lg leading-relaxed mt-10">
               By the end of 90 days, your team knows what to make, how to make it, what good looks like and what to do next.
             </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
+      {/* THE OFFER */}
+      <section className="py-14 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            {/* Sean, 21 Nov (feedback): the offer card moved down from under the video. */}
+            <div className="glow-card p-5 md:p-8">
+              {/* Sean, 17 Nov: value stack, kept simple. Only the title and price are bold. */}
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
+              <p className="font-display text-3xl md:text-4xl font-extrabold text-white mt-4">{feb ? '$15,000' : '$10,000'} AUD + GST</p>
+              {!feb && <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">When all five are filled, February intake automatically turns to $15,000 AUD + GST.</p>}
+              {/* Sean, 20 Nov: line items, super short. */}
+              <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
+                {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-white text-[17px]">
+                    <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
+                  </li>
+                ))}
+              </ul>
+              <BuyButton status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className="mt-7" />
+              <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">
+                Payment in full reserves your {feb ? 'February' : 'January'} place.{feb ? '' : ' Closes 30 November.'}
+              </p>
+              <FitCall />
+            </div>
           </Section>
         </div>
       </section>
