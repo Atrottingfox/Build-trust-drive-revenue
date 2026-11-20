@@ -112,7 +112,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             <div className="mt-8 glow-card overflow-hidden">
               <div className="hidden md:grid grid-cols-2 border-b border-white/10">
                 <p className="px-6 py-4 text-zinc-500 text-sm uppercase tracking-widest">Now</p>
-                <p className="px-6 py-4 text-blue-400 text-sm uppercase tracking-widest border-l border-white/10">With the Authority Engine</p>
+                <p className="px-6 py-4 text-blue-400 text-sm uppercase tracking-widest border-l border-white/10 bg-blue-500/[0.06]">With the Authority Engine</p>
               </div>
               {NOW_VS.map(([now, next]) => (
                 <div key={now} className="grid md:grid-cols-2 border-b border-white/5 last:border-b-0">
@@ -120,14 +120,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                     <X className="w-4 h-4 mt-1 shrink-0 text-rose-400" strokeWidth={3} />
                     <p className="text-zinc-400 text-[17px] leading-relaxed">{now}</p>
                   </div>
-                  <div className="flex items-start gap-3 px-5 md:px-6 pt-2 pb-4 md:py-4 md:border-l border-white/10">
+                  <div className="flex items-start gap-3 px-5 md:px-6 pt-2 pb-4 md:py-4 md:border-l border-white/10 md:bg-blue-500/[0.06]">
                     <Check className="w-4 h-4 mt-1 shrink-0 text-blue-400" strokeWidth={3} />
                     <p className="text-white text-[17px] font-semibold leading-relaxed">{next}</p>
                   </div>
                 </div>
               ))}
             </div>
-            <p className="text-white text-lg font-semibold leading-relaxed mt-8">You don't need to be in that position.</p>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-tight mt-10">You don't need to be in that position.</p>
           </Section>
         </div>
       </section>
