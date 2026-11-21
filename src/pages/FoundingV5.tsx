@@ -359,48 +359,44 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
           <Section>
             <Label>Everything you get</Label>
             <H2>Everything your team needs to run your content.</H2>
-            {/* Sean, 16 Nov: the v3 list. 21 Nov: his value on each line, and the total. */}
+            {/* Sean, 21 Nov (review notes): no price on each line, no total. One strong price box, guarantee straight under it. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
-              {([
-                ['A Strategy Day with you and your team', '$10,000'],
-                ['Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', '$8,000'],
-                ['Training every fortnight', '$3,000'],
-                ['Two Loom reviews per week during active implementation', '$6,000'],
-                ['Prescriptive advice directly through the portal', '$6,000'],
-                ['Advisory group office hours, every Thursday', '$6,000+'],
-                ['Monthly content advisory board meetings', '$3,000'],
-                ['WhatsApp support, 24 hour replies', '$6,000'],
-                ['Every SOP, every training video, all playbooks, straight away', '$10,000'],
-                ['Not there by day 90? We keep working with you until you are', ''],
-              ] as const).map(([t, v], i) => {
+              {[
+                'A Strategy Day with you and your team',
+                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
+                'Training every fortnight',
+                'Two Loom reviews per week during active implementation',
+                'Prescriptive advice directly through the portal',
+                'Advisory group office hours, every Thursday',
+                'Monthly content advisory board meetings',
+                'WhatsApp support, 24 hour replies',
+                'Every SOP, every training video, all playbooks, straight away',
+              ].map((t, i) => {
                 const Icon = GET_ICONS[i] || Play;
-                const val = v ? <span className="text-zinc-400 text-[16px] font-semibold whitespace-nowrap">{v}</span> : null;
                 return test ? (
                   <div key={t} className="flex items-center gap-4 px-6 py-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25"><Icon className="w-[18px] h-[18px] text-blue-400" strokeWidth={1.75} /></span>
-                    <span className="text-white text-[17px] flex-1">{t}</span>
-                    {val}
+                    <span className="text-white text-[17px]">{t}</span>
                   </div>
                 ) : (
-                  <div key={t} className="flex items-baseline justify-between gap-6 px-6 py-4 text-zinc-200 text-[17px]"><span className="flex-1">{t}</span>{val}</div>
+                  <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
                 );
               })}
-              <div className="flex items-baseline justify-between gap-4 px-6 py-4">
-                <p className="text-white text-[17px] font-semibold">Total value</p>
-                <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$58,000+ AUD</p>
-              </div>
-              <div className="px-6 py-6 bg-white/[0.02]">
-                {!feb && <div className="flex items-baseline justify-between gap-4">
-                  <p className="text-zinc-400 text-[16px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
-                  <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$15,000 AUD <span className="text-zinc-500 text-[0.6em] font-semibold">+ GST</span></p>
-                </div>}
-                <div className={`flex items-baseline justify-between gap-4 ${feb ? '' : 'mt-4'}`}>
-                  <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
-                  <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
-                </div>
-                {/* Sean, 21 Nov: the start month line moved out of the list to here. */}
-                <p className="text-zinc-400 text-[16px] mt-4">1:1 guided implementation starts in the next available intake month, beginning January.</p>
-                <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
+            </div>
+            <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
+              <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+              <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>
+              {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
+              <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
+              <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
+            </div>
+            {/* Sean's guarantee, moved here from its own section. */}
+            <div className="mt-6 flex gap-4">
+              <ShieldCheck className="w-6 h-6 shrink-0 text-blue-400 mt-0.5" strokeWidth={1.75} />
+              <div>
+                <p className="text-white text-lg font-semibold">The risk sits with me.</p>
+                <p className="text-zinc-300 text-[17px] leading-relaxed mt-1">If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.</p>
+                <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.</p>
               </div>
             </div>
             <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">
@@ -480,25 +476,6 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
 
       <div className="gradient-line" />
 
-      {/* GUARANTEE */}
-      <section className="py-14 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Guarantee</Label>
-            <H2>The risk sits with me.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">
-              If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.
-            </p>
-            <p className="text-zinc-500 leading-relaxed mt-6">
-              To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <SectionCta jump status={status} location={`${loc}-guarantee`} />
-
-      <div className="gradient-line" />
 
       {/* FAQ */}
       <section className="py-14 md:py-24">
