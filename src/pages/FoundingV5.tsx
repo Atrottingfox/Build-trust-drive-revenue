@@ -107,9 +107,11 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
               <VslPlayer src="/founding/vsl-final-v2-cc3.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
             </div>
-            <p className="text-zinc-400 text-[15px] italic leading-relaxed mb-6">
+            <p className="text-zinc-400 text-[15px] italic leading-relaxed">
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
+            {/* Sean, 21 Nov (Sammy's feedback): for people who won't press play. */}
+            <p className="text-zinc-400 text-[15px] leading-relaxed mt-1 mb-6">Rather read it? The page below covers everything in the video.</p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
             <BuyButton jump status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
             {/* Sean, 21 Nov: more below the button, but not the full cost. His line items from the old offer card, no price. */}
