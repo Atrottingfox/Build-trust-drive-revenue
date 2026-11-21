@@ -401,15 +401,15 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <div className="text-center"><Label>Who you'll be working with</Label></div>
-            <div className="flex flex-col items-center text-center gap-8 mt-2 max-w-2xl mx-auto">
+            <div className="text-center md:text-left"><Label>Who you'll be working with</Label></div>
+            <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-8 md:gap-10 mt-2 max-w-2xl md:max-w-none mx-auto">
               <img
                 src="/founding/sean.jpg"
                 alt="Sean on set, mid explanation"
                 width={440}
                 height={550}
                 loading="lazy"
-                className="w-full max-w-[220px] aspect-[4/5] object-cover rounded-2xl border border-white/10 mx-auto"
+                className="w-full max-w-[220px] md:w-[220px] md:shrink-0 aspect-[4/5] object-cover rounded-2xl border border-white/10 mx-auto md:mx-0"
               />
               <div>
                 {/* Sean's own words, 14 Nov. */}
