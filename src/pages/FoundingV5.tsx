@@ -86,6 +86,48 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
+      {/* THE TRUST GAP (Sean, 21 Nov). His Brand Day page lines, same order.
+          Strategy Day is Brand Day here, and buyer is added. */}
+      <section className="py-14 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The trust gap</Label>
+            <H2>The trust gap between content and revenue.</H2>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">Typically content has not caught up to the rest of the business.</p>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-4">This is what is happening:</p>
+            <div className="mt-6">
+              <Crosses items={[
+                'Scaling attention without equal clients',
+                'Generating engagement that does not turn into sales conversions',
+                'Your team is busy, but not strategic',
+                'You are still the bottleneck',
+                'You are becoming harder to distinguish from competitors',
+                'Your sales team is doing too much persuasion',
+                'Teaching useful ideas without making your offer the obvious next step',
+                'Reaching people not qualified to buy',
+                'Producing content without a clear connection to your sales process',
+              ]} />
+            </div>
+            <div className="glow-card p-6 md:p-8 mt-12">
+              <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">The Brand Day</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Our Brand Day compresses your brand, buyer and revenue.</p>
+              <p className="text-zinc-400 text-[17px] leading-relaxed mt-5">We map:</p>
+              <div className="mt-4">
+                <Ticks items={[
+                  'Your brand',
+                  'Your exact ideal buyer',
+                  'The beliefs that drive their purchase',
+                  'The specific content required to take somebody from stranger to advocate',
+                ]} />
+              </div>
+              <p className="text-white text-lg font-semibold leading-relaxed mt-6">Your Brand Day creates the blueprint.</p>
+            </div>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {/* HOW IT WORKS, Sean's copy 17 Nov */}
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
