@@ -130,16 +130,9 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The trust gap</Label>
-            <H2>What this is designed to fix</H2>
-            <div className="mt-6 space-y-1 text-zinc-300 text-lg leading-relaxed">
-              <p>The walkthrough showed you what gets installed.</p>
-              <p>Here's why it matters.</p>
-            </div>
-            <div className="mt-6 space-y-1 text-zinc-300 text-lg leading-relaxed">
-              <p>You and I can agree here.</p>
-              <p className="text-white font-semibold">Your business has outgrown the way your content gets made, and it's time to go pro.</p>
-              <p>You already have the expertise, a dialled offer and some serious proof behind you.</p>
-            </div>
+            {/* Sean, 21 Nov: the short version, his exact lines. */}
+            <H2>Your business has outgrown the way your content gets made, and it's time to go pro.</H2>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You already have the expertise, a dialled offer and some serious proof behind you.</p>
             <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">But your content is still:</p>
             <div className="mt-4">
               <Crosses items={[
@@ -147,14 +140,10 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                 'Teaching killer ideas but not connecting with your sales process',
                 'Being produced by a team that still needs you to decide what to say',
                 'Reaching people who are interested but unlikely to buy',
-                'Keeping a team busy, but not strategic',
-                'Getting harder to distinguish from competitors',
-                'Getting views without a clear connection to your sales process',
                 'Sending people into calls where they have to explain everything from scratch',
               ]} />
             </div>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-tight mt-10">That is the gap The Authority Engine is built to close.</p>
-            <div className="mt-4 space-y-1 text-zinc-300 text-lg leading-relaxed">
+            <div className="mt-8 space-y-1 text-white text-lg font-semibold leading-relaxed">
               <p>Your business has built the authority.</p>
               <p>Your content needs to communicate it before the sale.</p>
             </div>
