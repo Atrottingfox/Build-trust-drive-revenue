@@ -105,7 +105,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             )}
             <div className="mb-3">
               {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
-              <VslPlayer src="/founding/vsl-final-v2-cc.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
+              <VslPlayer src="/founding/vsl-final-v2-cc2.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
             </div>
             <p className="text-zinc-400 text-[15px] italic leading-relaxed mb-6">
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
