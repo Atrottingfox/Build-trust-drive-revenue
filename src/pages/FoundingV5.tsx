@@ -26,7 +26,7 @@ import { usePageVisits } from '../lib/pageVisits';
    /founding and v2 keep the shared PHASES wording. */
 const PHASES_V5 = PHASES.map((ph) =>
   ph.name === 'Install'
-    ? { ...ph, lead: 'We launch your content starting with short form. Your Brand Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.' }
+    ? { ...ph, lead: 'We launch your content starting with short form. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.' }
     : ph.name === 'Transfer'
       /* Sean, 18 Nov: "i think we can combine transfer and tune". One step, weeks 5 to 12. */
       ? { ...ph, weeks: 'Weeks 5 to 12', name: 'Transfer and tune', lead: "Your operator runs the system with support. When short form is calibrated and ready, we dial in long form. We iron out any kinks, iterate with data, and ensure the team can run it themselves." }
@@ -116,7 +116,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
-                {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
+                {['$5,000 Strategy Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
                   <li key={t} className="flex items-center gap-3 text-white text-[17px]">
                     <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
                   </li>
@@ -145,24 +145,26 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             <Label>The trust gap</Label>
             {/* Sean, 21 Nov: the short version, his exact lines. */}
             <H2>Your business has outgrown the way your content gets made.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You already have the expertise, a dialled offer and some serious proof behind you.</p>
+            {/* Sean, 21 Nov: his copy for the gap, verbatim. */}
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and you have legit proof on your side.</p>
             <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">But your content is still:</p>
             <div className="mt-4">
               <Crosses items={[
-                'Getting attention, but not enough sales',
-                'Teaching killer ideas but not connecting with your sales process',
-                'Being produced by a team that still needs you to decide what to say',
-                'Reaching people who are interested but unlikely to buy',
+                'Getting attention that doesn\'t convert to sales',
+                'Teaching killer ideas that don\'t connect with your sales process',
+                'Produced by a team that still needs you to decide what to say',
+                'Reaching people interested but unlikely to buy',
                 'Sending people into calls where they have to explain everything from scratch',
               ]} />
             </div>
             <div className="mt-8 space-y-1 text-white text-lg font-semibold leading-relaxed">
-              <p>Your business has built the authority.</p>
-              <p>Your content needs to communicate it before the sale.</p>
+              <p className="text-zinc-400 font-normal">Problem is -</p>
+              <p>You have the authority.</p>
+              <p>Your content just doesn't communicate it.</p>
             </div>
             <div className="glow-card p-6 md:p-8 mt-12">
               <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Step one</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">The Brand Day</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">The Strategy Day</p>
               <p className="text-zinc-300 text-lg leading-relaxed mt-4">We compress your brand, content and revenue strategy into one day.</p>
               <p className="text-zinc-400 text-[17px] leading-relaxed mt-5">We map:</p>
               <div className="mt-4">
@@ -227,8 +229,8 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                   One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in youyr business, and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
-                  <p className="text-white font-semibold">Secure your place now to get your Brand Day included in the price.</p>
-                  <p className="text-zinc-300 text-[17px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
+                  <p className="text-white font-semibold">Secure your place now to get your Strategy Day included in the price.</p>
+                  <p className="text-zinc-300 text-[17px] mt-1">There are 11 Strategy Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
               </li>
@@ -343,7 +345,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             {/* Sean, 16 Nov: the v3 list. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
-                'A $5,000 Brand Day with you and your team',
+                'A $5,000 Strategy Day with you and your team',
                 '1:1 guided implementation starts in the next available intake month, beginning January',
                 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
                 'Training every fortnight',
@@ -497,7 +499,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                 [CreditCard, 'Secure your place on the Stripe checkout.'],
                 [MessageCircle, 'We set up your WhatsApp straight away, with direct access to me.'],
                 [FolderOpen, 'Receive the Start Here workspace and pre install materials.'],
-                [CalendarDays, 'Book your Brand Day.'],
+                [CalendarDays, 'Book your Strategy Day.'],
                 [GraduationCap, 'Your team gets access to the training and systems.'],
                 [Users, '1:1 guided implementation starts in the next available intake month, beginning January.'],
                 [Repeat, 'Your first live content cycle runs once implementation starts.'],

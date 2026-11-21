@@ -478,7 +478,7 @@ export function SectionCta({ status, location, label = 'Secure your January plac
 export const PHASES = [
   {
     n: 'Phase 1', name: 'Install', weeks: 'Weeks 1 to 4',
-    lead: 'We build and launch the system. Your Brand Day creates the blueprint, then we run it straight away on real content.',
+    lead: 'We build and launch the system. Your Strategy Day creates the blueprint, then we run it straight away on real content.',
     items: ['Brand and positioning', 'Audience and buyer beliefs', 'Content strategy', 'Format selection', 'Weekly content rhythm', 'Capture workflow', 'Editing and approval standards', 'Publishing process', 'First live content cycle'],
   },
   {

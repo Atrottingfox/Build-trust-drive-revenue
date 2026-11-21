@@ -67,9 +67,9 @@ const FAQ: { q: string; a: string[] }[] = [
     ],
   },
   {
-    q: 'When is my Brand Day?',
+    q: 'When is my Strategy Day?',
     a: [
-      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month, beginning January, after your Brand Day.',
+      'We lock in your date as soon as you buy. 1:1 guided implementation starts in the next available intake month, beginning January, after your Strategy Day.',
     ],
   },
 ];
