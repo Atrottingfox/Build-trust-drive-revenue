@@ -125,41 +125,55 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
 
       <div className="gradient-line" />
 
-      {/* THE TRUST GAP (Sean, 21 Nov). His Brand Day page lines, same order.
-          Strategy Day is Brand Day here, and buyer is added. */}
+      {/* THE TRUST GAP. Sean's copy, 21 Nov, word for word. */}
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The trust gap</Label>
-            <H2>The trust gap between content and revenue.</H2>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">Typically content has not caught up to the rest of the business.</p>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-4">This is what is happening:</p>
-            <div className="mt-6">
+            <H2>What this is designed to fix</H2>
+            <div className="mt-6 space-y-1 text-zinc-300 text-lg leading-relaxed">
+              <p>The walkthrough showed you what gets installed.</p>
+              <p>Here's why it matters.</p>
+            </div>
+            <div className="mt-6 space-y-1 text-zinc-300 text-lg leading-relaxed">
+              <p>You and I can agree here.</p>
+              <p className="text-white font-semibold">Your business has outgrown the way your content gets made, and it's time to go pro.</p>
+              <p>You already have the expertise, a dialled offer and some serious proof behind you.</p>
+            </div>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">But your content is still:</p>
+            <div className="mt-4">
               <Crosses items={[
-                'Scaling attention without equal clients',
-                'Generating engagement that does not turn into sales conversions',
-                'Your team is busy, but not strategic',
-                'You are still the bottleneck',
-                'You are becoming harder to distinguish from competitors',
-                'Your sales team is doing too much persuasion',
-                'Teaching useful ideas without making your offer the obvious next step',
-                'Reaching people not qualified to buy',
-                'Producing content without a clear connection to your sales process',
+                'Getting attention, but not enough sales',
+                'Teaching killer ideas but not connecting with your sales process',
+                'Being produced by a team that still needs you to decide what to say',
+                'Reaching people who are interested but unlikely to buy',
+                'Keeping a team busy, but not strategic',
+                'Getting harder to distinguish from competitors',
+                'Getting views without a clear connection to your sales process',
+                'Sending people into calls where they have to explain everything from scratch',
               ]} />
             </div>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white leading-tight mt-10">That is the gap The Authority Engine is built to close.</p>
+            <div className="mt-4 space-y-1 text-zinc-300 text-lg leading-relaxed">
+              <p>Your business has built the authority.</p>
+              <p>Your content needs to communicate it before the sale.</p>
+            </div>
             <div className="glow-card p-6 md:p-8 mt-12">
-              <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">The Brand Day</p>
-              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Our Brand Day compresses your brand, buyer and revenue.</p>
+              <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Step one</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">The Brand Day</p>
+              <p className="text-zinc-300 text-lg leading-relaxed mt-4">We compress your brand, buyer and revenue strategy into one working blueprint.</p>
               <p className="text-zinc-400 text-[17px] leading-relaxed mt-5">We map:</p>
               <div className="mt-4">
                 <Ticks items={[
-                  'Your brand',
-                  'Your exact ideal buyer',
-                  'The beliefs that drive their purchase',
-                  'The specific content required to take somebody from stranger to advocate',
+                  'Your positioning',
+                  'Your ideal buyer',
+                  'What they need to believe before buying',
+                  'Why common solutions fail',
+                  'What makes your approach different',
+                  'The content required to move someone from stranger to advocate',
                 ]} />
               </div>
-              <p className="text-white text-lg font-semibold leading-relaxed mt-6">Your Brand Day creates the blueprint.</p>
+              <p className="text-white text-lg font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
           </Section>
         </div>
