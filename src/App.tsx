@@ -181,6 +181,8 @@ export default function App() {
           <Route path="/brandday" element={<BrandDayOffer />} />
           {/* Sean, 16 Nov: v5 is /founding. The old tests point at it. Old pages are in git (tag pre-founding-v5-live-*). */}
           <Route path="/founding" element={<FoundingV5 live />} />
+          {/* Sean, 21 Nov: test with elements from ecommerceequation.com.au. Not indexed. */}
+          <Route path="/founding-test" element={<FoundingV5 test />} />
           <Route path="/founding-review" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v2" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v3" element={<Navigate to="/founding" replace />} />

@@ -1,4 +1,5 @@
-import { CalendarDays, CreditCard, FolderOpen, GraduationCap, MessageCircle, Repeat, Users } from 'lucide-react';
+import { BookOpen, CalendarDays, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
+import FitCall from '../components/founding/FitCall';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -32,7 +33,25 @@ const PHASES_V5 = PHASES.map((ph) =>
       : ph
 ).filter((ph) => ph.name !== 'Operate and improve');
 
-export default function FoundingV5({ live = false }: { live?: boolean }) {
+/* /founding-test (Sean, 21 Nov): elements borrowed from ecommerceequation.com.au.
+   Only real proof. Quotes and testimonial videos are slots until Sean supplies them. */
+const HERO_STATS = [
+  { v: '+$5M', l: 'Revenue from content', s: 'Taki Moore, 12 months' },
+  { v: '46k to 90k', l: 'Following', s: 'Jay Wright, 10 months' },
+  { v: '$10M+', l: 'Created for clients', s: 'Past 24 months' },
+  { v: '$1.06M', l: 'Average client, per month', s: 'Revenue' },
+];
+const PROOF = [
+  { stat: '+$5M', when: '12 months', name: 'Taki Moore', head: 'Every prospect arrived presold.', body: 'In twelve months. It completely transformed how he sold, how he showed up, and how the market saw him.' },
+  { stat: '46k to 90k', when: '10 months', name: 'Jay Wright', head: 'Optimised exclusively for trust.', body: 'Content attributed to many millions in additional revenue and a PE acquisition.' },
+];
+const GET_ICONS = [CalendarDays, Users, CalendarDays, GraduationCap, Video, MessageCircle, Users, BookOpen, MessageCircle, FolderOpen, ShieldCheck];
+
+function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: string }) {
+  return <BuyButton status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
+}
+
+export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
      /founding?paid=1, personal links (?for= or ?c=) post visits to Slack, and
      the buttons report as founding-* so GA stays continuous with the old page. */
@@ -40,7 +59,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
   const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
   usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
-  const loc = live ? 'founding' : 'founding-v5';
+  const loc = live ? 'founding' : test ? 'founding-test' : 'founding-v5';
   /* Checkout moves to February once January has 5 sales or 30 November passes. */
   const feb = status?.intake === 'february';
   if (paid) return <Paid />;
@@ -55,7 +74,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
           image="https://authorityengine.com.au/og-founding-v3.jpg"
         />
       ) : (
-        <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
+        test ? <SEO title="90 Day Install (test)" description="Test page." path="/founding-test" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex /> : <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
       )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
@@ -72,6 +91,17 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
               A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
             </p>
+            {test && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
+                {HERO_STATS.map((x) => (
+                  <div key={x.l} className="glow-card px-4 py-4">
+                    <p className="font-display text-2xl md:text-[26px] font-extrabold text-white leading-none">{x.v}</p>
+                    <p className="text-zinc-300 text-[14px] mt-2 leading-snug">{x.l}</p>
+                    <p className="text-blue-400 text-[12px] mt-1">{x.s}</p>
+                  </div>
+                ))}
+              </div>
+            )}
             <div className="mb-3">
               {/* Sean, 18 Nov: the new VSL final render (7:35) as the header video. The older cuts are still in public/founding. */}
               <VslPlayer src="/founding/vsl-final-v2.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Founding 5 VSL final v2" />
@@ -81,6 +111,14 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
             <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2 mb-8" />
+            {test && (
+              <div className="border-t border-white/10 pt-6">
+                <p className="text-zinc-500 text-[12px] uppercase tracking-widest">Behind the scenes with</p>
+                <div className="flex flex-wrap gap-x-8 gap-y-3 mt-3 text-zinc-300 font-display font-extrabold text-lg">
+                  {['Taki Moore', 'Jay Wright', 'LSKD', 'Tiger Lily'].map((n) => <span key={n}>{n}</span>)}
+                </div>
+              </div>
+            )}
           </Section>
         </div>
       </section>
@@ -129,6 +167,32 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
+      {test && (
+        <>
+          <section className="py-14 md:py-24">
+            <div className="max-w-4xl mx-auto px-6 lg:px-8">
+              <Section>
+                <Label>Client results</Label>
+                <H2>$10M+ created for clients in the past 24 months.</H2>
+                <div className="grid md:grid-cols-2 gap-4 mt-10">
+                  {PROOF.map((x) => (
+                    <div key={x.name} className="glow-card p-6 md:p-8 flex flex-col">
+                      <p className="font-display text-4xl md:text-5xl font-extrabold text-white leading-none">{x.stat}</p>
+                      <p className="text-blue-400 text-[13px] uppercase tracking-widest mt-3">{x.name}, {x.when}</p>
+                      <p className="text-white text-xl font-semibold mt-6">{x.head}</p>
+                      <p className="text-zinc-400 text-[17px] leading-relaxed mt-2">{x.body}</p>
+                      <div className="mt-6 rounded-xl border border-dashed border-white/15 px-5 py-4 text-zinc-500 text-[15px] italic">({x.name.split(' ')[0]} quote)</div>
+                    </div>
+                  ))}
+                </div>
+                <TestCta status={status} loc={`${loc}-proof`} />
+              </Section>
+            </div>
+          </section>
+          <div className="gradient-line" />
+        </>
+      )}
+
       {/* HOW IT WORKS, Sean's copy 17 Nov */}
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
@@ -158,6 +222,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                   <p className="text-zinc-500 text-sm uppercase tracking-widest">{ph.weeks}</p>
                   <p className="font-display text-2xl font-extrabold text-white mt-1">{ph.name}</p>
                   <p className="text-zinc-400 text-lg leading-relaxed mt-2">{ph.lead}</p>
+                  {test && <TestCta status={status} loc={`${loc}-phase`} />}
                 </li>
               ))}
             </ol>
@@ -273,9 +338,17 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                 'WhatsApp support, 24 hour replies',
                 'Every SOP, every training video, all playbooks, straight away',
                 'Not there by day 90? We keep working with you until you are',
-              ].map((t) => (
-                <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
-              ))}
+              ].map((t, i) => {
+                const Icon = GET_ICONS[i] || Play;
+                return test ? (
+                  <div key={t} className="flex items-center gap-4 px-6 py-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25"><Icon className="w-[18px] h-[18px] text-blue-400" strokeWidth={1.75} /></span>
+                    <span className="text-white text-[17px]">{t}</span>
+                  </div>
+                ) : (
+                  <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
+                );
+              })}
               <div className="px-6 py-6 bg-white/[0.02]">
                 {!feb && <div className="flex items-baseline justify-between gap-4">
                   <p className="text-zinc-400 text-[16px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
@@ -430,6 +503,29 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
 
       <div className="gradient-line" />
 
+      {test && (
+        <>
+          <section className="py-14 md:py-24">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+              <Section>
+                <Label>From the founders</Label>
+                <H2>Hear it from them.</H2>
+                <div className="grid md:grid-cols-3 gap-4 mt-10">
+                  {['(testimonial video 1)', '(testimonial video 2)', '(testimonial video 3)'].map((t) => (
+                    <div key={t} className="glow-card aspect-[9/16] md:aspect-[4/5] flex flex-col items-center justify-center gap-3 border border-dashed border-white/15">
+                      <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10"><Play className="w-6 h-6 text-white" /></span>
+                      <p className="text-zinc-500 text-[15px] italic">{t}</p>
+                    </div>
+                  ))}
+                </div>
+                <TestCta status={status} loc={`${loc}-wall`} />
+              </Section>
+            </div>
+          </section>
+          <div className="gradient-line" />
+        </>
+      )}
+
       {/* CLOSE */}
       <section className="relative overflow-hidden py-16 md:py-28">
         {/* Feedback, 21 Nov: the close read dark. A soft blue glow behind it. */}
@@ -446,6 +542,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
             <div className="flex justify-center">
               <BuyButton status={status} location={`${loc}-close`} className="mt-10" />
             </div>
+            {test && <div className="max-w-md mx-auto mt-10 text-left"><FitCall /></div>}
           </Section>
         </div>
       </section>
