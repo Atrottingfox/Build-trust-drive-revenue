@@ -123,7 +123,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                 ))}
               </ul>
               {/* Sean, 21 Nov: everything they get before the Strategy Day, under "Get immediate access to:". Names from the Start today list. */}
-              <p className="text-zinc-400 text-[17px] mt-6">Before you start, get immediate access to:</p>
+              <p className="text-zinc-400 text-[17px] mt-6">Before we roll into 1:1 implementation on our in person strategy day, get immediate access to:</p>
               <ul className="mt-3 space-y-3">
                 {['Every SOP', 'Every training video', 'All playbooks', 'Thursday advisory group office hours', '1:1 WhatsApp communication'].map((t) => (
                   <li key={t} className="flex items-center gap-3 text-white text-[17px]">
