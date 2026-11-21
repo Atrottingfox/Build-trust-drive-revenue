@@ -194,7 +194,14 @@ function Waitlist() {
 /* revealAt: an element id. Until the reader reaches it the bar leads with the
    spots and countdown, not the price (/founding-v2). Without it, the price
    shows the whole way (/founding). */
-export function StickyBar({ status, revealAt, jump = false }: { status: Status | null; revealAt?: string; jump?: boolean }) {
+/* Sean, 21 Nov: apply buttons go to the application form instead of Stripe. */
+function goApply(location: string) {
+  trackCta(location);
+  ga('apply_click', { cta_location: location });
+  window.location.href = '/apply';
+}
+
+export function StickyBar({ status, revealAt, jump = false, apply = false }: { status: Status | null; revealAt?: string; jump?: boolean; apply?: boolean }) {
   const [show, setShow] = useState(false);
   const [priced, setPriced] = useState(!revealAt);
   /* February has no closing date, so no countdown. */
@@ -220,6 +227,7 @@ export function StickyBar({ status, revealAt, jump = false }: { status: Status |
   const left = `5 spots for ${status?.intake === 'february' ? 'February' : 'January'}`; /* Sean, 21 Nov: 5 spots for the month, never a count */
   const buy = async () => {
     if (busy) return;
+    if (apply) { goApply('founding-sticky'); return; }
     trackCta('founding-sticky');
     if (jump) { document.getElementById('price')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     ga('begin_checkout', { cta_location: 'founding-sticky' });
@@ -267,7 +275,7 @@ export function StickyBar({ status, revealAt, jump = false }: { status: Status |
           className="btn-pulse flex-shrink-0 inline-flex items-center gap-2 bg-white text-black px-4 py-3 rounded-full text-[13px] font-semibold disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-          {status?.intake === 'february' ? 'Secure your February place' : 'Secure your January place'}
+          {apply ? (status?.intake === 'february' ? 'Apply for February' : 'Apply for January') : status?.intake === 'february' ? 'Secure your February place' : 'Secure your January place'}
         </button>
       </div>
     </div>
@@ -275,7 +283,7 @@ export function StickyBar({ status, revealAt, jump = false }: { status: Status |
 }
 
 /* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
-export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false, jump = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean; jump?: boolean }) {
+export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false, jump = false, apply = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean; jump?: boolean; apply?: boolean }) {
   const feb = status?.intake === 'february';
   const label = feb ? (labelIn ? labelIn.replace('January', 'February') : 'Secure your February place') : labelIn || 'Secure your January place';
   const [busy, setBusy] = useState(false);
@@ -285,6 +293,7 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
 
   const buy = async () => {
     if (busy || closed) return;
+    if (apply) { goApply(location); return; }
     trackCta(location);
     /* Sean, 21 Nov: jump buttons take you down to the itemised list, which has the checkout button. */
     if (jump) { document.getElementById('price')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
@@ -450,11 +459,12 @@ const Group = ({ title, items, n }: { title: string; items: React.ReactNode[]; n
 
 /* A plain buy button between sections (Sean, 13 Nov: more payment buttons).
    Same checkout as BuyButton. If the checkout fails it scrolls to the price. */
-export function SectionCta({ status, location, label = 'Secure your January place', jump = false }: { status: Status | null; location: string; label?: string; jump?: boolean }) {
+export function SectionCta({ status, location, label = 'Secure your January place', jump = false, apply = false }: { status: Status | null; location: string; label?: string; jump?: boolean; apply?: boolean }) {
   const [busy, setBusy] = useState(false);
   if (status && !status.open) return null;
   const buy = async () => {
     if (busy) return;
+    if (apply) { goApply(location); return; }
     trackCta(location);
     if (jump) { document.getElementById('price')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     setBusy(true);

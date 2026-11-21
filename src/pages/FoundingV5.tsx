@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
-import { BuyButton, Crosses, H2, Label, Paid, PHASES, Section, SectionCta, StickyBar, Ticks, useStatus } from './Founding';
+import { BuyButton, Crosses, H2, Label, Paid, PHASES, Section, StickyBar, Ticks, useStatus } from './Founding';
 import { usePageVisits } from '../lib/pageVisits';
 
 /*
@@ -48,7 +48,7 @@ const PROOF = [
 const GET_ICONS = [CalendarDays, Users, CalendarDays, GraduationCap, Video, MessageCircle, Users, BookOpen, MessageCircle, FolderOpen, ShieldCheck];
 
 function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: string }) {
-  return <BuyButton jump status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
+  return <BuyButton apply status={status} location={loc} label="Apply for the January intake" hideSpots className="mt-5" />;
 }
 
 export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
@@ -78,6 +78,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
+      {/* Sean, 21 Nov (structure notes): problem, how it works, outcome, who, fit, offer, then FAQ and close. His words unchanged. */}
       {/* HERO */}
       <section className="pt-24 pb-8 md:pt-40 md:pb-10">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
@@ -110,7 +111,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
-            <BuyButton jump status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
+            <BuyButton apply status={status} location={`${loc}-video`} label="Apply for the January intake" hideSpots className="-mt-2" />
             {/* Sean, 21 Nov: more below the button, but not the full cost. His line items from the old offer card, no price. */}
             <div className="glow-card p-5 md:p-8 mt-8">
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
@@ -194,6 +195,31 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
 
       <div className="gradient-line" />
 
+      {/* Sean, 21 Nov: offer card removed. It is in git at efb32cc. */}
+      {/* THE COMMERCIAL JOB (Sean, 13 Nov) */}
+      <section className="py-14 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>The commercial job</Label>
+            <H2>Your content should do more than get attention.</H2>
+            <div className="mt-8">
+            <Ticks items={[
+              'Make the right buyers recognise their problem',
+              'Show them why common solutions fail',
+              'Explain why your approach is different',
+              'Build trust in your expertise',
+              'Move them toward the next step',
+            ]} />
+            </div>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-8">
+              Your sales team should not have to explain everything from scratch on every call.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
       {test && (
         <>
           <section className="py-14 md:py-24">
@@ -240,7 +266,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                   <p className="text-zinc-300 text-[17px] mt-1">There are 11 Strategy Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
-                <BuyButton jump status={status} location={`${loc}-build`} label="Secure your January place" hideSpots className="mt-6" />
+                <BuyButton apply status={status} location={`${loc}-build`} label="Apply for the January intake" hideSpots className="mt-6" />
               </li>
               <li className="relative pl-8 pb-12">
                 <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
@@ -263,31 +289,6 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             </ol>
             <p className="text-zinc-300 text-lg leading-relaxed mt-10">
               By the end of 90 days, your team knows what to make, how to make it, what good looks like and what to do next.
-            </p>
-          </Section>
-        </div>
-      </section>
-
-      <div className="gradient-line" />
-
-      {/* Sean, 21 Nov: offer card removed. It is in git at efb32cc. */}
-      {/* THE COMMERCIAL JOB (Sean, 13 Nov) */}
-      <section className="py-14 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>The commercial job</Label>
-            <H2>Your content should do more than get attention.</H2>
-            <div className="mt-8">
-            <Ticks items={[
-              'Make the right buyers recognise their problem',
-              'Show them why common solutions fail',
-              'Explain why your approach is different',
-              'Build trust in your expertise',
-              'Move them toward the next step',
-            ]} />
-            </div>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-8">
-              Your sales team should not have to explain everything from scratch on every call.
             </p>
           </Section>
         </div>
@@ -349,62 +350,6 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
         </div>
       </section>
 
-      <SectionCta jump status={status} location={`${loc}-payinfull`} />
-
-      <div className="gradient-line" />
-
-      {/* EVERYTHING YOU GET + PRICE (Sean, 16 Nov: the v3 layout, price under the list) */}
-      <section id="price" className="py-14 md:py-24 scroll-mt-16">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Section>
-            <Label>Everything you get</Label>
-            <H2>Everything your team needs to run your content.</H2>
-            {/* Sean, 21 Nov (review notes): no price on each line, no total. One strong price box, guarantee straight under it. */}
-            <div className="glow-card mt-8 divide-y divide-white/5">
-              {[
-                'A Strategy Day with you and your team',
-                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
-                'Training every fortnight',
-                'Two Loom reviews per week during active implementation',
-                'Prescriptive advice directly through the portal',
-                'Advisory group office hours, every Thursday',
-                'Monthly content advisory board meetings',
-                'WhatsApp support, 24 hour replies',
-                'Every SOP, every training video, all playbooks, straight away',
-              ].map((t, i) => {
-                const Icon = GET_ICONS[i] || Play;
-                return test ? (
-                  <div key={t} className="flex items-center gap-4 px-6 py-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25"><Icon className="w-[18px] h-[18px] text-blue-400" strokeWidth={1.75} /></span>
-                    <span className="text-white text-[17px]">{t}</span>
-                  </div>
-                ) : (
-                  <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
-                );
-              })}
-            </div>
-            <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
-              <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
-              <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>
-              {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
-              <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
-              <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
-            </div>
-            {/* Sean's guarantee, moved here from its own section. */}
-            <div className="mt-6 flex gap-4">
-              <ShieldCheck className="w-6 h-6 shrink-0 text-blue-400 mt-0.5" strokeWidth={1.75} />
-              <div>
-                <p className="text-white text-lg font-semibold">The risk sits with me.</p>
-                <p className="text-zinc-300 text-[17px] leading-relaxed mt-1">If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.</p>
-                <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.</p>
-              </div>
-            </div>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">
-              The support is there to install the system so your team stops needing me.
-            </p>
-          </Section>
-        </div>
-      </section>
 
       <div className="gradient-line" />
 
@@ -476,6 +421,61 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
 
       <div className="gradient-line" />
 
+      {/* EVERYTHING YOU GET + PRICE (Sean, 16 Nov: the v3 layout, price under the list) */}
+      <section id="price" className="py-14 md:py-24 scroll-mt-16">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8">
+          <Section>
+            <Label>Everything you get</Label>
+            <H2>Everything your team needs to run your content.</H2>
+            {/* Sean, 21 Nov (review notes): no price on each line, no total. One strong price box, guarantee straight under it. */}
+            <div className="glow-card mt-8 divide-y divide-white/5">
+              {[
+                'A Strategy Day with you and your team',
+                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
+                'Training every fortnight',
+                'Two Loom reviews per week during active implementation',
+                'Prescriptive advice directly through the portal',
+                'Advisory group office hours, every Thursday',
+                'Monthly content advisory board meetings',
+                'WhatsApp support, 24 hour replies',
+                'Every SOP, every training video, all playbooks, straight away',
+              ].map((t, i) => {
+                const Icon = GET_ICONS[i] || Play;
+                return test ? (
+                  <div key={t} className="flex items-center gap-4 px-6 py-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25"><Icon className="w-[18px] h-[18px] text-blue-400" strokeWidth={1.75} /></span>
+                    <span className="text-white text-[17px]">{t}</span>
+                  </div>
+                ) : (
+                  <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
+                );
+              })}
+            </div>
+            <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
+              <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+              <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>
+              {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
+              <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
+              <BuyButton apply status={status} location={`${loc}-price`} label="Apply for the January intake" hideSpots className="mt-6" />
+            </div>
+            {/* Sean's guarantee, moved here from its own section. */}
+            <div className="mt-6 flex gap-4">
+              <ShieldCheck className="w-6 h-6 shrink-0 text-blue-400 mt-0.5" strokeWidth={1.75} />
+              <div>
+                <p className="text-white text-lg font-semibold">The risk sits with me.</p>
+                <p className="text-zinc-300 text-[17px] leading-relaxed mt-1">If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.</p>
+                <p className="text-zinc-500 text-[14px] leading-relaxed mt-3">To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.</p>
+              </div>
+            </div>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">
+              The support is there to install the system so your team stops needing me.
+            </p>
+          </Section>
+        </div>
+      </section>
+
+      <div className="gradient-line" />
+
 
       {/* FAQ */}
       <section className="py-14 md:py-24">
@@ -497,7 +497,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             <Label>What happens next</Label>
             <ol className="grid gap-3 mt-2">
               {([
-                [CreditCard, 'Secure your place on the Stripe checkout.'],
+                [CreditCard, 'Apply for the January intake.'],
                 [MessageCircle, 'We set up your WhatsApp straight away, with direct access to me.'],
                 [FolderOpen, 'Receive the Start Here workspace and pre install materials.'],
                 [CalendarDays, 'Book your Strategy Day.'],
@@ -559,14 +559,14 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
-              <BuyButton jump status={status} location={`${loc}-close`} className="mt-10" />
+              <BuyButton apply status={status} location={`${loc}-close`} label="Apply for the January intake" className="mt-10" />
             </div>
             {test && <div className="max-w-md mx-auto mt-10 text-left"><FitCall /></div>}
           </Section>
         </div>
       </section>
 
-      <StickyBar jump status={status} />
+      <StickyBar apply status={status} />
       <div className="h-20 md:hidden" />
       <Footer />
     </div>
