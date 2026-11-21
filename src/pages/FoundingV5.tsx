@@ -1,3 +1,4 @@
+import { CalendarDays, CreditCard, FolderOpen, GraduationCap, MessageCircle, Repeat, Users } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import StartTodayShowcase from '../components/founding/StartTodayShowcase';
@@ -146,7 +147,7 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
                   One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in youyr business, and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
                 </p>
                 <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
-                  <p className="text-white font-semibold">Lock it in now to get your Brand Day included in the price.</p>
+                  <p className="text-white font-semibold">Secure your place now to get your Brand Day included in the price.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">There are 11 Brand Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
@@ -300,15 +301,15 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Who you'll be working with</Label>
-            <div className="grid md:grid-cols-[220px_1fr] gap-8 items-start mt-2">
+            <div className="text-center"><Label>Who you'll be working with</Label></div>
+            <div className="flex flex-col items-center text-center gap-8 mt-2 max-w-2xl mx-auto">
               <img
                 src="/founding/sean.jpg"
                 alt="Sean on set, mid explanation"
                 width={440}
                 height={550}
                 loading="lazy"
-                className="w-full max-w-[220px] aspect-[4/5] object-cover rounded-2xl border border-white/10"
+                className="w-full max-w-[220px] aspect-[4/5] object-cover rounded-2xl border border-white/10 mx-auto"
               />
               <div>
                 {/* Sean's own words, 14 Nov. */}
@@ -402,19 +403,24 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>What happens next</Label>
-            <ol className="space-y-4 mt-2">
-              {[
-                'Lock in your place on the secure Stripe checkout.',
-                'We set up your WhatsApp straight away, with direct access to me.',
-                'Receive the Start Here workspace and pre install materials.',
-                'Book your Brand Day.',
-                'Your team gets access to the training and systems.',
-                '1:1 guided implementation starts in the next available intake month, beginning January.',
-                'Your first live content cycle runs once implementation starts.',
-              ].map((t, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <span className="font-display text-sm font-extrabold text-blue-400 mt-[3px] w-5 flex-shrink-0">{`0${i + 1}`}</span>
-                  <span className="text-zinc-300 text-[17px] leading-relaxed">{t}</span>
+            <ol className="grid gap-3 mt-2">
+              {([
+                [CreditCard, 'Secure your place on the Stripe checkout.'],
+                [MessageCircle, 'We set up your WhatsApp straight away, with direct access to me.'],
+                [FolderOpen, 'Receive the Start Here workspace and pre install materials.'],
+                [CalendarDays, 'Book your Brand Day.'],
+                [GraduationCap, 'Your team gets access to the training and systems.'],
+                [Users, '1:1 guided implementation starts in the next available intake month, beginning January.'],
+                [Repeat, 'Your first live content cycle runs once implementation starts.'],
+              ] as const).map(([Icon, t], i) => (
+                <li key={i} className="glow-card flex items-center gap-4 md:gap-5 px-5 py-4 md:px-6 md:py-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25">
+                    <Icon className="w-5 h-5 text-blue-400" strokeWidth={1.75} />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-blue-400 text-[12px] uppercase tracking-widest font-semibold">Step {i + 1}</p>
+                    <p className="text-white text-lg leading-snug mt-0.5">{t}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -425,14 +431,16 @@ export default function FoundingV5({ live = false }: { live?: boolean }) {
       <div className="gradient-line" />
 
       {/* CLOSE */}
-      <section className="py-14 md:py-28">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center">
+      <section className="relative overflow-hidden py-16 md:py-28">
+        {/* Feedback, 21 Nov: the close read dark. A soft blue glow behind it. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_45%,rgba(59,125,255,0.16),transparent_70%)]" />
+        <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">
               The Authority Engine
             </h2>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-400 leading-[1.15] mt-4">
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-200 leading-[1.15] mt-4">
               Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
