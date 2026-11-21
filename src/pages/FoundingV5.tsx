@@ -131,7 +131,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
           <Section>
             <Label>The trust gap</Label>
             {/* Sean, 21 Nov: the short version, his exact lines. */}
-            <H2>Your business has outgrown the way your content gets made, and it's time to go pro.</H2>
+            <H2>Your business has outgrown the way your content gets made.</H2>
             <p className="text-zinc-300 text-lg leading-relaxed mt-6">You already have the expertise, a dialled offer and some serious proof behind you.</p>
             <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">But your content is still:</p>
             <div className="mt-4">
