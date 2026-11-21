@@ -79,7 +79,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
 
       {/* HERO */}
-      <section className="pt-24 pb-12 md:pt-40 md:pb-20">
+      <section className="pt-24 pb-8 md:pt-40 md:pb-10">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <div className="accent-line mb-8" />
@@ -110,7 +110,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
-            <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2 mb-8" />
+            <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
             {test && (
               <div className="border-t border-white/10 pt-6">
                 <p className="text-zinc-500 text-[12px] uppercase tracking-widest">Behind the scenes with</p>
@@ -126,7 +126,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       <div className="gradient-line" />
 
       {/* THE TRUST GAP. Sean's copy, 21 Nov, word for word. */}
-      <section className="py-14 md:py-24">
+      <section className="pt-10 pb-14 md:pt-14 md:pb-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
             <Label>The trust gap</Label>
