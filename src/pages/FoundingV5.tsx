@@ -1,4 +1,4 @@
-import { BookOpen, CalendarDays, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
+import { BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
 import FitCall from '../components/founding/FitCall';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -111,6 +111,19 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
             <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
+            {/* Sean, 21 Nov: more below the button, but not the full cost. His line items from the old offer card, no price. */}
+            <div className="glow-card p-5 md:p-8 mt-8">
+              <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
+              <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
+              <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
+                {['$5,000 Brand Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-white text-[17px]">
+                    <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
+                  </li>
+                ))}
+              </ul>
+              {!feb && <p className="text-zinc-500 text-[14px] leading-relaxed mt-5">Closes 30 November.</p>}
+            </div>
             {test && (
               <div className="border-t border-white/10 pt-6">
                 <p className="text-zinc-500 text-[12px] uppercase tracking-widest">Behind the scenes with</p>
