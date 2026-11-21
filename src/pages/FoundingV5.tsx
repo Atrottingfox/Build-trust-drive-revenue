@@ -166,8 +166,8 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                 'Sending people into calls where they have to explain everything from scratch',
               ]} />
             </div>
-            <div className="mt-8 space-y-1 text-white text-lg font-semibold leading-relaxed">
-              <p className="text-zinc-400 font-normal">Problem is -</p>
+            <div className="mt-8 space-y-1 text-white text-lg leading-relaxed">
+              <p className="text-zinc-400">Problem is -</p>
               <p>You have the authority.</p>
               <p>Your content just doesn't communicate it.</p>
             </div>
