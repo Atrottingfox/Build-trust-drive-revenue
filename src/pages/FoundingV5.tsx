@@ -359,31 +359,37 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
           <Section>
             <Label>Everything you get</Label>
             <H2>Everything your team needs to run your content.</H2>
-            {/* Sean, 16 Nov: the v3 list. */}
+            {/* Sean, 16 Nov: the v3 list. 21 Nov: his value on each line, and the total. */}
             <div className="glow-card mt-8 divide-y divide-white/5">
-              {[
-                'A $5,000 Strategy Day with you and your team',
-                '1:1 guided implementation starts in the next available intake month, beginning January',
-                'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
-                'Training every fortnight',
-                'Two Loom reviews per week during active implementation',
-                'Prescriptive advice directly through the portal',
-                'Advisory group office hours, every Thursday',
-                'Monthly content advisory board meetings',
-                'WhatsApp support, 24 hour replies',
-                'Every SOP, every training video, all playbooks, straight away',
-                'Not there by day 90? We keep working with you until you are',
-              ].map((t, i) => {
+              {([
+                ['A Strategy Day with you and your team', '$10,000'],
+                ['1:1 guided implementation starts in the next available intake month, beginning January', ''],
+                ['Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', '$8,000'],
+                ['Training every fortnight', '$3,000'],
+                ['Two Loom reviews per week during active implementation', '$6,000'],
+                ['Prescriptive advice directly through the portal', '$6,000'],
+                ['Advisory group office hours, every Thursday', '$6,000+'],
+                ['Monthly content advisory board meetings', ''],
+                ['WhatsApp support, 24 hour replies', '$6,000'],
+                ['Every SOP, every training video, all playbooks, straight away', '$10,000'],
+                ['Not there by day 90? We keep working with you until you are', ''],
+              ] as const).map(([t, v], i) => {
                 const Icon = GET_ICONS[i] || Play;
+                const val = v ? <span className="text-zinc-400 text-[16px] font-semibold whitespace-nowrap">{v}</span> : null;
                 return test ? (
                   <div key={t} className="flex items-center gap-4 px-6 py-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-500/10 ring-1 ring-blue-500/25"><Icon className="w-[18px] h-[18px] text-blue-400" strokeWidth={1.75} /></span>
-                    <span className="text-white text-[17px]">{t}</span>
+                    <span className="text-white text-[17px] flex-1">{t}</span>
+                    {val}
                   </div>
                 ) : (
-                  <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>
+                  <div key={t} className="flex items-baseline justify-between gap-4 px-6 py-4 text-zinc-200 text-[17px]"><span>{t}</span>{val}</div>
                 );
               })}
+              <div className="flex items-baseline justify-between gap-4 px-6 py-4">
+                <p className="text-white text-[17px] font-semibold">Total value</p>
+                <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$55,000+ AUD</p>
+              </div>
               <div className="px-6 py-6 bg-white/[0.02]">
                 {!feb && <div className="flex items-baseline justify-between gap-4">
                   <p className="text-zinc-400 text-[16px]">From February, once 5 are sold, increasing back to $30,000 throughout 2027</p>
