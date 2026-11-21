@@ -48,7 +48,7 @@ const PROOF = [
 const GET_ICONS = [CalendarDays, Users, CalendarDays, GraduationCap, Video, MessageCircle, Users, BookOpen, MessageCircle, FolderOpen, ShieldCheck];
 
 function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: string }) {
-  return <BuyButton apply status={status} location={loc} label="Apply for the January intake" hideSpots className="mt-5" />;
+  return <BuyButton jump status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
 }
 
 export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
@@ -111,7 +111,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
-            <BuyButton apply status={status} location={`${loc}-video`} label="Apply for the January intake" hideSpots className="-mt-2" />
+            <BuyButton jump status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
             {/* Sean, 21 Nov: more below the button, but not the full cost. His line items from the old offer card, no price. */}
             <div className="glow-card p-5 md:p-8 mt-8">
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
@@ -266,7 +266,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                   <p className="text-zinc-300 text-[17px] mt-1">There are 11 Strategy Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
-                <BuyButton apply status={status} location={`${loc}-build`} label="Apply for the January intake" hideSpots className="mt-6" />
+                <BuyButton jump status={status} location={`${loc}-build`} label="Secure your January place" hideSpots className="mt-6" />
               </li>
               <li className="relative pl-8 pb-12">
                 <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
@@ -456,7 +456,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>
               {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
               <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
-              <BuyButton apply status={status} location={`${loc}-price`} label="Apply for the January intake" hideSpots className="mt-6" />
+              <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
             </div>
             {/* Sean's guarantee, moved here from its own section. */}
             <div className="mt-6 flex gap-4">
@@ -497,7 +497,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             <Label>What happens next</Label>
             <ol className="grid gap-3 mt-2">
               {([
-                [CreditCard, 'Apply for the January intake.'],
+                [CreditCard, 'Secure your place on the Stripe checkout.'],
                 [MessageCircle, 'We set up your WhatsApp straight away, with direct access to me.'],
                 [FolderOpen, 'Receive the Start Here workspace and pre install materials.'],
                 [CalendarDays, 'Book your Strategy Day.'],
@@ -559,14 +559,14 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
-              <BuyButton apply status={status} location={`${loc}-close`} label="Apply for the January intake" className="mt-10" />
+              <BuyButton jump status={status} location={`${loc}-close`} label="Secure your January place" className="mt-10" />
             </div>
             {test && <div className="max-w-md mx-auto mt-10 text-left"><FitCall /></div>}
           </Section>
         </div>
       </section>
 
-      <StickyBar apply status={status} />
+      <StickyBar jump status={status} />
       <div className="h-20 md:hidden" />
       <Footer />
     </div>

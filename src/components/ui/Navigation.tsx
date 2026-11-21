@@ -58,10 +58,10 @@ export function Navigation() {
 
             {!hideCta && founding && (
               <a
-                href="/apply"
+                href="#price"
                 className="btn-pulse hidden sm:flex items-center px-5 py-2 text-sm font-semibold bg-white text-black rounded-full hover:bg-zinc-200 transition-all"
               >
-                {Date.now() < Date.parse('2026-12-01T00:00:00+10:00') ? 'Apply for the January intake' : 'Apply for the February intake'}
+                {Date.now() < Date.parse('2026-12-01T00:00:00+10:00') ? 'Secure your January place' : 'Secure your February place'}
               </a>
             )}
             {!hideCta && !founding && (
