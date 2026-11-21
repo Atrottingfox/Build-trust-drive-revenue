@@ -394,7 +394,7 @@ export function Paid() {
                 'You receive the Start Here workspace and pre install materials',
                 'Your team gets every SOP, edit, playbook and training video',
                 'Advisory group office hours before you start',
-                'We lock in your Brand Day date',
+                'We lock in your Strategy Day date',
                 /* No month here: a February buyer lands on this screen too. */
                 '1:1 guided implementation starts in your intake month',
               ]} />
