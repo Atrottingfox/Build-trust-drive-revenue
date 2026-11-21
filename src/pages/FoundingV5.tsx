@@ -150,7 +150,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             <div className="glow-card p-6 md:p-8 mt-12">
               <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Step one</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">The Brand Day</p>
-              <p className="text-zinc-300 text-lg leading-relaxed mt-4">We compress your brand, buyer and revenue strategy into one working blueprint.</p>
+              <p className="text-zinc-300 text-lg leading-relaxed mt-4">We compress your brand, buyer and revenue strategy into one day.</p>
               <p className="text-zinc-400 text-[17px] leading-relaxed mt-5">We map:</p>
               <div className="mt-4">
                 <Ticks items={[
