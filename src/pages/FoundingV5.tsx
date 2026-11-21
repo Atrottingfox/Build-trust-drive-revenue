@@ -116,7 +116,16 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
               <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">{feb ? 'Join the February intake' : 'Join the January intake'}</p>
               <ul className="mt-6 border-t border-white/10 pt-5 space-y-3">
-                {['$5,000 Strategy Day', 'Playbooks, SOPs and training, immediately', 'Thursday advisory group office hours', '1:1 strategy call within 7 days'].map((t) => (
+                {['$5,000 Strategy Day', '1:1 strategy call within 7 days'].map((t) => (
+                  <li key={t} className="flex items-center gap-3 text-white text-[17px]">
+                    <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
+                  </li>
+                ))}
+              </ul>
+              {/* Sean, 21 Nov: everything they get before the Strategy Day, under "Get immediate access to:". Names from the Start today list. */}
+              <p className="text-zinc-400 text-[17px] mt-6">Get immediate access to:</p>
+              <ul className="mt-3 space-y-3">
+                {['Every SOP', 'Every training video', 'All playbooks', 'Thursday advisory group office hours', '1:1 WhatsApp communication'].map((t) => (
                   <li key={t} className="flex items-center gap-3 text-white text-[17px]">
                     <Check className="w-4 h-4 shrink-0 text-blue-400" strokeWidth={3} />{t}
                   </li>
