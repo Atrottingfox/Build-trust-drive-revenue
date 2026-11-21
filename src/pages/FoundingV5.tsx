@@ -48,7 +48,7 @@ const PROOF = [
 const GET_ICONS = [CalendarDays, Users, CalendarDays, GraduationCap, Video, MessageCircle, Users, BookOpen, MessageCircle, FolderOpen, ShieldCheck];
 
 function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: string }) {
-  return <BuyButton status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
+  return <BuyButton jump status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
 }
 
 export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
@@ -110,7 +110,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Watch the 7 minute walkthrough to see what your team installs over 90 days.
             </p>
             {/* Feedback, 21 Nov: a button straight under the video. */}
-            <BuyButton status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
+            <BuyButton jump status={status} location={`${loc}-video`} label="Secure your January place" hideSpots className="-mt-2" />
             {/* Sean, 21 Nov: more below the button, but not the full cost. His line items from the old offer card, no price. */}
             <div className="glow-card p-5 md:p-8 mt-8">
               <p className="text-blue-400 font-semibold text-sm uppercase tracking-widest">{feb ? 'February 2027 | 5 places' : '5 places at the founding rate'}</p>
@@ -240,7 +240,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                   <p className="text-zinc-300 text-[17px] mt-1">There are 11 Strategy Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
-                <BuyButton status={status} location={`${loc}-build`} label="Secure your January place" hideSpots className="mt-6" />
+                <BuyButton jump status={status} location={`${loc}-build`} label="Secure your January place" hideSpots className="mt-6" />
               </li>
               <li className="relative pl-8 pb-12">
                 <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
@@ -349,7 +349,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
         </div>
       </section>
 
-      <SectionCta status={status} location={`${loc}-payinfull`} />
+      <SectionCta jump status={status} location={`${loc}-payinfull`} />
 
       <div className="gradient-line" />
 
@@ -363,13 +363,12 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             <div className="glow-card mt-8 divide-y divide-white/5">
               {([
                 ['A Strategy Day with you and your team', '$10,000'],
-                ['1:1 guided implementation starts in the next available intake month, beginning January', ''],
                 ['Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', '$8,000'],
                 ['Training every fortnight', '$3,000'],
                 ['Two Loom reviews per week during active implementation', '$6,000'],
                 ['Prescriptive advice directly through the portal', '$6,000'],
                 ['Advisory group office hours, every Thursday', '$6,000+'],
-                ['Monthly content advisory board meetings', ''],
+                ['Monthly content advisory board meetings', '$3,000'],
                 ['WhatsApp support, 24 hour replies', '$6,000'],
                 ['Every SOP, every training video, all playbooks, straight away', '$10,000'],
                 ['Not there by day 90? We keep working with you until you are', ''],
@@ -383,12 +382,12 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                     {val}
                   </div>
                 ) : (
-                  <div key={t} className="flex items-baseline justify-between gap-4 px-6 py-4 text-zinc-200 text-[17px]"><span>{t}</span>{val}</div>
+                  <div key={t} className="flex items-baseline justify-between gap-6 px-6 py-4 text-zinc-200 text-[17px]"><span className="flex-1">{t}</span>{val}</div>
                 );
               })}
               <div className="flex items-baseline justify-between gap-4 px-6 py-4">
                 <p className="text-white text-[17px] font-semibold">Total value</p>
-                <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$55,000+ AUD</p>
+                <p className="font-display text-lg font-extrabold text-zinc-300 whitespace-nowrap">$58,000+ AUD</p>
               </div>
               <div className="px-6 py-6 bg-white/[0.02]">
                 {!feb && <div className="flex items-baseline justify-between gap-4">
@@ -399,6 +398,8 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
                   <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
                   <p className="font-display text-3xl font-extrabold text-white whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.4em] font-semibold">+ GST</span></p>
                 </div>
+                {/* Sean, 21 Nov: the start month line moved out of the list to here. */}
+                <p className="text-zinc-400 text-[16px] mt-4">1:1 guided implementation starts in the next available intake month, beginning January.</p>
                 <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
               </div>
             </div>
@@ -495,7 +496,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
         </div>
       </section>
 
-      <SectionCta status={status} location={`${loc}-guarantee`} />
+      <SectionCta jump status={status} location={`${loc}-guarantee`} />
 
       <div className="gradient-line" />
 
@@ -581,14 +582,14 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Turn your content team into a sales asset.
             </p>
             <div className="flex justify-center">
-              <BuyButton status={status} location={`${loc}-close`} className="mt-10" />
+              <BuyButton jump status={status} location={`${loc}-close`} className="mt-10" />
             </div>
             {test && <div className="max-w-md mx-auto mt-10 text-left"><FitCall /></div>}
           </Section>
         </div>
       </section>
 
-      <StickyBar status={status} />
+      <StickyBar jump status={status} />
       <div className="h-20 md:hidden" />
       <Footer />
     </div>
