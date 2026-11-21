@@ -19,7 +19,7 @@ import { usePageVisits } from '../lib/pageVisits';
 /*
   DELIBERATE small errors, Sean 16 Nov (so the page reads hand written). Do not fix:
   the double space after "This is the foundation." (By day 90),
-  "every every post" (Fit). 17 Nov, in How it works (Build): "in youyr business" and the
+  "every every post" (Fit). 17 Nov, in How it works (Build): the
   double space before "Then we turn that".
 */
 /* v5 only (Sean, 16 Nov): short form in Install, long form in Transfer when it's ready.
@@ -230,18 +230,26 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               The Authority Engine turns your founder expertise into a repeatable content system your team can plan, produce, review and improve without relying on you to make every decision.
             </p>
             <ol className="relative mt-12 ml-2 border-l border-white/10">
+              {/* Sean, 21 Nov: Secure your place sits above Build, because access starts the moment they buy. */}
               <li className="relative pl-8 pb-12">
                 <span className="absolute -left-[9px] top-2 h-4 w-4 rounded-full bg-white ring-4 ring-blue-500/30" />
-                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
-                <p className="font-display text-3xl font-extrabold text-white mt-1">Build</p>
-                <p className="text-zinc-300 text-lg leading-relaxed mt-2">
-                  One full media strategy day in person, to get your brand and content dialled. We analyse your current bottlenecks, map how content actually drives revenue in youyr business, and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
-                </p>
-                <div className="mt-6 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
+                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Today</p>
+                <p className="font-display text-3xl font-extrabold text-white mt-1">Secure your place</p>
+                <div className="mt-4 rounded-xl border border-blue-500/30 bg-blue-500/[0.06] px-5 py-4">
                   <p className="text-white font-semibold">Secure your place now to get your Strategy Day included in the price.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">There are 11 Strategy Days left at $5,000. After that the price goes to <span className="text-white font-semibold">$10,000</span>.</p>
                   <p className="text-zinc-300 text-[17px] mt-1">Plus immediate access to group advisory calls, training, playbooks, and all SOP's.</p>
                 </div>
+                <BuyButton status={status} location={`${loc}-build`} label="Secure your January place" hideSpots className="mt-6" />
+              </li>
+              <li className="relative pl-8 pb-12">
+                <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-blue-500 ring-4 ring-blue-500/15" />
+                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">Before week 1</p>
+                <p className="font-display text-3xl font-extrabold text-white mt-1">Build</p>
+                <p className="text-zinc-300 text-lg leading-relaxed mt-2">
+                  {/* Sean, 21 Nov: points back to the Strategy Day card above instead of repeating it. */}
+                  Your Strategy Day, in person, with everything we map above. We analyse your current bottlenecks and build your Buying Belief Map.{'\u00a0 '}Then we turn that into a documented brand and Authority Engine.
+                </p>
               </li>
               {PHASES_V5.map((ph) => (
                 <li key={ph.n} className="relative pl-8 pb-12 last:pb-0">
