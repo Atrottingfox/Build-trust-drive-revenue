@@ -69,7 +69,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
       {live ? (
         <SEO
           title="90 Day Install"
-          description="The Authority Engine. A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
+          description="The Authority Engine. Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November."
           path="/founding"
           image="https://authorityengine.com.au/og-founding-v3.jpg"
         />
@@ -89,7 +89,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
               Turn your content team into a sales asset.
             </h1>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              A 90 day content plan with the strategy, playbooks and standards your team needs to create content that builds trust before the sale.
+              Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.
             </p>
             {test && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
