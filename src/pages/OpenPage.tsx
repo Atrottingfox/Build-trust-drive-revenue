@@ -235,14 +235,10 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             </ul>
             <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">Your sales team should not have to build every belief from scratch on every call.</p>
           </Section>
-          <Section className="max-w-xl mx-auto text-center mt-20 md:mt-28">
-            <H dark>By the end of the first cycle, your media has a job.</H>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You're not just throwing it at a wall and seeing what sticks.</p>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-2">It helps buyers understand, believe, and take action.</p>
-          </Section>
+          {/* Sean, 23 Nov, his words. */}
           <Section className="text-center max-w-3xl mx-auto mt-20 md:mt-28">
-            <Eyebrow dark>By day 90</Eyebrow>
-            <H dark className="mt-4">By day 90, your team can answer these.</H>
+            <H dark>By the end of the first cycle, your content has a job.</H>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">At day 90 your team can answer these:</p>
           </Section>
           <Section className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-10">
             {QUESTIONS.map((q, i) => (
@@ -253,7 +249,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             ))}
           </Section>
           <Section className="text-center max-w-2xl mx-auto mt-10">
-            <p className="text-zinc-400 text-[17px] leading-relaxed">A working operating system your team uses to plan, produce, judge, publish and improve content.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed">You're not just throwing it at a wall and seeing what sticks.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-2">It helps buyers understand, believe, and take action.</p>
           </Section>
           <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-day90`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
