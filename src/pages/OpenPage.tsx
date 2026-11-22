@@ -55,7 +55,7 @@ const STEPS = [
   },
 ];
 
-const NOW = ['Start Here workspace', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup'];
+const NOW = ['The Engineroom', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup'];
 
 const NEXT = [
   [CreditCard, 'Secure your place on the Stripe checkout.'],
