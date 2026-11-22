@@ -83,6 +83,35 @@ const OPEN_TIERS = [
 /* Sean is making these two in Stripe. Paste the payment links here and the buttons appear. */
 const OPEN_LINKS: Record<number, string> = { 6: '', 12: '' };
 
+/* Sean, 22 Nov: the /open visual model. Three circles, his three words, his headline where they overlap. */
+function OpenVenn() {
+  const C = [
+    { cx: 222, cy: 205, label: 'ACCESS', lx: 150, ly: 150 },
+    { cx: 378, cy: 205, label: 'TRAINING', lx: 450, ly: 150 },
+    { cx: 300, cy: 340, label: 'ADVISORY', lx: 300, ly: 455 },
+  ];
+  return (
+    <div className="mt-10 flex justify-center">
+      <svg viewBox="0 35 600 475" className="w-full max-w-[520px] h-auto" role="img" aria-label="Access, Training and Advisory overlap. Get access to the best.">
+        <defs>
+          <radialGradient id="vennFill" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#3B7DFF" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#3B7DFF" stopOpacity="0.06" />
+          </radialGradient>
+        </defs>
+        {C.map((c) => (
+          <circle key={c.label} cx={c.cx} cy={c.cy} r={160} fill="url(#vennFill)" stroke="#3B7DFF" strokeOpacity="0.7" strokeWidth="1.5" style={{ mixBlendMode: 'screen' }} />
+        ))}
+        {C.map((c) => (
+          <text key={c.label + 't'} x={c.lx} y={c.ly} textAnchor="middle" fill="#7FA8FF" fontSize="24" fontWeight="700" letterSpacing="3" className="font-display">{c.label}</text>
+        ))}
+        <text x="300" y="242" textAnchor="middle" fill="#fff" fontSize="26" fontWeight="800" className="font-display">Get access</text>
+        <text x="300" y="274" textAnchor="middle" fill="#fff" fontSize="26" fontWeight="800" className="font-display">to the best.</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function FoundingV5({ live = false, test = false, open = false }: { live?: boolean; test?: boolean; open?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
      /founding?paid=1, personal links (?for= or ?c=) post visits to Slack, and
@@ -238,6 +267,7 @@ export default function FoundingV5({ live = false, test = false, open = false }:
               <Section>
                 <Label>What you get</Label>
                 <H2>Get access to the best.</H2>
+                <OpenVenn />
                 <div className="mt-8 space-y-4">
                 {OPEN_GROUPS.map((g) => (
                   <div key={g.name} className="glow-card">
