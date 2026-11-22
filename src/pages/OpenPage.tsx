@@ -50,7 +50,7 @@ const STEPS = [
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/step4-full.mp4', full: true, alt: 'Sean walking through a format in the Engineroom',
+    img: '/founding/step4-full2.mp4', full: true, alt: 'Sean walking through a format in the Engineroom',
   },
 ];
 
