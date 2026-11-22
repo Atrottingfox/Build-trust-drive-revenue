@@ -137,23 +137,19 @@ export default function OpenPage() {
             <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
             {/* Sean, 22 Nov, his words. */}
             <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
-            <p className="text-zinc-400 text-[17px] mt-6">But your content is still:</p>
+            <p className="text-zinc-400 text-[17px] mt-6">Why is your content still:</p>
           </Section>
           <Section className="max-w-xl mx-auto mt-5">
             <ul className="space-y-3">
               {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
             </ul>
           </Section>
-          <Section className="text-center mt-10 space-y-1 text-lg md:text-xl">
-            <p className="text-zinc-400">Problem is -</p>
-            <p>You have the authority. Your content just doesn't communicate it.</p>
-          </Section>
 
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              {/* Sean, 22 Nov: "use your first 90 days". */}
-              <Eyebrow>Your first 90 days</Eyebrow>
+              {/* Sean, 22 Nov: "it's how we start". */}
+              <Eyebrow>How we start</Eyebrow>
               <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">The Strategy Day</p>
               <p className="text-zinc-700 text-[17px] leading-relaxed mt-4">We compress your brand, content and revenue strategy into one day.</p>
               <p className="text-zinc-600 text-[17px] mt-5">We map:</p>
