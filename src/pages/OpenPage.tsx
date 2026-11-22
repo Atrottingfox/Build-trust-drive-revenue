@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
+import StartTodayShowcase from '../components/founding/StartTodayShowcase';
 import { BuyButton, Section, StickyBar, useStatus } from './Founding';
 
 /*
@@ -32,12 +33,13 @@ const STEPS = [
   },
   {
     tag: 'Weeks 1 to 4', title: 'Install',
-    body: ['We launch your content starting with short form. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.'],
+    /* Sean, 22 Nov: about the exact bottleneck, never short form or long form. "we do what's necessary". */
+    body: ["We start on your exact bottleneck and do what's necessary. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking."],
     img: '/founding/train-02a.jpg', alt: 'Sean teaching at the desk',
   },
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
-    body: ['Your operator runs the system with support. When short form is calibrated and ready, we dial in long form. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
+    body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
     img: '/founding/receive/kpi.jpg', alt: 'The 4 Numbers dashboard',
   },
 ];
@@ -153,13 +155,15 @@ export default function OpenPage() {
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <Eyebrow>Step one</Eyebrow>
-              <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">Your first advisory cycle</p>
+              {/* Sean, 22 Nov: "just call The Strategy Day our first advisory cycle". */}
+              <Eyebrow>Your first advisory cycle</Eyebrow>
+              <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">The Strategy Day</p>
               <p className="text-zinc-600 text-[17px] mt-4">The Strategy Day establishes:</p>
               <ul className="mt-4 space-y-2.5">{ESTABLISHES.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">The exact work is shaped around your business. We do not force every founder through the same content plan.</p>
             </div>
-            <img src="/founding/receive/brand-walkout.jpg" alt="What You Walk Out With, the Strategy Day output" loading="lazy" className="w-full aspect-video object-cover object-top rounded-2xl border border-zinc-200" />
+            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 16 cuts, 21s, silent loop). */}
+            <video src="/founding/sd-reel.mp4" poster="/founding/sd-reel.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
         </div>
       </section>
@@ -185,6 +189,19 @@ export default function OpenPage() {
               </Section>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ACCESS TODAY, the /founding video showcase (Sean, 22 Nov: keep the core visuals of the vids). His /founding copy. */}
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          <Section className="max-w-3xl">
+            <Eyebrow dark>Access today</Eyebrow>
+            <H dark className="mt-4">Start in January, get access today.</H>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month, beginning January.</p>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
+          </Section>
+          <StartTodayShowcase />
         </div>
       </section>
 
