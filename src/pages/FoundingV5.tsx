@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ArrowRight, BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
 import FitCall from '../components/founding/FitCall';
 import Footer from '../components/Footer';
@@ -93,6 +94,10 @@ export default function FoundingV5({ live = false, test = false, open = false }:
   const loc = live ? 'founding' : open ? 'open' : test ? 'founding-test' : 'founding-v5';
   /* Checkout moves to February once January has 5 sales or 30 November passes. */
   const feb = status?.intake === 'february';
+  /* /open#price from the thank you page: scroll to the tiers once the page has rendered. */
+  useEffect(() => {
+    if (open && window.location.hash === '#price') setTimeout(() => document.getElementById('price')?.scrollIntoView({ block: 'start' }), 300);
+  }, [open]);
   if (paid) return <Paid />;
 
   return (

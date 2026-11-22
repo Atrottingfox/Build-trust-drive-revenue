@@ -348,6 +348,7 @@ export function Paid() {
     paid: false,
     firstName: '',
   });
+  const paidStatus = useStatus();
 
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('session_id') || '';
@@ -413,6 +414,22 @@ export function Paid() {
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
               </p>
+              {/* Sean, 22 Nov: the /open membership as the upsell after the $10k. Same tiers and prices as /open. */}
+              <div className="glow-card p-6 md:p-8 mt-12">
+                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">The Authority Engine</p>
+                <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access to the best.</p>
+                <div className="mt-5 divide-y divide-white/5">
+                  {[[3, '$10,000', '$15,000'], [6, '$15,000', '$18,000'], [12, '$18,000', '$24,000']].map(([m, jan, feb]) => (
+                    <div key={m} className="flex items-center justify-between py-3 text-[17px]">
+                      <span className="text-zinc-300">{m} months</span>
+                      <span className="text-white font-semibold">{paidStatus?.intake === 'february' ? feb : jan} <span className="text-zinc-500 text-[14px] font-normal">AUD + GST</span></span>
+                    </div>
+                  ))}
+                </div>
+                <a href="/open#price" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors mt-6">
+                  Secure your place <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
             </>
           ) : (
             <>
