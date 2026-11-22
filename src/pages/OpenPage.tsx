@@ -139,12 +139,12 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             <Eyebrow dark>The trust gap</Eyebrow>
             <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
             {/* Sean, 22 Nov, his words. */}
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
-            <p className="text-zinc-400 text-[17px] mt-6">Why is your content still:</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most - you're actually legit.</p>
+            <p className="text-zinc-400 text-[17px] mt-6">So why is your content still -</p>
           </Section>
           <Section className="max-w-xl mx-auto mt-5">
             <ul className="space-y-3">
-              {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
+              {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><span className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />{t}</li>)}
             </ul>
           </Section>
 
