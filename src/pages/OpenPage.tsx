@@ -35,7 +35,7 @@ const STEPS = [
   {
     tag: 'Today', title: 'Secure your place',
     body: ['Secure your place now to get your Strategy Day included in the price.', "Plus immediate access to group advisory calls, training, playbooks, and all SOP's."],
-    img: '/founding/ce-walk.mp4', alt: 'A walkthrough of contentengine.live in use',
+    img: '/founding/ce-portal.mp4', alt: 'A new client going through the contentengine.live portal: welcome video, Home, adding the calls to their calendar, the toolkit',
   },
   {
     tag: 'Before week 1', title: 'Build',
