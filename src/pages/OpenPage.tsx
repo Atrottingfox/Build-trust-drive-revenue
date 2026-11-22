@@ -76,15 +76,15 @@ const GROUPS = [
   ] },
 ];
 
+/* Sean, 22 Nov: "use this same language", his /founding trust gap and Strategy Day copy, word for word. */
 const GAP = [
-  'Your team still needs the founder to decide what to say',
-  'Great ideas are produced once, then disappear',
-  'Content lacks a consistent point of view',
-  'Different people create different standards',
-  'Nobody knows what to improve next',
-  'The media function is not compounding',
+  "Getting attention that doesn't convert to sales",
+  "Teaching killer ideas that don't connect with your sales process",
+  'Produced by a team that still needs you to decide what to say',
+  'Reaching people interested but unlikely to buy',
+  'Sending people into calls where they have to explain everything from scratch',
 ];
-const ESTABLISHES = ['Brand and positioning', 'Audience and point of view', 'Media priorities', 'Team responsibilities', 'Content standards', 'The first implementation priorities'];
+const MAP = ['Your positioning', 'Your ideal buyer', 'What they need to believe before buying', 'Why common solutions fail', 'What makes your approach different', 'The content required to move someone from stranger to advocate'];
 const QUESTIONS = ['What should we make?', 'Who is it for?', 'Which format fits?', 'How do we capture it?', 'How do we produce it?', 'Is it good enough to publish?', 'Did it work?', 'What do we do more of next?'];
 
 const Eyebrow = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
@@ -158,26 +158,28 @@ export default function OpenPage() {
             <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
             {/* Sean, 22 Nov, his words. */}
             <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
-            <p className="text-zinc-400 text-[17px] mt-6">But your problem's simple -</p>
+            <p className="text-zinc-400 text-[17px] mt-6">But your content is still:</p>
           </Section>
           <Section className="max-w-xl mx-auto mt-5">
             <ul className="space-y-3">
               {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
             </ul>
           </Section>
-          <Section className="text-center mt-10 text-lg md:text-xl font-semibold">
-            <p>You have the expertise. Your media function has not caught up to it.</p>
+          <Section className="text-center mt-10 space-y-1 text-lg md:text-xl">
+            <p className="text-zinc-400">Problem is -</p>
+            <p>You have the authority.</p>
+            <p>Your content just doesn't communicate it.</p>
           </Section>
 
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              {/* Sean, 22 Nov: "just call The Strategy Day our first advisory cycle". */}
-              <Eyebrow>Your first advisory cycle</Eyebrow>
+              <Eyebrow>Step one</Eyebrow>
               <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">The Strategy Day</p>
-              <p className="text-zinc-600 text-[17px] mt-4">The Strategy Day establishes:</p>
-              <ul className="mt-4 space-y-2.5">{ESTABLISHES.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
-              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">The exact work is shaped around your business. We do not force every founder through the same content plan.</p>
+              <p className="text-zinc-700 text-[17px] leading-relaxed mt-4">We compress your brand, content and revenue strategy into one day.</p>
+              <p className="text-zinc-600 text-[17px] mt-5">We map:</p>
+              <ul className="mt-4 space-y-2.5">{MAP.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
+              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
             {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, five rooms, 13 shots with slow zooms and crossfades, whiteboard clip deflickered, 17s, silent loop). */}
             <video src="/founding/sd-reel3.mp4" poster="/founding/sd-reel3.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
