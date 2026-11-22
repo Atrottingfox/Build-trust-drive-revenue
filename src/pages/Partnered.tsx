@@ -66,6 +66,19 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
   <li className={`flex items-start gap-2.5 text-[16px] leading-relaxed ${dark ? 'text-zinc-300' : 'text-zinc-600'}`}><Check className={`w-4 h-4 mt-1 shrink-0 ${dark ? 'text-blue-400' : 'text-[#3B7DFF]'}`} strokeWidth={3} />{children}</li>
 );
 
+/* Sean, 23 Nov: a hand written looking underline under the room line. */
+function Scribble({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-block pb-3">
+      {children}
+      <svg aria-hidden="true" viewBox="0 0 300 16" preserveAspectRatio="none" className="absolute left-[-2%] bottom-0 w-[104%] h-[14px] overflow-visible">
+        <path d="M3 10.5 C 45 5.5, 90 4, 140 6.2 S 235 10.8, 297 5.2" fill="none" stroke="#3B7DFF" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M18 13.2 C 70 9.8, 150 9.2, 214 10.6 S 270 11.4, 286 9.6" fill="none" stroke="#3B7DFF" strokeOpacity="0.55" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    </span>
+  );
+}
+
 function ApplyButton({ className = '', white = false }: { className?: string; white?: boolean }) {
   return (
     <a
@@ -83,7 +96,7 @@ export default function Partnered() {
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
       <SEO
         title="Founding Partner Network"
-        description="Do your best work with people worth working with."
+        description="A private network of exceptional specialists, operators, and partners across media, content, production, acquisition, and growth."
         path="/partnered"
         image="https://authorityengine.com.au/og-founding-v3.jpg"
         noIndex
@@ -94,10 +107,9 @@ export default function Partnered() {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             <Eyebrow>The Authority Engine | Founding Partner Network</Eyebrow>
-            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto mt-5">Fuck tall poppy.</h1>
-            <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Get in a room that celebrates when others win.</p>
-            <p className="text-zinc-900 text-lg md:text-xl font-semibold leading-relaxed mt-8 max-w-2xl mx-auto">Do your best work with people worth working with.</p>
-            <p className="text-zinc-600 text-lg leading-relaxed mt-3 max-w-2xl mx-auto">
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto mt-5">F*ck tall poppy.</h1>
+            <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5"><Scribble>Get in a room that cheers when others win.</Scribble></p>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-8 max-w-2xl mx-auto">
               The Authority Engine is building a private network of exceptional specialists, operators, and partners across media, content, production, acquisition, and growth.
             </p>
             <ApplyButton className="mt-9" />
@@ -217,7 +229,7 @@ export default function Partnered() {
           <Section>
             <div className="accent-line mx-auto mb-10" />
             <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">Build the room you wish existed.</h2>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-300 leading-[1.15] mt-4">Fuck tall poppy.</p>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-300 leading-[1.15] mt-4">F*ck tall poppy.</p>
             <div className="flex justify-center"><ApplyButton white className="mt-10" /></div>
           </Section>
         </div>
