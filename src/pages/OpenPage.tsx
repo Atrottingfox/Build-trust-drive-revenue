@@ -348,6 +348,32 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         </div>
       </section>
 
+      {/* What this is not. Sean's /offer copy, 23 Nov. */}
+      <section className="py-16 md:py-24 border-t border-zinc-200/70">
+        <div className="max-w-3xl mx-auto px-5 lg:px-8">
+          <Section className="text-center">
+            <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em]">What this is not</p>
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05] mt-4">Boundaries.<br /><span className="text-zinc-400">So we both stay sharp.</span></h2>
+            <p className="text-zinc-600 text-[17px] mt-6">For clarity on both sides. This is not:</p>
+          </Section>
+          <Section className="mt-8 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-9">
+            <ul className="divide-y divide-zinc-100">
+              {[
+                ['A done for you content agency.', 'Your team films, edits and posts. I design the Authority Engine, train your operator, and read the data with you.'],
+                ['Full time CMO or creative director services.', 'I show up for the cadence we agree, not to manage your entire media team.'],
+                ['A guarantee of revenue.', 'We agree the metrics, test, and the data tells us what worked.'],
+                ['A content factory.', 'I do not write or edit every script. Your team produces.'],
+              ].map(([h, b]) => (
+                <li key={h} className="flex items-start gap-4 py-5 first:pt-0 last:pb-0">
+                  <span className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
+                  <p className="text-[17px] leading-relaxed text-zinc-600"><span className="text-zinc-900 font-semibold">{h}</span> {b}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        </div>
+      </section>
+
       {/* FAQ, dark */}
       <section className="bg-[#0B0D12] py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
