@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ArrowRight, BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
+import { BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
 import FitCall from '../components/founding/FitCall';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -8,7 +8,6 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import { BuyButton, Crosses, H2, Label, Paid, PHASES, Section, StickyBar, Ticks, useStatus } from './Founding';
 import { usePageVisits } from '../lib/pageVisits';
-import { trackCta } from '../lib/track';
 
 /*
   /founding-v5. Sean, 13 Nov: everything /founding has, displayed exactly as
@@ -75,13 +74,6 @@ const OPEN_GROUPS = [
     'Prescriptive advice directly through the portal',
   ] },
 ];
-const OPEN_TIERS = [
-  { months: 3, jan: '$10,000', feb: '$15,000' },
-  { months: 6, jan: '$15,000', feb: '$18,000' },
-  { months: 12, jan: '$18,000', feb: '$24,000' },
-];
-/* Sean is making these two in Stripe. Paste the payment links here and the buttons appear. */
-const OPEN_LINKS: Record<number, string> = { 6: '', 12: '' };
 
 /* Sean, 22 Nov: the /open visual model. Three circles, his three words, his headline where they overlap. */
 function OpenVenn() {
@@ -544,28 +536,8 @@ export default function FoundingV5({ live = false, test = false, open = false }:
               })}
             </div>
             )}
-            {open ? (
-              /* Sean, 22 Nov: January 10/15/18, February 15/18/24. 3 months uses the existing checkout. 6 and 12 show a button once their Stripe links are in OPEN_LINKS. */
-              <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
-                <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
-                <div className="grid sm:grid-cols-3 gap-3 mt-5">
-                  {OPEN_TIERS.map((t) => (
-                    <div key={t.months} className="rounded-xl border border-white/10 bg-white/[0.03] p-5 flex flex-col">
-                      <p className="text-zinc-400 text-[15px] uppercase tracking-widest">{t.months} months</p>
-                      <p className="font-display text-3xl md:text-[34px] font-extrabold text-white mt-2 whitespace-nowrap">{feb ? t.feb : t.jan}</p>
-                      <p className="text-zinc-500 text-[14px]">AUD + GST</p>
-                      {t.months === 3 ? (
-                        <BuyButton status={status} location={`${loc}-price-3`} label="Secure your place" hideSpots className="mt-5 [&_button]:whitespace-nowrap [&_button]:px-5" />
-                      ) : OPEN_LINKS[t.months] ? (
-                        <a href={OPEN_LINKS[t.months]} onClick={() => trackCta(`${loc}-price-${t.months}`)} className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-black hover:bg-zinc-200 transition-colors">Secure your place <ArrowRight className="w-4 h-4" /></a>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-                {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-5">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000, $18,000 and $24,000 AUD + GST</span>.</p>}
-                <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
-              </div>
-            ) : (
+            {/* Sean, 22 Nov: no tiers on /open, back to the 90 day price. The tier version is in git at a2ea5e7. */}
+            {(
             <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
               <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
               <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>

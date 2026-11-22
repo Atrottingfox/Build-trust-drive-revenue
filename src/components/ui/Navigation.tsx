@@ -11,7 +11,7 @@ export function Navigation() {
   const path = location.pathname.toLowerCase();
   const hideCta = NO_CTA_PATHS.includes(path);
   // Founding pages are buy direct, never apply (Sean, 13 Nov).
-  const founding = path.startsWith('/founding');
+  const founding = path.startsWith('/founding') || path === '/open';
   const [scrolled, setScrolled] = useState(false);
   const [showMobile, setShowMobile] = useState(false);
   const lastScrollY = useRef(0);
