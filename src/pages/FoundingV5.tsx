@@ -1,4 +1,4 @@
-import { BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Play, Repeat, ShieldCheck, Users, Video } from 'lucide-react';
 import FitCall from '../components/founding/FitCall';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -7,6 +7,7 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
 import { BuyButton, Crosses, H2, Label, Paid, PHASES, Section, StickyBar, Ticks, useStatus } from './Founding';
 import { usePageVisits } from '../lib/pageVisits';
+import { trackCta } from '../lib/track';
 
 /*
   /founding-v5. Sean, 13 Nov: everything /founding has, displayed exactly as
@@ -50,6 +51,36 @@ const GET_ICONS = [CalendarDays, Users, CalendarDays, GraduationCap, Video, Mess
 function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: string }) {
   return <BuyButton jump status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
 }
+
+/* /open (Sean, 22 Nov): same items, grouped. Wording from this page and his voice note. */
+const OPEN_GROUPS = [
+  { name: 'Access', items: [
+    'Direct access to me',
+    'Experts in content, production and acquisition, through the network',
+    'The whole team gets access',
+    'Monthly meet ups for the first 3 months, Brisbane, Melbourne and Sydney',
+    'WhatsApp support, 24 hour replies',
+  ] },
+  { name: 'Training', items: [
+    'Every SOP, every training video, all playbooks, straight away',
+    'Training every fortnight',
+    'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
+  ] },
+  { name: 'Advisory', items: [
+    'A Strategy Day with you and your team',
+    'Advisory group office hours, every Thursday',
+    'Monthly content advisory board meetings',
+    'Two Loom reviews per week during active implementation',
+    'Prescriptive advice directly through the portal',
+  ] },
+];
+const OPEN_TIERS = [
+  { months: 3, jan: '$10,000', feb: '$15,000' },
+  { months: 6, jan: '$15,000', feb: '$18,000' },
+  { months: 12, jan: '$18,000', feb: '$24,000' },
+];
+/* Sean is making these two in Stripe. Paste the payment links here and the buttons appear. */
+const OPEN_LINKS: Record<number, string> = { 6: '', 12: '' };
 
 export default function FoundingV5({ live = false, test = false, open = false }: { live?: boolean; test?: boolean; open?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
@@ -427,6 +458,19 @@ export default function FoundingV5({ live = false, test = false, open = false }:
             <Label>Everything you get</Label>
             <H2>Everything your team needs to run your content.</H2>
             {/* Sean, 21 Nov (review notes): no price on each line, no total. One strong price box, guarantee straight under it. */}
+            {open ? (
+              /* Sean, 22 Nov: /open groups the same items under Access, Training, Advisory. Item wording is his, from this page and his voice note. */
+              <div className="mt-8 space-y-4">
+                {OPEN_GROUPS.map((g) => (
+                  <div key={g.name} className="glow-card">
+                    <p className="px-6 pt-5 pb-2 text-blue-400 text-sm uppercase tracking-widest font-semibold">{g.name}</p>
+                    <div className="divide-y divide-white/5">
+                      {g.items.map((t) => <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
                 'A Strategy Day with you and your team',
@@ -450,6 +494,29 @@ export default function FoundingV5({ live = false, test = false, open = false }:
                 );
               })}
             </div>
+            )}
+            {open ? (
+              /* Sean, 22 Nov: January 10/15/18, February 15/18/24. 3 months uses the existing checkout. 6 and 12 show a button once their Stripe links are in OPEN_LINKS. */
+              <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
+                <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+                <div className="grid sm:grid-cols-3 gap-3 mt-5">
+                  {OPEN_TIERS.map((t) => (
+                    <div key={t.months} className="rounded-xl border border-white/10 bg-white/[0.03] p-5 flex flex-col">
+                      <p className="text-zinc-400 text-[15px] uppercase tracking-widest">{t.months} months</p>
+                      <p className="font-display text-3xl md:text-[34px] font-extrabold text-white mt-2 whitespace-nowrap">{feb ? t.feb : t.jan}</p>
+                      <p className="text-zinc-500 text-[14px]">AUD + GST</p>
+                      {t.months === 3 ? (
+                        <BuyButton status={status} location={`${loc}-price-3`} label="Secure your place" hideSpots className="mt-5 [&_button]:whitespace-nowrap [&_button]:px-5" />
+                      ) : OPEN_LINKS[t.months] ? (
+                        <a href={OPEN_LINKS[t.months]} onClick={() => trackCta(`${loc}-price-${t.months}`)} className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-[15px] font-semibold text-black hover:bg-zinc-200 transition-colors">Secure your place <ArrowRight className="w-4 h-4" /></a>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+                {!feb && <p className="text-zinc-400 text-[16px] leading-relaxed mt-5">From February, once 5 are sold, <span className="text-zinc-200 font-semibold">$15,000, $18,000 and $24,000 AUD + GST</span>.</p>}
+                <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
+              </div>
+            ) : (
             <div className="mt-6 rounded-2xl border border-blue-500/40 bg-blue-500/[0.07] p-6 md:p-8">
               <p className="text-white text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
               <p className="font-display text-4xl md:text-6xl font-extrabold text-white mt-2 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} AUD <span className="text-zinc-400 text-[0.3em] font-semibold">+ GST</span></p>
@@ -457,6 +524,7 @@ export default function FoundingV5({ live = false, test = false, open = false }:
               <p className="text-zinc-400 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
               <BuyButton status={status} location={`${loc}-price`} label="Secure your January place" hideSpots className="mt-6" />
             </div>
+            )}
             {/* Sean's guarantee, moved here from its own section. */}
             <div className="mt-6 flex gap-4">
               <ShieldCheck className="w-6 h-6 shrink-0 text-blue-400 mt-0.5" strokeWidth={1.75} />
@@ -555,7 +623,7 @@ export default function FoundingV5({ live = false, test = false, open = false }:
               The Authority Engine
             </h2>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-200 leading-[1.15] mt-4">
-              Turn your content team into a sales asset.
+              {open ? 'Get access to the best.' : 'Turn your content team into a sales asset.'}
             </p>
             <div className="flex justify-center">
               <BuyButton jump status={status} location={`${loc}-close`} label="Secure your January place" className="mt-10" />
