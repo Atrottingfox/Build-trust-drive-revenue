@@ -70,8 +70,8 @@ const NEXT = [
 // Sean, 23 Nov: what they get, in his pasted words.
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['SOPs and playbooks', 'Fortnightly team training', 'Weekly implementation calls for four weeks', 'Fortnightly calls for eight weeks', 'Reviews of real work'] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Senior judgment', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['Strategy Day', 'Loom reviews', 'Content advisory board', 'Office hours', 'Prescriptive feedback', 'WhatsApp support'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['Every SOP, every training video, all playbooks, straight away', 'Training every fortnight', 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', 'Reviews of real work'] },
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Senior judgment', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['A Strategy Day with you and your team', 'Two Loom reviews per week during active implementation', 'Monthly content advisory board meetings', 'Advisory group office hours, every Thursday', 'Prescriptive advice directly through the portal', 'WhatsApp support, 24 hour replies'] },
 ];
 
 /* Sean, 22 Nov: "use this same language", his /founding trust gap and Strategy Day copy, word for word. */
