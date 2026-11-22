@@ -120,8 +120,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             {/* Sean, 22 Nov: no eyebrow, no button and no walkthrough line above the fold. */}
-            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
-            <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Build the media function behind your next stage of growth.</p>
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Own your category.</h1>
+            <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Private media growth advisory for industry leading founders.</p>
             <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">We help you turn your expertise, point of view, and proof into media your team can plan, produce, review, and improve without you directing every decision.</p>
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
