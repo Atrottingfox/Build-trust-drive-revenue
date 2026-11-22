@@ -280,31 +280,62 @@ const handler: Handler = async (event) => {
       }
     }
 
-    if (writeNotion) {
-      const res = await fetch("https://api.notion.com/v1/pages", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${notionKey}`,
-          "Notion-Version": "2022-06-28",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          parent: { database_id: notionDbId },
-          properties,
-        }),
-      });
+    /*
+      Notion must never be the reason an application disappears.
 
+      From 14 Aug to 22 Nov every /apply submission returned 500 because the
+      code wrote two columns ("Operator Name", "How Did You Hear") that only
+      existed in the /builder database. Notion refused the row, this function
+      gave up, and so there was no Slack alert, no GHL contact and no email,
+      while the form still told the applicant they were in.
+
+      So: if Notion names columns it does not have, write the row without them.
+      If it still refuses, carry on to GHL and Slack anyway and say so loudly in
+      the Slack alert, which then becomes the record of the application.
+    */
+    let notionOutcome = "";
+    if (writeNotion) {
+      const writeRow = (props: Record<string, any>) =>
+        fetch("https://api.notion.com/v1/pages", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${notionKey}`,
+            "Notion-Version": "2022-06-28",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            parent: { database_id: notionDbId },
+            properties: props,
+          }),
+        });
+
+      let res = await writeRow(properties);
       if (!res.ok) {
         const err = await res.text();
         console.error("Notion API error:", err);
-        // Same reasoning as the config check above: Notion is the queue for
-        // builder and apply, but not for the Operator Intensive.
-        if (!isOperator) {
-          return {
-            statusCode: 500,
-            headers,
-            body: JSON.stringify({ error: "Failed to submit application" }),
-          };
+        let message = err;
+        try {
+          message = JSON.parse(err)?.message || err;
+        } catch {
+          /* Not JSON. Keep the raw text. */
+        }
+        const missing = message
+          .split(/\.\s*/)
+          .map((part: string) => part.match(/^(.+) is not a property that exists$/)?.[1]?.trim())
+          .filter((name: string | undefined): name is string => Boolean(name && name in properties));
+
+        if (missing.length) {
+          const trimmed = { ...properties };
+          for (const name of missing) delete trimmed[name];
+          res = await writeRow(trimmed);
+          if (res.ok) {
+            notionOutcome = `written, but the database has no ${missing.join(", ")} column, so that was left out`;
+          }
+        }
+        if (!res.ok) {
+          const second = missing.length ? await res.text() : message;
+          if (missing.length) console.error("Notion retry failed:", second);
+          notionOutcome = `NOT WRITTEN, this message is the only record: ${String(second).slice(0, 180)}`;
         }
       }
     }
@@ -690,6 +721,8 @@ const handler: Handler = async (event) => {
               /* The CRM half of the alert. Silence here is what let a missing
                  `applied` tag survive for eight days. */
               ghlDegraded ? `:rotating_light: *CRM:* ${ghlOutcome}` : null,
+              /* Notion is written first, so say when it went wrong. */
+              notionOutcome ? `:rotating_light: *Notion:* ${notionOutcome}` : null,
               /* Straight to the person, so acting on this is one click rather
                  than a search in GHL for a name they may have typed oddly. */
               ghlContactId
