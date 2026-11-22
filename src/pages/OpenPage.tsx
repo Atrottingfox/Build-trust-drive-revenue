@@ -39,23 +39,23 @@ const STEPS = [
   {
     tag: 'Today', title: 'Secure your place',
     body: ['Secure your place now to get your Strategy Day included in the price.', "Plus immediate access to group advisory calls, training, playbooks, and all SOP's."],
-    img: '/founding/live.jpg', alt: 'Sean mid explanation',
+    img: '/founding/step1-portal.mp4', alt: 'The Engineroom portal your team gets today',
   },
   {
     tag: 'Before week 1', title: 'Build',
     body: ['Your Strategy Day, in person. We analyse your current bottlenecks and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.'],
-    img: '/founding/receive/brand-cover.jpg', alt: 'The Brand section of the Strategy Day output',
+    img: '/founding/step2-build.mp4', alt: 'Sean running a Strategy Day',
   },
   {
     tag: 'Weeks 1 to 4', title: 'Install',
     /* Sean, 22 Nov: about the exact bottleneck, never short form or long form. "we do what's necessary". */
     body: ["We start on your exact bottleneck and do what's necessary. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking."],
-    img: '/founding/train-02a.jpg', alt: 'Sean teaching at the desk',
+    img: '/founding/step3-install.mp4', alt: 'Weekly 1:1 implementation at the table',
   },
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/ocs-tune.mp4', alt: 'Sean walking through a format in the Engineroom',
+    img: '/founding/step4-loom.mp4', alt: 'A Loom style walkthrough of a format in the Engineroom',
   },
 ];
 
@@ -143,7 +143,7 @@ export default function OpenPage() {
             <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Build the media function behind your next stage of growth.</p>
             <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">We help you turn your expertise, point of view, and proof into media your team can plan, produce, review, and improve without you directing every decision.</p>
             <div className="mt-10 text-left">
-              <VslPlayer src="/founding/vsl-final-v2-cc4.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Open VSL" />
+              <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Open VSL" />
             </div>
             <p className="text-zinc-500 text-[15px] mt-4">Rather read it? The page below covers everything in the video.</p>
           </Section>
