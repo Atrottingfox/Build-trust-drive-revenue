@@ -75,10 +75,10 @@ const FAQ: { q: string; a: string[] }[] = [
 ];
 
 /* leadWith moves one question to the top (and opens it). Other pages keep the default order. */
-export default function FoundingFaq({ leadWith }: { leadWith?: string } = {}) {
+export default function FoundingFaq({ leadWith, hide = [] }: { leadWith?: string; hide?: string[] } = {}) {
   const [open, setOpen] = useState<number | null>(0);
   const lead = leadWith ? FAQ.filter((f) => f.q === leadWith) : [];
-  const items = [...lead, ...FAQ.filter((f) => !lead.includes(f))];
+  const items = [...lead, ...FAQ.filter((f) => !lead.includes(f))].filter((f) => !hide.includes(f.q));
   return (
     <div className="mt-8 divide-y divide-white/5 border-y border-white/5">
       {items.map((f, i) => {

@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import VslPlayer from '../components/founding/VslPlayer';
-import StartTodayShowcase from '../components/founding/StartTodayShowcase';
+import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
 import { BuyButton, Section, StickyBar, useStatus } from './Founding';
 
 /*
@@ -17,13 +17,6 @@ import { BuyButton, Section, StickyBar, useStatus } from './Founding';
   Earlier versions in git: founding intake 607bc95, access headline 937d7a5.
 */
 
-/* Sean, 22 Nov: a simple brand pattern in the blocks. The A mark from the logo, outlined, tiled, faint. */
-const markTile = (stroke: string) =>
-  `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'><path d='M28 14 L38 36 L30 36 L28 32 L26 36 L18 36 Z M28 21 L31 28 L25 28 Z' fill='none' stroke='${stroke}' stroke-width='1.2' stroke-linejoin='round'/></svg>`)}")`;
-const PAT_DARK = { backgroundImage: markTile('rgba(255,255,255,0.05)') };
-const PAT_LIGHT = { backgroundImage: markTile('rgba(59,125,255,0.05)') };
-const PAT_BLUE = { backgroundImage: markTile('rgba(255,255,255,0.09)') };
-
 /* Looping silent clip, or a still. */
 const Media = ({ src, alt = '', className = '' }: { src: string; alt?: string; className?: string }) =>
   src.endsWith('.mp4') ? (
@@ -33,7 +26,8 @@ const Media = ({ src, alt = '', className = '' }: { src: string; alt?: string; c
   );
 
 const BLUE = '[&_button]:!bg-[#3B7DFF] [&_button]:!text-white [&_button]:!shadow-none [&_button:hover]:!bg-[#2f6be6]';
-const CTA = 'Secure your January 2027 founding place';
+/* One CTA label everywhere, same as the top bar and sticky bar (review notes, 22 Nov). */
+const CTA = 'Secure your January place';
 
 const STEPS = [
   {
@@ -50,17 +44,19 @@ const STEPS = [
     tag: 'Weeks 1 to 4', title: 'Install',
     /* Sean, 22 Nov: about the exact bottleneck, never short form or long form. "we do what's necessary". */
     body: ["We start on your exact bottleneck and do what's necessary. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking."],
-    img: '/founding/step3-install.mp4', alt: 'Weekly 1:1 implementation at the table',
+    img: '/founding/train-02a.mp4', alt: 'A training video from the library',
   },
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/step4-loom.mp4', alt: 'A Loom style walkthrough of a format in the Engineroom',
+    img: '/founding/step4-ocs.mp4', alt: 'Sean walking through a format in the Engineroom',
   },
 ];
 
+const NOW = ['Start Here workspace', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup', 'Strategy Day scheduling'];
+
 const GROUPS = [
-  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access.mp4', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
   { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', line: 'SOPs, playbooks and team training.', items: [
     'Every SOP, every training video, all playbooks, straight away',
     'Training every fortnight',
@@ -151,7 +147,7 @@ export default function OpenPage() {
       </section>
 
       {/* THE TRUST GAP, dark band */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>The trust gap</Eyebrow>
@@ -174,15 +170,16 @@ export default function OpenPage() {
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <Eyebrow>Step one</Eyebrow>
+              {/* Sean, 22 Nov: "use your first 90 days". */}
+              <Eyebrow>Your first 90 days</Eyebrow>
               <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">The Strategy Day</p>
               <p className="text-zinc-700 text-[17px] leading-relaxed mt-4">We compress your brand, content and revenue strategy into one day.</p>
               <p className="text-zinc-600 text-[17px] mt-5">We map:</p>
               <ul className="mt-4 space-y-2.5">{MAP.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
-            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, five rooms, 13 shots with slow zooms and crossfades, whiteboard clip deflickered, 17s, silent loop). */}
-            <video src="/founding/sd-reel3.mp4" poster="/founding/sd-reel3.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 12 shots, no zoom, no desk shots, 0.6s crossfades, no jump cut inside any shot, whiteboard clip deflickered, 27s, silent loop). */}
+            <video src="/founding/sd-reel4.mp4" poster="/founding/sd-reel4.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
         </div>
       </section>
@@ -200,10 +197,23 @@ export default function OpenPage() {
                   <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em]">Step {i + 1} | {s.tag}</p>
                   <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">{s.title}</h3>
                   {s.body.map((b) => <p key={b} className="text-zinc-600 text-[17px] leading-relaxed mt-4">{b}</p>)}
+                  {i === 0 && (
+                    <>
+                      {/* Sean, 22 Nov: straight under Secure your place, everything they get immediately. List from the review notes. */}
+                      <p className="text-zinc-900 text-[17px] font-semibold mt-6">Get immediate access to:</p>
+                      <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2">{NOW.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
+                    </>
+                  )}
                   {i === 0 && <BuyButton jump status={status} location={`${loc}-step`} label={CTA} hideSpots className={`mt-6 ${BLUE}`} />}
                 </div>
                 <div className={i % 2 ? 'md:order-1' : ''}>
-                  <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]" />
+                  {i === 0 ? (
+                    <Window title="contentengine.live">
+                      <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top" />
+                    </Window>
+                  ) : (
+                    <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]" />
+                  )}
                 </div>
               </Section>
             ))}
@@ -212,20 +222,20 @@ export default function OpenPage() {
       </section>
 
       {/* ACCESS TODAY, the /founding video showcase (Sean, 22 Nov: keep the core visuals of the vids). His /founding copy. */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
           <Section className="max-w-3xl">
+            {/* Review notes, 22 Nov: one clear message, join now, implementation in January. */}
             <Eyebrow dark>Access today</Eyebrow>
-            <H dark className="mt-4">Start in January, get access today.</H>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">1:1 guided implementation starts in the next available intake month, beginning January.</p>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-3">Pay $10,000 AUD + GST by 30 November and your team gets access to all of this today.</p>
+            <H dark className="mt-4">Join now. Begin implementation in January.</H>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">Your guided implementation begins in January 2027.</p>
           </Section>
           <StartTodayShowcase />
         </div>
       </section>
 
       {/* BY DAY 90 */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>By day 90</Eyebrow>
@@ -264,7 +274,7 @@ export default function OpenPage() {
                     <p className="font-display text-3xl font-extrabold text-white tracking-[-0.02em]">{g.name}</p>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col" style={PAT_LIGHT}>
+                <div className="p-6 flex-1 flex flex-col">
                   <p className="text-zinc-900 text-[17px] font-semibold leading-snug">{g.line}</p>
                   <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
                     {g.items.map((t) => (
@@ -329,7 +339,7 @@ export default function OpenPage() {
       {/* PRICE */}
       <section id="price" className="pb-16 md:pb-28 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]" style={PAT_LIGHT}>
+          <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]">
             <Eyebrow>{feb ? 'February 2027 intake' : 'Five founding places'}</Eyebrow>
             <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-4 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
             {feb ? (
@@ -357,17 +367,17 @@ export default function OpenPage() {
       </section>
 
       {/* FAQ, dark */}
-      <section className="bg-[#0B0D12] py-16 md:py-24" style={PAT_DARK}>
+      <section className="bg-[#0B0D12] py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Section>
             <H dark>What founders ask before they buy.</H>
-            <FoundingFaq />
+            <FoundingFaq hide={['Do we need more reach first?']} />
           </Section>
         </div>
       </section>
 
       {/* CLOSE, blue band */}
-      <section className="bg-[#1f4fd1] text-white py-16 md:py-24" style={PAT_BLUE}>
+      <section className="bg-[#1f4fd1] text-white py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             <p className="text-white/70 text-[13px] font-semibold uppercase tracking-[0.18em]">The Authority Engine</p>
