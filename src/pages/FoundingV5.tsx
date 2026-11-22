@@ -230,6 +230,31 @@ export default function FoundingV5({ live = false, test = false, open = false }:
 
       <div className="gradient-line" />
 
+      {/* Review notes, 22 Nov: on /open the promise (Access, Training, Advisory) comes straight after the problem, before the 90 days. Same items and words. */}
+      {open && (
+        <>
+          <section className="py-14 md:py-24">
+            <div className="max-w-3xl mx-auto px-6 lg:px-8">
+              <Section>
+                <Label>What you get</Label>
+                <H2>Get access to the best.</H2>
+                <div className="mt-8 space-y-4">
+                {OPEN_GROUPS.map((g) => (
+                  <div key={g.name} className="glow-card">
+                    <p className="px-6 pt-5 pb-2 text-blue-400 text-sm uppercase tracking-widest font-semibold">{g.name}</p>
+                    <div className="divide-y divide-white/5">
+                      {g.items.map((t) => <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              </Section>
+            </div>
+          </section>
+          <div className="gradient-line" />
+        </>
+      )}
+
       {/* Sean, 21 Nov: offer card removed. It is in git at efb32cc. */}
       {/* THE COMMERCIAL JOB (Sean, 13 Nov) */}
       <section className="py-14 md:py-24">
@@ -335,7 +360,7 @@ export default function FoundingV5({ live = false, test = false, open = false }:
       <section className="py-14 md:py-24">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>By day 90</Label>
+            <Label>{open ? 'Your first 90 days' : 'By day 90'}</Label>
             <H2>By day 90, your team can answer these.</H2>
             <div className="grid sm:grid-cols-2 gap-3 mt-8">
               {[
@@ -460,22 +485,11 @@ export default function FoundingV5({ live = false, test = false, open = false }:
       <section id="price" className="py-14 md:py-24 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <Section>
-            <Label>Everything you get</Label>
-            <H2>Everything your team needs to run your content.</H2>
+            {/* /open: the list moved up, so this section is the price. Label from the hero card. */}
+            <Label>{open ? '5 places at the founding rate' : 'Everything you get'}</Label>
+            {!open && <H2>Everything your team needs to run your content.</H2>}
             {/* Sean, 21 Nov (review notes): no price on each line, no total. One strong price box, guarantee straight under it. */}
-            {open ? (
-              /* Sean, 22 Nov: /open groups the same items under Access, Training, Advisory. Item wording is his, from this page and his voice note. */
-              <div className="mt-8 space-y-4">
-                {OPEN_GROUPS.map((g) => (
-                  <div key={g.name} className="glow-card">
-                    <p className="px-6 pt-5 pb-2 text-blue-400 text-sm uppercase tracking-widest font-semibold">{g.name}</p>
-                    <div className="divide-y divide-white/5">
-                      {g.items.map((t) => <div key={t} className="px-6 py-4 text-zinc-200 text-[17px]">{t}</div>)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
+            {!open && (
             <div className="glow-card mt-8 divide-y divide-white/5">
               {[
                 'A Strategy Day with you and your team',
