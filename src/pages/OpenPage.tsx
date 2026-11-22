@@ -148,19 +148,6 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             </ul>
           </Section>
 
-          {/* Sean, 23 Nov, his words under the trust gap. */}
-          <Section className="max-w-xl mx-auto mt-16 md:mt-20 text-center">
-            <H dark>Your content should do more than get attention.</H>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">When you design it right. Shortform, longform &amp; lead magnets all build one clear path toward a sale.</p>
-            <p className="text-zinc-400 text-[17px] mt-6">It should help the right buyers:</p>
-          </Section>
-          <Section className="max-w-xl mx-auto mt-5">
-            <ul className="space-y-3">
-              {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your expertise before the conversation', 'Arrive with better questions and stronger intent', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
-            </ul>
-            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">Your sales team should not have to build every belief from scratch on every call.</p>
-          </Section>
-
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
@@ -232,7 +219,24 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
       {/* BY DAY 90 */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
-          <Section className="text-center max-w-3xl mx-auto">
+          {/* Sean, 23 Nov, his words, above By day 90. */}
+          <Section className="max-w-xl mx-auto text-center">
+            <H dark>Your content should do more than get attention.</H>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">When engineered, shortform, longform &amp; lead magnets all become trust assets that turn viewers into buyers.</p>
+            <p className="text-zinc-400 text-[17px] mt-6">It should help the right people:</p>
+          </Section>
+          <Section className="max-w-xl mx-auto mt-5">
+            <ul className="space-y-3">
+              {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your expertise before the conversation', 'Arrive with better questions and stronger intent', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
+            </ul>
+            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">Your sales team should not have to build every belief from scratch on every call.</p>
+          </Section>
+          <Section className="max-w-xl mx-auto text-center mt-20 md:mt-28">
+            <H dark>By the end of the first cycle, your media has a job.</H>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You're not just throwing it at a wall and seeing what sticks.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-2">It helps buyers understand, believe, and take action.</p>
+          </Section>
+          <Section className="text-center max-w-3xl mx-auto mt-20 md:mt-28">
             <Eyebrow dark>By day 90</Eyebrow>
             <H dark className="mt-4">By day 90, your team can answer these.</H>
           </Section>
