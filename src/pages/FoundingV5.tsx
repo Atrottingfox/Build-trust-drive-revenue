@@ -51,7 +51,7 @@ function TestCta({ status, loc }: { status: ReturnType<typeof useStatus>; loc: s
   return <BuyButton jump status={status} location={loc} label="Secure your January place" hideSpots className="mt-5" />;
 }
 
-export default function FoundingV5({ live = false, test = false }: { live?: boolean; test?: boolean }) {
+export default function FoundingV5({ live = false, test = false, open = false }: { live?: boolean; test?: boolean; open?: boolean }) {
   /* live = the /founding page (Sean, 16 Nov: v5 is the page). Stripe returns to
      /founding?paid=1, personal links (?for= or ?c=) post visits to Slack, and
      the buttons report as founding-* so GA stays continuous with the old page. */
@@ -59,7 +59,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
   const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
   usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
-  const loc = live ? 'founding' : test ? 'founding-test' : 'founding-v5';
+  const loc = live ? 'founding' : open ? 'open' : test ? 'founding-test' : 'founding-v5';
   /* Checkout moves to February once January has 5 sales or 30 November passes. */
   const feb = status?.intake === 'february';
   if (paid) return <Paid />;
@@ -74,6 +74,7 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
           image="https://authorityengine.com.au/og-founding-v3.jpg"
         />
       ) : (
+        open ? <SEO title="The Authority Engine" description="Get access to the best." path="/open" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex /> :
         test ? <SEO title="90 Day Install (test)" description="Test page." path="/founding-test" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex /> : <SEO title="90 Day Install (v5)" description="Founding 5 page, v5." path="/founding-v5" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
       )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
@@ -87,10 +88,13 @@ export default function FoundingV5({ live = false, test = false }: { live?: bool
             {/* Sean's hero copy, 17 Nov: "Sold before the call" is the brow. 18 Nov: The Authority Engine instead. */}
             <p className="text-sm font-medium text-zinc-400 uppercase tracking-widest mb-5">The Authority Engine</p>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] text-white leading-[1.04] mb-6">
-              Turn your content team into a sales asset.
+              {/* Sean, 22 Nov: /open is the same page with the angle shifted. Headline and promise from his voice note ("access to the best", "we pay that fee so you don't have to"). */}
+              {open ? 'Get access to the best.' : 'Turn your content team into a sales asset.'}
             </h1>
             <p className="text-white text-lg md:text-xl font-semibold leading-relaxed mb-6">
-              Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.
+              {open
+                ? "Experts in content, production and acquisition you cannot get access to unless they are through the network. We pay that fee so you don't have to, and the whole team gets access."
+                : 'Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.'}
             </p>
             {test && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
