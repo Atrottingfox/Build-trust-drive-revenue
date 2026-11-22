@@ -160,9 +160,12 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
             {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.9s, a very slight zoom out on each, 0.25s crossfades (Sean picked crossfade at half the time), AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, no looking up shots, 23s, silent loop). */}
-            <video src="/founding/sd-reel7.mp4" poster="/founding/sd-reel7.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+            <div>
+              <video src="/founding/sd-reel7.mp4" poster="/founding/sd-reel7.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+              {/* Sean, 23 Nov: button under the tile, inside the card. */}
+              <div className="mt-8 flex justify-center"><BuyButton jump status={status} location={`${loc}-strategy`} label={CTA} hideSpots className={BLUE} /></div>
+            </div>
           </Section>
-          <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-strategy`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
       </section>
 
