@@ -384,7 +384,7 @@ export default function OpenPage() {
             <div className="flex justify-center">
               <BuyButton jump status={status} location={`${loc}-close`} label={CTA} hideSpots className="mt-9" />
             </div>
-            <div className="max-w-md mx-auto mt-6 text-left [&_.border-white\/5]:border-white/20"><FitCall /></div>
+            <div className="max-w-md mx-auto mt-6 text-left [&_button]:!text-white [&_button]:underline [&_button]:underline-offset-4"><FitCall /></div>
           </Section>
         </div>
       </section>
