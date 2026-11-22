@@ -184,8 +184,10 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
           <div className="mt-12 md:mt-16 space-y-12 md:space-y-20">
             {STEPS.map((s, i) => (
               <Section key={s.title} className="grid md:grid-cols-2 gap-8 md:gap-14 items-center">
-                <div className={`border-l-2 border-[#3B7DFF]/40 pl-6 ${i % 2 ? 'md:order-2' : ''}`}>
-                  <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em]">Step {i + 1} | {s.tag}</p>
+                <div className={i % 2 ? 'md:order-2' : ''}>
+                  {/* Sean, 23 Nov: big faint step number instead of the blue left line. */}
+                  <p aria-hidden="true" className="font-display text-[72px] md:text-[96px] font-extrabold leading-none tracking-[-0.05em] text-[#3B7DFF]/15 select-none">{String(i + 1).padStart(2, '0')}</p>
+                  <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em] mt-2">Step {i + 1} | {s.tag}</p>
                   <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] mt-3">{s.title}</h3>
                   {s.body.map((b) => <p key={b} className="text-zinc-600 text-[17px] leading-relaxed mt-4">{b}</p>)}
                   {i === 0 && (
