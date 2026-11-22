@@ -1,7 +1,8 @@
-import { Check, ShieldCheck, X } from 'lucide-react';
+import { CalendarDays, Check, CreditCard, FolderOpen, GraduationCap, MessageCircle, Repeat, ShieldCheck, Users, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import FoundingFaq from '../components/founding/FoundingFaq';
+import FitCall from '../components/founding/FitCall';
 import VslPlayer from '../components/founding/VslPlayer';
 import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
 import { BuyButton, Section, StickyBar, useStatus } from './Founding';
@@ -33,7 +34,7 @@ const STEPS = [
   {
     tag: 'Today', title: 'Secure your place',
     body: ['Secure your place now to get your Strategy Day included in the price.', "Plus immediate access to group advisory calls, training, playbooks, and all SOP's."],
-    img: '/founding/step1-portal.mp4', alt: 'The Engineroom portal your team gets today',
+    img: '/founding/ce-walk.mp4', alt: 'A walkthrough of contentengine.live in use',
   },
   {
     tag: 'Before week 1', title: 'Build',
@@ -49,11 +50,21 @@ const STEPS = [
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/step4-ocs.mp4', alt: 'Sean walking through a format in the Engineroom',
+    img: '/founding/step4-ocs.mp4', full: true, alt: 'Sean walking through a format in the Engineroom',
   },
 ];
 
 const NOW = ['Start Here workspace', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup', 'Strategy Day scheduling'];
+
+const NEXT = [
+  [CreditCard, 'Secure your place on the Stripe checkout.'],
+  [MessageCircle, 'We set up your WhatsApp straight away, with direct access to me.'],
+  [FolderOpen, 'Receive the Start Here workspace and pre install materials.'],
+  [CalendarDays, 'Book your Strategy Day.'],
+  [GraduationCap, 'Your team gets access to the training and systems.'],
+  [Users, '1:1 guided implementation starts in the next available intake month, beginning January.'],
+  [Repeat, 'Your first live content cycle runs once implementation starts.'],
+] as const;
 
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
@@ -92,34 +103,6 @@ const H = ({ children, dark = false, className = '' }: { children: React.ReactNo
 const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
   <li className={`flex items-start gap-2.5 text-[16px] leading-relaxed ${dark ? 'text-zinc-300' : 'text-zinc-600'}`}><Check className={`w-4 h-4 mt-1 shrink-0 ${dark ? 'text-blue-400' : 'text-[#3B7DFF]'}`} strokeWidth={3} />{children}</li>
 );
-
-/* 22 Nov, "make this 10x better": solid circles in the card colours, overlaps blend, the engine at the centre. */
-function Venn() {
-  const C = [
-    { g: GROUPS[0], cx: 225, cy: 210, lx: 160, ly: 170 },
-    { g: GROUPS[1], cx: 375, cy: 210, lx: 440, ly: 170 },
-    { g: GROUPS[2], cx: 300, cy: 340, lx: 300, ly: 440 },
-  ];
-  return (
-    <svg viewBox="40 30 520 490" className="w-full max-w-[460px] h-auto mx-auto drop-shadow-[0_30px_60px_rgba(59,125,255,0.25)]" role="img" aria-label="Access, Training and Advisory overlap. The Authority Engine.">
-      <defs>
-        {C.map((c) => (
-          <radialGradient key={c.g.name} id={`v-${c.g.name}`} cx="35%" cy="30%" r="80%">
-            <stop offset="0%" stopColor={c.g.colour} stopOpacity="0.95" />
-            <stop offset="100%" stopColor={c.g.colour} stopOpacity="0.75" />
-          </radialGradient>
-        ))}
-      </defs>
-      <g style={{ isolation: 'isolate' }}>
-        {C.map((c) => <circle key={c.g.name} cx={c.cx} cy={c.cy} r={165} fill={`url(#v-${c.g.name})`} style={{ mixBlendMode: 'multiply' }} />)}
-      </g>
-      {C.map((c) => <text key={c.g.name + 't'} x={c.lx} y={c.ly} textAnchor="middle" fill="#fff" fontSize="23" fontWeight="800" letterSpacing="3" className="font-display">{c.g.name.toUpperCase()}</text>)}
-      <circle cx="300" cy="255" r="58" fill="#0B0D12" />
-      <text x="300" y="250" textAnchor="middle" fill="#fff" fontSize="17" fontWeight="800" className="font-display">The Authority</text>
-      <text x="300" y="272" textAnchor="middle" fill="#fff" fontSize="17" fontWeight="800" className="font-display">Engine</text>
-    </svg>
-  );
-}
 
 export default function OpenPage() {
   const status = useStatus();
@@ -163,8 +146,7 @@ export default function OpenPage() {
           </Section>
           <Section className="text-center mt-10 space-y-1 text-lg md:text-xl">
             <p className="text-zinc-400">Problem is -</p>
-            <p>You have the authority.</p>
-            <p>Your content just doesn't communicate it.</p>
+            <p>You have the authority. Your content just doesn't communicate it.</p>
           </Section>
 
           {/* Your first advisory cycle: the Strategy Day */}
@@ -178,8 +160,8 @@ export default function OpenPage() {
               <ul className="mt-4 space-y-2.5">{MAP.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
-            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 12 shots, no zoom, no desk shots, 0.6s crossfades, no jump cut inside any shot, whiteboard clip deflickered, 27s, silent loop). */}
-            <video src="/founding/sd-reel4.mp4" poster="/founding/sd-reel4.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.7s, one slow zoom in, 0.35s crossfades, AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, 19s, silent loop). */}
+            <video src="/founding/sd-reel5.mp4" poster="/founding/sd-reel5.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
         </div>
       </section>
@@ -212,7 +194,7 @@ export default function OpenPage() {
                       <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top" />
                     </Window>
                   ) : (
-                    <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]" />
+                    <Media src={s.img} alt={s.alt} className={`w-full aspect-video rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)] ${'full' in s ? 'object-contain bg-[#0d0f14]' : 'object-cover object-top'}`} />
                   )}
                 </div>
               </Section>
@@ -227,8 +209,8 @@ export default function OpenPage() {
           <Section className="max-w-3xl">
             {/* Review notes, 22 Nov: one clear message, join now, implementation in January. */}
             <Eyebrow dark>Access today</Eyebrow>
-            <H dark className="mt-4">Join now. Begin implementation in January.</H>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-6">Your guided implementation begins in January 2027.</p>
+            {/* Sean, 22 Nov: two lines. */}
+            <H dark className="mt-4">Get access now.<br />Begin 1:1 implementation in January.</H>
           </Section>
           <StartTodayShowcase />
         </div>
@@ -260,7 +242,6 @@ export default function OpenPage() {
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
             <H>What you get</H>
-            <div className="mt-10"><Venn /></div>
           </Section>
           <div className="grid md:grid-cols-3 gap-5 mt-14 md:items-start">
             {GROUPS.map((g, i) => (
@@ -340,16 +321,10 @@ export default function OpenPage() {
       <section id="price" className="pb-16 md:pb-28 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]">
-            <Eyebrow>{feb ? 'February 2027 intake' : 'Five founding places'}</Eyebrow>
-            <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-4 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
-            {feb ? (
-              <p className="text-zinc-600 text-[16px] mt-4">Paid in full.</p>
-            ) : (
-              <>
-                <p className="text-zinc-900 text-[17px] font-semibold mt-4">Paid in full by 30 November 2026.</p>
-                <p className="text-zinc-500 text-[16px] mt-2">Founding members join at $10,000. Pricing increases after the founding intake.</p>
-              </>
-            )}
+            {/* Sean, 22 Nov: "i think we still need this", his /founding price box. */}
+            <p className="text-zinc-900 text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+            <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-3 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
+            {!feb && <p className="text-zinc-500 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-900 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
             <p className="text-zinc-500 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
             <div className="flex justify-center">
               <BuyButton status={status} location={`${loc}-price`} label={CTA} hideSpots className={`mt-7 ${BLUE}`} />
@@ -358,10 +333,14 @@ export default function OpenPage() {
           <Section className="mt-8 flex gap-4 max-w-2xl mx-auto">
             <ShieldCheck className="w-6 h-6 shrink-0 text-[#3B7DFF] mt-0.5" strokeWidth={1.75} />
             <div>
-              <p className="text-zinc-900 text-lg font-semibold">Implementation guarantee</p>
-              <p className="text-zinc-600 text-[17px] leading-relaxed mt-1">If your team completes the agreed work and you have not established a consistent media operating rhythm by day 90, we continue supporting implementation at no additional cost until it is established.</p>
-              <p className="text-zinc-400 text-[14px] leading-relaxed mt-3">The guarantee covers implementation, not revenue.</p>
+              {/* His /founding guarantee. "The risk sits with me." swapped for a plain label (Sean, 22 Nov: iterate the slop). */}
+              <p className="text-zinc-900 text-lg font-semibold">Guarantee</p>
+              <p className="text-zinc-600 text-[17px] leading-relaxed mt-1">If you do not have a consistent rhythm of content going out by day 90, we'll continue working with you until you do.</p>
+              <p className="text-zinc-400 text-[14px] leading-relaxed mt-3">To qualify, your team attends at least 80% of agreed sessions, required founder inputs arrive on time, and your team completes the agreed implementation work. The guarantee covers installation, not revenue.</p>
             </div>
+          </Section>
+          <Section className="mt-6 max-w-2xl mx-auto">
+            <p className="text-zinc-600 text-[17px] leading-relaxed">The support is there to install the system so your team stops needing me.</p>
           </Section>
         </div>
       </section>
@@ -376,15 +355,36 @@ export default function OpenPage() {
         </div>
       </section>
 
-      {/* CLOSE, blue band */}
+      {/* WHAT HAPPENS NEXT, Sean's /founding steps */}
+      <section className="py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-5 lg:px-8">
+          <Section>
+            <Eyebrow>What happens next</Eyebrow>
+            <ol className="grid gap-3 mt-6">
+              {NEXT.map(([Icon, t], i) => (
+                <li key={i} className="rounded-2xl bg-white border border-zinc-200 flex items-center gap-4 md:gap-5 px-5 py-4 md:px-6 md:py-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#3B7DFF]/10"><Icon className="w-5 h-5 text-[#3B7DFF]" strokeWidth={1.75} /></span>
+                  <div className="min-w-0">
+                    <p className="text-[#3B7DFF] text-[12px] uppercase tracking-widest font-semibold">Step {i + 1}</p>
+                    <p className="text-zinc-900 text-lg leading-snug mt-0.5">{t}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Section>
+        </div>
+      </section>
+
+      {/* CLOSE, blue band. Sean's /founding close, plus the call button. */}
       <section className="bg-[#1f4fd1] text-white py-16 md:py-24">
         <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
           <Section>
-            <p className="text-white/70 text-[13px] font-semibold uppercase tracking-[0.18em]">The Authority Engine</p>
-            <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-[-0.03em] leading-[1.04] mt-4">Build the media function behind your next stage of growth.</h2>
+            <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-[-0.03em] leading-[1.04]">The Authority Engine</h2>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white/85 leading-[1.15] mt-4">Turn your content team into a sales asset.</p>
             <div className="flex justify-center">
               <BuyButton jump status={status} location={`${loc}-close`} label={CTA} hideSpots className="mt-9" />
             </div>
+            <div className="max-w-md mx-auto mt-6 text-left [&_.border-white\/5]:border-white/20"><FitCall /></div>
           </Section>
         </div>
       </section>
