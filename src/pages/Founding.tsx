@@ -38,7 +38,7 @@ function ga(event: string, extra: Record<string, unknown> = {}) {
   }
 }
 
-export function Section({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+export function Section({ children, className = '', style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 });
   return (
     <motion.section
@@ -47,6 +47,7 @@ export function Section({ children, className = '' }: { children: React.ReactNod
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, ease: 'easeOut' }}
       className={className}
+      style={style}
     >
       {children}
     </motion.section>

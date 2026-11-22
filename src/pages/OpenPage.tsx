@@ -17,6 +17,21 @@ import { BuyButton, Section, StickyBar, useStatus } from './Founding';
   Earlier versions in git: founding intake 607bc95, access headline 937d7a5.
 */
 
+/* Sean, 22 Nov: a simple brand pattern in the blocks. The A mark from the logo, outlined, tiled, faint. */
+const markTile = (stroke: string) =>
+  `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'><path d='M28 14 L38 36 L30 36 L28 32 L26 36 L18 36 Z M28 21 L31 28 L25 28 Z' fill='none' stroke='${stroke}' stroke-width='1.2' stroke-linejoin='round'/></svg>`)}")`;
+const PAT_DARK = { backgroundImage: markTile('rgba(255,255,255,0.05)') };
+const PAT_LIGHT = { backgroundImage: markTile('rgba(59,125,255,0.05)') };
+const PAT_BLUE = { backgroundImage: markTile('rgba(255,255,255,0.09)') };
+
+/* Looping silent clip, or a still. */
+const Media = ({ src, alt = '', className = '' }: { src: string; alt?: string; className?: string }) =>
+  src.endsWith('.mp4') ? (
+    <video src={src} poster={src.replace('.mp4', '.jpg')} autoPlay muted loop playsInline preload="metadata" aria-label={alt} className={className} />
+  ) : (
+    <img src={src} alt={alt} loading="lazy" className={className} />
+  );
+
 const BLUE = '[&_button]:!bg-[#3B7DFF] [&_button]:!text-white [&_button]:!shadow-none [&_button:hover]:!bg-[#2f6be6]';
 const CTA = 'Secure your January 2027 founding place';
 
@@ -40,18 +55,18 @@ const STEPS = [
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/receive/kpi.jpg', alt: 'The 4 Numbers dashboard',
+    img: '/founding/ocs-tune.mp4', alt: 'Sean walking through a format in the Engineroom',
   },
 ];
 
 const GROUPS = [
-  { name: 'Access', colour: '#3B7DFF', img: '/founding/train-16a.jpg', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.jpg', line: 'SOPs, playbooks and team training.', items: [
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access.mp4', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', line: 'SOPs, playbooks and team training.', items: [
     'Every SOP, every training video, all playbooks, straight away',
     'Training every fortnight',
     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
   ] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/train-13.jpg', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory.mp4', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
     'A Strategy Day with you and your team',
     'Two Loom reviews per week during active implementation',
     'Advisory group office hours, every Thursday',
@@ -136,14 +151,16 @@ export default function OpenPage() {
       </section>
 
       {/* THE TRUST GAP, dark band */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>The trust gap</Eyebrow>
             <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and you have legit proof on your side.</p>
+            {/* Sean, 22 Nov, his words. */}
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
+            <p className="text-zinc-400 text-[17px] mt-6">But your problem's simple -</p>
           </Section>
-          <Section className="max-w-xl mx-auto mt-8">
+          <Section className="max-w-xl mx-auto mt-5">
             <ul className="space-y-3">
               {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
             </ul>
@@ -162,8 +179,8 @@ export default function OpenPage() {
               <ul className="mt-4 space-y-2.5">{ESTABLISHES.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">The exact work is shaped around your business. We do not force every founder through the same content plan.</p>
             </div>
-            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 16 cuts, 21s, silent loop). */}
-            <video src="/founding/sd-reel.mp4" poster="/founding/sd-reel.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, five rooms, 13 shots with slow zooms and crossfades, whiteboard clip deflickered, 17s, silent loop). */}
+            <video src="/founding/sd-reel3.mp4" poster="/founding/sd-reel3.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
         </div>
       </section>
@@ -184,7 +201,7 @@ export default function OpenPage() {
                   {i === 0 && <BuyButton jump status={status} location={`${loc}-step`} label={CTA} hideSpots className={`mt-6 ${BLUE}`} />}
                 </div>
                 <div className={i % 2 ? 'md:order-1' : ''}>
-                  <img src={s.img} alt={s.alt} loading="lazy" className="w-full aspect-video object-cover object-top rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]" />
+                  <Media src={s.img} alt={s.alt} className="w-full aspect-video object-cover object-top rounded-2xl shadow-[0_20px_50px_-20px_rgba(0,0,0,0.35)]" />
                 </div>
               </Section>
             ))}
@@ -193,7 +210,7 @@ export default function OpenPage() {
       </section>
 
       {/* ACCESS TODAY, the /founding video showcase (Sean, 22 Nov: keep the core visuals of the vids). His /founding copy. */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
           <Section className="max-w-3xl">
             <Eyebrow dark>Access today</Eyebrow>
@@ -206,7 +223,7 @@ export default function OpenPage() {
       </section>
 
       {/* BY DAY 90 */}
-      <section className="bg-[#0B0D12] text-white py-16 md:py-28">
+      <section className="bg-[#0B0D12] text-white py-16 md:py-28" style={PAT_DARK}>
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>By day 90</Eyebrow>
@@ -237,7 +254,7 @@ export default function OpenPage() {
             {GROUPS.map((g, i) => (
               <Section key={g.name} className="group rounded-3xl bg-white overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.04),0_24px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-zinc-200/70 flex flex-col">
                 <div className="relative h-52 md:h-56 overflow-hidden">
-                  <img src={g.img} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Media src={g.img} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <span className="absolute top-4 left-4 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-white text-[12px] font-semibold tracking-widest">{`0${i + 1}`}</span>
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -245,7 +262,7 @@ export default function OpenPage() {
                     <p className="font-display text-3xl font-extrabold text-white tracking-[-0.02em]">{g.name}</p>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
+                <div className="p-6 flex-1 flex flex-col" style={PAT_LIGHT}>
                   <p className="text-zinc-900 text-[17px] font-semibold leading-snug">{g.line}</p>
                   <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
                     {g.items.map((t) => (
@@ -310,7 +327,7 @@ export default function OpenPage() {
       {/* PRICE */}
       <section id="price" className="pb-16 md:pb-28 scroll-mt-16">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]">
+          <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]" style={PAT_LIGHT}>
             <Eyebrow>{feb ? 'February 2027 intake' : 'Five founding places'}</Eyebrow>
             <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-4 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
             {feb ? (
@@ -338,7 +355,7 @@ export default function OpenPage() {
       </section>
 
       {/* FAQ, dark */}
-      <section className="bg-[#0B0D12] py-16 md:py-24">
+      <section className="bg-[#0B0D12] py-16 md:py-24" style={PAT_DARK}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Section>
             <H dark>What founders ask before they buy.</H>
@@ -348,7 +365,7 @@ export default function OpenPage() {
       </section>
 
       {/* CLOSE, blue band */}
-      <section className="bg-[#1f4fd1] text-white py-16 md:py-24">
+      <section className="bg-[#1f4fd1] text-white py-16 md:py-24" style={PAT_BLUE}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             <p className="text-white/70 text-[13px] font-semibold uppercase tracking-[0.18em]">The Authority Engine</p>
