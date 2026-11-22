@@ -92,7 +92,7 @@ const GAP = [
   'Reaching people interested but unlikely to buy',
   'Sending people into calls where they have to explain everything from scratch',
 ];
-const MAP = ['Your positioning', 'Your ideal buyer', 'What they need to believe before buying', 'Why common solutions fail', 'What makes your approach different', 'The content required to move someone from stranger to advocate'];
+const MAP = ['Your positioning', 'Your ideal buyer', 'What they need to believe before buying', 'Why common solutions fail', 'What makes your approach different', 'The content that moves a stranger to a buyer'];
 const QUESTIONS = ['What should we make?', 'Who is it for?', 'Which format fits?', 'How do we capture it?', 'How do we produce it?', 'Is it good enough to publish?', 'Did it work?', 'What do we do more of next?'];
 
 const Eyebrow = ({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) => (
