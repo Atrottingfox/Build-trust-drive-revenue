@@ -136,7 +136,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
             </div>
-            <p className="text-zinc-500 text-[15px] mt-4">Rather read it? The page below covers everything in the video.</p>
+            <p className="text-zinc-700 text-[16px] mt-5">Watch the 7 minute walkthrough to see what your team installs over 90 days.</p>
+            <p className="text-zinc-500 text-[15px] mt-1">Rather read it? The page below covers everything in the video.</p>
           </Section>
         </div>
       </section>
