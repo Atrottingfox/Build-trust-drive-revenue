@@ -39,7 +39,7 @@ const STEPS = [
   {
     tag: 'Before week 1', title: 'Build',
     body: ['Your Strategy Day, in person. We analyse your current bottlenecks and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.'],
-    img: '/founding/step2-build.mp4', alt: 'Sean running a Strategy Day',
+    img: '/founding/step2-build-l.mp4', alt: 'Sean running a Strategy Day',
   },
   {
     tag: 'Weeks 1 to 4', title: 'Install',
@@ -50,7 +50,7 @@ const STEPS = [
   {
     tag: 'Weeks 5 to 12', title: 'Transfer and tune',
     body: ['Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.'],
-    img: '/founding/step4-ocs.mp4', full: true, alt: 'Sean walking through a format in the Engineroom',
+    img: '/founding/step4-full.mp4', full: true, alt: 'Sean walking through a format in the Engineroom',
   },
 ];
 
