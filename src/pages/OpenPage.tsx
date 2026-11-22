@@ -148,6 +148,19 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             </ul>
           </Section>
 
+          {/* Sean, 23 Nov, his words under the trust gap. */}
+          <Section className="max-w-xl mx-auto mt-16 md:mt-20 text-center">
+            <H dark>Your content should do more than get attention.</H>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">When you design it right. Shortform, longform &amp; lead magnets all build one clear path toward a sale.</p>
+            <p className="text-zinc-400 text-[17px] mt-6">It should help the right buyers:</p>
+          </Section>
+          <Section className="max-w-xl mx-auto mt-5">
+            <ul className="space-y-3">
+              {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your expertise before the conversation', 'Arrive with better questions and stronger intent', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
+            </ul>
+            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">Your sales team should not have to build every belief from scratch on every call.</p>
+          </Section>
+
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
