@@ -106,10 +106,16 @@ export default function OpenPage() {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             <Eyebrow>The Authority Engine</Eyebrow>
-            <h1 className="font-display text-[44px] md:text-7xl font-extrabold tracking-[-0.04em] leading-[1.02] text-zinc-900 mt-5 max-w-4xl mx-auto">Get access to the best.</h1>
+            {/* Sean, 22 Nov: "i wanna try it", the pasted review's hero, word for word. Previous hero: "Get access to the best." (git 937d7a5). */}
+            <h1 className="font-display text-[40px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 mt-5 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">
-              Experts in content, production and acquisition you cannot get access to unless they are through the network. We pay that fee so you don't have to, and the whole team gets access.
+              Give your media team the judgment, standards, and direction required to turn your expertise into a serious company asset.
             </p>
+            <div className="mt-6 space-y-1 text-zinc-900 text-lg md:text-xl font-semibold">
+              <p>You stay the founder.</p>
+              <p>Your team runs the media.</p>
+              <p>We help you decide what matters, make it better, and build the system around it.</p>
+            </div>
             <div className="flex justify-center mt-8">
               <BuyButton jump status={status} location={`${loc}-hero`} label="Secure your January place" hideSpots className={BLUE} />
             </div>
@@ -121,6 +127,30 @@ export default function OpenPage() {
             <div className="flex flex-wrap justify-center gap-x-10 gap-y-3 mt-4 text-zinc-400 font-display font-extrabold text-lg">
               {['Taki Moore', 'Jay Wright', 'LSKD', 'Tiger Lily'].map((n) => <span key={n}>{n}</span>)}
             </div>
+          </Section>
+        </div>
+      </section>
+
+      {/* WHAT CHANGES (pasted review, 22 Nov, word for word) */}
+      <section className="pb-16 md:pb-24">
+        <div className="max-w-5xl mx-auto px-5 lg:px-8">
+          <Section className="text-center">
+            <H>What changes after you join</H>
+          </Section>
+          <Section className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mt-10">
+            {[
+              'Your team knows what to make',
+              'Your founder is no longer the only source of direction',
+              'Content is judged against clear standards',
+              'The best ideas become repeatable formats',
+              'Your media improves through iteration instead of random output',
+              'You have a senior person to call when the team gets stuck',
+            ].map((t) => (
+              <div key={t} className="rounded-2xl bg-white border border-zinc-200 p-5 flex items-start gap-3">
+                <Check className="w-5 h-5 mt-0.5 shrink-0 text-[#3B7DFF]" strokeWidth={3} />
+                <p className="text-zinc-800 text-[16px] font-semibold leading-snug">{t}</p>
+              </div>
+            ))}
           </Section>
         </div>
       </section>
