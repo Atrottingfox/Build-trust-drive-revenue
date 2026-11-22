@@ -43,13 +43,13 @@ const STEPS = [
 ];
 
 const GROUPS = [
-  { name: 'Access', img: '/founding/train-16a.jpg', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
-  { name: 'Training', img: '/founding/receive/hooks-cover.jpg', items: [
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/train-16a.jpg', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.jpg', line: 'SOPs, playbooks and team training.', items: [
     'Every SOP, every training video, all playbooks, straight away',
     'Training every fortnight',
     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
   ] },
-  { name: 'Advisory', img: '/founding/train-13.jpg', items: [
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/train-13.jpg', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
     'A Strategy Day with you and your team',
     'Two Loom reviews per week during active implementation',
     'Advisory group office hours, every Thursday',
@@ -80,18 +80,30 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
   <li className={`flex items-start gap-2.5 text-[16px] leading-relaxed ${dark ? 'text-zinc-300' : 'text-zinc-600'}`}><Check className={`w-4 h-4 mt-1 shrink-0 ${dark ? 'text-blue-400' : 'text-[#3B7DFF]'}`} strokeWidth={3} />{children}</li>
 );
 
+/* 22 Nov, "make this 10x better": solid circles in the card colours, overlaps blend, the engine at the centre. */
 function Venn() {
   const C = [
-    { cx: 222, cy: 205, label: 'ACCESS', lx: 150, ly: 150 },
-    { cx: 378, cy: 205, label: 'TRAINING', lx: 450, ly: 150 },
-    { cx: 300, cy: 340, label: 'ADVISORY', lx: 300, ly: 455 },
+    { g: GROUPS[0], cx: 225, cy: 210, lx: 160, ly: 170 },
+    { g: GROUPS[1], cx: 375, cy: 210, lx: 440, ly: 170 },
+    { g: GROUPS[2], cx: 300, cy: 340, lx: 300, ly: 440 },
   ];
   return (
-    <svg viewBox="0 35 600 475" className="w-full max-w-[440px] h-auto mx-auto" role="img" aria-label="Access, Training and Advisory overlap. The Authority Engine.">
-      {C.map((c) => <circle key={c.label} cx={c.cx} cy={c.cy} r={160} fill="#3B7DFF" fillOpacity="0.07" stroke="#3B7DFF" strokeOpacity="0.55" strokeWidth="1.5" />)}
-      {C.map((c) => <text key={c.label + 't'} x={c.lx} y={c.ly} textAnchor="middle" fill="#3B7DFF" fontSize="24" fontWeight="700" letterSpacing="3" className="font-display">{c.label}</text>)}
-      <text x="300" y="242" textAnchor="middle" fill="#18181b" fontSize="26" fontWeight="800" className="font-display">The Authority</text>
-      <text x="300" y="274" textAnchor="middle" fill="#18181b" fontSize="26" fontWeight="800" className="font-display">Engine</text>
+    <svg viewBox="40 30 520 490" className="w-full max-w-[460px] h-auto mx-auto drop-shadow-[0_30px_60px_rgba(59,125,255,0.25)]" role="img" aria-label="Access, Training and Advisory overlap. The Authority Engine.">
+      <defs>
+        {C.map((c) => (
+          <radialGradient key={c.g.name} id={`v-${c.g.name}`} cx="35%" cy="30%" r="80%">
+            <stop offset="0%" stopColor={c.g.colour} stopOpacity="0.95" />
+            <stop offset="100%" stopColor={c.g.colour} stopOpacity="0.75" />
+          </radialGradient>
+        ))}
+      </defs>
+      <g style={{ isolation: 'isolate' }}>
+        {C.map((c) => <circle key={c.g.name} cx={c.cx} cy={c.cy} r={165} fill={`url(#v-${c.g.name})`} style={{ mixBlendMode: 'multiply' }} />)}
+      </g>
+      {C.map((c) => <text key={c.g.name + 't'} x={c.lx} y={c.ly} textAnchor="middle" fill="#fff" fontSize="23" fontWeight="800" letterSpacing="3" className="font-display">{c.g.name.toUpperCase()}</text>)}
+      <circle cx="300" cy="255" r="58" fill="#0B0D12" />
+      <text x="300" y="250" textAnchor="middle" fill="#fff" fontSize="17" fontWeight="800" className="font-display">The Authority</text>
+      <text x="300" y="272" textAnchor="middle" fill="#fff" fontSize="17" fontWeight="800" className="font-display">Engine</text>
     </svg>
   );
 }
@@ -109,15 +121,11 @@ export default function OpenPage() {
       <section className="pt-28 pb-14 md:pt-40 md:pb-20">
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
-            <Eyebrow>The Authority Engine</Eyebrow>
-            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 mt-5 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
+            {/* Sean, 22 Nov: no eyebrow, no button and no walkthrough line above the fold. */}
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
             <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Build the media function behind your next stage of growth.</p>
             <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">We help you turn your expertise, point of view, and proof into media your team can plan, produce, review, and improve without you directing every decision.</p>
-            <div className="flex justify-center mt-8">
-              <BuyButton jump status={status} location={`${loc}-hero`} label={CTA} hideSpots className={BLUE} />
-            </div>
-            <p className="text-zinc-500 text-[15px] leading-relaxed mt-12 max-w-2xl mx-auto">Watch the 7 minute walkthrough to see how we help industry leading founders build a stronger media function across brand, content, and systems.</p>
-            <div className="mt-5 text-left">
+            <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-cc4.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-final-v2-loop.mp4" loopPoster="/founding/vsl-final-v2-loop.jpg" length="7:35" title="Open VSL" />
             </div>
             <p className="text-zinc-500 text-[15px] mt-4">Rather read it? The page below covers everything in the video.</p>
@@ -202,18 +210,37 @@ export default function OpenPage() {
       </section>
 
       {/* WHAT YOU GET */}
-      <section className="py-16 md:py-28">
-        <div className="max-w-5xl mx-auto px-5 lg:px-8">
+      <section className="py-16 md:py-28 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
             <H>What you get</H>
-            <div className="mt-8"><Venn /></div>
+            <div className="mt-10"><Venn /></div>
           </Section>
-          <div className="grid md:grid-cols-3 gap-4 mt-10">
-            {GROUPS.map((g) => (
-              <Section key={g.name} className="rounded-2xl bg-white border border-zinc-200 p-4 flex flex-col">
-                <img src={g.img} alt="" loading="lazy" className="w-full aspect-[16/10] object-cover rounded-xl" />
-                <p className="font-display text-2xl font-extrabold mt-5 px-2">{g.name}</p>
-                <ul className="mt-3 mb-2 px-2 space-y-2.5">{g.items.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
+          <div className="grid md:grid-cols-3 gap-5 mt-14 md:items-start">
+            {GROUPS.map((g, i) => (
+              <Section key={g.name} className="group rounded-3xl bg-white overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.04),0_24px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-zinc-200/70 flex flex-col">
+                <div className="relative h-52 md:h-56 overflow-hidden">
+                  <img src={g.img} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <span className="absolute top-4 left-4 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-white text-[12px] font-semibold tracking-widest">{`0${i + 1}`}</span>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <div className="h-1 w-10 rounded-full mb-3" style={{ background: g.colour }} />
+                    <p className="font-display text-3xl font-extrabold text-white tracking-[-0.02em]">{g.name}</p>
+                  </div>
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <p className="text-zinc-900 text-[17px] font-semibold leading-snug">{g.line}</p>
+                  <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
+                    {g.items.map((t) => (
+                      <li key={t} className="flex items-start gap-3 py-3 text-zinc-600 text-[15px] leading-relaxed">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ background: `${g.colour}1f` }}>
+                          <Check className="w-3 h-3" style={{ color: g.colour }} strokeWidth={3.5} />
+                        </span>
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </Section>
             ))}
           </div>
