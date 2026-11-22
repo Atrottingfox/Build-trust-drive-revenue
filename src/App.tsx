@@ -66,6 +66,7 @@ const TheNextStage = React.lazy(() => import('./pages/TheNextStage'));
 const Offer = React.lazy(() => import('./pages/Offer'));
 const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
 const FoundingV5 = React.lazy(() => import('./pages/FoundingV5'));
+const OpenPage = React.lazy(() => import('./pages/OpenPage'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
 const Booked = React.lazy(() => import('./pages/Booked'));
@@ -184,7 +185,7 @@ export default function App() {
           {/* Sean, 21 Nov: test with elements from ecommerceequation.com.au. Not indexed. */}
           <Route path="/founding-test" element={<FoundingV5 test />} />
           {/* Sean, 22 Nov: /open, same page and offer, access angle on the headline and promise. Not in the nav, noindex. */}
-          <Route path="/open" element={<FoundingV5 open />} />
+          <Route path="/open" element={<OpenPage />} />
           <Route path="/founding-review" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v2" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v3" element={<Navigate to="/founding" replace />} />
