@@ -341,7 +341,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           {/* Sean, 23 Nov, his words. */}
           {!feb && <Section className="max-w-2xl mx-auto text-center mb-10">
-            <p className="text-zinc-600 text-[18px] leading-relaxed">This is the founding intake. The system is being built with the first five members, which means the engagement is more direct and more customised than the future version. The founding price is $10,000 AUD + GST, paid in full by November 30, 2026.</p>
+            <p className="text-zinc-600 text-[18px] leading-relaxed">This is the founding intake. The system is being built with the first five members, which means the engagement is more direct and more customised than the future version.</p>
           </Section>}
           <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]">
             {/* Sean, 22 Nov: "i think we still need this", his /founding price box. */}
