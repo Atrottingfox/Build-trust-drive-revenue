@@ -83,10 +83,10 @@ export default function Partnered() {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             <Eyebrow>The Authority Engine | Partner Network</Eyebrow>
-            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto mt-5">
-              Do excellent work for serious businesses without building another sales machine.
-            </h1>
+            {/* Sean, 23 Nov: "i still like the whole angle of fuck tall poppy". His line leads, the offer sits under it. */}
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto mt-5">Fuck tall poppy.</h1>
             <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Get in a room that celebrates when others win.</p>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">Do excellent work for serious businesses without building another sales machine.</p>
             <ApplyButton className="mt-9" />
             <p className="text-zinc-500 text-[15px] mt-4">No joining fee. No guaranteed volume. No exclusivity initially.</p>
           </Section>
@@ -152,7 +152,7 @@ export default function Partnered() {
         <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
             <div className="accent-line mx-auto mb-10" />
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">Fuck tall poppy.</h2>
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">The Authority Engine</h2>
             <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-200 leading-[1.15] mt-4">Get in a room that celebrates when others win.</p>
             <div className="flex justify-center"><ApplyButton white className="mt-10" /></div>
           </Section>
