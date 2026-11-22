@@ -372,16 +372,18 @@ export default function OpenPage() {
         </div>
       </section>
 
-      {/* CLOSE, blue band. Sean's /founding close, plus the call button. */}
-      <section className="bg-[#1f4fd1] text-white py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
+      {/* CLOSE. Sean, 22 Nov: "how it is in the /founding design". Dark with the soft blue glow. Fit call straight under the button. */}
+      <section className="relative overflow-hidden bg-[#0B0D12] text-white py-16 md:py-28">
+        <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_45%,rgba(59,125,255,0.16),transparent_70%)]" />
+        <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
           <Section>
-            <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-[-0.03em] leading-[1.04]">The Authority Engine</h2>
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-white/85 leading-[1.15] mt-4">Turn your content team into a sales asset.</p>
+            <div className="accent-line mx-auto mb-10" />
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] text-white leading-[1.05]">The Authority Engine</h2>
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em] text-zinc-200 leading-[1.15] mt-4">Turn your content team into a sales asset.</p>
             <div className="flex justify-center">
-              <BuyButton jump status={status} location={`${loc}-close`} label={CTA} hideSpots className="mt-9" />
+              <BuyButton jump status={status} location={`${loc}-close`} label={CTA} className="mt-10" />
             </div>
-            <div className="max-w-md mx-auto mt-6 text-left [&_button]:!text-white [&_button]:underline [&_button]:underline-offset-4"><FitCall /></div>
+            <div className="max-w-md mx-auto text-center [&>div]:mt-5 [&>div]:pt-0 [&>div]:border-0 [&_button]:mx-auto"><FitCall /></div>
           </Section>
         </div>
       </section>
