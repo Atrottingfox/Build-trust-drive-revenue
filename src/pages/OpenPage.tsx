@@ -333,11 +333,12 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 22 Nov: "i think we still need this", his /founding price box. */}
             <p className="text-zinc-900 text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
             <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-3 whitespace-nowrap">{feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
-            {!feb && <p className="text-zinc-500 text-[16px] leading-relaxed mt-4">From February, once 5 are sold, <span className="text-zinc-900 font-semibold">$15,000 AUD + GST</span>, increasing back to $30,000 throughout 2027.</p>}
+            {!feb && <p className="text-zinc-500 text-[16px] leading-relaxed mt-4">Once 5 are sold, price increases to <span className="text-zinc-900 font-semibold">$15,000 + GST</span> for February.</p>}
             <p className="text-zinc-500 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
             <div className="flex justify-center">
               <BuyButton status={status} location={`${loc}-price`} label={CTA} hideSpots className={`mt-7 ${BLUE}`} />
             </div>
+            <div className="max-w-md mx-auto text-center [&>div]:mt-5 [&>div]:pt-0 [&>div]:border-0 [&_p]:text-zinc-900 [&_button]:mx-auto [&_button]:text-[#3B7DFF] [&_button:hover]:text-[#2563eb]"><FitCall /></div>
           </Section>
           <Section className="mt-8 flex gap-4 max-w-2xl mx-auto">
             <ShieldCheck className="w-6 h-6 shrink-0 text-[#3B7DFF] mt-0.5" strokeWidth={1.75} />
