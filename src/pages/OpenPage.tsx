@@ -168,8 +168,8 @@ export default function OpenPage() {
               <ul className="mt-4 space-y-2.5">{MAP.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
               <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
             </div>
-            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.7s, one slow zoom in, 0.35s crossfades, AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, 19s, silent loop). */}
-            <video src="/founding/sd-reel5.mp4" poster="/founding/sd-reel5.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
+            {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.9s, a very slight zoom out on each, 0.25s crossfades (Sean picked crossfade at half the time), AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, 19s, silent loop). */}
+            <video src="/founding/sd-reel6.mp4" poster="/founding/sd-reel6.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
         </div>
       </section>
