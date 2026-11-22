@@ -70,7 +70,7 @@ const NEXT = [
 // Sean, 23 Nov: what they get, in his pasted words.
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['Every SOP, every training video, all playbooks, straight away', 'Training every fortnight', 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', 'Reviews of real work'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['Every SOP, every training video, all playbooks, straight away', 'Training every fortnight', 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', 'The whole team gets access'] },
   { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Senior judgment', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['A Strategy Day with you and your team', 'Two Loom reviews per week during active implementation', 'Monthly content advisory board meetings', 'Advisory group office hours, every Thursday', 'Prescriptive advice directly through the portal', 'WhatsApp support, 24 hour replies'] },
 ];
 
@@ -162,6 +162,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.9s, a very slight zoom out on each, 0.25s crossfades (Sean picked crossfade at half the time), AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, no looking up shots, 23s, silent loop). */}
             <video src="/founding/sd-reel7.mp4" poster="/founding/sd-reel7.jpg" autoPlay muted loop playsInline preload="metadata" aria-label="Clips from Strategy Days" className="w-full aspect-video object-cover rounded-2xl bg-black shadow-[0_24px_60px_-24px_rgba(0,0,0,0.5)]" />
           </Section>
+          <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-strategy`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
       </section>
 
@@ -251,6 +252,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
           <Section className="text-center max-w-2xl mx-auto mt-10">
             <p className="text-zinc-400 text-[17px] leading-relaxed">A working operating system your team uses to plan, produce, judge, publish and improve content.</p>
           </Section>
+          <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-day90`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
       </section>
 
@@ -290,6 +292,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
               </Section>
             ))}
           </div>
+          <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-get`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
       </section>
 
