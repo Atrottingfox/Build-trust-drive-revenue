@@ -132,22 +132,30 @@ export default function OpenPage() {
       {/* THE TRUST GAP, dark band */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
-          <Section className="text-center max-w-3xl mx-auto">
-            <Eyebrow dark>The trust gap</Eyebrow>
-            <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
-            {/* Sean, 22 Nov, his words. */}
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
-            <p className="text-zinc-400 text-[17px] mt-6">But your content is still:</p>
-          </Section>
-          <Section className="max-w-xl mx-auto mt-5">
-            <ul className="space-y-3">
-              {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
-            </ul>
-          </Section>
-          <Section className="text-center mt-10 space-y-1 text-lg md:text-xl">
-            <p className="text-zinc-400">Problem is -</p>
-            <p>You have the authority. Your content just doesn't communicate it.</p>
-          </Section>
+          {/* Sean, 22 Nov: "this looks clunky". Two columns on desktop, one alignment, the list as a card. Same words. */}
+          <div className="grid md:grid-cols-[1fr_1.05fr] gap-10 md:gap-14 items-center">
+            <Section>
+              <Eyebrow dark>The trust gap</Eyebrow>
+              <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
+              {/* Sean, 22 Nov, his words. */}
+              <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
+              <div className="mt-10 pt-8 border-t border-white/10">
+                <p className="text-zinc-500 text-[15px] uppercase tracking-[0.18em] font-semibold">Problem is -</p>
+                <p className="font-display text-2xl md:text-[28px] font-extrabold leading-[1.2] tracking-[-0.01em] mt-3">You have the authority. <span className="text-blue-400">Your content just doesn't communicate it.</span></p>
+              </div>
+            </Section>
+            <Section className="rounded-3xl bg-white/[0.04] border border-white/10 overflow-hidden">
+              <p className="px-6 md:px-7 pt-6 pb-4 text-zinc-400 text-[15px] font-semibold">But your content is still:</p>
+              <ul className="divide-y divide-white/[0.07] border-t border-white/[0.07]">
+                {GAP.map((t) => (
+                  <li key={t} className="flex items-center gap-4 px-6 md:px-7 py-4 text-zinc-100 text-[16px] md:text-[17px] leading-snug">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose-500/10 ring-1 ring-rose-400/25"><X className="w-3.5 h-3.5 text-rose-300" strokeWidth={2.5} /></span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </Section>
+          </div>
 
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
