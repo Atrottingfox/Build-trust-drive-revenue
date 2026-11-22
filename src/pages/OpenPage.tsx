@@ -34,7 +34,7 @@ const CTA = 'Secure your January place';
 const STEPS = [
   {
     tag: 'Today', title: 'Secure your place',
-    body: ['Secure your place now to get your Strategy Day included in the price.', "Plus immediate access to group advisory calls, training, playbooks, and all SOP's."],
+    body: ['Get your Strategy Day included in the price.'],
     img: '/founding/ce-portal.mp4', alt: 'A new client going through the contentengine.live portal: welcome video, Home, adding the calls to their calendar, the toolkit',
   },
   {
@@ -67,21 +67,11 @@ const NEXT = [
   [Repeat, 'Your first live content cycle runs once implementation starts.'],
 ] as const;
 
+// Sean, 23 Nov: what they get, in his pasted words.
 const GROUPS = [
-  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', line: 'Sean, relevant specialists and the founder network.', items: ['Direct access to Sean', 'Relevant specialists', 'The founder network'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', line: 'SOPs, playbooks and team training.', items: [
-    'Every SOP, every training video, all playbooks, straight away',
-    'Training every fortnight',
-    'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
-  ] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
-    'A Strategy Day with you and your team',
-    'Two Loom reviews per week during active implementation',
-    'Advisory group office hours, every Thursday',
-    'Monthly content advisory board meetings',
-    'Prescriptive advice directly through the portal',
-    'WhatsApp support, 24 hour replies',
-  ] },
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['SOPs and playbooks', 'Fortnightly team training', 'Weekly implementation calls for four weeks', 'Fortnightly calls for eight weeks', 'Reviews of real work'] },
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Senior judgment', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['Strategy Day', 'Loom reviews', 'Content advisory board', 'Office hours', 'Prescriptive feedback', 'WhatsApp support'] },
 ];
 
 /* Sean, 22 Nov: "use this same language", his /founding trust gap and Strategy Day copy, word for word. */
@@ -197,7 +187,6 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
                       <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2">{NOW.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
                     </>
                   )}
-                  {i === 0 && <BuyButton jump status={status} location={`${loc}-step`} label={CTA} hideSpots className={`mt-6 ${BLUE}`} />}
                 </div>
                 <div className={i % 2 ? 'md:order-1' : ''}>
                   {i === 0 ? (
@@ -268,7 +257,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
                   </div>
                 </div>
                 <div className="p-6 md:p-7 flex-1 flex flex-col">
-                  <p className="text-zinc-900 text-[17px] font-semibold leading-snug">{g.line}</p>
+                  <p className="text-[13px] font-semibold uppercase tracking-[0.18em]" style={{ color: g.colour }}>{g.sub}</p>
+                  <p className="text-zinc-900 text-[17px] font-semibold leading-snug mt-2">{g.line}</p>
                   <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
                     {g.items.map((t) => (
                       <li key={t} className="flex items-start gap-3 py-3 text-zinc-600 text-[15px] leading-relaxed">
