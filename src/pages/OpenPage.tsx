@@ -5,7 +5,8 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 import FitCall from '../components/founding/FitCall';
 import VslPlayer from '../components/founding/VslPlayer';
 import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
-import { BuyButton, Section, StickyBar, useStatus } from './Founding';
+import { BuyButton, Paid, Section, StickyBar, useStatus } from './Founding';
+import { usePageVisits } from '../lib/pageVisits';
 
 /*
   /open. Hidden from Google.
@@ -104,14 +105,25 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
   <li className={`flex items-start gap-2.5 text-[16px] leading-relaxed ${dark ? 'text-zinc-300' : 'text-zinc-600'}`}><Check className={`w-4 h-4 mt-1 shrink-0 ${dark ? 'text-blue-400' : 'text-[#3B7DFF]'}`} strokeWidth={3} />{children}</li>
 );
 
-export default function OpenPage() {
+/* Sean, 22 Nov: "swap the pages". live = /founding. Stripe returns to /founding?paid=1,
+   personal links (?for= or ?c=) post visits to Slack, buttons report as founding-* for GA. */
+export default function OpenPage({ live = false }: { live?: boolean }) {
+  const paid = live && typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
+  const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
+  usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
   const feb = status?.intake === 'february';
-  const loc = 'open';
+  const loc = live ? 'founding' : 'open';
+
+  if (paid) return <Paid />;
 
   return (
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
-      <SEO title="The Authority Engine" description="Private media growth advisory for industry leading founders. Five founding places." path="/open" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
+      {live ? (
+        <SEO title="90 Day Install" description="The Authority Engine. Private media growth advisory for industry leading founders. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November." path="/founding" image="https://authorityengine.com.au/og-founding-v3.jpg" />
+      ) : (
+        <SEO title="The Authority Engine" description="Private media growth advisory for industry leading founders. Five founding places." path="/open" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
+      )}
 
       {/* HERO */}
       <section className="pt-28 pb-14 md:pt-40 md:pb-20">
