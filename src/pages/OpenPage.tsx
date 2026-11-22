@@ -73,7 +73,7 @@ const GROUPS = [
     'Training every fortnight',
     'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8',
   ] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory.mp4', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', line: 'Strategy Day, reviews, calls, Looms and WhatsApp.', items: [
     'A Strategy Day with you and your team',
     'Two Loom reviews per week during active implementation',
     'Advisory group office hours, every Thursday',
@@ -132,30 +132,22 @@ export default function OpenPage() {
       {/* THE TRUST GAP, dark band */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
-          {/* Sean, 22 Nov: "this looks clunky". Two columns on desktop, one alignment, the list as a card. Same words. */}
-          <div className="grid md:grid-cols-[1fr_1.05fr] gap-10 md:gap-14 items-center">
-            <Section>
-              <Eyebrow dark>The trust gap</Eyebrow>
-              <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
-              {/* Sean, 22 Nov, his words. */}
-              <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
-              <div className="mt-10 pt-8 border-t border-white/10">
-                <p className="text-zinc-500 text-[15px] uppercase tracking-[0.18em] font-semibold">Problem is -</p>
-                <p className="font-display text-2xl md:text-[28px] font-extrabold leading-[1.2] tracking-[-0.01em] mt-3">You have the authority. <span className="text-blue-400">Your content just doesn't communicate it.</span></p>
-              </div>
-            </Section>
-            <Section className="rounded-3xl bg-white/[0.04] border border-white/10 overflow-hidden">
-              <p className="px-6 md:px-7 pt-6 pb-4 text-zinc-400 text-[15px] font-semibold">But your content is still:</p>
-              <ul className="divide-y divide-white/[0.07] border-t border-white/[0.07]">
-                {GAP.map((t) => (
-                  <li key={t} className="flex items-center gap-4 px-6 md:px-7 py-4 text-zinc-100 text-[16px] md:text-[17px] leading-snug">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose-500/10 ring-1 ring-rose-400/25"><X className="w-3.5 h-3.5 text-rose-300" strokeWidth={2.5} /></span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-          </div>
+          <Section className="text-center max-w-3xl mx-auto">
+            <Eyebrow dark>The trust gap</Eyebrow>
+            <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
+            {/* Sean, 22 Nov, his words. */}
+            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most, you're actually legit.</p>
+            <p className="text-zinc-400 text-[17px] mt-6">But your content is still:</p>
+          </Section>
+          <Section className="max-w-xl mx-auto mt-5">
+            <ul className="space-y-3">
+              {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-200 text-[17px] leading-relaxed"><X className="w-4 h-4 mt-1.5 shrink-0 text-zinc-500" />{t}</li>)}
+            </ul>
+          </Section>
+          <Section className="text-center mt-10 space-y-1 text-lg md:text-xl">
+            <p className="text-zinc-400">Problem is -</p>
+            <p>You have the authority. Your content just doesn't communicate it.</p>
+          </Section>
 
           {/* Your first advisory cycle: the Strategy Day */}
           <Section className="mt-14 md:mt-20 rounded-3xl bg-white text-zinc-900 p-7 md:p-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -251,11 +243,12 @@ export default function OpenPage() {
           <Section className="text-center">
             <H>What you get</H>
           </Section>
-          <div className="grid md:grid-cols-3 gap-5 mt-14 md:items-start">
+          {/* Sean, 22 Nov: bottoms line up. Access and Training side by side, Advisory full width underneath (video left, list right). */}
+          <div className="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl mx-auto">
             {GROUPS.map((g, i) => (
-              <Section key={g.name} className="group rounded-3xl bg-white overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.04),0_24px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-zinc-200/70 flex flex-col">
-                <div className="relative h-52 md:h-56 overflow-hidden">
-                  <Media src={g.img} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <Section key={g.name} className={`${i === 2 ? 'md:col-span-2 md:flex-row' : ''} group rounded-3xl bg-white overflow-hidden shadow-[0_1px_0_rgba(0,0,0,0.04),0_24px_60px_-30px_rgba(15,23,42,0.35)] ring-1 ring-zinc-200/70 flex flex-col`}>
+                <div className={`relative overflow-hidden ${i === 2 ? 'bg-[#0a0a0c]' : 'bg-[#0d0f14]'} ${i === 2 ? 'aspect-video md:w-1/2 md:shrink-0 md:aspect-auto md:min-h-[320px]' : 'aspect-video'}`}>
+                  <Media src={g.img} className={`absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105 ${i === 2 ? 'object-contain' : 'object-cover'}`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <span className="absolute top-4 left-4 rounded-full bg-black/50 backdrop-blur px-3 py-1 text-white text-[12px] font-semibold tracking-widest">{`0${i + 1}`}</span>
                   <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -263,7 +256,7 @@ export default function OpenPage() {
                     <p className="font-display text-3xl font-extrabold text-white tracking-[-0.02em]">{g.name}</p>
                   </div>
                 </div>
-                <div className="p-6 flex-1 flex flex-col">
+                <div className="p-6 md:p-7 flex-1 flex flex-col">
                   <p className="text-zinc-900 text-[17px] font-semibold leading-snug">{g.line}</p>
                   <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
                     {g.items.map((t) => (
@@ -293,7 +286,7 @@ export default function OpenPage() {
               <p className="text-zinc-600 text-[17px] leading-relaxed mt-5">I cut my teeth door knocking as a 17 year old kid trying to sell my art to businesses.</p>
               <p className="text-zinc-600 text-[17px] leading-relaxed mt-4">Then spent the next 10 years transitioning from photographer, to videographer, creative director, strategist and advisor, now for the past 3 years I've been behind the scenes with 8 figure B2B founders doing $1M+/month, creating content that consistently drives revenue.</p>
               <p className="text-zinc-600 text-[17px] leading-relaxed mt-4">We work with the top 1% as an accelerant where our sole job is to get them seen by the right people to expand impact, and increase their commercial output.</p>
-              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-4">Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.</p>
+              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-4">Here's my take: Business is a vehicle for impact, content is the engine that drives it, and revenue is the fuel.</p>
             </div>
           </Section>
         </div>
