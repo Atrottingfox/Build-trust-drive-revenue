@@ -158,7 +158,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
               <p className="text-zinc-700 text-[17px] leading-relaxed mt-4">We compress your brand, content and revenue strategy into one day.</p>
               <p className="text-zinc-600 text-[17px] mt-5">We map:</p>
               <ul className="mt-4 space-y-2.5">{MAP.map((t) => <Tick key={t}>{t}</Tick>)}</ul>
-              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">That blueprint becomes the foundation for the 90 day implementation.</p>
+              <p className="text-zinc-900 text-[17px] font-semibold leading-relaxed mt-6">This blueprint is the foundation of both short and longform content for the 90 days of implementation.</p>
             </div>
             {/* Sean, 22 Nov: a hype scroll of real Strategy Day clips (TO CLIP folder, 14 shots of 1.9s, a very slight zoom out on each, 0.25s crossfades (Sean picked crossfade at half the time), AirPlay room levelled, left screen in the pink room frozen to stop the flicker, no desk shots, no looking up shots, 23s, silent loop). */}
             <div>
