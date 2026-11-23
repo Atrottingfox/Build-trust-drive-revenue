@@ -45,7 +45,7 @@ const STEPS = [
   {
     tag: 'Weeks 1 to 4', title: 'Install',
     /* Sean, 22 Nov: about the exact bottleneck, never short form or long form. "we do what's necessary". */
-    body: ["We start on your exact bottleneck and do what's necessary. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking."],
+    body: ["We start on your exact bottleneck using our CVAQ analysis. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking."],
     img: '/founding/train-02a.mp4', alt: 'A training video from the library',
   },
   {
