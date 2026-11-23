@@ -110,7 +110,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
   return (
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
       {live ? (
-        <SEO title="90 Day Install" description="The Authority Engine. Private media growth advisory for industry leading founders. Turn your content team into a sales asset. Our 90 day install. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November." path="/founding" image="https://authorityengine.com.au/og-founding-v3.jpg" />
+        <SEO title="90 Day Install" description="The Authority Engine. Private media growth advisory for industry leading founders. Our 90 day install. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November." path="/founding" image="https://authorityengine.com.au/og-founding-v3.jpg" />
       ) : (
         <SEO title="The Authority Engine" description="Private media growth advisory for industry leading founders. Five founding places." path="/open" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
       )}
@@ -122,8 +122,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 22 Nov: no eyebrow, no button and no walkthrough line above the fold. */}
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
             {/* Sean, 23 Nov: back to the 90 day promise and outcome. His /founding hero lines. */}
-            <p className="font-display text-xl md:text-2xl font-extrabold text-zinc-700 mt-5">Turn your content team into a sales asset.</p>
-            <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.</p>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">Our 90 day install with the strategy, playbooks and standards your team needs to create content that makes the right buyers trust you before the sale.</p>
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
             </div>
