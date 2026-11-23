@@ -137,9 +137,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>The trust gap</Eyebrow>
-            <H dark className="mt-4">Private media growth advisory for industry leading founders.</H>
             {/* Sean, 22 Nov, his words. */}
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most - you're actually legit.</p>
+            <p className="font-display text-white text-2xl md:text-3xl font-extrabold tracking-[-0.02em] leading-snug mt-5">You've got the expertise, your offer's dialled and unlike most - you're actually legit.</p>
             <p className="text-zinc-400 text-[17px] mt-6">So why is your content still -</p>
           </Section>
           <Section className="max-w-xl mx-auto mt-5">
@@ -173,9 +172,10 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
       <section className="py-16 md:py-28">
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
-            <H>How the first 90 days works</H>
-            {/* Sean, 23 Nov: the 90 day line sits here, not in the hero. */}
+            {/* Sean, 23 Nov: advisory heading, the 90 day line, then How the first 90 days works as the label. */}
+            <H>Private media growth advisory for industry leading founders.</H>
             <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">A 90 day implementation that gives your team the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
+            <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em] mt-12">How the first 90 days works</p>
           </Section>
           <div className="mt-12 md:mt-16 space-y-12 md:space-y-20">
             {STEPS.map((s, i) => (
