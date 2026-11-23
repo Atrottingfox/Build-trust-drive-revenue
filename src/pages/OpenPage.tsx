@@ -125,6 +125,7 @@ export default function OpenPage({ live = false, advisory = false }: { live?: bo
             {/* Sean, 23 Nov: eyebrow back above the headline. No button and no walkthrough line above the fold. */}
             {advisory ? (<>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto [text-wrap:balance]">Private media growth advisory for industry leading founders.</h1>
+            <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your media a path to money in 90 days.</p>
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Give your media team the judgment, standards, and direction required to turn your expertise into a serious company asset.</p>
             </>) : (<>
             <Eyebrow>Private content advisory</Eyebrow>
