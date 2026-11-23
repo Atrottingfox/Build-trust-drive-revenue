@@ -263,7 +263,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 23 Nov: the advisory heading and 90 day line open What you get. */}
             <Eyebrow>What you get</Eyebrow>
             <H className="mt-4">Private media growth advisory for industry leading founders.</H>
-            <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">A 90 day implementation that gives your team the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">A 90 day implementation that gets you the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
           </Section>
           {/* Sean, 22 Nov: bottoms line up. Access and Training side by side, Advisory full width underneath (video left, list right). */}
           <div className="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl mx-auto">
