@@ -1,4 +1,4 @@
-import { provisionPortal } from "./_portal";
+import { logPortalEvent, provisionPortal } from "./_portal";
 import type { Handler } from "@netlify/functions";
 import { reconcile, contactUrl } from "./_ghl";
 
@@ -99,6 +99,29 @@ const handler: Handler = async (event) => {
       if (!startTime) {
         console.error("calendly-booked: NO START TIME. Nothing can count back from this booking.", eventUri);
       }
+    }
+
+    /*
+      Every booking on the buyer's contentengine timeline and in their Slack
+      thread (Sean, 24 Nov 2026: "i need full tracking and visibility across
+      all data"). Matched by the invitee's email, so it works with or without
+      a GHL contact id. Before any early return, so an unrecognised event type
+      is still recorded as a plain booking. contentengine drops a repeat of
+      the same booking (Calendly retries).
+    */
+    {
+      const label = `${payload.scheduled_event?.name || payload.event_type?.name || ""} ${payload.scheduled_event?.event_type || payload.event_type?.uri || ""}`.toLowerCase();
+      const typeUri = String(payload.scheduled_event?.event_type || payload.event_type?.uri || "");
+      const brandDayId = process.env.CALENDLY_TYPE_BRAND_DAY || "67a02dc5-7d2c-4d54-8dcd-2268983ce45e";
+      const prepId = process.env.CALENDLY_TYPE_PREP_CALL || "8bae55d8-9869-4d69-b649-8cea7436ba99";
+      const prep = typeUri.endsWith(prepId) || /prep[-\s]?call/.test(label);
+      const day = !prep && (typeUri.endsWith(brandDayId) || /vip[-\s]?day|brand[-\s]?day|vip[-\s]?strategy[-\s]?day|strategy[-\s]?day/.test(label));
+      const strategy = !prep && !day && /strategy[-\s]?(session|call)/.test(label);
+      const kind = day ? "brand_day_booked" : strategy ? "strategy_call_booked" : prep ? "prep_call_booked" : "call_booked";
+      await logPortalEvent(payload.email || undefined, kind, {
+        date: startTime || undefined,
+        name: payload.scheduled_event?.name || payload.event_type?.name || undefined,
+      });
     }
 
     if (!contactId) {

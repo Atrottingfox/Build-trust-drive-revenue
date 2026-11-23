@@ -1,6 +1,7 @@
 import type { Handler } from "@netlify/functions";
 import { getContact, addTags, contactUrl, findOrCreateByEmail, sendEmail } from "./_ghl";
 import { FORM_URL } from "./_prep";
+import { logPortalEvent } from "./_portal";
 import {
   SLOT_HOURS,
   BOARD_HOURS,
@@ -610,6 +611,16 @@ const handler: Handler = async (event) => {
     operatorEmail ? [BOOKED_TAG, OPERATOR_TAG] : [BOOKED_TAG, NO_OPERATOR_TAG]
   );
 
+  /* On the buyer's contentengine timeline and Slack thread (Sean, 24 Nov
+     2026: full tracking). Never blocks the booking. */
+  await logPortalEvent(email || undefined, "slot_booked", {
+    hour: hourLabel(chosen),
+    boardHour: hourLabel(boardHour),
+    calls: total,
+    from: start,
+    operator: operatorEmail || undefined,
+  });
+
   /*
     One email, not ten.
 
@@ -642,7 +653,9 @@ const handler: Handler = async (event) => {
           zoom ? `<p>Same link every time: <a href="${zoom}">${zoom}</a></p>` : "",
           `<p>Need to move one? Move it in the calendar and it stays in sync.</p>`,
           `<p>Sean</p>`,
-        ].join("")
+        ].join(""),
+        /* The operator gets it, the event belongs to the buyer. */
+        { logAs: email || undefined }
       );
 
       if (!sent) {

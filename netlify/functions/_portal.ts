@@ -48,19 +48,42 @@ export async function provisionPortal(contact: { email?: string; firstName?: str
 /*
   One line on the buyer's timeline on contentengine.live, and in their Slack
   thread (Sean, 2026-11-23: "i just want to know what's happened where when
-  and how"). Today only the welcome email. Reuses CALL_CONTEXT_SECRET: this
-  site is at Netlify's 4KB env limit. Never throws, never blocks.
+  and how"; 24 Nov: "i need full tracking and visibility across all data").
+  Matched to the client by email (or clientId). Reuses CALL_CONTEXT_SECRET:
+  this site is at Netlify's 4KB env limit. Never throws, never blocks.
+
+  Kinds contentengine's portal-event accepts from here:
+    welcome_email          the welcome went (or did not)
+    email_sent/failed      every email sendEmail sends (automatic)
+    brand_day_booked, strategy_call_booked, prep_call_booked, call_booked
+                           Calendly (calendly-booked)
+    slot_booked            the 90 day call slot (install-slot)
 */
 const EVENT_URL = "https://contentengine.live/.netlify/functions/portal-event";
 
-export async function logPortalEvent(email: string | undefined, kind: "welcome_email", detail: Record<string, unknown>): Promise<void> {
+export type PortalEventKind =
+  | "welcome_email"
+  | "email_sent"
+  | "email_failed"
+  | "brand_day_booked"
+  | "strategy_call_booked"
+  | "prep_call_booked"
+  | "call_booked"
+  | "slot_booked";
+
+export async function logPortalEvent(
+  email: string | undefined,
+  kind: PortalEventKind,
+  detail: Record<string, unknown>,
+  clientId?: string
+): Promise<void> {
   const secret = process.env.CALL_CONTEXT_SECRET;
-  if (!secret || !email) return;
+  if (!secret || (!email && !clientId)) return;
   try {
     await fetch(EVENT_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-call-context-key": secret },
-      body: JSON.stringify({ email, kind, detail }),
+      body: JSON.stringify({ email, clientId, kind, detail }),
       signal: AbortSignal.timeout(6000),
     });
   } catch {

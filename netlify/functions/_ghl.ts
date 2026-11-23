@@ -25,6 +25,9 @@
   matter, and re-running it is harmless.
 */
 
+import { newMailId, trackEmail } from "./_track";
+import { logPortalEvent } from "./_portal";
+
 export const GHL_API = "https://services.leadconnectorhq.com";
 export const GHL_VERSION = "2021-07-28";
 
@@ -232,25 +235,60 @@ export async function sendEmail(
   token: string,
   contactId: string,
   subject: string,
-  html: string
-): Promise<{ sent: boolean; reason?: string }> {
+  html: string,
+  opts: { email?: string; clientId?: string; logAs?: string; track?: boolean } = {}
+): Promise<{ sent: boolean; reason?: string; ghlId?: string }> {
+  /*
+    Tracked by default (Sean, 24 Nov 2026: "i need full tracking and
+    visibility across all data"). Every link becomes a tracked redirect and an
+    open pixel is appended (_track.ts), and the send itself is logged on the
+    buyer's contentengine timeline as 'email_sent' (or 'email_failed'). The
+    event belongs to `logAs` when the mail goes to someone other than the
+    buyer (an operator), otherwise to the recipient. One extra GET for the
+    contact's email when the caller did not pass it. Never blocks the send.
+  */
+  let recipient = (opts.email || "").trim().toLowerCase();
+  if (!recipient && opts.track !== false) {
+    const c = await getContact(token, contactId).catch(() => null);
+    recipient = String(c?.email || "").trim().toLowerCase();
+  }
+  const owner = (opts.logAs || recipient || "").trim().toLowerCase();
+  const mailId = newMailId();
+  const body =
+    opts.track === false || (!owner && !opts.clientId)
+      ? html
+      : trackEmail(html, { email: owner || undefined, clientId: opts.clientId, subject, mailId });
+
+  let result: { sent: boolean; reason?: string; ghlId?: string };
   try {
     const res = await fetch(`${GHL_API}/conversations/messages`, {
       method: "POST",
       headers: authHeaders(token),
-      body: JSON.stringify({ type: "Email", contactId, subject, html }),
+      body: JSON.stringify({ type: "Email", contactId, subject, html: body }),
     });
 
     if (!res.ok) {
-      const body = await res.text();
-      console.error("GHL sendEmail failed:", res.status, body.slice(0, 300), contactId);
-      return { sent: false, reason: `HTTP ${res.status}` };
+      const text = await res.text();
+      console.error("GHL sendEmail failed:", res.status, text.slice(0, 300), contactId);
+      result = { sent: false, reason: `HTTP ${res.status}` };
+    } else {
+      const d = await res.json().catch(() => ({}));
+      console.log("GHL sendEmail sent:", subject, "->", contactId);
+      result = { sent: true, ghlId: d?.emailMessageId || undefined };
     }
-
-    console.log("GHL sendEmail sent:", subject, "->", contactId);
-    return { sent: true };
   } catch (err) {
     console.error("GHL sendEmail error:", err, contactId);
-    return { sent: false, reason: String(err) };
+    result = { sent: false, reason: String(err) };
   }
+
+  if (opts.track !== false && (owner || opts.clientId)) {
+    await logPortalEvent(owner || undefined, result.sent ? "email_sent" : "email_failed", {
+      subject,
+      mail: mailId,
+      to: recipient || undefined,
+      ghlId: result.ghlId,
+      reason: result.reason,
+    }, opts.clientId);
+  }
+  return result;
 }
