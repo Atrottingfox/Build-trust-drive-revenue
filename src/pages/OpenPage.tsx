@@ -97,19 +97,22 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
 
 /* Sean, 22 Nov: "swap the pages". live = /founding. Stripe returns to /founding?paid=1,
    personal links (?for= or ?c=) post visits to Slack, buttons report as founding-* for GA. */
-export default function OpenPage({ live = false }: { live?: boolean }) {
+/* Sean, 24 Nov: second landing page, same body, different hero. advisory = /founding-advisory. */
+export default function OpenPage({ live = false, advisory = false }: { live?: boolean; advisory?: boolean }) {
   const paid = live && typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
   usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
   const feb = status?.intake === 'february';
-  const loc = live ? 'founding' : 'open';
+  const loc = advisory ? 'advisory' : live ? 'founding' : 'open';
 
   if (paid) return <Paid />;
 
   return (
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
-      {live ? (
+      {advisory ? (
+        <SEO title="Private Media Growth Advisory" description="The Authority Engine. Private media growth advisory for industry leading founders. January 2027, 5 founding places." path="/founding-advisory" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
+      ) : live ? (
         <SEO title="90 Day Install" description="The Authority Engine. Private media growth advisory for industry leading founders. Our 90 day install. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November." path="/founding" image="https://authorityengine.com.au/og-founding-v3.jpg" />
       ) : (
         <SEO title="The Authority Engine" description="Private media growth advisory for industry leading founders. Five founding places." path="/open" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
@@ -120,10 +123,15 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             {/* Sean, 23 Nov: eyebrow back above the headline. No button and no walkthrough line above the fold. */}
+            {advisory ? (<>
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto [text-wrap:balance]">Private media growth advisory for industry leading founders.</h1>
+            <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Give your media team the judgment, standards, and direction required to turn your expertise into a serious company asset.</p>
+            </>) : (<>
             <Eyebrow>Private content advisory</Eyebrow>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Your business has outgrown how content gets made.</h1>
             {/* Sean, 23 Nov: picked "Without you". */}
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">One clear content blueprint, the standards to execute it, and direct support to turn your expertise into short and longform content that builds trust before the sale without directing every decision.</p>
+            </>)}
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
             </div>

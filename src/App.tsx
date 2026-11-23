@@ -186,6 +186,7 @@ export default function App() {
           {/* Sean, 16 Nov: v5 is /founding. The old tests point at it. Old pages are in git (tag pre-founding-v5-live-*). */}
           {/* Sean, 22 Nov: "swap the pages". /founding is the new design, the old /founding is at /open. Rollback: tag pre-founding-swap-20261122T2130. */}
           <Route path="/founding" element={<OpenPage live />} />
+          <Route path="/founding-advisory" element={<OpenPage live advisory />} />
           {/* Sean, 21 Nov: test with elements from ecommerceequation.com.au. Not indexed. */}
           <Route path="/founding-test" element={<FoundingV5 test />} />
           {/* Sean, 22 Nov: /open, same page and offer, access angle on the headline and promise. Not in the nav, noindex. */}
