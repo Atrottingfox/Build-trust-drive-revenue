@@ -260,7 +260,8 @@ export function StickyBar({ status, revealAt, jump = false, apply = false }: { s
           {priced ? (
             <>
               <p className="text-white text-[15px] font-semibold leading-tight">{status?.intake === 'february' ? '$15,000' : '$10,000'} AUD + GST</p>
-              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{left}.{status?.intake === 'february' ? ' February intake.' : ' Closes 30 Nov.'}</p>
+              {/* Sean, 24 Nov: phone bar says Closes 30 Nov, no spots line. */}
+              <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{status?.intake === 'february' ? `${left}. February intake.` : 'Closes 30 Nov.'}</p>
             </>
           ) : (
             <>
