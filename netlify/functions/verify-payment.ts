@@ -1,4 +1,4 @@
-import { provisionPortal } from "./_portal";
+import { logPortalEvent, provisionPortal, type PaidInfo } from "./_portal";
 import type { Handler } from "@netlify/functions";
 import { reconcile, getContact, sendEmail } from "./_ghl";
 import { isTestContact, priceCents } from "./_pricing";
@@ -7,6 +7,19 @@ import { OFFICE_HOURS, whatsappLine } from "./_calls";
 
 /* One place to shout from. A paid client who did not get their booking link is
    the exact failure this file exists to prevent, so it must not be silent. */
+/* What was bought, for the buyer's timeline and Slack thread on
+   contentengine.live (2026-11-23). */
+function paidInfo(session: any): PaidInfo {
+  const kind = String(session?.metadata?.payment || "");
+  const product =
+    kind === "install-1" ? "90 Day Install (payment 1 of 2)"
+    : kind === "intensive-1" ? "Operator Intensive (payment 1 of 4)"
+    : !kind || kind === "brand-day" ? "Brand Day"
+    : kind;
+  const amount = ((session?.amount_total ?? 0) / 100).toLocaleString("en-AU", { style: "currency", currency: String(session?.currency || "aud").toUpperCase() });
+  return { product, amount, session: session?.id, phone: session?.customer_details?.phone || undefined };
+}
+
 async function slackAlert(text: string): Promise<void> {
   const url = process.env.SLACK_WEBHOOK_MONEY || process.env.SLACK_WEBHOOK_URL;
   if (!url) return;
@@ -412,7 +425,7 @@ const handler: Handler = async (event) => {
 
           /* Their portal on contentengine.live: one "set your password" link,
              carried in this same email. See _portal.ts. */
-          const portal = await provisionPortal(contact);
+          const portal = await provisionPortal(contact, { paid: paidInfo(session) });
           const portalLine = portal.claimUrl
             ? `<p>Your portal is ready. <a href="${portal.claimUrl}">Set your password</a> and everything for the build lives there.</p>`
             : portal.loginUrl
@@ -457,6 +470,7 @@ const handler: Handler = async (event) => {
             ].join("")
           );
 
+          await logPortalEvent(contact?.email || session.customer_details?.email, "welcome_email", { subject: ownRhythm ? "Payment received." : "Payment received. One thing left.", sent, reason: sent ? undefined : reason });
           if (!sent) {
             await slackAlert(
               [
@@ -552,7 +566,7 @@ const handler: Handler = async (event) => {
     const portal = await provisionPortal({
       email: session.customer_details?.email || undefined,
       name: session.customer_details?.name || session.customer_details?.email || undefined,
-    });
+    }, { paid: paidInfo(session) });
 
     /* The Brand Day welcome email (Sean, 2026-11-12: payment to onboard, the
        same for everyone). Until now a Brand Day buyer got no email from code,
@@ -576,6 +590,7 @@ const handler: Handler = async (event) => {
         whatsappLine(portal.whatsappUrl),
         `<p>Sean</p>`,
       ].join(""));
+      await logPortalEvent(session.customer_details?.email || undefined, "welcome_email", { subject: "You're in. Here's what happens now.", sent, reason: sent ? undefined : reason });
       if (sent) {
         await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
           method: "POST",

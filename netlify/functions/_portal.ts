@@ -16,7 +16,11 @@
 const PROVISION_URL =
   process.env.PORTAL_PROVISION_URL || "https://contentengine.live/.netlify/functions/provision-client";
 
-export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null, extra: { brandDay?: string; start?: string } = {}): Promise<{ claimUrl?: string; loginUrl?: string; whatsappUrl?: string; error?: string }> {
+/* What was bought, for the buyer's timeline and Slack thread on contentengine
+   (2026-11-23). */
+export type PaidInfo = { product?: string; amount?: string; session?: string; phone?: string };
+
+export async function provisionPortal(contact: { email?: string; firstName?: string; lastName?: string; name?: string } | null, extra: { brandDay?: string; start?: string; paid?: PaidInfo } = {}): Promise<{ claimUrl?: string; loginUrl?: string; whatsappUrl?: string; error?: string }> {
   /* The secret contentengine and this site already share (it is how
      contentengine asks client-upcoming for call times). A new variable pushed
      this site over Netlify's 4KB function environment limit and stopped every
@@ -30,7 +34,7 @@ export async function provisionPortal(contact: { email?: string; firstName?: str
     const r = await fetch(PROVISION_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-provision-secret": secret },
-      body: JSON.stringify({ email, name, brandDay: extra.brandDay, start: extra.start }),
+      body: JSON.stringify({ email, name, brandDay: extra.brandDay, start: extra.start, paid: extra.paid }),
       signal: AbortSignal.timeout(8000),
     });
     const body = await r.json().catch(() => ({}));
@@ -38,5 +42,28 @@ export async function provisionPortal(contact: { email?: string; firstName?: str
     return { claimUrl: body.claimUrl, loginUrl: body.loginUrl, whatsappUrl: body.whatsappUrl || undefined };
   } catch (e) {
     return { error: `provision-client unreachable: ${(e as Error).message}` };
+  }
+}
+
+/*
+  One line on the buyer's timeline on contentengine.live, and in their Slack
+  thread (Sean, 2026-11-23: "i just want to know what's happened where when
+  and how"). Today only the welcome email. Reuses CALL_CONTEXT_SECRET: this
+  site is at Netlify's 4KB env limit. Never throws, never blocks.
+*/
+const EVENT_URL = "https://contentengine.live/.netlify/functions/portal-event";
+
+export async function logPortalEvent(email: string | undefined, kind: "welcome_email", detail: Record<string, unknown>): Promise<void> {
+  const secret = process.env.CALL_CONTEXT_SECRET;
+  if (!secret || !email) return;
+  try {
+    await fetch(EVENT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-call-context-key": secret },
+      body: JSON.stringify({ email, kind, detail }),
+      signal: AbortSignal.timeout(6000),
+    });
+  } catch {
+    /* The email went (or did not) either way. */
   }
 }

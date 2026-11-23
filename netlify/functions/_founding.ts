@@ -1,6 +1,6 @@
 import { addTags, contactUrl, findOrCreateByEmail, GHL_API, GHL_VERSION, sendEmail } from "./_ghl";
 import { BRAND_DAY_BOOKING, OFFICE_HOURS, whatsappLine } from "./_calls";
-import { provisionPortal } from "./_portal";
+import { logPortalEvent, provisionPortal } from "./_portal";
 
 /*
   Everything that happens after somebody buys the founding 90 Day at /founding.
@@ -147,7 +147,10 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
      hour reminder (portal-chase), and so the link is in Slack. */
   const intake = session?.metadata?.intake === "february" ? "february" : "january";
   const start = cohortStart((session.created ? session.created * 1000 : Date.now()), intake);
-  const portal = await provisionPortal({ email: d.email, name: d.name }, { start });
+  const portal = await provisionPortal({ email: d.email, name: d.name }, {
+    start,
+    paid: { product: `Founding 90 Day (${intake === "february" ? "February" : "January"} intake)`, amount, session: session.id, phone: d.phone || undefined },
+  });
 
   /* Sean, 2026-11-12: "the founding buyers next steps all implemented asap".
      One welcome email, sent from here like the install payment email (the tag
@@ -170,6 +173,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
     ].join(""));
     welcomed = sent;
   }
+  await logPortalEvent(d.email, "welcome_email", { subject: "You're in. Here's what happens now.", sent: welcomed });
 
   await slack(
     [
