@@ -170,19 +170,13 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
           {/* Sean, 23 Nov, his words, above By day 90. */}
           <Section className="max-w-xl mx-auto text-center mt-20 md:mt-28">
             <H dark>Your content should do more than get attention.</H>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">When engineered, shortform, longform &amp; lead magnets all become trust assets that turn viewers into buyers.</p>
             <p className="text-zinc-400 text-[17px] mt-6">It should help the right people:</p>
           </Section>
           <Section className="max-w-xl mx-auto mt-5">
             <ul className="space-y-3">
-              {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your expertise before the conversation', 'Arrive with better questions and stronger intent', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
+              {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your brand, your expertise and unique method before the sale', 'Arrive presold and ready to buy', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
             </ul>
-            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">Your sales team should not have to build every belief from scratch on every call.</p>
-          </Section>
-          {/* Sean, 23 Nov: the advisory heading and 90 day line sit under Your content should do more. */}
-          <Section className="max-w-2xl mx-auto text-center mt-20 md:mt-28">
-            <H dark>Private media growth advisory for industry leading founders.</H>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-6">A 90 day implementation that gives your team the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
+            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">We engineer one clear path to money that consistently turns viewers into buyers.</p>
           </Section>
         </div>
       </section>
@@ -266,7 +260,10 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
       <section className="py-16 md:py-28 overflow-hidden">
         <div className="max-w-6xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
-            <H>What you get</H>
+            {/* Sean, 23 Nov: the advisory heading and 90 day line open What you get. */}
+            <Eyebrow>What you get</Eyebrow>
+            <H className="mt-4">Private media growth advisory for industry leading founders.</H>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-5 max-w-2xl mx-auto">A 90 day implementation that gives your team the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
           </Section>
           {/* Sean, 22 Nov: bottoms line up. Access and Training side by side, Advisory full width underneath (video left, list right). */}
           <div className="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl mx-auto">
