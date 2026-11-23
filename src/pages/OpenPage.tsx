@@ -125,7 +125,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 23 Nov: in between the headline and the blueprint line. */}
             <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your content a clear path to money in 90 days.</p>
             {/* Sean, 23 Nov: picked "Without you". */}
-            <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Get yourself one clear content blueprint, the standards to execute it, and direct support to turn your expertise into short and longform content that builds trust before the sale without directing every decision.</p>
+            <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Get yourself one clear content blueprint, the standards to execute it, and direct support to turn your expertise into short and longform content that builds trust before the sale without you directing every decision.</p>
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
             </div>
