@@ -68,6 +68,7 @@ const Offer = React.lazy(() => import('./pages/Offer'));
 const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
 const FoundingV5 = React.lazy(() => import('./pages/FoundingV5'));
 const OpenPage = React.lazy(() => import('./pages/OpenPage'));
+const SimpleDraft = React.lazy(() => import('./pages/SimpleDraft'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
 const Booked = React.lazy(() => import('./pages/Booked'));
@@ -189,6 +190,8 @@ export default function App() {
           <Route path="/founding-test" element={<FoundingV5 test />} />
           {/* Sean, 22 Nov: /open, same page and offer, access angle on the headline and promise. Not in the nav, noindex. */}
           <Route path="/open" element={<FoundingV5 />} />
+          {/* Sean, 23 Nov: draft of the simplification angle, not linked, noindex. */}
+          <Route path="/founding-draft" element={<SimpleDraft />} />
           <Route path="/founding-review" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v2" element={<Navigate to="/founding" replace />} />
           <Route path="/founding-v3" element={<Navigate to="/founding" replace />} />
