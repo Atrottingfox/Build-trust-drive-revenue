@@ -137,7 +137,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-5xl mx-auto px-5 lg:px-8">
           <Section className="text-center max-w-3xl mx-auto">
             <Eyebrow dark>The trust gap</Eyebrow>
-            <H dark className="mt-4">Your business has outgrown the way its media gets made.</H>
+            <H dark className="mt-4">Your business has outgrown how content gets made.</H>
             {/* Sean, 22 Nov, his words. */}
             <p className="text-zinc-300 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most - you're actually legit.</p>
             <p className="text-zinc-400 text-[17px] mt-6">So why is your content still -</p>
