@@ -249,8 +249,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             ))}
           </Section>
           <Section className="text-center max-w-2xl mx-auto mt-10">
-            <p className="text-zinc-300 text-lg leading-relaxed">You're not just throwing it at a wall and seeing what sticks.</p>
-            <p className="text-zinc-300 text-lg leading-relaxed mt-2">It helps buyers understand, believe, and take action.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed">You're not just throwing content at the wall and seeing what sticks.</p>
+            <p className="text-zinc-300 text-lg leading-relaxed mt-2">Every piece has a clear role to build trust, and belief.</p>
           </Section>
           <div className="mt-10 md:mt-12 flex justify-center"><BuyButton jump status={status} location={`${loc}-day90`} label={CTA} hideSpots className={BLUE} /></div>
         </div>
