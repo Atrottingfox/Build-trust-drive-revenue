@@ -672,7 +672,7 @@ export async function runChecks(deep: boolean): Promise<Check[]> {
      being renamed or deleted and only fails for the reason worth failing on. */
   try {
     const res = await fetch(
-      "https://brand.contentengine.live/.netlify/functions/sync?slug=alpha-tradie"
+      "https://brand.contentengine.live/.netlify/functions/sync?probe=github"
     );
     const body = (await res.text()).slice(0, 400);
     const badCreds = /bad credentials|401/i.test(body);
