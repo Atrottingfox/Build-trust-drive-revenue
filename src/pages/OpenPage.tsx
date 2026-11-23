@@ -122,7 +122,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 22 Nov: no eyebrow, no button and no walkthrough line above the fold. */}
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Private media growth advisory for industry leading founders.</h1>
             {/* Sean, 23 Nov: back to the 90 day promise and outcome. His /founding hero lines. */}
-            <p className="text-zinc-600 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">A 90 day implementation that gives your team the strategy, playbooks, and standards to create content that earns trust before the sales conversation, without you directing every decision.</p>
+            <p className="text-zinc-600 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">A 90 day implementation that gives your team the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
             <div className="mt-10 text-left">
               <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Open VSL" />
             </div>
