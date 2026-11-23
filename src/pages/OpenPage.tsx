@@ -176,7 +176,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             <ul className="space-y-3">
               {['Recognise the problem they actually have', 'Understand why common solutions fail', 'See why your approach is different', 'Trust your brand, your expertise and unique method before the sale', 'Arrive presold and ready to buy', 'Know what to do next'].map((t) => <Tick key={t} dark>{t}</Tick>)}
             </ul>
-            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">We engineer one clear path to money that consistently turns viewers into buyers.</p>
+            <p className="text-white text-lg font-semibold leading-relaxed mt-8 text-center">All you need is one clear path from stranger to buyer.</p>
           </Section>
         </div>
       </section>
