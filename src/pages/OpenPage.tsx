@@ -98,19 +98,22 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
 /* Sean, 22 Nov: "swap the pages". live = /founding. Stripe returns to /founding?paid=1,
    personal links (?for= or ?c=) post visits to Slack, buttons report as founding-* for GA. */
 /* Sean, 24 Nov: second landing page, same body, different hero. advisory = /founding-advisory. */
-export default function OpenPage({ live = false, advisory = false }: { live?: boolean; advisory?: boolean }) {
+/* Sean, 24 Nov: third landing page, growth = /founding-growth. */
+export default function OpenPage({ live = false, advisory = false, growth = false }: { live?: boolean; advisory?: boolean; growth?: boolean }) {
   const paid = live && typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
   const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
   usePageVisits('/founding', '90 Day Install', personal && !paid);
   const status = useStatus();
   const feb = status?.intake === 'february';
-  const loc = advisory ? 'advisory' : live ? 'founding' : 'open';
+  const loc = growth ? 'growth' : advisory ? 'advisory' : live ? 'founding' : 'open';
 
   if (paid) return <Paid />;
 
   return (
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
-      {advisory ? (
+      {growth ? (
+        <SEO title="Private Content Advisory" description="The Authority Engine. Build the content machine behind your next stage of growth. January 2027, 5 founding places." path="/founding-growth" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
+      ) : advisory ? (
         <SEO title="Private Media Growth Advisory" description="The Authority Engine. Private media growth advisory for industry leading founders. January 2027, 5 founding places." path="/founding-advisory" image="https://authorityengine.com.au/og-founding-v3.jpg" noIndex />
       ) : live ? (
         <SEO title="90 Day Install" description="The Authority Engine. Private media growth advisory for industry leading founders. Our 90 day install. January 2027, 5 founding places. $10,000 AUD + GST, closes 30 November." path="/founding" image="https://authorityengine.com.au/og-founding-v3.jpg" />
@@ -123,7 +126,12 @@ export default function OpenPage({ live = false, advisory = false }: { live?: bo
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             {/* Sean, 23 Nov: eyebrow back above the headline. No button and no walkthrough line above the fold. */}
-            {advisory ? (<>
+            {growth ? (<>
+            <Eyebrow>Private content advisory</Eyebrow>
+            <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto [text-wrap:balance]">Build the content machine behind your next stage of growth.</h1>
+            <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your media a path to money in 90 days.</p>
+            <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">A clear plan, the standards, and the support to create short form and long form content that builds buyer trust before the sale, without you directing every decision.</p>
+            </>) : advisory ? (<>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto [text-wrap:balance]">Private media growth advisory for industry leading founders.</h1>
             <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your media a path to money in 90 days.</p>
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Give your media team the judgment, standards, and direction required to turn your expertise into a serious company asset.</p>
