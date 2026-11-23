@@ -122,6 +122,8 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
             {/* Sean, 23 Nov: eyebrow back above the headline. No button and no walkthrough line above the fold. */}
             <Eyebrow>Private growth advisory</Eyebrow>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Your business has outgrown how content gets made.</h1>
+            {/* Sean, 23 Nov: in between the headline and the blueprint line. */}
+            <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-[#3B7DFF] mt-5 [text-wrap:balance]">Turn your media into a sales asset.</p>
             {/* Sean, 23 Nov: picked "Without you". */}
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">Give your team one clear content blueprint, the standards to execute it, and direct support to turn your expertise into short and longform content that builds trust before the sale so you get more leverage for less work, without directing every decision.</p>
             <div className="mt-10 text-left">
