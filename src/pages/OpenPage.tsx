@@ -120,7 +120,7 @@ export default function OpenPage({ live = false }: { live?: boolean }) {
         <div className="max-w-5xl mx-auto px-5 lg:px-8 text-center">
           <Section>
             {/* Sean, 23 Nov: eyebrow back above the headline. No button and no walkthrough line above the fold. */}
-            <Eyebrow>Private growth advisory</Eyebrow>
+            <Eyebrow>Private content advisory</Eyebrow>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto">Your business has outgrown how content gets made.</h1>
             {/* Sean, 23 Nov: picked "Without you". */}
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">One clear content blueprint, the standards to execute it, and direct support to turn your expertise into short and longform content that builds trust before the sale without directing every decision.</p>
