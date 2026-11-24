@@ -73,7 +73,10 @@ export const Ticks = ({ items }: { items: React.ReactNode[] }) => (
   </ul>
 );
 
-export type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string | null; intake?: 'january' | 'february' | null };
+export type Status = { open: boolean; remaining: number | null; total: number; configured?: boolean; closesAt?: string | null; intake?: 'january' | 'february' | null; credit?: boolean };
+
+/* Personal link contact id (?c=). The server decides if it carries a Brand Day credit. */
+const contactId = () => (typeof window === 'undefined' ? undefined : new URLSearchParams(window.location.search).get('c') || undefined);
 
 /* Same deadline the checkout enforces. The server's value wins when it loads. */
 const CLOSES_AT = '2026-12-01T00:00:00+10:00';
@@ -82,9 +85,10 @@ const CLOSES_AT = '2026-12-01T00:00:00+10:00';
 export function useStatus() {
   const [status, setStatus] = useState<Status | null>(null);
   useEffect(() => {
-    fetch(FN)
+    const c = contactId();
+    fetch(c ? `${FN}?c=${encodeURIComponent(c)}` : FN)
       .then((r) => r.json())
-      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured, closesAt: d.closesAt ?? null, intake: d.intake ?? null }))
+      .then((d) => setStatus({ open: Boolean(d.open), remaining: d.remaining ?? null, total: d.total ?? 5, configured: d.configured, closesAt: d.closesAt ?? null, intake: d.intake ?? null, credit: Boolean(d.credit) }))
       .catch(() => setStatus({ open: true, remaining: null, total: 5 }));
   }, []);
   return status;
@@ -237,7 +241,7 @@ export function StickyBar({ status, revealAt, jump = false, apply = false }: { s
       const r = await fetch(FN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
+        body: JSON.stringify({ action: 'checkout', contactId: contactId(), testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
       });
       const d = await r.json();
       if (d.url) {
@@ -259,7 +263,7 @@ export function StickyBar({ status, revealAt, jump = false, apply = false }: { s
         <div className="min-w-0">
           {priced ? (
             <>
-              <p className="text-white text-[15px] font-semibold leading-tight">{status?.intake === 'february' ? '$15,000' : '$10,000'} AUD + GST</p>
+              <p className="text-white text-[15px] font-semibold leading-tight">{status?.credit ? (status?.intake === 'february' ? '$10,000' : '$5,000') : status?.intake === 'february' ? '$15,000' : '$10,000'} AUD + GST</p>
               {/* Sean, 24 Nov: phone bar says Closes 30 Nov, no spots line. */}
               <p className="text-zinc-400 text-[12px] leading-tight mt-0.5">{status?.intake === 'february' ? `${left}. February intake.` : 'Closes 30 Nov.'}</p>
             </>
@@ -306,7 +310,7 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
       const r = await fetch(FN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
+        body: JSON.stringify({ action: 'checkout', contactId: contactId(), testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
       });
       const d = await r.json();
       if (d.url) {
@@ -488,7 +492,7 @@ export function SectionCta({ status, location, label = 'Secure your January plac
     if (jump) { document.getElementById('price')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     setBusy(true);
     try {
-      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout', testEmail: new URLSearchParams(window.location.search).get('test') || undefined }) });
+      const r = await fetch(FN, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'checkout', contactId: contactId(), testEmail: new URLSearchParams(window.location.search).get('test') || undefined }) });
       const d = await r.json();
       if (d.url) { window.location.href = d.url; return; }
     } catch {

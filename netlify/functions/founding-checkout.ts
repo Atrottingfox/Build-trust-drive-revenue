@@ -55,6 +55,18 @@ const FEB_INVOICE_DESCRIPTION =
 const PAGE = "https://authorityengine.com.au/founding";
 
 /*
+  Brand Day credit (Sean, 24 Nov 2026). Someone who has already paid for a
+  Brand Day pays $5,000 + GST less. Only these GHL contact ids get it, through
+  their personal link /founding?c=<contact id>. Still a founding sale: same
+  metadata, takes one of the 5 spots, same portal and alerts.
+*/
+const CREDIT_CONTACTS: Record<string, string> = {
+  "4h47HYqgK7VD4eaExDAI": "Erina Roch, UpScale. Brand Day already paid.",
+};
+const CREDIT_AUD_CENTS = 550000; /* $5,000 + 10% GST */
+const hasCredit = (id: unknown) => typeof id === "string" && Object.prototype.hasOwnProperty.call(CREDIT_CONTACTS, id);
+
+/*
   A $1 test run (Sean, 12 Nov 2026). /founding?test=<email> passes that email
   here. Only a GHL contact with that exact email AND the zz-test tag pays $1,
   the same rule as every other checkout (see _pricing.ts). Anybody else, or GHL
@@ -99,7 +111,7 @@ const handler: Handler = async (event) => {
   }
 
   if (event.httpMethod === "GET") {
-    return json({ configured: true, ...(await status()) });
+    return json({ configured: true, ...(await status()), credit: hasCredit(event.queryStringParameters?.c) });
   }
 
   if (event.httpMethod !== "POST") {
@@ -124,9 +136,17 @@ const handler: Handler = async (event) => {
     const testEmail = typeof body.testEmail === "string" ? body.testEmail.slice(0, 120).trim().replace(/\s+/g, "+") : "";
     const isTest = testEmail ? await isTestEmail(testEmail) : false;
     const feb = s.intake === "february";
-    const cents = isTest ? TEST_CENTS : feb ? FEB_PRICE_AUD_CENTS : PRICE_AUD_CENTS;
-    const productName = feb ? FEB_PRODUCT_NAME : PRODUCT_NAME;
-    const invoiceDescription = feb ? FEB_INVOICE_DESCRIPTION : INVOICE_DESCRIPTION;
+    const credit = !isTest && hasCredit(body.contactId);
+    const full = feb ? FEB_PRICE_AUD_CENTS : PRICE_AUD_CENTS;
+    const cents = isTest ? TEST_CENTS : credit ? full - CREDIT_AUD_CENTS : full;
+    const money = (c: number) => c.toLocaleString("en-AU", { maximumFractionDigits: 0 });
+    const ex = money(cents / 110), gst = money(cents / 1100), total = money(cents / 100);
+    const productName = credit
+      ? `Authority Engine 90 Day Install. ${feb ? "February intake" : "Founding"}, Brand Day already paid ($${ex} + GST)`
+      : feb ? FEB_PRODUCT_NAME : PRODUCT_NAME;
+    const invoiceDescription = credit
+      ? `90 days of implementation. ${feb ? "February intake" : "Founding price"}, paid in full, Brand Day already paid and taken off. $${ex} plus 10% GST ($${gst}), $${total} total.`
+      : feb ? FEB_INVOICE_DESCRIPTION : INVOICE_DESCRIPTION;
 
     const form = new URLSearchParams({
       mode: "payment",
@@ -153,6 +173,12 @@ const handler: Handler = async (event) => {
       /* Unpaid sessions expire after 30 minutes so nobody sits on a spot. */
       "expires_at": String(Math.floor(Date.now() / 1000) + 30 * 60),
     });
+
+    if (credit) {
+      form.set("metadata[credit]", "brand-day");
+      form.set("metadata[contact_id]", String(body.contactId));
+      form.set("payment_intent_data[metadata][credit]", "brand-day");
+    }
 
     if (isTest) {
       form.set("customer_email", testEmail.trim().toLowerCase());
