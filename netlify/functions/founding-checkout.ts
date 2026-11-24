@@ -175,6 +175,16 @@ const handler: Handler = async (event) => {
       "expires_at": String(Math.floor(Date.now() / 1000) + 30 * 60),
     });
 
+    /* The founding agreement (Sean, 24 Nov). Which version was ticked, and when, on the session and the PaymentIntent. */
+    const agreedVersion = typeof body.agreedVersion === "string" ? body.agreedVersion.slice(0, 60) : "";
+    if (agreedVersion) {
+      const at = new Date().toISOString();
+      form.set("metadata[terms_version]", agreedVersion);
+      form.set("metadata[terms_accepted_at]", at);
+      form.set("payment_intent_data[metadata][terms_version]", agreedVersion);
+      form.set("payment_intent_data[metadata][terms_accepted_at]", at);
+    }
+
     if (credit) {
       form.set("metadata[credit]", "brand-day");
       form.set("metadata[contact_id]", String(body.contactId));

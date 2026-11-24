@@ -2,8 +2,8 @@ import SEO from '../components/SEO';
 import { useStatus } from './Founding';
 import { foundingTerms, FOUNDING_TERMS_TITLE, FOUNDING_TERMS_VERSION } from '../content/founding-terms';
 
-/* /founding-agreement (Sean, 24 Nov): DRAFT of the founding agreement for review.
-   Not wired into checkout. ?c=<credit contact id> shows the Brand Day credit version,
+/* /founding-agreement (Sean, 24 Nov): the founding agreement, linked from the
+   tick box above the checkout button. ?c=<credit contact id> shows the Brand Day credit version,
    ?credit=1 previews it. Unlisted, noindex. */
 
 export default function FoundingAgreement() {
@@ -17,8 +17,7 @@ export default function FoundingAgreement() {
       <SEO title="Founding Agreement" description="The founding 90 Day agreement." path="/founding-agreement" noIndex />
       <section className="pt-32 pb-24 md:pt-40">
         <div className="max-w-2xl mx-auto px-5 lg:px-8">
-          <p className="inline-block rounded-full bg-amber-100 text-amber-800 text-[12px] font-semibold uppercase tracking-[0.14em] px-3 py-1">Draft for review</p>
-          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#3B7DFF] mt-6">The Authority Engine</p>
+          <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-[#3B7DFF]">The Authority Engine</p>
           <h1 className="font-display text-[34px] md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.06] mt-3">{FOUNDING_TERMS_TITLE}</h1>
           <p className="text-zinc-500 text-[15px] mt-3">{credit ? 'Brand Day already paid. ' : ''}Version {FOUNDING_TERMS_VERSION}</p>
 
@@ -44,16 +43,6 @@ export default function FoundingAgreement() {
             ))}
           </div>
 
-          {/* How it will sit above the buy button once approved. Shown here so Sean can see it. Not functional. */}
-          <div className="mt-14 rounded-2xl bg-white ring-1 ring-zinc-200 p-5 md:p-6">
-            <p className="text-zinc-400 text-[12px] font-semibold uppercase tracking-[0.14em]">How it sits above the buy button</p>
-            <label className="mt-3 flex items-start gap-3 text-[15px] text-zinc-700 leading-relaxed">
-              <input type="checkbox" disabled className="mt-1 h-4 w-4" />
-              <span>I have read the agreement, I am authorised to enter into it, and I agree to pay {credit ? '$5,000' : '$10,000'} AUD plus GST in full today.</span>
-            </label>
-            <button type="button" disabled className="mt-4 w-full rounded-full bg-[#3B7DFF]/40 text-white py-3 text-[15px] font-semibold">Secure your January place</button>
-            <p className="text-zinc-400 text-[13px] mt-3">The button unlocks once the box is ticked. Stripe stores the agreement version and the time on the payment.</p>
-          </div>
         </div>
       </section>
     </div>

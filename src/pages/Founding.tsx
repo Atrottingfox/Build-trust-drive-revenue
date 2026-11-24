@@ -289,16 +289,19 @@ export function StickyBar({ status, revealAt, jump = false, apply = false }: { s
 }
 
 /* label and note are for the test pages (/founding-v5). /founding uses the defaults. */
-export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false, jump = false, apply = false }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean; jump?: boolean; apply?: boolean }) {
+/* agree (Sean, 24 Nov): the founding agreement tick box. The button stays locked until it is ticked, and the version goes to Stripe. */
+export function BuyButton({ status, location, className = '', label: labelIn, note, hideSpots = false, jump = false, apply = false, agree }: { status: Status | null; location: string; className?: string; label?: string; note?: string; hideSpots?: boolean; jump?: boolean; apply?: boolean; agree?: { version: string; text: React.ReactNode } }) {
   const feb = status?.intake === 'february';
   const label = feb ? (labelIn ? labelIn.replace('January', 'February') : 'Secure your February place') : labelIn || 'Secure your January place';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [agreed, setAgreed] = useState(false);
 
   const closed = status !== null && !status.open;
 
   const buy = async () => {
     if (busy || closed) return;
+    if (agree && !agreed) { setError('Tick the box to agree to the agreement first.'); return; }
     if (apply) { goApply(location); return; }
     trackCta(location);
     /* Sean, 21 Nov: jump buttons take you down to the itemised list, which has the checkout button. */
@@ -310,7 +313,7 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
       const r = await fetch(FN, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'checkout', contactId: contactId(), testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
+        body: JSON.stringify({ action: 'checkout', contactId: contactId(), agreedVersion: agree && agreed ? agree.version : undefined, testEmail: new URLSearchParams(window.location.search).get('test') || undefined }),
       });
       const d = await r.json();
       if (d.url) {
@@ -326,13 +329,19 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
 
   return (
     <div className={className}>
+      {!closed && agree && (
+        <label className="mb-5 flex items-start gap-3 text-left text-[15px] leading-relaxed text-zinc-700 cursor-pointer max-w-md mx-auto">
+          <input type="checkbox" checked={agreed} onChange={(e) => { setAgreed(e.target.checked); setError(''); }} className="mt-1 h-4 w-4 shrink-0 accent-[#3B7DFF]" />
+          <span>{agree.text}</span>
+        </label>
+      )}
       {closed ? (
         <Waitlist />
       ) : (
         <button
           type="button"
           onClick={buy}
-          disabled={busy}
+          disabled={busy || (Boolean(agree) && !agreed)}
           className="btn-shine btn-pulse inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)] disabled:opacity-70"
         >
           {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : null}

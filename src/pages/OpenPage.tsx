@@ -6,6 +6,7 @@ import FitCall from '../components/founding/FitCall';
 import VslPlayer from '../components/founding/VslPlayer';
 import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
 import { BuyButton, Paid, Section, StickyBar, useStatus } from './Founding';
+import { FOUNDING_TERMS_VERSION } from '../content/founding-terms';
 import { usePageVisits } from '../lib/pageVisits';
 
 /*
@@ -382,7 +383,10 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
             {!feb && <p className="text-zinc-500 text-[16px] leading-relaxed mt-4">Once 5 are sold, price increases to <span className="text-zinc-900 font-semibold">$15,000 + GST</span> for February.</p>}
             <p className="text-zinc-500 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
             <div className="flex justify-center">
-              <BuyButton status={status} location={`${loc}-price`} label={CTA} hideSpots className={`mt-7 ${BLUE}`} />
+              <BuyButton status={status} location={`${loc}-price`} label={CTA} hideSpots className={`mt-7 ${BLUE}`} agree={{
+                version: FOUNDING_TERMS_VERSION,
+                text: <>I have read the <a href={`/founding-agreement${typeof window !== 'undefined' ? window.location.search.replace(/[?&]paid=1/, '') : ''}`} target="_blank" rel="noopener noreferrer" className="text-[#3B7DFF] underline underline-offset-2">agreement</a>, I am authorised to enter into it, and I agree to pay {status?.credit ? (feb ? '$10,000' : '$5,000') : feb ? '$15,000' : '$10,000'} AUD plus GST in full today.</>,
+              }} />
             </div>
             <div className="max-w-md mx-auto text-center [&>div]:mt-5 [&>div]:pt-0 [&>div]:border-0 [&_p]:text-zinc-900 [&_button]:mx-auto [&_button]:text-[#3B7DFF] [&_button:hover]:text-[#2563eb]"><FitCall /></div>
           </Section>

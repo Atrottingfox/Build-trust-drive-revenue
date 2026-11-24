@@ -1,6 +1,7 @@
 /*
-  The founding 90 Day agreement. DRAFT for Sean's review (24 Nov 2026), not
-  wired into checkout yet.
+  The founding 90 Day agreement. Live at checkout from 24 Nov 2026 (Sean: "go
+  for all of them"). Ticked above the price box button, version stored on the
+  Stripe payment.
 
   Built only from text that already exists, so the contract and the pages say
   the same thing:
@@ -17,7 +18,7 @@
 
 import type { TermsSection } from './install-terms';
 
-export const FOUNDING_TERMS_VERSION = 'founding-v1-draft-2026-11-24';
+export const FOUNDING_TERMS_VERSION = 'founding-v1-2026-11-24';
 export const FOUNDING_TERMS_TITLE = 'The Founding 90 Day Install';
 
 export function foundingTerms(credit = false): TermsSection[] {
