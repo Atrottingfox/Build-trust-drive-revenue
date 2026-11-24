@@ -95,51 +95,6 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
   <li className={`flex items-start gap-2.5 text-[16px] leading-relaxed ${dark ? 'text-zinc-300' : 'text-zinc-600'}`}><Check className={`w-4 h-4 mt-1 shrink-0 ${dark ? 'text-blue-400' : 'text-[#3B7DFF]'}`} strokeWidth={3} />{children}</li>
 );
 
-/* Sean, 24 Nov: will do and won't do inside the advisory. His words. /founding-advisory only. */
-const WILL_DO = [
-  'Set content direction (What to stop + what to do more of)',
-  'Decide what to create',
-  'Topic selection refinement',
-  'Review work and tell you what to improve, where and how',
-  'Review pieces when change in strategy occur',
-  'Hook refinement',
-  'Define short form and long form priorities',
-  'Give you the standards for good content',
-  'Give direct, actionable feedback to improve on',
-  'Support you through calls, Looms, training and WhatsApp',
-  'Help you build a consistent, reliable publishing rhythm',
-  'Help your team make better decisions without waiting for you',
-  'Review the data and decide what to do more of next',
-];
-/* Sean, 24 Nov: your responsibilities, his words. */
-const YOUR_PART = [
-  'Attend the agreed sessions',
-  'Submit any work for review on time',
-  'Assign one core person to own implementation',
-  'Make decisions quickly',
-  'Publish or deploy the agreed work',
-  'Share performance data honestly',
-  'Complete the implementation work between sessions',
-];
-const WONT_DO = [
-  'Write scripts',
-  'Unlimited revisions or endless feedback',
-  'Guarantee formats work',
-  'Edit or publish',
-  'Tell everybody exactly what to do',
-  'Film anything for you',
-  'Adhoc meetings',
-  'Chase attendance, or submitting work',
-  'Solving the same problem if an agreed standard is ignored',
-  'Change strategy every week because of a new idea',
-  'Manage the team',
-  'Act as a CMO',
-  'Calls without a specific purpose',
-  'Review all posts before they go out',
-  'Guarantee any leads, sales, or revenue',
-  'Make every decision forever',
-];
-
 /* Sean, 22 Nov: "swap the pages". live = /founding. Stripe returns to /founding?paid=1,
    personal links (?for= or ?c=) post visits to Slack, buttons report as founding-* for GA. */
 /* Sean, 24 Nov: second landing page, same body, different hero. advisory = /founding-advisory. */
@@ -446,66 +401,8 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
         </div>
       </section>
 
-      {/* WILL DO / WON'T DO, /founding-advisory only, in place of What this is not (Sean, 24 Nov). */}
-      {advisory && (
-      <section className="py-16 md:py-24 border-t border-zinc-200/70">
-        <div className="max-w-5xl mx-auto px-5 lg:px-8">
-          <Section className="text-center">
-            <Eyebrow>Inside the advisory</Eyebrow>
-            <H className="mt-4">Will do. Won't do.</H>
-          </Section>
-          <div className="grid md:grid-cols-2 gap-5 mt-12">
-            <Section className="rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-8">
-              <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-zinc-900">Will do</p>
-              <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em] mt-1">During 1:1 (Starting January)</p>
-              <ul className="mt-5 divide-y divide-zinc-100 border-t border-zinc-100">
-                {WILL_DO.map((t) => (
-                  <li key={t} className="flex items-start gap-3 py-3 text-zinc-700 text-[15px] leading-relaxed">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3B7DFF]/10">
-                      <Check className="w-3 h-3 text-[#3B7DFF]" strokeWidth={3.5} />
-                    </span>
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-            <Section className="rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-8">
-              <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-zinc-900">Won't do</p>
-              <ul className="mt-5 md:mt-[46px] divide-y divide-zinc-100 border-t border-zinc-100">
-                {WONT_DO.map((t) => (
-                  <li key={t} className="flex items-start gap-3 py-3 text-zinc-500 text-[15px] leading-relaxed">
-                    <span className="mt-[9px] mx-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
-                    {t}
-                  </li>
-                ))}
-              </ul>
-            </Section>
-          </div>
-          <Section className="text-center mt-14 max-w-2xl mx-auto">
-            <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] text-zinc-900">Think of me like course correction.</p>
-            <p className="text-zinc-600 text-[18px] leading-relaxed mt-5">I will train, guide, review, and challenge the team.</p>
-            <p className="text-zinc-600 text-[18px] leading-relaxed mt-1">Will not manage the team, do the work for them or make every decision indefinitely.</p>
-          </Section>
-          <Section className="mt-14 max-w-3xl mx-auto rounded-3xl bg-[#0d0f14] text-white p-6 md:p-9">
-            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em]">Your responsibilities</p>
-            <p className="text-zinc-400 text-[16px] mt-2">To make the engagement work you agree to:</p>
-            <ul className="mt-5 grid md:grid-cols-2 gap-x-8 border-t border-white/10">
-              {YOUR_PART.map((t) => (
-                <li key={t} className="flex items-start gap-3 py-3 border-b border-white/10 text-zinc-200 text-[15px] leading-relaxed">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3B7DFF]/20">
-                    <Check className="w-3 h-3 text-[#3B7DFF]" strokeWidth={3.5} />
-                  </span>
-                  {t}
-                </li>
-              ))}
-            </ul>
-          </Section>
-        </div>
-      </section>
-      )}
-
       {/* What this is not. Sean's /offer copy, 23 Nov. */}
-      {!advisory && <section className="py-16 md:py-24 border-t border-zinc-200/70">
+      <section className="py-16 md:py-24 border-t border-zinc-200/70">
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
             <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em]">What this is not</p>
@@ -528,7 +425,7 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
             </ul>
           </Section>
         </div>
-      </section>}
+      </section>
 
       {/* FAQ, dark */}
       <section className="bg-[#0B0D12] py-16 md:py-24">
