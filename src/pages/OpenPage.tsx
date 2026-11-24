@@ -406,7 +406,7 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <Section className="text-center">
             <p className="text-[#3B7DFF] text-[13px] font-semibold uppercase tracking-[0.18em]">What this is not</p>
-            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05] mt-4">Boundaries.<br /><span className="text-zinc-400">So we both stay sharp.</span></h2>
+            <h2 className="font-display text-4xl md:text-5xl font-extrabold tracking-[-0.03em] leading-[1.05] mt-4">Boundaries.</h2>
             <p className="text-zinc-600 text-[17px] mt-6">For clarity on both sides. This is not:</p>
           </Section>
           <Section className="mt-8 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-9">
