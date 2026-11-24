@@ -132,7 +132,7 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
             <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your media a path to money in 90 days.</p>
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">A clear plan, the standards, and the support to create short form and long form content that builds buyer trust before the sale, without you directing every decision.</p>
             </>) : advisory ? (<>
-            <Eyebrow>Private growth advisory</Eyebrow>
+            <Eyebrow>Private content advisory</Eyebrow>
             <h1 className="font-display text-[38px] md:text-6xl font-extrabold tracking-[-0.04em] leading-[1.04] text-zinc-900 max-w-4xl mx-auto [text-wrap:balance]">Content should do more than get attention.</h1>
             <p className="font-display text-2xl md:text-3xl font-bold tracking-[-0.02em] text-zinc-800 mt-5 [text-wrap:balance]">Give your media a better path to money in 90 days.</p>
             <p className="text-zinc-600 text-lg md:text-xl leading-relaxed mt-6 max-w-2xl mx-auto">One clear plan, the standards and direct support from me to create short form and long form that turns your content team into a sales asset, without you directing every decision.</p>
