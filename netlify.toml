@@ -38,6 +38,12 @@
 # Founding 90 Day sales the thank you page never confirmed (closed tab). Same
 # GHL contact, founding-paid tag and Slack alert. Safe to rerun: Stripe session
 # metadata alerted=1 marks a sale as done.
+# Founding buyers between paying and starting (Sean, 24 Nov 2026). Tags only:
+# no-strategy-day-booked, founding-start-14, founding-start-2, founding-started.
+# GoHighLevel sends the emails. 08:00 Brisbane.
+[functions."founding-chase"]
+  schedule = "0 22 * * *"
+
 [functions."founding-sweep"]
   schedule = "*/10 * * * *"
 
