@@ -412,10 +412,12 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
           <Section className="mt-8 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-9">
             <ul className="divide-y divide-zinc-100">
               {[
-                ['A done for you content agency.', 'Your team films, edits and posts. I design the Authority Engine, train your operator, and read the data with you.'],
+                ['A done for you content agency.', 'Your team films, edits and posts. I design the strategy, train your operator, and read the data with your team.'],
                 ['Full time CMO or creative director services.', 'I show up for the cadence we agree, not to manage your entire media team.'],
                 ['A guarantee of revenue.', 'We agree the metrics, test, and the data tells us what worked.'],
                 ['A content factory.', 'I do not write or edit every script. Your team produces.'],
+                /* Sean, 25 Nov. */
+                ['A forever contract.', 'At Day 90 we both choose whether to continue with advisory.'],
               ].map(([h, b]) => (
                 <li key={h} className="flex items-start gap-4 py-5 first:pt-0 last:pb-0">
                   <span className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-400" />
