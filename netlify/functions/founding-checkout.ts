@@ -62,6 +62,7 @@ const PAGE = "https://authorityengine.com.au/founding";
 */
 const CREDIT_CONTACTS: Record<string, string> = {
   "4h47HYqgK7VD4eaExDAI": "Erina Roch, UpScale. Brand Day already paid.",
+  "eSfrsm52xbz2pNxE7v7j": "Jack O'Brien, Clinic Mastery. Brand Day already paid.",
 };
 const CREDIT_AUD_CENTS = 550000; /* $5,000 + 10% GST */
 const hasCredit = (id: unknown) => typeof id === "string" && Object.prototype.hasOwnProperty.call(CREDIT_CONTACTS, id);
