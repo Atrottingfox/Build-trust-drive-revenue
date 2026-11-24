@@ -157,6 +157,8 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
      route has failed before): the portal, the Brand Day booking and office
      hours, which is the one call they join before their Brand Day. */
   let welcomed = false;
+  /* Sean, 24 Nov: Brand Day credit buyers (Erina, Jack) have had their day already. No booking line. */
+  const credit = session?.metadata?.credit === "brand-day";
   if (token && contactId) {
     const first = String(d.name || "").split(" ")[0] || "there";
     const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}&utm_content=${encodeURIComponent(contactId)}`;
@@ -164,10 +166,13 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       `<p>${first},</p>`,
       `<p>You're in. Your spot is locked in.</p>`,
       portal.claimUrl ? `<p>1. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>1. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
-      `<p>2. <a href="${brandDay}">Lock in your Brand Day date</a>.</p>`,
-      `<p>3. <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}">Book your 1:1 strategy call</a> in the next 7 days.</p>`,
-      `<p>4. Advisory group office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
-      `<p>Your weekly calls and monthly content advisory board meetings start after your Brand Day.</p>`,
+      credit ? "" : `<p>2. <a href="${brandDay}">Lock in your Strategy Day date</a>.</p>`,
+      `<p>${credit ? 2 : 3}. <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}">Book your 1:1 strategy call</a> in the next 7 days.</p>`,
+      `<p>${credit ? 3 : 4}. Advisory group office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
+      credit
+        ? `<p>Your weekly calls and monthly content advisory board meetings start ${longDate(start)}.</p>`
+        : `<p>Your weekly calls and monthly content advisory board meetings start after your Strategy Day.</p>`,
+      `<p>What I will and won't do, and your 12 week rhythm: <a href="https://authorityengine.com.au/advisoryoutline">authorityengine.com.au/advisoryoutline</a>.</p>`,
       whatsappLine(portal.whatsappUrl),
       `<p>Sean</p>`,
     ].join(""));
@@ -184,10 +189,11 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       contactId
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
         : `:warning: Could not create or tag them in GoHighLevel. Add them by hand with the \`${PAID_TAG}\` tag.`,
-      welcomed ? `Welcome email sent (portal, Brand Day booking, 7 day strategy call, group advisory).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
+      credit ? `Brand Day credit sale (${session?.metadata?.contact_id || "contact id missing"}). Their Strategy Day is already done, so no booking was sent.` : "",
+      welcomed ? `Welcome email sent (portal, ${credit ? "" : "Strategy Day booking, "}7 day strategy call, group advisory, advisory outline).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
       portal.claimUrl ? `Portal made: ${portal.claimUrl}` : portal.error ? `:warning: No portal made (${portal.error}). Invite them from contentengine.live/clients.` : `Portal: they already have an account.`,
-      `Now: ${portal.whatsappUrl ? "their WhatsApp group link went in the welcome email (Slack says which group)." : "make their WhatsApp group and paste the invite link on their portal hub (Edit hub), which emails it to them."} Then give them the SOPs, playbooks, training videos and early group advisory, and lock in their Brand Day date.`,
-    ].join("\n")
+      `Now: ${portal.whatsappUrl ? "their WhatsApp group link went in the welcome email (Slack says which group)." : "make their WhatsApp group and paste the invite link on their portal hub (Edit hub), which emails it to them."} Then give them the SOPs, playbooks, training videos and early group advisory${credit ? "." : ", and lock in their Strategy Day date."}`,
+    ].filter(Boolean).join("\n")
   );
 
   await stripe(`checkout/sessions/${session.id}`, {

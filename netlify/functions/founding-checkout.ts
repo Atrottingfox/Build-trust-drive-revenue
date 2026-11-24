@@ -221,7 +221,7 @@ const handler: Handler = async (event) => {
        reused, and an existing account gets a log in link instead. */
     const portal = paid ? await provisionPortal({ email: d.email, name: d.name }) : {};
 
-    return json({ paid, firstName, portalUrl: portal.claimUrl || portal.loginUrl || null });
+    return json({ paid, firstName, portalUrl: portal.claimUrl || portal.loginUrl || null, credit: session?.metadata?.credit === "brand-day" });
   }
 
   /* ---------- Waitlist (once full or closed) ---------- */

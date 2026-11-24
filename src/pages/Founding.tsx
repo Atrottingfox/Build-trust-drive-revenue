@@ -349,13 +349,11 @@ export function BuyButton({ status, location, className = '', label: labelIn, no
 
 /* What they see when Stripe sends them back paid. */
 export function Paid() {
-  const [state, setState] = useState<{ loading: boolean; paid: boolean; firstName: string; portalUrl?: string | null }>({
+  const [state, setState] = useState<{ loading: boolean; paid: boolean; firstName: string; portalUrl?: string | null; credit?: boolean }>({
     loading: true,
     paid: false,
     firstName: '',
   });
-  const paidStatus = useStatus();
-
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get('session_id') || '';
     fetch(FN, {
@@ -365,7 +363,7 @@ export function Paid() {
     })
       .then((r) => r.json())
       .then((d) => {
-        setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '', portalUrl: d.portalUrl || null });
+        setState({ loading: false, paid: Boolean(d.paid), firstName: d.firstName || '', portalUrl: d.portalUrl || null, credit: Boolean(d.credit) });
         if (d.paid) {
           let seen = false;
           try { seen = localStorage.getItem('ga_purchase_' + id) === '1'; localStorage.setItem('ga_purchase_' + id, '1'); } catch { /* private window */ }
@@ -408,34 +406,27 @@ export function Paid() {
                 </a>
               </div>
               <p className="text-zinc-400 leading-relaxed mb-6">What happens now:</p>
+              {/* Sean, 24 Nov: clean up. The Engineroom, not Start Here. Credit buyers have had their day. */}
               <Ticks items={[
                 'We set up your WhatsApp channel, on the number you gave at checkout',
-                'You receive the Start Here workspace and pre install materials',
+                'You get into The Engineroom and the pre install materials',
                 'Your team gets every SOP, edit, playbook and training video',
                 'Advisory group office hours before you start',
-                'We lock in your Strategy Day date',
+                ...(state.credit ? [] : ['We lock in your Strategy Day date']),
                 /* No month here: a February buyer lands on this screen too. */
                 '1:1 guided implementation starts in your intake month',
               ]} />
               <p className="text-zinc-400 text-[15px] leading-relaxed mt-8">
                 If you have not heard from us on WhatsApp within 24 hours, reply to your receipt email.
               </p>
-              {/* Sean, 22 Nov: the /open membership as the upsell after the $10k. Same tiers and prices as /open. */}
-              <div className="glow-card p-6 md:p-8 mt-12">
-                <p className="text-blue-400 text-sm uppercase tracking-widest font-semibold">The Authority Engine</p>
-                <p className="font-display text-2xl md:text-3xl font-extrabold text-white leading-tight mt-2">Get access to the best.</p>
-                <div className="mt-5 divide-y divide-white/5">
-                  {[[3, '$10,000', '$15,000'], [6, '$15,000', '$18,000'], [12, '$18,000', '$24,000']].map(([m, jan, feb]) => (
-                    <div key={m} className="flex items-center justify-between py-3 text-[17px]">
-                      <span className="text-zinc-300">{m} months</span>
-                      <span className="text-white font-semibold">{paidStatus?.intake === 'february' ? feb : jan} <span className="text-zinc-500 text-[14px] font-normal">AUD + GST</span></span>
-                    </div>
-                  ))}
-                </div>
-                <a href="/open#price" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-7 py-3.5 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors mt-6">
-                  Secure your place <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
+              {/* Sean, 24 Nov: upsell card removed. What I will and won't do, and the rhythm. */}
+              <a href="/advisoryoutline" className="glow-card p-6 mt-12 flex items-center justify-between gap-4 group">
+                <span>
+                  <span className="block text-white font-semibold">What I will and won't do</span>
+                  <span className="block text-zinc-400 text-[15px] leading-relaxed mt-1">Your 12 week rhythm and your responsibilities.</span>
+                </span>
+                <ArrowRight className="w-5 h-5 text-blue-400 shrink-0 group-hover:translate-x-1 transition-transform" />
+              </a>
             </>
           ) : (
             <>
