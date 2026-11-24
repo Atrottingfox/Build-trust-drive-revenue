@@ -230,13 +230,25 @@ export default function ClientPlan() {
   React.useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase.from('clients')
-        .select('name,brand_workspace_draft').eq('slug', slug).maybeSingle();
+      // 24 Nov 2026: the anon key is losing its read on `clients`. The plan now
+      // comes from public.client_plan(slug), which returns this one client's
+      // name and plan and nothing else. The table read is the fallback until
+      // the lock SQL (which creates the function) is applied.
+      let data: { name?: string; brand_workspace_draft?: { plan?: Plan } } | null = null;
+      const rpc = await (supabase.rpc as unknown as (fn: string, args: object) => Promise<{ data: unknown; error: unknown }>)('client_plan', { p_slug: slug });
+      const row = Array.isArray(rpc.data) ? rpc.data[0] : rpc.data;
+      if (!rpc.error && row) {
+        const r = row as { name?: string; plan?: Plan };
+        data = { name: r.name, brand_workspace_draft: { plan: r.plan } };
+      } else {
+        const t = await supabase.from('clients').select('name,brand_workspace_draft').eq('slug', slug).maybeSingle();
+        data = t.data as typeof data;
+      }
       if (cancelled) return;
-      const p = (data as { brand_workspace_draft?: { plan?: Plan } } | null)?.brand_workspace_draft?.plan;
+      const p = data?.brand_workspace_draft?.plan;
       if (!p?.sections) { setState('missing'); return; }
       setPlan(p);
-      setName((data as { name?: string } | null)?.name || slug);
+      setName(data?.name || slug);
       setState('ready');
     })();
     return () => { cancelled = true; };
