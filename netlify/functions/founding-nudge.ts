@@ -150,7 +150,8 @@ const handler: Handler = async () => {
     }
 
     const name = String(d.name || c?.firstName || "");
-    const first = name.split(" ")[0] || "there";
+    const raw = name.trim().split(/\s+/)[0] || "there";
+    const first = raw.charAt(0).toUpperCase() + raw.slice(1);
     const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&utm_content=${encodeURIComponent(contactId)}`;
     const strategy = `${STRATEGY_CALL}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`;
 

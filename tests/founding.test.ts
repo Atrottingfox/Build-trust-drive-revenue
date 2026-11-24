@@ -19,12 +19,29 @@ type Call = { url: string; method: string; body: string };
 const OLD_FETCH = globalThis.fetch;
 let calls: Call[] = [];
 
+/* Stripe's checkout session metadata, kept between calls, so the claim a
+   run writes is the claim the next read returns (claimSale in _founding.ts). */
+let stripeMeta: Record<string, Record<string, string>> = {};
+function stripeSessionCall(u: string, init: any) {
+  const m = u.match(/api\.stripe\.com\/v1\/checkout\/sessions\/(cs_[A-Za-z0-9_]+)$/);
+  if (!m) return null;
+  const meta = (stripeMeta[m[1]] ||= {});
+  if ((init.method || "GET") === "POST") {
+    for (const [k, v] of new URLSearchParams(String(init.body || ""))) {
+      const key = k.match(/^metadata\[(.+)\]$/)?.[1];
+      if (key) meta[key] = v;
+    }
+  }
+  return { json: { id: m[1], metadata: { payment: "founding-90", ...meta } } };
+}
+
 function mockFetch(handler: (url: string, init: any) => any) {
   calls = [];
+  stripeMeta = {};
   globalThis.fetch = vi.fn(async (url: any, init: any = {}) => {
     const u = String(url);
     calls.push({ url: u, method: init.method || "GET", body: String(init.body || "") });
-    const out = handler(u, init) ?? {};
+    const out = stripeSessionCall(u, init) ?? handler(u, init) ?? {};
     return {
       ok: out.status ? out.status < 400 : true,
       status: out.status ?? 200,
@@ -57,7 +74,8 @@ afterEach(() => {
 });
 
 const slackPosts = () => calls.filter((c) => c.url.startsWith("https://hooks.slack.test"));
-const stripeUpdates = () => calls.filter((c) => c.url.includes("api.stripe.com/v1/checkout/sessions/") && c.method === "POST");
+/* Updates that mark the sale done (the claim write is the lock, not the mark). */
+const stripeUpdates = () => calls.filter((c) => c.url.includes("api.stripe.com/v1/checkout/sessions/") && c.method === "POST" && !decodeURIComponent(c.body).includes("metadata[claim]"));
 
 describe("a founding sale", () => {
   it("creates the GHL contact, tags founding-paid, posts Slack once and marks the session", async () => {
@@ -81,6 +99,18 @@ describe("a founding sale", () => {
     expect(stripeUpdates()).toHaveLength(1);
     expect(decodeURIComponent(stripeUpdates()[0].body)).toContain("metadata[alerted]=1");
     expect(decodeURIComponent(stripeUpdates()[0].body)).toContain("metadata[ghl_contact_id]=c_1");
+  });
+
+  it("two runs at the same moment (thank you page and sweep) send one welcome and one alert", async () => {
+    mockFetch((u, init) => {
+      if (u.includes("/contacts/?locationId")) return { json: { contacts: [] } };
+      if (u.endsWith("/contacts/") && init.method === "POST") return { json: { contact: { id: "c_1" } } };
+      return { json: {} };
+    });
+    const [a, b] = await Promise.all([handleFoundingSale(paidSession(), "thank-you page"), handleFoundingSale(paidSession(), "sweep")]);
+    expect([a, b].filter(Boolean)).toHaveLength(1);
+    expect(slackPosts()).toHaveLength(1);
+    expect(calls.filter((c) => c.url.includes("/conversations/messages"))).toHaveLength(1);
   });
 
   it("does nothing the second time, so a refresh or the sweep never repeats the alert", async () => {
