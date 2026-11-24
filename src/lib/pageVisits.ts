@@ -21,6 +21,53 @@ import { useEffect } from 'react';
 
 const ENDPOINT = '/.netlify/functions/page-visit';
 const TEAM_KEY = 'ae_team';
+/* Sean, 25 Nov: "track who they are and what they're doing". A personal link
+   (?c= or ?for=) is remembered in this browser, so later visits without the
+   link are still named. Visits are counted per browser. */
+const WHO_KEY = 'ae_who';
+const COUNT_KEY = 'ae_visits';
+
+function rememberWho(contactId: string | null, forName: string | null): { contactId: string | null; forName: string | null } {
+  try {
+    if (contactId || forName) {
+      localStorage.setItem(WHO_KEY, JSON.stringify({ contactId, forName }));
+      return { contactId, forName };
+    }
+    const saved = JSON.parse(localStorage.getItem(WHO_KEY) || 'null');
+    if (saved && typeof saved === 'object') return { contactId: saved.contactId || null, forName: saved.forName || null };
+  } catch {
+    /* storage blocked: unnamed */
+  }
+  return { contactId, forName };
+}
+
+function visitNumber(): number {
+  try {
+    const n = (Number(localStorage.getItem(COUNT_KEY)) || 0) + 1;
+    localStorage.setItem(COUNT_KEY, String(n));
+    return n;
+  } catch {
+    return 0;
+  }
+}
+
+/* Tags the Clarity recording, so a Slack line leads straight to the session:
+   in Clarity, filter by custom tag visit = the id in the Slack line. */
+function tagClarity(visitId: string, who: { contactId: string | null; forName: string | null }, n: number) {
+  try {
+    const c = (window as unknown as { clarity?: (...a: unknown[]) => void }).clarity;
+    if (!c) return;
+    c('set', 'visit', visitId);
+    if (n) c('set', 'visit_number', String(n));
+    if (who.contactId) {
+      c('identify', who.contactId);
+      c('set', 'contact', who.contactId);
+    }
+    if (who.forName) c('set', 'person', who.forName);
+  } catch {
+    /* tracking never breaks a page */
+  }
+}
 
 /* A tab switch sends an update only when this much more time has been spent,
    so flicking between tabs does not fill Slack. */
@@ -62,16 +109,23 @@ export function usePageVisits(path: string, title: string, enabled: boolean) {
     if (!enabled || typeof window === 'undefined') return;
 
     const visitId = Math.random().toString(36).slice(2, 10);
+    const qs = new URLSearchParams(window.location.search);
+    /* A personal link, /founding?for=jane, names the visit without a GHL id. Remembered after. */
+    const who = rememberWho(qs.get('c'), qs.get('for'));
+    const n = visitNumber();
     const base = {
       visitId,
       path,
       title,
-      contactId: new URLSearchParams(window.location.search).get('c'),
-      /* A personal link, /founding?for=jane, names the visit without a GHL id. */
-      forName: new URLSearchParams(window.location.search).get('for'),
+      contactId: who.contactId,
+      forName: who.forName,
+      remembered: !qs.get('c') && !qs.get('for') && Boolean(who.contactId || who.forName),
+      visitNumber: n,
       team: isTeam(),
       referrer: document.referrer || '',
+      utm: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].map((k) => qs.get(k)).filter(Boolean).join(' / '),
     };
+    tagClarity(visitId, who, n);
 
     let activeMs = 0;
     let visibleSince = document.visibilityState === 'visible' ? Date.now() : 0;

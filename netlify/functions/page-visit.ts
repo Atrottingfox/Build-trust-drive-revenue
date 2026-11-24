@@ -88,6 +88,11 @@ const handler: Handler = async (event) => {
   const title = clean(b.title, 80);
   const visit = clean(b.visitId, 12);
   const tag = b.team ? "[team] " : "";
+  /* Sean, 25 Nov: returning visitors, ad source, and the Clarity tag to find the recording. */
+  const n = Math.max(0, Math.min(9999, Number(b.visitNumber) || 0));
+  const nth = n > 1 ? `, ${n}${n % 10 === 2 && n % 100 !== 12 ? "nd" : n % 10 === 3 && n % 100 !== 13 ? "rd" : n % 10 === 1 && n % 100 !== 11 ? "st" : "th"} visit` : n === 1 ? ", first visit" : "";
+  const utm = clean(b.utm, 120);
+  const remembered = b.remembered ? " (remembered from an earlier link)" : "";
   const from = [where(event.headers), device(event.headers["user-agent"] || "")].filter(Boolean).join(", ");
 
   let text: string;
@@ -101,14 +106,16 @@ const handler: Handler = async (event) => {
     text =
       `${tag}${who || page}: ${duration(seconds)} on the page, scrolled ${scroll}%` +
       (clicks.length ? `, clicked: ${clicks.map((c: string) => `"${c}"`).join(", ")}` : ", no clicks") +
-      ` (visit ${visit})`;
+      ` (visit ${visit}, Clarity tag visit=${visit})`;
   } else {
     const ref = clean(b.referrer, 120);
     text =
-      `${tag}${who ? `${who} opened ` : "Opened "}${page}` +
+      `${tag}${who ? `${who}${remembered} opened ` : "Opened "}${page}` +
       (title ? ` (${title})` : "") +
+      nth +
       (from ? `, from ${from}` : "") +
       (ref && !ref.includes("authorityengine.com.au") ? `, via ${ref}` : "") +
+      (utm ? `, ad: ${utm}` : "") +
       ` (visit ${visit})`;
   }
 

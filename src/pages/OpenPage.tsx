@@ -101,8 +101,9 @@ const Tick = ({ children, dark = false }: { children: React.ReactNode; dark?: bo
 /* Sean, 24 Nov: third landing page, growth = /founding-growth. */
 export default function OpenPage({ live = false, advisory = false, growth = false }: { live?: boolean; advisory?: boolean; growth?: boolean }) {
   const paid = live && typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('paid') === '1';
-  const personal = live && typeof window !== 'undefined' && /[?&](for|c)=/.test(window.location.search);
-  usePageVisits('/founding', '90 Day Install', personal && !paid);
+  /* Sean, 25 Nov: every /founding visit to Slack, not only personal links. The advisory and growth
+     pages are noIndex, so SEO already tracks them under their own path. */
+  usePageVisits('/founding', '90 Day Install', live && !advisory && !growth && !paid);
   const status = useStatus();
   const feb = status?.intake === 'february';
   const loc = growth ? 'growth' : advisory ? 'advisory' : live ? 'founding' : 'open';
