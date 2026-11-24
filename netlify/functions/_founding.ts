@@ -1,6 +1,6 @@
 import { addTags, contactUrl, findOrCreateByEmail, GHL_API, GHL_VERSION, sendEmail } from "./_ghl";
 import { BRAND_DAY_BOOKING, OFFICE_HOURS, whatsappLine } from "./_calls";
-import { logPortalEvent, provisionPortal } from "./_portal";
+import { claimPortalEvent, intakeLink, logPortalEvent, provisionPortal } from "./_portal";
 
 /*
   Everything that happens after somebody buys the founding 90 Day at /founding.
@@ -16,6 +16,15 @@ import { logPortalEvent, provisionPortal } from "./_portal";
     2. Posts the sale to Slack with name, email, phone and the GHL link.
     3. Writes `alerted=1` onto the Stripe session, which is what makes the second
        call a no-op.
+
+  Double welcome guard (24 Nov 2026). The thank you page and the sweep can
+  both arrive before alerted=1 lands (or the buyer refreshes the thank you
+  page), and each used to send a welcome. Two locks now:
+    - claimSale: a claim written onto the Stripe session, then read back after
+      a pause. Whoever reads back their own claim does the work; the other
+      stops. A claim older than 10 minutes is a run that died, and is taken over.
+    - welcome_claim on contentengine, once per Stripe session, logged before
+      the welcome goes. A second run for the same sale finds it and sends nothing.
 */
 
 export const PAYMENT_KIND = "founding-90";
@@ -116,10 +125,30 @@ export function cohortStart(paidMs: number, intake?: string): string {
 const longDate = (iso: string) =>
   new Date(`${iso}T00:00:00+10:00`).toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Australia/Brisbane" });
 
+const CLAIM_TTL = 10 * 60_000;
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/* True when this call holds the sale. See the note at the top. */
+async function claimSale(sessionId: string): Promise<boolean> {
+  const fresh = await stripe(`checkout/sessions/${sessionId}`);
+  if (!fresh.ok) return false;
+  const m = fresh.data?.metadata || {};
+  if (m.alerted === "1") return false;
+  const held = Number(String(m.claim || "").split(":")[1] || 0);
+  if (held && Date.now() - held < CLAIM_TTL) return false;
+  const mine = `${Math.random().toString(36).slice(2, 10)}:${Date.now()}`;
+  const w = await stripe(`checkout/sessions/${sessionId}`, { method: "POST", form: new URLSearchParams({ "metadata[claim]": mine }) });
+  if (!w.ok) return false;
+  await sleep(1500);
+  const back = await stripe(`checkout/sessions/${sessionId}`);
+  return back.ok && back.data?.metadata?.claim === mine && back.data?.metadata?.alerted !== "1";
+}
+
 export async function handleFoundingSale(session: any, via: "thank-you page" | "sweep"): Promise<boolean> {
   if (session?.metadata?.payment !== PAYMENT_KIND) return false;
   if (session?.payment_status !== "paid") return false;
   if (session?.metadata?.alerted === "1") return false;
+  if (!(await claimSale(session.id))) return false;
 
   const d = session.customer_details || {};
   const [firstName, ...rest] = String(d.name || "").trim().split(/\s+/);
@@ -159,16 +188,31 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
   let welcomed = false;
   /* Sean, 24 Nov: Brand Day credit buyers (Erina, Jack) have had their day already. No booking line. */
   const credit = session?.metadata?.credit === "brand-day";
+  /* Second lock: one welcome per sale, on contentengine. Null means it could
+     not be asked, and then the Stripe claim alone decides. */
+  const claim = await claimPortalEvent(d.email, "welcome_claim", { session: session.id, via });
+  if (claim?.duplicate === true) {
+    /* Another run already welcomed this sale. Close it and say nothing. */
+    await stripe(`checkout/sessions/${session.id}`, { method: "POST", form: new URLSearchParams({ "metadata[alerted]": "1" }) });
+    return false;
+  }
+  /* The research intake (brand.contentengine.live/welcome). Not for credit
+     buyers, whose research was done for their Brand Day, and not for anyone
+     who has already sent it. */
+  const research: { url?: string; submitted?: boolean; error?: string } = credit ? {} : await intakeLink(portal.slug ? { slug: portal.slug } : { email: d.email });
+  const intakeUrl = research.url && !research.submitted ? research.url : "";
   if (token && contactId) {
     const first = String(d.name || "").split(" ")[0] || "there";
     const brandDay = `${BRAND_DAY_BOOKING}?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}&utm_content=${encodeURIComponent(contactId)}`;
+    let n = 1;
     const { sent } = await sendEmail(token, contactId, "You're in. Here's what happens now.", [
       `<p>${first},</p>`,
       `<p>You're in. Your spot is locked in.</p>`,
-      portal.claimUrl ? `<p>1. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>1. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
-      credit ? "" : `<p>2. <a href="${brandDay}">Lock in your Strategy Day date</a>.</p>`,
-      `<p>${credit ? 2 : 3}. <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}">Book your 1:1 strategy call</a> in the next 7 days.</p>`,
-      `<p>${credit ? 3 : 4}. Advisory group office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
+      portal.claimUrl ? `<p>${n++}. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>${n++}. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
+      credit ? "" : `<p>${n++}. <a href="${brandDay}">Lock in your Strategy Day date</a>.</p>`,
+      `<p>${n++}. <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}">Book your 1:1 strategy call</a> in the next 7 days.</p>`,
+      intakeUrl ? `<p>${n++}. <a href="${intakeUrl}">Send us your YouTube, Instagram and podcast links</a> so we can start your research.</p>` : "",
+      `<p>${n++}. Advisory group office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
       credit
         ? `<p>Your weekly calls and monthly content advisory board meetings start ${longDate(start)}.</p>`
         : `<p>Your weekly calls and monthly content advisory board meetings start after your Strategy Day.</p>`,
@@ -178,7 +222,7 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
     ].join(""));
     welcomed = sent;
   }
-  await logPortalEvent(d.email, "welcome_email", { subject: "You're in. Here's what happens now.", sent: welcomed });
+  await logPortalEvent(d.email, "welcome_email", { subject: "You're in. Here's what happens now.", sent: welcomed, session: session.id, intake: Boolean(intakeUrl), ...(research.error ? { intakeError: research.error } : {}) });
 
   await slack(
     [
@@ -190,7 +234,8 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
         ? `Tagged \`${PAID_TAG}\` in GoHighLevel. <${contactUrl(contactId)}|Open them>`
         : `:warning: Could not create or tag them in GoHighLevel. Add them by hand with the \`${PAID_TAG}\` tag.`,
       credit ? `Brand Day credit sale (${session?.metadata?.contact_id || "contact id missing"}). Their Strategy Day is already done, so no booking was sent.` : "",
-      welcomed ? `Welcome email sent (portal, ${credit ? "" : "Strategy Day booking, "}7 day strategy call, group advisory, advisory outline).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
+      welcomed ? `Welcome email sent (portal, ${credit ? "" : "Strategy Day booking, "}7 day strategy call, ${intakeUrl ? "research intake, " : ""}group advisory, advisory outline).` : `:warning: Welcome email NOT sent. Send them the portal and Brand Day links by hand.`,
+      !credit && !intakeUrl ? `:warning: No research intake link in the welcome (${research.error || "already sent"}). Get it from brand.contentengine.live (Intake link on their card).` : "",
       portal.claimUrl ? `Portal made: ${portal.claimUrl}` : portal.error ? `:warning: No portal made (${portal.error}). Invite them from contentengine.live/clients.` : `Portal: they already have an account.`,
       `Now: ${portal.whatsappUrl ? "their WhatsApp group link went in the welcome email (Slack says which group)." : "make their WhatsApp group and paste the invite link on their portal hub (Edit hub), which emails it to them."} Then give them the SOPs, playbooks, training videos and early group advisory${credit ? "." : ", and lock in their Strategy Day date."}`,
     ].filter(Boolean).join("\n")

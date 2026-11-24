@@ -47,6 +47,15 @@
 [functions."founding-sweep"]
   schedule = "*/10 * * * *"
 
+# Founding buyers who paid and went quiet (Sean, 24 Nov 2026). Strategy Day
+# not booked at 48 hours and day 7, 1:1 strategy call not booked at day 7, no
+# portal login at day 3 and day 7. Each stage once ever (a founding_chase event
+# on contentengine, logged before the email goes), a line with a wa.me link in
+# the buyer's Slack thread, and one email in the welcome email's own words.
+# Hourly, 07:00 to 20:00 Brisbane (21:00 to 10:00 UTC).
+[functions."founding-nudge"]
+  schedule = "0 0-10,21-23 * * *"
+
 # Founding 5 morning digest to Slack, 07:30 Brisbane (21:30 UTC). Spots, days
 # left, last 24 hours of checkouts. Stops itself the day after the intake closes.
 [functions."founding-digest"]
