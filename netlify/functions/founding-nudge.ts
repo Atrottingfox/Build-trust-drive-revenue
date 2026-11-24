@@ -28,7 +28,12 @@ import { claimPortalEvent, foundingStatus, type FoundingStatus } from "./_portal
   and nothing is sent unless the log landed. That same event is the line in
   the buyer's Slack thread, with a one tap wa.me link to their phone.
 
-  Every stage due at the same moment goes in ONE email. The lines are the
+  The two Strategy Day stages send NO email to the buyer: founding-chase
+  already tags no-strategy-day-booked at 24 hours and GoHighLevel sends that
+  one (Sean's rule: code tags, GHL sends). For those, the Slack thread line
+  with the wa.me link is the whole nudge.
+
+  Every emailed stage due at the same moment goes in ONE email. The lines are the
   welcome email's own lines (_founding.ts), word for word, after a plain
   opener. Skipped: test sales, zz-test contacts, anyone who has parted ways
   or been refunded, and contacts without founding-paid.
@@ -171,7 +176,7 @@ const handler: Handler = async () => {
     const num = waNumber(d.phone);
 
     if (dry) {
-      plan.push({ email, stages: due.map((x) => x.stage), wa: Boolean(num) });
+      plan.push({ email, stages: due.map((x) => x.stage), emails: due.filter((x) => x.topic !== "brand_day").map((x) => x.stage), wa: Boolean(num) });
       continue;
     }
 
@@ -184,12 +189,15 @@ const handler: Handler = async () => {
       : undefined;
     const claimed: Due[] = [];
     for (const x of due) {
-      const r = await claimPortalEvent(email, "founding_chase", { stage: x.stage, label: x.label, first, wa, phone: d.phone || undefined });
+      const r = await claimPortalEvent(email, "founding_chase", { stage: x.stage, label: x.label, first, wa, phone: d.phone || undefined, ...(x.topic === "brand_day" ? { noEmail: true } : {}) });
       if (r && !r.duplicate) claimed.push(x);
     }
-    if (!claimed.length) continue;
-
-    const topics = new Set(claimed.map((x) => x.topic));
+    /* Strategy Day: Slack only (GHL emails it off founding-chase's tag). */
+    const topics = new Set<Topic>(claimed.map((x) => x.topic).filter((t) => t !== "brand_day"));
+    if (!topics.size) {
+      if (claimed.length) plan.push({ email, stages: claimed.map((x) => x.stage), sent: "slack only" });
+      continue;
+    }
     const { sent, reason } = await sendEmail(token, contactId, "Quick one", [
       `<p>${esc(first)}, quick one.</p>`,
       ...order.filter((t) => topics.has(t)).map((t) => html[t]),
