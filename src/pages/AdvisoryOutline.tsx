@@ -57,11 +57,17 @@ const WONT_DO = [
 
 
 /* Sean, 24 Nov: "show what when happens". Only commitments already on /founding (STEPS, NOW and GROUPS in OpenPage.tsx). */
-const RHYTHM = [
-  { when: 'Every week', items: ['1:1 implementation call, for the first 4 weeks', 'Two Loom reviews during active implementation', 'Advisory group office hours, every Thursday'] },
-  { when: 'Every fortnight', items: ['1:1 implementation call, for the next 8 weeks', 'Training, the whole team gets access'] },
-  { when: 'Every month', items: ['Content advisory board meeting'] },
-  { when: 'Any time', items: ['WhatsApp support, 24 hour replies', 'Prescriptive advice directly through the portal'] },
+/* Sean, 24 Nov: show the cadence better. 12 week grid. Weeks marked show the frequency
+   from /founding (weekly 1:1 for 4 weeks then fortnightly for 8, fortnightly training,
+   monthly board). kind: dot = happens that week, two = up to two, bar = any time. */
+const RHYTHM: { name: string; when: string; kind: 'dot' | 'two' | 'bar'; weeks?: number[] }[] = [
+  { name: '1:1 implementation call', when: 'Weekly for 4 weeks, then fortnightly', kind: 'dot', weeks: [1, 2, 3, 4, 6, 8, 10, 12] },
+  { name: 'Loom reviews', when: 'Up to two a week', kind: 'two', weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+  { name: 'Advisory group office hours', when: 'Every Thursday', kind: 'dot', weeks: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] },
+  { name: 'Team training', when: 'Every fortnight', kind: 'dot', weeks: [2, 4, 6, 8, 10, 12] },
+  { name: 'Content advisory board', when: 'Monthly', kind: 'dot', weeks: [4, 8, 12] },
+  { name: 'WhatsApp support', when: 'Any time, 24 hour replies', kind: 'bar' },
+  { name: 'Prescriptive advice in the portal', when: 'Any time', kind: 'bar' },
 ];
 
 export default function AdvisoryOutline() {
@@ -101,20 +107,45 @@ export default function AdvisoryOutline() {
               </ul>
             </Section>
           </div>
-          {/* THE CADENCE (Sean, 24 Nov: no timeline, just the cadence) */}
-          <Section className="mt-14 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-8">
+          {/* THE CADENCE (Sean, 24 Nov: no timeline, just the cadence, shown as a 12 week grid) */}
+          <Section className="mt-14 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-5 md:p-8">
             <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-zinc-900">The rhythm</p>
-            <div className="mt-5 grid sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-zinc-100 pt-5">
+            <p className="text-zinc-500 text-[15px] mt-1">Your 12 weeks of implementation, week by week.</p>
+            <div className="mt-6">
+              <div className="hidden md:grid grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-6 pb-2 border-b border-zinc-100">
+                <span />
+                <div className="grid grid-cols-12 text-center text-[11px] font-semibold text-zinc-400">
+                  {Array.from({ length: 12 }, (_, k) => <span key={k}>W{k + 1}</span>)}
+                </div>
+              </div>
               {RHYTHM.map((r) => (
-                <div key={r.when}>
-                  <p className="text-[#3B7DFF] text-[12px] font-semibold uppercase tracking-[0.16em]">{r.when}</p>
-                  <ul className="mt-3 space-y-2">
-                    {r.items.map((t) => (
-                      <li key={t} className="text-zinc-700 text-[15px] leading-relaxed">{t}</li>
-                    ))}
-                  </ul>
+                <div key={r.name} className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] gap-2 md:gap-6 items-center py-4 border-b border-zinc-100 last:border-0">
+                  <div>
+                    <p className="text-zinc-900 text-[15px] font-semibold leading-snug">{r.name}</p>
+                    <p className="text-[#3B7DFF] text-[12px] font-semibold uppercase tracking-[0.12em] mt-0.5">{r.when}</p>
+                  </div>
+                  {r.kind === 'bar' ? (
+                    <div className="h-2.5 rounded-full bg-[#3B7DFF]/25 mx-1" />
+                  ) : (
+                    <div className="grid grid-cols-12 gap-1">
+                      {Array.from({ length: 12 }, (_, k) => {
+                        const on = r.weeks?.includes(k + 1);
+                        return (
+                          <div key={k} className={`h-7 rounded-md flex items-center justify-center gap-[3px] ${on ? 'bg-[#3B7DFF]/10' : 'bg-zinc-50'}`}>
+                            {on && (r.kind === 'two'
+                              ? <><span className="h-1.5 w-1.5 rounded-full bg-[#3B7DFF]" /><span className="h-1.5 w-1.5 rounded-full bg-[#3B7DFF]" /></>
+                              : <span className="h-2 w-2 rounded-full bg-[#3B7DFF]" />)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               ))}
+              <div className="md:hidden grid grid-cols-12 gap-1 text-center text-[10px] font-semibold text-zinc-400 pt-2">
+                {Array.from({ length: 12 }, (_, k) => <span key={k}>{k + 1}</span>)}
+              </div>
+              <p className="md:hidden text-center text-[11px] text-zinc-400 mt-1">Week</p>
             </div>
           </Section>
 
