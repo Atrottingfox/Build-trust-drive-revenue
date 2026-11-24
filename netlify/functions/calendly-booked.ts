@@ -246,11 +246,60 @@ const handler: Handler = async (event) => {
     */
     if (isBrandDay) {
       let isIntensive = false;
+      let isFounding = false;
       try {
         const c = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}`, { headers: ghlHeaders });
-        if (c.ok) isIntensive = ((await c.json())?.contact?.tags || []).includes("intensive-paid");
+        if (c.ok) {
+          const tags: string[] = (await c.json())?.contact?.tags || [];
+          isIntensive = tags.includes("intensive-paid");
+          isFounding = tags.includes("founding-paid");
+        }
       } catch (err) {
-        console.error("intensive check failed, treating as a Brand Day:", err);
+        console.error("intensive/founding check failed, treating as a Brand Day:", err);
+      }
+      /*
+        Founding 90 Day buyers have paid in full and book their Brand Day from
+        the welcome email. Treating that as a $5k Brand Day booking tagged them
+        booked-no-payment, sent Sean a false "has not paid" alert and lined up
+        the Brand Day prep emails. Same shape as the Intensive branch: their
+        own tag, the date on their portal, one Slack line, nothing else.
+      */
+      if (isFounding && !isIntensive) {
+        const r = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
+          method: "POST",
+          headers: ghlHeaders,
+          body: JSON.stringify({ tags: ["founding-day-booked"] }),
+        });
+        if (!r.ok) console.error("GHL founding-day-booked tag failed:", r.status, await r.text());
+        let portalNote: string | null = null;
+        if (startTime && payload.email) {
+          const portal = await provisionPortal({ email: payload.email, name: payload.name || payload.email }, { brandDay: startTime });
+          if (portal.error) {
+            console.error("calendly-booked: founding portal not updated:", portal.error);
+            portalNote = `:warning: Portal date not set (${portal.error}). Add it on their hub.`;
+          }
+        }
+        const hook = process.env.SLACK_WEBHOOK_BOOKINGS || process.env.SLACK_WEBHOOK_URL;
+        if (hook) {
+          const when = startTime
+            ? new Date(startTime).toLocaleString("en-AU", { dateStyle: "full", timeStyle: "short", timeZone: "Australia/Brisbane" })
+            : "date not supplied by Calendly";
+          await fetch(hook, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: [
+                ":calendar: *Brand Day locked in (Founding 90 Day, paid in full)*",
+                `*Who:* ${payload.name || payload.email || contactId}`,
+                `*When:* ${when}`,
+                !r.ok ? `:rotating_light: *CRM:* tagging failed ${r.status}` : null,
+                portalNote,
+                `<${contactUrl(contactId)}|Open them in GHL>`,
+              ].filter(Boolean).join("\n"),
+            }),
+          }).catch((e) => console.error("founding booking Slack failed:", e));
+        }
+        return { statusCode: 200, headers, body: JSON.stringify({ ok: true, contactId, founding: true }) };
       }
       if (isIntensive) {
         const r = await fetch(`${GHL_API}/contacts/${encodeURIComponent(contactId)}/tags`, {
