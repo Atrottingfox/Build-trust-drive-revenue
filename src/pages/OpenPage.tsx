@@ -371,9 +371,14 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
           <Section className="rounded-3xl bg-white border-2 border-[#3B7DFF] p-7 md:p-12 text-center shadow-[0_30px_80px_-40px_rgba(59,125,255,0.6)]">
             {/* Sean, 22 Nov: "i think we still need this", his /founding price box. */}
             <p className="text-zinc-900 text-[17px] font-semibold">{feb ? 'February intake, paid in full' : 'Founding 5, paid in full by 30 November'}</p>
+            {/* Sean, 24 Nov: show why it's $5,000, above the price. Brand Day credit links only. */}
+            {status?.credit && (
+              <div className="mt-5 max-w-xs mx-auto text-[16px] text-zinc-500 space-y-1.5">
+                <div className="flex justify-between"><span>Founding price</span><span className="line-through">{feb ? '$15,000' : '$10,000'}</span></div>
+                <div className="flex justify-between"><span>Brand Day already paid</span><span className="text-zinc-900 font-semibold">less $5,000</span></div>
+              </div>
+            )}
             <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-3 whitespace-nowrap">{status?.credit ? (feb ? '$10,000' : '$5,000') : feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
-            {/* Sean, 24 Nov: Brand Day already paid, only the extra $5,000. */}
-            {status?.credit && <p className="text-zinc-900 text-[16px] font-semibold mt-4">Your Brand Day is already paid, so it comes off.</p>}
             {!feb && <p className="text-zinc-500 text-[16px] leading-relaxed mt-4">Once 5 are sold, price increases to <span className="text-zinc-900 font-semibold">$15,000 + GST</span> for February.</p>}
             <p className="text-zinc-500 text-[16px] mt-2">1:1 guided implementation starts in the next available intake month, beginning January.</p>
             <div className="flex justify-center">
