@@ -111,6 +111,16 @@ const WILL_DO = [
   'Help your team make better decisions without waiting for you',
   'Review the data and decide what to do more of next',
 ];
+/* Sean, 24 Nov: your responsibilities, his words. */
+const YOUR_PART = [
+  'Attend the agreed sessions',
+  'Submit any work for review on time',
+  'Assign one core person to own implementation',
+  'Make decisions quickly',
+  'Publish or deploy the agreed work',
+  'Share performance data honestly',
+  'Complete the implementation work between sessions',
+];
 const WONT_DO = [
   'Write scripts',
   'Unlimited revisions or endless feedback',
@@ -475,6 +485,20 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
             <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] text-zinc-900">Think of me like course correction.</p>
             <p className="text-zinc-600 text-[18px] leading-relaxed mt-5">I will train, guide, review, and challenge the team.</p>
             <p className="text-zinc-600 text-[18px] leading-relaxed mt-1">Will not manage the team, do the work for them or make every decision indefinitely.</p>
+          </Section>
+          <Section className="mt-14 max-w-3xl mx-auto rounded-3xl bg-[#0d0f14] text-white p-6 md:p-9">
+            <p className="font-display text-2xl md:text-3xl font-extrabold tracking-[-0.02em]">Your responsibilities</p>
+            <p className="text-zinc-400 text-[16px] mt-2">To make the engagement work you agree to:</p>
+            <ul className="mt-5 grid md:grid-cols-2 gap-x-8 border-t border-white/10">
+              {YOUR_PART.map((t) => (
+                <li key={t} className="flex items-start gap-3 py-3 border-b border-white/10 text-zinc-200 text-[15px] leading-relaxed">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3B7DFF]/20">
+                    <Check className="w-3 h-3 text-[#3B7DFF]" strokeWidth={3.5} />
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
           </Section>
         </div>
       </section>
