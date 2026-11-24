@@ -10,8 +10,8 @@ import { cohortStart, PAYMENT_KIND, stripe, stripeKey } from "./_founding";
   once and never again, so each GHL workflow fires once per buyer.
 
     no-strategy-day-booked   paid more than 24 hours ago and no Strategy Day
-                             booked (no `brand-day-booked` tag, which Calendly
-                             sets). Taken off again once they book. Brand Day
+                             booked (no `founding-day-booked` or
+                             `brand-day-booked` tag, set by calendly-booked). Taken off again once they book. Brand Day
                              credit buyers are skipped: their day is done.
     founding-start-14        14 days before their start date
     founding-start-2         2 days before their start date
@@ -23,7 +23,8 @@ import { cohortStart, PAYMENT_KIND, stripe, stripeKey } from "./_founding";
   Test sales (metadata test=1) are skipped.
 */
 
-const BOOKED = "brand-day-booked";
+/* Founding bookings get founding-day-booked (calendly-booked, d7b8c89). brand-day-booked kept for anyone tagged before that. */
+const BOOKED = ["founding-day-booked", "brand-day-booked"];
 const NOT_BOOKED = "no-strategy-day-booked";
 const DAY = 86_400_000;
 
@@ -78,7 +79,7 @@ const handler: Handler = async () => {
 
     /* Strategy Day not booked. */
     if (!credit) {
-      if (tags.includes(BOOKED)) {
+      if (BOOKED.some((t) => tags.includes(t))) {
         if (tags.includes(NOT_BOOKED)) await removeTags(token, contactId, [NOT_BOOKED]);
       } else if (Date.now() - paidMs > DAY && !tags.includes(NOT_BOOKED)) {
         add.push(NOT_BOOKED);
