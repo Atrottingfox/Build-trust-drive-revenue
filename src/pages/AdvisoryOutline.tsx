@@ -56,6 +56,20 @@ const WONT_DO = [
 ];
 
 
+/* Sean, 24 Nov: "show what when happens". Only commitments already on /founding (STEPS, NOW and GROUPS in OpenPage.tsx). */
+const WHEN = [
+  { tag: 'Today', title: 'Secure your place', items: ['The Engineroom', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup'] },
+  { tag: 'Before week 1', title: 'Strategy Day', items: ['In person, with you and your team', 'We analyse your current bottlenecks', 'We build your Buying Belief Map', 'Turned into a documented brand and Authority Engine'] },
+  { tag: 'Weeks 1 to 4', title: 'Install', items: ['Weekly 1:1 implementation calls', 'We start on your exact bottleneck using our CVAQ analysis', 'Two Loom reviews per week'] },
+  { tag: 'Weeks 5 to 12', title: 'Transfer and tune', items: ['Fortnightly 1:1 implementation calls', 'Your operator runs the system with support', 'We iterate with data until the team can run it themselves'] },
+];
+const RHYTHM = [
+  { when: 'Every week', items: ['Two Loom reviews during active implementation', 'Advisory group office hours, every Thursday'] },
+  { when: 'Every fortnight', items: ['Training, the whole team gets access'] },
+  { when: 'Every month', items: ['Content advisory board meeting'] },
+  { when: 'Any time', items: ['WhatsApp support, 24 hour replies', 'Prescriptive advice directly through the portal'] },
+];
+
 export default function AdvisoryOutline() {
   return (
     <div className="min-h-screen bg-[#F7F6F3] text-zinc-900">
@@ -93,6 +107,49 @@ export default function AdvisoryOutline() {
               </ul>
             </Section>
           </div>
+          {/* WHAT HAPPENS WHEN */}
+          <Section className="text-center mt-20 md:mt-24">
+            <Eyebrow>The first 90 days</Eyebrow>
+            <h2 className="font-display text-[30px] md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.06] text-zinc-900 mt-4">What happens when.</h2>
+          </Section>
+          <div className="relative mt-10 grid md:grid-cols-4 gap-4">
+            <div className="hidden md:block absolute left-0 right-0 top-[11px] h-px bg-zinc-300" />
+            {WHEN.map((w, i) => (
+              <Section key={w.tag} className="relative flex flex-col">
+                <div className="flex items-center gap-3 md:block">
+                  <span className="relative z-10 flex h-6 w-6 items-center justify-center rounded-full bg-[#3B7DFF] text-white text-[11px] font-bold ring-4 ring-[#F7F6F3]">{i + 1}</span>
+                  <p className="text-[#3B7DFF] text-[12px] font-semibold uppercase tracking-[0.16em] md:mt-4">{w.tag}</p>
+                </div>
+                <div className="mt-3 rounded-2xl bg-white ring-1 ring-zinc-200/70 p-5 flex-1">
+                  <p className="font-display text-xl font-extrabold tracking-[-0.02em] text-zinc-900">{w.title}</p>
+                  <ul className="mt-3 space-y-2">
+                    {w.items.map((t) => (
+                      <li key={t} className="flex items-start gap-2.5 text-zinc-600 text-[14px] leading-relaxed">
+                        <span className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#3B7DFF]" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Section>
+            ))}
+          </div>
+          <Section className="mt-10 rounded-3xl bg-white ring-1 ring-zinc-200/70 shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] p-6 md:p-8">
+            <p className="font-display text-2xl font-extrabold tracking-[-0.02em] text-zinc-900">The rhythm</p>
+            <div className="mt-5 grid sm:grid-cols-2 md:grid-cols-4 gap-6 border-t border-zinc-100 pt-5">
+              {RHYTHM.map((r) => (
+                <div key={r.when}>
+                  <p className="text-[#3B7DFF] text-[12px] font-semibold uppercase tracking-[0.16em]">{r.when}</p>
+                  <ul className="mt-3 space-y-2">
+                    {r.items.map((t) => (
+                      <li key={t} className="text-zinc-700 text-[15px] leading-relaxed">{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </Section>
+
           <Section className="text-center mt-14 max-w-2xl mx-auto">
             <p className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] text-zinc-900">Think of me like course correction.</p>
             <p className="text-zinc-600 text-[18px] leading-relaxed mt-5">I will train, guide, review, and challenge the team.</p>
