@@ -375,7 +375,7 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
             {status?.credit && (
               <div className="mt-5 max-w-xs mx-auto text-[16px] text-zinc-500 space-y-1.5">
                 <div className="flex justify-between"><span>Founding price</span><span className="line-through">{feb ? '$15,000' : '$10,000'}</span></div>
-                <div className="flex justify-between"><span>Brand Day already paid</span><span className="text-zinc-900 font-semibold">less $5,000</span></div>
+                <div className="flex justify-between"><span>Brand Day already paid</span><span className="text-zinc-900 font-semibold">$5,000</span></div>
               </div>
             )}
             <p className="font-display text-5xl md:text-7xl font-extrabold tracking-[-0.03em] mt-3 whitespace-nowrap">{status?.credit ? (feb ? '$10,000' : '$5,000') : feb ? '$15,000' : '$10,000'} <span className="text-zinc-400 text-[0.3em] font-semibold tracking-normal">AUD + GST</span></p>
