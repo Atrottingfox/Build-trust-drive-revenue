@@ -4,7 +4,7 @@ import { Logo } from './Logo';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Client plan pages are private references, not sales pages. No Apply CTA.
-const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan', '/margot', '/themargotplan', '/thecultivatedplan', '/cultivated-theplan', '/thechloeplan', '/advisoryoutline'];
+const NO_CTA_PATHS = ['/thegeronimoplan', '/geronimo-theplan', '/geronimotheplan', '/margot', '/themargotplan', '/thecultivatedplan', '/cultivated-theplan', '/thechloeplan', '/advisoryoutline', '/founding-agreement'];
 
 export function Navigation() {
   const location = useLocation();
@@ -47,7 +47,7 @@ export function Navigation() {
   return (
     <>
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled || (path === '/founding' || path === '/founding-draft' || path === '/founding-advisory' || path === '/founding-growth' || path === '/advisoryoutline') ? 'bg-base/80 backdrop-blur-xl border-b border-zinc-800/50' : ''
+        scrolled || (path === '/founding' || path === '/founding-draft' || path === '/founding-advisory' || path === '/founding-growth' || path === '/advisoryoutline' || path === '/founding-agreement') ? 'bg-base/80 backdrop-blur-xl border-b border-zinc-800/50' : ''
       }`}>
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">

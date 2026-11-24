@@ -69,6 +69,7 @@ const BrandDayOffer = React.lazy(() => import('./pages/BrandDayOffer'));
 const FoundingV5 = React.lazy(() => import('./pages/FoundingV5'));
 const OpenPage = React.lazy(() => import('./pages/OpenPage'));
 const AdvisoryOutline = React.lazy(() => import('./pages/AdvisoryOutline'));
+const FoundingAgreement = React.lazy(() => import('./pages/FoundingAgreement'));
 const SimpleDraft = React.lazy(() => import('./pages/SimpleDraft'));
 const LockIn = React.lazy(() => import('./pages/LockIn'));
 const LockInIntensive = React.lazy(() => import('./pages/LockInIntensive'));
@@ -190,6 +191,7 @@ export default function App() {
           <Route path="/founding-advisory" element={<OpenPage live advisory />} />
           <Route path="/founding-growth" element={<OpenPage live growth />} />
           <Route path="/advisoryoutline" element={<AdvisoryOutline />} />
+          <Route path="/founding-agreement" element={<FoundingAgreement />} />
           {/* Sean, 21 Nov: test with elements from ecommerceequation.com.au. Not indexed. */}
           <Route path="/founding-test" element={<FoundingV5 test />} />
           {/* Sean, 22 Nov: /open, same page and offer, access angle on the headline and promise. Not in the nav, noindex. */}
