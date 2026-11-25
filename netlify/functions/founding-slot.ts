@@ -359,7 +359,7 @@ const handler: Handler = async (event) => {
 
   const picker = (err?: string) => `
     <h1>Set your rhythm, ${esc(name)}</h1>
-    <p>Two choices and you are done. Both hours are then yours for the whole 90 days, and every call goes straight into the calendar.</p>
+    <p>Pick your hour and you are done. It is yours for the whole 90 days, and every call goes straight into the calendar.</p>
     <form method="POST">
       ${operatorFields(err)}
       <hr class="rule">
@@ -370,7 +370,7 @@ const handler: Handler = async (event) => {
       <input type="hidden" name="hour" id="hourField">
       <button class="wide" type="submit" id="go" disabled>Pick your weekly hour</button>
     </form>
-    <p class="sub">Weekly for the first 4 weeks, then fortnightly: weeks 1, 2, 3, 4, 6, 8, 10 and 12, Sixty minutes each.</p>
+    <p class="sub">Weekly for the first 4 weeks, then fortnightly: weeks 1, 2, 3, 4, 6, 8, 10 and 12. Sixty minutes each.</p>
     <script>
       /* Choosing the Wednesday also chooses the same hour on Friday, when that
          hour is free. Most people never touch the second row, and the ones who
