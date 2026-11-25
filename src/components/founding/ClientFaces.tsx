@@ -1,7 +1,7 @@
 /* Sean, 25 Nov: founder faces pass across the page under the video on /founding-advisory.
    Faces only, no names. Photos are the Instagram profile pictures Sean supplied, in
    public/founding/faces/. To add one, drop a square image there and add its file name below. */
-const FACES = ['01', '06', '02', '09', '03', '08', '05', '10', '07'];
+const FACES = ['01', '06', '02', '09', '03', '11', '08', '05', '10', '07'];
 
 /* Two copies of the row, slid half its width, so the pass never ends. */
 const Row = ({ hidden = false }: { hidden?: boolean }) => (
