@@ -1,6 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { timingSafeEqual } from "node:crypto";
-import { accessToken, listInstallEvents } from "./_google";
+import { accessToken, listInstallEvents, calendarId } from "./_google";
 import { toUtcIso, toDateStr, addDays } from "./_cadence";
 
 /*
@@ -90,7 +90,13 @@ const handler: Handler = async (event) => {
 
     /* No match is an answer, not a failure. The caller falls back to its own
        matching, and a 404 here would read as this endpoint being broken. */
-    if (!best) return json({ matched: false });
+    /* Not a slot picker call. Any ordinary calendar event starting within 30
+       minutes still says who was invited, which is enough for the caller to
+       find the client by email. Sean's own addresses are left out. */
+    if (!best) {
+      const attendees = await nearestAttendees(token, startedAt);
+      return json({ matched: false, attendees });
+    }
 
     const e = best.e;
     return json({
@@ -104,11 +110,36 @@ const handler: Handler = async (event) => {
       scheduledFor: e.startLocal,
       minutesOut: Math.round(best.gap / 60_000),
       eventId: e.id,
+      attendees: await nearestAttendees(token, startedAt),
     });
   } catch (err) {
     console.error("call-context:", err);
     return json({ error: String(err) }, 502);
   }
 };
+
+async function nearestAttendees(token: string, at: Date): Promise<string[]> {
+  const params = new URLSearchParams({
+    timeMin: new Date(at.getTime() - 30 * 60_000).toISOString(),
+    timeMax: new Date(at.getTime() + 30 * 60_000).toISOString(),
+    singleEvents: "true",
+    orderBy: "startTime",
+    maxResults: "20",
+  });
+  const res = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId())}/events?${params}`,
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  if (!res.ok) return [];
+  const items = ((await res.json()).items ?? [])
+    .filter((it: any) => it.status !== "cancelled" && it.start?.dateTime && (it.attendees ?? []).length > 1)
+    .map((it: any) => ({ it, gap: Math.abs(Date.parse(it.start.dateTime) - at.getTime()) }))
+    .filter((x: any) => x.gap <= 30 * 60_000)
+    .sort((a: any, b: any) => a.gap - b.gap);
+  const own = /@(authorityengine\.com\.au|atrottingfox\.com\.au)$|^sean\.fox@hotmail\.com$|^atrottingfox@/i;
+  return (items[0]?.it.attendees ?? [])
+    .map((a: any) => String(a.email || "").toLowerCase())
+    .filter((e: string) => e && !own.test(e));
+}
 
 export { handler };
