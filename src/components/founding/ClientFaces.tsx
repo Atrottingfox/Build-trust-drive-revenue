@@ -15,23 +15,35 @@ const PEOPLE: { name: string; brand: string; photo?: string }[] = [
 
 const initials = (n: string) => n.split(' ').map((w) => w[0]).slice(0, 2).join('');
 
+/* Sean, 25 Nov: the row passes across the page. Two copies of the row, slid half its width. */
+const Row = ({ hidden = false }: { hidden?: boolean }) => (
+  <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>
+    {PEOPLE.map((p) => (
+      <li key={p.name} className="mx-2.5 md:mx-3.5 flex items-center gap-3.5 rounded-full bg-white py-2 pl-2 pr-7 ring-1 ring-zinc-900/[0.06] shadow-[0_10px_30px_-14px_rgba(15,23,42,0.28)]">
+        {p.photo ? (
+          <img src={p.photo} alt={hidden ? '' : p.name} loading="lazy" className="h-14 w-14 md:h-16 md:w-16 rounded-full object-cover" />
+        ) : (
+          <span aria-hidden className="flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-full bg-gradient-to-br from-zinc-100 to-zinc-200 font-display text-lg font-extrabold tracking-[-0.02em] text-zinc-400">{initials(p.name)}</span>
+        )}
+        <span className="whitespace-nowrap text-left">
+          <span className="block text-[16px] md:text-[17px] font-semibold leading-tight tracking-[-0.01em] text-zinc-900">{p.name}</span>
+          <span className="mt-0.5 block text-[13px] md:text-[14px] leading-snug text-zinc-500">{p.brand}</span>
+        </span>
+      </li>
+    ))}
+  </ul>
+);
+
 export default function ClientFaces() {
   return (
     <section className="pb-14 md:pb-20" aria-label="Founders we have worked with">
       <p className="text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Trusted by</p>
-      <ul className="mt-7 flex gap-5 overflow-x-auto px-5 pb-2 snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-4 md:gap-x-6 md:gap-y-9 md:overflow-visible md:max-w-4xl md:mx-auto lg:grid-cols-8 lg:max-w-6xl lg:px-8">
-        {PEOPLE.map((p) => (
-          <li key={p.name} className="w-[104px] shrink-0 snap-start text-center md:w-auto">
-            {p.photo ? (
-              <img src={p.photo} alt={p.name} loading="lazy" className="mx-auto h-[84px] w-[84px] rounded-full object-cover ring-1 ring-zinc-900/10 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.35)]" />
-            ) : (
-              <span aria-hidden className="mx-auto flex h-[84px] w-[84px] items-center justify-center rounded-full bg-white ring-1 ring-zinc-200 font-display text-xl font-extrabold tracking-[-0.02em] text-zinc-400">{initials(p.name)}</span>
-            )}
-            <p className="mt-3 text-[15px] font-semibold leading-tight text-zinc-900">{p.name}</p>
-            <p className="mt-1 text-[13px] leading-snug text-zinc-500">{p.brand}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="trusted-marquee mt-6 overflow-hidden py-4">
+        <div className="trusted-track faces-track flex w-max">
+          <Row />
+          <Row hidden />
+        </div>
+      </div>
     </section>
   );
 }
