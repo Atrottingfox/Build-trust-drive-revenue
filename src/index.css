@@ -131,3 +131,16 @@
 }
 .btn-pulse { animation: btn-pulse 2.4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .btn-pulse { animation: none; } }
+
+/* Sean, 25 Nov: 'Trusted by' banner on /founding-advisory. Two copies of the row, slid half its width. */
+@keyframes trusted-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.trusted-track { animation: trusted-scroll 38s linear infinite; }
+.trusted-marquee {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.trusted-marquee:hover .trusted-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .trusted-track { animation: none; } }

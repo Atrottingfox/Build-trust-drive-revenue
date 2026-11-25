@@ -4,6 +4,7 @@ import SEO from '../components/SEO';
 import FoundingFaq from '../components/founding/FoundingFaq';
 import FitCall from '../components/founding/FitCall';
 import VslPlayer from '../components/founding/VslPlayer';
+import TrustedBy from '../components/founding/TrustedBy';
 import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
 import { BuyButton, Paid, Section, StickyBar, useStatus } from './Founding';
 import { usePageVisits } from '../lib/pageVisits';
@@ -151,6 +152,9 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
           </Section>
         </div>
       </section>
+
+      {/* Sean, 25 Nov: client banner, /founding-advisory only. */}
+      {advisory && <TrustedBy />}
 
       {/* THE TRUST GAP, dark band */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
