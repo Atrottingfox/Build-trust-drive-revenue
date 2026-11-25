@@ -33,7 +33,7 @@ const handler: Handler = async (event) => {
   let b: any;
   try { b = JSON.parse(event.body || "{}"); } catch { return json(400, { error: "Invalid JSON" }); }
   const email = String(b.email || "").trim().toLowerCase();
-  const tasks: string[] = (Array.isArray(b.tasks) ? b.tasks : []).map((t: unknown) => String(t).trim()).filter(Boolean).slice(0, 12);
+  const tasks: string[] = (Array.isArray(b.tasks) ? b.tasks : []).map((t: unknown) => String(t).trim()).filter(Boolean).slice(0, 40);
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !tasks.length) return json(400, { error: "email and tasks required" });
   const first = String(b.name || "").trim().split(/\s+/)[0] || "Hey";
   const portal = /^https:\/\/contentengine\.live\//.test(String(b.portalUrl || "")) ? String(b.portalUrl) : "https://contentengine.live/portal";
