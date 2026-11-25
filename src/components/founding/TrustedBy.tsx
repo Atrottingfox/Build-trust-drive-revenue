@@ -30,7 +30,7 @@ const Row = ({ hidden = false }: { hidden?: boolean }) => (
 export default function TrustedBy() {
   return (
     <section className="pb-14 md:pb-20" aria-label="Trusted by">
-      <p className="text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-500">Trusted by</p>
+      <p className="text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-zinc-500">The brands behind them</p>
       <div className="trusted-marquee mt-6 overflow-hidden">
         <div className="trusted-track flex w-max">
           <Row />

@@ -5,6 +5,7 @@ import FoundingFaq from '../components/founding/FoundingFaq';
 import FitCall from '../components/founding/FitCall';
 import VslPlayer from '../components/founding/VslPlayer';
 import TrustedBy from '../components/founding/TrustedBy';
+import ClientFaces from '../components/founding/ClientFaces';
 import StartTodayShowcase, { Window } from '../components/founding/StartTodayShowcase';
 import { BuyButton, Paid, Section, StickyBar, useStatus } from './Founding';
 import { usePageVisits } from '../lib/pageVisits';
@@ -153,8 +154,8 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
         </div>
       </section>
 
-      {/* Sean, 25 Nov: client banner, /founding-advisory only. */}
-      {advisory && <TrustedBy />}
+      {/* Sean, 25 Nov: founder headshots up top, logo banner at the bottom, /founding-advisory only. */}
+      {advisory && <ClientFaces />}
 
       {/* THE TRUST GAP, dark band */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
@@ -463,6 +464,8 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
           </Section>
         </div>
       </section>
+
+      {advisory && <TrustedBy />}
 
       {/* CLOSE. Sean, 22 Nov: "how it is in the /founding design". Dark with the soft blue glow. Fit call straight under the button. */}
       <section className="relative overflow-hidden bg-[#0B0D12] text-white py-16 md:py-28">
