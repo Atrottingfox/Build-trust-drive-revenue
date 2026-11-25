@@ -154,8 +154,8 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
         </div>
       </section>
 
-      {/* Sean, 25 Nov: founder headshots up top, logo banner at the bottom, /founding-advisory only. */}
-      {advisory && <ClientFaces />}
+      {/* Sean, 25 Nov: founder faces up top, brand banner at the bottom. On /founding and /founding-advisory. */}
+      {live && !growth && <ClientFaces />}
 
       {/* THE TRUST GAP, dark band */}
       <section className="bg-[#0B0D12] text-white py-16 md:py-28">
@@ -465,7 +465,7 @@ export default function OpenPage({ live = false, advisory = false, growth = fals
         </div>
       </section>
 
-      {advisory && <TrustedBy />}
+      {live && !growth && <TrustedBy />}
 
       {/* CLOSE. Sean, 22 Nov: "how it is in the /founding design". Dark with the soft blue glow. Fit call straight under the button. */}
       <section className="relative overflow-hidden bg-[#0B0D12] text-white py-16 md:py-28">
