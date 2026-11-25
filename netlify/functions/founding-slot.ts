@@ -5,11 +5,8 @@ import { logPortalEvent } from "./_portal";
 import {
   SLOT_HOURS,
   SLOT_WEEKDAY,
-  BOARD_HOURS,
-  BOARD_TITLE,
   DURATION_MIN,
   TZ,
-  boardCallDates,
   toUtcIso,
   toLocalIso,
   toDateStr,
@@ -40,7 +37,8 @@ import {
     - weeks 1, 2, 3, 4, then fortnightly: 6, 8, 10, 12. Eight calls
     - the link goes out with the 14 day countdown (founding-start-14 in GHL):
       https://authorityengine.com.au/.netlify/functions/founding-slot?c={{contact.id}}
-  Plus the Content Board every four weeks on a Friday, same as the install.
+  No per buyer board call (25 Nov): the monthly content advisory board is its
+  own meeting, so this books the eight 1:1s only.
 
   Gated on founding-paid. The start date comes from their Stripe sale, found by
   the GHL contact id written on the session (ghl_contact_id), or the credit
@@ -357,10 +355,7 @@ const handler: Handler = async (event) => {
   /* An hour is only offered if it is clear on every date it would be used. */
   const available = SLOT_HOURS.filter((h) => clearOn(dates.map((d) => d.date), h));
 
-  /* Board calls are every four weeks from the first one, so the dates are
-     fixed the moment the Wednesday is known. Only the hour is a choice. */
-  const boards = boardCallDates(start);
-  const boardHours = BOARD_HOURS.filter((h) => clearOn(boards, h));
+  const boards: string[] = [];
 
   const picker = (err?: string) => `
     <h1>Set your rhythm, ${esc(name)}</h1>
@@ -372,24 +367,16 @@ const handler: Handler = async (event) => {
       <div class="grid" id="wed">
         ${available.map((h) => `<button type="button" data-hour="${h}" aria-pressed="false">${hourLabel(h)}</button>`).join("")}
       </div>
-      <hr class="rule">
-      <label>Your board call, every four weeks on a Friday</label>
-      <div class="grid" id="fri">
-        ${boardHours.map((h) => `<button type="button" data-hour="${h}" aria-pressed="false">${hourLabel(h)}</button>`).join("")}
-      </div>
-      <p class="sub">First one ${dayLabel(boards[0])}, then every four weeks, for as long as we work together.</p>
-
       <input type="hidden" name="hour" id="hourField">
-      <input type="hidden" name="boardHour" id="boardField">
       <button class="wide" type="submit" id="go" disabled>Pick your weekly hour</button>
     </form>
-    <p class="sub">Weekly for the first 4 weeks, then fortnightly: weeks 1, 2, 3, 4, 6, 8, 10 and 12, plus your board call. Sixty minutes each.</p>
+    <p class="sub">Weekly for the first 4 weeks, then fortnightly: weeks 1, 2, 3, 4, 6, 8, 10 and 12, Sixty minutes each.</p>
     <script>
       /* Choosing the Wednesday also chooses the same hour on Friday, when that
          hour is free. Most people never touch the second row, and the ones who
          care can still change it. */
       var go = document.getElementById("go");
-      var fields = { wed: document.getElementById("hourField"), fri: document.getElementById("boardField") };
+      var fields = { wed: document.getElementById("hourField") };
 
       function pick(group, hour) {
         var row = document.getElementById(group);
@@ -400,11 +387,8 @@ const handler: Handler = async (event) => {
       }
 
       function ready() {
-        var both = fields.wed.value && fields.fri.value;
-        go.disabled = !both;
-        go.textContent = both
-          ? "Lock in Wednesdays at " + label(fields.wed.value) + ", board call " + label(fields.fri.value)
-          : fields.wed.value ? "Now pick your board call time" : "Pick your weekly hour";
+        go.disabled = !fields.wed.value;
+        go.textContent = fields.wed.value ? "Lock in Wednesdays at " + label(fields.wed.value) : "Pick your weekly hour";
       }
 
       function label(h) { h = Number(h); return h === 12 ? "12pm" : h < 12 ? h + "am" : (h - 12) + "pm"; }
@@ -419,7 +403,7 @@ const handler: Handler = async (event) => {
           .then(function (r) { return r.ok ? r.json() : null; })
           .then(function (free) {
             if (!free) return;
-            [["wed", free.weekly], ["fri", free.board]].forEach(function (pair) {
+            [["wed", free.weekly]].forEach(function (pair) {
               var row = document.getElementById(pair[0]);
               if (!row) return;
               Array.prototype.forEach.call(row.querySelectorAll("button"), function (b) {
@@ -438,19 +422,13 @@ const handler: Handler = async (event) => {
       }
       setInterval(refresh, 45000);
 
-      ["wed", "fri"].forEach(function (group) {
+      ["wed"].forEach(function (group) {
         var row = document.getElementById(group);
         if (!row) return;
         row.addEventListener("click", function (e) {
           var b = e.target.closest("button");
           if (!b) return;
           pick(group, b.dataset.hour);
-          /* Mirror onto Friday, but never overrule a choice already made. */
-          if (group === "wed" && !fields.fri.dataset.touched) {
-            var match = document.querySelector('#fri button[data-hour="' + b.dataset.hour + '"]');
-            if (match) pick("fri", b.dataset.hour);
-          }
-          if (group === "fri") fields.fri.dataset.touched = "1";
           ready();
         });
       });
@@ -461,12 +439,12 @@ const handler: Handler = async (event) => {
     return {
       statusCode: 200,
       headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
-      body: JSON.stringify({ weekly: available, board: boardHours }),
+      body: JSON.stringify({ weekly: available }),
     };
   }
 
   if (event.httpMethod !== "POST") {
-    if (!available.length || !boardHours.length) {
+    if (!available.length) {
       await slack(
         `:red_circle: *No Wednesday hours left.* ${esc(name)} opened their slot link and had nothing to pick. <${contactUrl(contactId)}|Open in GHL>`
       );
@@ -481,24 +459,6 @@ const handler: Handler = async (event) => {
   const chosen = Number(params.get("hour"));
   if (!SLOT_HOURS.includes(chosen)) {
     return html("<h1>Pick an hour</h1><p>Go back and choose one.</p>", 400);
-  }
-
-  /*
-    Two different failures, and telling them apart matters. Nothing chosen is
-    the client's to fix. An hour that has gone since the page loaded is not, and
-    being told to "pick your board time as well" when they already did reads as
-    the page being broken.
-  */
-  const boardHour = Number(params.get("boardHour"));
-  if (!boardHours.includes(boardHour)) {
-    return html(
-      picker(
-        params.get("boardHour")
-          ? "That board call time went while this page was open. These are free now."
-          : "Pick your board call time as well."
-      ),
-      400
-    );
   }
 
   /* Blank is allowed, wrong is not. Somebody mid-hire should not be blocked,
@@ -571,7 +531,6 @@ const handler: Handler = async (event) => {
     clientName: name,
     releases,
     hour: String(chosen),
-    boardHour: String(boardHour),
     founderEmail: email,
     operatorEmail: operatorEmail || "",
     operatorName: operatorName || "",
@@ -604,24 +563,6 @@ const handler: Handler = async (event) => {
       created.push(id);
     }
 
-    /* The board call is the one the founder sits in on, so they are invited
-       alongside the operator rather than instead of them. */
-    for (const d of boards) {
-      const id = await createEvent(token, {
-        summary: `${BOARD_TITLE}, ${name}`,
-        description:
-          "The Content Board. What has actually been published, what performed, and what the next cycle points at. " +
-          "Your operator presents the numbers and the thesis." +
-          (zoom ? `\n\nZoom: ${zoom}` : ""),
-        startLocal: toLocalIso(d, boardHour),
-        endLocal: toLocalIso(d, boardHour, DURATION_MIN),
-        timeZone: TZ,
-        attendees: [...new Set([FOUNDER_EMAIL, email, attendee])],
-        notify: false,
-        privateProps: { ...shared, board: "1" },
-      });
-      created.push(id);
-    }
   } catch (err) {
     /*
       A half built series is worse than none: the client sees three calls, Sean
@@ -645,7 +586,6 @@ const handler: Handler = async (event) => {
      2026: full tracking). Never blocks the booking. */
   await logPortalEvent(email || undefined, "slot_booked", {
     hour: hourLabel(chosen),
-    boardHour: hourLabel(boardHour),
     calls: total,
     from: start,
     operator: operatorEmail || undefined,
@@ -678,7 +618,7 @@ const handler: Handler = async (event) => {
         `Your ${total} calls are booked`,
         [
           `<p>${esc(operatorName || name)},</p>`,
-          `<p>The calls are in your calendar. Wednesdays at ${hourLabel(chosen)}, and the Content Board every four weeks on Friday at ${hourLabel(boardHour)}, Brisbane time.</p>`,
+          `<p>The calls are in your calendar. Wednesdays at ${hourLabel(chosen)}, Brisbane time.</p>`,
           `<ol>${list}</ol>`,
           zoom ? `<p>Same link every time: <a href="${zoom}">${zoom}</a></p>` : "",
           `<p>Need to move one? Move it in the calendar and it stays in sync.</p>`,
@@ -707,7 +647,7 @@ const handler: Handler = async (event) => {
   }
 
   await slack(
-    `:white_check_mark: *${esc(name)}* (Founding) took Wednesday ${hourLabel(chosen)} and board calls Friday ${hourLabel(boardHour)}. ` +
+    `:white_check_mark: *${esc(name)}* (Founding) took Wednesday ${hourLabel(chosen)}. ` +
       `${total} calls from ${dayLabel(start)}, hours free again ${releases}.\n` +
       (operatorEmail
         ? `Operator: ${esc(operatorName || "unnamed")}, ${esc(operatorEmail)}.`
@@ -717,7 +657,7 @@ const handler: Handler = async (event) => {
 
   return html(
     `<h1>Done, ${esc(name)}</h1>
-     <p>Wednesdays at ${hourLabel(chosen)} and your board call every four weeks on Friday at ${hourLabel(boardHour)}, Brisbane time.
+     <p>Wednesdays at ${hourLabel(chosen)}, Brisbane time.
         All ${total} are in ${esc(attendee)}'s calendar, and one confirmation email is on its way.</p>
      <ol>${dates
        .map((d) => `<li>${dayLabel(d.date)}</li>`)
