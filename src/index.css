@@ -142,6 +142,6 @@
   -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
 }
-.faces-track { animation-duration: 42s; }
+.faces-track { animation-duration: 46s; }
 .trusted-marquee:hover .trusted-track { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .trusted-track { animation: none; } }
