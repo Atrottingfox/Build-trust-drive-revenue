@@ -156,7 +156,7 @@ export default function HomeDraft() {
         <ClientFaces />
         <section className="pb-24 md:pb-32" aria-label="Brands we have worked with">
           {/* Trust line. Sean, 27 Nov: "just make it 100M+", then "there's a better place": with the logos. */}
-          <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind established companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
+          <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
           <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Brands we have worked with</p>
           <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 items-center justify-items-center">
             {LOGOS.map((l) => (
