@@ -24,15 +24,19 @@ import ClientFaces from '../components/founding/ClientFaces';
 const MAP = ['Your positioning', 'Your ideal buyer', 'What they need to believe before buying', 'Why common solutions fail', 'What makes your approach different', 'The content that moves a stranger to a buyer'];
 
 /* Sean, 26 Nov: "if we were going to say 'brands we've worked with' let's just have the exact logos".
-   From each brand's own site or Sean's files. Undeniable and Dream Out Loud are still to find. */
+   From each brand's own site or Sean's files. Undeniable from undeniableeducation.com (27 Nov). CFS Health, Laura Higgins and Remote Sales Institute (Kris Cochrane) from their own sites. MDC cropped to drop Implementation Program. Dream Out Loud has no standalone logo online. */
 const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
   { name: 'Klaviyo', src: '/home/logos/klaviyo.svg', h: 'h-7 md:h-8' },
-  { name: 'Million Dollar Coach', src: '/home/logos/mdc.png', h: 'h-12 md:h-14' },
+  { name: 'Million Dollar Coach', src: '/home/logos/mdc.png', h: 'h-10 md:h-12' },
   { name: 'Ecommerce Equation', src: '/home/logos/ece.svg', h: 'h-7 md:h-8' },
   { name: 'Seven Figure Creators', src: '/home/logos/sfc.svg', h: 'h-11 md:h-12' },
   { name: 'The Geronimo Academy', src: '/home/logos/geronimo.png', h: 'h-12 md:h-14' },
   { name: 'UpScale Business Coaching', src: '/home/logos/upscale.png', h: 'h-8 md:h-9', keep: true },
   { name: 'Alpha Tradie', src: '/home/logos/alpha.png', h: 'h-9 md:h-10' },
+  { name: 'Undeniable', src: '/home/logos/undeniable.webp', h: 'h-5 md:h-6' },
+  { name: 'CFS Health', src: '/home/logos/cfs.png', h: 'h-12 md:h-14' },
+  { name: 'Laura Higgins', src: '/home/logos/laura.png', h: 'h-7 md:h-8' },
+  { name: 'Remote Sales Institute', src: '/home/logos/rsi.svg', h: 'h-9 md:h-10' },
 ];
 
 /* Sean, 26 Nov: "the core parts with me showing different things". The /founding clips. */
