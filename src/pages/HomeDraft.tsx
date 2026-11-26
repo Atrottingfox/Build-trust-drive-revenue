@@ -5,7 +5,6 @@ import ProofStrip from '../components/ProofStrip';
 import Engine from '../components/Engine';
 import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
-import FinalCTA from '../components/FinalCTA';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import VslPlayer from '../components/founding/VslPlayer';
@@ -168,7 +167,6 @@ export default function HomeDraft() {
         </section>
       </div>
 
-      <FinalCTA />
       <Footer showApply />
     </div>
   );
