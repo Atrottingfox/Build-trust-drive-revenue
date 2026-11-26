@@ -87,6 +87,11 @@ export default function HomeDraft() {
       {/* Sean, 27 Nov: "it also needs to show private content advisory" */}
       <Hero eyebrow="Private content advisory" />
 
+      {/* Trust line. Sean, 27 Nov: "just make it 100M+" */}
+      <section className="py-10 md:py-12 border-b border-zinc-800/60">
+        <div className="max-w-3xl mx-auto px-6 text-center text-[15px] md:text-base leading-relaxed" style={{ color: '#a1a1aa' }}>Built from experience behind established companies representing <span className="text-white font-semibold">$100M+</span> in combined revenue per year.</div>
+      </section>
+
       {/* The /founding walkthrough */}
       <section className="py-24 md:py-32 relative">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
