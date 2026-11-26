@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import Hero from '../components/Hero';
 import ProofStrip from '../components/ProofStrip';
-import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -195,7 +194,20 @@ export default function HomeDraft() {
       </section>
 
 
-      <Process hideNot />
+      {/* Sean, 27 Nov: "What you walk away with" has no value. The $100M line goes there with the brands below. */}
+        <section className="py-24 md:py-32 relative" aria-label="Brands we have worked with">
+          {/* Trust line. Sean, 27 Nov: "just make it 100M+", then "there's a better place": with the logos. */}
+          <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
+          <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Brands we have worked with</p>
+          <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-12 items-center justify-items-center">
+            {LOGOS.map((l) => (
+              <li key={l.name} className="flex h-14 items-center">
+                <img src={l.src} alt={l.name} loading="lazy" className={`${l.h} w-auto max-w-[170px] object-contain opacity-70 ${l.keep ? 'grayscale' : 'brightness-0 invert'}`} />
+              </li>
+            ))}
+          </ul>
+          <div className="absolute bottom-0 left-0 right-0 gradient-line" />
+        </section>
 
       {/* Sean, /founding copy, home styling */}
       <section className="py-24 md:py-32 relative">
@@ -218,7 +230,7 @@ export default function HomeDraft() {
 
       {/* Trusted by, down the bottom (Sean, 26 Nov) */}
       <div className="pt-24 md:pt-32">
-        <section className="pb-14 md:pb-20" aria-label="Founders we have worked with">
+        <section className="pb-24 md:pb-32" aria-label="Founders we have worked with">
           <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Trusted by</p>
           <div className="trusted-marquee mt-8 overflow-hidden py-4">
             <div className="trusted-track faces-track flex w-max">
@@ -226,18 +238,6 @@ export default function HomeDraft() {
               <FaceRow hidden />
             </div>
           </div>
-        </section>
-        <section className="pb-24 md:pb-32" aria-label="Brands we have worked with">
-          {/* Trust line. Sean, 27 Nov: "just make it 100M+", then "there's a better place": with the logos. */}
-          <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
-          <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Brands we have worked with</p>
-          <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-12 items-center justify-items-center">
-            {LOGOS.map((l) => (
-              <li key={l.name} className="flex h-14 items-center">
-                <img src={l.src} alt={l.name} loading="lazy" className={`${l.h} w-auto max-w-[170px] object-contain opacity-70 ${l.keep ? 'grayscale' : 'brightness-0 invert'}`} />
-              </li>
-            ))}
-          </ul>
         </section>
       </div>
 
