@@ -7,7 +7,6 @@ import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import VslPlayer from '../components/founding/VslPlayer';
 import ClientFaces from '../components/founding/ClientFaces';
 
 /*
@@ -73,19 +72,6 @@ export default function HomeDraft() {
       <Hero eyebrow="Private content advisory" />
 
 
-      {/* The /founding walkthrough */}
-      <section className="py-24 md:py-32 relative">
-        <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <Fade>
-            <Kicker>The walkthrough</Kicker>
-            <H2>Watch the 7 minute walkthrough</H2>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-5 max-w-xl">See what your team installs over 90 days.</p>
-            <div className="mt-12">
-              <VslPlayer src="/founding/vsl-final-v2-hd.mp4" poster="/founding/vsl-final-v2.jpg" loopSrc="/founding/vsl-loop.mp4" loopPoster="/founding/vsl-loop.jpg" length="7:35" title="Home VSL" />
-            </div>
-          </Fade>
-        </div>
-      </section>
 
       {/* Sean, 27 Nov: "get rid of trust gap section, we move up the private growth advisory section" */}
       {/* WHAT YOU GET, his /founding cards */}
