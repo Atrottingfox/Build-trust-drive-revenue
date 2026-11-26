@@ -87,10 +87,6 @@ export default function HomeDraft() {
       {/* Sean, 27 Nov: "it also needs to show private content advisory" */}
       <Hero eyebrow="Private content advisory" />
 
-      {/* Trust line. Sean, 27 Nov: "just make it 100M+" */}
-      <section className="py-10 md:py-12 border-b border-zinc-800/60">
-        <div className="max-w-3xl mx-auto px-6 text-center text-[15px] md:text-base leading-relaxed" style={{ color: '#a1a1aa' }}>Built from experience behind established companies representing <span className="text-white font-semibold">$100M+</span> in combined revenue per year.</div>
-      </section>
 
       {/* The /founding walkthrough */}
       <section className="py-24 md:py-32 relative">
@@ -221,6 +217,8 @@ export default function HomeDraft() {
       <div className="pt-24 md:pt-32 [&_img]:!ring-zinc-900">
         <ClientFaces />
         <section className="pb-24 md:pb-32" aria-label="Brands we have worked with">
+          {/* Trust line. Sean, 27 Nov: "just make it 100M+", then "there's a better place": with the logos. */}
+          <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind established companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
           <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Brands we have worked with</p>
           <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 items-center justify-items-center">
             {LOGOS.map((l) => (
