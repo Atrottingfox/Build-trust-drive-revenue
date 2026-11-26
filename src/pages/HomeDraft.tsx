@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import Hero from '../components/Hero';
 import ProofStrip from '../components/ProofStrip';
-import Engine from '../components/Engine';
 import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import Footer from '../components/Footer';
@@ -44,6 +43,35 @@ const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
    Order is the /founding band order, numbered by Sean: 2 Taki, 3 Matt, 4 Laura, 5 Kris, 6 Erina,
    7 Morgan (out), 8 Doza, 9 Rhys, 10 Toby (CFS Health), 11 Jay. 1 is Sam (Alpha Tradie cap).
    Doza is paired with Geronimo, his business. Toby Morrison per cfshealth.com. */
+/* Sean, 27 Nov: the /founding steps look, but principle based. Brand, Content, Scale. Words from the live Engine, /founding steps and the business map. */
+const PILLARS = [
+  {
+    title: 'Brand',
+    line: 'Realign perception with truth',
+    body: 'We uncover your voice, your positioning, and your story. We analyse your current bottlenecks and build your Buying Belief Map. Then we turn that into a documented brand your team executes from.',
+    items: ['Belief Map', 'Proof Architecture', 'Authority Narrative'],
+    img: '/founding/step2-build-l.mp4',
+    alt: 'Sean running a Strategy Day',
+  },
+  {
+    title: 'Content',
+    line: 'Engineer consistent trust transfer',
+    body: 'A content system tied directly to your offers, your launches, and your revenue targets. We start on your exact bottleneck using our CVAQ analysis.',
+    items: ['Channel OS', 'Format Library', 'Distribution OS'],
+    img: '/founding/train-02a.mp4',
+    alt: 'A training video from the library',
+  },
+  {
+    title: 'Scale',
+    line: 'Build an operator led engine',
+    body: 'Once direction is locked, we scale. Your operator runs the system, we iterate with data, and the team runs it without you directing every decision.',
+    items: ['Operator Install', 'Authority Dashboard', 'Quarterly Campaigns'],
+    img: '/founding/step4-full2.mp4',
+    full: true,
+    alt: 'Sean walking through a format in the Engineroom',
+  },
+];
+
 const FACES = [
   { f: '01', brand: 'Alpha Tradie' },
   { f: '06', brand: 'Million Dollar Coach' },
@@ -138,7 +166,34 @@ export default function HomeDraft() {
       <ProofStrip />
 
       {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
-      <Engine />
+      {/* HOW IT WORKS: Brand, Content, Scale */}
+      <section id="engine" className="py-24 md:py-32 relative">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
+          <Fade>
+            <Kicker>How it works</Kicker>
+            <H2>Brand. Content. Scale.</H2>
+            <p className="text-zinc-400 text-[17px] leading-relaxed mt-5 max-w-2xl">The Authority Engine is the Media Operating System. Brand, Content, and Scale running as one Engine your operator can control.</p>
+          </Fade>
+          <div className="mt-16 space-y-16 md:space-y-24">
+            {PILLARS.map((st, i) => (
+              <Fade key={st.title} className="grid md:grid-cols-2 gap-8 md:gap-14 items-center">
+                <div className={i % 2 ? 'md:order-2' : ''}>
+                  <p aria-hidden="true" className="font-display text-[72px] md:text-[96px] font-extrabold leading-none tracking-[-0.05em] text-zinc-800 select-none">{String(i + 1).padStart(2, '0')}</p>
+                  <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mt-2">{st.title}</p>
+                  <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] text-white mt-3">{st.line}</h3>
+                  <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">{st.body}</p>
+                  <ul className="mt-6 space-y-2">{st.items.map((t) => <li key={t} className="flex items-start gap-2.5 text-zinc-300 text-[15px]"><Check className="w-4 h-4 mt-0.5 shrink-0 text-zinc-500" strokeWidth={2.5} />{t}</li>)}</ul>
+                </div>
+                <div className={i % 2 ? 'md:order-1' : ''}>
+                  <Media src={st.img} alt={st.alt} className={`w-full aspect-video rounded-2xl border border-zinc-800/60 ${'full' in st ? 'object-contain bg-[#0d0f14]' : 'object-cover object-top'}`} />
+                </div>
+              </Fade>
+            ))}
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 gradient-line" />
+      </section>
+
 
       <Process hideNot />
 
