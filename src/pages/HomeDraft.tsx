@@ -22,13 +22,6 @@ import ClientFaces from '../components/founding/ClientFaces';
 */
 
 /* Sean, 27 Nov: his pasted outline. His /founding words, word for word. */
-const GAP = [
-  "Getting attention that doesn't convert to sales",
-  "Teaching killer ideas that don't connect with your sales process",
-  'Produced by a team that still needs you to decide what to say',
-  'Reaching people interested but unlikely to buy',
-  'Sending people into calls where they have to explain everything from scratch',
-];
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
   { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['Every SOP, every training video, all playbooks, straight away', 'Training every fortnight', 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', 'The whole team gets access'] },
@@ -95,27 +88,7 @@ export default function HomeDraft() {
         </div>
       </section>
 
-      {/* THE PROBLEM, his /founding trust gap */}
-      <section className="py-24 md:py-32 relative">
-        <div className="max-w-3xl mx-auto px-6 lg:px-8">
-          <Fade>
-            <Kicker>The trust gap</Kicker>
-            <H2>Your sales team is doing the work your content already should have.</H2>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6">You've got the expertise, your offer's dialled and unlike most - you're actually legit.</p>
-            <p className="text-zinc-500 text-[16px] mt-6">So why is your content still -</p>
-            <ul className="mt-4 space-y-3">
-              {GAP.map((t) => <li key={t} className="flex items-start gap-3 text-zinc-300 text-[16px] leading-relaxed"><span className="mt-[10px] h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-600" />{t}</li>)}
-            </ul>
-            <p className="text-white text-xl font-semibold leading-relaxed mt-10">Your business has outgrown how content gets made.</p>
-          </Fade>
-        </div>
-      </section>
-
-      <ProofStrip />
-
-      {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
-      <Engine />
-
+      {/* Sean, 27 Nov: "get rid of trust gap section, we move up the private growth advisory section" */}
       {/* WHAT YOU GET, his /founding cards */}
       <section className="py-24 md:py-32 relative">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
@@ -151,6 +124,11 @@ export default function HomeDraft() {
           <div className="mt-12 flex justify-center"><Go /></div>
         </div>
       </section>
+
+      <ProofStrip />
+
+      {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
+      <Engine />
 
       <Process hideNot />
 
