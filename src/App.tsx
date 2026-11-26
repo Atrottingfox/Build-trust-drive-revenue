@@ -1,6 +1,7 @@
 import React, { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 const Home = React.lazy(() => import('./pages/Home'));
+const HomeDraft = React.lazy(() => import('./pages/HomeDraft'));
 const DFY = React.lazy(() => import('./pages/DFY'));
 const Accelerator = React.lazy(() => import('./pages/Accelerator'));
 const ContentArchetypeAssessment = React.lazy(() => import('./pages/ContentArchetypeAssessment'));
@@ -189,6 +190,7 @@ export default function App() {
           {/* Sean, 22 Nov: "swap the pages". /founding is the new design, the old /founding is at /open. Rollback: tag pre-founding-swap-20261122T2130. */}
           <Route path="/founding" element={<OpenPage live />} />
           <Route path="/founding-advisory" element={<OpenPage live advisory />} />
+          <Route path="/home-draft" element={<HomeDraft />} />
           <Route path="/founding-growth" element={<OpenPage live growth />} />
           <Route path="/advisoryoutline" element={<AdvisoryOutline />} />
           <Route path="/founding-agreement" element={<FoundingAgreement />} />
