@@ -36,7 +36,8 @@ function OutcomeCard({ outcome, index }: { outcome: string; index: number }) {
   );
 }
 
-export default function Process() {
+/* hideNot: drops the "Not a content agency..." line (/home-draft, 27 Nov). The live home page passes nothing. */
+export default function Process({ hideNot = false }: { hideNot?: boolean } = {}) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
@@ -70,8 +71,8 @@ export default function Process() {
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.1 }}
           >
-            Not a content agency. Not a scripting service. Not a mastermind.
-            <br className="hidden sm:block" />
+            {!hideNot && <>Not a content agency. Not a scripting service. Not a mastermind.
+            <br className="hidden sm:block" /></>}
             Personalised direction, structure, and calibration for 7 and 8 figure founders.
           </motion.p>
         </div>

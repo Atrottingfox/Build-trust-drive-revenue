@@ -57,7 +57,8 @@ function HeroMetricsGhost() {
   );
 }
 
-export default function Hero() {
+/* eyebrow: optional small line above the headline (/home-draft, Sean 27 Nov). The live home page passes nothing. */
+export default function Hero({ eyebrow }: { eyebrow?: string } = {}) {
   const { scrollY } = useScroll();
   const bgPosition = useTransform(scrollY, [0, 800], ['200%', '-200%']);
 
@@ -75,6 +76,7 @@ export default function Hero() {
             animate={{ width: 40 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           />
+          {eyebrow && <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest -mt-4 mb-8">{eyebrow}</p>}
 
           <motion.h1
             className="font-display text-5xl sm:text-7xl md:text-[6rem] font-extrabold tracking-[-0.04em] leading-[0.9] text-white mb-8"
