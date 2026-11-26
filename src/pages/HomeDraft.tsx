@@ -45,24 +45,23 @@ const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
    7 Morgan (out), 8 Doza, 9 Rhys, 10 Toby (CFS Health), 11 Jay. 1 is Sam (Alpha Tradie cap).
    Doza is paired with Geronimo, his business. Toby Morrison per cfshealth.com. */
 const FACES = [
-  { f: '01', name: 'Sam Ackland', brand: 'Alpha Tradie' },
-  { f: '06', name: 'Taki Moore', brand: 'Million Dollar Coach' },
-  { f: '02', name: 'Matt Lakajev', brand: 'Seven Figure Creators' },
-  { f: '09', name: 'Laura Higgins', brand: 'Laura Higgins' },
-  { f: '03', name: 'Kris Cochrane', brand: 'Remote Sales Institute' },
-  { f: '11', name: 'Erina Roch', brand: 'UpScale' },
-  { f: '05', name: 'Doza', brand: 'Geronimo' },
-  { f: '12', name: 'Rhys Livingstone', brand: 'Undeniable' },
-  { f: '10', name: 'Toby Morrison', brand: 'CFS Health' },
-  { f: '07', name: 'Jay Wright', brand: 'Ecommerce Equation' },
+  { f: '01', brand: 'Alpha Tradie' },
+  { f: '06', brand: 'Million Dollar Coach' },
+  { f: '02', brand: 'Seven Figure Creators' },
+  { f: '09', brand: 'Laura Higgins' },
+  { f: '03', brand: 'Remote Sales Institute' },
+  { f: '11', brand: 'UpScale' },
+  { f: '05', brand: 'Geronimo' },
+  { f: '12', brand: 'Undeniable' },
+  { f: '10', brand: 'CFS Health' },
+  { f: '07', brand: 'Ecommerce Equation' },
 ];
 const FaceRow = ({ hidden = false }: { hidden?: boolean }) => (
   <ul className="flex shrink-0 items-start" aria-hidden={hidden || undefined}>
     {FACES.map((p) => (
       <li key={p.f} className="mx-4 md:mx-6 w-[120px] md:w-[150px] text-center">
-        <img src={`/founding/faces/${p.f}.jpg`} alt={hidden ? '' : p.name} width={144} height={144} loading="lazy" className="mx-auto h-[88px] w-[88px] md:h-[120px] md:w-[120px] rounded-full object-cover ring-4 ring-zinc-900" />
-        <p className="mt-4 text-white text-[14px] md:text-[15px] font-semibold leading-tight">{p.name}</p>
-        <p className="mt-1 text-zinc-500 text-[12px] md:text-[13px] leading-snug">{p.brand}</p>
+        <img src={`/founding/faces/${p.f}.jpg`} alt={hidden ? '' : p.brand} width={144} height={144} loading="lazy" className="mx-auto h-[88px] w-[88px] md:h-[120px] md:w-[120px] rounded-full object-cover ring-4 ring-zinc-900" />
+        <p className="mt-4 text-white text-[14px] md:text-[15px] font-semibold leading-tight">{p.brand}</p>
       </li>
     ))}
   </ul>
