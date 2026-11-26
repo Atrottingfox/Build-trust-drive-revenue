@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import Hero from '../components/Hero';
 import ProofStrip from '../components/ProofStrip';
+import Engine from '../components/Engine';
 import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import FinalCTA from '../components/FinalCTA';
@@ -9,7 +10,6 @@ import Footer from '../components/Footer';
 import SEO from '../components/SEO';
 import VslPlayer from '../components/founding/VslPlayer';
 import ClientFaces from '../components/founding/ClientFaces';
-import { Window } from '../components/founding/StartTodayShowcase';
 
 /*
   /home-draft. Hidden from Google, linked from nowhere.
@@ -28,13 +28,6 @@ const GAP = [
   'Produced by a team that still needs you to decide what to say',
   'Reaching people interested but unlikely to buy',
   'Sending people into calls where they have to explain everything from scratch',
-];
-const NOW = ['The Engineroom', 'SOP library', 'Training library', 'Playbooks', 'Thursday office hours', 'WhatsApp setup'];
-const STEPS = [
-  { tag: 'Today', title: 'Secure your place', body: 'Secure your place now to get your Strategy Day included in the price.', img: '/founding/ce-portal.mp4', alt: 'A new client going through the contentengine.live portal' },
-  { tag: 'Before week 1', title: 'Build', body: 'Your Strategy Day, in person. We analyse your current bottlenecks and build your Buying Belief Map. Then we turn that into a documented brand and Authority Engine.', img: '/founding/step2-build-l.mp4', alt: 'Sean running a Strategy Day' },
-  { tag: 'Weeks 1 to 4', title: 'Install', body: 'We start on your exact bottleneck using our CVAQ analysis. Your Strategy Day creates the blueprint, then we immediately begin implementation with weekly 1:1 support to get it cranking.', img: '/founding/train-02a.mp4', alt: 'A training video from the library' },
-  { tag: 'Weeks 5 to 12', title: 'Transfer and tune', body: 'Your operator runs the system with support. We iron out any kinks, iterate with data, and ensure the team can run it themselves.', img: '/founding/step4-full2.mp4', full: true, alt: 'Sean walking through a format in the Engineroom' },
 ];
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
@@ -120,41 +113,8 @@ export default function HomeDraft() {
 
       <ProofStrip />
 
-      {/* HOW IT WORKS, the /founding steps and videos */}
-      <section id="engine" className="py-24 md:py-32 relative">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Fade>
-            <Kicker>How it works</Kicker>
-            <H2>How the first 90 days works</H2>
-          </Fade>
-          <div className="mt-16 space-y-16 md:space-y-24">
-            {STEPS.map((st, i) => (
-              <Fade key={st.title} className="grid md:grid-cols-2 gap-8 md:gap-14 items-center">
-                <div className={i % 2 ? 'md:order-2' : ''}>
-                  <p aria-hidden="true" className="font-display text-[72px] md:text-[96px] font-extrabold leading-none tracking-[-0.05em] text-zinc-800 select-none">{String(i + 1).padStart(2, '0')}</p>
-                  <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mt-2">Step {i + 1} | {st.tag}</p>
-                  <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] text-white mt-3">{st.title}</h3>
-                  <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">{st.body}</p>
-                  {i === 0 && (
-                    <>
-                      <p className="text-white text-[16px] font-semibold mt-6">Get immediate access to:</p>
-                      <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2">{NOW.map((t) => <li key={t} className="flex items-start gap-2.5 text-zinc-300 text-[15px]"><Check className="w-4 h-4 mt-0.5 shrink-0 text-zinc-500" strokeWidth={2.5} />{t}</li>)}</ul>
-                    </>
-                  )}
-                </div>
-                <div className={i % 2 ? 'md:order-1' : ''}>
-                  {i === 0 ? (
-                    <Window title="contentengine.live"><Media src={st.img} alt={st.alt} className="w-full aspect-video object-cover object-top" /></Window>
-                  ) : (
-                    <Media src={st.img} alt={st.alt} className={`w-full aspect-video rounded-2xl border border-zinc-800/60 ${'full' in st ? 'object-contain bg-[#0d0f14]' : 'object-cover object-top'}`} />
-                  )}
-                </div>
-              </Fade>
-            ))}
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 gradient-line" />
-      </section>
+      {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
+      <Engine />
 
       {/* WHAT YOU GET, his /founding cards */}
       <section className="py-24 md:py-32 relative">
