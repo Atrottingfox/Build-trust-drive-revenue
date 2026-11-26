@@ -7,7 +7,6 @@ import Process from '../components/Process';
 import PricingPlans from '../components/PricingPlans';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
-import ClientFaces from '../components/founding/ClientFaces';
 
 /*
   /home-draft. Hidden from Google, linked from nowhere.
@@ -29,7 +28,6 @@ const GROUPS = [
 /* Sean, 26 Nov: "if we were going to say 'brands we've worked with' let's just have the exact logos".
    From each brand's own site or Sean's files. Undeniable from undeniableeducation.com (27 Nov). CFS Health, Laura Higgins and Remote Sales Institute (Kris Cochrane) from their own sites. MDC cropped to drop Implementation Program. Dream Out Loud has no standalone logo online. */
 const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
-  { name: 'Klaviyo', src: '/home/logos/klaviyo.svg', h: 'h-7 md:h-8' },
   { name: 'Million Dollar Coach', src: '/home/logos/mdc.png', h: 'h-10 md:h-12' },
   { name: 'Ecommerce Equation', src: '/home/logos/ece.svg', h: 'h-7 md:h-8' },
   { name: 'Seven Figure Creators', src: '/home/logos/sfc.svg', h: 'h-11 md:h-12' },
@@ -41,6 +39,34 @@ const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
   { name: 'Laura Higgins', src: '/home/logos/laura.png', h: 'h-7 md:h-8' },
   { name: 'Remote Sales Institute', src: '/home/logos/rsi.svg', h: 'h-9 md:h-10' },
 ];
+
+/* Sean, 27 Nov: brand name under each face, Morgan out, Klaviyo out, so 10 faces and 10 logos.
+   Order is the /founding band order, numbered by Sean: 2 Taki, 3 Matt, 4 Laura, 5 Kris, 6 Erina,
+   7 Morgan (out), 8 Doza, 9 Rhys, 10 Toby (CFS Health), 11 Jay. 1 is Sam (Alpha Tradie cap).
+   Doza is paired with Geronimo, his business. Toby Morrison per cfshealth.com. */
+const FACES = [
+  { f: '01', name: 'Sam Ackland', brand: 'Alpha Tradie' },
+  { f: '06', name: 'Taki Moore', brand: 'Million Dollar Coach' },
+  { f: '02', name: 'Matt Lakajev', brand: 'Seven Figure Creators' },
+  { f: '09', name: 'Laura Higgins', brand: 'Laura Higgins' },
+  { f: '03', name: 'Kris Cochrane', brand: 'Remote Sales Institute' },
+  { f: '11', name: 'Erina Roch', brand: 'UpScale' },
+  { f: '05', name: 'Doza', brand: 'Geronimo' },
+  { f: '12', name: 'Rhys Livingstone', brand: 'Undeniable' },
+  { f: '10', name: 'Toby Morrison', brand: 'CFS Health' },
+  { f: '07', name: 'Jay Wright', brand: 'Ecommerce Equation' },
+];
+const FaceRow = ({ hidden = false }: { hidden?: boolean }) => (
+  <ul className="flex shrink-0 items-start" aria-hidden={hidden || undefined}>
+    {FACES.map((p) => (
+      <li key={p.f} className="mx-4 md:mx-6 w-[120px] md:w-[150px] text-center">
+        <img src={`/founding/faces/${p.f}.jpg`} alt={hidden ? '' : p.name} width={144} height={144} loading="lazy" className="mx-auto h-[88px] w-[88px] md:h-[120px] md:w-[120px] rounded-full object-cover ring-4 ring-zinc-900" />
+        <p className="mt-4 text-white text-[14px] md:text-[15px] font-semibold leading-tight">{p.name}</p>
+        <p className="mt-1 text-zinc-500 text-[12px] md:text-[13px] leading-snug">{p.brand}</p>
+      </li>
+    ))}
+  </ul>
+);
 
 const Kicker = ({ children }: { children: React.ReactNode }) => (
   <>
@@ -137,13 +163,21 @@ export default function HomeDraft() {
       <PricingPlans />
 
       {/* Trusted by, down the bottom (Sean, 26 Nov) */}
-      <div className="pt-24 md:pt-32 [&_img]:!ring-zinc-900">
-        <ClientFaces />
+      <div className="pt-24 md:pt-32">
+        <section className="pb-14 md:pb-20" aria-label="Founders we have worked with">
+          <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Trusted by</p>
+          <div className="trusted-marquee mt-8 overflow-hidden py-4">
+            <div className="trusted-track faces-track flex w-max">
+              <FaceRow />
+              <FaceRow hidden />
+            </div>
+          </div>
+        </section>
         <section className="pb-24 md:pb-32" aria-label="Brands we have worked with">
           {/* Trust line. Sean, 27 Nov: "just make it 100M+", then "there's a better place": with the logos. */}
           <h2 className="max-w-3xl mx-auto px-6 text-center font-display text-2xl md:text-4xl font-extrabold tracking-[-0.02em] leading-[1.15] mb-14" style={{ color: '#a1a1aa' }}>Built from experience behind companies representing <span className="text-white">$100M+</span> in combined revenue per year.</h2>
           <p className="text-center text-sm font-medium text-zinc-500 uppercase tracking-widest">Brands we have worked with</p>
-          <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12 items-center justify-items-center">
+          <ul className="max-w-5xl mx-auto px-6 lg:px-8 mt-12 grid grid-cols-2 md:grid-cols-5 gap-x-8 gap-y-12 items-center justify-items-center">
             {LOGOS.map((l) => (
               <li key={l.name} className="flex h-14 items-center">
                 <img src={l.src} alt={l.name} loading="lazy" className={`${l.h} w-auto max-w-[170px] object-contain opacity-70 ${l.keep ? 'grayscale' : 'brightness-0 invert'}`} />
