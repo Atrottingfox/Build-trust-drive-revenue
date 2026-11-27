@@ -18,23 +18,18 @@ const safeEqual = (a: string, b: string) => a.length === b.length && crypto.timi
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c] as string));
 const reply = (statusCode: number, body: unknown) => ({ statusCode, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
 
-const SUBJECT = "Your idea capture";
+const SUBJECT = "Your idea capture app";
 
 // One list of lines, so the preview and the email can never differ.
 // A line starting with "- " is a list item; "#" is a small heading; "[link]" is the button.
+// Sean, 27 Nov: "specifically just to get the homescreen app and show how to do it".
+// The link opens a setup screen that shows the taps for their phone.
 function lines(first: string): string[] {
   return [
     `${first},`,
-    "Here's your idea capture. Something's on your mind, tap it and talk. It comes straight through to us.",
+    "Open this on your phone. It shows you how to put it on your home screen, two taps.",
     "[link]",
-    "# Put it on your home screen",
-    "- iPhone: open the link in Safari, tap Share (the square with the arrow), tap Add to Home Screen.",
-    "- Android: open the link in Chrome, tap the three dots, tap Add to Home screen.",
-    "# The three things to share",
-    "- Teach. What did you teach today? What problem did you solve?",
-    "- Belief. Most people in my industry believe X, but I believe Y.",
-    "- Share. What did you learn today? What came up? What are you excited about?",
-    "Pick one, hit the mic, say it how it comes out. Rough is fine.",
+    "Then whenever something's on your mind, tap it and talk.",
     "Sean",
   ];
 }
@@ -50,7 +45,7 @@ function toHtml(first: string, url: string) {
   for (const l of lines(esc(first))) {
     if (l.startsWith("- ")) { list.push(`<li>${l.slice(2)}</li>`); continue; }
     flush();
-    if (l === "[link]") out.push(`<p><a href="${esc(url)}" style="display:inline-block;padding:12px 22px;border-radius:10px;background:#3B7DFF;color:#fff;font-weight:600;text-decoration:none">Open my idea capture</a></p>`);
+    if (l === "[link]") out.push(`<p><a href="${esc(url)}" style="display:inline-block;padding:12px 22px;border-radius:10px;background:#3B7DFF;color:#fff;font-weight:600;text-decoration:none">Set it up</a></p>`);
     else if (l.startsWith("# ")) out.push(`<p style="margin-top:20px"><strong>${l.slice(2)}</strong></p>`);
     else out.push(`<p>${l}</p>`);
   }
