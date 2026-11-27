@@ -122,7 +122,7 @@ export default function HomeDraft() {
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
       {/* Sean, 27 Nov: "it also needs to show private content advisory" */}
       {/* Sean, 27 Nov: plain words across the top of the page, "that's fine" to the drafted version. */}
-      <Hero eyebrow="Private content advisory" sub="We work with top 1% industry leaders to scale media & own their category." />
+      <Hero eyebrow="Private content advisory" sub="We work with the top 1% of industry leaders to scale their media and own their category." />
 
 
 

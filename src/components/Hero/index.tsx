@@ -102,7 +102,7 @@ export default function Hero({ eyebrow, sub }: { eyebrow?: string; sub?: string 
           </motion.h1>
 
           <motion.p
-            className="text-lg sm:text-xl text-zinc-400 max-w-xl mb-14 leading-relaxed"
+            className={`text-lg sm:text-xl text-zinc-400 ${sub ? 'max-w-2xl' : 'max-w-xl'} mb-14 leading-relaxed`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
