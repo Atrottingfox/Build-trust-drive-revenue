@@ -18,9 +18,9 @@ import SEO from '../components/SEO';
 
 /* Sean, 27 Nov: his pasted outline. His /founding words, word for word. */
 const GROUPS = [
-  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Talk to Sean, trusted experts and other serious founders when your team needs help it can\'t give itself.', items: ['Talk to Sean directly', 'Introductions to the right experts', 'A private group of founders', 'Help hiring and finding partners'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Your team gets the standards, tools and feedback to make better content without waiting on you.', items: ['Every SOP, training video and playbook, straight away', 'Team training every fortnight', 'Weekly calls for 4 weeks, then every second week', 'Your whole team gets access'] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Straight answers', line: 'Know what to make, what to fix and what to do next.', items: ['A Strategy Day with you and your team', 'Two video reviews a week while we build', 'A monthly content review meeting', 'Open Q&A every Thursday', 'Clear advice inside the portal', 'WhatsApp help, answers within 24 hours'] },
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Talk to Sean, trusted experts and other serious founders when your team needs help it can\'t give itself.', items: ['Direct access to Sean', 'Introductions to the right experts', 'A private network of founders', 'Help with hiring and partnerships'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Your team gets the standards, tools and feedback to make better content without waiting on you.', items: ['SOPs, training and playbooks', 'Regular team training', 'Implementation calls with your team', 'Access for your whole team'] },
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Straight answers', line: 'Know what to make, what to fix and what to do next.', items: ['A strategy built around your business', 'Reviews of the content you make', 'Ongoing advisory calls', 'Clear advice inside the portal', 'Support when you need it'] },
 ];
 
 /* Sean, 26 Nov: "if we were going to say 'brands we've worked with' let's just have the exact logos".
@@ -107,7 +107,7 @@ const Media = ({ src, alt = '', className = '' }: { src: string; alt?: string; c
   <video src={src} poster={src.replace('.mp4', '.jpg')} autoPlay muted loop playsInline preload="metadata" aria-label={alt} className={className} />
 );
 const Go = () => (
-  <a href="/founding" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">Secure your January place</a>
+  <a href="/apply" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">Apply now</a>
 );
 const Fade = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
   <motion.div className={className} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }}>
