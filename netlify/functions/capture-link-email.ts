@@ -34,15 +34,29 @@ function lines(first: string): string[] {
   ];
 }
 
-function toText(first: string, url: string) {
-  return lines(first).map((l) => (l === "[link]" ? url : l.startsWith("# ") ? `\n${l.slice(2)}` : l)).join("\n");
+// The weekly target nudge (Sean, 27 Nov: "send them a nudge at 9am, 2pm, and
+// 5pm friday if they haven't done it").
+type Nudge = { have: number; need: number; due: string };
+function nudgeLines(first: string, n: Nudge): string[] {
+  const left = Math.max(1, n.need - n.have);
+  return [
+    `${first},`,
+    `${n.have} of ${n.need} ideas in this week. ${left} to go, they were due ${n.due}.`,
+    "Tap it, pick Teach, Belief or Share, and talk. One minute each.",
+    "[link]",
+    "Sean",
+  ];
 }
 
-function toHtml(first: string, url: string) {
+function toText(first: string, url: string, n?: Nudge) {
+  return (n ? nudgeLines(first, n) : lines(first)).map((l) => (l === "[link]" ? url : l.startsWith("# ") ? `\n${l.slice(2)}` : l)).join("\n");
+}
+
+function toHtml(first: string, url: string, n?: Nudge) {
   const out: string[] = [];
   let list: string[] = [];
   const flush = () => { if (list.length) { out.push(`<ul>${list.join("")}</ul>`); list = []; } };
-  for (const l of lines(esc(first))) {
+  for (const l of (n ? nudgeLines(esc(first), n) : lines(esc(first)))) {
     if (l.startsWith("- ")) { list.push(`<li>${l.slice(2)}</li>`); continue; }
     flush();
     if (l === "[link]") out.push(`<p><a href="${esc(url)}" style="display:inline-block;padding:12px 22px;border-radius:10px;background:#3B7DFF;color:#fff;font-weight:600;text-decoration:none">Set it up</a></p>`);
@@ -68,7 +82,12 @@ export const handler: Handler = async (event) => {
   const [firstName, ...rest] = name.split(/\s+/);
   const first = firstName || "Hey";
 
-  if (body.preview) return reply(200, { subject: SUBJECT, text: toText(first, url) });
+  const n: Nudge | undefined = body.nudge && Number.isFinite(Number(body.nudge.need))
+    ? { have: Math.max(0, Number(body.nudge.have) || 0), need: Number(body.nudge.need), due: esc(String(body.nudge.due || "").slice(0, 40)) }
+    : undefined;
+  const togo = n ? Math.max(1, n.need - n.have) : 0;
+  const subject = n ? `${togo} idea${togo === 1 ? "" : "s"} to go this week` : SUBJECT;
+  if (body.preview) return reply(200, { subject, text: toText(first, url, n) });
 
   const token = process.env.GHL_TOKEN;
   const location = process.env.GHL_LOCATION_ID;
@@ -77,7 +96,7 @@ export const handler: Handler = async (event) => {
 
   const contactId = await findOrCreateByEmail(token, location, email, { firstName: firstName || undefined, lastName: rest.join(" ") || undefined });
   if (!contactId) return reply(200, { sent: false, reason: "no GHL contact" });
-  const { sent, reason } = await sendEmail(token, contactId, SUBJECT, toHtml(first, url));
+  const { sent, reason } = await sendEmail(token, contactId, subject, toHtml(first, url, n));
   console.log("capture-link-email", sent ? "sent" : `not sent: ${reason}`, contactUrl(contactId));
   return reply(200, { sent, reason });
 };
