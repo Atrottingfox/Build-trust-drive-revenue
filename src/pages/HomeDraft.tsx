@@ -115,10 +115,19 @@ const Fade = ({ children, className = '' }: { children: React.ReactNode; classNa
   </motion.div>
 );
 
-export default function HomeDraft() {
+/* live: Sean, 27 Nov "hit it": this page is the home page at /. Same SEO as the old home (Home.tsx, kept for rollback). */
+export default function HomeDraft({ live = false }: { live?: boolean } = {}) {
   return (
     <div className="min-h-screen bg-base">
-      <SEO title="Own Your Category" description="The Authority Engine." path="/home-draft" noIndex />
+      {live ? (
+        <SEO
+          title="Own Your Category. The Content Authority Engine for 7 & 8 figure founders"
+          description="Sean Fox builds Authority Engines. A 90 day content system that turns founder expertise into a media operating system. Without you becoming a full time creator."
+          path="/"
+        />
+      ) : (
+        <SEO title="Own Your Category" description="The Authority Engine." path="/home-draft" noIndex />
+      )}
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
       {/* Sean, 27 Nov: "it also needs to show private content advisory" */}
       {/* Sean, 27 Nov: plain words across the top of the page, "that's fine" to the drafted version. */}

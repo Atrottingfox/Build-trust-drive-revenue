@@ -112,7 +112,7 @@ export default function App() {
         </div>
       }>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomeDraft live />} />
           <Route path="/dfy" element={<DFY />} />
           <Route path="/accelerator" element={<Accelerator />} />
           <Route path="/content-archetype" element={<ContentArchetypeAssessment />} />
