@@ -86,9 +86,9 @@ const FACES = [
 const FaceRow = ({ hidden = false }: { hidden?: boolean }) => (
   <ul className="flex shrink-0 items-start" aria-hidden={hidden || undefined}>
     {FACES.map((p) => (
-      <li key={p.f} className="mx-4 md:mx-6 w-[120px] md:w-[150px] text-center">
-        <img src={`/founding/faces/${p.f}.jpg`} alt={hidden ? '' : p.brand} width={144} height={144} loading="lazy" className="mx-auto h-[88px] w-[88px] md:h-[120px] md:w-[120px] rounded-full object-cover ring-4 ring-zinc-900" />
-        <p className="mt-4 text-white text-[14px] md:text-[15px] font-semibold leading-tight">{p.brand}</p>
+      <li key={p.f} className="group mx-4 md:mx-6 w-[120px] md:w-[150px] text-center">
+        <img src={`/founding/faces/${p.f}.jpg`} alt={hidden ? '' : p.brand} width={144} height={144} loading="lazy" className="mx-auto h-[88px] w-[88px] md:h-[120px] md:w-[120px] rounded-full object-cover ring-4 ring-zinc-900 grayscale opacity-70 transition duration-300 group-hover:grayscale-0 group-hover:opacity-100" />
+        <p className="mt-4 text-zinc-500 text-[14px] md:text-[15px] font-semibold leading-tight transition-colors duration-300 group-hover:text-white">{p.brand}</p>
       </li>
     ))}
   </ul>
@@ -133,7 +133,7 @@ export default function HomeDraft() {
           <Fade className="text-center">
             <div className="accent-line mb-8 mx-auto" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you get</p>
-            <H2>Content advice for founders<br className="hidden md:block" /> at the top of their industry.</H2>
+            <H2>Private content advisory for founders<br className="hidden md:block" /> at the top of their industry.</H2>
             <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">We give you the plan, the playbooks and the standards so your team makes short and long videos that build trust before anyone gets on a sales call. You don't have to make every decision.</p>
           </Fade>
           <div className="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl mx-auto">
@@ -242,15 +242,19 @@ export default function HomeDraft() {
         </section>
       </div>
 
-      {/* Sean, 27 Nov: "we still need something below the faces". Close: the page title, Apply now (hero link), virtual coffee (live home link). */}
+      {/* Sean, 27 Nov: "we still need something below the faces". Close: the page title and Apply now (hero link). Coffee removed 27 Nov. */}
       <section className="pb-24 md:pb-32 relative">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+        <div className="max-w-5xl mx-auto px-6 text-center">
           <Fade>
-            <H2>Own your category.</H2>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-5">Content advice for founders at the top of their industry.</p>
+            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.04em] text-white leading-[0.95]">Own your category.</h2>
+            {/* Sean, 27 Nov, his words: one line each under Own your category. */}
+            <div className="mt-8 space-y-2 text-zinc-400 text-xl md:text-2xl font-medium leading-snug">
+              <p>Business is the vehicle for impact.</p>
+              <p>Revenue is the fuel.</p>
+              <p>Content is the engine.</p>
+            </div>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="/apply" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">Apply now</a>
-              <a href="https://calendar.app.google/BiQRa1PYXCyDQVov5" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 px-8 py-4 rounded-full text-[15px] font-medium hover:text-white hover:border-zinc-500 transition-colors">Book a virtual coffee</a>
             </div>
           </Fade>
         </div>
