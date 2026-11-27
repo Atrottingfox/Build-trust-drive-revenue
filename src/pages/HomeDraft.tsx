@@ -42,28 +42,29 @@ const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
    Order is the /founding band order, numbered by Sean: 2 Taki, 3 Matt, 4 Laura, 5 Kris, 6 Erina,
    7 Morgan (out), 8 Doza, 9 Rhys, 10 Toby (CFS Health), 11 Jay. 1 is Sam (Alpha Tradie cap).
    Doza is paired with Geronimo, his business. Toby Morrison per cfshealth.com. */
-/* Sean, 27 Nov: the /founding steps look, but principle based. Brand, Content, Scale. Words from the live Engine, /founding steps and the business map. */
+/* Sean, 27 Nov: the /founding steps look, Brand, Content, Scale, "use words that already exist".
+   Headlines and bodies word for word from the live home Engine. Ticks word for word from /business-map. */
 const PILLARS = [
   {
     title: 'Brand',
-    line: 'Realign perception with truth',
-    body: 'We uncover your voice, your positioning, and your story. We analyse your current bottlenecks and build your Buying Belief Map. Then we turn that into a documented brand your team executes from.',
+    line: 'The Brand Bible',
+    body: 'We uncover your voice, your positioning, and your story. Then we build the blueprint your team executes from.',
     items: ['Belief Map', 'Proof Architecture', 'Authority Narrative'],
     img: '/founding/step2-build-l.mp4',
     alt: 'Sean running a Strategy Day',
   },
   {
     title: 'Content',
-    line: 'Engineer consistent trust transfer',
-    body: 'A content system tied directly to your offers, your launches, and your revenue targets. We start on your exact bottleneck using our CVAQ analysis.',
+    line: 'The Posting Program',
+    body: 'We install the growth engine. You get a content system tied directly to your offers, your launches, and your revenue targets.',
     items: ['Channel OS', 'Format Library', 'Distribution OS'],
     img: '/founding/train-02a.mp4',
     alt: 'A training video from the library',
   },
   {
     title: 'Scale',
-    line: 'Build an operator led engine',
-    body: 'Once direction is locked, we scale. Your operator runs the system, we iterate with data, and the team runs it without you directing every decision.',
+    line: 'Scale + Compound',
+    body: 'Once direction is locked, we scale. Refining a straight line system to push volume through every channel.',
     items: ['Operator Install', 'Authority Dashboard', 'Quarterly Campaigns'],
     img: '/founding/step4-full2.mp4',
     full: true,
