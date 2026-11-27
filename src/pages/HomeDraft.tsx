@@ -18,9 +18,9 @@ import SEO from '../components/SEO';
 
 /* Sean, 27 Nov: his pasted outline. His /founding words, word for word. */
 const GROUPS = [
-  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Get direct access to Sean, trusted specialists, and serious founders when your team needs help beyond its current capability.', items: ['Direct access to Sean', 'Curated specialist introductions', 'Private founder network', 'Help with hiring and partnerships'] },
-  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Give your team the standards, tools, and feedback to produce better media without waiting for you.', items: ['Every SOP, every training video, all playbooks, straight away', 'Training every fortnight', 'Weekly implementation calls for the first 4 weeks, then fortnightly for the next 8', 'The whole team gets access'] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Senior judgment', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['A Strategy Day with you and your team', 'Two Loom reviews per week during active implementation', 'Monthly content advisory board meetings', 'Advisory group office hours, every Thursday', 'Prescriptive advice directly through the portal', 'WhatsApp support, 24 hour replies'] },
+  { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Talk to Sean, trusted experts and other serious founders when your team needs help it can\'t give itself.', items: ['Talk to Sean directly', 'Introductions to the right experts', 'A private group of founders', 'Help hiring and finding partners'] },
+  { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Your team gets the standards, tools and feedback to make better content without waiting on you.', items: ['Every SOP, training video and playbook, straight away', 'Team training every fortnight', 'Weekly calls for 4 weeks, then every second week', 'Your whole team gets access'] },
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Straight answers', line: 'Know what to make, what to fix and what to do next.', items: ['A Strategy Day with you and your team', 'Two video reviews a week while we build', 'A monthly content review meeting', 'Open Q&A every Thursday', 'Clear advice inside the portal', 'WhatsApp help, answers within 24 hours'] },
 ];
 
 /* Sean, 26 Nov: "if we were going to say 'brands we've worked with' let's just have the exact logos".
@@ -42,30 +42,29 @@ const LOGOS: { name: string; src: string; h: string; keep?: boolean }[] = [
    Order is the /founding band order, numbered by Sean: 2 Taki, 3 Matt, 4 Laura, 5 Kris, 6 Erina,
    7 Morgan (out), 8 Doza, 9 Rhys, 10 Toby (CFS Health), 11 Jay. 1 is Sam (Alpha Tradie cap).
    Doza is paired with Geronimo, his business. Toby Morrison per cfshealth.com. */
-/* Sean, 27 Nov: the /founding steps look, Brand, Content, Scale, "use words that already exist".
-   Headlines and bodies word for word from the live home Engine. Ticks word for word from /business-map. */
+/* Sean, 27 Nov: the /founding steps look, Brand, Content, Scale. Plain words, approved 27 Nov ("that's fine"). */
 const PILLARS = [
   {
     title: 'Brand',
-    line: 'The Brand Bible',
-    body: 'We uncover your voice, your positioning, and your story. Then we build the blueprint your team executes from.',
-    items: ['Belief Map', 'Proof Architecture', 'Authority Narrative'],
+    line: 'Know exactly what you stand for',
+    body: 'We uncover your voice, your positioning, and your story. We build your Buying Belief Map, then turn it into a documented brand your team executes from.',
+    items: ['Your Buying Belief Map', 'Your proof, organised', 'Your story, documented'],
     img: '/founding/step2-build-l.mp4',
     alt: 'Sean running a Strategy Day',
   },
   {
     title: 'Content',
-    line: 'The Posting Program',
-    body: 'We install the growth engine. You get a content system tied directly to your offers, your launches, and your revenue targets.',
-    items: ['Channel OS', 'Format Library', 'Distribution OS'],
+    line: 'Content that sells before the sales call',
+    body: 'A content system tied directly to your offers, your launches, and your revenue targets. We start on your exact bottleneck.',
+    items: ['Formats that fit your offers', 'A posting rhythm your team can run', 'Distribution across every channel'],
     img: '/founding/train-02a.mp4',
     alt: 'A training video from the library',
   },
   {
     title: 'Scale',
-    line: 'Scale + Compound',
-    body: 'Once direction is locked, we scale. Refining a straight line system to push volume through every channel.',
-    items: ['Operator Install', 'Authority Dashboard', 'Quarterly Campaigns'],
+    line: 'A team that runs it without you',
+    body: 'Once direction is locked, we scale. Your operator runs the system, we iterate with data, and you stop directing every decision.',
+    items: ['An operator who runs it', 'A dashboard that shows what\'s working', 'Campaigns planned each quarter'],
     img: '/founding/step4-full2.mp4',
     full: true,
     alt: 'Sean walking through a format in the Engineroom',
@@ -122,7 +121,8 @@ export default function HomeDraft() {
       <SEO title="Own Your Category" description="The Authority Engine." path="/home-draft" noIndex />
       <div className="fixed top-0 left-0 right-0 z-[60] gradient-border-top" />
       {/* Sean, 27 Nov: "it also needs to show private content advisory" */}
-      <Hero eyebrow="Private content advisory" />
+      {/* Sean, 27 Nov: plain words across the top of the page, "that's fine" to the drafted version. */}
+      <Hero eyebrow="Private content advisory" sub="We help 7 and 8 figure founders turn their content into a marketing machine that brings in buyers." />
 
 
 
@@ -133,8 +133,8 @@ export default function HomeDraft() {
           <Fade className="text-center">
             <div className="accent-line mb-8 mx-auto" />
             <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mb-5">What you get</p>
-            <H2>Private media growth advisory<br className="hidden md:block" /> for industry leading founders.</H2>
-            <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">A 90 day implementation that gets you the strategy, playbooks, and standards to create short form and long form content that builds buyer trust before the sales conversation, without you directing every decision.</p>
+            <H2>Content advice for founders<br className="hidden md:block" /> at the top of their industry.</H2>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-6 max-w-2xl mx-auto">We give you the plan, the playbooks and the standards so your team makes short and long videos that build trust before anyone gets on a sales call. You don't have to make every decision.</p>
           </Fade>
           <div className="grid md:grid-cols-2 gap-5 mt-14 max-w-5xl mx-auto">
             {GROUPS.map((g, i) => (
@@ -163,7 +163,7 @@ export default function HomeDraft() {
         </div>
       </section>
 
-      <ProofStrip />
+      <ProofStrip plain />
 
       {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
       {/* HOW IT WORKS: Brand, Content, Scale */}
@@ -241,6 +241,20 @@ export default function HomeDraft() {
           </div>
         </section>
       </div>
+
+      {/* Sean, 27 Nov: "we still need something below the faces". Close: the page title, Apply now (hero link), virtual coffee (live home link). */}
+      <section className="pb-24 md:pb-32 relative">
+        <div className="max-w-3xl mx-auto px-6 text-center">
+          <Fade>
+            <H2>Own your category.</H2>
+            <p className="text-zinc-400 text-lg leading-relaxed mt-5">Content advice for founders at the top of their industry.</p>
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a href="/apply" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">Apply now</a>
+              <a href="https://calendar.app.google/BiQRa1PYXCyDQVov5" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 border border-zinc-700 text-zinc-300 px-8 py-4 rounded-full text-[15px] font-medium hover:text-white hover:border-zinc-500 transition-colors">Book a virtual coffee</a>
+            </div>
+          </Fade>
+        </div>
+      </section>
 
       <Footer showApply />
     </div>

@@ -58,7 +58,7 @@ function HeroMetricsGhost() {
 }
 
 /* eyebrow: optional small line above the headline (/home-draft, Sean 27 Nov). The live home page passes nothing. */
-export default function Hero({ eyebrow }: { eyebrow?: string } = {}) {
+export default function Hero({ eyebrow, sub }: { eyebrow?: string; sub?: string } = {}) {
   const { scrollY } = useScroll();
   const bgPosition = useTransform(scrollY, [0, 800], ['200%', '-200%']);
 
@@ -107,7 +107,7 @@ export default function Hero({ eyebrow }: { eyebrow?: string } = {}) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            We turn founder led content into a predictable, value driven marketing engine for 7 and 8 figure companies.
+            {sub ?? 'We turn founder led content into a predictable, value driven marketing engine for 7 and 8 figure companies.'}
           </motion.p>
 
           <motion.div

@@ -30,7 +30,8 @@ function CountUp({ end, decimals, duration = 2.8, active }: { end: number; decim
   return <>{active ? value.toFixed(decimals) : '0'}</>;
 }
 
-export default function ProofStrip() {
+/* plain: the /home-draft wording (Sean, 27 Nov: plain words). The live home passes nothing. */
+export default function ProofStrip({ plain = false }: { plain?: boolean } = {}) {
   const [ref, inView] = useInView({ threshold: 0.1 });
   const [activeStudy, setActiveStudy] = useState<number | null>(null);
 
@@ -54,9 +55,9 @@ export default function ProofStrip() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          The outcomes
+          {plain ? 'What our' : 'The outcomes'}
           <br />
-          <span className="text-zinc-500">tell a story.</span>
+          <span className="text-zinc-500">{plain ? 'clients got.' : 'tell a story.'}</span>
         </motion.h2>
 
         <motion.div
@@ -71,7 +72,7 @@ export default function ProofStrip() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-zinc-400 font-medium hover:text-white transition-colors text-[15px] group"
           >
-            Download our authority template
+            {plain ? 'Get our free authority template' : 'Download our authority template'}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
