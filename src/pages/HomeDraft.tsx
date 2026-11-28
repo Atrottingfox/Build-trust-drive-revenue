@@ -172,7 +172,8 @@ export default function HomeDraft({ live = false }: { live?: boolean } = {}) {
         </div>
       </section>
 
-      <ProofStrip plain />
+      {/* Sean, 28 Nov: "What our clients got" was Claude's line, not his. Back to his original. */}
+      <ProofStrip />
 
       {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
       {/* HOW IT WORKS: Brand, Content, Scale */}
