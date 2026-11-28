@@ -1,5 +1,6 @@
 import type { Handler } from "@netlify/functions";
 import { findOrCreateByEmail, sendEmail, contactUrl, getTags } from "./_ghl";
+import { PERSON_SUBJECT, personEmailHtml } from "./_people";
 
 /*
   Reminds a paid client who has not set up their portal after 48 hours.
@@ -33,12 +34,14 @@ export const handler: Handler = async () => {
 
   let clients: { name: string; email: string; claimUrl: string; slug: string }[] = [];
   let noWhatsapp: { name: string; email: string }[] = [];
+  let people: { name: string; email: string; role: string; claimUrl: string; clientId: string; clientName: string; whatsappUrl?: string | null }[] = [];
   try {
     const r = await fetch(UNCLAIMED_URL, { method: "POST", headers: { "x-call-context-key": secret }, signal: AbortSignal.timeout(10000) });
     if (!r.ok) throw new Error(`portal-unclaimed ${r.status}`);
     const out = await r.json();
     clients = out?.clients || [];
     noWhatsapp = out?.noWhatsapp || [];
+    people = out?.people || [];
   } catch (err) {
     await slack(`:warning: The portal reminder could not run: ${String(err)}`);
     return { statusCode: 200, body: "lookup failed" };
@@ -67,6 +70,19 @@ export const handler: Handler = async () => {
     lines.push(`${esc(c.name || c.email)}: ${sent ? "reminded" : `NOT reminded (${reason})`}${contactId ? ` <${contactUrl(contactId)}|GHL>` : ""}`);
   }
 
+  /* Second people on a client's portal (head of content, editor) whose own
+     link from portal-add-person is still unused 2 to 3 days on (Sean, 28 Nov
+     2026). Same reminder as their welcome. They are not founding buyers, so
+     no tag check. With clientId, the send lands on that client's thread too. */
+  for (const p of people) {
+    if (!p.email || !p.claimUrl) continue;
+    const contactId = await findOrCreateByEmail(token, location, p.email, {});
+    const { sent, reason } = contactId
+      ? await sendEmail(token, contactId, PERSON_SUBJECT, personEmailHtml(p), { email: p.email, clientId: p.clientId })
+      : { sent: false, reason: "no GHL contact" };
+    lines.push(`${esc(p.name || p.email)} (${esc(p.role || "person")} on ${esc(p.clientName || "a portal")}): ${sent ? "reminded" : `NOT reminded (${reason})`}${contactId ? ` <${contactUrl(contactId)}|GHL>` : ""}`);
+  }
+
   if (lines.length) {
     await slack(`:key: *Portal not set up after 48 hours.*\n` + lines.map((l) => `  • ${l}`).join("\n"));
   }
@@ -80,5 +96,5 @@ export const handler: Handler = async () => {
     );
   }
 
-  return { statusCode: 200, body: JSON.stringify({ reminded: lines.length, noWhatsapp: noWhatsapp.length }) };
+  return { statusCode: 200, body: JSON.stringify({ reminded: lines.length, people: people.length, noWhatsapp: noWhatsapp.length }) };
 };
