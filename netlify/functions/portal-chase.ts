@@ -1,5 +1,5 @@
 import type { Handler } from "@netlify/functions";
-import { findOrCreateByEmail, sendEmail, contactUrl } from "./_ghl";
+import { findOrCreateByEmail, sendEmail, contactUrl, getTags } from "./_ghl";
 
 /*
   Reminds a paid client who has not set up their portal after 48 hours.
@@ -49,6 +49,13 @@ export const handler: Handler = async () => {
     if (!c.email) continue;
     const first = (c.name || "").split(" ")[0] || "there";
     const contactId = await findOrCreateByEmail(token, location, c.email, {});
+    /* Founding buyers get their own "Quick one" login nudge on day 3 from
+       founding-nudge. Sending this as well put two "set up your portal" emails
+       in their inbox the same day (28 Nov). Skip them here. */
+    if (contactId && (await getTags(token, contactId)).includes("founding-paid")) {
+      lines.push(`${esc(c.name || c.email)}: skipped, founding buyer (their day 3 Quick one covers it)`);
+      continue;
+    }
     const { sent, reason } = contactId
       ? await sendEmail(token, contactId, "Your portal is ready", [
           `<p>${esc(first)},</p>`,
