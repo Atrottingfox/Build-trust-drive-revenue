@@ -171,3 +171,4 @@ lives at "Margot - Call breakdown" under Extra pages.
 - Why: Sean, 2026-11-11: "everything you can do, do it".
 
 - 2026-11-27 21:15 AEST · Home page swapped to the home draft (/ renders HomeDraft live, commit 352d38b) · Rollback: git revert 352d38b, or tag pre-home-swap-20261127T2109 · Why: Sean approved ("hit it")
+- 2026-11-28 15:02 AEST - Welcome sequence fixes live (c8f40de): office hours Thursday 11am to 12:30pm in every email, research links step removed from the founding welcome, Calendly bookings with no contact id matched to GHL by email (tags founding-day-booked / brand-day-booked as normal), WhatsApp ready email says Help. Client facing emails. Rollback: git revert c8f40de and push main. Why: Sean, 'fix sequence', 28 Nov.
