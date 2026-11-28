@@ -58,7 +58,7 @@ export const handler: Handler = async (event) => {
   const { sent, reason } = await sendEmail(token, contactId, "Your brand WhatsApp group is ready", [
     `<p>${esc(first)},</p>`,
     `<p>Your brand WhatsApp group is ready. <a href="${esc(url)}">Join it here</a> for async comms with your team and I.</p>`,
-    `<p>Post your questions there. For urgent blockers, tag the operator. The link is on your portal too, under Need help.</p>`,
+    `<p>Post your questions there. For urgent blockers, tag the operator. The link is on your portal too, under Help.</p>`,
     `<p>Sean</p>`,
   ].join(""));
 

@@ -1,10 +1,12 @@
 /*
   The standing call details every client gets, from Sean's calls page
   (Calls and Zoom Links - Dream Out Loud, 11 Nov 2026). One Zoom link per call
-  type, the same every week. Queensland time.
+  type, the same every week. Queensland time. Moved to 11am to 12:30pm from
+  3 Dec 2026, to match the portal and its calendar invite (contentengine
+  a9c9ae4, 26 Nov). The emails still said 8 to 9:30am until 28 Nov.
 */
 export const OFFICE_HOURS = {
-  when: "Thursday, 8 to 9:30am",
+  when: "Thursday, 11am to 12:30pm",
   zoom: "https://us06web.zoom.us/j/88013254811?pwd=rvabbMcztMM2AllUI4n8bCJlEidTpK.1",
   form: "https://authorityengine.notion.site/79691282e52242a797027539d5a5a29d",
 };

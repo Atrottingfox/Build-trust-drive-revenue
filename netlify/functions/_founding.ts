@@ -211,7 +211,8 @@ export async function handleFoundingSale(session: any, via: "thank-you page" | "
       portal.claimUrl ? `<p>${n++}. <a href="${portal.claimUrl}">Set up your portal</a>. Everything for the build lives there: the SOPs, playbooks, training and your calls.</p>` : `<p>${n++}. Your portal is ready at <a href="https://contentengine.live/login">contentengine.live</a>. Everything for the build lives there.</p>`,
       credit ? "" : `<p>${n++}. <a href="${brandDay}">Lock in your Strategy Day date</a>.</p>`,
       `<p>${n++}. <a href="https://calendly.com/sean-authorityengine/1-1-private-strategy-session?name=${encodeURIComponent(d.name || "")}&email=${encodeURIComponent(d.email || "")}">Book your 1:1 strategy call</a> in the next 7 days.</p>`,
-      intakeUrl ? `<p>${n++}. <a href="${intakeUrl}">Send us your YouTube, Instagram and podcast links</a> so we can start your research.</p>` : "",
+      /* The research links step is out (28 Nov): its page has no form any more
+         and told founding buyers their Brand Day was booked when it wasn't. */
       `<p>${n++}. Advisory group office hours run every ${OFFICE_HOURS.when}, Queensland time. Join any week with a question: <a href="${OFFICE_HOURS.zoom}">Zoom link</a>. Fill in the <a href="${OFFICE_HOURS.form}">group advisory form</a> before you come.</p>`,
       credit
         ? `<p>Your weekly calls and monthly content advisory board meetings start ${longDate(start)}.</p>`

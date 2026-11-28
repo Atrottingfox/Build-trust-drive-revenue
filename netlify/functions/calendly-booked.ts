@@ -51,10 +51,34 @@ const handler: Handler = async (event) => {
     const payload = body.payload || {};
 
     // The contact id we sent through the embed as utm_content.
-    const contactId =
+    let contactId: string | null =
       payload.tracking?.utm_content ||
       payload.utm_content ||
       null;
+
+    /* No contact id in the link (the portal's Book your Brand Day button, or a
+       shared Calendly link): find the GHL contact by the email they typed, so
+       the booking is tagged like any other. Without this, founding-chase still
+       tagged them no-strategy-day-booked and GHL told them to book a day they
+       had already booked (28 Nov). Exact email match only. */
+    if (!contactId && token && payload.email && process.env.GHL_LOCATION_ID) {
+      try {
+        const res = await fetch(`${GHL_API}/contacts/search`, {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}`, Version: GHL_VERSION, "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ locationId: process.env.GHL_LOCATION_ID, pageLimit: 10, query: String(payload.email) }),
+        });
+        if (res.ok) {
+          const want = String(payload.email).trim().toLowerCase();
+          const hit = ((await res.json())?.contacts || []).find((c: any) => String(c?.email || "").trim().toLowerCase() === want);
+          if (hit?.id) contactId = hit.id;
+        } else {
+          console.error("calendly-booked: GHL email lookup failed", res.status);
+        }
+      } catch (err) {
+        console.error("calendly-booked: GHL email lookup error", err);
+      }
+    }
 
     // Calendly nests the appointment time differently across payload versions.
     let startTime =
