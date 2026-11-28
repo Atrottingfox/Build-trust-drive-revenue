@@ -19,7 +19,7 @@ import SEO from '../components/SEO';
 const GROUPS = [
   { name: 'Access', colour: '#3B7DFF', img: '/founding/sd-access2.mp4', sub: 'The right people', line: 'Talk to Sean, trusted experts and other serious founders when your team needs help it can\'t give itself.', items: ['Direct access to Sean', 'Introductions to the right experts', 'A private network of founders', 'Help with hiring and partnerships'] },
   { name: 'Training', colour: '#8B7CFF', img: '/founding/train-02b.mp4', sub: 'A better team', line: 'Your team gets the standards, tools and feedback to make better content without waiting on you.', items: ['SOPs, training and playbooks', 'Regular team training', 'Implementation calls with your team', 'Access for your whole team'] },
-  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Straight answers', line: 'Know what to make, what to fix and what to do next.', items: ['A strategy built around your business', 'Reviews of the content you make', 'Ongoing advisory calls', 'Clear advice inside the portal', 'Support when you need it'] },
+  { name: 'Advisory', colour: '#14B8A6', img: '/founding/ocs-advisory-full.mp4', sub: 'Clear direction', line: 'Get clear direction on what to make, what to fix, and what to do next.', items: ['A strategy built around your business', 'Reviews of the content you make', 'Ongoing advisory calls', 'Clear advice inside the portal', 'Support when you need it'] },
 ];
 
 /* Sean, 26 Nov: "if we were going to say 'brands we've worked with' let's just have the exact logos".
