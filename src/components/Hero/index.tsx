@@ -58,7 +58,7 @@ function HeroMetricsGhost() {
 }
 
 /* eyebrow: optional small line above the headline (/home-draft, Sean 27 Nov). The live home page passes nothing. */
-export default function Hero({ eyebrow, sub }: { eyebrow?: string; sub?: string } = {}) {
+export default function Hero({ eyebrow, sub, cta }: { eyebrow?: string; sub?: string; cta?: string } = {}) {
   const { scrollY } = useScroll();
   const bgPosition = useTransform(scrollY, [0, 800], ['200%', '-200%']);
 
@@ -102,7 +102,7 @@ export default function Hero({ eyebrow, sub }: { eyebrow?: string; sub?: string 
           </motion.h1>
 
           <motion.p
-            className={`text-lg sm:text-xl text-zinc-400 ${sub ? 'max-w-2xl' : 'max-w-xl'} mb-14 leading-relaxed`}
+            className={`text-lg sm:text-xl text-zinc-400 ${sub ? 'max-w-3xl' : 'max-w-xl'} mb-14 leading-relaxed`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
@@ -120,7 +120,7 @@ export default function Hero({ eyebrow, sub }: { eyebrow?: string; sub?: string 
               href="/apply"
               className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_30px_-5px_rgba(255,255,255,0.12)]"
             >
-              Apply now
+              {cta ?? 'Apply now'}
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
