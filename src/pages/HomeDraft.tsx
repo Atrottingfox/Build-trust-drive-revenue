@@ -175,28 +175,28 @@ export default function HomeDraft({ live = false }: { live?: boolean } = {}) {
 
       {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
       {/* HOW IT WORKS: Brand, Content, Scale */}
+      {/* Sean, 28 Nov: Media Operating System line out; shown differently from the cards so the page doesn't double up. */}
       <section id="engine" className="py-24 md:py-32 relative">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <Fade>
+          <Fade className="text-center">
             <Kicker>How it works</Kicker>
             <H2>Brand. Content. Scale.</H2>
-            <p className="text-zinc-400 text-[17px] leading-relaxed mt-5 max-w-2xl">The Authority Engine is the Media Operating System. Brand, Content, and Scale running as one Engine your operator can control.</p>
           </Fade>
-          <div className="mt-16 space-y-16 md:space-y-24">
-            {PILLARS.map((st, i) => (
-              <Fade key={st.title} className="grid md:grid-cols-2 gap-8 md:gap-14 items-center">
-                <div className={i % 2 ? 'md:order-2' : ''}>
-                  <p aria-hidden="true" className="font-display text-[72px] md:text-[96px] font-extrabold leading-none tracking-[-0.05em] text-zinc-800 select-none">{String(i + 1).padStart(2, '0')}</p>
-                  <p className="text-sm font-medium text-zinc-500 uppercase tracking-widest mt-2">{st.title}</p>
-                  <h3 className="font-display text-3xl md:text-4xl font-extrabold tracking-[-0.03em] leading-[1.08] text-white mt-3">{st.line}</h3>
-                  <p className="text-zinc-400 text-[16px] leading-relaxed mt-4">{st.body}</p>
-                  <ul className="mt-6 space-y-2">{st.items.map((t) => <li key={t} className="flex items-start gap-2.5 text-zinc-300 text-[15px]"><Check className="w-4 h-4 mt-0.5 shrink-0 text-zinc-500" strokeWidth={2.5} />{t}</li>)}</ul>
-                </div>
-                <div className={i % 2 ? 'md:order-1' : ''}>
-                  <Media src={st.img} alt={st.alt} className={`w-full aspect-video rounded-2xl border border-zinc-800/60 ${'full' in st ? 'object-contain bg-[#0d0f14]' : 'object-cover object-top'}`} />
-                </div>
-              </Fade>
-            ))}
+          <div className="relative mt-16 md:mt-20">
+            <div aria-hidden="true" className="hidden md:block absolute left-[16.66%] right-[16.66%] top-[28px] h-px bg-gradient-to-r from-zinc-700 via-zinc-500 to-zinc-700" />
+            <ol className="grid md:grid-cols-3 gap-14 md:gap-10">
+              {PILLARS.map((st, i) => (
+                <Fade key={st.title} className="relative md:text-center flex flex-col">
+                  <div className="relative z-10 md:mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-zinc-700 bg-base font-display text-lg font-bold text-white">{String(i + 1).padStart(2, '0')}</div>
+                  <p className="mt-7 text-sm font-medium text-zinc-500 uppercase tracking-[0.2em]">{st.title}</p>
+                  <h3 className="mt-3 font-display text-2xl md:text-[26px] font-extrabold tracking-[-0.02em] leading-[1.15] text-white">{st.line}</h3>
+                  <p className="mt-4 mb-6 text-zinc-400 text-[15px] leading-relaxed md:max-w-xs md:mx-auto">{st.body}</p>
+                  <ul className="mt-auto w-full md:max-w-xs md:mx-auto border-t border-zinc-800/70">
+                    {st.items.map((t) => <li key={t} className="border-b border-zinc-800/70 py-3 text-zinc-300 text-[14px]">{t}</li>)}
+                  </ul>
+                </Fade>
+              ))}
+            </ol>
           </div>
         </div>
         <div className="absolute bottom-0 left-0 right-0 gradient-line" />
