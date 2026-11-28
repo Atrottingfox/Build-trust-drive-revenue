@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import Hero from '../components/Hero';
-import ProofStrip from '../components/ProofStrip';
 import PricingPlans from '../components/PricingPlans';
 import Footer from '../components/Footer';
 import SEO from '../components/SEO';
@@ -172,8 +171,7 @@ export default function HomeDraft({ live = false }: { live?: boolean } = {}) {
         </div>
       </section>
 
-      {/* Sean, 28 Nov: "What our clients got" was Claude's line, not his. Back to his original. */}
-      <ProofStrip />
+      {/* Client results removed, Sean 28 Nov: "i think we can remove". */}
 
       {/* Sean, 27 Nov: "i'm not selling the program. i'm selling that i know my shit ... we could keep the old how it works" */}
       {/* HOW IT WORKS: Brand, Content, Scale */}
@@ -253,19 +251,23 @@ export default function HomeDraft({ live = false }: { live?: boolean } = {}) {
       </div>
 
       {/* Sean, 27 Nov: "we still need something below the faces". Close: the page title and Apply now (hero link). Coffee removed 27 Nov. */}
-      <section className="pb-24 md:pb-32 relative">
-        <div className="max-w-5xl mx-auto px-6 text-center">
+      <section className="relative overflow-hidden border-t border-zinc-800/60 py-28 md:py-40">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-px max-w-3xl bg-gradient-to-r from-transparent via-zinc-500/60 to-transparent" />
+        <div className="max-w-6xl mx-auto px-6 lg:px-8 text-center">
           <Fade>
-            <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-[-0.04em] text-white leading-[0.95]">Own your category.</h2>
-            {/* Sean, 27 Nov, his words: one line each under Own your category. */}
-            <div className="mt-8 space-y-2 text-zinc-400 text-xl md:text-2xl font-medium leading-snug">
-              <p>Business is the vehicle for impact.</p>
-              <p>Revenue is the fuel.</p>
-              <p>Content is the engine.</p>
-            </div>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="/apply" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors">Apply now</a>
-            </div>
+            <p className="text-sm font-medium text-zinc-500 uppercase tracking-[0.25em]">The Authority Engine</p>
+            <h2 className="mt-8 font-display text-5xl md:text-7xl lg:text-[104px] font-extrabold tracking-[-0.045em] leading-[0.92] bg-gradient-to-b from-white via-white to-zinc-500 bg-clip-text text-transparent pb-3">Own your category.</h2>
+          </Fade>
+          {/* Sean, 27 Nov, his words: one line each under Own your category. */}
+          <Fade className="mt-16 md:mt-20 grid md:grid-cols-3 border-y border-zinc-800/70 md:divide-x divide-zinc-800/70 text-left md:text-center">
+            {[['Business', 'is the vehicle for impact.'], ['Revenue', 'is the fuel.'], ['Content', 'is the engine.']].map(([w, rest], k) => (
+              <div key={w} className={`py-8 md:py-10 md:px-6 flex md:justify-center items-center ${k ? 'border-t md:border-t-0 border-zinc-800/70' : ''}`}>
+                <p className="font-display text-2xl md:text-[17px] lg:text-[20px] xl:text-[21px] font-bold tracking-[-0.02em] leading-tight md:whitespace-nowrap"><span className="text-white">{w}</span> <span className="text-zinc-500">{rest}</span></p>
+              </div>
+            ))}
+          </Fade>
+          <Fade className="mt-14 md:mt-16">
+            <a href="/apply" className="btn-shine inline-flex items-center gap-2 bg-white text-black px-10 py-4 rounded-full text-[15px] font-semibold hover:bg-zinc-100 transition-colors shadow-[0_0_40px_-5px_rgba(255,255,255,0.18)]">Apply now<ArrowRight className="w-4 h-4" /></a>
           </Fade>
         </div>
       </section>
